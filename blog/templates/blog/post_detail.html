@@ -1,0 +1,208 @@
+{% extends 'blog/base_post_main_block.html' %}
+{% load static %}
+{% load markdown_extra %}
+
+
+{% block crumbs %}
+    &rsaquo; Post
+    {% if not post.private and post.published_date or post.private and user.is_superuser or not post.published_date and user.is_superuser %}
+        {% if post.title %} &rsaquo; {{ post.title }}{% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block page_top_title %}
+    <h2>Post #{{ post.id }}
+
+        <a class="w3-right" href="{% url 'post_detail' pk=post.pk|add:"1" %}">
+            <span class="iconify" data-icon="topcoat:next" data-inline="false"></span>
+        </a>
+
+        <a class="w3-right" href="{% url 'post_detail' pk=post.pk|add:"-1" %}">
+            <span class="iconify" data-icon="topcoat:back" data-inline="false"></span>
+        </a>
+    </h2>
+{% endblock page_top_title %}
+
+{% block content_main %}
+    {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+
+        {% if post.private or not post.published_date %}
+            <div class="w3-ul w3-card-4">
+                <div class="postContainer w3-ul w3-card-4 w3-container">
+        {% else %}
+            <div class="w3-ul w3-card-4 w3-padding-bottom-8">
+                <div class="postContainer w3-ul w3-card-4 w3-padding-bottom-8 w3-container">
+        {% endif %}
+                    <div class="post">
+                        <h3 class="postTitle">
+                            {{ post.title }}
+
+                            {% block superButtons %}
+                                {% if user.is_superuser %}
+                                    <a class="w3-right" href="/admin/blog/post/{{ post.id }}/change/">
+                                        <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                    </a>
+
+                                    <a class="w3-right" href="{% url 'post_edit' slug=post.slug %}">
+                                        <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                    </a>
+
+                                    <a class="w3-right w3-hide-small" href="{% url 'post_remove' slug=post.slug %}">
+                                        <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
+                                    </a>
+
+                                    {% if not post.published_date %}
+                                        <a class="w3-right" href="{% url 'post_publish_private' slug=post.slug %}">
+                                            <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
+                                        </a>
+
+                                        <a class="w3-right" href="{% url 'post_publish' slug=post.slug %}">
+                                            <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
+                                        </a>
+                                    {% endif %}
+
+                                {% endif %}
+                            {% endblock superButtons %}
+                        </h3>
+
+                        <div class="date w3-Montserrat">
+                            <p class="postPubliDate">Created : {{ post.created_date|date:'l, d F Y' }} - {{ post.created_date|time:"G:i:s" }}</p>
+
+                            {% if post.published_date %}
+                                <p class="postPubliDate">Published : {{ post.published_date|date:'l, d F Y' }} - {{ post.published_date|time:"G:i:s" }}</p>
+                            {% endif %}
+
+                            {% if post.modified_date %}
+                                <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'l, d F Y' }} - {{ post.modified_date|time:"G:i:s" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div id="contents" class="postText">{{ post.body|formatted_markdown|safe }}</div>
+                    <div class="date w3-Montserrat">
+
+                        <span class="author">Author : {{ post.author|linebreaksbr }}</span>
+
+                        {% for category in post.categories.all %}
+                            {% if not category.private or category.private and user.is_superuser %}
+                                {% if post.categories.all|length == 1 %}
+                                    <span class="w3-margin"> | </span>
+                                    <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+                                {% else %}
+
+                                    {% if forloop.first %}
+                                        <span class="w3-margin"> | </span>
+                                    {% endif %}
+
+                                    <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+
+                                    {% if forloop.revcounter0 and not category.private or category.private and user.is_superuser %}
+
+                                        {% if not forloop.last %}
+                                            <span class="w3-margin"> | </span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                {% if post.published_date and not post.private %}
+
+                    <hr class="hr" />
+
+                    <div class="comment">
+
+                        <a class="w3-btn w3-theme-dark" href="{% url 'add_comment_to_post' slug=post.slug %}">Add comment</a>
+
+                        <hr class="hr">
+
+                        {% if post.approved_comments.count or user.is_superuser %}
+                            {% for comment in post.comments.all %}
+                                {% if comment.approved_comment or not comment.approved_comment and user.is_superuser %}
+                                    <div class="w3-Montserrat">
+                                        <div>
+                                            <div class="date">
+                                                <p>
+                                                    <span class="khoWhite khoBold khoUnderline">{{ comment.author }}</span>
+                                                    <span> - </span>
+                                                    <span class="khoGray">{{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }}</span>
+
+                                                    {% if not comment.approved_comment %}
+                                                        <span class="w3-right khoWhite">
+                                                            <a href="{% url 'comment_remove' pk=comment.pk %}"><span class="iconify" data-icon="foundation:page-remove" data-inline="false"></span></a>
+                                                            <a href="{% url 'comment_approve' pk=comment.pk %}"><span class="iconify" data-icon="emojione-monotone:ok-button" data-inline="false"></span></a>
+                                                        </span>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+
+                                            <span class="khoGray-2">{{ comment.message|formatted_markdown|safe }}</span>
+
+                                        </div>
+
+                                        {% if not forloop.last %}
+                                            <hr class="hr">
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% empty %}
+                                <p>No comments here yet.</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>No comments here yet.</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div id='console'></div>
+            <div id="toc">
+                <h3>Table of Contents</h3>
+            </div>
+
+            <script type="text/javascript">
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            htmlTableOfContents();
+        } );
+
+        function htmlTableOfContents( documentRef ) {
+            var documentRef = documentRef || document;
+            var toc = documentRef.getElementById("toc");
+            var headings = [].slice.call(documentRef.body.querySelectorAll('.postText h1, .postText h2, .postText h3, .postText h4, .postText h5, .postText h6'));
+            headings.forEach(function (heading, index) {
+                var ref = "toc" + index;
+                if ( heading.hasAttribute( "id" ) ) 
+                    ref = heading.getAttribute( "id" );
+                else
+                    heading.setAttribute( "id", ref );
+
+                var link = documentRef.createElement( "a" );
+                link.setAttribute( "href", "#"+ ref );
+                link.textContent = heading.textContent;
+
+                var div = documentRef.createElement( "div" );
+                div.setAttribute( "class", heading.tagName.toLowerCase() );
+                div.appendChild( link );
+                toc.appendChild( div );
+            });
+        }
+
+        try {
+            module.exports = htmlTableOfContents;
+        } catch (e) {
+            // module.exports is not defined
+        }
+        </script>
+    {% else %}
+        <h1><a class="coolLinks" href="/pages/kheee">This post is either private or still a draft, you must be logged in to be able to see it</a></h1>
+    {% endif %}
+{% endblock content_main %}
+
+{% block pagination %}
+{% endblock pagination %}

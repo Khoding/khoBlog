@@ -1,0 +1,14 @@
+{% extends 'blog/base_post.html' %}
+{% load markdown_extra %}
+
+{% block main %}
+    <h2>Update Category</h2>
+    <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <br />
+        <button type="submit" class="w3-btn w3-theme-dark">Save</button>
+    </form>
+
+{% endblock main %}

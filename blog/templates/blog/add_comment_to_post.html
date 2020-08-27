@@ -1,0 +1,20 @@
+{% extends 'blog/base_post.html' %}
+{% load markdown_extra %}
+
+
+{% block title %}
+    Add Comment
+{% endblock title %}
+
+{% block main %}
+    <div id="posts" class="w3-ul w3-threequarter">
+        <h2>New Comment</h2>
+        <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">{% csrf_token %}
+            {{ form.as_p }}
+
+            <br />
+            <button type="submit" class="w3-btn w3-theme-dark">Send</button>
+        </form>
+    </div>
+    {{ form.media }}
+{% endblock main %}

@@ -1,0 +1,83 @@
+{% extends 'blog/base_post_main_block.html' %}
+{% load static %}
+{% load markdown_extra %}
+
+{% block sidenav %}
+
+    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
+
+    {% for item in category_list %}
+        {% if not item.private or item.private and user.is_superuser %}
+            <a class="w3-bar-item w3-button" href="{% url 'post_category_list' slug=item.slug %}">{{ item|capfirst }}</a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock sidenav %}
+
+{% block content_main %}
+
+    {% for item in category_list %}
+        {% if not item.private or item.private and user.is_superuser %}
+            <div class="postContainer w3-ul w3-card-4 w3-container">
+
+                <div class="post">
+                    <h3 class="postTitle">
+                        <a href="{% url 'post_category_list' item.slug %}" class="coolLinks">{{ item|capfirst }}</a>
+
+                        {% block superButtons %}
+                            {% if user.is_superuser %}
+                                <a class="w3-right" href="/admin/blog/category/{{ item.id }}/change/">
+                                    <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                </a>
+
+                                <a class="w3-right" href="{% url 'category_edit' slug=item.slug %}">
+                                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                </a>
+
+                            {% endif %}
+                        {% endblock superButtons %}
+                    </h3>
+                </div>
+
+                <div class="postText">{{ item.description|formatted_markdown|safe }}</div>
+
+                <div class="date w3-Montserrat">
+                    <span class="category_slug">Category Slug : {{ item.slug }}</span>
+                    <span class="w3-margin"> | </span>
+                    <span class="category_slug">Category Posts Count : {{ item.cat.count }}</span>
+                </div>
+            </div>
+
+        {% endif %}
+
+        {% if not forloop.last %}
+            {% if not item.private or item.private and user.is_superuser %}
+                <hr class="hr">
+            {% endif %}
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock content_main %}
+
+{% block pagination %}
+    <hr class="hr" />
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="w3-btn w3-theme-dark" href="?page=1">&laquo; First</a>
+                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock pagination %}

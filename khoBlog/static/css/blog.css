@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scrollbar-color: #2a2c2e #1c1e1f;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Montserrat';
+}
+
+#mainDiv {
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    color: #aaa;
+}
+
+header {
+    padding: 16px;
+}
+
+main {
+    background-color: #434343;
+    padding: 0 16px 16px 16px;
+}
+
+main .post {
+    color: white;
+    padding: 16px;
+}
+
+.postTitle {
+    padding: 10px 0;
+    border-bottom: 1px solid darkGray;
+}
+
+.postPubliDate {
+    font-size: 15pt;
+    color: #aaa;
+    padding: 10px 0;
+}
+
+main #posts {
+    background-color: #434343;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 74.999999%;
+}
+
+main #top {
+    padding: 4px 0;
+    color: white;
+}
+
+main a,
+h1 a {
+    color: orange;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.4s ease-out;
+}
+
+main a:hover,
+h1 a:hover {
+    color: #ff7b4b;
+    right: 0;
+    text-decoration: none;
+}
+
+main a:hover:after,
+h1 a:hover:after {
+    border-color: #ff7b4b;
+    right: 0;
+    animation: anchor-underline 2s cubic-bezier(0, 0.5, 0, 1) infinite;
+    border-color: #ff7b4b;
+}
+
+main a:after,
+h1 a:after {
+    border-top: 0.1em solid orange;
+    content: '';
+    position: absolute;
+    right: 100%;
+    bottom: 0.14em;
+    left: 0;
+    transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
+}
+
+@keyframes anchor-underline {
+    0%,
+    10% {
+        left: 0;
+        right: 100%;
+    }
+    40%,
+    60% {
+        left: 0;
+        right: 0;
+    }
+    90%,
+    100% {
+        left: 100%;
+        right: 0;
+    }
+}
+
+/* footer {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    height: 50px;
+}
+
+#khodok {
+    float: right;
+    padding: 16px;
+}
+
+#khodokLink img {
+    opacity: 1;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    width: 50px;
+}
+
+#khodokLink img:hover {
+    opacity: 0.5;
+} */

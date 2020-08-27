@@ -1,0 +1,190 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149959147-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-149959147-2');
+        </script>
+
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-ND43ZGJ');</script>
+        <!-- End Google Tag Manager -->
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <link rel="canonical" href="https://blog.khodok.xyz/">
+        <link rel="shortlink" href="https://blog.khodok.xyz/">
+
+        <meta property="og:site_name" content="Hello There !" />
+        <meta property="og:image" content="{% static 'img/RuthinkkTooBig.png' %}">
+        <meta property="twitter:image" content="{% static 'img/RuthinkkTooBig.png' %}">
+
+        {% block page_head %}
+            <!-- Primary Meta Tags -->
+            <meta name="description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+            <!-- Twitter -->
+            <meta property="twitter:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+        {% endblock page_head %}
+
+        <meta name="theme-color" content="#B362FF">
+        <link rel="alternate" type="application/json+oembed" href="https://blog.khodok.xyz/static/js/oembed/oembed.json" title="oEmbed Profile: JSON">
+
+        <title>
+            Khodok's Blog
+            {% block title %}
+            {% endblock title %}
+        </title>
+
+        {% block rel %}
+            <!-- base! favicon -->
+            <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+
+            <!-- rel! W3pro.css -->
+            <link rel="stylesheet" href="{% static 'css/w3pro.css' %}">
+
+            <!-- rel! twemoji.js -->
+            <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+
+            <!-- rel! Fonts / Icons -->
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet" />
+
+            <!-- rel! Themes -->
+            <link rel="stylesheet" href="{% static 'css/Themes/dark-theme/dark-theme.css' %}">
+            <link rel="stylesheet" href="{% static 'css/Themes/general-theme/general-theme.css' %}">
+            <link rel="stylesheet" href="{% static 'css/Themes/highlight.css' %}">
+        {% endblock rel %}
+
+        <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI" />
+    </head>
+
+    <body class="app">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <div class="w3-main-div w3-theme-dark">
+            <nav class="w3-sidebar w3-bar-block w3-animate-left w3-theme-d5 w3-mobile" style="display:none;z-index:5" id="menuSidebar">
+                <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">
+                    Close
+                </button>
+
+                {% block sidenav %}
+                    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon !</a>
+                {% endblock sidenav %}
+
+                <button class="w3-bar-item w3-button w3-large" onclick="showElements()">
+                    Show HTML Elements outline
+                </button>
+
+                <form class="w3-bar-item w3-large" action="{% url 'search_results' %}" method="get">
+                    <input name="q" type="text" placeholder="Search a post">
+                </form>
+            </nav>
+
+            <div id="main">
+                <div class="w3-theme-dark w3-text-theme">
+
+                    <script src="{% static 'js/scripts/menu.js' %}"></script>
+                    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="overlayMenu"></div>
+
+                    <button id="openMenu" class="w3-button w3-padding-small w3-transparent w3-hover-text-theme" onclick="w3_open()">
+                        &#9776; Menu
+                    </button>
+
+                    <header class="w3-container w3-theme-dark w3-text-theme">
+                        <div class="w3-row">
+                            <div class="w3-col l11 m11 s12">
+
+                                <h1 class="w3-color-font w3-margin-top" id="mainHeading">Khodok (Autogenerated)</h1>
+
+                                {% block auth %}
+                                    {% if user.is_authenticated %}
+                                        {% if user.is_superuser %}
+                                            <p>Hello <span class="superuser">{{ user.username }}</span> <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small>
+                                                <span class="postsButtons">
+                                                    <a href="{% url 'post_new' %}"><span class="iconify" data-icon="bx:bx-list-plus" data-inline="false"></span></a>
+                                                    <a href="{% url 'post_draft_list' %}"><span class="iconify" data-icon="ic:outline-drafts" data-inline="false"></span></a>
+                                                    <a href="{% url 'post_private_list' %}"><span class="iconify" data-icon="cil:lock-locked" data-inline="false"></span></a>
+                                                </span>
+
+                                                <span class="w3-margin categoryButtons">
+                                                    <a href="{% url 'category_new' %}"><span class="iconify" data-icon="carbon:category-new" data-inline="false"></span></a>
+                                                    <a href="{% url 'category_list' %}"><span class="iconify" data-icon="carbon:category" data-inline="false"></span></a>
+                                                </span>
+
+                                                <span class="adminButtons">
+                                                    <a href="{% url 'admin:index' %}"><span class="iconify" data-icon="dashicons:admin-generic" data-inline="false"></span></a>
+                                                    <a href="https://pythonanywhere.com"><span class="iconify khoRed" data-icon="fa-solid:user-cog" data-inline="false"></span></a>
+                                                </span>
+                                            </p>
+
+                                        {% elif user.is_staff %}
+                                            <p>Hello <span class="staff">{{ user.username }}</span> <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small>
+                                                <a href="{% url 'admin:index' %}"><span class="iconify" data-icon="dashicons:admin-generic" data-inline="false"></span></a>
+                                            </p>
+                                        {% else %}
+                                            <p>Hello {{ user.username }} <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small></p>
+                                        {% endif %}
+
+                                    {% else %}
+                                        <a href="{% url 'account_signup' %}" class="w3-bar-block"><span class="iconify" data-icon="ant-design:user-add-outlined" data-inline="false"></span></a>
+                                        <a href="{% url 'account_login' %}" class="w3-bar-block"><span class="iconify" data-icon="ant-design:lock-filled" data-inline="false"></span></a>
+                                        <a href="{% provider_login_url 'google' %}"><span class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
+                                    {% endif %}
+
+                                {% endblock auth %}
+                            </div>
+
+                            <div class="w3-col l1 m1 w3-hide-small">
+                                <img id="logo" width="75" src="{% static 'img/RuthinkkTooBig.png' %}" class="w3-margin-top" alt="Khodok's Logo" />
+                            </div>
+
+                        </div>
+                    </header>
+
+                </div>
+
+                {% block content %}
+                {% endblock content %}
+
+                <footer class="w3-container w3-center w3-padding-16 w3-text-theme w3-theme-dark">
+                    <div class="w3-row">
+                        <div class="w3-col l4 m5 w3-hide-small"><a href="{% url 'category_list' %}"
+                                class="coolLinks">Category List</a></div>
+
+                        <div class="w3-col l4 m2 s12">
+                            <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
+                                    width="50" alt="Khodok's Logo" /></a>
+                        </div>
+
+                        <div class="w3-col l4 m5 w3-hide-small"><a href="{% url 'latest' %}"
+                                class="coolLinks">Latest Post</a>
+                        </div>
+                    </div>
+                </footer>
+
+                <!-- rel! js -->
+                <script src="{% static 'js/scripts/dynamic.js' %}"></script>
+            </div>
+        </div>
+
+    </body>
+</html>

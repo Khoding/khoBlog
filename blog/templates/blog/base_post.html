@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% with request.resolver_match.view_name as view_name %}
+        {% if view_name == 'post_category_list' %}
+            {% if not cats.private or cats.private and user.is_superuser %}
+                - {{ cats }}
+            {% else %}
+                - This category is Private
+            {% endif %}
+
+        {% elif view_name == 'post_detail' %}
+            {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+                - {{ post.title }}
+            {% else %}
+                - Private Post
+            {% endif %}
+
+        {% else %}
+            - {{ title }}
+        {% endif %}
+    {% endwith %}
+{% endblock title %}
+
+{% block page_head %}
+    {% with request.resolver_match.view_name as view_name %}
+        {% if view_name == 'post_detail' %}
+            {% if not post.private and post.published_date %}
+                <!-- Primary Meta Tags -->
+                <meta name="title" content="Post #{{ post.id }} - {{ post.title }}">
+                <meta name="description" content="{{ post.description }}">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:url" content="{% url 'post_detail' slug=post.slug %}">
+                <meta property="og:title" content="Post #{{ post.id }} - {{ post.title }}">
+                <meta property="og:description" content="{{ post.description }}">
+
+                <!-- Twitter -->
+                <meta property="twitter:url" content="{% url 'post_detail' slug=post.slug %}">
+                <meta property="twitter:title" content="Post #{{ post.id }} - {{ post.title }}">
+                <meta property="twitter:description" content="{{ post.description }}">
+            {% else %}
+                <!-- Primary Meta Tags -->
+                <meta name="title" content="Private or draft">
+                <meta name="description" content="This post is either private or still a draft, you must be logged in to be able to see it">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:url" content="/pages/kheee">
+                <meta property="og:title" content="Private or draft">
+                <meta property="og:description" content="This post is either private or still a draft, you must be logged in to be able to see it">
+
+                <!-- Twitter -->
+                <meta property="twitter:url" content="/pages/kheee">
+                <meta property="twitter:title" content="Private or draft">
+                <meta property="twitter:description" content="This post is either private or still a draft, you must be logged in to be able to see it">
+            {% endif %}
+
+        {% elif view_name == 'post_category_list' %}
+            {% if not cats.private or cats.private and user.is_superuser %}
+                <!-- Primary Meta Tags -->
+                <meta name="title" content="{{ cats }}">
+                <meta name="description" content="{{ cats.description }}">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:url" content="{% url 'post_category_list' slug=cats.slug %}">
+                <meta property="og:title" content="{{ cats }}">
+                <meta property="og:description" content="{{ cats.description }}">
+
+                <!-- Twitter -->
+                <meta property="twitter:url" content="{% url 'post_category_list' slug=cats.slug %}">
+                <meta property="twitter:title" content="{{ cats }}">
+                <meta property="twitter:description" content="{{ cats.description }}">
+            {% else %}
+                <!-- Primary Meta Tags -->
+                <meta name="title" content="Private">
+                <meta name="description" content="This category is Private">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:url" content="/pages/kheee">
+                <meta property="og:title" content="Private">
+                <meta property="og:description" content="This category is Private">
+
+                <!-- Twitter -->
+                <meta property="twitter:url" content="/pages/kheee">
+                <meta property="twitter:title" content="Private">
+                <meta property="twitter:description" content="This category is Private">
+            {% endif %}
+
+        {% elif view_name == 'category_list' %}
+            <!-- Primary Meta Tags -->
+            <meta name="title" content="{{ title }}">
+            <meta name="description" content="List of categories">
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:url" content="{% url 'category_list' %}">
+            <meta property="og:title" content="{{ title }}">
+            <meta property="og:description" content="List of categories">
+
+            <!-- Twitter -->
+            <meta property="twitter:url" content="{% url 'category_list' %}">
+            <meta property="twitter:title" content="{{ title }}">
+            <meta property="twitter:description" content="List of categories">
+
+        {% else %}
+            <!-- Primary Meta Tags -->
+            <meta name="description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+            <!-- Open Graph / Facebook -->
+            <meta property="og:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+            <!-- Twitter -->
+            <meta property="twitter:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+        {% endif %}
+    {% endwith %}
+
+{% endblock page_head %}
+
+{% block sidenav %}
+    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
+
+    {% for post in posts %}
+        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+            <a class="w3-bar-item w3-button" href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock sidenav %}
+
+{% block content %}
+    <main class="w3-container w3-theme-d4 w3-padding-bottom-16">
+        {% block main %}
+        {% endblock main %}
+    </main>
+{% endblock content %}
