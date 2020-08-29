@@ -5,7 +5,10 @@
         }
     ],
     "settings": {
-        "editor.autoIndent": "none",
-        "editor.detectIndentation": false
+        "editor.autoIndent": "full",
+        "editor.codeActionsOnSave": {"source.fixAll": false},
+        "[django-html]": {
+            "editor.defaultFormatter": "batisteo.vscode-django"
+        }
     }
 }
