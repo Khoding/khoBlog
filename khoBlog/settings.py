@@ -74,6 +74,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'pymdownx.caret',
     'pymdownx.critic',
     'pymdownx.details',
+    'pymdownx.saneheaders',
     'pymdownx.emoji',
     'pymdownx.escapeall',
     'pymdownx.extra',
@@ -95,6 +96,10 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     'pymdownx.highlight': {
         'guess_lang': True,
         'linenums': True,
+        'linenums_style': 'inline',
+    },
+    'pymdownx.snippets': {
+        'base_path': './_snippets/'
     }
 }
 

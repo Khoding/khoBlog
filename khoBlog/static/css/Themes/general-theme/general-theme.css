@@ -311,21 +311,27 @@ a .iconify:hover {
 }
 
 .postContainer .postText img,
-.postContainer .postText .highlighttable,
-.todo .postText img,
-.todo .postText .highlighttable {
+.todo .postText img {
   max-width: 100%;
 }
 
-.postContainer .postText .highlighttable,
-.todo .postText .highlighttable {
+.postContainer .postText .highlight,
+.todo .postText .highlight {
   display: block;
-  background-color: #3333;
   -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 16px;
   padding: 0.01em 16px;
   overflow-x: auto !important;
+  resize: both;
+}
+
+.postContainer .postText .highlight .lineno,
+.todo .postText .highlight .lineno {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .postContainer .postText dt,
@@ -758,38 +764,6 @@ a .iconify:hover {
   font-size: inherit;
 }
 
-.postContainer .postText .app--dark .layout__panel--editor blockquote,
-.postContainer .postText .app--dark .layout__panel--preview blockquote,
-.todo .postText .app--dark .layout__panel--editor blockquote,
-.todo .postText .app--dark .layout__panel--preview blockquote {
-  color: rgba(255, 255, 255, 0.4);
-  border-left-color: rgba(255, 255, 255, 0.1);
-}
-
-.postContainer .postText code,
-.todo .postText code {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 3px;
-  padding: 2px 4px;
-}
-
-.postContainer .postText hr,
-.todo .postText hr {
-  border: 0;
-  border-top: 1px solid rgba(128, 128, 128, 0.33);
-  margin: 2em 0;
-}
-
-.postContainer .postText pre > code,
-.todo .postText pre > code {
-  background-color: rgba(0, 0, 0, 0.05);
-  display: block;
-  padding: 0.5em;
-  -webkit-text-size-adjust: none;
-  overflow-x: auto;
-  white-space: pre;
-}
-
 .postContainer .postText .toc ul,
 .todo .postText .toc ul {
   list-style-type: none;
@@ -848,11 +822,6 @@ a .iconify:hover {
 .todo .postText abbr[title] {
   border-bottom: 1px dotted #777;
   cursor: help;
-}
-
-.postContainer .postText img,
-.todo .postText img {
-  max-width: 100%;
 }
 
 .postContainer .postText .task-list-item,
@@ -949,5 +918,68 @@ a .iconify:hover {
 
 .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
   display: block;
+}
+
+.progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: 700;
+  width: 100%;
+  margin: 0;
+  line-height: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 1.2rem;
+  float: left;
+  background-color: #2979ff;
+}
+
+.progress {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  height: 1.2rem;
+  background-color: #eeeeee;
+  position: relative;
+}
+
+.progress.thin {
+  margin-top: 0.9rem;
+  height: 0.4rem;
+}
+
+.progress.thin .progress-label {
+  margin-top: -0.4rem;
+}
+
+.progress.thin .progress-bar {
+  height: 0.4rem;
+}
+
+.progress-100plus .progress-bar {
+  background-color: #00e676;
+}
+
+.progress-80plus .progress-bar {
+  background-color: #fbc02d;
+}
+
+.progress-60plus .progress-bar {
+  background-color: #ff9100;
+}
+
+.progress-40plus .progress-bar {
+  background-color: #ff5252;
+}
+
+.progress-20plus .progress-bar {
+  background-color: #ff1744;
+}
+
+.progress-0plus .progress-bar {
+  background-color: #f50057;
 }
 /*# sourceMappingURL=general-theme.css.map */

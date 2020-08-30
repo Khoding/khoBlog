@@ -1,0 +1,6 @@
+[latest]: /latest "latest"
+[quotes]: /posts/quotes "quotes post"
+[ruthinkk]: /static/img/RuthinkkTooBig.png
+[frog]: /static/img/mydudes.png
+[whathype]: /static/gif/whathype.gif
+[babysip]: /static/gif/babysip.gif
