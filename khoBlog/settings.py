@@ -99,7 +99,7 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
         'linenums_style': 'inline',
     },
     'pymdownx.snippets': {
-        'base_path': '../_snippets/'
+        'base_path': BASE_DIR / '_snippets/'
     }
 }
 
