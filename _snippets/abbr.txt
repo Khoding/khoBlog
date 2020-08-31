@@ -1,0 +1,6 @@
+*[KB]: Khodok's Blog's acronym
+*[btw]: By The Way
+*[imo]: In My Opinion
+*[lmao]: Laughing My Ass Off
+*[lol]: Laughing Out Loud
+*[RoutedEventHandler]: Rohr
