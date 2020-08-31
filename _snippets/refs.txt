@@ -2,5 +2,4 @@
 links.txt
 links_sttc.txt
 abbr.txt
-footer.txt
 --8<--
