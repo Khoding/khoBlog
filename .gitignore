@@ -10,8 +10,6 @@ db.sqlite3
 /pages/migrations
 /users/migrations
 /todo/migrations
-*.scss
-*.css.map
 /env
 Pipfile
 Pipfile.lock

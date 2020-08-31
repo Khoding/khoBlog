@@ -1,6 +1,9 @@
-[latest]: /latest "latest"
-[quotes]: /posts/quotes "quotes post"
+[latest]: /latest "Latest Post"
+[quotes]: /posts/quotes "Quotes Post"
 [ruthinkk]: /static/img/RuthinkkTooBig.png
 [frog]: /static/img/mydudes.png
 [whathype]: /static/gif/whathype.gif
 [babysip]: /static/gif/babysip.gif
+[khodok]: https://khodok.xyz "Khodok's Old Main Website"
+[repo]: https://github.com/Khoding/khoBlog "KhoBlog's Repo on Github"
+[google]: https://google.com "Google"
