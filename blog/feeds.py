@@ -25,6 +25,9 @@ class LatestPostsFeed(Feed):
     def item_pubdate(self, item):
         return item.published_date
 
+    def item_author_name(self, item):
+        return item.author
+
 
 class LatestPostsFeedByCategory(Feed):
     title = 'Khodok\'s Blog'
@@ -49,3 +52,6 @@ class LatestPostsFeedByCategory(Feed):
 
     def item_pubdate(self, item):
         return item.published_date
+
+    def item_author_name(self, item):
+        return item.author
