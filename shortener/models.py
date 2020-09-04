@@ -20,7 +20,7 @@ class URL(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.title)
 
         validate = URLValidator()
         try:
