@@ -49,12 +49,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'markdownx',
+    'graphene_django',
 
-    'blog.apps.BlogConfig',
-    'pages.apps.PagesConfig',
-    'polls.apps.PollsConfig',
-    'todo.apps.TodoConfig',
-    'users.apps.UsersConfig',
+    'blog',
+    'pages',
+    'polls',
+    'todo',
+    'users',
+    'shortener',
 ]
 
 # Markdown extensions
@@ -204,3 +206,7 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+GRAPHENE = {
+    'SCHEMA': 'khoBlog.schema.schema',
+}

@@ -9,6 +9,8 @@
         "editor.codeActionsOnSave": {"source.fixAll": false},
         "[django-html]": {
             "editor.defaultFormatter": "batisteo.vscode-django"
-        }
+        },
+        "python.pythonPath": "khoBlogEnv\\Scripts\\python.exe",
+        "git.ignoreLimitWarning": true
     }
 }

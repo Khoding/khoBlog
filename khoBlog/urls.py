@@ -27,6 +27,8 @@ urlpatterns = [
     path('pages/', include('pages.urls')),
     path('polls/', include('polls.urls')),
     path('todo/', include('todo.urls')),
+    path('s/', include('shortener.urls')),
+
 
     # Django Admin
     path('admin/', admin.site.urls),
