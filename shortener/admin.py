@@ -4,8 +4,10 @@ from .models import URL
 
 
 class URLAdmin(admin.ModelAdmin):
-
-    prepopulated_fields = {'short_url': ('name',)}
+    list_display = ('title', 'full_url', 'slug')
+    ordering = ('-pk',)
+    search_fields = ('title', 'slug', 'pk', 'full_url')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 admin.site.register(URL, URLAdmin)

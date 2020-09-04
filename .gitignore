@@ -10,12 +10,8 @@ db.sqlite3
 /pages/migrations
 /users/migrations
 /todo/migrations
+/shortener/migrations
 /khoBlogEnv
 Pipfile
 Pipfile.lock
 khoBlog/settings_dev.py
-shortener/migrations/__init__.py
-shortener/migrations/0001_initial.py
-shortener/migrations/0002_url_name.py
-shortener/migrations/0003_auto_20200904_1724.py
-shortener/migrations/0004_auto_20200904_1726.py

@@ -8,9 +8,9 @@ from graphql import GraphQLError
 
 
 class URL(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True)
     full_url = models.URLField(unique=True)
-    short_url = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
     clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,7 +20,7 @@ class URL(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.short_url = slugify(self.name)
+            self.slug = slugify(self.name)
 
         validate = URLValidator()
         try:
