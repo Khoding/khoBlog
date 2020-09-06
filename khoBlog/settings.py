@@ -102,6 +102,9 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     },
     'pymdownx.snippets': {
         'base_path': BASE_DIR / '_snippets/'
+    },
+    'pymdownx.tasklist': {
+        'custom_checkbox': True
     }
 }
 
