@@ -1,0 +1,21 @@
+{% extends 'blog/base_post_main_block.html' %}
+{% load static %}
+{% load markdown_extra %}
+
+{% block title %}
+{% endblock title %}
+
+{% block page_top_title %}
+    <h2>Error 403
+        <a class="w3-right coolLinks" href="{% url 'latest' %}">
+            Latest Post
+        </a>
+    </h2>
+{% endblock page_top_title %}
+
+{% block content_main %}
+    <h1><a class="coolLinks" href="/pages/kheee">Permission Denied</a></h1>
+{% endblock content_main %}
+
+{% block pagination %}
+{% endblock pagination %}
