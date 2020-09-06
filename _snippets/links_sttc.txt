@@ -1,4 +1,4 @@
-[ruthinkk]: /static/img/RuthinkkTooBig.png
-[frog]: /static/img/mydudes.png
-[whathype]: /static/gif/whathype.gif
-[babysip]: /static/gif/babysip.gif
+[ruthinkk]: /s/ruthinkk
+[mydudes]: /s/mydudes
+[whathype]: /s/whathype
+[babysip]: /s/babysip
