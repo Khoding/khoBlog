@@ -11,6 +11,7 @@
             "editor.defaultFormatter": "batisteo.vscode-django"
         },
         "python.pythonPath": "khoBlogEnv\\Scripts\\python.exe",
-        "git.ignoreLimitWarning": true
+        "git.ignoreLimitWarning": true,
+        "compile-hero.disable-compile-files-on-did-save-code": false
     }
 }

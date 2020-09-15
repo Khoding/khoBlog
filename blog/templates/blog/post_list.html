@@ -70,7 +70,10 @@
                         </div>
                     </div>
 
-                    <div class="postText">{{ post.description|formatted_markdown|safe }}</div>
+                    <div class="postText">
+                    <p>{{ post.description|formatted_markdown|safe }}</p>
+                    <p><a href="{{ post.get_absolute_url }}" class="coolLinks">Read More</a></p>
+                    </div>
 
                     <div class="bottomInformations">
 
@@ -81,10 +84,10 @@
 
                             {% if not post.private and post.published_date %}
                                 <span class="postComments w3-Montserrat">
-                                    <a href="{% url 'post_detail' slug=post.slug %}">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
+                                    <a href="{% url 'post_detail' slug=post.slug %}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
                                     {% if user.is_superuser %}
                                         <br />
-                                        <a href="{% url 'post_detail' slug=post.slug %}">Approved Comments : {{ post.approved_comments.count }}</a>
+                                        <a href="{% url 'post_detail' slug=post.slug %}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
                                     {% endif %}
                                 </span>
                             {% endif %}

@@ -52,6 +52,10 @@ body {
     color: #ddd;
 }
 
+.khoOrange {
+    color: orange !important;
+}
+
 /* full-sized  container that fills up the page */
 .w3-main-div {
     height: 100% !important;
@@ -844,7 +848,8 @@ a .iconify {
 }
 
 .task-list-control {
-    display: inline; /* Ensure label is inline incase theme sets it to block.*/
+    display: inline;
+    /* Ensure label is inline incase theme sets it to block.*/
 }
 
 .task-list-control {
@@ -857,7 +862,8 @@ a .iconify {
 .task-list-control input[type='checkbox'] {
     position: absolute;
     opacity: 0;
-    z-index: -1; /* Put the input behind the label so it doesn't overlay text */
+    z-index: -1;
+    /* Put the input behind the label so it doesn't overlay text */
 }
 
 .task-list-indicator {

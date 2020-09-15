@@ -40,6 +40,10 @@ body {
   color: #ddd;
 }
 
+.khoOrange {
+  color: orange !important;
+}
+
 /* full-sized  container that fills up the page */
 .w3-main-div {
   height: 100% !important;
