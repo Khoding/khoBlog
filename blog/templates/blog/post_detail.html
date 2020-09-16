@@ -2,6 +2,16 @@
 {% load static %}
 {% load markdown_extra %}
 
+{% block sidenav %}
+    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
+
+    {% for post in posts %}
+        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+            <a class="w3-bar-item w3-button" href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock sidenav %}
 
 {% block crumbs %}
     &rsaquo; Post
