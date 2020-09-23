@@ -44,6 +44,10 @@ body {
   color: orange !important;
 }
 
+.khoPaddingLeftM-16 {
+  margin-left: -16px !important;
+}
+
 /* full-sized  container that fills up the page */
 .w3-main-div {
   height: 100% !important;

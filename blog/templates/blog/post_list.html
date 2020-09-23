@@ -57,16 +57,30 @@
                             {% endblock superButtons %}
                         </h3>
 
-                        <div class="date w3-Montserrat">
-                            <p class="postPubliDate">Created : {{ post.created_date|date:'l, d F Y' }} - {{ post.created_date|time:"G:i:s" }}</p>
+                        <div class="w3-container khoPaddingLeftM-16">
+                            <div class="date w3-Montserrat w3-col l12 w3-hide-medium w3-hide-small">
+                                <p class="postPubliDate">Created : {{ post.created_date|date:'l, d F Y' }} - {{ post.created_date|time:"G:i:s" }}</p>
 
-                            {% if post.published_date %}
-                                <p class="postPubliDate">Published : {{ post.published_date|date:'l, d F Y' }} - {{ post.published_date|time:"G:i:s" }}</p>
-                            {% endif %}
+                                {% if post.published_date %}
+                                    <p class="postPubliDate">Published : {{ post.published_date|date:'l, d F Y' }} - {{ post.published_date|time:"G:i:s" }}</p>
+                                {% endif %}
 
-                            {% if post.modified_date %}
-                                <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'l, d F Y' }} - {{ post.modified_date|time:"G:i:s" }}</p>
-                            {% endif %}
+                                {% if post.modified_date %}
+                                    <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'l, d F Y' }} - {{ post.modified_date|time:"G:i:s" }}</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="date w3-Montserrat w3-col w3-hide-large m12 s12">
+                                <p class="postPubliDate">Created : {{ post.created_date|date:'d b Y' }}</p>
+
+                                {% if post.published_date %}
+                                    <p class="postPubliDate">Published : {{ post.published_date|date:'d b Y' }}</p>
+                                {% endif %}
+
+                                {% if post.modified_date %}
+                                    <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'d b Y' }}</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
 
