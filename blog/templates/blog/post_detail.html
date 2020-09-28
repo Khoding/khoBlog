@@ -7,7 +7,7 @@
 
     {% for post in posts %}
         {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+            <a class="w3-bar-item w3-button" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
         {% endif %}
     {% endfor %}
 
@@ -111,14 +111,14 @@
                             {% if not category.private or category.private and user.is_superuser %}
                                 {% if post.categories.all|length == 1 %}
                                     <span class="w3-margin"> | </span>
-                                    <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+                                    <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
                                 {% else %}
 
                                     {% if forloop.first %}
                                         <span class="w3-margin"> | </span>
                                     {% endif %}
 
-                                    <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+                                    <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
 
                                     {% if forloop.revcounter0 and not category.private or category.private and user.is_superuser %}
 

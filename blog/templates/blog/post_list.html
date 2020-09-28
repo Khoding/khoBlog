@@ -98,10 +98,10 @@
 
                             {% if not post.private and post.published_date %}
                                 <span class="postComments w3-Montserrat">
-                                    <a href="{% url 'post_detail' slug=post.slug %}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
+                                    <a href="{{ post.get_absolute_url }}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
                                     {% if user.is_superuser %}
                                         <br />
-                                        <a href="{% url 'post_detail' slug=post.slug %}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
+                                        <a href="{{ post.get_absolute_url }}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
                                     {% endif %}
                                 </span>
                             {% endif %}
@@ -113,14 +113,14 @@
                                 {% if not category.private or category.private and user.is_superuser %}
                                     {% if post.categories.all|length == 1 %}
                                         <span class="w3-margin"> | </span>
-                                        <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+                                        <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
                                     {% else %}
 
                                         {% if forloop.first %}
                                             <span class="w3-margin"> | </span>
                                         {% endif %}
 
-                                        <a href="{% url 'post_category_list' category.slug %}" class="coolLinks">{{ category|capfirst }}</a>
+                                        <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
 
                                         {% if forloop.revcounter0 and not category.private or category.private and user.is_superuser %}
 

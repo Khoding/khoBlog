@@ -31,12 +31,12 @@
                 <meta name="description" content="{{ post.description }}">
 
                 <!-- Open Graph / Facebook -->
-                <meta property="og:url" content="{% url 'post_detail' slug=post.slug %}">
+                <meta property="og:url" content="{{ post.get_absolute_url }}">
                 <meta property="og:title" content="Post #{{ post.id }} - {{ post.title }}">
                 <meta property="og:description" content="{{ post.description }}">
 
                 <!-- Twitter -->
-                <meta property="twitter:url" content="{% url 'post_detail' slug=post.slug %}">
+                <meta property="twitter:url" content="{{ post.get_absolute_url }}">
                 <meta property="twitter:title" content="Post #{{ post.id }} - {{ post.title }}">
                 <meta property="twitter:description" content="{{ post.description }}">
             {% else %}
@@ -62,12 +62,12 @@
                 <meta name="description" content="{{ cats.description }}">
 
                 <!-- Open Graph / Facebook -->
-                <meta property="og:url" content="{% url 'post_category_list' slug=cats.slug %}">
+                <meta property="og:url" content="{{ cats.get_absolute_url }}">
                 <meta property="og:title" content="{{ cats }}">
                 <meta property="og:description" content="{{ cats.description }}">
 
                 <!-- Twitter -->
-                <meta property="twitter:url" content="{% url 'post_category_list' slug=cats.slug %}">
+                <meta property="twitter:url" content="{{ cats.get_absolute_url }}">
                 <meta property="twitter:title" content="{{ cats }}">
                 <meta property="twitter:description" content="{{ cats.description }}">
             {% else %}
@@ -120,7 +120,7 @@
 
     {% for post in posts %}
         {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+            <a class="w3-bar-item w3-button" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
         {% endif %}
     {% endfor %}
 
