@@ -16,3 +16,4 @@ Pipfile
 Pipfile.lock
 khoBlog/settings_dev.py
 pythonenv3.8/
+.history
