@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import PostListView, PostDetailView, PostDetailIDView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
-from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
+from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
 
 urlpatterns = [
     path('', PostListView.as_view(), name='post_list'),
@@ -40,6 +40,8 @@ urlpatterns = [
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),
     path('category/<slug:slug>/rss/',
          LatestPostsFeedByCategory(), name='latest_category_post_feed'),
+    path('latest_comments/rss/',
+         LatestCommentsFeed(), name='latest_comments_feed'),
 
     path('search/', SearchResultsView.as_view(), name='search_results'),
 ]

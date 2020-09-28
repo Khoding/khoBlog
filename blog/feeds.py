@@ -2,7 +2,7 @@ from django.contrib.syndication.views import Feed
 from django.utils import timezone
 
 
-from .models import Post, Category
+from .models import Post, Category, Comment
 
 
 class LatestPostsFeed(Feed):
@@ -55,3 +55,24 @@ class LatestPostsFeedByCategory(Feed):
 
     def item_author_name(self, item):
         return item.author
+
+
+class LatestCommentsFeed(Feed):
+    title = 'Khodok\'s Blog'
+    link = ''
+    description = 'Comments to accept'
+
+    def items(self):
+        return Comment.objects.filter(approved_comment=False).order_by('-pk')
+
+    def item_title(self, item):
+        return item.author
+
+    def item_description(self, item):
+        return item.message
+
+    def item_link(self, item):
+        return item.post.get_absolute_url()
+
+    def item_pubdate(self, item):
+        return item.created_date
