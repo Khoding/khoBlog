@@ -6,14 +6,14 @@ from .models import Post, Comment, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'categories', 'description', 'body',)
+        fields = ('title', 'categories', 'description', 'body')
 
 
 class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'categories', 'description',
-                  'body', 'slug', 'private',)
+                  'body', 'slug', 'private', 'hidden')
 
 
 class CategoryAddForm(forms.ModelForm):

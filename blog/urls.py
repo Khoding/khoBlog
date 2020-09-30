@@ -26,6 +26,8 @@ urlpatterns = [
          EditCategoryView.as_view(), name='category_edit'),
 
     path('post/<slug>/publish/', views.post_publish, name='post_publish'),
+    path('post/<slug>/publish_hidden/',
+         views.post_publish_hidden, name='post_publish_hidden'),
     path('post/<slug>/publish_private/',
          views.post_publish_private, name='post_publish_private'),
     path('post/<slug>/delete/', DeletePostView.as_view(), name='post_remove'),

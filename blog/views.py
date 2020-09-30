@@ -28,7 +28,7 @@ class PostListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date')
+        return Post.objects.filter(published_date__lte=timezone.now(), private=False, hidden=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -76,9 +76,25 @@ class PostDetailView(DetailView):
         context['posts'] = Post.objects.all().order_by('-pk')
         return context
 
+class RedirectToLatest(RedirectView):
+    model = Post
+    query_string = True
+    pattern_name = 'post_detail'
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.latest = get_object_or_404(Post, pk=self.kwargs['pk'])
+        if latest.hidden:
+            latest.id = latest.id-1
+        else:
+            latest.id
+        return super().get_redirect_url(*args, **kwargs)
 
 def redirect_to_latest(request):
-    latest = Post.objects.latest('id')
+    latest = latest = Post.objects.latest('id')
+    if latest.hidden == True:
+        latest.id = latest.id - 1
+    else:
+        latest.id
     return redirect(reverse('post_detail', args=(latest.slug,)))
 
 
@@ -205,6 +221,14 @@ class SearchResultsView(ListView):
 def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.publish()
+    return redirect('post_detail', slug=slug)
+
+
+@ user_passes_test(lambda u: u.is_superuser)
+def post_publish_hidden(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.hidden = True
+    post.publish_hidden()
     return redirect('post_detail', slug=slug)
 
 

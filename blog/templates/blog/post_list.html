@@ -17,7 +17,7 @@
 {% block content_main %}
     {% if not cats.private or cats.private and user.is_superuser %}
         {% for post in posts %}
-            {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+            {% if post.published_date and not post.private and not post.hidden or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
 
                 {% if post.private or not post.published_date %}
                     <div class="postContainer w3-ul w3-card-4 w3-container">
@@ -46,6 +46,10 @@
                                     {% if not post.published_date %}
                                         <a class="w3-right" href="{% url 'post_publish_private' slug=post.slug %}">
                                             <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
+                                        </a>
+
+                                        <a class="w3-right" href="{% url 'post_publish_hidden' slug=post.slug %}">
+                                            <span class="iconify" data-icon="mdi:file-hidden" data-inline="false"></span>
                                         </a>
 
                                         <a class="w3-right" href="{% url 'post_publish' slug=post.slug %}">
