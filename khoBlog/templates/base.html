@@ -8,7 +8,7 @@
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
             https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script>
+        {% comment %} <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script> {% endcomment %}
 
         <script>
             // Your web app's Firebase configuration
@@ -29,14 +29,14 @@
         </script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149959147-2"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149959147-2"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
             gtag('config', 'UA-149959147-2');
-        </script> {% endcomment %}
+        </script>
 
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
