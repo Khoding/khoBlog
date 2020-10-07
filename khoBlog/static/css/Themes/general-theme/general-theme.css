@@ -44,6 +44,16 @@ body {
   color: orange !important;
 }
 
+.markdownx textarea {
+  padding: 8px;
+  display: block;
+  border: none;
+  width: 100%;
+  color: #fff !important;
+  background-color: #2a2a2a !important;
+  border: 0 !important;
+}
+
 .khoPaddingLeftM-16 {
   margin-left: -16px !important;
 }

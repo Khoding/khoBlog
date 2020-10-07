@@ -1,17 +1,7 @@
-{% extends 'blog/base_post.html' %}
-{% load markdown_extra %}
 
-{% block main %}
+<div class="markdownx">
+        <textarea name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
 
-    <div id="posts" class="w3-ul w3-threequarter">
-        <h2>New Post</h2>
-        <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">{% csrf_token %}
-            {{ form.as_p }}
-
-            <br />
-            <button type="submit" class="w3-btn w3-theme-dark">Save</button>
-        </form>
-    </div>
-    {{ form.media }}
-
-{% endblock main %}
+        <div class="markdownx-preview"></div>
+</div>
