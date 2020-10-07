@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.forms',
 
     'allauth',
     'allauth.account',
@@ -58,6 +59,9 @@ INSTALLED_APPS = [
     'users',
     'shortener',
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
 
 # Markdown extensions
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
