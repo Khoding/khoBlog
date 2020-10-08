@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'impostor',
 
     'markdownx',
     'graphene_django',
@@ -209,6 +210,7 @@ LOGOUT_REDIRECT_URL = '/'
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
+    'impostor.backend.AuthBackend',
 )
 
 ACCOUNT_EMAIL_REQUIRED = True
