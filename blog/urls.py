@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('latest/', views.redirect_to_latest, name='latest'),
 
-    path('post/<int:pk>/', views.PostDetailIDView, name='post_detail'),
+    path('post/<int:pk>/', PostDetailIDView.as_view(), name='post_detail'),
     path('post/<slug:slug>/', PostDetailView.as_view(), name='post_detail'),
     path('post/<slug:slug>/edit/', EditPostView.as_view(), name='post_edit'),
 

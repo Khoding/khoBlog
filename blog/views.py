@@ -1,13 +1,11 @@
-from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import ListView, DetailView, RedirectView, CreateView, UpdateView, DeleteView
-from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Comment, Category
 from .forms import PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
 
 
