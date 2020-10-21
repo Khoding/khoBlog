@@ -12,8 +12,10 @@ db.sqlite3
 /todo/migrations
 /shortener/migrations
 /khoBlogEnv
+/venv
 Pipfile
 Pipfile.lock
 khoBlog/settings_dev.py
 pythonenv3.8/
 .history
+.idea
