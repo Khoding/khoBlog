@@ -9,7 +9,7 @@
 
         {% block breadcrumbs %}
             <div class="breadcrumbs">
-                <a class="coolLinks" href="{% url 'post_list' %}">{% trans "Home" %}</a>
+                <a class="coolLinks" href="{% url 'blog:post_list' %}">{% trans "Home" %}</a>
                 {% if not cats.private or cats.private and user.is_superuser %}
                     {% block crumbs %}
                         {% if title %} &rsaquo; {{ title }}{% endif %}
@@ -22,13 +22,13 @@
 
         {% block page_top_title %}
             {% with request.resolver_match.view_name as view_name %}
-                {% if view_name == 'post_private_list' %}
+                {% if view_name == 'blog:post_private_list' %}
                     <h2>Private Posts</h2>
 
-                {% elif view_name == 'post_draft_list' %}
+                {% elif view_name == 'blog:post_draft_list' %}
                     <h2>Drafts</h2>
 
-                {% elif view_name == 'post_category_list' %}
+                {% elif view_name == 'blog:post_category_list' %}
                     {% if not cats.private or cats.private and user.is_superuser %}
                         <h2>
                             Posts in <b>{{ cats|capfirst }}</b> Category
@@ -39,7 +39,7 @@
                             This category is Private
                         </h2>
                     {% endif %}
-                {% elif view_name == 'category_list' %}
+                {% elif view_name == 'blog:category_list' %}
                     <h2>Category List</h2>
                 {% else %}
                     <h2>Latest Posts</h2>

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block sidenav %}
-    <a class="w3-bar-item w3-button" href="{% url 'latest' %}">Latest Post</a>
+    <a class="w3-bar-item w3-button" href="{% url 'blog:latest' %}">Latest Post</a>
 
     <a class="w3-bar-item w3-button" href="/">Blog</a>
 
@@ -16,7 +16,7 @@
                 <h2>TODO List</h2>
 
 
-                <form action="{% url 'add' %}" method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16 w3-padding-bottom-16">
+                <form action="{% url 'todo:add' %}" method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16 w3-padding-bottom-16">
                     {% csrf_token %}
                     {{ form.text }}
 
@@ -29,11 +29,11 @@
 
                 <div class="w3-ul w3-padding-bottom-16">
 
-                    <a href="{% url 'deletecomplete' %}"><button type="button" class="w3-btn w3-theme-dark">
+                    <a href="{% url 'todo:deletecomplete' %}"><button type="button" class="w3-btn w3-theme-dark">
                         DELETE COMPLETED
                     </button></a>
 
-                    <a href="{% url 'deleteall' %}"><button type="button" class="w3-btn w3-theme-dark">
+                    <a href="{% url 'todo:deleteall' %}"><button type="button" class="w3-btn w3-theme-dark">
                         DELETE ALL
                     </button></a>
                 </div>
@@ -43,7 +43,7 @@
                         {% if todo.complete %}
                             <li class="todo-completed">{{ todo.text }}</li>
                         {% else %}
-                            <a class="todoTodo" href="{% url 'complete' todo.id %}"><li>{{ todo.text }}</li></a>
+                            <a class="todoTodo" href="{% url 'todo:complete' todo.id %}"><li>{{ todo.text }}</li></a>
                         {% endif %}
 
                         {% if not forloop.last %}

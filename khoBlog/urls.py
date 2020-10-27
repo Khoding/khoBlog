@@ -19,7 +19,7 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.utils import timezone
 from django.urls import include, path
-from django.conf import  settings
+from django.conf import settings
 from django.conf.urls.static import static
 
 

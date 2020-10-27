@@ -2,14 +2,14 @@
 
 {% block title %}
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name == 'post_category_list' %}
+        {% if view_name == 'blog:post_category_list' %}
             {% if not cats.private or cats.private and user.is_superuser %}
                 - {{ cats }}
             {% else %}
                 - This category is Private
             {% endif %}
 
-        {% elif view_name == 'post_detail' %}
+        {% elif view_name == 'blog:post_detail' %}
             {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
                 - {{ post.title }}
             {% else %}
@@ -24,7 +24,7 @@
 
 {% block page_head %}
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name == 'post_detail' %}
+        {% if view_name == 'blog:post_detail' %}
             {% if not post.private and post.published_date %}
                 <!-- Primary Meta Tags -->
                 <meta name="title" content="Post #{{ post.id }} - {{ post.title }}">
@@ -55,7 +55,7 @@
                 <meta property="twitter:description" content="This post is either private or still a draft, you must be logged in to be able to see it">
             {% endif %}
 
-        {% elif view_name == 'post_category_list' %}
+        {% elif view_name == 'blog:post_category_list' %}
             {% if not cats.private or cats.private and user.is_superuser %}
                 <!-- Primary Meta Tags -->
                 <meta name="title" content="{{ cats }}">
@@ -86,18 +86,18 @@
                 <meta property="twitter:description" content="This category is Private">
             {% endif %}
 
-        {% elif view_name == 'category_list' %}
+        {% elif view_name == 'blog:category_list' %}
             <!-- Primary Meta Tags -->
             <meta name="title" content="{{ title }}">
             <meta name="description" content="List of categories">
 
             <!-- Open Graph / Facebook -->
-            <meta property="og:url" content="{% url 'category_list' %}">
+            <meta property="og:url" content="{% url 'blog:category_list' %}">
             <meta property="og:title" content="{{ title }}">
             <meta property="og:description" content="List of categories">
 
             <!-- Twitter -->
-            <meta property="twitter:url" content="{% url 'category_list' %}">
+            <meta property="twitter:url" content="{% url 'blog:category_list' %}">
             <meta property="twitter:title" content="{{ title }}">
             <meta property="twitter:description" content="List of categories">
 

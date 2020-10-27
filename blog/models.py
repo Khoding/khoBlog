@@ -20,7 +20,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('post_category_list', kwargs={'slug': self.slug})
+        return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -33,7 +33,8 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     body = MarkdownxField()
-    post_image = models.ImageField(null=True, blank=True, upload_to='images/post/')
+    post_image = models.ImageField(
+        null=True, blank=True, upload_to='images/post/')
     description = models.TextField()
     slug = models.SlugField(null=False, unique=True)
     categories = models.ManyToManyField(
@@ -55,7 +56,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'slug': self.slug})
+        return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:

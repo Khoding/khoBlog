@@ -77,12 +77,12 @@ class PostDetailView(DetailView):
 
 def redirect_to_latest(request):
     latest = Post.objects.latest('id')
-    return redirect(reverse('post_detail', args=(latest.slug,)))
+    return redirect(reverse('blog:post_detail', args=(latest.slug,)))
 
 
 def PostDetailIDView(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return redirect(reverse('post_detail', args=(post.slug,)))
+    return redirect(reverse('blog:post_detail', args=(post.slug,)))
 
 
 @superuser_required()
@@ -203,7 +203,7 @@ class SearchResultsView(ListView):
 def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.publish()
-    return redirect('post_detail', slug=slug)
+    return redirect('blog:post_detail', slug=slug)
 
 
 @ user_passes_test(lambda u: u.is_superuser)
@@ -211,7 +211,7 @@ def post_publish_private(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.private = True
     post.publish_private()
-    return redirect('post_detail', slug=slug)
+    return redirect('blog:post_detail', slug=slug)
 
 
 def publish(self):
@@ -227,7 +227,7 @@ def add_comment_to_post(request, slug):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('post_detail', slug=post.slug)
+            return redirect('blog:post_detail', slug=post.slug)
     else:
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
@@ -237,11 +237,11 @@ def add_comment_to_post(request, slug):
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect('post_detail', slug=comment.post.slug)
+    return redirect('blog:post_detail', slug=comment.post.slug)
 
 
 @ user_passes_test(lambda u: u.is_superuser)
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
-    return redirect('post_detail', slug=comment.post.slug)
+    return redirect('blog:post_detail', slug=comment.post.slug)

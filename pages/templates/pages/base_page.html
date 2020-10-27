@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block sidenav %}
-    <a class="w3-bar-item w3-button" href="{% url 'latest' %}">Latest Post</a>
+    <a class="w3-bar-item w3-button" href="{% url 'blog:latest' %}">Latest Post</a>
 
-    <a class="w3-bar-item w3-button khoBold" href="/">Blog</a>
+    <a class="w3-bar-item w3-button khoBold" href="{% url 'blog:post_list' %}">Blog</a>
 
     {% for page in page_list %}
         <a class="w3-bar-item w3-button" href=".{{ page.permalink }}">{{ page.title }}</a>

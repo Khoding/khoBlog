@@ -5,7 +5,7 @@
 {% block crumbs %}
     &rsaquo;
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name != 'post_category_list' %}
+        {% if view_name != 'blog:post_category_list' %}
             Post List
         {% else %}
             Category
@@ -35,20 +35,20 @@
                                         <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                     </a>
 
-                                    <a class="w3-right" href="{% url 'post_edit' slug=post.slug %}">
+                                    <a class="w3-right" href="{% url 'blog:post_edit' slug=post.slug %}">
                                         <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                     </a>
 
-                                    <a class="w3-right w3-hide-small" href="{% url 'post_remove' slug=post.slug %}">
+                                    <a class="w3-right w3-hide-small" href="{% url 'blog:post_remove' slug=post.slug %}">
                                         <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
                                     </a>
 
                                     {% if not post.published_date %}
-                                        <a class="w3-right" href="{% url 'post_publish_private' slug=post.slug %}">
+                                        <a class="w3-right" href="{% url 'blog:post_publish_private' slug=post.slug %}">
                                             <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
                                         </a>
 
-                                        <a class="w3-right" href="{% url 'post_publish' slug=post.slug %}">
+                                        <a class="w3-right" href="{% url 'blog:post_publish' slug=post.slug %}">
                                             <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
                                         </a>
                                     {% endif %}

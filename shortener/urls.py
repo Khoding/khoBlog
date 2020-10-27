@@ -4,6 +4,7 @@ from shortener.views import root
 
 from graphene_django.views import GraphQLView
 
+app_name = 'shortener'
 urlpatterns = [
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path('<slug:slug>/', root, name='root'),

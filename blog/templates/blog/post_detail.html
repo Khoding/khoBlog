@@ -23,11 +23,11 @@
 {% block page_top_title %}
     <h2>Post #{{ post.id }}
 
-        <a class="w3-right" href="{% url 'post_detail' pk=post.pk|add:"1" %}">
+        <a class="w3-right" href="{% url 'blog:post_detail' pk=post.pk|add:"1" %}">
             <span class="iconify" data-icon="topcoat:next" data-inline="false"></span>
         </a>
 
-        <a class="w3-right" href="{% url 'post_detail' pk=post.pk|add:"-1" %}">
+        <a class="w3-right" href="{% url 'blog:post_detail' pk=post.pk|add:"-1" %}">
             <span class="iconify" data-icon="topcoat:back" data-inline="false"></span>
         </a>
     </h2>
@@ -53,20 +53,20 @@
                                         <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                     </a>
 
-                                    <a class="w3-right" href="{% url 'post_edit' slug=post.slug %}">
+                                    <a class="w3-right" href="{% url 'blog:post_edit' slug=post.slug %}">
                                         <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                     </a>
 
-                                    <a class="w3-right w3-hide-small" href="{% url 'post_remove' slug=post.slug %}">
+                                    <a class="w3-right w3-hide-small" href="{% url 'blog:post_remove' slug=post.slug %}">
                                         <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
                                     </a>
 
                                     {% if not post.published_date %}
-                                        <a class="w3-right" href="{% url 'post_publish_private' slug=post.slug %}">
+                                        <a class="w3-right" href="{% url 'blog:post_publish_private' slug=post.slug %}">
                                             <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
                                         </a>
 
-                                        <a class="w3-right" href="{% url 'post_publish' slug=post.slug %}">
+                                        <a class="w3-right" href="{% url 'blog:post_publish' slug=post.slug %}">
                                             <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
                                         </a>
                                     {% endif %}
@@ -145,7 +145,7 @@
 
                     <div id="comments" class="comment">
 
-                        <a class="w3-btn w3-theme-dark" href="{% url 'add_comment_to_post' slug=post.slug %}">Add comment</a>
+                        <a class="w3-btn w3-theme-dark" href="{% url 'blog:add_comment_to_post' slug=post.slug %}">Add comment</a>
 
                         <hr class="hr">
 
@@ -162,8 +162,8 @@
 
                                                     {% if not comment.approved_comment %}
                                                         <span class="w3-right khoWhite">
-                                                            <a href="{% url 'comment_remove' pk=comment.pk %}"><span class="iconify" data-icon="foundation:page-remove" data-inline="false"></span></a>
-                                                            <a href="{% url 'comment_approve' pk=comment.pk %}"><span class="iconify" data-icon="emojione-monotone:ok-button" data-inline="false"></span></a>
+                                                            <a href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="iconify" data-icon="foundation:page-remove" data-inline="false"></span></a>
+                                                            <a href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="iconify" data-icon="emojione-monotone:ok-button" data-inline="false"></span></a>
                                                         </span>
                                                     {% endif %}
                                                 </p>

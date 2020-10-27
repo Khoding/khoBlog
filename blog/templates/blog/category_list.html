@@ -8,7 +8,7 @@
 
     {% for item in category_list %}
         {% if not item.private or item.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{% url 'post_category_list' slug=item.slug %}">{{ item|capfirst }}</a>
+            <a class="w3-bar-item w3-button" href="{% url 'blog:post_category_list' slug=item.slug %}">{{ item|capfirst }}</a>
         {% endif %}
     {% endfor %}
 
@@ -22,7 +22,7 @@
 
                 <div class="post">
                     <h3 class="postTitle">
-                        <a href="{% url 'post_category_list' item.slug %}" class="coolLinks">{{ item|capfirst }}</a>
+                        <a href="{% url 'blog:post_category_list' item.slug %}" class="coolLinks">{{ item|capfirst }}</a>
 
                         {% block superButtons %}
                             {% if user.is_superuser %}
@@ -30,7 +30,7 @@
                                     <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                 </a>
 
-                                <a class="w3-right" href="{% url 'category_edit' slug=item.slug %}">
+                                <a class="w3-right" href="{% url 'blog:category_edit' slug=item.slug %}">
                                     <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
                                 </a>
 

@@ -3,6 +3,7 @@ from . import views
 from .views import PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
 
+app_name = 'blog'
 urlpatterns = [
     path('', PostListView.as_view(), name='post_list'),
     path('drafts/', PostDraftListView.as_view(), name='post_draft_list'),
