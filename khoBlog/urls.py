@@ -19,6 +19,8 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.utils import timezone
 from django.urls import include, path
+from django.conf import  settings
+from django.conf.urls.static import static
 
 
 admin.site.site_header = "Khodok's Blog Admin"
@@ -52,4 +54,4 @@ urlpatterns = [
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

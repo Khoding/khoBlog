@@ -102,7 +102,13 @@
                         </div>
                     </div>
 
-                    <div id="contents" class="postText">{{ post.body|formatted_markdown|safe }}</div>
+                    <div id="contents" class="postText">
+                        {% if post.post_image %}
+                            <img src="{{ post.post_image.url }}" alt="" />
+                            <hr class="hr">
+                        {% endif %}
+                        {{ post.body|formatted_markdown|safe }}
+                    </div>
                     <div class="date w3-Montserrat">
 
                         <span class="author">Author : {{ post.author|linebreaksbr }}</span>

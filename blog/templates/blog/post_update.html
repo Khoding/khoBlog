@@ -3,7 +3,7 @@
 
 {% block main %}
     <h2>Update Post</h2>
-    <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">
+    <form method="POST" enctype="multipart/form-data" class="w3-card-4 w3-padding-16 w3-padding-sides-16">
         {% csrf_token %}
         {{ form.as_p }}
 

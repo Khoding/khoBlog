@@ -8,7 +8,7 @@ from .models import Post, Comment, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'categories', 'description', 'body')
+        fields = ('title', 'categories', 'description', 'body', 'post_image')
 
         body = MarkdownxFormField()
 
@@ -23,7 +23,7 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'categories', 'description',
-                  'body', 'slug', 'private',)
+                  'body', 'post_image', 'slug', 'private',)
 
         body = MarkdownxFormField()
 

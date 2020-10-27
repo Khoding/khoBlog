@@ -12,6 +12,7 @@ Pipfile.lock
 /.idea
 /node_modules
 /static
+/media
 /khoBlogEnv
 /venv
 /.history
