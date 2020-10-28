@@ -23,11 +23,11 @@
 {% block page_top_title %}
     <h2>Post #{{ post.id }}
 
-        <a class="w3-right" href="{% url 'blog:post_detail' pk=post.pk|add:"1" %}">
+        <a class="w3-right" href="{{ post.get_next_by_created_date.get_absolute_url }}">
             <span class="iconify" data-icon="topcoat:next" data-inline="false"></span>
         </a>
 
-        <a class="w3-right" href="{% url 'blog:post_detail' pk=post.pk|add:"-1" %}">
+        <a class="w3-right" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
             <span class="iconify" data-icon="topcoat:back" data-inline="false"></span>
         </a>
     </h2>

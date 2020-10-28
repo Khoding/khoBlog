@@ -58,6 +58,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
+    def _get_next_or_previous_by_slug(self, field, is_next, **kwargs):
+        return reverse('blog:post_detail', kwargs={'slug': self.slug})
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
