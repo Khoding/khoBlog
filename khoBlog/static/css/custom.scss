@@ -1,6 +1,4 @@
-@import 'variables';
-
-@import '../../../node_modules/bootstrap/scss/bootstrap';
+@import 'variables.scss';
 
 $primary: $palette_primary;
 $secondary: $palette_secondary;
@@ -8,3 +6,9 @@ $success: $palette_success;
 $danger: $palette_danger;
 $warning: $palette_warning;
 $info: $palette_info;
+
+$dark: $palette_dark;
+
+$font-family: $font-family-base;
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';
