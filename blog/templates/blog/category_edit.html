@@ -1,14 +1,15 @@
 {% extends 'blog/base_post.html' %}
+{% load bootstrap4 %}
 {% load markdown_extra %}
 
 {% block main %}
     <h2>Update Category</h2>
-    <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">
+    <form method="POST" class="form">
         {% csrf_token %}
-        {{ form.as_p }}
-
-        <br />
-        <button type="submit" class="w3-btn w3-theme-dark">Save</button>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
     </form>
 
 {% endblock main %}

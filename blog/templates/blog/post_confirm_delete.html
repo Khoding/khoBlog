@@ -1,17 +1,17 @@
 {% extends 'blog/base_post.html' %}
 
+
 {% block main %}
     <h2>Delete Post</h2>
     <h3>Delete: {{ post.title }}</h3>
-
-    <br />
-    <form method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16">
+    <form method="POST" class="form">
         {% csrf_token %}
         <h4>Are you sure ?</h4>
 
-        <hr class="hr">
-
-        <button type="submit" class="w3-btn w3-theme-dark">Delete Post</button>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
     </form>
 
 {% endblock main %}

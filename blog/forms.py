@@ -10,12 +10,11 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'categories', 'description', 'body', 'post_image')
 
-        body = MarkdownxFormField()
-
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'description': forms.Textarea(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
+            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
+            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
         }
 
 
@@ -25,13 +24,12 @@ class EditForm(forms.ModelForm):
         fields = ('title', 'categories', 'description',
                   'body', 'post_image', 'slug', 'private',)
 
-        body = MarkdownxFormField()
-
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'w3-theme-dark'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'w3-theme-dark'}),
-            'description': forms.Textarea(attrs={'class': 'w3-theme-dark'}),
-            'slug': forms.TextInput(attrs={'class': 'w3-theme-dark'}),
+            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
+            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 
@@ -41,9 +39,9 @@ class CategoryAddForm(forms.ModelForm):
         fields = ('name', 'description', 'private')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'description': forms.Textarea(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'private': forms.CheckboxInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
+            'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'private': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 
@@ -53,10 +51,10 @@ class CategoryEditForm(forms.ModelForm):
         fields = ('name', 'description', 'slug', 'private')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'description': forms.Textarea(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'slug': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'private': forms.CheckboxInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0 w3-border-0'}),
+            'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'private': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 
@@ -66,8 +64,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('author', 'message')
 
-        message = MarkdownxFormField()
-
         widgets = {
-            'author': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0 w3-border-0'}),
+            'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
         }
