@@ -1,0 +1,10 @@
+@import 'variables';
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+$primary: $palette_primary;
+$secondary: $palette_secondary;
+$success: $palette_success;
+$danger: $palette_danger;
+$warning: $palette_warning;
+$info: $palette_info;

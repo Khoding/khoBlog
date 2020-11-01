@@ -28,11 +28,10 @@ class EditForm(forms.ModelForm):
         body = MarkdownxFormField()
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'description': forms.Textarea(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'slug': forms.TextInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
-            'private': forms.CheckboxInput(attrs={'class': 'w3-input w3-theme-dark w3-border-0'}),
+            'title': forms.TextInput(attrs={'class': 'w3-theme-dark'}),
+            'categories': forms.SelectMultiple(attrs={'class': 'w3-theme-dark'}),
+            'description': forms.Textarea(attrs={'class': 'w3-theme-dark'}),
+            'slug': forms.TextInput(attrs={'class': 'w3-theme-dark'}),
         }
 
 

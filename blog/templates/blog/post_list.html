@@ -2,143 +2,41 @@
 {% load static %}
 {% load markdown_extra %}
 
-{% block crumbs %}
-    &rsaquo;
-    {% with request.resolver_match.view_name as view_name %}
-        {% if view_name != 'blog:post_category_list' %}
-            Post List
-        {% else %}
-            Category
-        {% endif %}
-    {% endwith %}
-    {% if title %} &rsaquo; {{ title }}{% endif %}
-{% endblock %}
-
 {% block content_main %}
+
     {% if not cats.private or cats.private and user.is_superuser %}
         {% for post in posts %}
             {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
 
-                {% if post.private or not post.published_date %}
-                    <div class="postContainer w3-ul w3-card-4 w3-container">
-                {% else %}
-                    <div class="postContainer w3-ul w3-card-4 w3-padding-bottom-8 w3-container">
-                {% endif %}
+                <div class="card text-white border-secondary bg-dark mb-3">
+                    <div class="card-header border-secondary">
+                        <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
+                    </div>
 
-                    <div class="post">
-                        <h3 class="postTitle">
-                            <a href="{{ post.get_absolute_url }}" class="coolLinks">{{ post.title }}</a>
-
-                            {% block superButtons %}
-                                {% if user.is_superuser %}
-                                    <a class="w3-right" href="/admin/blog/post/{{ post.id }}/change/">
-                                        <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
-                                    </a>
-
-                                    <a class="w3-right" href="{% url 'blog:post_edit' slug=post.slug %}">
-                                        <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
-                                    </a>
-
-                                    <a class="w3-right w3-hide-small" href="{% url 'blog:post_remove' slug=post.slug %}">
-                                        <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
-                                    </a>
-
-                                    {% if not post.published_date %}
-                                        <a class="w3-right" href="{% url 'blog:post_publish_private' slug=post.slug %}">
-                                            <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
-                                        </a>
-
-                                        <a class="w3-right" href="{% url 'blog:post_publish' slug=post.slug %}">
-                                            <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
-                                        </a>
-                                    {% endif %}
-
-                                {% endif %}
-                            {% endblock superButtons %}
-                        </h3>
-
-                        <div class="w3-container khoPaddingLeftM-16">
-                            <div class="date w3-Montserrat w3-col l12 w3-hide-medium w3-hide-small">
-                                <p class="postPubliDate">Created : {{ post.created_date|date:'l, d F Y' }} - {{ post.created_date|time:"G:i:s" }}</p>
-
-                                {% if post.published_date %}
-                                    <p class="postPubliDate">Published : {{ post.published_date|date:'l, d F Y' }} - {{ post.published_date|time:"G:i:s" }}</p>
-                                {% endif %}
-
-                                {% if post.modified_date %}
-                                    <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'l, d F Y' }} - {{ post.modified_date|time:"G:i:s" }}</p>
-                                {% endif %}
-                            </div>
-
-                            <div class="date w3-Montserrat w3-col w3-hide-large m12 s12">
-                                <p class="postPubliDate">Created : {{ post.created_date|date:'d b Y' }}</p>
-
-                                {% if post.published_date %}
-                                    <p class="postPubliDate">Published : {{ post.published_date|date:'d b Y' }}</p>
-                                {% endif %}
-
-                                {% if post.modified_date %}
-                                    <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'d b Y' }}</p>
-                                {% endif %}
-                            </div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <div class="blog-post-meta">
+                            {% include 'blog/postdates.html' %}
                         </div>
-                    </div>
+                        <p class="card-text">{{ post.description }}</p>
 
-                    <div class="postText">
-                    <p>{{ post.description|formatted_markdown|safe }}</p>
-                    <p><a href="{{ post.get_absolute_url }}" class="coolLinks">Read More</a></p>
-                    </div>
-
-                    <div class="bottomInformations">
-
-                        <div class="changes w3-show-inline-block">
-                            {% if post.private or not post.published_date %}
-                                <span class="date w3-Montserrat">Author : {{ post.author|linebreaksbr }}</span>
+                        {% if not post.private and post.published_date %}
+                            <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
+                            {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
+                                <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
                             {% endif %}
-
-                            {% if not post.private and post.published_date %}
-                                <span class="postComments w3-Montserrat">
-                                    <a href="{{ post.get_absolute_url }}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
-                                    {% if user.is_superuser %}
-                                        <br />
-                                        <a href="{{ post.get_absolute_url }}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
-                                    {% endif %}
-                                </span>
-                            {% endif %}
-                        </div>
-
-                        <div class="category w3-show-inline-block">
-
-                            {% for category in post.categories.all %}
-                                {% if not category.private or category.private and user.is_superuser %}
-                                    {% if post.categories.all|length == 1 %}
-                                        <span class="w3-margin"> | </span>
-                                        <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
-                                    {% else %}
-
-                                        {% if forloop.first %}
-                                            <span class="w3-margin"> | </span>
-                                        {% endif %}
-
-                                        <a href="{{ category.get_absolute_url }}" class="coolLinks">{{ category|capfirst }}</a>
-
-                                        {% if forloop.revcounter0 and not category.private or category.private and user.is_superuser %}
-
-                                            {% if not forloop.last %}
-                                                <span class="w3-margin"> | </span>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                        {% endif %}
                     </div>
+
+                    <div class="card-footer border-secondary">
+                        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#postModal-{{ post.id }}">Open modal for this post</button>
+                    </div>
+
+                    {% include 'blog/post_modale.html' %}
 
                 </div>
-
-                {% if not forloop.last %}
-                    <hr class="hr" />
-                {% endif %}
 
             {% endif %}
         {% endfor %}
@@ -146,23 +44,25 @@
 {% endblock content_main %}
 
 {% block pagination %}
-    <hr class="hr" />
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a class="w3-btn w3-theme-dark" href="?page=1">&laquo; First</a>
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
+    <nav class="blog-pagination">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; First</a>
+                    <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
 
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
             </span>
+        </div>
+    </nav>
 
-            {% if page_obj.has_next %}
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
 {% endblock pagination %}

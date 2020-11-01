@@ -2,82 +2,70 @@
 {% load static %}
 {% load markdown_extra %}
 
-{% block sidenav %}
-
-    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
-
-    {% for item in category_list %}
-        {% if not item.private or item.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{% url 'blog:post_category_list' slug=item.slug %}">{{ item|capfirst }}</a>
-        {% endif %}
-    {% endfor %}
-
-{% endblock sidenav %}
-
 {% block content_main %}
 
+{% if not cats.private or cats.private and user.is_superuser %}
     {% for item in category_list %}
         {% if not item.private or item.private and user.is_superuser %}
-            <div class="postContainer w3-ul w3-card-4 w3-container">
 
-                <div class="post">
-                    <h3 class="postTitle">
-                        <a href="{% url 'blog:post_category_list' item.slug %}" class="coolLinks">{{ item|capfirst }}</a>
+                <div class="card text-white border-secondary bg-dark mb-3">
+                    <div class="card-header border-secondary">
+                        <h2>Category #{{ item.id }}
+                            {% block superButtons %}
+                                {% if user.is_superuser %}
+                                    <div class="float-right btn-group" role="group" aria-label="Edit Group">
+                                        <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
+                                            <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                        </a>
 
-                        {% block superButtons %}
-                            {% if user.is_superuser %}
-                                <a class="w3-right" href="/admin/blog/category/{{ item.id }}/change/">
-                                    <span class="iconify khoRed" data-icon="ant-design:edit-filled" data-inline="false"></span>
-                                </a>
+                                        <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
+                                            <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endblock superButtons %}
+                        </h2>
+                    </div>
 
-                                <a class="w3-right" href="{% url 'blog:category_edit' slug=item.slug %}">
-                                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
-                                </a>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ item }}</h2>
+                        <div class="blog-post-meta">
+                            Category Clug: {{ item.slug }}
+                            <br />
+                            Category Post Count: {{ item.cat.count }}
+                        </div>
+                        <p class="card-text">{{ item.description }}</p>
+                    </div>
 
-                            {% endif %}
-                        {% endblock superButtons %}
-                    </h3>
+                    <div class="card-footer border-secondary">
+                        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">See all posts in this Category</a>
+                    </div>
                 </div>
 
-                <div class="postText">{{ item.description|formatted_markdown|safe }}</div>
-
-                <div class="date w3-Montserrat">
-                    <span class="category_slug">Category Slug : {{ item.slug }}</span>
-                    <span class="w3-margin"> | </span>
-                    <span class="category_slug">Category Posts Count : {{ item.cat.count }}</span>
-                </div>
-            </div>
-
-        {% endif %}
-
-        {% if not forloop.last %}
-            {% if not item.private or item.private and user.is_superuser %}
-                <hr class="hr">
             {% endif %}
-        {% endif %}
-
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 
 {% endblock content_main %}
 
 {% block pagination %}
-    <hr class="hr" />
+    <nav class="blog-pagination">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; First</a>
+                    <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a class="w3-btn w3-theme-dark" href="?page=1">&laquo; First</a>
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
 
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
             </span>
-
-            {% if page_obj.has_next %}
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a class="w3-btn w3-theme-dark" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+        </div>
+    </nav>
 {% endblock pagination %}

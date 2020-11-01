@@ -1,0 +1,35 @@
+{% block superButtons %}
+    {% if user.is_superuser %}
+
+        <div class="float-right btn-toolbar" rold="toolbar" aria-label="Super Buttons Toolbar">
+            {% if not post.published_date %}
+                <div class="btn-group mr-2" role="group" aria-label="Publish Group">
+                    <a class="btn btn-light" href="{% url 'blog:post_publish' slug=post.slug %}">
+                        <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
+                    </a>
+
+                    <a class="btn btn-warning" href="{% url 'blog:post_publish_private' slug=post.slug %}">
+                        <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
+                    </a>
+                </div>
+            {% endif %}
+
+
+            <div class="btn-group mr-2" role="group" aria-label="Delete Group">
+                <a class="btn btn-warning" href="{% url 'blog:post_remove' slug=post.slug %}">
+                    <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
+                </a>
+            </div>
+
+            <div class="btn-group mr-2" role="group" aria-label="Edit Group">
+                <a class="btn btn-light" href="{% url 'blog:post_edit' slug=post.slug %}">
+                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                </a>
+
+                <a class="btn btn-danger" href="/admin/blog/post/{{ post.id }}/change/">
+                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock superButtons %}

@@ -2,39 +2,44 @@
 {% load static %}
 {% load markdown_extra %}
 
-{% block sidenav %}
-    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
-
-    {% for post in posts %}
-        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-        {% endif %}
-    {% endfor %}
-
-{% endblock sidenav %}
-
-{% block crumbs %}
-    &rsaquo; Post
-    {% if not post.private and post.published_date or post.private and user.is_superuser or not post.published_date and user.is_superuser %}
-        {% if post.title %} &rsaquo; {{ post.title }}{% endif %}
-    {% endif %}
-{% endblock %}
-
 {% block page_top_title %}
-    <h2>Post #{{ post.id }}
+    <h2>{{ title }}
+        <div class="btn-group float-right" role="group" aria-label="Previous / Next">
+            <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
+                <span class="iconify" data-icon="topcoat:back" data-inline="false"></span>
+            </a>
 
-        <a class="w3-right" href="{{ post.get_next_by_created_date.get_absolute_url }}">
-            <span class="iconify" data-icon="topcoat:next" data-inline="false"></span>
-        </a>
-
-        <a class="w3-right" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
-            <span class="iconify" data-icon="topcoat:back" data-inline="false"></span>
-        </a>
+            <a class="btn btn-primary" href="{{ post.get_next_by_created_date.get_absolute_url }}">
+                <span class="iconify" data-icon="topcoat:next" data-inline="false"></span>
+            </a>
+        </div>
     </h2>
 {% endblock page_top_title %}
 
 {% block content_main %}
+
     {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+
+        <div class="card text-white border-secondary bg-dark mb-3">
+            <div class="card-header border-secondary">
+                <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
+            </div>
+
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <div class="blog-post-meta">
+                    {% include 'blog/postdates.html' %}
+                </div>
+                <p class="card-text">{{ post.body|formatted_markdown|safe }}</p>
+            </div>
+
+            <div id="comments" class="card-footer border-secondary">
+                {% include 'blog/postcomments.html' %}
+            </div>
+
+        </div><!-- /.blog-post -->
+
+    {% comment %} {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
 
         {% if post.private or not post.published_date %}
             <div class="w3-ul w3-card-4">
@@ -187,48 +192,8 @@
                     </div>
                 {% endif %}
 
-            </div>
+            </div> {% endcomment %}
 
-            <div id='console'></div>
-            <div id="toc">
-                <h3>Table of Contents</h3>
-            </div>
-
-            <script type="text/javascript">
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            htmlTableOfContents();
-        } );
-
-        function htmlTableOfContents( documentRef ) {
-            var documentRef = documentRef || document;
-            var toc = documentRef.getElementById("toc");
-            var headings = [].slice.call(documentRef.body.querySelectorAll('.postText h1, .postText h2, .postText h3, .postText h4, .postText h5, .postText h6'));
-            headings.forEach(function (heading, index) {
-                var ref = "toc" + index;
-                if ( heading.hasAttribute( "id" ) ) 
-                    ref = heading.getAttribute( "id" );
-                else
-                    heading.setAttribute( "id", ref );
-
-                var link = documentRef.createElement( "a" );
-                link.setAttribute( "href", "#"+ ref );
-                link.textContent = heading.textContent;
-
-                var div = documentRef.createElement( "div" );
-                div.setAttribute( "class", heading.tagName.toLowerCase() );
-                div.appendChild( link );
-                toc.appendChild( div );
-            });
-        }
-
-        try {
-            module.exports = htmlTableOfContents;
-        } catch (e) {
-            // module.exports is not defined
-        }
-        </script>
     {% else %}
         <h1><a class="coolLinks" href="/pages/kheee">This post is either private or still a draft, you must be logged in to be able to see it</a></h1>
     {% endif %}

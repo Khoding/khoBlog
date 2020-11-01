@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        {% comment %} <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7PT0XGK3G"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -42,7 +42,7 @@
             };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
-        </script>
+        </script> {% endcomment %}
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,6 +54,12 @@
         <meta property="og:site_name" content="Hello There !" />
         <meta property="og:image" content="{% static 'img/RuthinkkTooBig.png' %}">
         <meta property="twitter:image" content="{% static 'img/RuthinkkTooBig.png' %}">
+
+        <!-- Bootstrap CSS -->
+        {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> {% endcomment %}
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
         {% block page_head %}
             <!-- Primary Meta Tags -->
@@ -80,7 +86,7 @@
             <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
 
             <!-- rel! W3pro.css -->
-            <link rel="stylesheet" href="{% static 'css/w3pro.css' %}">
+            {% comment %} <link rel="stylesheet" href="{% static 'css/w3pro.css' %}"> {% endcomment %}
 
             <!-- rel! twemoji.js -->
             <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
@@ -92,121 +98,102 @@
             <link rel="stylesheet" href="{% static 'css/Themes/dark-theme/dark-theme.css' %}">
             <link rel="stylesheet" href="{% static 'css/Themes/general-theme/general-theme.css' %}">
             <link rel="stylesheet" href="{% static 'css/Themes/highlight.css' %}">
+            <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
         {% endblock rel %}
 
         <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI" />
     </head>
 
-    <body class="app">
+    <body class="text-white bg-dark">
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
-        <div class="w3-main-div w3-theme-dark">
-            <nav class="w3-sidebar w3-bar-block w3-animate-left w3-theme-d5 w3-mobile" style="display:none;z-index:5" id="menuSidebar">
-                <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">
-                    Close
-                </button>
+        <div class="container">
+            <header class="blog-header py-3">
+                <div class="row flex-nowrap justify-content-start align-items-center">
+                    <div class="col-4 text-left pt-1">
+                        <p class="blog-header-logo">Khodok's Blog</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="blog-header-logo">{{ title }}</p>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end align-items-center">
+                        <img id="logo" width="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo" />
+                    </div>
+                </div>
+            </header>
 
-                {% block sidenav %}
-                    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon !</a>
-                {% endblock sidenav %}
+            <div class="nav-scroller py-1 mb-2">
+                <nav class="nav d-flex justify-content-between">
+                    <a class="p-2 text-muted" href="/">Home</a>
+                    <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
+                    <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
+                </nav>
+            </div>
+            </div>
 
-                <button class="w3-bar-item w3-button w3-large" onclick="showElements()">
-                    Show HTML Elements outline
-                </button>
+            <main role="main" class="container">
+                <div class="row">
+                    <div class="col-md-8 blog-main">
 
-                <form class="w3-bar-item w3-large" action="{% url 'blog:search_results' %}" method="get">
-                    <input name="q" type="text" placeholder="Search a post">
-                </form>
-            </nav>
-
-            <div id="main">
-                <div class="w3-theme-dark w3-text-theme">
-
-                    <script src="{% static 'js/scripts/menu.js' %}"></script>
-                    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="overlayMenu"></div>
-
-                    <button id="openMenu" class="w3-button w3-padding-small w3-transparent w3-hover-text-theme" onclick="w3_open()">
-                        &#9776; Menu
-                    </button>
-
-                    <header class="w3-container w3-theme-dark w3-text-theme">
-                        <div class="w3-row">
-                            <div class="w3-col l11 m11 s12">
-
-                                <h1 class="w3-color-font w3-margin-top" id="mainHeading">Khodok (Autogenerated)</h1>
-
-                                {% block auth %}
-                                    {% if user.is_authenticated %}
-                                        {% if user.is_superuser %}
-                                            <p>Hello <span class="superuser">{{ user.username }}</span> <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small>
-                                                <span class="postsButtons">
-                                                    <a href="{% url 'blog:post_new' %}"><span class="iconify" data-icon="bx:bx-list-plus" data-inline="false"></span></a>
-                                                    <a href="{% url 'blog:post_draft_list' %}"><span class="iconify" data-icon="ic:outline-drafts" data-inline="false"></span></a>
-                                                    <a href="{% url 'blog:post_private_list' %}"><span class="iconify" data-icon="cil:lock-locked" data-inline="false"></span></a>
-                                                </span>
-
-                                                <span class="w3-margin categoryButtons">
-                                                    <a href="{% url 'blog:category_new' %}"><span class="iconify" data-icon="carbon:category-new" data-inline="false"></span></a>
-                                                    <a href="{% url 'blog:category_list' %}"><span class="iconify" data-icon="carbon:category" data-inline="false"></span></a>
-                                                </span>
-
-                                                <span class="adminButtons">
-                                                    <a href="{% url 'admin:index' %}"><span class="iconify" data-icon="dashicons:admin-generic" data-inline="false"></span></a>
-                                                    <a href="https://pythonanywhere.com"><span class="iconify khoRed" data-icon="fa-solid:user-cog" data-inline="false"></span></a>
-                                                </span>
-                                            </p>
-
-                                        {% elif user.is_staff %}
-                                            <p>Hello <span class="staff">{{ user.username }}</span> <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small>
-                                                <a href="{% url 'admin:index' %}"><span class="iconify" data-icon="dashicons:admin-generic" data-inline="false"></span></a>
-                                            </p>
-                                        {% else %}
-                                            <p>Hello {{ user.username }} <small>(<a class="coolLinks" href="{% url 'account_logout' %}">Log out</a>)</small></p>
-                                        {% endif %}
-
-                                    {% else %}
-                                        <a href="{% url 'account_signup' %}" class="w3-bar-block"><span class="iconify" data-icon="ant-design:user-add-outlined" data-inline="false"></span></a>
-                                        <a href="{% url 'account_login' %}" class="w3-bar-block"><span class="iconify" data-icon="ant-design:lock-filled" data-inline="false"></span></a>
-                                        <a href="{% provider_login_url 'google' %}"><span class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
-                                    {% endif %}
-
-                                {% endblock auth %}
-                            </div>
-
-                            <div class="w3-col l1 m1 w3-hide-small">
-                                <img id="logo" width="75" src="{% static 'img/RuthinkkTooBig.png' %}" class="w3-margin-top" alt="Khodok's Logo" />
-                            </div>
-
-                        </div>
-                    </header>
+                    {% block content %}
+                    {% endblock content %}
 
                 </div>
 
-                {% block content %}
-                {% endblock content %}
+                <aside class="col-md-4 blog-sidebar">
+                    <div class="p-4 mb-3 rounded">
+                        <h4 class="font-italic">About</h4>
+                        <p class="mb-0">Khodok's Blog, Read at own risks</p>
+                        <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
+                    </div>
 
-                <footer class="w3-container w3-center w3-padding-16 w3-text-theme w3-theme-dark">
-                    <div class="w3-row">
-                        <div class="w3-col l4 m5 w3-hide-small"><a href="{% url 'blog:category_list' %}"
-                                class="coolLinks">Category List</a></div>
+                    <div class="p-4">
+                        <h4 class="font-italic">Post List</h4>
+                            <ol class="list-unstyled mb-0">
+                            {% for post in posts %}
+                                {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
 
-                        <div class="w3-col l4 m2 s12">
+                    <div class="p-4 mb-3 rounded">
+                        <h4 class="font-italic">Search</h4>
+                        <form action="{% url 'blog:search_results' %}" method="get">
+                            <input class="form-control" name="q" type="text" placeholder="Search a post">
+                        </form>
+                    </div>
+
+                </aside>
+
+                </div>
+
+            </main>
+
+            <footer class="blog-footer text-white bg-dark">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm">
+                        <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">Category List</a></div>
+
+                        <div class="col-sm">
                             <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
                                     width="50" alt="Khodok's Logo" /></a>
                         </div>
 
-                        <div class="w3-col l4 m5 w3-hide-small"><a href="{% url 'blog:latest' %}"
-                                class="coolLinks">Latest Post</a>
+                        <div class="col-sm"><a href="{% url 'blog:latest' %}"
+                                class="btn btn-dark btn-outline-light">Latest Post</a>
                         </div>
                     </div>
-                </footer>
+                </div>
+            </footer>
 
-                <!-- rel! js -->
-                <script src="{% static 'js/scripts/dynamic.js' %}"></script>
-            </div>
-        </div>
+        <!-- rel! js -->
+        <script src="{% static 'js/scripts/dynamic.js' %}"></script>
     </body>
 </html>

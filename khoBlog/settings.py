@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'markdownx',
     'graphene_django',
+    "bootstrap4",
 
     'blog',
     'pages',

@@ -1,0 +1,29 @@
+{% load markdown_extra %}
+
+{% if post.approved_comments.count or user.is_superuser %}
+    {% for comment in post.comments.all %}
+        {% if comment.approved_comment or not comment.approved_comment and user.is_superuser %}
+            <div class="card text-white border-secondary bg-dark mb-3">
+                <div class="card-header">
+                    <h4>{{ comment.author }}
+                        {% if not comment.approved_comment %}
+                            <span class="float-right">
+                                <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="iconify" data-icon="foundation:page-remove" data-inline="false"></span></a>
+                                <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="iconify" data-icon="emojione-monotone:ok-button" data-inline="false"></span></a>
+                            </span>
+                        {% endif %}
+                    </h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }}</li>
+                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.message|formatted_markdown|safe }}</li>
+                </ul>
+            </div>
+
+        {% endif %}
+    {% empty %}
+        <p>No comments here yet.</p>
+    {% endfor %}
+{% else %}
+    <p>No comments here yet.</p>
+{% endif %}

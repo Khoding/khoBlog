@@ -1,5 +1,3 @@
-var mainHeading = document.title;
-
 var isRoot = location.pathname == '/';
 
 if (isRoot) {
@@ -8,5 +6,3 @@ if (isRoot) {
         ele[i].classList.toggle('isHome');
     }
 }
-
-document.getElementById('mainHeading').innerHTML = mainHeading;

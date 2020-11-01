@@ -115,20 +115,8 @@
 
 {% endblock page_head %}
 
-{% block sidenav %}
-    <a class="w3-bar-item w3-button khoBold" href="/pages">Coming Soon ! (Pages)</a>
-
-    {% for post in posts %}
-        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
-            <a class="w3-bar-item w3-button" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-        {% endif %}
-    {% endfor %}
-
-{% endblock sidenav %}
 
 {% block content %}
-    <main class="w3-container w3-theme-d4 w3-padding-bottom-16">
-        {% block main %}
-        {% endblock main %}
-    </main>
+    {% block main %}
+    {% endblock main %}
 {% endblock content %}

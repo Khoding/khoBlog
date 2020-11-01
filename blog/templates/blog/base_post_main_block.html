@@ -5,55 +5,39 @@
 
 {% block main %}
 
-    <div id="posts" class="w3-ul w3-threequarter">
+    {% block page_top_title %}
+        {% with request.resolver_match.view_name as view_name %}
+            {% if view_name == 'blog:post_private_list' %}
+                <h2>Private Posts</h2>
 
-        {% block breadcrumbs %}
-            <div class="breadcrumbs">
-                <a class="coolLinks" href="{% url 'blog:post_list' %}">{% trans "Home" %}</a>
+            {% elif view_name == 'blog:post_draft_list' %}
+                <h2>Drafts</h2>
+
+            {% elif view_name == 'blog:post_category_list' %}
                 {% if not cats.private or cats.private and user.is_superuser %}
-                    {% block crumbs %}
-                        {% if title %} &rsaquo; {{ title }}{% endif %}
-                    {% endblock %}
-                {% endif %}
-            </div>
-        {% endblock %}
+                    <h2>
+                        Posts in <b>{{ cats|capfirst }}</b> Category
+                    </h2>
 
-        <hr class="hr">
-
-        {% block page_top_title %}
-            {% with request.resolver_match.view_name as view_name %}
-                {% if view_name == 'blog:post_private_list' %}
-                    <h2>Private Posts</h2>
-
-                {% elif view_name == 'blog:post_draft_list' %}
-                    <h2>Drafts</h2>
-
-                {% elif view_name == 'blog:post_category_list' %}
-                    {% if not cats.private or cats.private and user.is_superuser %}
-                        <h2>
-                            Posts in <b>{{ cats|capfirst }}</b> Category
-                        </h2>
-
-                    {% else %}
-                        <h2>
-                            This category is Private
-                        </h2>
-                    {% endif %}
-                {% elif view_name == 'blog:category_list' %}
-                    <h2>Category List</h2>
                 {% else %}
-                    <h2>Latest Posts</h2>
+                    <h2>
+                        This category is Private
+                    </h2>
                 {% endif %}
-            {% endwith %}
+            {% elif view_name == 'blog:category_list' %}
+                <h2>Category List</h2>
+            {% else %}
+                <h2>Latest Posts</h2>
+            {% endif %}
+        {% endwith %}
 
-        {% endblock page_top_title %}
+    {% endblock page_top_title %}
 
-        {% block content_main %}
-        {% endblock content_main %}
+    {% block content_main %}
+    {% endblock content_main %}
 
-        {% block pagination %}
-        {% endblock pagination %}
+    {% block pagination %}
+    {% endblock pagination %}
 
-    </div>
 
 {% endblock main %}

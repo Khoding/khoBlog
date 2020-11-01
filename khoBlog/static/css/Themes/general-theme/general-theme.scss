@@ -10,28 +10,6 @@ $lightGrayBase: #ddd;
 $easeOut: ease-out;
 $easeInOut: ease-in-out;
 
-html {
-    box-sizing: border-box !important;
-    width: calc(100vw - 100%);
-}
-
-* {
-    scrollbar-color: #2a2c2e #1c1e1f !important;
-
-    &,
-    &::before,
-    &::after {
-        margin: 0;
-        padding: 0;
-    }
-}
-
-/* use viewport-relative units to cover page fully */
-body {
-    height: 100vh !important;
-    width: 100vw !important;
-}
-
 .khoBold {
     font-weight: bold;
 }
@@ -103,21 +81,6 @@ body {
     padding: 0 16px;
 }
 
-.iconify {
-    font-size: 16pt;
-    line-height: 26px;
-}
-
-a .iconify {
-    opacity: 1;
-    -webkit-transition: 0.3s $easeInOut;
-    transition: 0.3s $easeInOut;
-
-    &:hover {
-        opacity: 0.5;
-    }
-}
-
 #posts.w3-ul li {
     padding: 0;
 }
@@ -133,11 +96,6 @@ a .iconify {
 
 #uselessInfos li {
     border-bottom-color: #ddd6;
-}
-
-#logo {
-    width: 75px;
-    float: right;
 }
 
 .niceButtons {

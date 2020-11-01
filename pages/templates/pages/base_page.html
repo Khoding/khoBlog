@@ -1,16 +1,5 @@
 {% extends 'base.html' %}
 
-{% block sidenav %}
-    <a class="w3-bar-item w3-button" href="{% url 'blog:latest' %}">Latest Post</a>
-
-    <a class="w3-bar-item w3-button khoBold" href="{% url 'blog:post_list' %}">Blog</a>
-
-    {% for page in page_list %}
-        <a class="w3-bar-item w3-button" href=".{{ page.permalink }}">{{ page.title }}</a>
-    {% endfor %}
-
-{% endblock sidenav %}
-
 {% block content %}
     <main class="w3-container w3-theme-d2 w3-text-theme w3-padding-bottom-16">
         {% block main %}
