@@ -42,12 +42,10 @@
                     <div class="modal-body">
                         <h5>Author</h5>
                         <p>{{ post.author }}</p>
-                        <hr class="hr">
-                        <h5>Dates</h5>
+                        <h5 class="mt-3">Dates</h5>
                         {% include 'blog/postdates.html' %}
-                        <hr class="hr">
-                        <h5>Categories</h5>
-                        <p>{% include 'blog/postcategories.html' %}</p>
+                        <h5 class="mt-3">Categories</h5>
+                        {% include 'blog/postcategories.html' %}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

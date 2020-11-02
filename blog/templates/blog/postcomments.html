@@ -3,7 +3,7 @@
 {% if post.approved_comments.count or user.is_superuser %}
     {% for comment in post.comments.all %}
         {% if comment.approved_comment or not comment.approved_comment and user.is_superuser %}
-            <div class="card text-white border-secondary bg-dark mb-3">
+            <div class="card text-white border-secondary bg-dark mt-3">
                 <div class="card-header">
                     <h4>{{ comment.author }}
                         {% if not comment.approved_comment %}
