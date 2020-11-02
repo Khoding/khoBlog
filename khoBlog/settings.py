@@ -45,16 +45,20 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.forms',
 
+    # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'impostor',
+    'allauth.socialaccount.providers.discord',
 
+    # packages apps
+    'impostor',
     'markdownx',
     'graphene_django',
     "bootstrap4",
 
+    # apps
     'blog',
     'pages',
     'polls',
