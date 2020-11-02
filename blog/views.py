@@ -188,7 +188,7 @@ class DeletePostView(DeleteView):
 
 class SearchResultsView(ListView):
     model = Post
-    template_name = 'post_list.html'
+    template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
     def get_queryset(self):

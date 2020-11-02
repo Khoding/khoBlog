@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load account %}
+
+{% block title %} - Profile | {{ user.username }}{% endblock title %}
+
+{% block content %}
+    <h2>Profile</h2>
+    {% if user.profile_pic %}
+        <h2>{% user_display user %}'s Profile <img src="{{ user.profile_pic.url }}" alt="profile pic" width="50"/></h2>
+    {% endif %}
+
+    <a class="mb-3 btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
+
+{% endblock content %}
