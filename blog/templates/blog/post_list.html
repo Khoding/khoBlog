@@ -21,9 +21,12 @@
                         <p class="card-text">{{ post.description }}</p>
 
                         {% if not post.private and post.published_date %}
-                            <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments : {% if user.is_superuser %}{{ post.comments.count }}{% else %}{{ post.approved_comments.count }}{% endif %}</a>
+                            <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments :
+                                {% if user.is_superuser %}{{ post.comments.count }}{% else %}
+                                    {{ post.approved_comments.count }}{% endif %}</a>
                             {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
-                                <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments : {{ post.approved_comments.count }}</a>
+                                <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments
+                                    : {{ post.approved_comments.count }}</a>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -31,7 +34,9 @@
                     <div class="card-footer border-secondary">
                         <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
 
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#postModal-{{ post.id }}">Open modal for this post</button>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#postModal-{{ post.id }}">Open modal for this post
+                        </button>
                     </div>
 
                     {% include 'blog/post_modale.html' %}
@@ -59,7 +64,8 @@
 
                 {% if page_obj.has_next %}
                     <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    <a class="btn btn-outline-secondary"
+                       href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
                 {% endif %}
             </span>
         </div>

@@ -1,7 +1,9 @@
 from django.urls import path
+
 from . import views
-from .views import PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
+from .views import PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, \
+    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
 
 app_name = 'blog'
 urlpatterns = [

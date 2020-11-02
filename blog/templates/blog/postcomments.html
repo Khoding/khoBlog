@@ -8,14 +8,19 @@
                     <h4>{{ comment.author }}
                         {% if not comment.approved_comment %}
                             <span class="float-right">
-                                <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="iconify" data-icon="foundation:page-remove" data-inline="false"></span></a>
-                                <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="iconify" data-icon="emojione-monotone:ok-button" data-inline="false"></span></a>
+                                <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span
+                                        class="iconify" data-icon="foundation:page-remove"
+                                        data-inline="false"></span></a>
+                                <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span
+                                        class="iconify" data-icon="emojione-monotone:ok-button"
+                                        data-inline="false"></span></a>
                             </span>
                         {% endif %}
                     </h4>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }}</li>
+                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.created_date|date:'l, d F Y' }}
+                        - {{ comment.created_date|time:"G:i:s" }}</li>
                     <li class="list-group-item text-white border-secondary bg-dark">{{ comment.message|formatted_markdown|safe }}</li>
                 </ul>
             </div>

@@ -4,9 +4,9 @@
 
 {% block content_main %}
 
-{% if not cats.private or cats.private and user.is_superuser %}
-    {% for item in category_list %}
-        {% if not item.private or item.private and user.is_superuser %}
+    {% if not cats.private or cats.private and user.is_superuser %}
+        {% for item in category_list %}
+            {% if not item.private or item.private and user.is_superuser %}
 
                 <div class="card text-white border-secondary bg-dark mb-3">
                     <div class="card-header border-secondary">
@@ -15,11 +15,13 @@
                                 {% if user.is_superuser %}
                                     <div class="float-right btn-group" role="group" aria-label="Edit Group">
                                         <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
-                                            <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                            <span class="iconify" data-icon="ant-design:edit-filled"
+                                                  data-inline="false"></span>
                                         </a>
 
                                         <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
-                                            <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                                            <span class="iconify" data-icon="ant-design:edit-filled"
+                                                  data-inline="false"></span>
                                         </a>
                                     </div>
                                 {% endif %}
@@ -31,7 +33,7 @@
                         <h2 class="card-title">{{ item }}</h2>
                         <div class="blog-post-meta">
                             Category Clug: {{ item.slug }}
-                            <br />
+                            <br/>
                             Category Post Count: {{ item.cat.count }}
                         </div>
                         <p class="card-text">{{ item.description }}</p>
@@ -63,7 +65,8 @@
 
                 {% if page_obj.has_next %}
                     <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    <a class="btn btn-outline-secondary"
+                       href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
                 {% endif %}
             </span>
         </div>

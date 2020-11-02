@@ -1,7 +1,5 @@
 from django import forms
 
-from markdownx.fields import MarkdownxFormField
-
 from .models import Post, Comment, Category
 
 
@@ -59,7 +57,6 @@ class CategoryEditForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
         fields = ('author', 'message')

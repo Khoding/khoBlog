@@ -1,7 +1,6 @@
 from django.contrib.syndication.views import Feed
 from django.utils import timezone
 
-
 from .models import Post, Category, Comment
 
 
@@ -45,7 +44,8 @@ class LatestPostsFeedByCategory(Feed):
         return obj.description
 
     def items(self, obj):
-        return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), private=False).order_by('-published_date')
+        return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), private=False).order_by(
+            '-published_date')
 
     def item_description(self, item):
         return item.description

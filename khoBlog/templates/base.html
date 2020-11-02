@@ -2,272 +2,309 @@
 {% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7PT0XGK3G"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7PT0XGK3G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-            gtag('config', 'G-V7PT0XGK3G');
-        </script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-ND43ZGJ');</script>
-        <!-- End Google Tag Manager -->
+        gtag('js', new Date());
 
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+        gtag('config', 'G-V7PT0XGK3G');
+    </script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-ND43ZGJ');</script>
+    <!-- End Google Tag Manager -->
 
-        <script>
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            var firebaseConfig = {
-                apiKey: "AIzaSyDo47xBD-VL4bN9JT_efi9u_lsYGys8pFQ",
-                authDomain: "django-khodok.firebaseapp.com",
-                databaseURL: "https://django-khodok.firebaseio.com",
-                projectId: "django-khodok",
-                storageBucket: "django-khodok.appspot.com",
-                messagingSenderId: "555741128855",
-                appId: "1:555741128855:web:aecc0210cffd7bc1b3a1d2",
-                measurementId: "G-9K7CK18BG6"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
 
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
 
-        <link rel="canonical" href="https://blog.khodok.xyz/">
-        <link rel="shortlink" href="https://blog.khodok.xyz/">
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDo47xBD-VL4bN9JT_efi9u_lsYGys8pFQ",
+            authDomain: "django-khodok.firebaseapp.com",
+            databaseURL: "https://django-khodok.firebaseio.com",
+            projectId: "django-khodok",
+            storageBucket: "django-khodok.appspot.com",
+            messagingSenderId: "555741128855",
+            appId: "1:555741128855:web:aecc0210cffd7bc1b3a1d2",
+            measurementId: "G-9K7CK18BG6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
-        <meta property="og:site_name" content="Hello There !" />
-        <meta property="og:image" content="{% static 'img/RuthinkkTooBig.png' %}">
-        <meta property="twitter:image" content="{% static 'img/RuthinkkTooBig.png' %}">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
-        <!-- Bootstrap CSS -->
-        {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> {% endcomment %}
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://blog.khodok.xyz/">
+    <link rel="shortlink" href="https://blog.khodok.xyz/">
 
-        {% block page_head %}
-            <!-- Primary Meta Tags -->
-            <meta name="description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+    <meta property="og:site_name" content="Hello There !"/>
+    <meta property="og:image" content="{% static 'img/RuthinkkTooBig.png' %}">
+    <meta property="twitter:image" content="{% static 'img/RuthinkkTooBig.png' %}">
 
-            <!-- Open Graph / Facebook -->
-            <meta property="og:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+    <!-- Bootstrap CSS -->
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous"></script>
 
-            <!-- Twitter -->
-            <meta property="twitter:description" content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
-        {% endblock page_head %}
+    {% block page_head %}
+        <!-- Primary Meta Tags -->
+        <meta name="description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
-        <meta name="theme-color" content="#B362FF">
-        <link rel="alternate" type="application/json+oembed" href="https://blog.khodok.xyz/static/js/oembed/oembed.json" title="oEmbed Profile: JSON">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
-        <title>
-            Khodok's Blog
-            {% block title %}
-            {% endblock title %}
-        </title>
+        <!-- Twitter -->
+        <meta property="twitter:description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+    {% endblock page_head %}
 
-        {% block rel %}
-            <!-- base! favicon -->
-            <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <meta name="theme-color" content="#B362FF">
+    <link rel="alternate" type="application/json+oembed" href="https://blog.khodok.xyz/static/js/oembed/oembed.json"
+          title="oEmbed Profile: JSON">
 
-            <!-- rel! twemoji.js -->
-            <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+    <title>
+        Khodok's Blog
+        {% block title %}
+        {% endblock title %}
+    </title>
 
-            <!-- rel! Fonts / Icons -->
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet" />
+    {% block rel %}
+        <!-- base! favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
 
-            <!-- rel! Themes -->
-            <link rel="stylesheet" href="{% static 'css/Themes/dark-theme/dark-theme.css' %}">
-            <link rel="stylesheet" href="{% static 'css/Themes/general-theme/general-theme.css' %}">
-            <link rel="stylesheet" href="{% static 'css/Themes/highlight.css' %}">
-            <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        {% endblock rel %}
+        <!-- rel! twemoji.js -->
+        <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 
-        <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI" />
-    </head>
+        <!-- rel! Fonts / Icons -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet"/>
 
-    <body class="text-white bg-dark">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+        <!-- rel! Themes -->
+        <link rel="stylesheet" href="{% static 'css/Themes/dark-theme/dark-theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/Themes/general-theme/general-theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/Themes/highlight.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    {% endblock rel %}
 
-        <div class="container">
-            <header class="blog-header py-3">
-                <div class="row flex-nowrap justify-content-start align-items-center">
-                    <div class="col-6 col-sm-4 text-left pt-1">
-                        <p class="blog-header-logo">Khodok's Blog</p>
-                    </div>
-                    <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
-                        <p class="blog-header-logo">{{ title }}</p>
-                    </div>
-                    <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
-                        <img id="logo" height="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo" />
-                    </div>
-                </div>
-            </header>
+    <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+</head>
 
-            <div class="nav-scroller py-1 mb-2">
-                <nav class="nav d-flex justify-content-between">
-                    <a class="p-2 text-muted" href="/">Home</a>
-                    <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
-                    <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
-                </nav>
+<body class="text-white bg-dark">
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-start align-items-center">
+            <div class="col-6 col-sm-4 text-left pt-1">
+                <p class="blog-header-logo">Khodok's Blog</p>
             </div>
+            <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
+                <p class="blog-header-logo">{{ title }}</p>
+            </div>
+            <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
+                <img id="logo" height="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo"/>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 text-muted" href="/">Home</a>
+            <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
+            <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
+        </nav>
+    </div>
+</div>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+
+        <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 rounded">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">Khodok's Blog, Read at own risks</p>
+                <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
             </div>
 
-            <main role="main" class="container">
-                <div class="row">
-                    <div class="col-md-8 blog-main">
-
-                    {% block content %}
-                    {% endblock content %}
-
-                </div>
-
-                <aside class="col-md-4 blog-sidebar">
-                    <div class="p-4 mb-3 rounded">
-                        <h4 class="font-italic">About</h4>
-                        <p class="mb-0">Khodok's Blog, Read at own risks</p>
-                        <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
-                    </div>
-
-                    <div class="p-4 mb-3 rounded">
-                        <h4 class="font-italic">User</h4>
-                    {% block auth %}
-                        {% if user.is_authenticated %}
-                            {% if user.is_superuser %}
-                                <p>Hello <span class="superuser">{{ user.username }}</span></p>
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                    </div>
-
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Posts">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:post_private_list' %}">Private</a>
-                                    </div>
-
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-                                    </div>
-
-                                    <div class="btn-group" role="group" aria-label="Group Admin">
-                                        <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                                        <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
-                                    </div>
-
-                                </div>
-                            {% elif user.is_staff %}
-                                <p>Hello <span class="staff">{{ user.username }}</span></p>
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                    </div>
-
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-                                    </div>
-
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Admin">
-                                        <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <p>Hello {{ user.username }}</p>
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                        <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                    </div>
-
-                                    <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                        {% else %}
+            <div class="p-4 mb-3 rounded">
+                <h4 class="font-italic">User</h4>
+                {% block auth %}
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <p>Hello <span class="superuser">{{ user.username }}</span></p>
                             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
-                                    <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
-                                    <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
+                                </div>
+
+                                <div class="btn-group mb-2" role="group" aria-label="Group Posts">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                    <a class="mb-0 btn btn-primary"
+                                       href="{% url 'blog:post_private_list' %}">Private</a>
                                 </div>
 
                                 <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New
+                                        Category</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
+                                        List</a>
+                                </div>
+
+                                <div class="btn-group" role="group" aria-label="Group Admin">
+                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                                    <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
+                                </div>
+
+                            </div>
+                        {% elif user.is_staff %}
+                            <p>Hello <span class="staff">{{ user.username }}</span></p>
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mb-2" role="group" aria-label="Group Account">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
+                                </div>
+
+                                <div class="btn-group mb-2" role="group" aria-label="Group Categories">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
+                                        List</a>
+                                </div>
+
+                                <div class="btn-group mb-2" role="group" aria-label="Group Admin">
+                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <p>Hello {{ user.username }}</p>
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mb-2" role="group" aria-label="Group Account">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
+                                </div>
+
+                                <div class="btn-group mb-2" role="group" aria-label="Group Categories">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
+                                        List</a>
                                 </div>
                             </div>
                         {% endif %}
 
-                    {% endblock auth %}
-                    </div>
+                    {% else %}
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group mb-2" role="group" aria-label="Group Account">
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
+                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
+                                        class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
+                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
+                                        class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+                            </div>
 
-                    <div class="p-4">
-                        <h4 class="font-italic">Post List</h4>
-                            <ol class="list-unstyled mb-0">
-                            {% for post in posts %}
-                                {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
-                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                        </ol>
-                    </div>
-
-                    <div class="p-4 mb-3 rounded">
-                        <h4 class="font-italic">Search</h4>
-                        <form action="{% url 'blog:search_results' %}" method="get">
-                            <input class="form-control" name="q" type="text" placeholder="Search a post">
-                        </form>
-                    </div>
-
-                </aside>
-
-                </div>
-
-            </main>
-
-            <footer class="blog-footer text-white bg-dark">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm">
-                        <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">Category List</a></div>
-
-                        <div class="col-sm">
-                            <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
-                                    width="50" alt="Khodok's Logo" /></a>
+                            <div class="btn-group mb-2" role="group" aria-label="Group Categories">
+                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+                            </div>
                         </div>
+                    {% endif %}
 
-                        <div class="col-sm"><a href="{% url 'blog:latest' %}"
-                                class="btn btn-dark btn-outline-light">Latest Post</a>
+                {% endblock auth %}
+            </div>
+
+            <div class="p-4">
+                <h4 class="font-italic">Post List</h4>
+                <ol class="list-unstyled mb-0">
+                    {% for post in posts %}
+                        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+
+            <div class="p-4 mb-3 rounded">
+                <h4 class="font-italic">Search</h4>
+                <form action="{% url 'blog:search_results' %}" method="get">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Search</span>
                         </div>
+                        <input type="text" class="form-control" id="post_search" placeholder="Search a post" name="q"
+                               aria-label="search" aria-describedby="basic-addon1">
                     </div>
-                </div>
-            </footer>
+                </form>
+            </div>
 
-        <!-- rel! js -->
-        <script src="{% static 'js/scripts/dynamic.js' %}"></script>
-    </body>
+        </aside>
+
+    </div>
+
+</main>
+
+<footer class="blog-footer text-white bg-dark">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm">
+                <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">Category List</a></div>
+
+            <div class="col-sm">
+                <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
+                                                  width="50" alt="Khodok's Logo"/></a>
+            </div>
+
+            <div class="col-sm"><a href="{% url 'blog:latest' %}"
+                                   class="btn btn-dark btn-outline-light">Latest Post</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- rel! js -->
+<script src="{% static 'js/scripts/dynamic.js' %}"></script>
+</body>
 </html>

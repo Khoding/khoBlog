@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
@@ -102,6 +102,6 @@ class Comment(models.Model):
         self.save()
 
     # Create a property that returns the markdown instead
-    @ property
+    @property
     def formatted_markdown(self):
         return markdownify(self.message)

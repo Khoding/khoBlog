@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Comment, Category
-from .forms import PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm
-from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse, reverse_lazy
+from django.utils import timezone
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from .forms import PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm
+from .models import Post, Comment, Category
 
 
 def superuser_required():
@@ -16,6 +17,7 @@ def superuser_required():
                 return self.request.user.is_superuser
 
         return WrappedClass
+
     return wrapper
 
 
@@ -200,14 +202,14 @@ class SearchResultsView(ListView):
         return object_list
 
 
-@ user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.publish()
     return redirect('blog:post_detail', slug=slug)
 
 
-@ user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def post_publish_private(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.private = True
@@ -234,14 +236,14 @@ def add_comment_to_post(request, slug):
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
 
-@ user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('blog:post_detail', slug=comment.post.slug)
 
 
-@ user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
