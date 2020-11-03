@@ -9,8 +9,8 @@ $info: $palette_info;
 
 $dark: $palette_dark;
 
-$font-family: $font-family-base;
+$enable-shadows: $enable-shadows;
 
-$enabled-shadows: $enable-shadows;
+$font-family: $font-family-base;
 
 @import '../../../node_modules/bootstrap/scss/bootstrap';

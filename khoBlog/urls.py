@@ -42,6 +42,7 @@ urlpatterns = [
 
 
     # Django Admin
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
 
     # User management
