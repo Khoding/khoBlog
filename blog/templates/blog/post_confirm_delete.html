@@ -8,9 +8,9 @@
         {% csrf_token %}
         <h4>Are you sure ?</h4>
 
-        {% bootstrap_form form %}
+        {{ form.as_p }}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Delete Post</button>
         {% endbuttons %}
     </form>
 

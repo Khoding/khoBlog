@@ -180,7 +180,8 @@ class EditPostView(UpdateView):
 @superuser_required()
 class DeletePostView(DeleteView):
     model = Post
-    success_url = reverse_lazy('post_list')
+    template_name = "blog/post_confirm_delete.html"
+    success_url = reverse_lazy('blog:post_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
