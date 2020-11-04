@@ -59,6 +59,10 @@ INSTALLED_APPS = [
     'graphene_django',
     "bootstrap4",
 
+    # REST
+    'rest_framework',
+    'khoBlogAPI',
+
     # apps
     'blog',
     'pages',
