@@ -64,10 +64,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'khoBlogAPI',
 
-    # REST
-    'rest_framework',
-    'khoBlogAPI',
-
     # apps
     'blog',
     'pages',
