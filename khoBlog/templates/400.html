@@ -7,14 +7,14 @@
 
 {% block page_top_title %}
     <h2>Error 400
-        <a class="w3-right coolLinks" href="{% url 'blog:latest' %}">
+        <a class="btn btn-primary" href="{% url 'blog:latest' %}">
             Latest Post
         </a>
     </h2>
 {% endblock page_top_title %}
 
 {% block content_main %}
-    <h1><a class="coolLinks" href="/pages/kheee">Bad Request</a></h1>
+    <a class="btn btn-danger" href="/pages/kheee">Bad Request</a>
 {% endblock content_main %}
 
 {% block pagination %}
