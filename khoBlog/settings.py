@@ -57,7 +57,12 @@ INSTALLED_APPS = [
     'impostor',
     'markdownx',
     'graphene_django',
-    "bootstrap4",
+    'bootstrap4',
+
+    # REST
+    'rest_framework',
+    'drf_yasg',
+    'khoBlogAPI',
 
     # REST
     'rest_framework',
@@ -74,6 +79,11 @@ INSTALLED_APPS = [
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ]
+}
 
 # Markdown extensions
 MARKDOWNX_MARKDOWN_EXTENSIONS = [

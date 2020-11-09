@@ -1,10 +1,9 @@
-from django.conf.urls import url, include
+from khoBlogAPI.views import CategoryViewSet, CommentViewSet, PostViewSet
 from rest_framework import routers
-from khoBlogAPI import views
 
 router = routers.DefaultRouter()
-router.register(r'post', views.PostViewSet)
+router.register('post', PostViewSet, basename='post')
+router.register('category', CategoryViewSet, basename='category')
+router.register('comment', CommentViewSet, basename='comment')
 
-urlpatterns = [
-    url(r'^', include(router.urls)),
-]
+urlpatterns = router.urls

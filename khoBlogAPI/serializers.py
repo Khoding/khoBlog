@@ -11,7 +11,9 @@ class CategorySerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'title', 'categories', 'description', 'body', 'post_image')
+        fields = ('title', 'categories',
+                  'description', 'body', 'post_image')
+        prepopulated_fields = {'slug': ('title',)}
 
 
 class CommentsSerializer(serializers.ModelSerializer):
