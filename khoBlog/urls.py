@@ -41,8 +41,7 @@ urlpatterns = [
     path('s/', include('shortener.urls')),
 
     # Rest API
-    path('api/', include('khoBlogAPI.urls')),
-
+    path('apis/v1/', include('khoBlogAPI.urls')),
 
     # Django Admin
     path('admin/doc/', include('django.contrib.admindocs.urls')),
