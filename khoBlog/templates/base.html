@@ -166,97 +166,84 @@
         </div>
 
         <aside class="col-md-4 blog-sidebar">
-            <div class="p-4 mb-3 rounded">
+            <h2>Menus</h2>
+            <div class="p-4 mb-3 rounded border border-secondary shadow">
                 <h4 class="font-italic">About</h4>
-                <p class="mb-0">Khodok's Blog, Read at own risks</p>
-                <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
+                <p class="mb-2">Khodok's Blog, Read at own risks</p>
+
+                <div class="btn-group-vertical d-block" role="group" aria-label="Group Accounts">
+                    <a href="{% url 'blog:latest' %}" class="btn btn-primary mb-lg-0 mb-2">Latest Post</a>
+                    <a href="{% url 'blog:category_list' %}" class="btn btn-primary mb-lg-0 mb-2">Category List</a>
+                </div>
             </div>
 
-            <div class="p-4 mb-3 rounded">
+            <div class="p-4 mb-3 rounded border border-secondary shadow">
                 <h4 class="font-italic">User</h4>
                 {% block auth %}
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <p>Hello <span class="superuser">{{ user.username }}</span></p>
-                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                </div>
-
-                                <div class="btn-group mb-2" role="group" aria-label="Group Posts">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                                    <a class="mb-0 btn btn-primary"
-                                       href="{% url 'blog:post_private_list' %}">Private</a>
-                                </div>
-
-                                <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New
-                                        Category</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
-                                        List</a>
-                                </div>
-
-                                <div class="btn-group" role="group" aria-label="Group Admin">
-                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                                    <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
-                                </div>
-
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
                             </div>
+
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
+                                <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                <a class="mb-0 btn btn-primary"
+                                    href="{% url 'blog:post_private_list' %}">Private</a>
+                            </div>
+
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
+                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+                            </div>
+
+                            <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
+                                <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                                <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
+                            </div>
+
                         {% elif user.is_staff %}
                             <p>Hello <span class="staff">{{ user.username }}</span></p>
-                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                </div>
-
-                                <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
-                                        List</a>
-                                </div>
-
-                                <div class="btn-group mb-2" role="group" aria-label="Group Admin">
-                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                                </div>
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
                             </div>
+
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
+                                <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                            </div>
+
                         {% else %}
                             <p>Hello {{ user.username }}</p>
-                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
-                                </div>
-
-                                <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category
-                                        List</a>
-                                </div>
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'profile' %}">Profile Page</a>
                             </div>
+
                         {% endif %}
 
                     {% else %}
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group mb-2" role="group" aria-label="Group Account">
-                                <a class="mb-0 btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
-                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
-                                        class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
-                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
-                                        class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
-                            </div>
-
-                            <div class="btn-group mb-2" role="group" aria-label="Group Categories">
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-                            </div>
+                        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                            <a class="mb-0 btn btn-primary" href="{% url 'account_signup' %}">Register</a>
+                            <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
                         </div>
+
+                        <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">
+                            <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
+                                class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
+                            <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
+                                class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+                        </div>
+
                     {% endif %}
 
                 {% endblock auth %}
             </div>
 
-            <div class="p-4">
+            <div class="p-4 mb-3 rounded border border-secondary shadow">
                 <h4 class="font-italic">Post List</h4>
                 <ol class="list-unstyled mb-0">
                     {% for post in posts %}
@@ -267,7 +254,7 @@
                 </ol>
             </div>
 
-            <div class="p-4 mb-3 rounded">
+            <div class="p-4 mb-3 rounded border border-secondary shadow">
                 <h4 class="font-italic">Search</h4>
                 <form action="{% url 'blog:search_results' %}" method="get">
                     <div class="input-group mb-3">

@@ -20,23 +20,26 @@
                         </div>
                         <p class="card-text">{{ post.description }}</p>
 
-                        {% if not post.private and post.published_date %}
-                            <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments :
-                                {% if user.is_superuser %}{{ post.comments.count }}{% else %}
-                                    {{ post.approved_comments.count }}{% endif %}</a>
-                            {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
-                                <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments
-                                    : {{ post.approved_comments.count }}</a>
+                        <div class="btn-group-vertical d-block" role="group" aria-label="Comments Group">
+                            {% if not post.private and post.published_date %}
+                                <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments:
+                                    {% if user.is_superuser %}{{ post.comments.count }}{% else %}
+                                        {{ post.approved_comments.count }}{% endif %}</a>
+                                {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
+                                    <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments:
+                                        {{ post.approved_comments.count }}</a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        </div>
                     </div>
 
                     <div class="card-footer border-secondary">
-                        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
-
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                data-target="#postModal-{{ post.id }}">Open modal for this post
-                        </button>
+                        <div class="btn-group-vertical d-block" role="group" aria-label="Comments Group">
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#postModal-{{ post.id }}">Post Info
+                            </button>
+                        </div>
                     </div>
 
                     {% include 'blog/post_modale.html' %}
