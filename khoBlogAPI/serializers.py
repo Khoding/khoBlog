@@ -8,18 +8,12 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class PostSerializer(serializers.Serializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('title', 'categories',
                   'description', 'body', 'post_image')
-
-    def create(self, validated_data):
-        return Post(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.save(owner=instance.user)
-        return instance
+        prepopulated_fields = {'slug': ('title',)}
 
 
 class CommentsSerializer(serializers.ModelSerializer):
