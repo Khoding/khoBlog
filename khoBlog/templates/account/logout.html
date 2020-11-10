@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %} - Logout{% endblock title %}
+
+{% block content %}
+    <h2>Logout</h2>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <h3>You're About to Logout</h3>
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+{% endblock content %}
