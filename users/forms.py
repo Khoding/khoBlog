@@ -14,4 +14,4 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'profile_pic')
+        fields = ('username', 'email', 'profile_pic', 'slug',)

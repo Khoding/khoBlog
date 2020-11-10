@@ -2,18 +2,22 @@
 {% load bootstrap4 %}
 {% load account %}
 
-{% block title %} - Profile | {{ user.username }}{% endblock title %}
+{% block title %} - Profile | {{ object.username }}{% endblock title %}
 
 {% block content %}
     <h2>Profile</h2>
-    <h2>{% user_display user %}'s Profile
-        {% if user.profile_pic %}
-            <img src="{{ user.profile_pic.url }}" alt="profile pic" width="50"/>
+    <h2>{% user_display object %}'s Profile
+        {% if object.profile_pic %}
+            <img src="{{ object.profile_pic.url }}" alt="profile pic" width="50"/>
         {% endif %}
     </h2>
 
-    <a class="mb-3 btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
-    <br>
-    <a class="mb-3 btn btn-primary" href="{% url 'edit_connections' %}">Edit Connections</a>
+    {% if user.is_authenticated %}
+        {% if object.id == user.id or user.is_superuser %}
+            <a class="mb-2 btn btn-primary" href="{% url 'edit_profile' slug=object.slug %}">Edit Profile</a>
+            <br>
+            <a class="btn btn-primary" href="{% url 'edit_connections' slug=object.slug %}">Edit Connections</a>
+        {% endif %}
+    {% endif %}
 
 {% endblock content %}

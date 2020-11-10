@@ -17,23 +17,36 @@ class ProfileView(DetailView):
     model = CustomUser
     template_name = 'account/profile.html'
 
-    def get_object(self, queryset=True):
-        return self.request.user
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Profile'
+        return context
 
 
 class UserEditView(UpdateView):
     form_class = CustomUserChangeForm
-    success_url = reverse_lazy('profile')
     template_name = 'account/edit_profile.html'
 
-    def get_object(self, queryset=True):
-        return self.request.user
+    def get_queryset(self):
+        return CustomUser.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Profile'
+        return context
 
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'account/change_password.html'
-    success_url = reverse_lazy('profile')
+
+    def get_queryset(self):
+        return CustomUser.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Password'
+        return context
 
 
 class ConnectionsEditView(ConnectionsView):
