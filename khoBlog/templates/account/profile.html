@@ -14,10 +14,19 @@
 
     {% if user.is_authenticated %}
         {% if object.id == user.id or user.is_superuser %}
-            <a class="mb-2 btn btn-primary" href="{% url 'edit_profile' slug=object.slug %}">Edit Profile</a>
-            <br>
-            <a class="btn btn-primary" href="{% url 'edit_connections' slug=object.slug %}">Edit Connections</a>
+            <p><a class="btn btn-primary" href="{% url 'edit_profile' slug=object.slug %}">Edit Profile</a></p>
+            <p><a class="btn btn-primary" href="{% url 'edit_connections' slug=object.slug %}">Edit Connections</a></p>
         {% endif %}
+    {% endif %}
+
+
+    {% if user.is_superuser %}
+        <hr class="bg-secondary">
+        {% for user in users %}
+            {% if user.id != object.id %}
+                <a class="btn btn-secondary mr-1 mb-2" href="{{ user.get_absolute_url }}">{{ user.username }}</a>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
 {% endblock content %}
