@@ -75,6 +75,7 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all().order_by('-pk')
         context['title'] = 'Post Detail'
+        context['now'] = timezone.now()
         return context
 
 

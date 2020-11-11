@@ -246,7 +246,7 @@
                 <h4 class="font-italic">Post List</h4>
                 <ol class="list-unstyled mb-0">
                     {% for post in posts %}
-                        {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+                        {% if post.published_date and not post.private and not post.published_date > now or not post.published_date and user.is_superuser or post.private and user.is_superuser or post.published_date > now and user.is_superuser %}
                             <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                         {% endif %}
                     {% endfor %}

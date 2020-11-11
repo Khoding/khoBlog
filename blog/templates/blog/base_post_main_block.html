@@ -13,6 +13,9 @@
             {% elif view_name == 'blog:post_draft_list' %}
                 <h2>Drafts</h2>
 
+            {% elif view_name == 'blog:post_future_list' %}
+                <h2>Future Posts</h2>
+
             {% elif view_name == 'blog:post_category_list' %}
                 {% if not cats.private or cats.private and user.is_superuser %}
                     <h2>
