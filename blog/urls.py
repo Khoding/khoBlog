@@ -2,13 +2,14 @@ from django.urls import path
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, \
+from .views import PostFutureListView, PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, \
     DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
 
 app_name = 'blog'
 urlpatterns = [
     path('', PostListView.as_view(), name='post_list'),
     path('drafts/', PostDraftListView.as_view(), name='post_draft_list'),
+    path('future/', PostFutureListView.as_view(), name='post_future_list'),
     path('private/', PostPrivateListView.as_view(), name='post_private_list'),
 
     path('category/<slug:slug>/', PostListFromCategoryView.as_view(),

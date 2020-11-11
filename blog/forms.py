@@ -20,7 +20,7 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'categories', 'description',
-                  'body', 'post_image', 'slug', 'private',)
+                  'body', 'post_image', 'slug', 'private', 'published_date')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
@@ -28,6 +28,7 @@ class EditForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'published_date': forms.SelectDateWidget(attrs={'class': 'bg-dark text-light'}),
         }
 
 

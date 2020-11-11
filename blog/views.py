@@ -105,6 +105,22 @@ class PostDraftListView(ListView):
 
 
 @superuser_required()
+class PostFutureListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 20
+
+    def get_queryset(self):
+        return Post.objects.filter(published_date__gte=timezone.now(), private=False).order_by('-published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Future'
+        return context
+
+
+@superuser_required()
 class PostPrivateListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
