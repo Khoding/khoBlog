@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'markdownx',
     'graphene_django',
     'bootstrap4',
+    'bootstrap_datepicker_plus',
 
     # REST
     'rest_framework',

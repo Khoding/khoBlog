@@ -2,6 +2,8 @@ from django import forms
 
 from .models import Post, Comment, Category
 
+from bootstrap_datepicker_plus import DateTimePickerInput
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -28,7 +30,7 @@ class EditForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'published_date': forms.SelectDateWidget(attrs={'class': 'bg-dark text-light'}),
+            'published_date': DateTimePickerInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 
