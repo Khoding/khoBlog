@@ -74,10 +74,6 @@ INSTALLED_APPS = [
     'shortener',
 ]
 
-BOOTSTRAP4 = {
-    'include_jquery': True,
-}
-
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 REST_FRAMEWORK = {
