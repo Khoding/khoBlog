@@ -1,15 +1,16 @@
-$palette_primary: #b362ff;
+$palette_primary: rgb(95, 69, 117);
 $palette_secondary: #444749;
-$palette_danger: #eb4034;
+$palette_danger: #a74646;
 $palette_success: #5ced4c;
-$palette_warning: #f5ef45;
+$palette_warning: #c0bc40;
 $palette_info: #45def5;
 
 $palette_light: #a59fee;
-$palette_attenuation: #4c44b8;
+$palette_attenuation: #7872d4;
 $palette_dark: #212121;
 
-$enable-shadows: false;
+$link-color: $palette_light;
+$link-hover-color: $palette_attenuation;
 
 $font-family-sans-serif: Roboto !default;
 $font-family-base: $font-family-sans-serif !default;
