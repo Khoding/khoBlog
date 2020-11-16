@@ -14,7 +14,7 @@ class URL(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    quick = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
 
     def clicked(self):
         self.clicks += 1
