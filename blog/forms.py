@@ -68,3 +68,15 @@ class CommentForm(forms.ModelForm):
             'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
         }
+
+
+class EditPostCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author', 'message', 'post')
+
+        widgets = {
+            'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'post': forms.Select(attrs={'class': 'bg-dark text-light'}),
+        }

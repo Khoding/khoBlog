@@ -30,7 +30,7 @@
                 <div class="blog-post-meta">
                     {% include 'blog/postdates.html' %}
                 </div>
-                <p class="card-text">{{ post.body|formatted_markdown|safe }}</p>
+                <span class="card-text">{{ post.body|formatted_markdown|safe }}</span>
             </div>
 
             <div id="comments" class="card-footer border-secondary">

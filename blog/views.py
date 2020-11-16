@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm
+from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm
 from .models import Post, Comment, Category
 
 
@@ -254,14 +254,22 @@ def add_comment_to_post(request, slug):
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@superuser_required()
+class EditPostCommentView(UpdateView):
+    model = Comment
+    form_class = EditPostCommentForm
+    template_name = 'blog/add_comment_to_post.html'
+    success_url = reverse_lazy('blog:post_list')
+
+
+@ user_passes_test(lambda u: u.is_superuser)
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('blog:post_detail', slug=comment.post.slug)
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@ user_passes_test(lambda u: u.is_superuser)
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
