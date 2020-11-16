@@ -52,6 +52,7 @@ extra_patterns = [
 urlpatterns = [
     # My Apps
     path('', include('blog.urls')),
+    path("projects/", include('portfolio.urls')),
     path('pages/', include('pages.urls')),
     path('polls/', include('polls.urls')),
     path('todo/', include('todo.urls')),

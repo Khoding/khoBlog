@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import URL
 
 
-def root(request, slug):
+def short_redirect(request, slug):
     url = get_object_or_404(URL, slug=slug)
     url.clicked()
 

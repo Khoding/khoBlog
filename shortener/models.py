@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 from django.template.defaultfilters import slugify
 
@@ -13,10 +14,14 @@ class URL(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    quick = models.BooleanField(default=False)
 
     def clicked(self):
         self.clicks += 1
         self.save()
+
+    def get_absolute_url(self):
+        return reverse("shortener:url_redirect", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:

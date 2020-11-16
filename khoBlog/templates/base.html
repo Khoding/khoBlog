@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% load render_urls %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,6 +151,7 @@
             <a class="p-2 text-muted" href="/">Home</a>
             <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
             <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
+            {% links urls %}
         </nav>
     </div>
 </div>
