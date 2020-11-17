@@ -4,6 +4,8 @@
 
 {% block content_main %}
 
+    {% include 'blog/all_posts.html' %}
+
     {% if not cats.private or cats.private and user.is_superuser %}
         {% for post in posts %}
             {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}

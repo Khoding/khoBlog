@@ -43,6 +43,7 @@ class Post(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
     private = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()
