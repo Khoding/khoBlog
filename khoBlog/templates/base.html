@@ -131,156 +131,164 @@
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<div class="container">
-    <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-start align-items-center">
-            <div class="col-6 col-sm-4 text-left pt-1">
-                <p class="blog-header-logo">Khodok's Blog</p>
-            </div>
-            <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
-                <p class="blog-header-logo">{{ title }}</p>
-            </div>
-            <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
-                <img id="logo" height="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo"/>
-            </div>
-        </div>
-    </header>
+<div class="container-fluid">
 
-    <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="/">Home</a>
-            <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
-            <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
-            {% links urls %}
-        </nav>
-    </div>
-</div>
-
-<main role="main" class="container">
-    <div class="row">
-        <div class="col-md-8 blog-main">
-
-            {% block content %}
-            {% endblock content %}
-
-        </div>
-
-        <aside class="col-md-4 blog-sidebar">
-            <h2>Menus</h2>
-            <div class="p-4 mb-3 rounded border border-secondary shadow">
-                <h4 class="font-italic">About</h4>
-                <p class="mb-2">Khodok's Blog, Read at own risks</p>
-
-                <div class="btn-group-vertical d-block" role="group" aria-label="Group Accounts">
-                    <a href="{% url 'blog:latest' %}" class="btn btn-primary mb-lg-0 mb-2">Latest Post</a>
-                    <a href="{% url 'blog:category_list' %}" class="btn btn-primary mb-lg-0 mb-2">Category List</a>
+    <div class="container-fluid">
+        <header class="blog-header py-3">
+            <div class="row flex-nowrap justify-content-start align-items-center">
+                <div class="col-6 col-sm-4 text-left">
+                    <p class="blog-header-logo">Khodok's Blog</p>
+                </div>
+                <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
+                    <p class="blog-header-logo">{{ title }}</p>
+                </div>
+                <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
+                    <img id="logo" height="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo"/>
                 </div>
             </div>
+        </header>
 
-            <div class="p-4 mb-3 rounded border border-secondary shadow">
-                <h4 class="font-italic">User</h4>
-                {% block auth %}
-                    {% if user.is_authenticated %}
-                        {% if user.is_superuser %}
-                            <p>Hello <span class="superuser">{{ user.username }}</span></p>
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
-                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
-                            </div>
-
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:post_future_list' %}">Future</a>
-                                <a class="mb-0 btn btn-primary"
-                                    href="{% url 'blog:post_private_list' %}">Private</a>
-                            </div>
-
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-                            </div>
-
-                            <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
-                                <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                                <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
-                            </div>
-
-                        {% elif user.is_staff %}
-                            <p>Hello <span class="staff">{{ user.username }}</span></p>
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
-                            </div>
-
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
-                                <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-                            </div>
-
-                        {% else %}
-                            <p>Hello {{ user.username }}</p>
-                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-                                <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-                                <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
-                            </div>
-
-                        {% endif %}
-
-                    {% else %}
-                        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-                            <a class="mb-0 btn btn-primary" href="{% url 'signup' %}">Register</a>
-                            <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
-                        </div>
-
-                        <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">
-                            <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
-                                class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
-                            <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
-                                class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
-                        </div>
-
-                    {% endif %}
-
-                {% endblock auth %}
-            </div>
-
-            <div class="p-4 mb-3 rounded border border-secondary shadow">
-                <h4 class="font-italic">Post List</h4>
-                <ol class="list-unstyled mb-0">
-                    {% for post in posts %}
-                        {% if post.published_date and not post.private and not post.published_date > now or not post.published_date and user.is_superuser or post.private and user.is_superuser or post.published_date > now and user.is_superuser %}
-                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ol>
-            </div>
-
-            <div class="p-4 mb-3 rounded border border-secondary shadow">
-                <h4 class="font-italic">Search</h4>
-                <form action="{% url 'blog:search_results' %}" method="get">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Search</span>
-                        </div>
-                        <input type="text" class="form-control" id="post_search" placeholder="Search a post" name="q"
-                               aria-label="search" aria-describedby="basic-addon1">
-                    </div>
-                </form>
-            </div>
-
-        </aside>
-
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+                <a class="p-2 text-muted" href="/">Home</a>
+                <a class="p-2 text-muted" href="{% url 'portfolio:project_list' %}">Portfolio</a>
+                <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
+                <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
+                {% links urls %}
+            </nav>
+        </div>
     </div>
 
-</main>
+    <main role="main" class="container-fluid">
+        <div class="row">
+            <div class="col-xl-9 col-md-8 blog-main">
+
+                {% block page_top_title %}
+                {% endblock page_top_title %}
+
+                {% block content %}
+                {% endblock content %}
+
+            </div>
+
+            <aside class="col-xl-3 col-md-4 blog-sidebar">
+                <h2>Menus</h2>
+                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                    <h4 class="font-italic">About</h4>
+                    <p class="mb-2">Khodok's Blog, Read at own risks</p>
+
+                    <div class="btn-group-vertical d-block" role="group" aria-label="Group Accounts">
+                        <a href="{% url 'blog:latest' %}" class="btn btn-primary mb-lg-0 mb-2">Latest Post</a>
+                        <a href="{% url 'blog:category_list' %}" class="btn btn-primary mb-lg-0 mb-2">Category List</a>
+                        <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary mb-lg-0 mb-2">Portfolio</a>
+                    </div>
+                </div>
+
+                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                    <h4 class="font-italic">User</h4>
+                    {% block auth %}
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                                <p>Hello <span class="superuser">{{ user.username }}</span></p>
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+                                </div>
+
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:post_future_list' %}">Future</a>
+                                    <a class="mb-0 btn btn-primary"
+                                        href="{% url 'blog:post_private_list' %}">Private</a>
+                                </div>
+
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+                                </div>
+
+                                <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
+                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                                    <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
+                                </div>
+
+                            {% elif user.is_staff %}
+                                <p>Hello <span class="staff">{{ user.username }}</span></p>
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+                                </div>
+
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
+                                    <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+                                </div>
+
+                            {% else %}
+                                <p>Hello {{ user.username }}</p>
+                                <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                                    <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+                                    <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+                                </div>
+
+                            {% endif %}
+
+                        {% else %}
+                            <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+                                <a class="mb-0 btn btn-primary" href="{% url 'signup' %}">Register</a>
+                                <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
+                            </div>
+
+                            <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">
+                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
+                                    class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
+                                <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
+                                    class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+                            </div>
+
+                        {% endif %}
+
+                    {% endblock auth %}
+                </div>
+
+                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                    <h4 class="font-italic">Post List</h4>
+                    <ol class="list-unstyled mb-0">
+                        {% for post in posts %}
+                            {% if post.published_date and not post.private and not post.published_date > now or not post.published_date and user.is_superuser or post.private and user.is_superuser or post.published_date > now and user.is_superuser %}
+                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                    <h4 class="font-italic">Search</h4>
+                    <form action="{% url 'blog:search_results' %}" method="get">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Search</span>
+                            </div>
+                            <input type="text" class="form-control" id="post_search" placeholder="Search a post" name="q"
+                                aria-label="search" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+</div>
 
 <footer class="blog-footer text-white bg-dark">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-sm">
                 <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">Category List</a></div>
 
-            <div class="col-sm">
+            <div class="col-sm my-2">
                 <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
                                                   width="50" alt="Khodok's Logo"/></a>
             </div>
