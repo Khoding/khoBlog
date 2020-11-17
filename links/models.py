@@ -9,6 +9,7 @@ class Links(models.Model):
     permalink = models.CharField(max_length=42, unique=True)
     slug = models.SlugField(null=False, unique=True)
     shown = models.BooleanField(default=True)
+    priority = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name_plural = "Links"

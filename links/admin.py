@@ -4,7 +4,8 @@ from .models import Links
 
 
 class LinksAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'permalink', 'slug', 'shown')
+    list_display = ('title', 'description', 'priority',
+                    'permalink', 'slug', 'shown')
     ordering = ('-pk',)
     prepopulated_fields = {'slug': ('title',)}
 
