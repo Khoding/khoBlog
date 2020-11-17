@@ -1,0 +1,61 @@
+{% load socialaccount %}
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <p>Hello <span class="superuser">{{ user.username }}</span></p>
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
+            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+        </div>
+
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_future_list' %}">Future</a>
+            <a class="mb-0 btn btn-primary"
+                href="{% url 'blog:post_private_list' %}">Private</a>
+        </div>
+
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+        </div>
+
+        <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
+            <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+            <a class="mb-0 btn btn-danger" href="https://pythonanywhere.com">Pythonanywhere</a>
+        </div>
+
+    {% elif user.is_staff %}
+        <p>Hello <span class="staff">{{ user.username }}</span></p>
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+        </div>
+
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
+            <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
+        </div>
+
+    {% else %}
+        <p>Hello {{ user.username }}</p>
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+        </div>
+
+    {% endif %}
+
+{% else %}
+    <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
+        <a class="mb-0 btn btn-primary" href="{% url 'signup' %}">Register</a>
+        <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
+    </div>
+
+    <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">
+        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
+            class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
+        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
+            class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+    </div>
+
+{% endif %}
