@@ -1,6 +1,7 @@
 {% load static %}
 {% load socialaccount %}
 {% load render_urls %}
+{% load links_menu %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,10 +151,7 @@
 
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
-                <a class="p-2 text-muted" href="/">Home</a>
-                <a class="p-2 text-muted" href="{% url 'portfolio:project_list' %}">Portfolio</a>
-                <a class="p-2 text-muted" href="{% url 'pages:home' %}">Pages</a>
-                <a class="p-2 text-muted" href="{% url 'blog:category_list' %}">Category List</a>
+                {% links_menu urls %}
                 {% links urls %}
             </nav>
         </div>

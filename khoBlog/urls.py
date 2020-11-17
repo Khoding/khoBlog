@@ -57,6 +57,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('todo/', include('todo.urls')),
     path('s/', include('shortener.urls')),
+    path('l/', include('links.urls')),
 
     # Rest API
     path('doc/', schema_view.with_ui('redoc',

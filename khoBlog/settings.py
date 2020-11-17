@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'todo',
     'users',
     'shortener',
+    'links',
 ]
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
