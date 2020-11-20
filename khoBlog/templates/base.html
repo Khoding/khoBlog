@@ -1,6 +1,7 @@
 {% load static %}
 {% load render_urls %}
 {% load links_menu %}
+{% load featured_post %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,6 +153,7 @@
             <nav class="nav d-flex justify-content-between">
                 {% links_menu urls %}
                 {% links urls %}
+                {% featured_post_list urls %}
             </nav>
         </div>
     </div>
