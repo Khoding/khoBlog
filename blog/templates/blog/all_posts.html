@@ -1,12 +1,10 @@
 {% for post in featured %}
-    {% if post.featured %}
-        <div class="card jumbotron jumbotron-fluid rounded border-secondary bg-dark shadow">
-            <div class="container">
-            <h1 class="display-4 font-italic">Featured Post</h1>
-                <h1 class="display-4">{{ post.title }}</h1>
-                <p class="lead">{{ post.description }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
-            </div>
+    <div class="card jumbotron jumbotron-fluid rounded border-secondary bg-dark shadow">
+        <div class="container">
+        <h1 class="display-4 font-italic">Featured Post</h1>
+            <h1 class="display-4">{{ post.featured_title }}</h1>
+            <p class="lead">{{ post.description }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
         </div>
-    {% endif %}
+    </div>
 {% endfor %}

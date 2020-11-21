@@ -32,6 +32,8 @@ class Post(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    featured_title = models.CharField(
+        max_length=200, null=True, unique=False, blank=True)
     body = MarkdownxField()
     post_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/')
