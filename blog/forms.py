@@ -13,6 +13,7 @@ class PostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
@@ -26,6 +27,7 @@ class EditForm(forms.ModelForm):
                   'body', 'post_image', 'slug', 'private', 'featured', 'published_date')
 
         widgets = {
+            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
