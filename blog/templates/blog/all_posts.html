@@ -1,10 +1,32 @@
 {% for post in featured %}
-    <div class="card jumbotron jumbotron-fluid rounded border-secondary bg-dark shadow">
-        <div class="container">
-        <h1 class="display-4 font-italic">Featured Post</h1>
-            <h1 class="display-4">{{ post.featured_title }}</h1>
-            <p class="lead">{{ post.description }}</p>
-            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+    {% if post.big %}
+        <div class="jumbotron jumbotron-fluid border rounded border-secondary bg-dark mb-3 shadow">
+            <div class="container">
+                <strong class="d-inline-block mb-2 text-uppercase font-italic">Featured Post</strong>
+                <h1 class="display-4">{{ post.featured_title }}</h1>
+                <p class="lead">{{ post.description }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endfor %}
+
+{% if featured|length > 1 %}
+    <div class="row row-cols-1 row-cols-lg-2">
+        {% for post in featured %}
+            {% if not post.big %}
+                <div class="col">
+                    <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-3 shadow">
+                        <div class="col p-4 d-flex flex-column">
+                            <strong class="d-inline-block mb-2 text-warning">{{ post.categories.all|first|capfirst }}</strong>
+                            <h3 class="mb-0">{{ post.featured_title }}</h3>
+                            <div class="mb-1 text-muted">{% include 'blog/postdates.html' %}</div>
+                            <p class="mb">{{ post.description }}</p>
+                            <a href="{{ post.get_absolute_url }}">Continue reading</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

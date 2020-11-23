@@ -22,7 +22,7 @@
                         </div>
                         <p class="card-text">{{ post.description }}</p>
 
-                        <div class="btn-group-vertical d-block" role="group" aria-label="Comments Group">
+                        <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                             {% if not post.private and post.published_date %}
                                 <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments:
                                     {% if user.is_superuser %}{{ post.comments.count }}{% else %}
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="card-footer border-secondary">
-                        <div class="btn-group-vertical d-block" role="group" aria-label="Comments Group">
+                        <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                             <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
                             <button type="button" class="btn btn-secondary" data-toggle="modal"
                                 data-target="#postModal-{{ post.id }}">Post Info

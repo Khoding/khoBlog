@@ -28,7 +28,7 @@ class PostListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now(), private=False, featured=False).order_by('-published_date')
+        return Post.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

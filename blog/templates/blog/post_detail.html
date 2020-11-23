@@ -34,7 +34,9 @@
             </div>
 
             <div id="comments" class="card-footer border-secondary">
-                <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' slug=post.slug %}">Add comment</a>
+                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                    <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' slug=post.slug %}">Add comment</a>
+                </div>
                 {% include 'blog/postcomments.html' %}
             </div>
 

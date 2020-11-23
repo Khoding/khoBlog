@@ -24,7 +24,7 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'description',
-                  'body', 'post_image', 'slug', 'private', 'featured', 'published_date')
+                  'body', 'post_image', 'slug', 'private', 'featured', 'big', 'published_date')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),

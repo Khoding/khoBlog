@@ -1,26 +1,17 @@
 <div class="d-none d-xl-block">
-    <p class="postPubliDate">Created : {{ post.created_date|date:'l, d F Y' }}
-        - {{ post.created_date|time:"G:i:s" }}</p>
+    <p class="postPubliDate">{{ post.created_date|date:'l, dS \o\f F Y' }}</p>
 
     {% if post.published_date %}
-        <p class="postPubliDate">Published : {{ post.published_date|date:'l, d F Y' }}
-            - {{ post.published_date|time:"G:i:s" }}</p>
+        <p class="postPubliDate"><span class="d-none d-xl-inline">{{ post.published_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 
     {% if post.modified_date %}
-        <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'l, d F Y' }}
-            - {{ post.modified_date|time:"G:i:s" }}</p>
+        <p class="postPubliDate"><span class="d-none d-xl-inline">Last {{ post.modified_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 </div>
 
 <div class="d-xl-none">
-    <p class="postPubliDate">Created : {{ post.created_date|date:'d b Y' }}</p>
-
     {% if post.published_date %}
-        <p class="postPubliDate">Published : {{ post.published_date|date:'d b Y' }}</p>
-    {% endif %}
-
-    {% if post.modified_date %}
-        <p class="postPubliDate">Last Modified : {{ post.modified_date|date:'d b Y' }}</p>
+        <p class="postPubliDate">{{ post.published_date|date:'dS M Y' }}</p>
     {% endif %}
 </div>
