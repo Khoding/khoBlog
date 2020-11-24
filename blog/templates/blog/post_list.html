@@ -17,7 +17,7 @@
 
                     <div class="card-body">
                         <h2 class="card-title">{{ post.title }}</h2>
-                        <div class="blog-post-meta">
+                        <div class="blog-post-meta mb-auto">
                             {% include 'blog/postdates.html' %}
                         </div>
                         <p class="card-text">{{ post.description }}</p>
@@ -37,7 +37,7 @@
 
                     <div class="card-footer border-secondary">
                         <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
                             <button type="button" class="btn btn-secondary" data-toggle="modal"
                                 data-target="#postModal-{{ post.id }}">Post Info
                             </button>
