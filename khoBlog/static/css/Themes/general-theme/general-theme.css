@@ -217,17 +217,7 @@
   margin-bottom: 4px;
 }
 
-.postContainer,
-.todo {
-  background-color: #252525;
-}
-
-.postContainer .post,
-.todo .post {
-  border-bottom: 1px #777 solid !important;
-}
-
-.postContainer .todo-completed,
+.card-body .todo-completed,
 .todo .todo-completed {
   text-decoration: line-through;
   background-color: #222;
@@ -235,66 +225,38 @@
   border-bottom: none;
 }
 
-.postContainer .todoTodo,
+.card-body .todoTodo,
 .todo .todoTodo {
   padding: 16px !important;
 }
 
-.postContainer .postText,
-.todo .postText {
-  font-size: 18px;
-  font-family: Lato, Helvetica Neue, Helvetica, sans-serif;
+.card-body .card-text,
+.todo .card-text {
   -webkit-font-variant-ligatures: common-ligatures;
           font-variant-ligatures: common-ligatures;
-  line-height: 1.67;
-  color: rgba(255, 255, 255, 0.75);
-  border-bottom: 4px #333 solid !important;
-  margin-bottom: 4px;
-  word-wrap: break-word;
-  /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 }
 
-.postContainer .postText a,
-.todo .postText a {
-  color: #0c93e4;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: ink;
-          text-decoration-skip: ink;
-}
-
-.postContainer .postText a:focus,
-.postContainer .postText a:hover,
-.todo .postText a:focus,
-.todo .postText a:hover {
-  text-decoration: none;
-}
-
-.postContainer .postText p,
-.todo .postText p {
-  margin: 1.2em 0;
-}
-
-.postContainer .postText ol,
-.postContainer .postText ul,
-.todo .postText ol,
-.todo .postText ul {
+.card-body .card-text ol,
+.card-body .card-text ul,
+.todo .card-text ol,
+.todo .card-text ul {
   padding: 0 32px;
 }
 
-.postContainer .postText ol li,
-.postContainer .postText ul li,
-.todo .postText ol li,
-.todo .postText ul li {
+.card-body .card-text ol li,
+.card-body .card-text ul li,
+.todo .card-text ol li,
+.todo .card-text ul li {
   border: none;
 }
 
-.postContainer .postText img,
-.todo .postText img {
+.card-body .card-text img,
+.todo .card-text img {
   max-width: 100%;
 }
 
-.postContainer .postText .highlight,
-.todo .postText .highlight {
+.card-body .card-text .highlight,
+.todo .card-text .highlight {
   display: block;
   -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
@@ -304,31 +266,31 @@
   resize: both;
 }
 
-.postContainer .postText .highlight .lineno,
-.todo .postText .highlight .lineno {
+.card-body .card-text .highlight .lineno,
+.todo .card-text .highlight .lineno {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-.postContainer .postText dt,
-.todo .postText dt {
+.card-body .card-text dt,
+.todo .card-text dt {
   font-weight: 700;
 }
 
-.postContainer .postText dd,
-.todo .postText dd {
+.card-body .card-text dd,
+.todo .card-text dd {
   margin: 0 0 0 16px;
 }
 
-.postContainer .postText .emojione,
-.todo .postText .emojione {
+.card-body .card-text .emojione,
+.todo .card-text .emojione {
   width: 18px;
 }
 
-.postContainer .postText blockquote,
-.todo .postText blockquote {
+.card-body .card-text blockquote,
+.todo .card-text blockquote {
   padding-left: 1.5em;
   border-left: 5px solid rgba(0, 0, 0, 0.1);
   margin: 1.2em 0;
@@ -336,452 +298,43 @@
   border-left-color: rgba(255, 255, 255, 0.1);
 }
 
-.postContainer .postText blockquote dt,
-.todo .postText blockquote dt {
+.card-body .card-text blockquote dt,
+.todo .card-text blockquote dt {
   font-weight: 700;
 }
 
-.postContainer .postText blockquote dd,
-.todo .postText blockquote dd {
+.card-body .card-text blockquote dd,
+.todo .card-text blockquote dd {
   margin: 0 0 0 16px;
 }
 
-.postContainer .postText html,
-.todo .postText html {
-  line-height: 1.15;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-
-.postContainer .postText body,
-.todo .postText body {
-  margin: 0;
-}
-
-.postContainer .postText article,
-.postContainer .postText aside,
-.postContainer .postText footer,
-.postContainer .postText header,
-.postContainer .postText nav,
-.postContainer .postText section,
-.todo .postText article,
-.todo .postText aside,
-.todo .postText footer,
-.todo .postText header,
-.todo .postText nav,
-.todo .postText section {
-  display: block;
-}
-
-.postContainer .postText h1,
-.todo .postText h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.postContainer .postText figcaption,
-.postContainer .postText figure,
-.todo .postText figcaption,
-.todo .postText figure {
-  display: block;
-}
-
-.postContainer .postText figure,
-.todo .postText figure {
-  margin: 1em 40px;
-}
-
-.postContainer .postText hr,
-.todo .postText hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.postContainer .postText main,
-.todo .postText main {
-  display: block;
-}
-
-.postContainer .postText pre,
-.todo .postText pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-.postContainer .postText a,
-.todo .postText a {
-  background-color: transparent;
-  -webkit-text-decoration-skip: objects;
-}
-
-.postContainer .postText abbr[title],
-.todo .postText abbr[title] {
-  border-bottom: none;
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-}
-
-.postContainer .postText b,
-.postContainer .postText strong,
-.todo .postText b,
-.todo .postText strong {
-  font-weight: inherit;
-  font-weight: bolder;
-}
-
-.postContainer .postText code,
-.postContainer .postText kbd,
-.postContainer .postText samp,
-.todo .postText code,
-.todo .postText kbd,
-.todo .postText samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-.postContainer .postText dfn,
-.todo .postText dfn {
-  font-style: italic;
-}
-
-.postContainer .postText mark,
-.todo .postText mark {
-  background-color: #ff0;
-  color: #000;
-}
-
-.postContainer .postText small,
-.todo .postText small {
-  font-size: 80%;
-}
-
-.postContainer .postText sub,
-.postContainer .postText sup,
-.todo .postText sub,
-.todo .postText sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.postContainer .postText sub,
-.todo .postText sub {
-  bottom: -0.25em;
-}
-
-.postContainer .postText sup,
-.todo .postText sup {
-  top: -0.5em;
-}
-
-.postContainer .postText audio,
-.postContainer .postText video,
-.todo .postText audio,
-.todo .postText video {
-  display: inline-block;
-}
-
-.postContainer .postText audio:not([controls]),
-.todo .postText audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-.postContainer .postText img,
-.todo .postText img {
-  border-style: none;
-}
-
-.postContainer .postText svg:not(:root),
-.todo .postText svg:not(:root) {
-  overflow: hidden;
-}
-
-.postContainer .postText button,
-.postContainer .postText input,
-.postContainer .postText optgroup,
-.postContainer .postText select,
-.postContainer .postText textarea,
-.todo .postText button,
-.todo .postText input,
-.todo .postText optgroup,
-.todo .postText select,
-.todo .postText textarea {
-  font-family: sans-serif;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.postContainer .postText button,
-.todo .postText button {
-  overflow: visible;
-}
-
-.postContainer .postText button,
-.postContainer .postText select,
-.todo .postText button,
-.todo .postText select {
-  text-transform: none;
-}
-
-.postContainer .postText [type='reset'],
-.postContainer .postText [type='submit'],
-.postContainer .postText button,
-.postContainer .postText html [type='button'],
-.todo .postText [type='reset'],
-.todo .postText [type='submit'],
-.todo .postText button,
-.todo .postText html [type='button'] {
-  -webkit-appearance: button;
-}
-
-.postContainer .postText [type='button']::-moz-focus-inner,
-.postContainer .postText [type='reset']::-moz-focus-inner,
-.postContainer .postText [type='submit']::-moz-focus-inner,
-.postContainer .postText button::-moz-focus-inner,
-.todo .postText [type='button']::-moz-focus-inner,
-.todo .postText [type='reset']::-moz-focus-inner,
-.todo .postText [type='submit']::-moz-focus-inner,
-.todo .postText button::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-.postContainer .postText [type='button']:-moz-focusring,
-.postContainer .postText [type='reset']:-moz-focusring,
-.postContainer .postText [type='submit']:-moz-focusring,
-.postContainer .postText button:-moz-focusring,
-.todo .postText [type='button']:-moz-focusring,
-.todo .postText [type='reset']:-moz-focusring,
-.todo .postText [type='submit']:-moz-focusring,
-.todo .postText button:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-.postContainer .postText input,
-.todo .postText input {
-  overflow: visible;
-}
-
-.postContainer .postText [type='checkbox'],
-.postContainer .postText [type='radio'],
-.todo .postText [type='checkbox'],
-.todo .postText [type='radio'] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 0;
-}
-
-.postContainer .postText [type='number']::-webkit-inner-spin-button,
-.postContainer .postText [type='number']::-webkit-outer-spin-button,
-.todo .postText [type='number']::-webkit-inner-spin-button,
-.todo .postText [type='number']::-webkit-outer-spin-button {
-  height: auto;
-}
-
-.postContainer .postText [type='search'],
-.todo .postText [type='search'] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-.postContainer .postText [type='search']::-webkit-search-cancel-button,
-.postContainer .postText [type='search']::-webkit-search-decoration,
-.todo .postText [type='search']::-webkit-search-cancel-button,
-.todo .postText [type='search']::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-.postContainer .postText ::-webkit-file-upload-button,
-.todo .postText ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-.postContainer .postText fieldset,
-.todo .postText fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-.postContainer .postText legend,
-.todo .postText legend {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  color: inherit;
-  white-space: normal;
-}
-
-.postContainer .postText progress,
-.todo .postText progress {
-  display: inline-block;
-  vertical-align: baseline;
-}
-
-.postContainer .postText textarea,
-.todo .postText textarea {
-  overflow: auto;
-}
-
-.postContainer .postText details,
-.todo .postText details {
-  display: block;
-}
-
-.postContainer .postText summary,
-.todo .postText summary {
-  display: list-item;
-}
-
-.postContainer .postText menu,
-.todo .postText menu {
-  display: block;
-}
-
-.postContainer .postText canvas,
-.todo .postText canvas {
-  display: inline-block;
-}
-
-.postContainer .postText blockquote,
-.postContainer .postText dl,
-.postContainer .postText ol,
-.postContainer .postText p,
-.postContainer .postText pre,
-.postContainer .postText ul,
-.todo .postText blockquote,
-.todo .postText dl,
-.todo .postText ol,
-.todo .postText p,
-.todo .postText pre,
-.todo .postText ul {
-  margin: 1.2em 0;
-}
-
-.postContainer .postText h1,
-.postContainer .postText h2,
-.postContainer .postText h3,
-.postContainer .postText h4,
-.postContainer .postText h5,
-.postContainer .postText h6,
-.todo .postText h1,
-.todo .postText h2,
-.todo .postText h3,
-.todo .postText h4,
-.todo .postText h5,
-.todo .postText h6 {
-  margin: 1.8em 0;
-  line-height: 1.33;
-}
-
-.postContainer .postText h1:after,
-.postContainer .postText h2:after,
-.todo .postText h1:after,
-.todo .postText h2:after {
-  content: '';
-  display: block;
-  position: relative;
-  top: 0.33em;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.33);
-}
-
-.postContainer .postText ol ol,
-.postContainer .postText ol ul,
-.postContainer .postText ul ol,
-.postContainer .postText ul ul,
-.todo .postText ol ol,
-.todo .postText ol ul,
-.todo .postText ul ol,
-.todo .postText ul ul {
-  margin: 0;
-}
-
-.postContainer .postText dt,
-.todo .postText dt {
-  font-weight: 700;
-}
-
-.postContainer .postText a,
-.todo .postText a {
-  color: #0c93e4;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: ink;
-          text-decoration-skip: ink;
-}
-
-.postContainer .postText a:focus,
-.postContainer .postText a:hover,
-.todo .postText a:focus,
-.todo .postText a:hover {
-  text-decoration: none;
-}
-
-.postContainer .postText code,
-.postContainer .postText pre,
-.postContainer .postText samp,
-.todo .postText code,
-.todo .postText pre,
-.todo .postText samp {
+.card-body .card-text code,
+.card-body .card-text pre,
+.card-body .card-text samp,
+.todo .card-text code,
+.todo .card-text pre,
+.todo .card-text samp {
   font-family: Roboto Mono, Lucida Sans Typewriter, Lucida Console, monaco, Courrier, monospace;
   font-size: 0.85em;
 }
 
-.postContainer .postText code *,
-.postContainer .postText pre *,
-.postContainer .postText samp *,
-.todo .postText code *,
-.todo .postText pre *,
-.todo .postText samp * {
+.card-body .card-text code *,
+.card-body .card-text pre *,
+.card-body .card-text samp *,
+.todo .card-text code *,
+.todo .card-text pre *,
+.todo .card-text samp * {
   font-size: inherit;
 }
 
-.postContainer .postText .toc ul,
-.todo .postText .toc ul {
-  list-style-type: none;
-  padding-left: 20px;
+.card-body .card-text mark,
+.todo .card-text mark {
+  background-color: #f3b700;
+  border-radius: 0.5rem !important;
 }
 
-.postContainer .postText table,
-.todo .postText table {
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.postContainer .postText td,
-.postContainer .postText th,
-.todo .postText td,
-.todo .postText th {
-  border-right: 1px solid #dcdcdc;
-  padding: 8px 12px;
-}
-
-.postContainer .postText td:last-child,
-.postContainer .postText th:last-child,
-.todo .postText td:last-child,
-.todo .postText th:last-child {
-  border-right: 0;
-}
-
-.postContainer .postText td,
-.todo .postText td {
-  border-top: 1px solid #dcdcdc;
-}
-
-.postContainer .postText mark,
-.todo .postText mark {
-  background-color: #f8f840;
-}
-
-.postContainer .postText kbd,
-.todo .postText kbd {
+.card-body .card-text kbd,
+.todo .card-text kbd {
   font-family: Lato, Helvetica Neue, Helvetica, sans-serif;
   background-color: #fff;
   border: 1px solid rgba(63, 63, 63, 0.25);
@@ -796,66 +349,52 @@
   white-space: nowrap;
 }
 
-.postContainer .postText abbr[title],
-.todo .postText abbr[title] {
+.card-body .card-text abbr[title],
+.todo .card-text abbr[title] {
   border-bottom: 1px dotted #777;
   cursor: help;
 }
 
-.postContainer .postText .task-list-item,
-.todo .postText .task-list-item {
+.card-body .card-text .task-list-item,
+.todo .card-text .task-list-item {
   list-style-type: none;
 }
 
-.postContainer .postText .task-list-item-checkbox,
-.todo .postText .task-list-item-checkbox {
+.card-body .card-text .task-list-item-checkbox,
+.todo .card-text .task-list-item-checkbox {
   margin: 0 0.2em 0 -1.3em;
 }
 
-.postContainer .postText .footnote,
-.todo .postText .footnote {
+.card-body .card-text .footnote,
+.todo .card-text .footnote {
   position: relative;
   top: -0.25em;
   vertical-align: top;
 }
 
-.postContainer .postText .page-break-after,
-.todo .postText .page-break-after {
+.card-body .card-text .page-break-after,
+.todo .card-text .page-break-after {
   page-break-after: always;
 }
 
-.postContainer .postText .abc-notation-block,
-.todo .postText .abc-notation-block {
+.card-body .card-text .abc-notation-block,
+.todo .card-text .abc-notation-block {
   overflow-x: auto !important;
 }
 
-.postContainer .markdownx-preview,
+.card-body .markdownx-preview,
 .todo .markdownx-preview {
   margin-top: 1.2em !important;
   border-top: 4px #333 solid !important;
 }
 
-.postContainer hr,
+.card-body hr,
 .todo hr {
   border: 0;
   border-top: 1px solid rgba(128, 128, 128, 0.33);
   margin: 2em 0;
 }
 
-.hr {
-  border-top: 4px #222 solid !important;
-}
-
-.date {
-  font-size: 11pt;
-  color: #ddd;
-}
-
-.comment .date .khoUnderline {
-  text-decoration: underline;
-}
-
-/* override browser default */
 .tabbed-set {
   display: -webkit-box;
   display: -ms-flexbox;
