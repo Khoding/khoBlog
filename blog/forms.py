@@ -76,7 +76,7 @@ class CommentForm(forms.ModelForm):
 class EditPostCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('author', 'message', 'related_post')
+        fields = ('author', 'message', 'related_post', 'approved_comment')
 
         widgets = {
             'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
