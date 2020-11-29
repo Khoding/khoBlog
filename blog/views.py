@@ -72,11 +72,24 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(message=request.POST.get('message'),
+                              author=request.POST.get('author'),
+                              post=self.get_object())
+        new_comment.save()
+        return self.get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all().order_by('-pk')
         context['title'] = 'Post Detail'
         context['now'] = timezone.now()
+
+        comments_connected = Comment.objects.filter(
+            post=self.get_object()).order_by('-created_date')
+        context['comments'] = comments_connected
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentForm()
         return context
 
 
@@ -241,18 +254,29 @@ def publish(self):
     self.save()
 
 
-def add_comment_to_post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-            return redirect('blog:post_detail', slug=post.slug)
-    else:
-        form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+# def add_comment_to_post(request, slug):
+#     post = get_object_or_404(Post, slug=slug)
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.post = post
+#             comment.save()
+#             return redirect('blog:post_detail', slug=post.slug)
+#     else:
+#         form = CommentForm()
+#     return render(request, 'blog/add_comment_to_post.html', {'form': form})
+
+# class AddPostCommentView(CreateView):
+#     model = Comment
+#     form_class = CommentForm
+#     template_name = "blog/add_comment_to_post.html"
+
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = 'Add Comment'
+#         return context
 
 
 @superuser_required()
