@@ -72,7 +72,7 @@ class LatestCommentsFeed(Feed):
         return item.message
 
     def item_link(self, item):
-        return item.post.get_absolute_url()
+        return item.related_post.get_absolute_url()
 
     def item_pubdate(self, item):
         return item.created_date

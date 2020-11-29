@@ -4,3 +4,4 @@
 *[lmao]: Laughing My Ass Off
 *[lol]: Laughing Out Loud
 *[RoutedEventHandler]: Rohr
+*[ngl]: Not Gonna Lie
