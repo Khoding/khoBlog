@@ -10,7 +10,7 @@
         {% for post in posts %}
             {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
 
-                <div class="card text-white border-secondary bg-dark shadow mb-3">
+                <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-3">
                     <div class="card-header border-secondary">
                         <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
                     </div>
