@@ -5,11 +5,15 @@
             {% if not post.published_date %}
                 <div class="btn-group mr-2" role="group" aria-label="Publish Group">
                     <a class="btn btn-light" href="{% url 'blog:post_publish' slug=post.slug %}">
-                        <span class="iconify" data-icon="ic:baseline-publish" data-inline="false"></span>
+                        <svg class="bi" fill="currentColor">
+                            <use href="/static/img/bootstrap-icons.svg#file-earmark-arrow-up"/>
+                        </svg>
                     </a>
 
                     <a class="btn btn-warning" href="{% url 'blog:post_publish_private' slug=post.slug %}">
-                        <span class="iconify" data-icon="foundation:folder-lock" data-inline="false"></span>
+                        <svg class="bi" fill="currentColor">
+                            <use href="/static/img/bootstrap-icons.svg#file-earmark-lock2"/>
+                        </svg>
                     </a>
                 </div>
             {% endif %}
@@ -17,17 +21,23 @@
 
             <div class="btn-group mr-2" role="group" aria-label="Delete Group">
                 <a class="btn btn-warning" href="{% url 'blog:post_remove' slug=post.slug %}">
-                    <span class="iconify" data-icon="ant-design:delete-outlined" data-inline="false"></span>
+                    <svg class="bi" fill="currentColor">
+                        <use href="/static/img/bootstrap-icons.svg#trash"/>
+                    </svg>
                 </a>
             </div>
 
             <div class="btn-group mr-2" role="group" aria-label="Edit Group">
                 <a class="btn btn-light" href="{% url 'blog:post_edit' slug=post.slug %}">
-                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                    <svg class="bi" fill="currentColor">
+                        <use href="/static/img/bootstrap-icons.svg#pencil-square"/>
+                    </svg>
                 </a>
 
                 <a class="btn btn-danger" href="/admin/blog/post/{{ post.id }}/change/">
-                    <span class="iconify" data-icon="ant-design:edit-filled" data-inline="false"></span>
+                    <svg class="bi" fill="currentColor">
+                        <use href="/static/img/bootstrap-icons.svg#pencil-square"/>
+                    </svg>
                 </a>
             </div>
         </div>

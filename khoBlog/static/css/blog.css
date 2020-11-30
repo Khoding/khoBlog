@@ -24,6 +24,11 @@
     }
 }
 
+.bi {
+    width: 1em;
+    height: 1em;
+}
+
 .nav-scroller {
     position: relative;
     z-index: 2;

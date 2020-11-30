@@ -52,10 +52,8 @@
     </div>
 
     <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">
-        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}"><span
-            class="iconify" data-icon="icomoon-free:google" data-inline="false"></span></a>
-        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}"><span
-            class="iconify" data-icon="fa-brands:discord" data-inline="false"></span></a>
+        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'google' %}">Login with Google</a>
+        <a class="mb-0 btn btn-primary" href="{% provider_login_url 'discord' %}">Login with Discord</a>
     </div>
 
 {% endif %}
