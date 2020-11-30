@@ -34,6 +34,8 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Latest Posts'
         context['featured'] = Post.objects.filter(featured=True)
+        context['featured_cat'] = Category.objects.filter(
+            postcatslink__featured_cat=True)
         return context
 
 

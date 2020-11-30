@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
 
-from .models import Category, Comment, Post
+from .models import Category, Comment, Post, PostCatsLink
 
 
 def export_as_json(modeladmin, request, queryset):
@@ -24,7 +24,7 @@ def make_published(modeladmin, request, queryset):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'featured_title', 'created_date', 'published_date', 'slug', 'get_categories',
+    list_display = ('title', 'featured_title', 'created_date', 'published_date', 'slug',
                     'private', 'featured', 'big',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
@@ -54,3 +54,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(PostCatsLink)

@@ -28,6 +28,15 @@ class Category(models.Model):
         return super().save(*args, **kwargs)
 
 
+class PostCatsLink(models.Model):
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
+    category = models.ForeignKey('blog.Category', on_delete=models.CASCADE)
+    featured_cat = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '%s - %s' % (self.post.title, self.category.name)
+
+
 class Post(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -40,7 +49,7 @@ class Post(models.Model):
     description = models.TextField()
     slug = models.SlugField(null=False, unique=True)
     categories = models.ManyToManyField(
-        'blog.Category', related_name='cat')
+        'blog.Category', related_name='cat', through='PostCatsLink')
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -81,8 +90,8 @@ class Post(models.Model):
     def removed_comments(self):
         return self.comments.filter(removed_comment=True)
 
-    def get_categories(self):
-        return [p.name for p in self.categories.all()]
+    # def get_categories(self):
+    #     return [p.name for p in self.categories.all()]
 
 
 class Comment(models.Model):
