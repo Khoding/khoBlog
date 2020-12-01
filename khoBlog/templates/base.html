@@ -121,7 +121,9 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     {% endblock rel %}
 
-    <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+    {% if not debug_flag %}
+        <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+    {% endif %}
 </head>
 
 <body class="text-white bg-dark">
