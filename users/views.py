@@ -40,6 +40,7 @@ class UserEditView(UpdateView):
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'account/change_password.html'
+    success_url = reverse_lazy('account_login')
 
     def get_queryset(self):
         return CustomUser.objects.all()
