@@ -15,8 +15,8 @@
     <div class="row row-cols-1 row-cols-lg-2">
         {% for post in featured %}
             {% if not post.big %}
-                <div class="col">
-                    <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-3 shadow">
+                <div class="col mb-3">
+                    <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-3 shadow h-100">
                         <div class="col p-4 d-flex flex-column">
                             <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                             <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
