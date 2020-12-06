@@ -13,10 +13,7 @@ Pipfile.lock
 /node_modules
 /static
 /media
-/khoBlogEnv
 /venv
-/.history
 migrations
 settings_dev.py
-pythonenv3.8/
-.history
+.env
