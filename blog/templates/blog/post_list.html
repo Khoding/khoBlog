@@ -4,7 +4,7 @@
 
 {% block content_main %}
 
-    {% include 'blog/all_posts.html' %}
+    {% include 'blog/featured_posts.html' %}
 
     {% if not cats.private or cats.private and user.is_superuser %}
         {% for post in posts %}
