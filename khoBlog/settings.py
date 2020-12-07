@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'graphene_django',
     'bootstrap4',
     'bootstrap_datepicker_plus',
-    'ckeditor',
 
     # REST
     'rest_framework',
@@ -75,7 +74,6 @@ INSTALLED_APPS = [
     'users',
     'shortener',
     'links',
-    'khoFlatpages',
 ]
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
