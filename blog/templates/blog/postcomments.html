@@ -5,7 +5,12 @@
         {% if comment.approved_comment or not comment.approved_comment and user.is_superuser %}
             <div class="card text-white border-secondary bg-dark mt-3">
                 <div class="card-header">
-                    <h4>{{ comment.author }}
+                    <h4>
+                    {% if comment.author %}
+                        {{ comment.author }}
+                    {% else %}
+                        {{ comment.author_logged }}
+                    {% endif %}
                         <span class="float-right">
                             <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                                 {% if not comment.approved_comment %}

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -243,12 +243,13 @@ def publish(self):
     self.save()
 
 
-class AddPostCommentView(CreateView):
+class AddPostCommentView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = "blog/add_comment_to_post.html"
 
     def form_valid(self, form):
+        form.instance.author_logged = self.request.user
         form.instance.related_post_id = self.kwargs['pk']
         return super().form_valid(form)
 
