@@ -102,7 +102,7 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     message = MarkdownxField()
     created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
+    approved_comment = models.BooleanField(default=True)
     removed_comment = models.BooleanField(default=False)
 
     def __str__(self):
