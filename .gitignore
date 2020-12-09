@@ -2,18 +2,20 @@
 *~
 *.zip
 *.css.map
+*.css
 __pycache__
-db.sqlite3
 .DS_Store
 Pipfile
 Pipfile.lock
 
 /.vscode
 /.idea
-/node_modules
+node_modules
 /static
 /media
 /venv
 migrations
 settings_dev.py
 .env
+
+*.sqlite3

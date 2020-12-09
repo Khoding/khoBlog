@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import '_variables.scss';
 
 $primary: $palette_primary;
 $secondary: $palette_secondary;
@@ -14,4 +14,4 @@ $link-hover-color: $link-hover-color;
 
 $font-family: $font-family-base;
 
-@import '../../../node_modules/bootstrap/scss/bootstrap';
+@import '../vendor/node_modules/bootstrap/scss/bootstrap';

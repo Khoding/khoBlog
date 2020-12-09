@@ -24,7 +24,7 @@
         <hr class="bg-secondary">
         {% for user in users %}
             {% if user.id != object.id %}
-                <a class="btn btn-secondary mr-1 mb-2" href="{{ user.get_absolute_url }}">{{ user.username }}</a>
+                <a class="btn btn-secondary me-1 mb-2" href="{{ user.get_absolute_url }}">{{ user.username }}</a>
             {% endif %}
         {% endfor %}
     {% endif %}
