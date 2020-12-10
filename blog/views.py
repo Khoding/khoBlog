@@ -28,14 +28,15 @@ class PostListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date')
+        return self.model.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Latest Posts'
-        context['featured'] = Post.objects.filter(featured=True)
-        context['featured_cat'] = Category.objects.filter(
-            postcatslink__featured_cat=True)
+        context['featured'] = self.model.objects.filter(
+            featured=True, big=False)
+        context['featured_big'] = self.model.objects.filter(
+            featured=True, big=True)
         return context
 
 
@@ -48,7 +49,10 @@ class PostListFromCategoryView(ListView):
     def get_queryset(self):
         self.category = get_object_or_404(
             Category, slug=self.kwargs['slug'])
-        return Post.objects.filter(categories=self.category).order_by('-pk')
+        if self.request.user.is_superuser:
+            return self.model.objects.filter(categories=self.category).order_by('-published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), private=False, categories=self.category).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,6 +68,12 @@ class CategoryListView(ListView):
     paginate_by = 20
     ordering = 'pk'
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            return self.model.objects.filter(private=False)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Category List'
@@ -76,7 +86,8 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('-pk')
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), private=False).order_by('-published_date')
         context['title'] = 'Post Detail'
         context['now'] = timezone.now()
         return context
@@ -100,7 +111,7 @@ class PostDraftListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+        return self.model.objects.filter(published_date__isnull=True).order_by('-created_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,7 +127,7 @@ class PostFutureListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__gte=timezone.now(), private=False).order_by('-published_date')
+        return self.model.objects.filter(published_date__gte=timezone.now(), private=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -132,7 +143,7 @@ class PostPrivateListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Post.objects.filter(private=True).order_by('-published_date')
+        return self.model.objects.filter(private=True).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -216,11 +227,21 @@ class SearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Post.objects.filter(
-            Q(title__icontains=query) | Q(
-                body__icontains=query) | Q(description__icontains=query)
-        )
-        return object_list
+        if self.request.user.is_superuser:
+            return self.model.objects.filter(
+                Q(title__icontains=query) | Q(
+                    body__icontains=query) | Q(description__icontains=query),
+            )
+        else:
+            return self.model.objects.filter(
+                Q(title__icontains=query) | Q(
+                    body__icontains=query) | Q(description__icontains=query),
+            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(private=True))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Search in Posts'
+        return context
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -264,6 +285,11 @@ class EditPostCommentView(UpdateView):
     model = Comment
     form_class = EditPostCommentForm
     template_name = 'blog/add_comment_to_post.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Comment'
+        return context
 
 
 @ user_passes_test(lambda u: u.is_superuser)

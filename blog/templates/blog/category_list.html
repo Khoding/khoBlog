@@ -3,53 +3,45 @@
 {% load markdown_extra %}
 
 {% block content_main %}
+    {% for item in category_list %}
+        <div class="card text-white border-secondary bg-dark mb-3">
+            <div class="card-header border-secondary">
+                <h2>Category #{{ item.id }}
+                    {% block superButtons %}
+                        {% if user.is_superuser %}
+                            <div class="float-right btn-group" role="group" aria-label="Edit Group">
+                                <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
+                                    <svg class="bi" fill="currentColor">
+                                        <use href="/static/img/bootstrap-icons.svg#pencil-fill"/>
+                                    </svg>
+                                </a>
 
-    {% if not cats.private or cats.private and user.is_superuser %}
-        {% for item in category_list %}
-            {% if not item.private or item.private and user.is_superuser %}
+                                <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
+                                    <svg class="bi" fill="currentColor">
+                                        <use href="/static/img/bootstrap-icons.svg#pencil-fill"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endblock superButtons %}
+                </h2>
+            </div>
 
-                <div class="card text-white border-secondary bg-dark mb-3">
-                    <div class="card-header border-secondary">
-                        <h2>Category #{{ item.id }}
-                            {% block superButtons %}
-                                {% if user.is_superuser %}
-                                    <div class="float-right btn-group" role="group" aria-label="Edit Group">
-                                        <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                            </svg>
-                                        </a>
-
-                                        <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endblock superButtons %}
-                        </h2>
-                    </div>
-
-                    <div class="card-body">
-                        <h2 class="card-title">{{ item }}</h2>
-                        <div class="blog-post-meta">
-                            Category Slug: {{ item.slug }}
-                            <br/>
-                            Category Post Count: {{ item.cat.count }}
-                        </div>
-                        <p class="card-text">{{ item.description }}</p>
-                    </div>
-
-                    <div class="card-footer border-secondary">
-                        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">See all posts in this Category</a>
-                    </div>
+            <div class="card-body">
+                <h2 class="card-title">{{ item }}</h2>
+                <div class="blog-post-meta">
+                    Category Slug: {{ item.slug }}
+                    <br/>
+                    Category Post Count: {{ item.cat.count }}
                 </div>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
 
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
+            <div class="card-footer border-secondary">
+                <a href="{{ item.get_absolute_url }}" class="btn btn-primary">See all posts in this Category</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock content_main %}
 
 {% block pagination %}

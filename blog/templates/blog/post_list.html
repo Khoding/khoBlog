@@ -6,51 +6,45 @@
 
     {% include 'blog/featured_posts.html' %}
 
-    {% if not cats.private or cats.private and user.is_superuser %}
-        {% for post in posts %}
-            {% if post.published_date and not post.private or not post.published_date and user.is_superuser or post.private and user.is_superuser %}
+    {% for post in posts %}
+        <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-3">
+            <div class="card-header border-secondary">
+                <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
+            </div>
 
-                <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-3">
-                    <div class="card-header border-secondary">
-                        <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
-                    </div>
-
-                    <div class="card-body">
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <div class="blog-post-meta mb-auto">
-                            {% include 'blog/postdates.html' %}
-                        </div>
-                        <p class="card-text">{{ post.description }}</p>
-
-                        <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                            {% if not post.private and post.published_date %}
-                                <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments:
-                                    {% if user.is_superuser %}{{ post.comments.count }}{% else %}
-                                        {{ post.approved_comments.count }}{% endif %}</a>
-                                {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
-                                    <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments:
-                                        {{ post.approved_comments.count }}</a>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="card-footer border-secondary">
-                        <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                data-target="#postModal-{{ post.id }}">Post Info
-                            </button>
-                        </div>
-                    </div>
-
-                    {% include 'blog/post_modale.html' %}
-
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <div class="blog-post-meta mb-auto">
+                    {% include 'blog/postdates.html' %}
                 </div>
+                <p class="card-text">{{ post.description }}</p>
 
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                    {% if not post.private and post.published_date %}
+                        <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments:
+                            {% if user.is_superuser %}{{ post.comments.count }}{% else %}
+                                {{ post.approved_comments.count }}{% endif %}</a>
+                        {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
+                            <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments:
+                                {{ post.approved_comments.count }}</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card-footer border-secondary">
+                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                        data-target="#postModal-{{ post.id }}">Post Info
+                    </button>
+                </div>
+            </div>
+
+            {% include 'blog/post_modale.html' %}
+
+        </div>
+    {% endfor %}
 {% endblock content_main %}
 
 {% block pagination %}

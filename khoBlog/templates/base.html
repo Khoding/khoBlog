@@ -139,7 +139,7 @@
                     <p class="blog-header-logo">Khodok's Blog</p>
                 </div>
                 <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
-                    <p class="blog-header-logo">{{ title }}</p>
+                    <p class="blog-header-logo">{% if flatpage.title %}{{ flatpage.title }}{% else %}{{ title }}{% endif %}</p>
                 </div>
                 <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
                     <img id="logo" height="75" src="{% static 'img/RuthinkkTooBig.png' %}" alt="Khodok's Logo"/>
@@ -190,9 +190,7 @@
                     <h4 class="font-italic">Post List</h4>
                     <ol class="list-unstyled mb-0">
                         {% for post in posts %}
-                            {% if post.published_date and not post.private and not post.published_date > now or not post.published_date and user.is_superuser or post.private and user.is_superuser or post.published_date > now and user.is_superuser %}
-                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                            {% endif %}
+                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                         {% endfor %}
                     </ol>
                 </div>

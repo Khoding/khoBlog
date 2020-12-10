@@ -1,32 +1,26 @@
-{% for post in featured %}
-    {% if post.big %}
-        <div class="jumbotron jumbotron-fluid border rounded border-secondary bg-dark mb-3 shadow">
-            <div class="container">
-                <strong class="d-inline-block mb-2 text-uppercase font-italic">Featured Post</strong>
-                <h1 class="display-4">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h1>
-                <p class="lead">{{ post.description }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
-            </div>
+{% for post in featured_big %}
+    <div class="jumbotron jumbotron-fluid border rounded border-secondary bg-dark mb-3 shadow">
+        <div class="container">
+            <strong class="d-inline-block mb-2 text-uppercase font-italic">Featured Post</strong>
+            <h1 class="display-4">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h1>
+            <p class="lead">{{ post.description }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
         </div>
-    {% endif %}
+    </div>
 {% endfor %}
 
-{% if featured|length > 1 %}
-    <div class="row row-cols-1 row-cols-lg-2">
-        {% for post in featured %}
-            {% if not post.big %}
-                <div class="col mb-3">
-                    <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-3 shadow h-100">
-                        <div class="col p-4 d-flex flex-column">
-                            <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                            <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
-                            <div class="mb-1 text-muted">{% include 'blog/postdates.html' %}</div>
-                            <p class="mb-auto">{{ post.description }}</p>
-                            <a href="{{ post.get_absolute_url }}">Continue Reading</a>
-                        </div>
-                    </div>
+<div class="row row-cols-1 row-cols-lg-2">
+    {% for post in featured %}
+        <div class="col mb-3">
+            <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-3 shadow h-100">
+                <div class="col p-4 d-flex flex-column">
+                    <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                    <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
+                    <div class="mb-1 text-muted">{% include 'blog/postdates.html' %}</div>
+                    <p class="mb-auto">{{ post.description }}</p>
+                    <a href="{{ post.get_absolute_url }}">Continue Reading</a>
                 </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-{% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
