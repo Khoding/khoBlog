@@ -41,7 +41,9 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item text-white border-secondary bg-dark">{{ comment.created_date|date:'l, d F Y' }}
                         - {{ comment.created_date|time:"G:i:s" }}</li>
-                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.message|formatted_markdown|safe }}</li>
+                    {% autoescape on %}
+                        <li class="list-group-item text-white border-secondary bg-dark">{{ comment.message }}</li>
+                    {% endautoescape %}
                 </ul>
             </div>
 

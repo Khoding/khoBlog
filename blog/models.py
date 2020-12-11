@@ -100,7 +100,7 @@ class Comment(models.Model):
     author = models.CharField(max_length=200, null=True, blank=True)
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    message = MarkdownxField()
+    message = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=True)
     removed_comment = models.BooleanField(default=False)
@@ -118,8 +118,3 @@ class Comment(models.Model):
     def remove(self):
         self.removed_comment = True
         self.save()
-
-    # Create a property that returns the markdown instead
-    @property
-    def formatted_markdown(self):
-        return markdownify(self.message)
