@@ -6,15 +6,11 @@
     <h2>{{ title }}
         <div class="btn-group float-right" role="group" aria-label="Previous / Next">
             <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
-                <svg class="bi" fill="currentColor">
-                    <use href="/static/img/bootstrap-icons.svg#chevron-left"/>
-                </svg>
+                <i class="bi bi-chevron-left"></i>
             </a>
 
             <a class="btn btn-primary" href="{{ post.get_next_by_created_date.get_absolute_url }}">
-                <svg class="bi" fill="currentColor">
-                    <use href="/static/img/bootstrap-icons.svg#chevron-right"/>
-                </svg>
+                <i class="bi bi-chevron-right"></i>
             </a>
         </div>
     </h2>

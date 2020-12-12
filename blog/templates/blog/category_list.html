@@ -11,15 +11,11 @@
                         {% if user.is_superuser %}
                             <div class="float-right btn-group" role="group" aria-label="Edit Group">
                                 <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
-                                    <svg class="bi" fill="currentColor">
-                                        <use href="/static/img/bootstrap-icons.svg#pencil-fill"/>
-                                    </svg>
+                                    <i class="bi bi-pencil-square"></i>
                                 </a>
 
                                 <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
-                                    <svg class="bi" fill="currentColor">
-                                        <use href="/static/img/bootstrap-icons.svg#pencil-fill"/>
-                                    </svg>
+                                    <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>
                         {% endif %}

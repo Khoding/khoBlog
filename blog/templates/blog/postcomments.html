@@ -16,22 +16,16 @@
                                 <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                                     {% if not comment.approved_comment %}
                                         <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                                            <svg class="bi" fill="currentColor">
-                                                <use href="/static/img/bootstrap-icons.svg#trash"/>
-                                            </svg>
+                                            <i class="bi bi-trash"></i>
                                         </a>
 
                                         <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                                            <svg class="bi" fill="currentColor">
-                                                <use href="/static/img/bootstrap-icons.svg#check-square"/>
-                                            </svg>
+                                            <i class="bi bi-check-square"></i>
                                         </a>
                                     {% endif %}
 
                                     <a class="btn btn-light" href="{% url 'blog:edit_post_comment' pk=comment.pk %}">
-                                        <svg class="bi" fill="currentColor">
-                                            <use href="/static/img/bootstrap-icons.svg#pencil-square"/>
-                                        </svg>
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </div>
                             {% endif %}

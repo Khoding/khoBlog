@@ -5,15 +5,11 @@
             {% if not post.published_date %}
                 <div class="btn-group mr-2" role="group" aria-label="Publish Group">
                     <a class="btn btn-light" href="{% url 'blog:post_publish' slug=post.slug %}">
-                        <svg class="bi" fill="currentColor">
-                            <use href="/static/img/bootstrap-icons.svg#file-earmark-arrow-up"/>
-                        </svg>
+                        <i class="bi bi-file-earmark-arrow-up"></i>
                     </a>
 
                     <a class="btn btn-warning" href="{% url 'blog:post_publish_private' slug=post.slug %}">
-                        <svg class="bi" fill="currentColor">
-                            <use href="/static/img/bootstrap-icons.svg#file-earmark-lock2"/>
-                        </svg>
+                        <i class="bi bi-file-earmark-lock"></i>
                     </a>
                 </div>
             {% endif %}
@@ -21,23 +17,17 @@
 
             <div class="btn-group mr-2" role="group" aria-label="Delete Group">
                 <a class="btn btn-warning" href="{% url 'blog:post_remove' slug=post.slug %}">
-                    <svg class="bi" fill="currentColor">
-                        <use href="/static/img/bootstrap-icons.svg#trash"/>
-                    </svg>
+                    <i class="bi bi-trash"></i>
                 </a>
             </div>
 
             <div class="btn-group mr-2" role="group" aria-label="Edit Group">
                 <a class="btn btn-light" href="{% url 'blog:post_edit' slug=post.slug %}">
-                    <svg class="bi" fill="currentColor">
-                        <use href="/static/img/bootstrap-icons.svg#pencil-square"/>
-                    </svg>
+                    <i class="bi bi-pencil-square"></i>
                 </a>
 
                 <a class="btn btn-danger" href="/admin/blog/post/{{ post.id }}/change/">
-                    <svg class="bi" fill="currentColor">
-                        <use href="/static/img/bootstrap-icons.svg#pencil-square"/>
-                    </svg>
+                    <i class="bi bi-pencil-square"></i>
                 </a>
             </div>
         </div>
