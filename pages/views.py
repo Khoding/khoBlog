@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
+from django.views.generic import ListView, DetailView
 
 from .models import Page
 
@@ -23,14 +22,15 @@ class PageDetailView(DetailView):
         return context
 
 
-class PageIndexView(TemplateView):
+class PageListView(ListView):
     model = Page
-    template_name = 'pages/page.html'
+    template_name = 'pages/page_list.html'
+    context_object_name = 'pages'
+
+    def get_queryset(self):
+        return self.model.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pages'] = self.model.objects.all().order_by('-pk')
-        context['title'] = 'Pages'
-        context['content'] = 'Pages, hf <a href="khodok">Khodok</a>'
-        context['now'] = timezone.now()
+        context['title'] = 'Page List'
         return context

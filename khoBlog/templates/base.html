@@ -188,7 +188,7 @@
 
                 <div class="p-4 mb-3 rounded border border-secondary shadow">
                     {% with request.resolver_match.view_name as view_name %}
-                        {% if view_name != 'pages:page_detail' and view_name != 'pages:page_index' %}
+                        {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                             <h4 class="font-italic">Post List</h4>
                         {% else %}
                             <h4 class="font-italic">Page List</h4>
@@ -196,7 +196,7 @@
                     {% endwith %}
                     <ol class="list-unstyled mb-0">
                         {% with request.resolver_match.view_name as view_name %}
-                            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_index' %}
+                            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                                 {% for post in posts %}
                                     <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                                 {% endfor %}

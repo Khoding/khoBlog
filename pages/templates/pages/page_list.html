@@ -1,0 +1,10 @@
+{% extends 'pages/base_page.html' %}
+{% load static %}
+
+{% block main %}
+    <ol class="list-unstyled mb-0">
+        {% for page in pages %}
+            <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock main %}
