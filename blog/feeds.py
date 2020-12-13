@@ -29,8 +29,6 @@ class LatestPostsFeed(Feed):
 
 
 class LatestPostsFeedByCategory(Feed):
-    title = 'Khodok\'s Blog'
-
     def get_object(self, request, slug):
         return Category.objects.get(slug=slug)
 
@@ -58,15 +56,16 @@ class LatestPostsFeedByCategory(Feed):
 
 
 class LatestCommentsFeed(Feed):
-    title = 'Khodok\'s Blog'
     link = ''
-    description = 'Comments to accept'
+
+    def title(self, item):
+        return "Latest comments on Khodok's Blog"
 
     def items(self):
-        return Comment.objects.filter(approved_comment=False).order_by('-pk')
+        return Comment.objects.filter(approved_comment=True).order_by('-pk')
 
     def item_title(self, item):
-        return item.author
+        return item.author_logged
 
     def item_description(self, item):
         return item.message
