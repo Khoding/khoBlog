@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from .views import PageDetailView, PageIndexView
+
 
 app_name = 'pages'
 urlpatterns = [
-    path('', views.index, {'pagename': ''}, name='home'),
-    path('<str:pagename>', views.index, name='index'),
+    path('', PageIndexView.as_view(), name='page_index'),
+    path('<slug:slug>/', PageDetailView.as_view(), name='page_detail'),
 ]

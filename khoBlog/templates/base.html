@@ -187,11 +187,25 @@
                 </div>
 
                 <div class="p-4 mb-3 rounded border border-secondary shadow">
-                    <h4 class="font-italic">Post List</h4>
+                    {% with request.resolver_match.view_name as view_name %}
+                        {% if view_name != 'pages:home' %}
+                            <h4 class="font-italic">Post List</h4>
+                        {% else %}
+                            <h4 class="font-italic">Page List</h4>
+                        {% endif %}
+                    {% endwith %}
                     <ol class="list-unstyled mb-0">
-                        {% for post in posts %}
-                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                        {% endfor %}
+                        {% with request.resolver_match.view_name as view_name %}
+                            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_index' %}
+                                {% for post in posts %}
+                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                {% endfor %}
+                            {% else %}
+                                {% for page in pages %}
+                                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </ol>
                 </div>
 
@@ -207,11 +221,8 @@
                         </div>
                     </form>
                 </div>
-
             </aside>
-
         </div>
-
     </main>
 </div>
 
