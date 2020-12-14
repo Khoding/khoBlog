@@ -56,6 +56,9 @@ class Post(models.Model):
     private = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     big = models.BooleanField(default=False)
+    url_post_type = models.URLField(null=True, blank=True)
+    url_post_type_name = models.CharField(
+        max_length=200, null=True, blank=True)
 
     def publish(self):
         self.published_date = timezone.now()

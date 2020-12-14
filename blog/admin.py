@@ -25,10 +25,10 @@ def make_published(modeladmin, request, queryset):
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'featured_title', 'created_date', 'published_date', 'slug',
-                    'private', 'featured', 'big',)
+                    'private', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
-                     'pk', 'private', 'featured', 'big',)
+                     'pk', 'private', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
     prepopulated_fields = {'slug': ('title',)}
 
     formfield_overrides = {

@@ -9,7 +9,16 @@
     {% for post in posts %}
         <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-3">
             <div class="card-header border-secondary">
-                <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
+                <h2>
+                    Post #{{ post.id }}
+                    {% if post.url_post_type %}
+                        <a href="{{ post.url_post_type }}">
+                            <i class="bi bi-link"></i>
+                        </a>
+                    {% endif %}
+
+                    {% include 'blog/superbuttons.html' %}
+                </h2>
             </div>
 
             <div class="card-body">
