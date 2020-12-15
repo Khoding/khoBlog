@@ -133,7 +133,7 @@
 <div class="container-fluid">
 
     <div class="container-fluid">
-        <header class="blog-header py-3">
+        <header class="blog-header py-2">
             <div class="row flex-nowrap justify-content-start align-items-center">
                 <div class="col-6 col-sm-4 text-left">
                     <p class="blog-header-logo">Khodok's Blog</p>
@@ -170,7 +170,7 @@
 
             <aside class="col-xl-3 col-md-4 blog-sidebar">
                 <h2>Menus</h2>
-                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                <div class="p-4 mb-2 rounded border border-secondary shadow">
                     <h4 class="font-italic">About</h4>
                     <p class="mb-2">Khodok's Blog, Read at own risks</p>
 
@@ -181,12 +181,12 @@
                     </div>
                 </div>
 
-                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                <div class="p-4 mb-2 rounded border border-secondary shadow">
                     <h4 class="font-italic">User</h4>
                     {% include 'includes/auth.html' %}
                 </div>
 
-                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                <div class="p-4 mb-2 rounded border border-secondary shadow">
                     {% with request.resolver_match.view_name as view_name %}
                         {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                             <h4 class="font-italic">Post List</h4>
@@ -209,10 +209,10 @@
                     </ol>
                 </div>
 
-                <div class="p-4 mb-3 rounded border border-secondary shadow">
+                <div class="p-4 mb-2 rounded border border-secondary shadow">
                     <h4 class="font-italic">Search</h4>
                     <form action="{% url 'blog:search_results' %}" method="get">
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-dark text-white border-secondary" id="basic-addon1">Search</span>
                             </div>

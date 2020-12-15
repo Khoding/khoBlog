@@ -7,7 +7,7 @@
     {% include 'blog/featured_posts.html' %}
 
     {% for post in posts %}
-        <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-3">
+        <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-2">
             <div class="card-header border-secondary">
                 <h2>
                     Post #{{ post.id }}
@@ -63,7 +63,7 @@
 
 {% block pagination %}
 
-    <nav class="blog-pagination">
+    <nav class="blog-pagination mb-2">
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}

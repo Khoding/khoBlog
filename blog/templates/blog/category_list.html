@@ -4,7 +4,7 @@
 
 {% block content_main %}
     {% for item in category_list %}
-        <div class="card text-white border-secondary bg-dark mb-3">
+        <div class="card text-white border-secondary bg-dark mb-2">
             <div class="card-header border-secondary">
                 <h2>Category #{{ item.id }}
                     {% block superButtons %}
@@ -41,7 +41,7 @@
 {% endblock content_main %}
 
 {% block pagination %}
-    <nav class="blog-pagination">
+    <nav class="blog-pagination mb-2">
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
