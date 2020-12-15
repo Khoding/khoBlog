@@ -29,14 +29,19 @@
                 <p class="card-text">{{ post.description }}</p>
 
                 <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                    {% if not post.private and post.published_date %}
-                        <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">Comments:
-                            {% if user.is_superuser %}{{ post.comments.count }}{% else %}
-                                {{ post.approved_comments.count }}{% endif %}</a>
-                        {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
-                            <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">Approved Comments:
-                                {{ post.approved_comments.count }}</a>
+                    <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">
+                        Comments:
+                        {% if user.is_superuser %}
+                            {{ post.comments.count }}
+                        {% else %}
+                            {{ post.approved_comments.count }}
                         {% endif %}
+                    </a>
+                    {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
+                        <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">
+                            Approved Comments:
+                            {{ post.approved_comments.count }}
+                        </a>
                     {% endif %}
                 </div>
             </div>
