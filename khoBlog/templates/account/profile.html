@@ -14,7 +14,9 @@
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
-            <p><a href="{{ comment.get_absolute_url }}">{{comment.message}}</a></p>
+            {% if comment.approved_comment or user.is_superuser or comment.author_logged.id == user.id %}
+                <p><a href="{{ comment.get_absolute_url }}">{{comment.message}}</a></p>
+            {% endif %}
         {% endif %}
     {% endfor %}
 
