@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load account %}
 
-{% block title %} - Profile | {{ object.username }}{% endblock title %}
+{% block title %} - {{ title }}{% endblock title %}
 
 {% block content %}
     <h2>Profile</h2>
@@ -15,7 +15,7 @@
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
             {% if comment.approved_comment or user.is_superuser or comment.author_logged.id == user.id %}
-                <p><a href="{{ comment.get_absolute_url }}">{{comment.message}}</a></p>
+                <p><a href="{{ comment.get_absolute_url }}">{{ comment.related_post }} - {{comment.message}}</a></p>
             {% endif %}
         {% endif %}
     {% endfor %}

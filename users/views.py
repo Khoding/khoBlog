@@ -5,7 +5,7 @@ from django.contrib.auth.views import PasswordChangeView
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
-from blog.models import Comment, Post
+from blog.models import Comment
 
 
 class SignUpView(CreateView):
@@ -20,7 +20,7 @@ class ProfileView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Profile'
+        context['title'] = 'Profile • %s' % self.request.user
         context['users'] = CustomUser.objects.all()
         context['comments'] = Comment.objects.all()
         return context
