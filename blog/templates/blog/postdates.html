@@ -2,11 +2,11 @@
     <p class="postPubliDate mb-auto text-muted">C: {{ post.created_date|date:'l, dS \o\f F Y' }}</p>
 
     {% if post.published_date %}
-        <p class="postPubliDate mb-auto text-muted"><span class="d-none d-xl-inline">P: {{ post.published_date|date:'l, dS \o\f F Y' }}</p>
+        <p class="postPubliDate mb-auto text-muted">P: {{ post.published_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 
     {% if post.modified_date %}
-        <p class="postPubliDate mb-auto text-muted"><span class="d-none d-xl-inline">M: {{ post.modified_date|date:'l, dS \o\f F Y' }}</p>
+        <p class="postPubliDate mb-auto text-muted">M: {{ post.modified_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 </div>
 
