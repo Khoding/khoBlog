@@ -12,6 +12,12 @@
         {% endif %}
     </h2>
 
+    {% for comment in comments %}
+        {% if comment.author_logged.id == object.id %}
+            <a href="{{ comment.get_absolute_url }}">{{comment.message}}</a>
+        {% endif %}
+    {% endfor %}
+
     {% if user.is_authenticated %}
         {% if object.id == user.id or user.is_superuser %}
             <p><a class="btn btn-primary" href="{% url 'edit_profile' slug=object.slug %}">Edit Profile</a></p>

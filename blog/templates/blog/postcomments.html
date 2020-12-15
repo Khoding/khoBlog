@@ -9,7 +9,11 @@
                     {% if comment.author %}
                         {{ comment.author }}
                     {% else %}
-                        {{ comment.author_logged }}
+                        {% if user.is_superuser %}
+                            <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                        {% else %}
+                            {{ comment.author_logged }}
+                        {% endif %}
                     {% endif %}
                         <span class="float-right">
                             {% if user.is_superuser %}
