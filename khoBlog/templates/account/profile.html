@@ -14,19 +14,18 @@
         <hr class="bg-secondary">
     </h2>
 
-    {% if object.id == user.id and view_as == "self" or user.is_superuser %}
+    {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
         <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
-
-        {% if object.is_superuser %}
-            Admin
-        {% elif object.is_staff %}
-            Staff
-        {% else %}
-            User
-        {% endif %}
-
-        <hr class="bg-secondary">
     {% endif %}
+
+    {% if object.is_superuser %}
+        Admin
+    {% elif object.is_staff %}
+        Staff
+    {% else %}
+        User
+    {% endif %}
+    <hr class="bg-secondary">
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
@@ -67,7 +66,7 @@
         {% endif %}
     {% endif %}
 
-    {% if object.id == user.id and view_as == "self" or user.is_superuser %}
+    {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
         <hr class="bg-secondary">
 
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
