@@ -4,7 +4,7 @@
         <p>Hello <span class="superuser">{{ user.username }}</span></p>
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
             <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
         </div>
 
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
@@ -29,7 +29,7 @@
         <p>Hello <span class="staff">{{ user.username }}</span></p>
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
             <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
         </div>
 
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
@@ -40,14 +40,14 @@
         <p>Hello {{ user.username }}</p>
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
             <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'profile' slug=user.slug %}">Profile Page</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
         </div>
 
     {% endif %}
 
 {% else %}
     <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-        <a class="mb-0 btn btn-primary" href="{% url 'signup' %}">Register</a>
+        <a class="mb-0 btn btn-primary" href="{% url 'accounts:signup' %}">Register</a>
         <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
     </div>
 

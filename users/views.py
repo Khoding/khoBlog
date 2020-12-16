@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import request
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.forms import PasswordChangeForm
@@ -14,16 +17,25 @@ class SignUpView(CreateView):
     template_name = 'account/signup.html'
 
 
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'account/profile.html'
+    view_as = 'self'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Profile • %s' % self.request.user
+        context['title'] = 'Profile'
         context['users'] = CustomUser.objects.all()
         context['comments'] = Comment.objects.all()
+        context['view_as'] = self.view_as
         return context
+
+    def get(self, request, *args, **kwargs):
+        if request.GET.get("view_as") is None or request.GET.get("view_as") == "" or request.GET.get("view_as") == "self":
+            self.view_as = 'self'
+        else:
+            self.view_as = 'guest'
+        return super(ProfileView, self).get(request, *args, **kwargs)
 
 
 class UserEditView(UpdateView):

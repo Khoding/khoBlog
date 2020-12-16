@@ -2,6 +2,7 @@ from django.conf.urls import include
 from django.urls import path
 from .views import SignUpView, ProfileView, UserEditView, PasswordsChangeView, ConnectionsEditView
 
+app_name = "accounts"
 extra_patterns = [
     path('', ProfileView.as_view(), name='profile'),
     path('edit/', UserEditView.as_view(), name='edit_profile'),

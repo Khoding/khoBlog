@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load account %}
 
-{% block title %} - {{ title }}{% endblock title %}
+{% block title %} - {{ title }} • {{ object.username }}{% endblock title %}
 
 {% block content %}
     <h2>Profile</h2>
@@ -10,31 +10,81 @@
         {% if object.profile_pic %}
             <img src="{{ object.profile_pic.url }}" alt="profile pic" width="50"/>
         {% endif %}
+
+        <hr class="bg-secondary">
     </h2>
+
+    {% if object.id == user.id and view_as == "self" or user.is_superuser %}
+        <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
+
+        {% if object.is_superuser %}
+            Admin
+        {% elif object.is_staff %}
+            Staff
+        {% else %}
+            User
+        {% endif %}
+
+        <hr class="bg-secondary">
+    {% endif %}
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
-            {% if comment.approved_comment or user.is_superuser or comment.author_logged.id == user.id %}
-                <p><a href="{{ comment.get_absolute_url }}">{{ comment.related_post }} - {{comment.message}}</a></p>
-            {% endif %}
+            <p><a href="{{ comment.get_absolute_url }}">{{ comment.related_post }} - {{comment.message}}</a></p>
+        {% endif %}
+
+        {% if forloop.last and not comment.author_logged.id == object.id and comment.author_logged|length_is:0 %}
+            <hr class="bg-secondary">
         {% endif %}
     {% endfor %}
 
-    {% if user.is_authenticated %}
-        {% if object.id == user.id or user.is_superuser %}
-            <p><a class="btn btn-primary" href="{% url 'edit_profile' slug=object.slug %}">Edit Profile</a></p>
-            <p><a class="btn btn-primary" href="{% url 'edit_connections' slug=object.slug %}">Edit Connections</a></p>
+    {% if user.is_superuser %}
+        {% if view_as == "self" %}
+            <div class="table-responsive">
+                <table class="table table-sm table-dark shadow mb-2">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            {% if user.id != object.id %}
+                                <tr>
+                                    <th scope="row">{{ user.id }}</th>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% endif %}
     {% endif %}
 
-
-    {% if user.is_superuser %}
+    {% if object.id == user.id and view_as == "self" or user.is_superuser %}
         <hr class="bg-secondary">
-        {% for user in users %}
-            {% if user.id != object.id %}
-                <a class="btn btn-secondary me-1 mb-2" href="{{ user.get_absolute_url }}">{{ user.username }}</a>
-            {% endif %}
-        {% endfor %}
+
+        <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:edit_connections' slug=object.slug %}">Edit Connections</a></p>
+    {% endif %}
+
+    {% if object.id == user.id and view_as == "self" %}
+        <hr class="bg-secondary">
+
+        <p><a class="btn btn-primary" href="?view_as=guest">View as Guest</a></p>
+    {% elif object.id == user.id and view_as == "guest" %}
+        <hr class="bg-secondary">
+        <div>
+            <a class="btn btn-outline-light p-2 mb-2" href="{% url 'accounts:profile' slug=object.slug %}">
+                Leave Guest View
+            </a>
+        </div>
     {% endif %}
 
 {% endblock content %}
