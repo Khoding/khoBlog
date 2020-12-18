@@ -29,7 +29,7 @@
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
-            <p><a href="{{ comment.get_absolute_url }}">{{ comment.related_post }} - {{comment.message}}</a></p>
+            <p><a href="{{ comment.get_absolute_url }}#comment-{{ comment.related_post.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
         {% endif %}
 
         {% if forloop.last and not comment.author_logged.id == object.id and comment.author_logged|length_is:0 %}
