@@ -3,7 +3,7 @@
 {% if post.approved_comments.count or user.is_superuser %}
     {% for comment in post.comments.all %}
         {% if comment.approved_comment or not comment.approved_comment and user.is_superuser %}
-            <div id="{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
+            <div id="comment-{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
                 <div class="card-header">
                     <h4>
                     {% if comment.author %}
@@ -15,6 +15,7 @@
                             {{ comment.author_logged }}
                         {% endif %}
                     {% endif %}
+                        <a href="#comment-{{ comment.id }}">Permalink</a>
                         <span class="float-right">
                             {% if user.is_superuser %}
                                 <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
