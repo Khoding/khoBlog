@@ -2,7 +2,6 @@
 *~
 *.zip
 *.css.map
-*.css
 __pycache__
 .DS_Store
 Pipfile
