@@ -11,12 +11,12 @@
 
 <div class="row row-cols-1 row-cols-lg-2">
     {% for post in featured %}
-        <div class="col mb-2">
+        <div class="col mb-2 {% cycle 'pr-lg-0' 'pr-kho-lg-15' %}">
             <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-2 shadow h-100">
                 <div class="col p-4 d-flex flex-column">
                     <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                     <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
-                    <div class="mb-1 text-muted">{% include 'blog/postdates.html' %}</div>
+                    <div class="mb-2 text-muted">{% include 'blog/postdates.html' %}</div>
                     <p class="mb-auto">{{ post.description }}</p>
                     <a href="{{ post.get_absolute_url }}">Continue Reading</a>
                 </div>

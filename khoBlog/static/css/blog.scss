@@ -5,6 +5,12 @@
     border-bottom: 1px solid $palette_secondary;
 }
 
+@media (min-width: 992px) {
+    .pr-kho-lg-15 {
+        padding-right: 15px;
+    }
+}
+
 .blog-header p {
     margin-bottom: 0;
 }
