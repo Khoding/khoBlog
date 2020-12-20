@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 class Links(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=50)
-    permalink = models.CharField(max_length=42, unique=True)
+    permalink = models.TextField(unique=True)
     slug = models.SlugField(null=False, unique=True)
     shown = models.BooleanField(default=True)
     priority = models.PositiveIntegerField(default=0)
