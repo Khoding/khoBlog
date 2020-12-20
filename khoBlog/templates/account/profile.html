@@ -6,25 +6,42 @@
 
 {% block content %}
     <h2>Profile</h2>
-    <h2>{% user_display object %}'s Profile
+    <h2>{% user_display object %}
         {% if object.profile_pic %}
-            <img src="{{ object.profile_pic.url }}" alt="profile pic" width="50"/>
+            <img src="{{ object.profile_pic.url }}" alt="Profile Pic" width="50"/>
         {% endif %}
 
         <hr class="bg-secondary">
     </h2>
 
+    <h4>Username</h4>
+    <p>{% user_display object %}</p>
+
     {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
+        <h4>Name</h4>
         <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
     {% endif %}
 
-    {% if object.is_superuser %}
-        Admin
-    {% elif object.is_staff %}
-        Staff
-    {% else %}
-        User
+    <h4>Role</h4>
+    <p>
+        {% if object.is_superuser %}
+            {% if object.owner %}
+                Website Owner
+            {% else %}
+                Admin
+            {% endif %}
+        {% elif object.is_staff %}
+            Staff
+        {% else %}
+            User
+        {% endif %}
+    </p>
+
+    {% if object.bio %}
+        <h4>Bio</h4>
+        {{ object.bio }}
     {% endif %}
+
     <hr class="bg-secondary">
 
     {% for comment in comments %}

@@ -8,7 +8,9 @@ class CustomUser(AbstractUser):
     pass
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
+    bio = models.TextField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True, unique=True)
+    owner = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username

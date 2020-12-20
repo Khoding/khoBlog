@@ -84,6 +84,12 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
+    def get_queryset(self):
+        self.post = get_object_or_404(
+            Post, slug=self.kwargs['slug'])
+        self.post.clicked()
+        return super().get_queryset()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.filter(

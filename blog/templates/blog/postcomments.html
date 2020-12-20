@@ -6,15 +6,17 @@
             <div id="comment-{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
                 <div class="card-header">
                     <h4>
-                    {% if comment.author %}
-                        {{ comment.author }}
-                    {% else %}
-                        {% if user.is_superuser %}
-                            <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                        {% if comment.author %}
+                            {{ comment.author }}
                         {% else %}
-                            {{ comment.author_logged }}
+                            {% if user.is_superuser or user.id == comment.author_logged.id %}
+                                <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                            {% elif comment.author_logged.owner and user.is_authenticated %}
+                                <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                            {% else %}
+                                {{ comment.author_logged }}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
                         <a href="{{ post.get_absolute_url }}#comment-{{ comment.id }}"><i class="bi bi-link-45deg"></i></a>
                         <span class="float-right">
                             {% if user.is_superuser %}

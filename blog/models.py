@@ -59,6 +59,7 @@ class Post(models.Model):
     url_post_type = models.URLField(null=True, blank=True)
     url_post_type_name = models.CharField(
         max_length=200, null=True, blank=True)
+    clicks = models.IntegerField(default=0)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -70,6 +71,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def clicked(self):
+        self.clicks += 1
+        self.save()
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
