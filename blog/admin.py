@@ -41,7 +41,7 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('author_logged', 'author', 'created_date')
     ordering = ('-author_logged', '-author',)
-    search_fields = ('author_logged', 'author', 'message',)
+    search_fields = ('author', 'message',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
