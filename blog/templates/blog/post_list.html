@@ -1,6 +1,7 @@
 {% extends 'blog/base_post_main_block.html' %}
 {% load static %}
 {% load markdown_extra %}
+{% load read_time %}
 
 {% block content_main %}
 
@@ -24,6 +25,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ post.title }}</h2>
                 <div class="blog-post-meta mb-auto">
+                    <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
                     {% include 'blog/postdates.html' %}
                 </div>
                 <p class="card-text">{{ post.description }}</p>

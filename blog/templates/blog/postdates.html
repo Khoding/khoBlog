@@ -1,17 +1,17 @@
 <div class="d-none d-xl-block">
-    <p class="postPubliDate mb-auto text-muted">C: {{ post.created_date|date:'l, dS \o\f F Y' }}</p>
+    <p class="mb-auto text-muted">C: {{ post.created_date|date:'l, dS \o\f F Y' }}</p>
 
     {% if post.published_date %}
-        <p class="postPubliDate mb-auto text-muted">P: {{ post.published_date|date:'l, dS \o\f F Y' }}</p>
+        <p class="mb-auto text-muted">P: {{ post.published_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 
     {% if post.modified_date %}
-        <p class="postPubliDate mb-auto text-muted">M: {{ post.modified_date|date:'l, dS \o\f F Y' }}</p>
+        <p class="mb-auto text-muted">M: {{ post.modified_date|date:'l, dS \o\f F Y' }}</p>
     {% endif %}
 </div>
 
 <div class="d-xl-none">
     {% if post.published_date %}
-        <p class="postPubliDate mb-auto text-muted">P: {{ post.published_date|date:'dS M Y' }}</p>
+        <p class="mb-auto text-muted">P: {{ post.published_date|date:'dS M Y' }}</p>
     {% endif %}
 </div>

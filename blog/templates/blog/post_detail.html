@@ -1,6 +1,7 @@
 {% extends 'blog/base_post_main_block.html' %}
 {% load static %}
 {% load markdown_extra %}
+{% load read_time %}
 
 {% block page_top_title %}
     <h2>{{ title }}
@@ -28,6 +29,7 @@
             <div class="card-body">
                 <h2 class="card-title">{{ post.title }}</h2>
                 <div class="blog-post-meta">
+                    <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
                     {% include 'blog/postdates.html' %}
                 </div>
                 <span class="card-text">{{ post.body|formatted_markdown|safe }}</span>
