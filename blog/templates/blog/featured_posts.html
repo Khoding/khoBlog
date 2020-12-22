@@ -18,7 +18,7 @@
                 <div class="col p-4 d-flex flex-column">
                     <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                     <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
-                    <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
+                    <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                     <div class="mb-2">{% include 'blog/postdates.html' %}</div>
                     <p class="mb-auto">{{ post.description }}</p>
                     <a href="{{ post.get_absolute_url }}">Continue Reading</a>
