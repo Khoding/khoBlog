@@ -46,17 +46,13 @@
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id %}
-            <p><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
-        {% endif %}
-
-        {% if forloop.last and not comment.author_logged.id == object.id and comment.author_logged|length_is:0 %}
-            <hr class="bg-secondary">
+            <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
         {% endif %}
     {% endfor %}
 
     {% if user.is_superuser %}
         {% if view_as == "self" %}
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
                 <table class="table table-sm table-dark shadow mb-2">
                     <thead>
                         <tr>
