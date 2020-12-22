@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 
 class CustomUser(AbstractUser):
-    pass
+    email = models.EmailField(blank=False, null=False)
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
     bio = models.TextField(null=True, blank=True)
