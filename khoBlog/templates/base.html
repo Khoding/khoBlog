@@ -98,8 +98,7 @@
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
     <script src="{% static 'vendor/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
-    <script src="{% static 'vendor/node_modules/popper.js/dist/popper.min.js' %}"></script>
-    <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
     {% block rel %}
         <!-- base! favicon -->
@@ -174,10 +173,14 @@
                     <h4 class="font-italic">About</h4>
                     <p class="mb-2">Khodok's Blog, Read at own risks</p>
 
-                    <div class="btn-group-vertical d-block" role="group" aria-label="Group Accounts">
+                    <div class="btn-group-vertical d-block" role="group" aria-label="Group Interesting Links">
                         <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
                         <a href="{% url 'blog:category_list' %}" class="btn btn-primary">Category List</a>
                         <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary">Portfolio</a>
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
+                        {% endif %}
                     </div>
                 </div>
 

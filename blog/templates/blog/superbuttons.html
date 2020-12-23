@@ -1,33 +1,35 @@
 {% block superButtons %}
     {% if user.is_superuser %}
 
-        <div class="float-right btn-toolbar" rold="toolbar" aria-label="Super Buttons Toolbar">
-            {% if not post.published_date %}
-                <div class="btn-group mr-2" role="group" aria-label="Publish Group">
-                    <a class="btn btn-light" href="{% url 'blog:post_publish' slug=post.slug %}">
-                        <i class="bi bi-file-earmark-arrow-up"></i>
+        <div class="btn-group float-right">
+            <a class="btn btn-secondary" href="{% url 'blog:post_edit' slug=post.slug %}">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" href="#" role="button" id="postAdminDropdown-{{ post.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="postAdminDropdown">
+                {% if not post.published_date %}
+                    <a class="dropdown-item" href="{% url 'blog:post_publish' slug=post.slug %}">
+                        <i class="bi bi-file-earmark-arrow-up"></i> Publish
                     </a>
 
-                    <a class="btn btn-warning" href="{% url 'blog:post_publish_private' slug=post.slug %}">
-                        <i class="bi bi-file-earmark-lock"></i>
+                    <a class="dropdown-item" href="{% url 'blog:post_publish_private' slug=post.slug %}">
+                        <i class="bi bi-file-earmark-lock"></i> Publish Private
                     </a>
-                </div>
-            {% endif %}
 
+                    <div class="dropdown-divider"></div>
+                {% endif %}
 
-            <div class="btn-group mr-2" role="group" aria-label="Delete Group">
-                <a class="btn btn-warning" href="{% url 'blog:post_remove' slug=post.slug %}">
-                    <i class="bi bi-trash"></i>
-                </a>
-            </div>
-
-            <div class="btn-group" role="group" aria-label="Edit Group">
-                <a class="btn btn-light" href="{% url 'blog:post_edit' slug=post.slug %}">
-                    <i class="bi bi-pencil-square"></i>
+                <a class="dropdown-item" href="/admin/blog/post/{{ post.id }}/change/">
+                    <i class="bi bi-pencil-square"></i> Edit in Admin
                 </a>
 
-                <a class="btn btn-danger" href="/admin/blog/post/{{ post.id }}/change/">
-                    <i class="bi bi-pencil-square"></i>
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="{% url 'blog:post_remove' slug=post.slug %}">
+                    <i class="bi bi-trash"></i> Delete
                 </a>
             </div>
         </div>

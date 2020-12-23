@@ -1,49 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
-    <main class="todo w3-container w3-theme-d4 w3-padding-bottom-16">
-        {% block main %}
-            <div id="posts" class="w3-ul w3-threequarter">
-                <h2>TODO List</h2>
+    <h2>TODO List</h2>
 
+    <form action="{% url 'todo:add' %}" method="POST" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-                <form action="{% url 'todo:add' %}" method="POST" class="w3-card-4 w3-padding-16 w3-padding-sides-16 w3-padding-bottom-16">
-                    {% csrf_token %}
-                    {{ form.text }}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Save</button>
+        {% endbuttons %}
+    </form>
 
-                    <br />
-                    <br />
-                    <button type="submit" class="w3-btn w3-theme-dark">Save</button>
-                </form>
+    <a class="btn btn-outline-light" href="{% url 'todo:deletecomplete' %}">Delete completed</a>
+    <a class="btn btn-outline-light" href="{% url 'todo:deleteall' %}">Delete all</a>
 
-                <br />
+    <hr>
 
-                <div class="w3-ul w3-padding-bottom-16">
+    <ul class="list-unstyled">
+        {% for todo in todo_list %}
+            {% if todo.complete %}
+                <li class="text-muted"><i class="bi bi-check2-square"></i> {{ todo.element }}</li>
+            {% else %}
+                <li><a class="todoTodo" href="{% url 'todo:complete' todo.id %}"><i class="bi bi-x-square"></i> {{ todo.element }}</a></li>
+            {% endif %}
 
-                    <a href="{% url 'todo:deletecomplete' %}"><button type="button" class="w3-btn w3-theme-dark">
-                        DELETE COMPLETED
-                    </button></a>
-
-                    <a href="{% url 'todo:deleteall' %}"><button type="button" class="w3-btn w3-theme-dark">
-                        DELETE ALL
-                    </button></a>
-                </div>
-
-                <ul class="w3-ul">
-                    {% for todo in todo_list %}
-                        {% if todo.complete %}
-                            <li class="todo-completed">{{ todo.text }}</li>
-                        {% else %}
-                            <a class="todoTodo" href="{% url 'todo:complete' todo.id %}"><li>{{ todo.text }}</li></a>
-                        {% endif %}
-
-                        {% if not forloop.last %}
-                            <hr class="hr" />
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endblock main %}
-    </main>
+            {% if not forloop.last %}
+                <hr class="hr" />
+            {% endif %}
+        {% endfor %}
+    </ul>
 {% endblock content %}
