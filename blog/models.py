@@ -105,16 +105,24 @@ class Post(models.Model):
 class Comment(models.Model):
     related_post = models.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField(max_length=200, null=True, blank=True)
+    author = models.CharField(
+        max_length=200, null=True, blank=True,
+        help_text="You don't have to add one, the point of the Author being hiding who actually wrote the comment by puttin another name, note that Admins and mods can still find who wrote the comment")
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    message = models.TextField()
+    message = models.TextField(verbose_name="Comment")
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=True)
     removed_comment = models.BooleanField(default=False)
+    comment_answer = models.ForeignKey(
+        'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 
     def __str__(self):
-        return '%s - %s' % (self.related_post.title, self.author_logged)
+        if self.author_logged:
+            author_in_name = self.author_logged
+        else:
+            author_in_name = self.author
+        return '%s - %s - %s' % (self.related_post.title, author_in_name, self.pk)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug})

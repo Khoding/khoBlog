@@ -7,13 +7,21 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <h2>Edit User</h2>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">Update profile</button>
-        {% endbuttons %}
-    </form>
+    {% if user.is_authenticated %}
+        {% if user.id == object.id or user.is_superuser %}
+            <h2>Edit User</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Update profile</button>
+                {% endbuttons %}
+            </form>
 
+        {% else %}
+            <p>It's not your profile.</p>
+        {% endif %}
+    {% else %}
+        <p>It's not your profile.</p>
+    {% endif %}
 {% endblock content %}

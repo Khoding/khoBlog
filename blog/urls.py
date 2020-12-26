@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
 from .views import AddPostCommentView, EditPostCommentView, PostFutureListView, PostListView, PostDetailView, PostDraftListView, PostPrivateListView, AddPostView, EditPostView, \
-    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView
+    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, SearchResultsView, AddReplyToComment
 
 app_name = 'blog'
 urlpatterns = [
@@ -35,8 +35,10 @@ urlpatterns = [
     path('post/<slug>/delete/', DeletePostView.as_view(), name='post_remove'),
     path('post/<int:pk>/comment/', AddPostCommentView.as_view(),
          name='add_comment_to_post'),
-    path('comment/<int:pk>/edit', EditPostCommentView.as_view(),
+    path('post-<int:pk_post>/comment-<int:pk>/edit/', EditPostCommentView.as_view(),
          name='edit_post_comment'),
+    path('post-<int:pk_post>/comment-<int:pk>/reply/', AddReplyToComment.as_view(),
+         name='add_reply_to_comment'),
 
     path('comment/<int:pk>/approve/',
          views.comment_approve, name='comment_approve'),

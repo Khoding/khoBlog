@@ -3,13 +3,16 @@
 {% load markdown_extra %}
 
 {% block main %}
-    <h2>New Comment</h2>
-    <form method="POST" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">Submit</button>
-        {% endbuttons %}
-    </form>
-    {{ form.media }}
+    {% if user.is_authenticated %}
+        {% if user.id == comment.author_logged.id or user.is_superuser %}
+            <h2>New Comment</h2>
+            <form method="POST" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                {% endbuttons %}
+            </form>
+        {% endif %}
+    {% endif %}
 {% endblock main %}

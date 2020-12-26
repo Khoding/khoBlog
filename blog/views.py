@@ -286,8 +286,24 @@ class AddPostCommentView(LoginRequiredMixin, CreateView):
         return context
 
 
-@superuser_required()
-class EditPostCommentView(UpdateView):
+class AddReplyToComment(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = "blog/add_comment_to_post.html"
+
+    def form_valid(self, form):
+        form.instance.author_logged = self.request.user
+        form.instance.related_post_id = self.kwargs['pk_post']
+        form.instance.comment_answer_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Reply to Comment'
+        return context
+
+
+class EditPostCommentView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = EditPostCommentForm
     template_name = 'blog/add_comment_to_post.html'
