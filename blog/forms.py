@@ -35,7 +35,7 @@ class EditForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M', attrs={'class': 'bg-dark text-light'}),
+            'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M:%S', attrs={'class': 'bg-dark text-light'}),
             'url_post_type': forms.URLInput(attrs={'class': 'bg-dark text-light'}),
             'url_post_type_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
         }
