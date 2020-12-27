@@ -1,0 +1,1001 @@
+.smile-ahh {
+    -webkit-animation: smile-ahh 2.6s steps(52) infinite;
+    animation: smile-ahh 2.6s steps(52) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/ahh.png);
+    height: 26px;
+    width: 27px;
+}
+.retina .smile-ahh {
+    background-image: url(/assets/common/components/ui/Smiles/images/ahh@2x.png);
+}
+@-webkit-keyframes smile-ahh {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1352px;
+    }
+}
+@keyframes smile-ahh {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1352px;
+    }
+}
+.smile-airkiss {
+    -webkit-animation: smile-airkiss 3.25s steps(65) infinite;
+    animation: smile-airkiss 3.25s steps(65) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/airkiss.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-airkiss {
+    background-image: url(/assets/common/components/ui/Smiles/images/airkiss@2x.png);
+}
+@-webkit-keyframes smile-airkiss {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1690px;
+    }
+}
+@keyframes smile-airkiss {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1690px;
+    }
+}
+.smile-angry {
+    -webkit-animation: smile-angry 1.5s steps(30) infinite;
+    animation: smile-angry 1.5s steps(30) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/angry.png);
+    height: 26px;
+    width: 28px;
+}
+.retina .smile-angry {
+    background-image: url(/assets/common/components/ui/Smiles/images/angry@2x.png);
+}
+@-webkit-keyframes smile-angry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -780px;
+    }
+}
+@keyframes smile-angry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -780px;
+    }
+}
+.smile-asking {
+    -webkit-animation: smile-asking 1.3s steps(26) infinite;
+    animation: smile-asking 1.3s steps(26) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/asking.png);
+    height: 26px;
+    width: 40px;
+}
+.retina .smile-asking {
+    background-image: url(/assets/common/components/ui/Smiles/images/asking@2x.png);
+}
+@-webkit-keyframes smile-asking {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -676px;
+    }
+}
+@keyframes smile-asking {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -676px;
+    }
+}
+.smile-ass {
+    -webkit-animation: smile-ass 0s steps(0) infinite;
+    animation: smile-ass 0s steps(0) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/ass.png);
+    height: 26px;
+    width: 33px;
+}
+.retina .smile-ass {
+    background-image: url(/assets/common/components/ui/Smiles/images/ass@2x.png);
+}
+@-webkit-keyframes smile-ass {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+@keyframes smile-ass {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+.smile-behind {
+    -webkit-animation: smile-behind 950ms steps(19) infinite;
+    animation: smile-behind 950ms steps(19) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/behind.png);
+    height: 26px;
+    width: 36px;
+}
+.retina .smile-behind {
+    background-image: url(/assets/common/components/ui/Smiles/images/behind@2x.png);
+}
+@-webkit-keyframes smile-behind {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -494px;
+    }
+}
+@keyframes smile-behind {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -494px;
+    }
+}
+.smile-blowjob {
+    -webkit-animation: smile-blowjob 2.25s steps(45) infinite;
+    animation: smile-blowjob 2.25s steps(45) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/blowjob.png);
+    height: 26px;
+    width: 60px;
+}
+.retina .smile-blowjob {
+    background-image: url(/assets/common/components/ui/Smiles/images/blowjob@2x.png);
+}
+@-webkit-keyframes smile-blowjob {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1170px;
+    }
+}
+@keyframes smile-blowjob {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1170px;
+    }
+}
+.smile-bye {
+    -webkit-animation: smile-bye 2.15s steps(43) infinite;
+    animation: smile-bye 2.15s steps(43) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/bye.png);
+    height: 26px;
+    width: 71px;
+}
+.retina .smile-bye {
+    background-image: url(/assets/common/components/ui/Smiles/images/bye@2x.png);
+}
+@-webkit-keyframes smile-bye {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1118px;
+    }
+}
+@keyframes smile-bye {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1118px;
+    }
+}
+.smile-cheekkiss {
+    -webkit-animation: smile-cheekkiss 2.7s steps(54) infinite;
+    animation: smile-cheekkiss 2.7s steps(54) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/cheekkiss.png);
+    height: 26px;
+    width: 50px;
+}
+.retina .smile-cheekkiss {
+    background-image: url(/assets/common/components/ui/Smiles/images/cheekkiss@2x.png);
+}
+@-webkit-keyframes smile-cheekkiss {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1404px;
+    }
+}
+@keyframes smile-cheekkiss {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1404px;
+    }
+}
+.smile-crazyguy {
+    -webkit-animation: smile-crazyguy 2s steps(40) infinite;
+    animation: smile-crazyguy 2s steps(40) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/crazyguy.png);
+    height: 26px;
+    width: 54px;
+}
+.retina .smile-crazyguy {
+    background-image: url(/assets/common/components/ui/Smiles/images/crazyguy@2x.png);
+}
+@-webkit-keyframes smile-crazyguy {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+@keyframes smile-crazyguy {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+.smile-cry {
+    -webkit-animation: smile-cry 2s steps(40) infinite;
+    animation: smile-cry 2s steps(40) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/cry.png);
+    height: 26px;
+    width: 40px;
+}
+.retina .smile-cry {
+    background-image: url(/assets/common/components/ui/Smiles/images/cry@2x.png);
+}
+@-webkit-keyframes smile-cry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+@keyframes smile-cry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+.smile-dancing {
+    -webkit-animation: smile-dancing 1.9s steps(38) infinite;
+    animation: smile-dancing 1.9s steps(38) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/dancing.png);
+    height: 26px;
+    width: 53px;
+}
+.retina .smile-dancing {
+    background-image: url(/assets/common/components/ui/Smiles/images/dancing@2x.png);
+}
+@-webkit-keyframes smile-dancing {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -988px;
+    }
+}
+@keyframes smile-dancing {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -988px;
+    }
+}
+.smile-devil {
+    -webkit-animation: smile-devil 2.7s steps(54) infinite;
+    animation: smile-devil 2.7s steps(54) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/devil.png);
+    height: 26px;
+    width: 28px;
+}
+.retina .smile-devil {
+    background-image: url(/assets/common/components/ui/Smiles/images/devil@2x.png);
+}
+@-webkit-keyframes smile-devil {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1404px;
+    }
+}
+@keyframes smile-devil {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1404px;
+    }
+}
+.smile-facepalm {
+    -webkit-animation: smile-facepalm 2.45s steps(49) infinite;
+    animation: smile-facepalm 2.45s steps(49) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/facepalm.png);
+    height: 26px;
+    width: 25px;
+}
+.retina .smile-facepalm {
+    background-image: url(/assets/common/components/ui/Smiles/images/facepalm@2x.png);
+}
+@-webkit-keyframes smile-facepalm {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+@keyframes smile-facepalm {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+.smile-fire {
+    -webkit-animation: smile-fire 0s steps(0) infinite;
+    animation: smile-fire 0s steps(0) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/fire.png);
+    height: 26px;
+    width: 20px;
+}
+.retina .smile-fire {
+    background-image: url(/assets/common/components/ui/Smiles/images/fire@2x.png);
+}
+@-webkit-keyframes smile-fire {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+@keyframes smile-fire {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+.smile-flirt {
+    -webkit-animation: smile-flirt 2.95s steps(59) infinite;
+    animation: smile-flirt 2.95s steps(59) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/flirt.png);
+    height: 26px;
+    width: 36px;
+}
+.retina .smile-flirt {
+    background-image: url(/assets/common/components/ui/Smiles/images/flirt@2x.png);
+}
+@-webkit-keyframes smile-flirt {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1534px;
+    }
+}
+@keyframes smile-flirt {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1534px;
+    }
+}
+.smile-flirting {
+    -webkit-animation: smile-flirting 2.45s steps(49) infinite;
+    animation: smile-flirting 2.45s steps(49) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/flirting.png);
+    height: 26px;
+    width: 36px;
+}
+.retina .smile-flirting {
+    background-image: url(/assets/common/components/ui/Smiles/images/flirting@2x.png);
+}
+@-webkit-keyframes smile-flirting {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+@keyframes smile-flirting {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+.smile-flower {
+    -webkit-animation: smile-flower 2.6s steps(52) infinite;
+    animation: smile-flower 2.6s steps(52) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/flower.png);
+    height: 26px;
+    width: 15px;
+}
+.retina .smile-flower {
+    background-image: url(/assets/common/components/ui/Smiles/images/flower@2x.png);
+}
+@-webkit-keyframes smile-flower {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1352px;
+    }
+}
+@keyframes smile-flower {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1352px;
+    }
+}
+.smile-gift {
+    -webkit-animation: smile-gift 2.1s steps(42) infinite;
+    animation: smile-gift 2.1s steps(42) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/gift.png);
+    height: 26px;
+    width: 32px;
+}
+.retina .smile-gift {
+    background-image: url(/assets/common/components/ui/Smiles/images/gift@2x.png);
+}
+@-webkit-keyframes smile-gift {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1092px;
+    }
+}
+@keyframes smile-gift {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1092px;
+    }
+}
+.smile-grinning {
+    -webkit-animation: smile-grinning 1.7s steps(34) infinite;
+    animation: smile-grinning 1.7s steps(34) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/grinning.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-grinning {
+    background-image: url(/assets/common/components/ui/Smiles/images/grinning@2x.png);
+}
+@-webkit-keyframes smile-grinning {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -884px;
+    }
+}
+@keyframes smile-grinning {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -884px;
+    }
+}
+.smile-heart {
+    -webkit-animation: smile-heart 1.2s steps(24) infinite;
+    animation: smile-heart 1.2s steps(24) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/heart.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-heart {
+    background-image: url(/assets/common/components/ui/Smiles/images/heart@2x.png);
+}
+@-webkit-keyframes smile-heart {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -624px;
+    }
+}
+@keyframes smile-heart {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -624px;
+    }
+}
+.smile-hideeyes {
+    -webkit-animation: smile-hideeyes 2.05s steps(41) infinite;
+    animation: smile-hideeyes 2.05s steps(41) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/hideeyes.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-hideeyes {
+    background-image: url(/assets/common/components/ui/Smiles/images/hideeyes@2x.png);
+}
+@-webkit-keyframes smile-hideeyes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1066px;
+    }
+}
+@keyframes smile-hideeyes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1066px;
+    }
+}
+.smile-inlove {
+    -webkit-animation: smile-inlove 3.45s steps(69) infinite;
+    animation: smile-inlove 3.45s steps(69) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/inlove.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-inlove {
+    background-image: url(/assets/common/components/ui/Smiles/images/inlove@2x.png);
+}
+@-webkit-keyframes smile-inlove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1794px;
+    }
+}
+@keyframes smile-inlove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1794px;
+    }
+}
+.smile-king {
+    -webkit-animation: smile-king 1.65s steps(33) infinite;
+    animation: smile-king 1.65s steps(33) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/king.png);
+    height: 26px;
+    width: 26px;
+}
+.retina .smile-king {
+    background-image: url(/assets/common/components/ui/Smiles/images/king@2x.png);
+}
+@-webkit-keyframes smile-king {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -858px;
+    }
+}
+@keyframes smile-king {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -858px;
+    }
+}
+.smile-kissing {
+    -webkit-animation: smile-kissing 2.3s steps(46) infinite;
+    animation: smile-kissing 2.3s steps(46) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/kissing.png);
+    height: 26px;
+    width: 60px;
+}
+.retina .smile-kissing {
+    background-image: url(/assets/common/components/ui/Smiles/images/kissing@2x.png);
+}
+@-webkit-keyframes smile-kissing {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1196px;
+    }
+}
+@keyframes smile-kissing {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1196px;
+    }
+}
+.smile-knight {
+    -webkit-animation: smile-knight 0s steps(0) infinite;
+    animation: smile-knight 0s steps(0) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/knight.png);
+    height: 26px;
+    width: 26px;
+}
+.retina .smile-knight {
+    background-image: url(/assets/common/components/ui/Smiles/images/knight@2x.png);
+}
+@-webkit-keyframes smile-knight {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+@keyframes smile-knight {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 0px;
+    }
+}
+.smile-lgbt {
+    -webkit-animation: smile-lgbt 1.9s steps(38) infinite;
+    animation: smile-lgbt 1.9s steps(38) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/lgbt.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-lgbt {
+    background-image: url(/assets/common/components/ui/Smiles/images/lgbt@2x.png);
+}
+@-webkit-keyframes smile-lgbt {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -988px;
+    }
+}
+@keyframes smile-lgbt {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -988px;
+    }
+}
+.smile-lol {
+    -webkit-animation: smile-lol 1.7s steps(34) infinite;
+    animation: smile-lol 1.7s steps(34) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/lol.png);
+    height: 26px;
+    width: 26px;
+}
+.retina .smile-lol {
+    background-image: url(/assets/common/components/ui/Smiles/images/lol@2x.png);
+}
+@-webkit-keyframes smile-lol {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -884px;
+    }
+}
+@keyframes smile-lol {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -884px;
+    }
+}
+.smile-movingboobs {
+    -webkit-animation: smile-movingboobs 1.05s steps(21) infinite;
+    animation: smile-movingboobs 1.05s steps(21) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/movingboobs.png);
+    height: 26px;
+    width: 31px;
+}
+.retina .smile-movingboobs {
+    background-image: url(/assets/common/components/ui/Smiles/images/movingboobs@2x.png);
+}
+@-webkit-keyframes smile-movingboobs {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -546px;
+    }
+}
+@keyframes smile-movingboobs {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -546px;
+    }
+}
+.smile-ok {
+    -webkit-animation: smile-ok 2.1s steps(42) infinite;
+    animation: smile-ok 2.1s steps(42) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/ok.png);
+    height: 26px;
+    width: 36px;
+}
+.retina .smile-ok {
+    background-image: url(/assets/common/components/ui/Smiles/images/ok@2x.png);
+}
+@-webkit-keyframes smile-ok {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1092px;
+    }
+}
+@keyframes smile-ok {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1092px;
+    }
+}
+.smile-onbed {
+    -webkit-animation: smile-onbed 5.25s steps(105) infinite;
+    animation: smile-onbed 5.25s steps(105) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/onbed.png);
+    height: 26px;
+    width: 74px;
+}
+.retina .smile-onbed {
+    background-image: url(/assets/common/components/ui/Smiles/images/onbed@2x.png);
+}
+@-webkit-keyframes smile-onbed {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -2730px;
+    }
+}
+@keyframes smile-onbed {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -2730px;
+    }
+}
+.smile-please {
+    -webkit-animation: smile-please 2s steps(40) infinite;
+    animation: smile-please 2s steps(40) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/please.png);
+    height: 26px;
+    width: 28px;
+}
+.retina .smile-please {
+    background-image: url(/assets/common/components/ui/Smiles/images/please@2x.png);
+}
+@-webkit-keyframes smile-please {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+@keyframes smile-please {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1040px;
+    }
+}
+.smile-sad {
+    -webkit-animation: smile-sad 1.85s steps(37) infinite;
+    animation: smile-sad 1.85s steps(37) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/sad.png);
+    height: 26px;
+    width: 40px;
+}
+.retina .smile-sad {
+    background-image: url(/assets/common/components/ui/Smiles/images/sad@2x.png);
+}
+@-webkit-keyframes smile-sad {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -962px;
+    }
+}
+@keyframes smile-sad {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -962px;
+    }
+}
+.smile-shy {
+    -webkit-animation: smile-shy 3.1s steps(62) infinite;
+    animation: smile-shy 3.1s steps(62) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/shy.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-shy {
+    background-image: url(/assets/common/components/ui/Smiles/images/shy@2x.png);
+}
+@-webkit-keyframes smile-shy {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1612px;
+    }
+}
+@keyframes smile-shy {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1612px;
+    }
+}
+.smile-thumbsup {
+    -webkit-animation: smile-thumbsup 2.45s steps(49) infinite;
+    animation: smile-thumbsup 2.45s steps(49) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/thumbsup.png);
+    height: 26px;
+    width: 34px;
+}
+.retina .smile-thumbsup {
+    background-image: url(/assets/common/components/ui/Smiles/images/thumbsup@2x.png);
+}
+@-webkit-keyframes smile-thumbsup {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+@keyframes smile-thumbsup {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1274px;
+    }
+}
+.smile-tongue {
+    -webkit-animation: smile-tongue 1.15s steps(23) infinite;
+    animation: smile-tongue 1.15s steps(23) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/tongue.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-tongue {
+    background-image: url(/assets/common/components/ui/Smiles/images/tongue@2x.png);
+}
+@-webkit-keyframes smile-tongue {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -598px;
+    }
+}
+@keyframes smile-tongue {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -598px;
+    }
+}
+.smile-wanker {
+    -webkit-animation: smile-wanker 2.05s steps(41) infinite;
+    animation: smile-wanker 2.05s steps(41) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/wanker.png);
+    height: 26px;
+    width: 50px;
+}
+.retina .smile-wanker {
+    background-image: url(/assets/common/components/ui/Smiles/images/wanker@2x.png);
+}
+@-webkit-keyframes smile-wanker {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1066px;
+    }
+}
+@keyframes smile-wanker {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1066px;
+    }
+}
+.smile-wink {
+    -webkit-animation: smile-wink 2.4s steps(48) infinite;
+    animation: smile-wink 2.4s steps(48) infinite;
+    background-image: url(/assets/common/components/ui/Smiles/images/wink.png);
+    height: 26px;
+    width: 30px;
+}
+.retina .smile-wink {
+    background-image: url(/assets/common/components/ui/Smiles/images/wink@2x.png);
+}
+@-webkit-keyframes smile-wink {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1248px;
+    }
+}
+@keyframes smile-wink {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -1248px;
+    }
+}
+.smile {
+    background-size: 100%;
+    display: inline-block;
+    margin: 0 4px;
+}
+.active-smile {
+    display: inline-block;
+    line-height: 16px;
+    padding: 5px;
+}
+.active-smile .smile {
+    margin: 0;
+}
