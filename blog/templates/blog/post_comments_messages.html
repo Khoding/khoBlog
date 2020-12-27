@@ -1,0 +1,54 @@
+<div class="pl-4 border-left border-secondary {% if comment.comment_answer %}ml-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
+    <div id="comment-{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
+        <div class="card-header">
+            <h4>
+                {% if comment.author or comment.author_logged and comment.author %}
+                    {{ comment.author }}
+                {% else %}
+                    {% if user.is_superuser or user.id == comment.author_logged.id %}
+                        <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                    {% elif comment.author_logged.owner and user.is_authenticated %}
+                        <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                    {% else %}
+                        {{ comment.author_logged }}
+                    {% endif %}
+                {% endif %}
+                <a href="{{ post.get_absolute_url }}#comment-{{ comment.id }}"><i class="bi bi-link-45deg"></i></a>
+                <span class="float-right">
+                    {% if user.id == comment.author_logged.id or user.is_superuser %}
+                        <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                            {% if not comment.approved_comment and user.is_superuser %}
+                                <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+
+                                <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}">
+                                    <i class="bi bi-check2-square"></i>
+                                </a>
+                            {% endif %}
+
+                            <a class="btn btn-light" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </span>
+            </h4>
+        </div>
+        <div class="card-body p-0">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-white border-secondary bg-dark">
+                    {{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }} {% if comment.comment_answer %}<a href="{{ post.get_absolute_url }}#comment-{{ comment.comment_answer.id }}"><small>&lt;Related Comment&gt;</small></a>{% endif %}
+                </li>
+                {% autoescape on %}
+                    <li class="list-group-item text-white border-secondary bg-dark">{{ comment.message }}</li>
+                {% endautoescape %}
+            </ul>
+        </div>
+        <div class="card-footer border-secondary">
+            <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk_post=comment.related_post.pk pk=comment.pk %}">Reply to this comment</a>
+            </div>
+        </div>
+    </div>
+</div>
