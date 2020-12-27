@@ -17,9 +17,11 @@
     <h4>Username</h4>
     <p>{% user_display object %}</p>
 
-    {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
-        <h4>Name</h4>
-        <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
+    {% if object.first_name or object.first_name %}
+        {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
+            <h4>Name</h4>
+            <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
+        {% endif %}
     {% endif %}
 
     <h4>Role</h4>
