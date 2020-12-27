@@ -93,7 +93,7 @@
     {% elif object.id == user.id and view_as == "guest" %}
         <hr class="bg-secondary">
         <div>
-            <a class="btn btn-outline-light p-2 mb-2" href="{% url 'accounts:profile' slug=object.slug %}">
+            <a class="btn btn-outline-light p-2" href="{% url 'accounts:profile' slug=object.slug %}">
                 Leave Guest View
             </a>
         </div>
