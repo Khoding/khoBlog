@@ -10,6 +10,11 @@
   }
 }
 
+#id_body {
+  background-color: #212121;
+  color: #f8f9fa;
+}
+
 .linkHome img {
   opacity: 1;
   -webkit-transition: 0.3s ease-in-out;
