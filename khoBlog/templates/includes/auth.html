@@ -1,12 +1,13 @@
 {% load socialaccount %}
-{% if user.is_authenticated %}
-    {% if user.is_superuser %}
-        <p>Hello <span class="superuser">{{ user.username }}</span></p>
-        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
-            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
-        </div>
 
+{% if user.is_authenticated %}
+    <p>{% firstof user.welcome_message 'Hello' %} <span class="{% if user.is_superuser %}superuser{% elif user.is_staff %}staff{% endif %}">{{ user.username }}</span></p>
+    <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
+        <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
+        <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
+    </div>
+
+    {% if user.is_superuser %}
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
             <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
             <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
@@ -14,35 +15,18 @@
             <a class="mb-0 btn btn-primary"
                 href="{% url 'blog:post_private_list' %}">Private</a>
         </div>
+    {% endif %}
 
-        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-        </div>
+    <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
+        {% if user.is_superuser %}<a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>{% endif %}
+        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
+    </div>
 
+    {% if user.is_superuser or user.is_staff %}
         <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
             <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-            <a class="mb-0 btn btn-danger" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
+            {% if user.is_superuser %}<a class="mb-0 btn btn-danger" href="https://eu.pythonanywhere.com">Pythonanywhere</a>{% endif %}
         </div>
-
-    {% elif user.is_staff %}
-        <p>Hello <span class="staff">{{ user.username }}</span></p>
-        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
-        </div>
-
-        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Admin">
-            <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
-        </div>
-
-    {% else %}
-        <p>Hello {{ user.username }}</p>
-        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-            <a class="mb-0 btn btn-primary" href="{% url 'account_logout' %}">Log out</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'accounts:profile' slug=user.slug %}">Profile Page</a>
-        </div>
-
     {% endif %}
 
 {% else %}
