@@ -71,7 +71,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # User management
-    path('users/', include('users.urls')),
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
 
     # Markdownx

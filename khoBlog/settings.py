@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     'pages',
     'polls',
     'todo',
-    'users',
+    'accounts',
     'shortener',
     'links',
 ]
@@ -133,7 +133,7 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     }
 }
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
