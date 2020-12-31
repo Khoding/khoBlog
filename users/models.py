@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     slug = models.SlugField(null=True, blank=True, unique=True)
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
-        max_length=42, blank=True, help_text="The message before your name when you are logged, by default 'Hello'")
+        max_length=42, blank=True, default="Hello", help_text="The message before your name when you are logged, by default 'Hello'")
 
     def __str__(self):
         return self.username
