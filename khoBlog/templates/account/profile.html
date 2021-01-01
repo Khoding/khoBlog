@@ -8,7 +8,7 @@
     <h2>Profile</h2>
     <h2>{% user_display object %}
         {% if object.profile_pic %}
-            <img src="{{ object.profile_pic.url }}" alt="Profile Pic" width="50"/>
+            <img src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" width="50"/>
         {% endif %}
 
         <hr class="bg-secondary">

@@ -32,6 +32,9 @@
                     <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
                     {% include 'blog/postdates.html' %}
                 </div>
+                {% if post.post_image %}
+                    <img src="{{ post.post_image.url }}" alt="Post image" />
+                {% endif %}
                 <span class="card-text">{{ post.body|formatted_markdown|safe }}</span>
                 {% if post.url_post_type %}
                     <a href="{{ post.url_post_type }}" class="card-link">{{ post.url_post_type_name }}</a>
