@@ -1,14 +1,13 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls.base import reverse
+from django.contrib.flatpages.models import FlatPage as FlatPageOld
 
 
-class Page(models.Model):
-    title = models.CharField(max_length=60)
+class FlatPage(FlatPageOld):
     slug = models.SlugField(null=True, unique=True)
     update_date = models.DateTimeField('Last Updated', null=True, blank=True)
     page_head = models.TextField('Page head', blank=True)
-    bodytext = models.TextField('Page Content', blank=True)
     main_page = models.BooleanField(default=False)
 
     def __str__(self):

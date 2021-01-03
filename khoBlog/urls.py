@@ -53,7 +53,7 @@ extra_patterns = [
 urlpatterns = [
     # My Apps
     path('', include('blog.urls')),
-    path("projects/", include('portfolio.urls')),
+    path('projects/', include('portfolio.urls')),
     path('pages/', include('pages.urls')),
     path('polls/', include('polls.urls')),
     path('todo/', include('todo.urls')),
@@ -81,8 +81,3 @@ urlpatterns = [
          {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-urlpatterns += [
-    re_path(r'^(?P<url>.*/)$', views.flatpage),
-]

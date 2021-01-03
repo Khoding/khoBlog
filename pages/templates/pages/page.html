@@ -1,9 +1,9 @@
 {% extends 'pages/base_page.html' %}
 
 {% block page_head %}
-    {% if page.page_head %}
+    {% if flatpage.page_head %}
         {% autoescape off %}
-            {{ page.page_head }}
+            {{ flatpage.page_head }}
         {% endautoescape %}
     {% else %}
         <!-- Primary Meta Tags -->
@@ -32,6 +32,6 @@
 
 {% block main %}
     {% autoescape off %}
-        {{ page.bodytext }}
+        {{ flatpage.content }}
     {% endautoescape %}
 {% endblock main %}

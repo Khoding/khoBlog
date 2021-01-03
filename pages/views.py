@@ -2,16 +2,16 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
-from .models import Page
+from .models import FlatPage
 
 
 class PageDetailView(DetailView):
-    model = Page
+    model = FlatPage
     template_name = 'pages/page.html'
 
     def get_queryset(self):
         self.page = get_object_or_404(
-            Page, slug=self.kwargs['slug'])
+            FlatPage, slug=self.kwargs['slug'])
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -23,7 +23,7 @@ class PageDetailView(DetailView):
 
 
 class PageListView(ListView):
-    model = Page
+    model = FlatPage
     template_name = 'pages/page_list.html'
     context_object_name = 'pages'
 
