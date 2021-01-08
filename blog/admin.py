@@ -32,6 +32,17 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('categories', 'private', 'featured', 'big',)
 
+    fieldsets = (
+        (None, {'fields': ('title', 'featured_title',
+                           'description', 'author', 'slug', 'body',)}),
+        (('Advanced'), {
+         'fields': ('private', 'featured', 'big',)}),
+        (('Post Type'), {
+         'fields': ('post_image', 'url_post_type', 'url_post_type_name',)}),
+        (('Dates'), {
+         'fields': ('created_date', 'published_date',)}),
+    )
+
     formfield_overrides = {
         Post.body: {'widget': AdminMarkdownxWidget},
     }

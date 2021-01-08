@@ -7,7 +7,7 @@ from .models import FlatPage
 
 class PageDetailView(DetailView):
     model = FlatPage
-    template_name = 'pages/page.html'
+    template_name = 'flatpages/default.html'
 
     def get_queryset(self):
         self.page = get_object_or_404(
