@@ -5,25 +5,21 @@
         {% autoescape off %}
             {{ flatpage.page_head }}
         {% endautoescape %}
-    {% else %}
-        <!-- Primary Meta Tags -->
-        <meta name="title" content="Khodok's Discord bio">
-        <meta name="description" content="Web Developer. EDM guy, KSHMR is the best. DC Comics stan. Quotes Batman characters all the time in a way nobody notices except true Waynafans (like this, not my best tho ngl). I'm a simp ngl. And dude... discord.bio is amazing.">
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://dsc.bio/khodok">
-        <meta property="og:title" content="Khodok's Discord.bio">
-        <meta property="og:description" content="Web Developer. EDM guy, KSHMR is the best. DC Comics stan. Quotes Batman characters all the time in a way nobody notices except true Waynafans (like this, not my best tho ngl). I'm a simp ngl. And dude... discord.bio is amazing.">
-        <meta property="og:image" content="https://cdn.discordapp.com/avatars/256875818397990912/a_4b19ebe3ca45ffc165ed245e88502576.gif">
-
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://dsc.bio/khodok">
-        <meta property="twitter:title" content="Khodok's Discord bio">
-        <meta property="twitter:description" content="Web Developer. EDM guy, KSHMR is the best. DC Comics stan. Quotes Batman characters all the time in a way nobody notices except true Waynafans (like this, not my best tho ngl). I'm a simp ngl. And dude... discord.bio is amazing.">
-        <meta property="twitter:image" content="https://cdn.discordapp.com/avatars/256875818397990912/a_4b19ebe3ca45ffc165ed245e88502576.gif">
     {% endif %}
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{{ title }}">
+    <meta name="description" content="A Page on Khodok's Blog">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:url" content="{{ flatpage.get_absolute_url }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="A Page on Khodok's Blog">
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="{{ flatpage.get_absolute_url }}">
+    <meta property="twitter:title" content="{{ title }}">
+    <meta property="twitter:description" content="A Page on Khodok's Blog">
 {% endblock page_head %}
 
 {% block title %}
