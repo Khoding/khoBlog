@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -24,13 +27,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-SITE_ID = 3
+DEBUG = os.getenv("DEBUG")
+SITE_ID = os.getenv("SITE_ID")
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com',
-                 'localhost', '.khodok.xyz']
-
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split()
 
 # Application definition
 INSTALLED_APPS = [
