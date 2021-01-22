@@ -4,15 +4,28 @@
 
 {% block main %}
     {% if user.is_authenticated %}
-        {% if user.id == comment.author_logged.id or user.is_superuser %}
-            <h2>New Comment</h2>
-            <form method="POST" class="form">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                {% endbuttons %}
-            </form>
-        {% endif %}
+        {% with request.resolver_match.view_name as view_name %}
+            {% if view_name != 'blog:add' and view_name != 'pages:page_list' %}
+                {% if user.id == comment.author_logged.id or user.is_superuser %}
+                    <h2>Edit Comment</h2>
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
+                    </form>
+                {% endif %}
+            {% else %}
+                <h2>New Comment</h2>
+                <form method="POST" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </form>
+            {% endif %}
+        {% endwith %}
     {% endif %}
 {% endblock main %}
