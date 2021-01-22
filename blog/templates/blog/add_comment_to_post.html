@@ -5,7 +5,7 @@
 {% block main %}
     {% if user.is_authenticated %}
         {% with request.resolver_match.view_name as view_name %}
-            {% if view_name != 'blog:add_comment_to_post' or view_name != 'blog:add_reply_to_comment' %}
+            {% if view_name != 'blog:add_comment_to_post' and view_name != 'blog:add_reply_to_comment' %}
                 {% if user.id == comment.author_logged.id or user.is_superuser %}
                     <h2>Edit Comment</h2>
                     <form method="POST" class="form">
