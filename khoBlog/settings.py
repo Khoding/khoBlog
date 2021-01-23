@@ -10,28 +10,30 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+root = environ.Path(__file__) - 2
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(root() + '/.env')  # reading .env file
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-SITE_ID = 3
+DEBUG = env.bool('DEBUG')
+SITE_ID = env.int("SITE_ID")
 
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split()
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # Application definition
 INSTALLED_APPS = [
@@ -245,9 +247,9 @@ GRAPHENE = {
     'SCHEMA': 'khoBlog.schema.schema',
 }
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
