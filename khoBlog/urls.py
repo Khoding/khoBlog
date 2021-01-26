@@ -65,7 +65,6 @@ urlpatterns = [
                                      cache_timeout=0), name='schema-redoc'),
     path('apis/', include(extra_patterns)),
 
-
     # Django Admin
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
@@ -73,6 +72,7 @@ urlpatterns = [
     # User management
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
+    path('captcha/', include('captcha.urls')),
 
     # Markdownx
     path('markdownx/', include('markdownx.urls')),
