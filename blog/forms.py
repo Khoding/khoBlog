@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaAnswerInput, CaptchaField, CaptchaTextInput
 from django import forms
 
 from .models import Post, Comment, Category
@@ -67,6 +68,8 @@ class CategoryEditForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = Comment
         fields = ('message',)
@@ -77,6 +80,8 @@ class CommentForm(forms.ModelForm):
 
 
 class EditPostCommentForm(forms.ModelForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = Comment
         fields = ('author', 'message',)

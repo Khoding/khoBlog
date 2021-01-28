@@ -20,6 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    captcha = CaptchaField()
 
     class Meta:
         model = CustomUser
