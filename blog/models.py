@@ -5,9 +5,6 @@ from django.urls import reverse
 from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
-from django.db.models import Q
-
-import itertools
 
 
 class Category(models.Model):
@@ -86,20 +83,8 @@ class Post(models.Model):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        max_length = Post._meta.get_field('slug').max_length
-        self.slug = orig = slugify(self.title)[:max_length]
-        for x in itertools.count(2):
-            if self.pk:
-                if Post.objects.filter(Q(slug=self.slug),
-                                       Q(author=self.author),
-                                       Q(id=self.pk),
-                                       ).exists():
-                    break
-            if not Post.objects.filter(slug=self.slug).exists():
-                break
-
-            # Truncate & Minus 1 for the hyphen.
-            self.slug = "%s-%d" % (orig[:max_length - len(str(x)) - 1], x)
+        if not self.slug:
+            self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     # Create a property that returns the markdown instead
