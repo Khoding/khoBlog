@@ -8,12 +8,12 @@
 {% block content %}
     {% for project in projects %}
         {% if project.featured %}
-            <div class="card jumbotron jumbotron-fluid rounded border-secondary bg-dark shadow">
+            <div class="p-5 border rounded border-secondary bg-dark mb-2 shadow">
                 <div class="container">
-                <h1 class="display-4 font-italic">Featured Project</h1>
+                    <strong class="d-inline-block mb-2 text-uppercase font-italic">Featured Post</strong>
                     <h1 class="display-4">{{ project.title }}</h1>
                     <p class="lead">{{ project.snippet }}</p>
-                    <a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                    <a href="{{ project.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
                 </div>
             </div>
         {% endif %}
@@ -35,7 +35,7 @@
 
                         <div class="card-footer border-secondary">
                             <div class="btn-group-vertical d-block" role="group" aria-label="">
-                                <a href="{{ project.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                                <a href="{{ project.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
                             </div>
                         </div>
 

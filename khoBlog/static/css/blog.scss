@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 992px) {
-    .pr-kho-lg-15 {
+    .pe-kho-lg-15 {
         padding-right: 15px;
     }
 }
@@ -36,6 +36,23 @@
 .staff {
     color: gold;
     font-weight: bold;
+}
+
+.link-muted {
+    color: #6c757d !important;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.link-primary {
+    color: $link-color !important;
+
+    &:hover {
+        text-decoration: none;
+        color: $link-hover-color !important;
+    }
 }
 
 .card-body,

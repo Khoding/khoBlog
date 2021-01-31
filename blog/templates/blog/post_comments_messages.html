@@ -1,4 +1,4 @@
-<div class="pl-4 border-left border-secondary {% if comment.comment_answer %}ml-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
+<div class="pl-4 border-start border-secondary {% if comment.comment_answer %}ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
     <div id="comment-{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
         <div class="card-header">
             <h4>
@@ -14,7 +14,7 @@
                     {% endif %}
                 {% endif %}
                 <a href="{{ post.get_absolute_url }}#comment-{{ comment.id }}"><i class="bi bi-link-45deg"></i></a>
-                <span class="float-right">
+                <span class="float-end">
                     {% if user.id == comment.author_logged.id or user.is_superuser %}
                         <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                             {% if not comment.approved_comment and user.is_superuser %}

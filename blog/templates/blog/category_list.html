@@ -9,7 +9,7 @@
                 <h2>Category #{{ item.id }}
                     {% block superButtons %}
                         {% if user.is_superuser %}
-                            <div class="float-right btn-group" role="group" aria-label="Edit Group">
+                            <div class="float-end btn-group" role="group" aria-label="Edit Group">
                                 <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>

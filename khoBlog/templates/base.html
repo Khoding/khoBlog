@@ -74,7 +74,6 @@
 
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
-    <script src="{% static 'vendor/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
     <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
     {% block rel %}
@@ -177,11 +176,11 @@
                         {% with request.resolver_match.view_name as view_name %}
                             {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                                 {% for post in posts %}
-                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                    <li><a class="link-primary" href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                                 {% endfor %}
                             {% else %}
                                 {% for page in pages %}
-                                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                                    <li><a class="link-primary" href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}

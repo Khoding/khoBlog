@@ -1,7 +1,7 @@
 {% load read_time %}
 
 {% for post in featured_big %}
-    <div class="jumbotron jumbotron-fluid border rounded border-secondary bg-dark mb-2 shadow">
+    <div class="p-5 border rounded border-secondary bg-dark mb-2 shadow">
         <div class="container">
             <strong class="d-inline-block mb-2 text-uppercase font-italic">Featured Post</strong>
             <h1 class="display-4">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h1>
@@ -13,15 +13,19 @@
 
 <div class="row row-cols-1 row-cols-lg-2">
     {% for post in featured %}
-        <div class="col mb-2 {% cycle 'pr-lg-0' 'pr-kho-lg-15' %}">
-            <div class="card row no-gutters border rounded flex-md-row border-secondary bg-dark mb-2 shadow h-100">
-                <div class="col p-4 d-flex flex-column">
-                    <strong class="d-inline-block mb-2"><a class="text-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                    <h3 class="mb-0">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
+        <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-kho-lg-15' %}">
+            <div class="card bg-dark border-secondary shadow">
+                <div class="card-header">
+                    <strong><a class="card-link link-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
                     <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                     <div class="mb-2">{% include 'blog/postdates.html' %}</div>
                     <p class="mb-auto">{{ post.description }}</p>
-                    <a href="{{ post.get_absolute_url }}">Continue Reading</a>
+                </div>
+                <div class="card-footer">
+                    <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
                 </div>
             </div>
         </div>

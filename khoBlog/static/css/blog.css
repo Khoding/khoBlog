@@ -5,7 +5,7 @@
 }
 
 @media (min-width: 992px) {
-  .pr-kho-lg-15 {
+  .pe-kho-lg-15 {
     padding-right: 15px;
   }
 }
@@ -35,6 +35,23 @@
 .staff {
   color: gold;
   font-weight: bold;
+}
+
+.link-muted {
+  color: #6c757d !important;
+}
+
+.link-muted:hover {
+  text-decoration: none;
+}
+
+.link-primary {
+  color: #a59fee !important;
+}
+
+.link-primary:hover {
+  text-decoration: none;
+  color: #7872d4 !important;
 }
 
 .card-body .todo-completed,

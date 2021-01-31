@@ -1,5 +1,5 @@
 {% for url in urls %}
     {% if url.featured %}
-        <a class="p-2 text-muted" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
+        <a class="p-2 link-muted" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
     {% endif %}
 {% endfor %}
