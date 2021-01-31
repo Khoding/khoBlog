@@ -145,7 +145,7 @@
             <aside class="col-xl-3 col-md-4 blog-sidebar">
                 <h2>Menus</h2>
                 <div class="p-4 mb-2 rounded border border-secondary shadow">
-                    <h4 class="font-italic">About</h4>
+                    <h4 class="fst-italic">About</h4>
                     <p class="mb-2">Khodok's Blog, Read at own risks</p>
 
                     <div class="btn-group-vertical d-block" role="group" aria-label="Group Interesting Links">
@@ -160,16 +160,16 @@
                 </div>
 
                 <div class="p-4 mb-2 rounded border border-secondary shadow">
-                    <h4 class="font-italic">User</h4>
+                    <h4 class="fst-italic">User</h4>
                     {% include 'includes/auth.html' %}
                 </div>
 
                 <div class="p-4 mb-2 rounded border border-secondary shadow">
                     {% with request.resolver_match.view_name as view_name %}
                         {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
-                            <h4 class="font-italic">Post List</h4>
+                            <h4 class="fst-italic">Post List</h4>
                         {% else %}
-                            <h4 class="font-italic">Page List</h4>
+                            <h4 class="fst-italic">Page List</h4>
                         {% endif %}
                     {% endwith %}
                     <ol class="list-unstyled mb-0">
@@ -188,7 +188,7 @@
                 </div>
 
                 <div class="p-4 rounded border border-secondary shadow">
-                    <h4 class="font-italic">Search</h4>
+                    <h4 class="fst-italic">Search</h4>
                     <form action="{% url 'blog:search_results' %}" method="get">
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
