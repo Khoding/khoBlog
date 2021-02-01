@@ -1,6 +1,6 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: 'AIzaSyDo47xBD-VL4bN9JT_efi9u_lsYGys8pFQ',
     authDomain: 'django-khodok.firebaseapp.com',
     databaseURL: 'https://django-khodok.firebaseio.com',
