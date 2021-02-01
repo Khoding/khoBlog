@@ -56,6 +56,15 @@
     }
 }
 
+.link-primary {
+    color: $link-color !important;
+
+    &:hover {
+        text-decoration: none;
+        color: $link-hover-color !important;
+    }
+}
+
 .card-body,
 .todo {
     & .todo-completed {
