@@ -1,12 +1,22 @@
-@import '_variables.scss';
+/* Variables */
+@import 'variables';
+
+/* Mixins SCSS */
+@import 'mixins';
+
+/* Bootstrap configuré */
+@import 'custom';
+
+/* Importe les classes utilitaires */
+@import 'utils';
 
 .blog-header {
     line-height: 1;
     border-bottom: 1px solid $palette_secondary;
 }
 
-@media (min-width: 992px) {
-    .pe-kho-lg-15 {
+@media (min-width: lg) {
+    .pe-kho-lg-12 {
         padding-right: 12px;
     }
 }
@@ -43,15 +53,6 @@
 
     &:hover {
         text-decoration: none;
-    }
-}
-
-.link-primary {
-    color: $link-color !important;
-
-    &:hover {
-        text-decoration: none;
-        color: $link-hover-color !important;
     }
 }
 
@@ -378,6 +379,7 @@
     z-index: 2;
     height: 2.75rem;
     overflow-y: hidden;
+    margin-left: -0.5rem;
 }
 
 .nav-scroller .nav {

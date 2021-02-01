@@ -87,8 +87,7 @@
 
         <!-- rel! Themes -->
         <link rel="stylesheet" href="{% static 'css/Themes/highlight.css' %}">
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% endblock rel %}
 
     {% if not debug_flag %}
@@ -106,7 +105,7 @@
     <!-- End Google Tag Manager (noscript) -->
 {% endif %}
 
-<div class="container-fluid">
+<div class="container-fluid mx-2">
 
     <div class="container-fluid">
         <header class="blog-header py-2">
@@ -123,7 +122,7 @@
             </div>
         </header>
 
-        <div class="nav-scroller p-y-1 mb-2">
+        <div class="nav-scroller">
             <nav class="nav d-flex justify-content-between">
                 {% links_menu urls %}
                 {% featured_post_list urls %}
