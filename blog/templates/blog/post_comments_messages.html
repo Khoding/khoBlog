@@ -1,4 +1,4 @@
-<div class="pl-4 border-start border-secondary {% if comment.comment_answer %}ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
+<div class="ps-4 border-start border-secondary {% if comment.comment_answer %}ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
     <div id="comment-{{ comment.id }}" class="card text-white border-secondary bg-dark mt-2">
         <div class="card-header">
             <h4>
@@ -14,25 +14,27 @@
                     {% endif %}
                 {% endif %}
                 <a href="{{ post.get_absolute_url }}#comment-{{ comment.id }}"><i class="bi bi-link-45deg"></i></a>
-                <span class="float-end">
-                    {% if user.id == comment.author_logged.id or user.is_superuser %}
-                        <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                            {% if not comment.approved_comment and user.is_superuser %}
-                                <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+                {% if user.is_authenticated %}
+                    <span class="float-end">
+                        {% if user.id == comment.author_logged.id or user.is_superuser %}
+                            <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                                {% if not comment.approved_comment and user.is_superuser %}
+                                    <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
 
-                                <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                                    <i class="bi bi-check2-square"></i>
-                                </a>
-                            {% endif %}
+                                    <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}">
+                                        <i class="bi bi-check2-square"></i>
+                                    </a>
+                                {% endif %}
 
-                            <a class="btn btn-light" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                        </div>
-                    {% endif %}
-                </span>
+                                <a class="btn btn-light" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </span>
+                {% endif %}
             </h4>
         </div>
         <div class="card-body p-0">

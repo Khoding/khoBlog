@@ -4,7 +4,7 @@
 {% load read_time %}
 
 {% block page_top_title %}
-    <h2>{{ title }}
+    <h2 class="clearfix">{{ title }}
         <div class="btn-group float-end" role="group" aria-label="Previous / Next">
             <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
                 <i class="bi bi-chevron-left"></i>
