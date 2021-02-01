@@ -12,7 +12,7 @@ class PageAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('title', 'page_head',
-                           'content', 'update_date', 'sites', 'slug',)}),
+                           'content', 'description', 'update_date', 'sites', 'slug',)}),
         (('Advanced options'), {
             'classes': ('collapse',),
             'fields': ('registration_required', 'template_name'),

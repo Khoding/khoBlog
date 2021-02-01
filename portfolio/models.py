@@ -14,6 +14,8 @@ class Project(models.Model):
     website = models.ForeignKey(
         'portfolio.Website', on_delete=CASCADE, related_name='websites', null=True, blank=True)
     featured = models.BooleanField(default=False)
+    repository = models.ForeignKey(
+        'portfolio.Repository', on_delete=DO_NOTHING, related_name='repositories', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -45,3 +47,14 @@ class Technology(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Repository(models.Model):
+    title = models.CharField(max_length=100)
+    url = models.URLField()
+
+    class Meta:
+        verbose_name_plural = "Repositories"
+
+    def __str__(self):
+        return self.title

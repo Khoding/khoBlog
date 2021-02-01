@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from .models import Project, Technology, Website
+from .models import Project, Technology, Website, Repository
 from .forms import ProjectForm
 
 
 class ProjectAdmin(admin.ModelAdmin):
     form_class = ProjectForm
     list_display = ('title', 'snippet', 'description',
-                    'technology')
+                    'technology', 'repository',)
     ordering = ('-pk',)
     prepopulated_fields = {'slug': ('title',)}
 
@@ -22,6 +22,12 @@ class TechnologyAdmin(admin.ModelAdmin):
     ordering = ('-pk',)
 
 
+class RepositoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'url')
+    ordering = ('-pk',)
+
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Website, WebsiteAdmin)
 admin.site.register(Technology, TechnologyAdmin)
+admin.site.register(Repository, RepositoryAdmin)
