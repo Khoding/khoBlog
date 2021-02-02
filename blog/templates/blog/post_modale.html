@@ -1,19 +1,20 @@
+<!-- Modal -->
 <div class="modal fade" id="postModal-{{ post.id }}" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content bg-dark">
             <ul class="nav nav-tabs" id="postModalTab-{{ post.id }}" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="post-tab-{{ post.id }}" data-toggle="tab" href="#post-{{ post.id }}"
+                    <a class="nav-link active" id="post-tab-{{ post.id }}" data-bs-toggle="tab" href="#post-{{ post.id }}"
                        role="tab" aria-controls="post" aria-selected="true">Post</a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="info-tab-{{ post.id }}" data-toggle="tab" href="#info-{{ post.id }}"
+                    <a class="nav-link" id="info-tab-{{ post.id }}" data-bs-toggle="tab" href="#info-{{ post.id }}"
                        role="tab" aria-controls="info" aria-selected="false">Information</a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="comments-tab-{{ post.id }}" data-toggle="tab" href="#comments-{{ post.id }}"
+                    <a class="nav-link" id="comments-tab-{{ post.id }}" data-bs-toggle="tab" href="#comments-{{ post.id }}"
                        role="tab" aria-controls="comments" aria-selected="false">Comments</a>
                 </li>
             </ul>
@@ -23,7 +24,7 @@
                      aria-labelledby="post-tab">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ post.title }} - #{{ post.id }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
                     </div>
@@ -31,7 +32,7 @@
                         <p>{{ post.description }}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                      aria-labelledby="info-tab-{{ post.id }}">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ post.title }} - #{{ post.id }} - Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
                     </div>
@@ -55,7 +56,7 @@
                         <p>{{ post.clicks }}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
                     </div>
                 </div>
@@ -65,7 +66,7 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title">{{ post.title }} - #{{ post.id }} - Comments</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
                     </div>
@@ -74,7 +75,7 @@
                         {% include 'blog/post_comments_base.html' %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <a href="{{ post.get_absolute_url }}#comments" class="btn btn-primary">Continue Reading</a>
                     </div>
                 </div>
