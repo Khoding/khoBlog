@@ -37,7 +37,7 @@
                 {% endif %}
                 <span class="card-text">{{ post.body|formatted_markdown|safe }}</span>
                 {% if post.url_post_type %}
-                    <a href="{{ post.url_post_type }}" class="card-link">{{ post.url_post_type_name }}</a>
+                    <a href="{{ post.url_post_type }}">{{ post.url_post_type_name }}</a>
                 {% endif %}
             </div>
 

@@ -21,21 +21,22 @@
     }
 }
 
-#id_body {
-    background-color: $palette_dark;
-    color: #f8f9fa;
-}
+.linkHome {
+    &.isHome {
+        pointer-events: none;
+        cursor: default;
+    }
 
-.linkHome img {
-    opacity: 1;
-    -webkit-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
-    width: 50px;
-}
+    & img {
+        opacity: 1;
+        -webkit-transition: 0.3s ease-in-out !important;
+        transition: 0.3s ease-in-out !important;
+        width: 50px;
 
-.linkHome.isHome {
-    pointer-events: none;
-    cursor: default;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }
 
 .superuser {
@@ -46,23 +47,6 @@
 .staff {
     color: gold;
     font-weight: bold;
-}
-
-.link-muted {
-    color: #6c757d !important;
-
-    &:hover {
-        text-decoration: none;
-    }
-}
-
-.link-primary {
-    color: $link-color !important;
-
-    &:hover {
-        text-decoration: none;
-        color: $link-hover-color !important;
-    }
 }
 
 .card-body,

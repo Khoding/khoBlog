@@ -177,11 +177,11 @@
                         {% with request.resolver_match.view_name as view_name %}
                             {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                                 {% for post in posts %}
-                                    <li><a class="link-primary" href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                                 {% endfor %}
                             {% else %}
                                 {% for page in pages %}
-                                    <li><a class="link-primary" href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}
@@ -214,10 +214,6 @@
             <div class="col-sm my-2">
                 <a class="linkHome" href="/"><img src="{% static 'img/RuthinkkTooBig.png' %}"
                                                   width="50" alt="Khodok's Logo"/></a>
-            </div>
-
-            <div class="col-sm d-none d-sm-block my-2">
-                <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
             </div>
 
             <div class="col-sm"><a href="{% url 'blog:latest' %}"

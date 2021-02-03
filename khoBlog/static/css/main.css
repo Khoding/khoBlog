@@ -216,11 +216,12 @@ sup {
 
 a {
   color: #a59fee;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:hover {
   color: #7872d4;
+  text-decoration: underline;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3098,7 +3099,6 @@ textarea.form-control-lg {
   line-height: 1.5;
   color: #212529;
   text-align: center;
-  text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
@@ -3125,6 +3125,7 @@ textarea.form-control-lg {
 
 .btn:hover {
   color: #212529;
+  text-decoration: none;
 }
 
 .btn-check:focus + .btn, .btn:focus {
@@ -3742,11 +3743,16 @@ fieldset:disabled .btn {
 .btn-link {
   font-weight: 400;
   color: #a59fee;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .btn-link:hover {
   color: #7872d4;
+  text-decoration: underline;
+}
+
+.btn-link:focus {
+  text-decoration: underline;
 }
 
 .btn-link:disabled, .btn-link.disabled {
@@ -4026,7 +4032,6 @@ fieldset:disabled .btn {
   font-weight: 400;
   color: #212529;
   text-align: inherit;
-  text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
   border: 0;
@@ -4034,6 +4039,7 @@ fieldset:disabled .btn {
 
 .dropdown-item:hover, .dropdown-item:focus {
   color: #1e2125;
+  text-decoration: none;
   background-color: #f8f9fa;
 }
 
@@ -4243,7 +4249,6 @@ fieldset:disabled .btn {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  text-decoration: none;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -4253,6 +4258,10 @@ fieldset:disabled .btn {
     -webkit-transition: none;
     transition: none;
   }
+}
+
+.nav-link:hover, .nav-link:focus {
+  text-decoration: none;
 }
 
 .nav-link.disabled {
@@ -4368,8 +4377,11 @@ fieldset:disabled .btn {
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
-  text-decoration: none;
   white-space: nowrap;
+}
+
+.navbar-brand:hover, .navbar-brand:focus {
+  text-decoration: none;
 }
 
 .navbar-nav {
@@ -5076,7 +5088,6 @@ fieldset:disabled .btn {
   position: relative;
   display: block;
   color: #a59fee;
-  text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -5095,6 +5106,7 @@ fieldset:disabled .btn {
 .page-link:hover {
   z-index: 2;
   color: #7872d4;
+  text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
@@ -5402,7 +5414,6 @@ fieldset:disabled .btn {
   position: relative;
   display: block;
   padding: 0.5rem 1rem;
-  text-decoration: none;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
@@ -11321,21 +11332,20 @@ fieldset:disabled .btn {
   }
 }
 
-#id_body {
-  background-color: #212121;
-  color: #f8f9fa;
+.linkHome.isHome {
+  pointer-events: none;
+  cursor: default;
 }
 
 .linkHome img {
   opacity: 1;
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out !important;
+  transition: 0.3s ease-in-out !important;
   width: 50px;
 }
 
-.linkHome.isHome {
-  pointer-events: none;
-  cursor: default;
+.linkHome img:hover {
+  opacity: 0.7;
 }
 
 .superuser {
@@ -11346,23 +11356,6 @@ fieldset:disabled .btn {
 .staff {
   color: gold;
   font-weight: bold;
-}
-
-.link-muted {
-  color: #6c757d !important;
-}
-
-.link-muted:hover {
-  text-decoration: none;
-}
-
-.link-primary {
-  color: #a59fee !important;
-}
-
-.link-primary:hover {
-  text-decoration: none;
-  color: #7872d4 !important;
 }
 
 .card-body .todo-completed,

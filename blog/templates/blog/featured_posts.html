@@ -16,7 +16,7 @@
         <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-kho-lg-12' %}">
             <div class="card bg-dark border-secondary shadow">
                 <div class="card-header">
-                    <strong><a class="card-link link-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                    <strong><a class="link-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                 </div>
                 <div class="card-body">
                     <h3 class="card-title">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h3>
@@ -25,7 +25,7 @@
                     <p class="mb-auto">{{ post.description }}</p>
                 </div>
                 <div class="card-footer">
-                    <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
+                    <a href="{{ post.get_absolute_url }}">Continue Reading</a>
                 </div>
             </div>
         </div>
