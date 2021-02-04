@@ -15,6 +15,11 @@
     border-bottom: 1px solid $palette_secondary;
 }
 
+#id_body {
+    background-color: $palette_dark !important;
+    color: #f8f9fa !important;
+}
+
 @media (min-width: lg) {
     .pe-kho-lg-12 {
         padding-right: 12px;
