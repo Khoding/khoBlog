@@ -233,6 +233,119 @@
     display: block;
 }
 
+/* Critic Markup */
+.critic {
+    font-family: inherit;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    text-decoration: none;
+    color: $palette_dark;
+
+    &:before,
+    &:after {
+        content: '\00a0';
+        padding-top: 0.1em;
+        padding-bottom: 0.1em;
+        font-size: initial;
+    }
+    &.block:before,
+    &.block:after {
+        content: '';
+    }
+}
+
+mark.critic {
+    border-color: #ff8600;
+    background: #ffddaa;
+}
+
+ins.critic {
+    border-color: #00bb00;
+    background: #ddffdd;
+}
+
+del.critic {
+    border-color: #dd0000;
+    background: #ffdddd;
+}
+
+ins.break,
+del.break {
+    font-size: 0;
+    border: none;
+}
+
+ins.break:before,
+del.break:before {
+    content: '\00a0\b6\00a0';
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+ins.after,
+del.after {
+    content: '';
+}
+
+ins.break:before {
+    color: #00bb00;
+    border: 1px solid #00bb00;
+    background: #ddffdd;
+}
+
+del.break:before {
+    color: #bb0000;
+    border: 1px solid #bb0000;
+    background: #ffdddd;
+}
+
+span.critic {
+    background: #ddddff;
+    border: 0;
+    border-top: 1px solid #0000bb;
+    border-bottom: 1px solid #0000bb;
+}
+
+span.critic:before,
+span.critic:after {
+    font-size: inherit;
+    background: #ddddff;
+    border: 1px solid #0000bb;
+}
+
+span.critic:before {
+    content: '\00a0\bb';
+    border-right: none;
+    -webkit-border-top-left-radius: 3px;
+    -moz-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+span.critic:after {
+    content: '\ab\00a0';
+    border-left: none;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.block {
+    display: block;
+    padding: 0.02em;
+}
+
 .progress-label {
     position: absolute;
     text-align: center;

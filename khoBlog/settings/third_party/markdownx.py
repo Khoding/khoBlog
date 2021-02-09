@@ -47,6 +47,9 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     },
     'pymdownx.tasklist': {
         'custom_checkbox': True
+    },
+    'pymdownx.critic': {
+        'mode': 'accept'
     }
 }
 
