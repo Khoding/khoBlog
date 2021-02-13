@@ -27,7 +27,7 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'description',
-                  'body', 'post_image', 'slug', 'private', 'featured', 'big', 'published_date', 'url_post_type', 'url_post_type_name')
+                  'body', 'post_image', 'slug', 'withdrawn', 'featured', 'big', 'published_date', 'url_post_type', 'url_post_type_name')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
@@ -45,25 +45,25 @@ class EditForm(forms.ModelForm):
 class CategoryAddForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('name', 'description', 'private')
+        fields = ('name', 'description', 'withdrawn')
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'private': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
+            'withdrawn': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 
 class CategoryEditForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('name', 'description', 'slug', 'private')
+        fields = ('name', 'description', 'slug', 'withdrawn')
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
             'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'private': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
+            'withdrawn': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
         }
 
 

@@ -15,8 +15,8 @@
                         <i class="bi bi-file-earmark-arrow-up"></i> Publish
                     </a>
 
-                    <a class="dropdown-item" href="{% url 'blog:post_publish_private' slug=post.slug %}">
-                        <i class="bi bi-file-earmark-lock"></i> Publish Private
+                    <a class="dropdown-item" href="{% url 'blog:post_publish_withdrawn' slug=post.slug %}">
+                        <i class="bi bi-file-earmark-lock"></i> Publish Withdrawn
                     </a>
 
                     <div class="dropdown-divider"></div>

@@ -1,5 +1,5 @@
 {% for category in post.categories.all %}
-    {% if not category.private or category.private and user.is_superuser %}
+    {% if not category.withdrawn or category.withdrawn and user.is_superuser %}
         <a href="{{ category.get_absolute_url }}" class="btn btn-secondary">{{ category|capfirst }}</a>
     {% endif %}
 {% endfor %}

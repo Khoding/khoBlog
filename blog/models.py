@@ -11,7 +11,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     slug = models.SlugField(null=False, unique=True)
-    private = models.BooleanField(default=False)
+    withdrawn = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -19,13 +19,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('blog:post_category_list', kwargs={'slug': self.slug})
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
 
 class PostCatsLink(models.Model):
@@ -38,6 +38,19 @@ class PostCatsLink(models.Model):
 
 
 class Post(models.Model):
+    PUBLICATION_CHOICES = [
+        ('P', 'Published'),
+        ('W', 'Withdrawn'),
+        ('D', 'Draft'),
+    ]
+
+    FEATURING_CHOICES = [
+        ('F', 'Featured'),
+        ('B', 'Big'),
+        ('FB', 'Featured Big'),
+        ('N', 'Not Featured'),
+    ]
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -53,7 +66,11 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
-    private = models.BooleanField(default=False)
+    publication_state = models.CharField(
+        max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D')
+    withdrawn = models.BooleanField(default=False)
+    featuring_state = models.CharField(
+        max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N')
     featured = models.BooleanField(default=False)
     big = models.BooleanField(default=False)
     url_post_type = models.URLField(null=True, blank=True)
@@ -61,20 +78,13 @@ class Post(models.Model):
         max_length=200, null=True, blank=True)
     clicks = models.IntegerField(default=0)
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
-
-    def publish_private(self):
-        self.published_date = timezone.now()
-        self.save()
-
     def __str__(self):
         return self.title
 
-    def clicked(self):
-        self.clicks += 1
-        self.save()
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
@@ -82,10 +92,19 @@ class Post(models.Model):
     def _get_next_or_previous_by_slug(self, field, is_next, **kwargs):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
+    def publish(self):
+        self.published_date = timezone.now()
+        self.publication_state = 'P'
+        self.save()
+
+    def publish_withdrawn(self):
+        self.published_date = timezone.now()
+        self.publication_state = 'W'
+        self.save()
+
+    def clicked(self):
+        self.clicks += 1
+        self.save()
 
     # Create a property that returns the markdown instead
     @property

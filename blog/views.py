@@ -28,7 +28,7 @@ class PostListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return self.model.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date')
+        return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,7 +52,7 @@ class PostListFromCategoryView(ListView):
         if self.request.user.is_superuser:
             return self.model.objects.filter(categories=self.category).order_by('-published_date')
         else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), private=False, categories=self.category).order_by('-published_date')
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, categories=self.category).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,7 +72,7 @@ class CategoryListView(ListView):
         if self.request.user.is_superuser:
             return self.model.objects.all()
         else:
-            return self.model.objects.filter(private=False)
+            return self.model.objects.filter(withdrawn=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,7 +93,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.filter(
-            published_date__lte=timezone.now(), private=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Post Detail'
         context['now'] = timezone.now()
         return context
@@ -133,7 +133,7 @@ class PostFutureListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return self.model.objects.filter(published_date__gte=timezone.now(), private=False).order_by('-published_date')
+        return self.model.objects.filter(published_date__gte=timezone.now(), withdrawn=False).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -142,19 +142,19 @@ class PostFutureListView(ListView):
 
 
 @superuser_required()
-class PostPrivateListView(ListView):
+class PostWithdrawnListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
     paginate_by = 20
 
     def get_queryset(self):
-        return self.model.objects.filter(private=True).order_by('-published_date')
+        return self.model.objects.filter(withdrawn=True).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
-        context['title'] = 'Private'
+        context['title'] = 'Withdrawn'
         return context
 
 
@@ -242,7 +242,7 @@ class SearchResultsView(ListView):
             return self.model.objects.filter(
                 Q(title__icontains=query) | Q(
                     body__icontains=query) | Q(description__icontains=query),
-            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(private=True))
+            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -258,16 +258,11 @@ def post_publish(request, slug):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def post_publish_private(request, slug):
+def post_publish_withdrawn(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    post.private = True
-    post.publish_private()
+    post.withdrawn = True
+    post.publish_withdrawn()
     return redirect('blog:post_detail', slug=slug)
-
-
-def publish(self):
-    self.published_date = timezone.now()
-    self.save()
 
 
 class AddPostCommentView(LoginRequiredMixin, CreateView):
@@ -277,7 +272,7 @@ class AddPostCommentView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs['pk']
+        form.instance.related_post_id = self.kwargs['pk_post']
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

@@ -5,8 +5,8 @@
 
 {% block page_top_title %}
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name == 'blog:post_private_list' %}
-            <h2>Private Posts</h2>
+        {% if view_name == 'blog:post_withdrawn_list' %}
+            <h2>Withdrawn Posts</h2>
 
         {% elif view_name == 'blog:post_draft_list' %}
             <h2>Drafts</h2>
@@ -15,14 +15,14 @@
             <h2>Future Posts</h2>
 
         {% elif view_name == 'blog:post_category_list' %}
-            {% if not cats.private or cats.private and user.is_superuser %}
+            {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
                 <h2>
                     Posts in <b>{{ cats|capfirst }}</b> Category
                 </h2>
 
             {% else %}
                 <h2>
-                    This category is Private
+                    This category is Withdrawn
                 </h2>
             {% endif %}
         {% elif view_name == 'blog:category_list' %}

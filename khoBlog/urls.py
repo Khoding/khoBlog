@@ -43,7 +43,7 @@ schema_view = get_schema_view(
 )
 
 info_dict = {
-    'queryset': Post.objects.filter(published_date__lte=timezone.now(), private=False).order_by('-published_date'),
+    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date'),
 }
 
 extra_patterns = [

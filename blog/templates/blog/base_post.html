@@ -3,18 +3,18 @@
 {% block title %}
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_category_list' %}
-            {% if not cats.private or cats.private and user.is_superuser %}
+            {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
                 - {{ cats }}
             {% else %}
-                - This category is Private
+                - This category is Withdrawn
             {% endif %}
 
         {% elif view_name == 'blog:post_detail' %}
-            {% if post.published_date and not post.private and not post.published_date > now or not post.published_date and user.is_superuser or post.private and user.is_superuser or post.published_date > now and user.is_superuser %}
+            {% if post.published_date and not post.withdrawn and not post.published_date > now or not post.published_date and user.is_superuser or post.withdrawn and user.is_superuser or post.published_date > now and user.is_superuser %}
 
                 - {{ post.title }}
             {% else %}
-                - Private Post
+                - Withdrawn Post
             {% endif %}
 
         {% else %}
@@ -26,7 +26,7 @@
 {% block page_head %}
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_detail' %}
-            {% if not post.private and post.published_date %}
+            {% if not post.withdrawn and post.published_date %}
                 <!-- Primary Meta Tags -->
                 <meta name="title" content="Post #{{ post.id }} - {{ post.title }}">
                 <meta name="description" content="{{ post.description }}">
@@ -42,25 +42,25 @@
                 <meta property="twitter:description" content="{{ post.description }}">
             {% else %}
                 <!-- Primary Meta Tags -->
-                <meta name="title" content="Private or draft">
+                <meta name="title" content="Withdrawn or draft">
                 <meta name="description"
-                      content="This post is either private or still a draft, you must be logged in to be able to see it">
+                      content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
 
                 <!-- Open Graph / Facebook -->
-                <meta property="og:url" content="/pages/kheee">
-                <meta property="og:title" content="Private or draft">
+                <meta property="og:url" content="{% url 'pages:kheee' %}">
+                <meta property="og:title" content="Withdrawn or draft">
                 <meta property="og:description"
-                      content="This post is either private or still a draft, you must be logged in to be able to see it">
+                      content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
 
                 <!-- Twitter -->
-                <meta property="twitter:url" content="/pages/kheee">
-                <meta property="twitter:title" content="Private or draft">
+                <meta property="twitter:url" content="{% url 'pages:kheee' %}">
+                <meta property="twitter:title" content="Withdrawn or draft">
                 <meta property="twitter:description"
-                      content="This post is either private or still a draft, you must be logged in to be able to see it">
+                      content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
             {% endif %}
 
         {% elif view_name == 'blog:post_category_list' %}
-            {% if not cats.private or cats.private and user.is_superuser %}
+            {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
                 <!-- Primary Meta Tags -->
                 <meta name="title" content="{{ cats }}">
                 <meta name="description" content="{{ cats.description }}">
@@ -76,18 +76,18 @@
                 <meta property="twitter:description" content="{{ cats.description }}">
             {% else %}
                 <!-- Primary Meta Tags -->
-                <meta name="title" content="Private">
-                <meta name="description" content="This category is Private">
+                <meta name="title" content="Withdrawn">
+                <meta name="description" content="This category is Withdrawn">
 
                 <!-- Open Graph / Facebook -->
-                <meta property="og:url" content="/pages/kheee">
-                <meta property="og:title" content="Private">
-                <meta property="og:description" content="This category is Private">
+                <meta property="og:url" content="{% url 'pages:kheee' %}">
+                <meta property="og:title" content="Withdrawn">
+                <meta property="og:description" content="This category is Withdrawn">
 
                 <!-- Twitter -->
-                <meta property="twitter:url" content="/pages/kheee">
-                <meta property="twitter:title" content="Private">
-                <meta property="twitter:description" content="This category is Private">
+                <meta property="twitter:url" content="{% url 'pages:kheee' %}">
+                <meta property="twitter:title" content="Withdrawn">
+                <meta property="twitter:description" content="This category is Withdrawn">
             {% endif %}
 
         {% elif view_name == 'blog:category_list' %}

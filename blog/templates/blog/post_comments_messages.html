@@ -30,7 +30,7 @@
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown">
                                     {% if user.is_superuser %}
                                         {% if not comment.approved_comment %}
-                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk=comment.pk %}">
+                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk_post=comment.related_post.pk pk=comment.pk %}">
                                                 <i class="bi bi-check2-square"></i> Approve
                                             </a>
                                         {% endif %}
@@ -45,7 +45,7 @@
                                             <div class="dropdown-divider"></div>
                                         {% endif %}
 
-                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk_post=comment.related_post.pk pk=comment.pk %}">
                                             <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
                                         </a>
                                     {% endif %}

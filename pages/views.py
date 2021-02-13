@@ -1,6 +1,6 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, RedirectView
 
 from .models import FlatPage
 
@@ -34,3 +34,8 @@ class PageListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page List'
         return context
+
+
+def kheee_special_case(request, slug, *args):
+    url = get_object_or_404(FlatPage, slug='kheee')
+    return redirect(url)

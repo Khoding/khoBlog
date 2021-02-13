@@ -15,10 +15,46 @@ def export_as_json(modeladmin, request, queryset):
 
 
 def make_published(modeladmin, request, queryset):
-    updated = queryset.update(published_date=timezone.now())
+    updated = queryset.update(publication_state='P')
     modeladmin.message_user(request, ngettext(
         '%d post was successfully marked as published.',
         '%d posts were successfully marked as published.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_withdrawn(modeladmin, request, queryset):
+    updated = queryset.update(publication_state='W')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as withdrawn.',
+        '%d posts were successfully marked as withdrawn.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_featured(modeladmin, request, queryset):
+    updated = queryset.update(featuring_state='F')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as featured.',
+        '%d posts were successfully marked as featured.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_big(modeladmin, request, queryset):
+    updated = queryset.update(featuring_state='B')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as big.',
+        '%d posts were successfully marked as big.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_featured_big(modeladmin, request, queryset):
+    updated = queryset.update(featuring_state='FB')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as featured big.',
+        '%d posts were successfully marked as featured big.',
         updated,
     ) % updated, messages.SUCCESS)
 
@@ -33,19 +69,21 @@ def make_approved(modeladmin, request, queryset):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_date', 'published_date', 'slug',
-                    'private', 'featured', 'big', 'clicks',)
+    list_display = ('title', 'created_date', 'published_date',
+                    'slug', 'publication_state', 'featuring_state', 'clicks', )
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
-                     'pk', 'private', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
-    prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('categories', 'private', 'featured', 'big',)
+                     'pk', 'withdrawn', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
+    prepopulated_fields = {
+        'slug': ('title',), }
+    list_filter = ('categories', 'publication_state',
+                   'featuring_state', 'published_date', 'withdrawn', 'featured', 'big',)
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
                            'description', 'author', 'slug', 'body',)}),
-        (('Advanced'), {
-         'fields': ('private', 'featured', 'big',)}),
+        (('States'), {
+         'fields': ('withdrawn', 'featured', 'big', 'publication_state', 'featuring_state',)}),
         (('Post Type'), {
          'fields': ('post_image', 'url_post_type', 'url_post_type_name',)}),
         (('Dates'), {
@@ -56,7 +94,8 @@ class PostAdmin(admin.ModelAdmin):
         Post.body: {'widget': AdminMarkdownxWidget},
     }
 
-    actions = [make_published, export_as_json]
+    actions = [make_published, make_withdrawn, make_featured,
+               make_big, make_featured_big, export_as_json]
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -70,11 +109,11 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'slug', 'private')
+    list_display = ('name', 'description', 'slug', 'withdrawn')
     ordering = ('-pk',)
-    search_fields = ('title', 'slug', 'pk', 'private')
+    search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('name',)}
-    list_filter = ('private',)
+    list_filter = ('withdrawn',)
 
 
 admin.site.register(Post, PostAdmin)
