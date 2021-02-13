@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm, RemovePostCommentForm
+from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
 from .models import Post, Comment, Category
 
 
@@ -309,17 +309,29 @@ class EditPostCommentView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@ user_passes_test(lambda u: u.is_superuser)
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('blog:post_detail', slug=comment.related_post.slug)
+@superuser_required()
+class ApprovePostCommentView(UpdateView):
+    model = Comment
+    form_class = ARPostCommentForm
+    template_name = 'blog/ar_post_comment.html'
+    success_url = reverse_lazy('blog:post_list')
+
+    def get_queryset(self):
+        self.comment = get_object_or_404(
+            Comment, pk=self.kwargs['pk'])
+        self.comment.approve()
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Approve Comment'
+        return context
 
 
 class RemovePostCommentView(LoginRequiredMixin, UpdateView):
     model = Comment
-    form_class = RemovePostCommentForm
-    template_name = 'blog/remove_post_comment.html'
+    form_class = ARPostCommentForm
+    template_name = 'blog/ar_post_comment.html'
     success_url = reverse_lazy('blog:post_list')
 
     def get_queryset(self):
@@ -327,3 +339,8 @@ class RemovePostCommentView(LoginRequiredMixin, UpdateView):
             Comment, pk=self.kwargs['pk'])
         self.comment.remove()
         return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Remove Comment'
+        return context

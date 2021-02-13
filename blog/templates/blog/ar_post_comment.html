@@ -1,0 +1,39 @@
+{% extends 'blog/base_post.html' %}
+{% load bootstrap4 %}
+
+{% block main %}
+    {% with request.resolver_match.view_name as view_name %}
+        {% if view_name == 'blog:comment_remove' %}
+            {% if comment.author_logged.id == user.id or user.is_superuser %}
+                <h2>Remove Comment</h2>
+                <h3>Delete: {{ comment.related_post }} - {{comment.message}}</h3>
+                <form method="POST" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    {% endbuttons %}
+                </form>
+                {{ form.media }}
+            {% else %}
+                <p>You aren't allowed to do this</p>
+            {% endif %}
+        {% else %}
+            {% if user.is_superuser %}
+                <h2>Approve Comment</h2>
+                <h3>Approve: {{ comment.related_post }} - {{comment.message}}</h3>
+                <form method="POST" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    {% endbuttons %}
+                </form>
+                {{ form.media }}
+            {% else %}
+                <p>You aren't allowed to do this</p>
+            {% endif %}
+        {% endif %}
+    {% endwith %}
+
+{% endblock main %}

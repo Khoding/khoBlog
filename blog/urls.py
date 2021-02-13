@@ -4,7 +4,7 @@ from django.urls.conf import include
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
 from .views import AddPostCommentView, EditPostCommentView, PostFutureListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
-    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, RemovePostCommentView, SearchResultsView, AddReplyToComment
+    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, SearchResultsView, AddReplyToComment
 
 post_action_extra_patterns = [
     path('edit/', EditPostView.as_view(), name='post_edit'),
@@ -27,8 +27,7 @@ post_comment_action_extra_patterns = [
     path('reply/', AddReplyToComment.as_view(),
          name='add_reply_to_comment'),
 
-    path('approve/',
-         views.comment_approve, name='comment_approve'),
+    path('approve/', ApprovePostCommentView.as_view(), name='comment_approve'),
     path('remove/',
          RemovePostCommentView.as_view(), name='comment_remove'),
 ]
