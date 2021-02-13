@@ -90,3 +90,11 @@ class EditPostCommentForm(forms.ModelForm):
             'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
             'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
         }
+
+
+class RemovePostCommentForm(forms.ModelForm):
+    captcha = CaptchaField()
+
+    class Meta:
+        model = Comment
+        fields = ()

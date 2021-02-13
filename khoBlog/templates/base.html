@@ -226,14 +226,5 @@
 <!-- rel! js -->
 <script src="{% static 'js/scripts/dynamic.js' %}"></script>
 
-{% if not debug_flag %}
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script defer src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script defer src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
-
-    <script defer src="{% static 'js/firebase/init-firebase.js' %}"></script>
-{% endif %}
 </body>
 </html>

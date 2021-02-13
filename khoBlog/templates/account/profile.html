@@ -47,7 +47,7 @@
     <hr class="bg-secondary">
 
     {% for comment in comments %}
-        {% if comment.author_logged.id == object.id %}
+        {% if comment.author_logged.id == object.id and comment.approved_comment %}
             <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
         {% endif %}
     {% endfor %}

@@ -17,20 +17,39 @@
                 {% if user.is_authenticated %}
                     <span class="float-end">
                         {% if user.id == comment.author_logged.id or user.is_superuser %}
-                            <div class="btn-group d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                                {% if not comment.approved_comment and user.is_superuser %}
-                                    <a class="btn btn-light" href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
 
-                                    <a class="btn btn-light" href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                                        <i class="bi bi-check2-square"></i>
-                                    </a>
-                                {% endif %}
-
-                                <a class="btn btn-light" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
-                                    <i class="bi bi-pencil-square"></i>
+                            <div class="btn-group float-end">
+                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                    <i class="bi bi-pencil-square"></i> Edit
                                 </a>
+
+                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="commentActionsDropdown-{{ post.id }}-{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown">
+                                    {% if user.is_superuser %}
+                                        {% if not comment.approved_comment %}
+                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk=comment.pk %}">
+                                                <i class="bi bi-check2-square"></i> Approve
+                                            </a>
+                                        {% endif %}
+
+                                        <a class="dropdown-item" href="/admin/blog/comment/{{ comment.id }}/change/">
+                                            <i class="bi bi-pencil-square"></i> Edit in Admin
+                                        </a>
+                                    {% endif %}
+
+                                    {% if comment.approved_comment %}
+                                        {% if user.is_superuser %}
+                                            <div class="dropdown-divider"></div>
+                                        {% endif %}
+
+                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                                            <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
+                                        </a>
+                                    {% endif %}
+                                </ul>
                             </div>
                         {% endif %}
                     </span>

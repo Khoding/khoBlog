@@ -23,6 +23,15 @@ def make_published(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
+def make_approved(modeladmin, request, queryset):
+    updated = queryset.update(approbation_state='AP')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as approved.',
+        '%d posts were successfully marked as approved.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'published_date', 'slug',
                     'private', 'featured', 'big', 'clicks',)
@@ -51,10 +60,13 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('author_logged', 'author', 'created_date')
+    list_display = ('author_logged', 'author',
+                    'created_date', 'approbation_state',)
     ordering = ('-author_logged', '-author',)
     search_fields = ('author', 'message',)
-    list_filter = ('author_logged',)
+    list_filter = ('author_logged', 'approbation_state')
+
+    actions = [make_approved, ]
 
 
 class CategoryAdmin(admin.ModelAdmin):

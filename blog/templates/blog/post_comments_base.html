@@ -5,7 +5,9 @@
         {% endif %}
 
         {% for comment in comment.related_comment.all %}
-            {% include 'blog/post_comments_messages.html' %}
+            {% if comment.approved_comment %}
+                {% include 'blog/post_comments_messages.html' %}
+            {% endif %}
         {% endfor %}
     {% empty %}
         <p>No comments here yet.</p>

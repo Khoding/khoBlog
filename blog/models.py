@@ -98,11 +98,13 @@ class Post(models.Model):
     def removed_comments(self):
         return self.comments.filter(removed_comment=True)
 
-    # def get_categories(self):
-    #     return [p.name for p in self.categories.all()]
-
 
 class Comment(models.Model):
+    APPROBATION_CHOICES = [
+        ('AP', 'Approved'),
+        ('RE', 'Removed'),
+    ]
+
     related_post = models.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(
@@ -112,6 +114,8 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     message = models.TextField(verbose_name="Comment")
     created_date = models.DateTimeField(default=timezone.now)
+    approbation_state = models.CharField(
+        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP')
     approved_comment = models.BooleanField(default=True)
     removed_comment = models.BooleanField(default=False)
     comment_answer = models.ForeignKey(
@@ -128,9 +132,13 @@ class Comment(models.Model):
         return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug})
 
     def approve(self):
+        self.approbation_state = 'AP'
+        self.removed_comment = False
         self.approved_comment = True
         self.save()
 
     def remove(self):
+        self.approbation_state = 'RE'
+        self.approved_comment = False
         self.removed_comment = True
         self.save()
