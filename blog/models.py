@@ -95,11 +95,13 @@ class Post(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.publication_state = 'P'
+        self.withdrawn = False
         self.save()
 
     def publish_withdrawn(self):
         self.published_date = timezone.now()
         self.publication_state = 'W'
+        self.withdrawn = True
         self.save()
 
     def clicked(self):
