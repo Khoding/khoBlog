@@ -15,10 +15,12 @@ post_action_extra_patterns = [
 ]
 
 category_extra_patterns = [
-    path('<slug:slug>/', PostListFromCategoryView.as_view(),
+    path('', PostListFromCategoryView.as_view(),
          name='post_category_list'),
-    path('<slug:slug>/edit/',
+    path('edit/',
          EditCategoryView.as_view(), name='category_edit'),
+    path('rss/',
+         LatestPostsFeedByCategory(), name='latest_category_post_feed'),
 ]
 
 post_comment_action_extra_patterns = [
@@ -62,15 +64,13 @@ urlpatterns = [
     path('add_post/', AddPostView.as_view(), name='post_new'),
 
     # Category Related Links
-    path('category/', include(category_extra_patterns)),
+    path('category/<slug:slug>', include(category_extra_patterns)),
     path('category_list/', CategoryListView.as_view(),
          name='category_list'),
     path('add_category/', AddCategoryView.as_view(), name='category_new'),
 
     # RSS Related Links
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),
-    path('category/<slug:slug>/rss/',
-         LatestPostsFeedByCategory(), name='latest_category_post_feed'),
     path('latest_comments/rss/',
          LatestCommentsFeed(), name='latest_comments_feed'),
 

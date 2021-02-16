@@ -1,0 +1,10 @@
+<div class="d-block">
+    <p class="mb-auto text-muted">
+    {% if not post.published_date %}
+        {{ post.created_date|date:'l, d F Y H:m:s' }}
+    {% else %}
+        {{ post.published_date|date:'l, d F Y H:m:s' }}
+    {% endif %}
+         by {{ post.author }}
+    </p>
+</div>

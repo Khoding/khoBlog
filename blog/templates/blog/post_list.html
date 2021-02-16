@@ -5,63 +5,57 @@
 
 {% block content_main %}
 
-    {% include 'blog/featured_posts.html' %}
+    {% with request.resolver_match.view_name as view_name %}
+        {% if view_name == 'blog:post_list' %}
+            {% include 'blog/featured_posts.html' %}
+        {% endif %}
+    {% endwith %}
 
-    {% for post in posts %}
-        <div id="post-{{ post.slug }}" class="card text-white border-secondary bg-dark shadow mb-2">
-            <div class="card-header border-secondary">
-                <h2>
-                    Post #{{ post.id }}
-                    {% if post.url_post_type %}
-                        <a href="{{ post.url_post_type }}">
-                            <i class="bi bi-link-45deg"></i>
-                        </a>
-                    {% endif %}
-
-                    {% include 'blog/superbuttons.html' %}
-                </h2>
-            </div>
-
-            <div class="card-body">
-                <h2 class="card-title">{{ post.title }}</h2>
-                <div class="blog-post-meta mb-auto">
-                    <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
-                    {% include 'blog/postdates.html' %}
+    <div class="row row-cols-1 row-cols-lg-3">
+        {% for post in posts %}
+            <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div id="post-{{ post.slug }}" class="card bg-dark border-secondary shadow h-100">
+                    <div class="card-header border-secondary">
+                        <span class="d-flex">
+                            <span class="col">
+                                <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
+                            </span>
+                            <span class="col">
+                                {% include 'blog/superbuttons.html' %}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ post.title }}</h3>
+                        <div class="mb-2">{% include 'blog/post_dates.html' %}</div>
+                        <p class="mb-auto">{{ post.description }}</p>
+                    </div>
+                    <div class="card-footer border-secondary">
+                        <span class="d-flex">
+                            <span class="col">
+                                <a href="{{ post.get_absolute_url }}">Continue Reading</a>
+                            </span>
+                            {% if post.url_post_type %}
+                                <span class="col">
+                                    <a class="float-end" href="{{ post.url_post_type }}">
+                                        <i class="bi bi-link-45deg"></i> External Link
+                                    </a>
+                                </span>
+                            {% endif %}
+                            <span class="col">
+                                <a role="button" class="link float-end" data-bs-toggle="modal"
+                                    data-bs-target="#postModal-{{ post.id }}">Post Info
+                                </a>
+                            </span>
+                        </span>
+                    </div>
                 </div>
-                <p class="card-text">{{ post.description }}</p>
 
-                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                    <a class="btn btn-primary" href="{{ post.get_absolute_url }}#comments">
-                        Comments:
-                        {% if user.is_superuser %}
-                            {{ post.comments.count }}
-                        {% else %}
-                            {{ post.approved_comments.count }}
-                        {% endif %}
-                    </a>
-                    {% if post.comments.count > post.approved_comments.count and user.is_superuser %}
-                        <a class="btn btn-danger" href="{{ post.get_absolute_url }}#comments">
-                            Approved Comments:
-                            {{ post.approved_comments.count }}
-                        </a>
-                    {% endif %}
-                </div>
+                 {% include 'blog/post_modale.html' %}
             </div>
-
-            <div class="card-footer border-secondary">
-                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#postModal-{{ post.id }}">Post Info
-                    </button>
-                </div>
-            </div>
-
-            {% include 'blog/post_modale.html' %}
-
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock content_main %}
 
 {% block pagination %}

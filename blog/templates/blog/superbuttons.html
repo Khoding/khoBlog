@@ -1,15 +1,15 @@
 {% block superButtons %}
     {% if user.is_superuser %}
 
-    <div class="btn-group float-end">
-        <a class="btn btn-secondary" href="{% url 'blog:post_edit' slug=post.slug %}">
-            <i class="bi bi-pencil-square"></i> Edit
-        </a>
+        <div class="btn-group float-end">
+            <a class="btn btn-secondary" href="{% url 'blog:post_edit' slug=post.slug %}">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
 
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="postAdminDropdown-{{ post.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="postAdminDropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="postAdminDropdown-{{ post.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="postAdminDropdown">
                 {% if not post.published_date %}
                     <a class="dropdown-item" href="{% url 'blog:post_publish' slug=post.slug %}">
                         <i class="bi bi-file-earmark-arrow-up"></i> Publish

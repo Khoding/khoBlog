@@ -3,6 +3,12 @@
 /* Mixins SCSS */
 /* Variables */
 /* Bootstrap configuré */
+.active {
+  background-color: #212121 !important;
+  border-color: #444749 !important;
+  color: #fff !important;
+}
+
 /*!
  * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -11213,7 +11219,6 @@ span.critic:after {
   z-index: 2;
   height: 2.75rem;
   overflow-y: hidden;
-  margin-left: -0.5rem;
 }
 
 .nav-scroller .nav {

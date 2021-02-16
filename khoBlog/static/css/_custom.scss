@@ -14,4 +14,10 @@ $link-hover-color: $link-hover-color;
 
 $font-family: $font-family-base;
 
+.active {
+    background-color: $palette_dark !important;
+    border-color: $palette_secondary !important;
+    color: #fff !important;
+}
+
 @import '../vendor/node_modules/bootstrap/scss/bootstrap.scss';

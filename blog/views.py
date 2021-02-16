@@ -25,7 +25,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 20
+    paginate_by = 21
 
     def get_queryset(self):
         return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
@@ -44,7 +44,7 @@ class PostListFromCategoryView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 20
+    paginate_by = 21
 
     def get_queryset(self):
         self.category = get_object_or_404(
@@ -65,7 +65,7 @@ class CategoryListView(ListView):
     model = Category
     template = 'blog/category_list.html'
     context_object_name = 'category_list'
-    paginate_by = 20
+    paginate_by = 21
     ordering = 'pk'
 
     def get_queryset(self):
@@ -114,7 +114,7 @@ class PostDraftListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 20
+    paginate_by = 21
 
     def get_queryset(self):
         return self.model.objects.filter(published_date__isnull=True).order_by('-created_date')
@@ -130,7 +130,7 @@ class PostFutureListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 20
+    paginate_by = 21
 
     def get_queryset(self):
         return self.model.objects.filter(published_date__gte=timezone.now(), withdrawn=False).order_by('-published_date')
@@ -146,7 +146,7 @@ class PostWithdrawnListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    paginate_by = 20
+    paginate_by = 21
 
     def get_queryset(self):
         return self.model.objects.filter(withdrawn=True).order_by('-published_date')

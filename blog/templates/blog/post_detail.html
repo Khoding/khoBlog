@@ -30,7 +30,7 @@
                 <h2 class="card-title">{{ post.title }}</h2>
                 <div class="blog-post-meta">
                     <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
-                    {% include 'blog/postdates.html' %}
+                    {% include 'blog/post_dates.html' %}
                 </div>
                 {% if post.post_image %}
                     <img src="{{ post.post_image.url }}" alt="Post image" />
