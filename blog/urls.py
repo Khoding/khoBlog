@@ -64,7 +64,7 @@ urlpatterns = [
     path('add_post/', AddPostView.as_view(), name='post_new'),
 
     # Category Related Links
-    path('category/<slug:slug>', include(category_extra_patterns)),
+    path('category/<slug:slug>/', include(category_extra_patterns)),
     path('category_list/', CategoryListView.as_view(),
          name='category_list'),
     path('add_category/', AddCategoryView.as_view(), name='category_new'),

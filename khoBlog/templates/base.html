@@ -149,7 +149,7 @@
                     <h4 class="fst-italic">About</h4>
                     <p class="mb-2">Khodok's Blog, Read at own risks</p>
 
-                    <div class="btn-group-vertical d-block" role="group" aria-label="Group Interesting Links">
+                    <div class="btn-group-vertical d-block mb-2" role="group" aria-label="Group Interesting Links">
                         <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
                         <a href="{% url 'blog:category_list' %}" class="btn btn-primary">Category List</a>
                         <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary">Portfolio</a>
@@ -158,6 +158,16 @@
                             <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
                         {% endif %}
                     </div>
+
+                    <form action="{% url 'blog:search_results' %}" method="get">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-dark text-white border-secondary" id="basic-addon1">Search</span>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="post_search" placeholder="Search a post" name="q"
+                                aria-label="search" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="p-4 mb-2 rounded border border-secondary shadow">
@@ -177,7 +187,7 @@
                         {% with request.resolver_match.view_name as view_name %}
                             {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
                                 {% for post in posts %}
-                                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                    <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                                 {% endfor %}
                             {% else %}
                                 {% for page in pages %}
@@ -186,19 +196,6 @@
                             {% endif %}
                         {% endwith %}
                     </ol>
-                </div>
-
-                <div class="p-4 rounded border border-secondary shadow">
-                    <h4 class="fst-italic">Search</h4>
-                    <form action="{% url 'blog:search_results' %}" method="get">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-dark text-white border-secondary" id="basic-addon1">Search</span>
-                            </div>
-                            <input type="text" class="form-control bg-dark text-white border-secondary" id="post_search" placeholder="Search a post" name="q"
-                                aria-label="search" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
                 </div>
             </aside>
         </div>
