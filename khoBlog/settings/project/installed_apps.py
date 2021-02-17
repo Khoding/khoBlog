@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'impostor',
     'markdownx',
     'graphene_django',
-    'bootstrap4',
+    'bootstrap5',
     'bootstrap_datepicker_plus',
 
     # REST
