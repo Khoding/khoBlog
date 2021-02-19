@@ -29,9 +29,14 @@ class Category(models.Model):
 
 
 class PostCatsLink(models.Model):
-    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
-    category = models.ForeignKey('blog.Category', on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        'blog.Post', on_delete=models.CASCADE, related_name='post_to_category')
+    category = models.ForeignKey(
+        'blog.Category', on_delete=models.CASCADE, related_name='category_to_post')
     featured_cat = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Post to Category Link"
 
     def __str__(self):
         return '%s - %s' % (self.post.title, self.category.name)

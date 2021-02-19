@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
-from .models import Post, Comment, Category
+from .models import Post, Comment, Category, PostCatsLink
 
 
 def superuser_required():
@@ -37,6 +37,8 @@ class PostListView(ListView):
             featured=True, big=False)
         context['featured_big'] = self.model.objects.filter(
             featured=True, big=True)
+        context['featured_cat'] = self.model.objects.filter(
+            post_to_category__featured_cat=True)
         return context
 
 

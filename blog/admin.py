@@ -68,6 +68,11 @@ def make_approved(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
+class PostCatsLinkInline(admin.TabularInline):
+    model = PostCatsLink
+    extra = 1
+
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'published_date',
                     'slug', 'publication_state', 'featuring_state', 'clicks', )
@@ -89,6 +94,8 @@ class PostAdmin(admin.ModelAdmin):
         (('Dates'), {
          'fields': ('created_date', 'published_date',)}),
     )
+
+    inlines = [PostCatsLinkInline, ]
 
     formfield_overrides = {
         Post.body: {'widget': AdminMarkdownxWidget},
@@ -119,4 +126,3 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(PostCatsLink)

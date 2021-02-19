@@ -18,7 +18,7 @@
                     <div class="card-header border-secondary">
                         <span class="d-flex">
                             <span class="col">
-                                <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                <strong><a class="text-muted" href="{{ post.categories.first }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                             </span>
                             <span class="col">
