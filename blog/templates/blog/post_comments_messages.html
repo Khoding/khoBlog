@@ -19,7 +19,7 @@
                         {% if user.id == comment.author_logged.id or user.is_superuser %}
 
                             <div class="btn-group float-end">
-                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk=comment.related_post.pk pk_comment=comment.pk %}">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
 
@@ -30,7 +30,7 @@
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown">
                                     {% if user.is_superuser %}
                                         {% if not comment.approved_comment %}
-                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk=comment.related_post.pk pk_comment=comment.pk %}">
                                                 <i class="bi bi-check2-square"></i> Approve
                                             </a>
                                         {% endif %}
@@ -45,7 +45,7 @@
                                             <div class="dropdown-divider"></div>
                                         {% endif %}
 
-                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk=comment.related_post.pk pk_comment=comment.pk %}">
                                             <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
                                         </a>
                                     {% endif %}
@@ -68,7 +68,7 @@
         </div>
         <div class="card-footer border-secondary">
             <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk_post=comment.related_post.pk pk=comment.pk %}">Reply to this comment</a>
+                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk=comment.related_post.pk pk_comment=comment.pk %}">Reply to this comment</a>
             </div>
         </div>
     </div>

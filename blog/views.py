@@ -104,7 +104,7 @@ def redirect_to_latest(request):
     return redirect(reverse('blog:post_detail', args=(latest.slug,)))
 
 
-def PostDetailIDView(request, pk):
+def post_detail_through_id(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return redirect(reverse('blog:post_detail', args=(post.slug,)))
 
@@ -272,7 +272,7 @@ class AddPostCommentView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs['pk_post']
+        form.instance.related_post_id = self.kwargs['pk']
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -288,8 +288,8 @@ class AddReplyToComment(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs['pk_post']
-        form.instance.comment_answer_id = self.kwargs['pk']
+        form.instance.related_post_id = self.kwargs['pk']
+        form.instance.comment_answer_id = self.kwargs['pk_comment']
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

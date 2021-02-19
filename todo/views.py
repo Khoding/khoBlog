@@ -40,7 +40,7 @@ def completeTodo(request, todo_id):
 
 @user_passes_test(lambda u: u.is_superuser)
 def deleteCompleted(request):
-    Todo.objects.filter(complete__exact=True).delete()
+    Todo.objects.filter(complete=True).delete()
 
     return redirect('todo:index')
 

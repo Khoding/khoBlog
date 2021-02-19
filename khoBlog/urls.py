@@ -22,7 +22,6 @@ from django.utils import timezone
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.flatpages import views
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi

@@ -7,6 +7,8 @@ from .views import AddPostCommentView, EditPostCommentView, PostFutureListView, 
     DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, SearchResultsView, AddReplyToComment
 
 post_action_extra_patterns = [
+    path('', PostDetailView.as_view(), name='post_detail'),
+
     path('edit/', EditPostView.as_view(), name='post_edit'),
     path('publish/', views.post_publish, name='post_publish'),
     path('publish_withdrawn/',
@@ -37,16 +39,16 @@ post_comment_action_extra_patterns = [
 comment_extra_patterns = [
     path('', AddPostCommentView.as_view(),
          name='add_comment_to_post'),
-    path('<int:pk>/', include(post_comment_action_extra_patterns)),
+    path('<int:pk_comment>/', include(post_comment_action_extra_patterns)),
 ]
 
 post_extra_patterns = [
-    path('<int:pk>/', views.PostDetailIDView, name='post_detail'),
-    path('<slug:slug>/', PostDetailView.as_view(), name='post_detail'),
+    # Goes to Post by redirecting through its ID or directly by slug respectively
+    path('<int:pk>/', views.post_detail_through_id, name='post_detail'),
     path('<slug:slug>/', include(post_action_extra_patterns)),
 
     # Post Comments Related Links
-    path('<int:pk_post>/comment/', include(comment_extra_patterns)),
+    path('<int:pk>/comment/', include(comment_extra_patterns)),
 ]
 
 app_name = 'blog'
