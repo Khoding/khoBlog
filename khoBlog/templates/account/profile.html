@@ -4,6 +4,22 @@
 
 {% block title %} - {{ title }} • {{ object.username }}{% endblock title %}
 
+{% block page_head %}
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{{ title }} • {{ object.username }}">
+    <meta name="description" content="{{ object.bio }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:url" content="{{ object.get_absolute_url }}">
+    <meta property="og:title" content="{{ title }} • {{ object.username }}">
+    <meta property="og:description" content="{{ object.bio }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="{{ object.get_absolute_url }}">
+    <meta property="twitter:title" content="{{ title }} • {{ object.username }}">
+    <meta property="twitter:description" content="{{ object.bio }}">
+{% endblock page_head %}
+
 {% block content %}
     <h2>Profile</h2>
     <h2>{% user_display object %}

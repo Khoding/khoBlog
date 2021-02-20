@@ -50,21 +50,36 @@
 
     {% block page_head %}
         <!-- Primary Meta Tags -->
+        <meta name="title" content="{{ title }}">
         <meta name="description"
               content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
         <!-- Open Graph / Facebook -->
+        <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+        <meta property="og:title" content="{{ title }}">
         <meta property="og:description"
               content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
         <!-- Twitter -->
+        <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
+        <meta property="twitter:title" content="{{ title }}">
         <meta property="twitter:description"
               content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
     {% endblock page_head %}
 
     <meta name="theme-color" content="#B362FF">
-    <link rel="alternate" type="application/json+oembed" href="{% static 'js/oembed/oembed.json' %}"
-          title="oEmbed Profile: JSON">
+    <script type="application/json+oembed" title="oEmbed Profile: JSON">
+        {
+            "title": "Khodok's Blog",
+            "url": "https://blog.khodok.xyz",
+            "author_name": "Khodok",
+            "author_url": "https://blog.khodok.xyz/accounts/profile/khodok",
+            "type": "rich"
+        }
+
+    </script>
+    {% comment %} <link rel="alternate" type="application/json+oembed" href="{% static 'js/oembed/oembed.json' %}"
+          title="oEmbed Profile: JSON"> {% endcomment %}
 
     <title>
         Khodok's Blog
