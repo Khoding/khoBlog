@@ -28,7 +28,7 @@
                         <h2>Post #{{ post.id }}</h2>
                     </span>
                     <span class="col-1">
-                        <h4><span class="badge bg-secondary d-flex justify-content-center">{{ post.language }}</span></h4>
+                        <h4><span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span></h4>
                     </span>
                     <span class="col">
                         {% include 'blog/superbuttons.html' %}

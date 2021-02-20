@@ -18,11 +18,11 @@
                     <div class="card-header border-secondary">
                         <span class="d-flex">
                             <span class="col">
-                                <strong><a class="text-muted" href="{{ post.categories.first }}">{{ post.categories.first|capfirst }}</a></strong>
+                                <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                             </span>
                             <span class="col-1">
-                                <span class="badge bg-secondary d-flex justify-content-center">{{ post.language }}</span>
+                                <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
                             </span>
                             <span class="col">
                                 {% include 'blog/superbuttons.html' %}
