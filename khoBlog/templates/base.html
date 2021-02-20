@@ -159,9 +159,15 @@
                         <a href="{% url 'blog:category_list' %}" class="btn btn-primary">Category List</a>
                         <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary">Portfolio</a>
 
-                        {% if user.is_superuser %}
-                            <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
+                        {% if user.is_authenticated %}
+                            {% if perms.polls.view_question %}
+                                <a href="{% url 'polls:index' %}" class="btn btn-primary">Polls</a>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
+                            {% endif %}
                         {% endif %}
+
                     </div>
 
                     <form action="{% url 'blog:search_results' %}" method="get">

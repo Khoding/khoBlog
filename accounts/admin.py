@@ -7,8 +7,6 @@ from .models import CustomUser
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password',)}),

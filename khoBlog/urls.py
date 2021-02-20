@@ -46,7 +46,10 @@ info_dict = {
 }
 
 extra_patterns = [
-    re_path(r'(?P<version>[v1]+)/', include('khoBlogAPI.urls')),
+    re_path(r'(?P<version>[v1]+)/',
+            include('khoBlogAPI.urls')),
+    path('docs/', schema_view.with_ui('redoc',
+                                      cache_timeout=0), name='schema-redoc'),
 ]
 
 urlpatterns = [
@@ -60,12 +63,10 @@ urlpatterns = [
     path('l/', include('links.urls')),
 
     # Rest API
-    path('doc/', schema_view.with_ui('redoc',
-                                     cache_timeout=0), name='schema-redoc'),
-    path('apis/', include(extra_patterns)),
+    path('api/', include(extra_patterns)),
 
     # Django Admin
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path('admin/docs/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
 
     # User management
