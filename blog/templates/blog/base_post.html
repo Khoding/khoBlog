@@ -59,6 +59,24 @@
                       content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
             {% endif %}
 
+        {% elif view_name == 'blog:post_list' %}
+                <!-- Primary Meta Tags -->
+                <meta name="title" content="{{ title }}">
+                <meta name="description"
+                    content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+                <!-- Open Graph / Facebook -->
+                <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+                <meta property="og:title" content="{{ title }}">
+                <meta property="og:description"
+                    content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+                <!-- Twitter -->
+                <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
+                <meta property="twitter:title" content="{{ title }}">
+                <meta property="twitter:description"
+                    content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
         {% elif view_name == 'blog:post_category_list' %}
             {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
                 <!-- Primary Meta Tags -->
