@@ -39,7 +39,7 @@ post_comment_action_extra_patterns = [
 comment_extra_patterns = [
     path('', AddPostCommentView.as_view(),
          name='add_comment_to_post'),
-    path('<int:pk_comment>/', include(post_comment_action_extra_patterns)),
+    path('<int:pk>/', include(post_comment_action_extra_patterns)),
 ]
 
 post_extra_patterns = [
@@ -48,7 +48,7 @@ post_extra_patterns = [
     path('<slug:slug>/', include(post_action_extra_patterns)),
 
     # Post Comments Related Links
-    path('<int:pk>/comment/', include(comment_extra_patterns)),
+    path('<int:pk_post>/comment/', include(comment_extra_patterns)),
 ]
 
 app_name = 'blog'
