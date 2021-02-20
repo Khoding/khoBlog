@@ -68,6 +68,42 @@ def make_approved(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
+def make_baguette(modeladmin, request, queryset):
+    updated = queryset.update(language='FR')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as Language Baguette.',
+        '%d posts were successfully marked as Language Baguette.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_english(modeladmin, request, queryset):
+    updated = queryset.update(language='EN')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as Language English.',
+        '%d posts were successfully marked as Language English.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_other_language(modeladmin, request, queryset):
+    updated = queryset.update(language='OL')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as Another Language.',
+        '%d posts were successfully marked as Another Language.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+def make_multi_lingui(modeladmin, request, queryset):
+    updated = queryset.update(language='ML')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as Multi Linguistic.',
+        '%d posts were successfully marked as Multi Linguistic.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
 class PostCatsLinkInline(admin.TabularInline):
     model = PostCatsLink
     extra = 1
@@ -75,20 +111,20 @@ class PostCatsLinkInline(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'published_date',
-                    'slug', 'publication_state', 'featuring_state', 'clicks', )
+                    'slug', 'publication_state', 'featuring_state', 'clicks', 'language',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
                      'pk', 'withdrawn', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'publication_state',
-                   'featuring_state', 'published_date', 'withdrawn', 'featured', 'big',)
+                   'featuring_state', 'published_date', 'withdrawn', 'featured', 'big', 'language',)
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
                            'description', 'author', 'slug', 'body',)}),
         (('States'), {
-         'fields': ('withdrawn', 'featured', 'big', 'publication_state', 'featuring_state',)}),
+         'fields': ('withdrawn', 'featured', 'big', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {
          'fields': ('post_image', 'url_post_type', 'url_post_type_name',)}),
         (('Dates'), {
@@ -102,7 +138,7 @@ class PostAdmin(admin.ModelAdmin):
     }
 
     actions = [make_published, make_withdrawn, make_featured,
-               make_big, make_featured_big, export_as_json]
+               make_big, make_featured_big, export_as_json, make_baguette, make_english, make_other_language, make_multi_lingui]
 
 
 class CommentAdmin(admin.ModelAdmin):

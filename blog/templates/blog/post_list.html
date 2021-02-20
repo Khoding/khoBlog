@@ -21,6 +21,9 @@
                                 <strong><a class="text-muted" href="{{ post.categories.first }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                             </span>
+                            <span class="col-1">
+                                <span class="badge bg-secondary d-flex justify-content-center">{{ post.language }}</span>
+                            </span>
                             <span class="col">
                                 {% include 'blog/superbuttons.html' %}
                             </span>

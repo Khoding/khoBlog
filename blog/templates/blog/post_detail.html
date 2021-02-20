@@ -23,7 +23,17 @@
 
         <div class="card text-white border-secondary bg-dark mb-2">
             <div class="card-header border-secondary">
-                <h2>Post #{{ post.id }} {% include 'blog/superbuttons.html' %}</h2>
+                <span class="d-flex">
+                    <span class="col">
+                        <h2>Post #{{ post.id }}</h2>
+                    </span>
+                    <span class="col-1">
+                        <h4><span class="badge bg-secondary d-flex justify-content-center">{{ post.language }}</span></h4>
+                    </span>
+                    <span class="col">
+                        {% include 'blog/superbuttons.html' %}
+                    </span>
+                </span>
             </div>
 
             <div class="card-body">

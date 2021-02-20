@@ -56,6 +56,14 @@ class Post(models.Model):
         ('N', 'Not Featured'),
     ]
 
+    LANGUAGE_CHOICES = [
+        ('EN', 'English'),
+        ('FR', 'French'),
+        ('ML', 'Multi Linguistic'),
+        ('OL', 'Other Language'),
+        ('NS', 'Not Specified'),
+    ]
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -78,6 +86,8 @@ class Post(models.Model):
         max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N')
     featured = models.BooleanField(default=False)
     big = models.BooleanField(default=False)
+    language = models.CharField(
+        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN')
     url_post_type = models.URLField(null=True, blank=True)
     url_post_type_name = models.CharField(
         max_length=200, null=True, blank=True)
