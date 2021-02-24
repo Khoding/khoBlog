@@ -1,0 +1,386 @@
+@import 'variables';
+@import '../../vendor/node_modules/bootstrap/scss/variables';
+
+/* Mixins SCSS */
+@import 'mixins';
+
+/* Texte */
+
+// Texte quand un résultat est vide
+.empty {
+    @include responsive-font-size(1.5rem);
+    color: $white;
+}
+
+// Ellipse
+.text-ellipsis {
+    @include ellipsis;
+}
+
+// Césure
+.text-word-wrap {
+    @include word-wrap;
+}
+
+.text-large {
+    @include responsive-font-size(1.25rem);
+}
+
+.text-medium {
+    @include responsive-font-size(1rem);
+}
+
+.text-small {
+    @include responsive-font-size(0.75rem);
+}
+
+// Texte en blanc
+.text-white {
+    color: $white;
+}
+
+// Texte en noir
+.text-black {
+    color: $black;
+}
+
+// hr en blanc
+.hr-white {
+    border: 2px solid $white;
+}
+
+// hr en noir
+.hr-black {
+    border: 2px solid $black;
+}
+
+/* Containers spéciaux */
+
+// Container avec les bordures arrondies
+.rounded-corner-container {
+    border-radius: $border-radius;
+}
+
+// Container avec padding
+.small-padding-container {
+    padding: 1rem;
+}
+
+.medium-padding-container {
+    padding: 1.75rem;
+}
+
+.large-padding-container {
+    padding: 2.5rem;
+}
+
+.responsive-padding-container {
+    padding: 0.75rem;
+    @include media-breakpoint-up(sm) {
+        padding: 1rem;
+    }
+    @include media-breakpoint-up(md) {
+        padding: 1.5rem;
+    }
+    @include media-breakpoint-up(lg) {
+        padding: 2rem;
+    }
+    @include media-breakpoint-up(xl) {
+        padding: 2.5rem;
+    }
+}
+
+.no-padding-container {
+    padding: 0 !important;
+}
+
+.blank-img {
+    background-color: $gray-400;
+}
+
+// Scrolling horizontal
+.horizontal-scroll {
+    margin: 0;
+    padding: 0 0 0.5em;
+    width: 100%;
+    height: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-color: $white transparent;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+    @include media-breakpoint-down(md) {
+        scrollbar-width: thick;
+    }
+    @include media-breakpoint-up(md) {
+        scrollbar-width: thin;
+    }
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+    background: lighten($palette-primary, 13%);
+}
+
+/* Badge des éléments non affichés */
+.undisplayed-elements-badge {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 64px;
+    font-size: 1.5em;
+    color: $white;
+    background-color: $palette-d2;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.undisplayed-elements-badge:active,
+.undisplayed-elements-badge:hover {
+    color: $white;
+}
+
+/* Couleurs de fond */
+
+// Arrière-plan transparent et blanc
+.bg-wt {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.bg-wt-50 {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+// Arrière-plan transparent et noir
+.bg-bt {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+@each $name, $color in $palette {
+    .bg-name {
+        background-color: $color;
+    }
+}
+
+/* Formulaires et contrôles */
+.icon-btn {
+    background: none;
+    box-shadow: none;
+    border: 0;
+    font-size: 2em;
+    outline: 0;
+    padding: 0;
+}
+
+.icon-btn:focus {
+    outline: 0;
+}
+
+/* Formcards */
+.card.formcard {
+    border: none !important;
+    border-radius: $border-radius;
+}
+
+.formcard .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.formcard .card-footer {
+    font-size: 1.25rem;
+}
+
+.formcard .card-header,
+.formcard .card-footer {
+    background-color: transparent;
+    border: none;
+}
+
+/*
+.formcard a {
+  color: $palette-d2;
+  background-color: white;
+  border-radius: 3px;
+  padding: 2px;
+}
+*/
+.formcard a:hover {
+    color: $palette-d1;
+}
+
+/* Infocards */
+
+// Infocard
+.card.infocard {
+    border: none !important;
+    border-radius: 5px;
+    margin-left: 0;
+    cursor: pointer;
+    min-width: 100%;
+    width: 100%;
+    @include media-breakpoint-up(sm) {
+        min-width: 75%;
+        width: 75%;
+    }
+    @include media-breakpoint-up(md) {
+        min-width: 50%;
+        width: 50%;
+    }
+    @include media-breakpoint-up(lg) {
+        min-width: 37.5%;
+        width: 37.5%;
+    }
+    @include media-breakpoint-up(xl) {
+        min-width: 25%;
+        width: 25%;
+    }
+}
+
+// En-tête des infocards
+.infocard .card-header h1,
+.infocard .card-header h2,
+.infocard .card-header h3,
+.infocard .card-header h4,
+.infocard .card-header h5,
+.infocard .card-header h6 {
+    display: block;
+    @include ellipsis();
+    font-weight: bold;
+}
+
+.infocard .card-img {
+    height: 30%;
+    max-height: 30%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.infocard .card-header,
+.infocard .card-footer {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.infocard .card-header {
+    border-bottom: 1px solid $white;
+}
+
+.infocard .card-footer {
+    background-color: transparent;
+}
+
+.infocard .card-body {
+    color: $white;
+    background-color: transparent;
+}
+
+/* Images */
+.profile-picture {
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+    border-radius: 100%;
+}
+
+/* Pills */
+@each $name, $color in $colors {
+    .pill-#{$name} {
+        @include pill();
+        border: 1px solid $color;
+        color: $color;
+        padding: $nav-link-padding-y $nav-link-padding-x;
+        margin-top: 0.15rem;
+        margin-bottom: 0.15rem;
+
+        &:hover {
+            box-shadow: 0 0 3px $color;
+            color: $color !important;
+        }
+    }
+
+    .pill-#{$name}.active {
+        @include pill();
+        background-color: $color;
+        color: $white !important;
+        border: 1px solid $color;
+        padding: $nav-link-padding-y $nav-link-padding-x;
+        margin-top: 0.15rem;
+        margin-bottom: 0.15rem;
+
+        &:hover {
+            background-color: darken($color, 2.5%);
+            color: $white !important;
+        }
+    }
+}
+
+/* Génération de classes par couleur */
+// Palette
+@each $name, $color in $palette {
+    .gradient-#{$name} {
+        @include khoblog-gradient($palette-primary, $color);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .gradient-#{$name}-i {
+        @include khoblog-gradient($color, $palette-primary);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .gradient-text-#{$name} {
+        background: -webkit-radial-gradient($palette-primary, $color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-text-#{$name}-i {
+        background: -webkit-radial-gradient($color, $palette-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .btn-#{$name} {
+        color: $white;
+        background-color: $color;
+    }
+
+    .btn-#{$name}:hover {
+        color: $white !important;
+        background-color: darken($color, 10%);
+    }
+
+    .text-#{$name} {
+        color: $color;
+    }
+
+    .hr-#{$name} {
+        border: 2px solid $color;
+    }
+}
+
+// Couleurs sémantiques
+@each $name, $color in $semantics {
+    .text-#{$name} {
+        color: $color;
+    }
+}

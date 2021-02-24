@@ -1,0 +1,56 @@
+$palette-d2: #b54ff6;
+$palette-d1: #7544d4;
+$palette-primary: #5444a6;
+$palette-l1: #4460d4;
+$palette-l2: #4f9cf6;
+
+$palette_secondary: #444749;
+$palette_danger: #e63946;
+$palette_success: #5ced4c;
+$palette_warning: #f3b700;
+$palette_info: #45def5;
+
+$palette_light: #a59fee;
+$palette_attenuation: #7872d4;
+$palette_dark: #212121;
+
+$link-color: $palette_light;
+$link-hover-color: $palette_attenuation;
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$font-family-sans-serif: Roboto !default;
+$font-family-base: $font-family-sans-serif !default;
+
+@use "sass:map";
+
+$semantics-danger: #eb4034;
+$semantics-success: #3dd750;
+$semantics-warning: #edc200;
+$semantics-info: #45def5;
+
+$white: #ffffff;
+$black: #000000;
+
+$palette: (
+    'd2': $palette-d2,
+    'd1': $palette-d1,
+    'p': $palette-primary,
+    'l1': $palette-l1,
+    'l2': $palette-l2
+);
+
+$semantics: (
+    'danger': $semantics-danger,
+    'success': $semantics-success,
+    'warning': $semantics-warning,
+    'info': $semantics-info
+);
+
+$black-white: (
+    'white': $white,
+    'black': $black
+);
+
+$colors: map.merge($palette, $semantics);

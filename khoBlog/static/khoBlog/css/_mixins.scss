@@ -1,0 +1,30 @@
+/* Variables */
+@import 'variables';
+
+/* Dégradés */
+@mixin khoblog-gradient($color1, $color2) {
+    background-image: radial-gradient(circle at top right, $color1, $color2);
+}
+
+/* Texte */
+@mixin word-wrap() {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+@mixin ellipsis() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@mixin pill() {
+    border-radius: $border-radius;
+}

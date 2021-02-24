@@ -41,7 +41,7 @@ schema_view = get_schema_view(
     permission_classes=(permissions.IsAdminUser,),
 )
 
-info_dict = {
+site_map_info_dict = {
     'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date'),
 }
 
@@ -78,6 +78,7 @@ urlpatterns = [
     path('markdownx/', include('markdownx.urls')),
 
     path('sitemap.xml', sitemap,
-         {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
+         {'sitemaps': {'blog': GenericSitemap(
+             site_map_info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
