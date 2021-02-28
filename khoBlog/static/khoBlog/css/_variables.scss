@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $palette-d2: #b54ff6;
 $palette-d1: #7544d4;
 $palette-primary: #5444a6;
@@ -22,8 +24,6 @@ $link-hover-decoration: underline;
 
 $font-family-sans-serif: Roboto !default;
 $font-family-base: $font-family-sans-serif !default;
-
-@use "sass:map";
 
 $semantics-danger: #eb4034;
 $semantics-success: #3dd750;

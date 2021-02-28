@@ -1,3 +1,4 @@
+import datetime
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -122,6 +123,10 @@ class Post(models.Model):
     def clicked(self):
         self.clicks += 1
         self.save()
+
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.published_date <= now
 
     # Create a property that returns the markdown instead
     @property

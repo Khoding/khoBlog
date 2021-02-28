@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
-from .models import Post, Comment, Category, PostCatsLink
+from .models import Post, Comment, Category
 
 
 def superuser_required():

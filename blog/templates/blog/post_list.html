@@ -15,6 +15,13 @@
         {% for post in posts %}
             <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
                 <div id="post-{{ post.slug }}" class="card bg-dark border-secondary shadow h-100">
+
+                    {% if post.published_date %}
+                        {% if post.was_published_recently %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
+                        {% endif %}
+                    {% endif %}
+
                     <div class="card-header border-secondary">
                         <span class="d-flex">
                             <span class="col">

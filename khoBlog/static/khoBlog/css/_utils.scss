@@ -7,10 +7,6 @@
 /* Texte */
 
 // Texte quand un résultat est vide
-.empty {
-    @include responsive-font-size(1.5rem);
-    color: $white;
-}
 
 // Ellipse
 .text-ellipsis {
@@ -20,18 +16,6 @@
 // Césure
 .text-word-wrap {
     @include word-wrap;
-}
-
-.text-large {
-    @include responsive-font-size(1.25rem);
-}
-
-.text-medium {
-    @include responsive-font-size(1rem);
-}
-
-.text-small {
-    @include responsive-font-size(0.75rem);
 }
 
 // Texte en blanc
