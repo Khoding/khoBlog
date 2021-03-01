@@ -26,7 +26,7 @@
         <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
             <a class="mb-0 btn btn-danger text-white" href="{% url 'admin:index' %}">Admin</a>
             {% if user.is_superuser %}
-                <a href="/api/v1/" class="btn btn-danger text-white">API V1</a>
+                <a href="{% url 'api-root' 'v1' %}" class="btn btn-danger text-white">API V1</a>
                 <a class="mb-0 btn btn-danger text-white" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
             {% endif %}
         </div>
