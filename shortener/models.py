@@ -11,7 +11,7 @@ from graphql import GraphQLError
 class URL(models.Model):
     title = models.CharField(max_length=200, unique=True)
     full_url = models.URLField(unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True, default="")
     clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     featured = models.BooleanField(default=False)

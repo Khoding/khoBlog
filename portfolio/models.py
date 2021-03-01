@@ -10,7 +10,7 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.ForeignKey(
         'portfolio.Technology', on_delete=DO_NOTHING, related_name='technologies', null=True, blank=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, default="")
     website = models.ForeignKey(
         'portfolio.Website', on_delete=CASCADE, related_name='websites', null=True, blank=True)
     featured = models.BooleanField(default=False)

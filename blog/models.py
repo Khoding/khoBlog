@@ -11,7 +11,7 @@ from markdownx.utils import markdownify
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
     description = models.TextField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, default="")
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
