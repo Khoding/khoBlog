@@ -7,7 +7,7 @@ class Links(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=50)
     permalink = models.TextField(unique=True)
-    slug = models.SlugField(null=False, unique=True)
+    slug = models.SlugField(unique=True)
     shown = models.BooleanField(default=True)
     priority = models.PositiveIntegerField(default=0)
 

@@ -9,8 +9,7 @@ class FlatPage(FlatPageOld):
     update_date = models.DateTimeField('Last Updated', null=True, blank=True)
     page_head = models.TextField('Page head', blank=True)
     main_page = models.BooleanField(default=False)
-    description = models.TextField(
-        null=True, blank=True, default="A page on Khodok's Blog")
+    description = models.TextField(blank=True, default="")
 
     def __str__(self):
         return self.title

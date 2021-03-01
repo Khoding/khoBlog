@@ -5,10 +5,10 @@ from django.template.defaultfilters import slugify
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(blank=False, null=False)
+    email = models.EmailField()
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
-    bio = models.TextField(null=True, blank=True)
+    bio = models.TextField(default="", blank=True)
     slug = models.SlugField(null=True, blank=True, unique=True)
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
