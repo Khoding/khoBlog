@@ -10,7 +10,7 @@ class Project(models.Model):
     description = models.TextField()
     technology = models.ForeignKey(
         'portfolio.Technology', on_delete=DO_NOTHING, related_name='technologies', null=True, blank=True)
-    slug = models.SlugField(null=False, unique=True)
+    slug = models.SlugField(unique=True)
     website = models.ForeignKey(
         'portfolio.Website', on_delete=CASCADE, related_name='websites', null=True, blank=True)
     featured = models.BooleanField(default=False)
@@ -39,8 +39,8 @@ class Website(models.Model):
 
 class Technology(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(null=True, blank=True)
-    website = models.URLField(null=True, blank=True)
+    description = models.TextField(default='', blank=True)
+    website = models.URLField(default='', blank=True)
 
     class Meta:
         verbose_name_plural = "Technologies"
