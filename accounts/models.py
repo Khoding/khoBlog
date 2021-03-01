@@ -17,10 +17,10 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-    def get_absolute_url(self):
-        return reverse('accounts:profile', kwargs={'slug': self.slug})
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('accounts:profile', kwargs={'slug': self.slug})

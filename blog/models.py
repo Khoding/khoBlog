@@ -66,7 +66,7 @@ class Post(models.Model):
     ]
 
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author")
     title = models.CharField(max_length=200)
     featured_title = models.CharField(max_length=200, default='', blank=True)
     body = MarkdownxField()
@@ -89,7 +89,8 @@ class Post(models.Model):
     language = models.CharField(
         max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN')
     url_post_type = models.URLField(default='', blank=True)
-    url_post_type_name = models.CharField(max_length=200, default='', blank=True)
+    url_post_type_name = models.CharField(
+        max_length=200, default='', blank=True)
     clicks = models.IntegerField(default=0)
 
     def __str__(self):
@@ -157,7 +158,7 @@ class Comment(models.Model):
         ),
     )
     author_logged = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged")
     message = models.TextField(verbose_name="Comment")
     created_date = models.DateTimeField(default=timezone.now)
     approbation_state = models.CharField(

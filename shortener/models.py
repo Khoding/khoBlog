@@ -19,13 +19,6 @@ class URL(models.Model):
     def __str__(self):
         return self.title
 
-    def clicked(self):
-        self.clicks += 1
-        self.save()
-
-    def get_absolute_url(self):
-        return reverse("shortener:url_redirect", kwargs={"slug": self.slug})
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -37,3 +30,10 @@ class URL(models.Model):
             raise GraphQLError('invalid url')
 
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("shortener:url_redirect", kwargs={"slug": self.slug})
+
+    def clicked(self):
+        self.clicks += 1
+        self.save()
