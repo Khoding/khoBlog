@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField()
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
-    bio = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True, default="")
     slug = models.SlugField(blank=True, unique=True, default="")
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
