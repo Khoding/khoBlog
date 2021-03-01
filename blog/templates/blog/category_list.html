@@ -14,7 +14,7 @@
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
-                                <a class="btn btn-danger" href="/admin/blog/category/{{ item.id }}/change/">
+                                <a class="btn btn-danger" href="{% url 'admin:blog_category_change' pk=item.id %}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>

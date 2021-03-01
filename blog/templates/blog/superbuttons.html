@@ -22,7 +22,7 @@
                     <div class="dropdown-divider"></div>
                 {% endif %}
 
-                <a class="dropdown-item" href="/admin/blog/post/{{ post.id }}/change/">
+                <a class="dropdown-item" href="{% url 'admin:blog_post_change' slug=post.slug %}">
                     <i class="bi bi-pencil-square"></i> Edit in Admin
                 </a>
 

@@ -35,7 +35,7 @@
                                             </a>
                                         {% endif %}
 
-                                        <a class="dropdown-item" href="/admin/blog/comment/{{ comment.id }}/change/">
+                                        <a class="dropdown-item" href="{% url 'admin:blog_comment_change' pk=comment.id %}">
                                             <i class="bi bi-pencil-square"></i> Edit in Admin
                                         </a>
                                     {% endif %}
