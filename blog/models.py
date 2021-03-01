@@ -88,9 +88,8 @@ class Post(models.Model):
     big = models.BooleanField(default=False)
     language = models.CharField(
         max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN')
-    url_post_type = models.URLField(null=True, blank=True)
-    url_post_type_name = models.CharField(
-        max_length=200, null=True, blank=True)
+    url_post_type = models.URLField(default='', blank=True)
+    url_post_type_name = models.CharField(max_length=200, default='', blank=True)
     clicks = models.IntegerField(default=0)
 
     def __str__(self):
@@ -148,8 +147,15 @@ class Comment(models.Model):
     related_post = models.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(
-        max_length=200, null=True, blank=True,
-        help_text="You don't have to add one, the point of the Author being hiding who actually wrote the comment by puttin another name, note that Admins and mods can still find who wrote the comment")
+        max_length=200,
+        default='',
+        blank=True,
+        help_text=(
+            "You don't have to add one, the point of the Author being hiding who actually"
+            ' wrote the comment by puttin another name, note that Admins and mods can still'
+            ' find who wrote the comment'
+        ),
+    )
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     message = models.TextField(verbose_name="Comment")
