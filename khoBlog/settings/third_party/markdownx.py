@@ -53,7 +53,7 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     }
 }
 
-MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+MARKDOWNX_MEDIA_PATH = datetime.now().strftime('images/markdownx/%Y/%m/%d')
 MARKDOWNX_UPLOAD_URLS_PATH = '/markdownx/upload/'
 MARKDOWNX_UPLOAD_CONTENT_TYPES = [
     'image/jpeg', 'image/png', 'image/svg+xml', 'image/gif']
