@@ -20,8 +20,17 @@
     <meta property="twitter:description" content="{{ object.bio }}">
 {% endblock page_head %}
 
+{% block page_top_title %}
+    <h2>Profile
+        {% if user.is_superuser %}
+            <a class="btn btn-danger float-end" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
+                <i class="bi bi-trash"></i> Delete in Admin
+            </a>
+        {% endif %}
+    </h2>
+{% endblock page_top_title %}
+
 {% block content %}
-    <h2>Profile</h2>
     <h2>{% user_display object %}
         {% if object.profile_pic %}
             <img src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" width="50"/>
