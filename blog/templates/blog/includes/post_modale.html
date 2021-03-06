@@ -49,9 +49,9 @@
                         <h5>Author</h5>
                         <p>{{ post.author }}</p>
                         <h5 class="mt-2">Dates</h5>
-                        {% include 'blog/post_dates_modal.html' %}
+                        {% include 'blog/includes/post_dates_modal.html' %}
                         <h5 class="mt-2">Categories</h5>
-                        {% include 'blog/postcategories.html' %}
+                        {% include 'blog/includes/post_categories.html' %}
                         <h5 class="mt-2">Clicks</h5>
                         <p>{{ post.clicks }}</p>
                     </div>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="modal-body">
-                        {% include 'blog/post_comments_base.html' %}
+                        {% include 'blog/includes/post_comments_base.html' %}
                     </div>
                     <div class="modal-footer border-secondary">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

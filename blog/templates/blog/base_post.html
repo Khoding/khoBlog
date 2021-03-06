@@ -6,7 +6,7 @@
             {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
                 - {{ cats }}
             {% else %}
-                - This category is Withdrawn
+                - Withdrawn Category
             {% endif %}
 
         {% elif view_name == 'blog:post_detail' %}

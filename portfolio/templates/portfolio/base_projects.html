@@ -2,10 +2,10 @@
 
 {% block title %}
     {% with request.resolver_match.view_name as view_name %}
-        {% if view_name != 'pages:page_list' %}
-            - {{ flatpage.title }}
-        {% else %}
+        {% if view_name == 'portfolio:project_list' %}
             - {{ title }}
+        {% elif view_name == 'portfolio:project_detail' %}
+            - {{ project.title }}
         {% endif %}
     {% endwith %}
 {% endblock title %}

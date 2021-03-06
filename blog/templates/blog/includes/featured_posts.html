@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <h3 class="card-title">{% firstof post.featured_title post.title %}</h3>
                     <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
-                    <div class="mb-2">{% include 'blog/post_dates.html' %}</div>
+                    <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
                     <p class="mb-auto">{{ post.description }}</p>
                 </div>
                 <div class="card-footer">

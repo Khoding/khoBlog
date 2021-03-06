@@ -31,7 +31,7 @@
                         <h4><span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span></h4>
                     </span>
                     <span class="col">
-                        {% include 'blog/superbuttons.html' %}
+                        {% include 'blog/includes/super_buttons.html' %}
                     </span>
                 </span>
             </div>
@@ -40,7 +40,7 @@
                 <h2 class="card-title">{{ post.title }}</h2>
                 <div class="blog-post-meta">
                     <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
-                    {% include 'blog/post_dates.html' %}
+                    {% include 'blog/includes/post_dates.html' %}
                 </div>
                 {% if post.post_image %}
                     <img src="{{ post.post_image.url }}" alt="Post image" />
@@ -55,7 +55,7 @@
                 <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                     <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' pk_post=post.pk %}">Add comment</a>
                 </div>
-                {% include 'blog/post_comments_base.html' %}
+                {% include 'blog/includes/post_comments_base.html' %}
             </div>
 
         </div>

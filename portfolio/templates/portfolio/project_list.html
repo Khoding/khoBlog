@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'portfolio/base_projects.html' %}
 {% load static %}
 
 {% block page_top_title %}
     <h2>{{ title }}</h2>
 {% endblock page_top_title %}
 
-{% block content %}
+{% block main %}
     {% for project in projects %}
         {% if project.featured %}
             <div class="p-5 border rounded border-secondary bg-dark mb-2 shadow">
@@ -44,4 +44,4 @@
             {% endif %}
         {% endfor %}
     </div>
-{% endblock content %}
+{% endblock main %}

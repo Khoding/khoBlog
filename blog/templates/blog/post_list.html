@@ -7,7 +7,7 @@
 
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_list' %}
-            {% include 'blog/featured_posts.html' %}
+            {% include 'blog/includes/featured_posts.html' %}
         {% endif %}
     {% endwith %}
 
@@ -32,13 +32,13 @@
                                 <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
                             </span>
                             <span class="col">
-                                {% include 'blog/superbuttons.html' %}
+                                {% include 'blog/includes/super_buttons.html' %}
                             </span>
                         </span>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{ post.title }}</h3>
-                        <div class="mb-2">{% include 'blog/post_dates.html' %}</div>
+                        <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
                         <p class="mb-auto">{{ post.description }}</p>
                     </div>
                     <div class="card-footer border-secondary">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                 {% include 'blog/post_modale.html' %}
+                 {% include 'blog/includes/post_modale.html' %}
             </div>
         {% endfor %}
     </div>

@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'portfolio/base_projects.html' %}
 {% load static %}
 
 {% block page_top_title %}
     <h2>{{ title }}</h2>
 {% endblock page_top_title %}
 
-{% block content %}
+{% block main %}
 
     <div class="card text-white border-secondary bg-dark mb-2">
         <div class="card-header border-secondary">
@@ -37,4 +37,4 @@
         {% endif %}
     </div>
 
-{% endblock content %}
+{% endblock main %}
