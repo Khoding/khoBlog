@@ -5,4 +5,5 @@ from .internationalization import *
 from .installed_apps import *
 from .middleware import *
 from .others import *
+from .security import *
 from .templates import *
