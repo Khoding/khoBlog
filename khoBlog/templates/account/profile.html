@@ -23,7 +23,7 @@
 {% block page_top_title %}
     <h2>Profile
         {% if user.is_superuser %}
-            <a class="btn btn-danger float-end" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
+            <a class="btn btn-danger float-end text-white" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
                 <i class="bi bi-trash"></i> Delete in Admin
             </a>
         {% endif %}
@@ -31,45 +31,40 @@
 {% endblock page_top_title %}
 
 {% block content %}
-    <h2>{% user_display object %}
-        {% if object.profile_pic %}
-            <img src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" width="50"/>
-        {% endif %}
-
-        <hr class="bg-secondary">
-    </h2>
-
-    <h4>Username</h4>
-    <p>{% user_display object %}</p>
-
-    {% if object.first_name or object.first_name %}
-        {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
-            <h4>Name</h4>
-            <p><span>{{ object.first_name }} {{ object.last_name }}</span></p>
-        {% endif %}
-    {% endif %}
-
-    <h4>Role</h4>
-    <p>
-        {% if object.is_superuser %}
-            {% if object.owner %}
-                Website Owner
-            {% else %}
-                Admin
-            {% endif %}
-        {% elif object.is_staff %}
-            Staff
-        {% else %}
-            User
-        {% endif %}
-    </p>
-
-    {% if object.bio %}
-        <h4>Bio</h4>
-        {{ object.bio }}
-    {% endif %}
-
-    <hr class="bg-secondary">
+    <div class="card text-white border-secondary bg-dark mb-2 shadow">
+        <div class="row g-0">
+            <div class="col">
+                {% if object.profile_pic %}
+                    <img class="w-75" src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" />
+                {% endif %}
+            </div>
+            <div class="col-10">
+                <div class="card-body">
+                    <h5 class="card-title">{% user_display object %}
+                        {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
+                            - <span>{{ object.first_name }} {{ object.last_name }}</span>
+                        {% endif %}
+                    </h5>
+                    <p class="card-text">{{ object.bio }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            {% if object.is_superuser %}
+                                {% if object.owner %}
+                                    Website Owner
+                                {% else %}
+                                    Admin
+                                {% endif %}
+                            {% elif object.is_staff %}
+                                Staff
+                            {% else %}
+                                User
+                            {% endif %}
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% for comment in comments %}
         {% if comment.author_logged.id == object.id and comment.approved_comment %}
