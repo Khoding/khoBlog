@@ -1,7 +1,6 @@
 from django.contrib import admin, messages
 from django.core import serializers
 from django.http import HttpResponse
-from django.utils import timezone
 from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
 

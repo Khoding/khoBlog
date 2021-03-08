@@ -31,9 +31,9 @@ class Category(models.Model):
 
 class PostCatsLink(models.Model):
     post = models.ForeignKey(
-        'blog.Post', on_delete=models.CASCADE, related_name='post_to_category')
+        'blog.Post', on_delete=models.CASCADE)
     category = models.ForeignKey(
-        'blog.Category', on_delete=models.CASCADE, related_name='category_to_post')
+        'blog.Category', on_delete=models.CASCADE)
     featured_cat = models.BooleanField(default=False)
 
     class Meta:
@@ -75,7 +75,7 @@ class Post(models.Model):
     description = models.TextField()
     slug = models.SlugField(unique=True)
     categories = models.ManyToManyField(
-        'blog.Category', related_name='cat', through='PostCatsLink')
+        'blog.Category', through='PostCatsLink')
     created_date = models.DateTimeField(default=timezone.now)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -102,9 +102,6 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'slug': self.slug})
-
-    def _get_next_or_previous_by_slug(self, field, is_next, **kwargs):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
     def publish(self):
