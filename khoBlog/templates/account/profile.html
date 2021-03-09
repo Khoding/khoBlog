@@ -21,7 +21,7 @@
 {% endblock page_head %}
 
 {% block page_top_title %}
-    <h2>Profile
+        <h2 class="clearfix">{{ title }}
         {% if user.is_superuser %}
             <a class="btn btn-danger float-end text-white" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
                 <i class="bi bi-trash"></i> Delete in Admin
@@ -33,20 +33,19 @@
 {% block content %}
     <div class="card text-white border-secondary bg-dark mb-2 shadow">
         <div class="row g-0">
-            <div class="col">
+            <div class="col-md-4">
                 {% if object.profile_pic %}
-                    <img class="w-75 p-2" src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" />
+                    <img class="w-100 p-2" src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" />
                 {% endif %}
             </div>
-            <div class="col-10">
+            <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{% user_display object %}
+                    <h3 class="card-title">{% user_display object %}
                         {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
                             - <span>{{ object.first_name }} {{ object.last_name }}</span>
                         {% endif %}
-                    </h5>
-                    <p class="card-text">{{ object.bio }}</p>
-                    <p class="card-text">
+                    </h3>
+                    <h6 class="card-subtitle">
                         <small class="text-muted">
                             {% if object.is_superuser %}
                                 {% if object.owner %}
@@ -60,17 +59,21 @@
                                 User
                             {% endif %}
                         </small>
-                    </p>
+                    </h6>
+                    <p class="card-text">{{ object.bio }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card-body border-top border-secondary">
+                    {% for comment in comments %}
+                        {% if comment.author_logged.id == object.id and comment.approved_comment %}
+                            <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-
-    {% for comment in comments %}
-        {% if comment.author_logged.id == object.id and comment.approved_comment %}
-            <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
-        {% endif %}
-    {% endfor %}
 
     {% if user.is_superuser %}
         {% if view_as == "self" %}
