@@ -1,5 +1,6 @@
 from .accounts_auth import *
 from .databases_settings import *
+from .email import *
 from .files_static_media import *
 from .internationalization import *
 from .installed_apps import *

@@ -42,7 +42,9 @@
                 <div class="card-body">
                     <h3 class="card-title">{% user_display object %}
                         {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
-                            - <span>{{ object.first_name }} {{ object.last_name }}</span>
+                            {% if object.first_name or object.last_name %}
+                                - <span>{% if object.first_name %}{{ object.first_name }}{% endif %}{% if object.last_name %} {{ object.last_name }}{% endif %}</span>
+                            {% endif %}
                         {% endif %}
                     </h3>
                     <h6 class="card-subtitle">
