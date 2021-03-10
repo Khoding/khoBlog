@@ -14,7 +14,7 @@ cryptography==3.4.6
 cssselect==1.1.0
 defusedxml==0.6.0
 distlib==0.3.1
-Django==3.1.6
+Django==3.1.7
 django-allauth==0.44.0
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap-v5==1.0.0

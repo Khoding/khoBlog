@@ -25,52 +25,13 @@
                     <div class="card-header border-secondary">
                         <span class="d-flex">
                             <span class="col">
-                                {% comment %} {% for cats in post.postcatslink_set.all %}
-                                    {% if cats.featured_cat %}
-                                        <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                    {% endif %}
-
-
-                                    {% if not cats.featured_cat %}
-                                        {{ cats.category }}
-                                    {% endif %}
-                                    {% for featured in featured_cat %}
-                                        {% if featured.id == cats.id %}
-                                            {% if cats.featured_cat %}
-                                                <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                            {% endif %}
+                                {% comment %} {% for cats in post.post_to_category.all %}
+                                {{ featured_cat_true }}
+                                    {% if featured_cat_true %}
+                                        {% if cats.featured_cat %}
+                                            <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
                                         {% endif %}
-                                    {% endfor %}
-
-                                    {% for cats in post.postcatslink_set.all %}
-                                    {% if cats.featured_cat %}
-                                        {{ cats.category.get_absolute_url }}
                                     {% endif %}
-                                {% endfor %}
-
-
-
-
-                                {% comment %} {% for cats in featured_cat %}
-                                    {{ cats.postcatslink.title }}
-                                    {% if post.id == cats.id %}
-                                        <strong><a class="text-muted" href="{{ cats.get_absolute_url }}">{{ cats|capfirst }}</a></strong>
-                                    {% endif %}
-                                {% endfor %} {% endcomment %}
-
-                                {% comment %} {% for cats in post.postcatslink_set.all %}
-                                    {% if cats.featured_cat %}
-                                        <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                    {% endif %}
-                                {% endfor %} {% endcomment %}
-                                {% comment %} {% for cats in post.postcatslink_set.all %} {% endcomment %}
-                                    {% comment %} {% if cats.featured_cat.count > 0 %}
-                                        <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                    {% else %}
-                                        <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                                    {% endif %}
-                                {% endfor %}
-                                    <!-- I could order by and then put the featured_cat as first and always use .first -->
                                 {% endfor %} {% endcomment %}
                                 <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>

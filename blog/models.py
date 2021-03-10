@@ -31,9 +31,9 @@ class Category(models.Model):
 
 class PostCatsLink(models.Model):
     post = models.ForeignKey(
-        'blog.Post', on_delete=models.CASCADE)
+        'blog.Post', on_delete=models.CASCADE, related_name='post_to_category')
     category = models.ForeignKey(
-        'blog.Category', on_delete=models.CASCADE)
+        'blog.Category', on_delete=models.CASCADE, related_name='category_to_post')
     featured_cat = models.BooleanField(default=False)
 
     class Meta:
