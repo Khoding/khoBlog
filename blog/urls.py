@@ -3,7 +3,7 @@ from django.urls.conf import include
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AddPostCommentView, EditPostCommentView, PostFutureListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
+from .views import AddPostCommentView, EditPostCommentView, PostScheduledListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
     DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, SearchResultsView, AddReplyToComment
 
 post_action_extra_patterns = [
@@ -57,7 +57,8 @@ urlpatterns = [
     path('', PostListView.as_view(), name='post_list'),
     path('latest/', views.redirect_to_latest, name='latest'),
     path('drafts/', PostDraftListView.as_view(), name='post_draft_list'),
-    path('future/', PostFutureListView.as_view(), name='post_future_list'),
+    path('scheduled/', PostScheduledListView.as_view(),
+         name='post_scheduled_list'),
     path('withdrawn/', PostWithdrawnListView.as_view(),
          name='post_withdrawn_list'),
 

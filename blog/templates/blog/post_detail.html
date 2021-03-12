@@ -107,6 +107,7 @@
         </p>
         {% if user.is_superuser %}
             <p>Withdrawn: {{ post.withdrawn }}</p>
+            <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
         {% endif %}
     </div>
 {% endblock aside %}

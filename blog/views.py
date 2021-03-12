@@ -128,7 +128,7 @@ class PostDraftListView(ListView):
 
 
 @superuser_required()
-class PostFutureListView(ListView):
+class PostScheduledListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
@@ -139,7 +139,7 @@ class PostFutureListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Future'
+        context['title'] = 'Scheduled'
         return context
 
 

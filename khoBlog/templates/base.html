@@ -200,9 +200,13 @@
                     <ol class="list-unstyled mb-0">
                         {% with request.resolver_match.view_name as view_name %}
                             {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
-                                {% for post in posts %}
-                                    <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                                {% endfor %}
+                                {% if view_name != 'post:post_list' %}
+                                    {% for post in posts %}
+                                        {% if forloop.counter <= 21 %}
+                                            <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
                             {% else %}
                                 {% for page in pages %}
                                     <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
