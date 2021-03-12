@@ -3,18 +3,18 @@
 {% load markdown_extra %}
 
 {% block content_main %}
-    {% for item in category_list %}
+    {% for cat in category_list %}
         <div class="card text-white border-secondary bg-dark mb-2 shadow">
             <div class="card-header border-secondary">
-                <h2>Category #{{ item.id }}
+                <h2>Category #{{ cat.id }}
                     {% block superButtons %}
                         {% if user.is_superuser %}
                             <div class="float-end btn-group" role="group" aria-label="Edit Group">
-                                <a class="btn btn-light" href="{% url 'blog:category_edit' slug=item.slug %}">
+                                <a class="btn btn-light" href="{% url 'blog:category_edit' slug=cat.slug %}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
-                                <a class="btn btn-danger" href="{% url 'admin:blog_category_change' object_id=item.id %}">
+                                <a class="btn btn-danger" href="{% url 'admin:blog_category_change' object_id=cat.id %}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>
@@ -24,17 +24,17 @@
             </div>
 
             <div class="card-body">
-                <h2 class="card-title">{{ item }}</h2>
+                <h2 class="card-title">{{ cat }}</h2>
                 <div class="blog-post-meta">
-                    Category Slug: {{ item.slug }}
+                    Category Slug: {{ cat.slug }}
                     <br/>
-                    Category Post Count: {{ item.cat.count }}
+                    Category Post Count: {{ cat.category_to_post.count }}
                 </div>
-                <p class="card-text">{{ item.description }}</p>
+                <p class="card-text">{{ cat.description }}</p>
             </div>
 
             <div class="card-footer border-secondary">
-                <a href="{{ item.get_absolute_url }}" class="btn btn-primary">See all posts in this Category</a>
+                <a href="{{ cat.get_absolute_url }}" class="btn btn-primary">See all posts in this Category</a>
             </div>
         </div>
     {% endfor %}
