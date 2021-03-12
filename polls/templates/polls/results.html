@@ -3,10 +3,10 @@
 {% block main %}
     <h4>{{ question.question_text }}</h4>
     <ul>
-        {% for choice in question.choice_set.all %}
+        {% for choice in question.related_question.all %}
             <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+    <a class="btn btn-primary" href="{% url 'polls:detail' question.id %}">Vote again?</a>
 {% endblock main %}

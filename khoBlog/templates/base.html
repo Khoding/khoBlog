@@ -181,6 +181,9 @@
                     </form>
                 </div>
 
+                {% block aside %}
+                {% endblock aside %}
+
                 <div class="p-4 mb-2 rounded border border-secondary shadow">
                     <h4 class="fst-italic">User</h4>
                     {% include 'includes/auth.html' %}
