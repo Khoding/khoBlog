@@ -1,0 +1,9 @@
+<form action="{% url 'blog:search_results' %}" class="d-none d-lg-block" method="get">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text bg-dark text-white border-secondary" id="search">Search</span>
+        </div>
+        <input type="text" class="form-control bg-dark text-white border-secondary" id="post_search" placeholder="Search a post" name="q"
+            aria-label="search" aria-describedby="search">
+    </div>
+</form>

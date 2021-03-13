@@ -66,51 +66,13 @@
     {% endif %}
 {% endblock content_main %}
 
-{% block aside %}
-    <div class="p-4 mb-2 rounded border border-secondary shadow">
-        <h4 class="fst-italic">About this Post</h4>
-        <p>
-            Author:
-            {{ post.author }} -
-            {% if post.author.is_superuser %}
-                {% if post.author.owner %}
-                    Website Owner
-                {% else %}
-                    Admin
-                {% endif %}
-            {% elif post.author.is_staff %}
-                Staff
-            {% else %}
-                User
-            {% endif %}
-        </p>
-        <p>
-            Created: {{ post.created_date|date:'l, d F Y H:m:s' }} <br />
-            {% if post.published_date %}
-                Published: {{ post.published_date|date:'l, d F Y H:m:s' }}
-            {% endif %}
-        </p>
-        <p>
-            {% if post.featured_title %}
-                Featured Title: {{ post.featured_title }}
-            {% endif %}
-        </p>
-        <p>
-            Description: {{ post.description }}
-        </p>
-        <p>
-            Clicks: {{ post.clicks }}
-        </p>
-        <p>
-            Categories: <br />
-            {% include 'blog/includes/post_categories.html' %}
-        </p>
-        {% if user.is_superuser %}
-            <p>Withdrawn: {{ post.withdrawn }}</p>
-            <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
-        {% endif %}
-    </div>
-{% endblock aside %}
+{% block inside_aside %}
+    {% include 'blog/includes/aside_nav_post_info.html' %}
+{% endblock inside_aside %}
+
+{% block inside_nav %}
+    {% include 'blog/includes/aside_nav_post_info.html' %}
+{% endblock inside_nav %}
 
 {% block pagination %}
 {% endblock pagination %}

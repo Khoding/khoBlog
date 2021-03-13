@@ -26,7 +26,7 @@
         <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
             <a class="mb-0 btn btn-danger text-white" href="{% url 'admin:index' %}">Admin</a>
             {% if user.is_superuser %}
-                <a href="{% url 'api-root' 'v1' %}" class="btn btn-danger text-white">API V1</a>
+                <a class="btn btn-danger text-white" href="{% url 'api-root' 'v1' %}">API V1</a>
                 <a class="mb-0 btn btn-danger text-white" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
             {% endif %}
         </div>
@@ -34,8 +34,8 @@
 
 {% else %}
     <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Account">
-        <a class="mb-0 btn btn-primary" href="{% url 'accounts:signup' %}">Register</a>
-        <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Login</a>
+        <a class="mb-0 btn btn-primary" href="{% url 'accounts:signup' %}">Sign up</a>
+        <a class="mb-0 btn btn-primary" href="{% url 'account_login' %}">Log in</a>
     </div>
 
     <div class="btn-group-vertical d-block" role="group" aria-label="Group Provider Account">

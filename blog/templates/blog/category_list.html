@@ -7,7 +7,7 @@
         <div class="card text-white border-secondary bg-dark mb-2 shadow">
             <div class="card-header border-secondary">
                 <h2>Category #{{ cat.id }}
-                    {% block superButtons %}
+                    {% block super_buttons %}
                         {% if user.is_superuser %}
                             <div class="float-end btn-group" role="group" aria-label="Edit Group">
                                 <a class="btn btn-light" href="{% url 'blog:category_edit' slug=cat.slug %}">
@@ -19,7 +19,7 @@
                                 </a>
                             </div>
                         {% endif %}
-                    {% endblock superButtons %}
+                    {% endblock super_buttons %}
                 </h2>
             </div>
 

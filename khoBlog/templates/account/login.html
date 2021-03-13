@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "sub_base.html" %}
 {% load bootstrap5 %}
 
-{% block title %} - Login{% endblock title %}
+{% block title %} - Log in{% endblock title %}
 
 {% block content %}
-    <h2>Login</h2>
+    <h2>Log in</h2>
     <form method="POST" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}

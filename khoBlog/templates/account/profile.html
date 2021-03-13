@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "sub_base.html" %}
 {% load bootstrap5 %}
 {% load account %}
 
@@ -87,7 +87,7 @@
                             <th scope="col"><a href="{% url 'admin:accounts_customuser_changelist' %}">Username</a></th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
-                            <th scope="col">Last Login</th>
+                            <th scope="col">Last Log in</th>
                             <th scope="col"><a href="{% url 'admin:account_emailaddress_changelist' %}">Verified Email</a></th>
                         </tr>
                     </thead>

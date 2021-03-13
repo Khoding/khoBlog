@@ -1,7 +1,6 @@
 {% load static %}
-{% load render_urls %}
-{% load links_menu %}
-{% load featured_post %}
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +78,6 @@
 
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
-    <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
     <script src="{% static 'vendor/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
 
@@ -101,44 +99,96 @@
 </head>
 
 <body class="text-white bg-dark">
-{% if not debug_flag %}
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-{% endif %}
+    {% if not debug_flag %}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    {% endif %}
 
-<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark shadow-sm" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'blog:post_list' %}">Khodok's Blog</a>
+            <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="container-fluid">
-        <header class="blog-header py-2">
-            <div class="row flex-nowrap justify-content-start align-items-center">
-                <div class="col-6 col-sm-4 text-left">
-                    <p class="blog-header-logo">Khodok's Blog</p>
+            <div class="navbar-collapse offcanvas-collapse" id="top_navbar">
+                <div class="d-block d-lg-none">
+                    {% block nav %}
+                    {% endblock nav %}
                 </div>
-                <div class="col-none d-none d-sm-flex col-sm-4 text-center justify-content-center">
-                    <p class="blog-header-logo">{% if flatpage.title %}{{ flatpage.title }}{% else %}{{ title }}{% endif %}</p>
-                </div>
-                <div class="col-6 col-sm-4 d-flex justify-content-end align-items-center">
-                    <img id="logo" height="75" src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" alt="Khodok's Logo"/>
-                </div>
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:post_list' %}">New Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
+                        </li>
+
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown content-align-left">
+                            <a class="nav-link dropdown-toggle" href="#" id="account_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="account_dropdown">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
+                                <li><a class="dropdown-item" href="{% url 'account_login' %}">Log in</a></li>
+                            </ul>
+                        </li>
+
+                        {% if user.is_superuser or user.is_staff %}
+                            <li class="nav-item dropdown content-align-left">
+                                <a class="nav-link dropdown-toggle" href="#" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
+                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                                    {% if user.is_superuser %}
+                                        <li><a class="dropdown-item" href="{% url 'api-root' 'v1' %}">API V1</a></li>
+                                        <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+
+                {% include 'includes/nav/search/big_search.html' %}
             </div>
-        </header>
-
-        <div class="nav-scroller">
-            <nav class="nav d-flex justify-content-between">
-                {% links_menu urls %}
-                {% featured_post_list urls %}
-                {% links urls %}
-            </nav>
         </div>
-    </div>
+    </nav>
+
+    {% include 'includes/nav/undernav.html' %}
 
     <main role="main" class="container-fluid mb-2">
         <div class="row">
-            <div class="col-xl-9 col-md-8">
+            <div class="col-xl-9 col-lg-9 col-md-auto">
 
                 {% block page_top_title %}
                 {% endblock page_top_title %}
@@ -148,105 +198,49 @@
 
             </div>
 
-            <aside class="col-xl-3 col-md-4 blog-sidebar">
+            <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
                 <h2>Menus</h2>
-                <div class="p-4 mb-2 rounded border border-secondary shadow">
-                    <h4 class="fst-italic">About</h4>
-                    <p class="mb-2">Khodok's Blog, Read at own risks</p>
-
-                    <div class="btn-group-vertical d-block mb-2" role="group" aria-label="Group Interesting Links">
-                        <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
-                        <a href="{% url 'blog:category_list' %}" class="btn btn-primary">Category List</a>
-                        <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary">Portfolio</a>
-
-                        {% if user.is_authenticated %}
-                            {% if perms.polls.view_question %}
-                                <a href="{% url 'polls:index' %}" class="btn btn-primary">Polls</a>
-                            {% endif %}
-                            {% if user.is_superuser %}
-                                <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
-                            {% endif %}
-                        {% endif %}
-
-                    </div>
-
-                    <form action="{% url 'blog:search_results' %}" method="get">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-dark text-white border-secondary" id="basic-addon1">Search</span>
-                            </div>
-                            <input type="text" class="form-control bg-dark text-white border-secondary" id="post_search" placeholder="Search a post" name="q"
-                                aria-label="search" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="p-4 mb-2 rounded border border-secondary shadow">
-                    <h4 class="fst-italic">User</h4>
-                    {% include 'includes/auth.html' %}
-                </div>
-
                 {% block aside %}
                 {% endblock aside %}
-
-                <div class="p-4 mb-2 rounded border border-secondary shadow">
-                    {% with request.resolver_match.view_name as view_name %}
-                        {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
-                            <h4 class="fst-italic">Post List</h4>
-                        {% else %}
-                            <h4 class="fst-italic">Page List</h4>
-                        {% endif %}
-                    {% endwith %}
-                    <ol class="list-unstyled mb-0">
-                        {% with request.resolver_match.view_name as view_name %}
-                            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' %}
-                                {% if view_name != 'post:post_list' %}
-                                    {% for post in posts %}
-                                        {% if forloop.counter <= 21 %}
-                                            <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% else %}
-                                {% for page in pages %}
-                                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
-                                {% endfor %}
-                            {% endif %}
-                        {% endwith %}
-                    </ol>
-                </div>
             </aside>
         </div>
     </main>
-</div>
 
-<footer class="blog-footer text-white bg-dark">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-sm">
-                <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">Category List</a></div>
+    <footer class="blog-footer text-white bg-dark">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-sm">
+                    <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">
+                        Category List
+                    </a>
+                </div>
 
-            <div class="col-sm my-2">
-                <a class="linkHome" href="/"><img src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}"
-                                                  width="50" alt="Khodok's Logo"/></a>
-            </div>
+                <div class="col-sm my-2">
+                    <a class="linkHome" href="/">
+                        <img src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" width="50" alt="Khodok's Logo"/>
+                    </a>
+                </div>
 
-            <div class="col-sm"><a href="{% url 'blog:latest' %}"
-                                   class="btn btn-dark btn-outline-light">Latest Post</a>
+                <div class="col-sm">
+                    <a href="{% url 'blog:latest' %}" class="btn btn-dark btn-outline-light">
+                        Latest Post
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- rel! js -->
-<script src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
+    <!-- rel! js -->
+    <script src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
+    <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
 
-<script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 
 </body>
 </html>

@@ -20,6 +20,10 @@ $font-family: $font-family-base;
     color: #fff !important;
 }
 
+.nav-link.text-muted:hover {
+    text-decoration: underline;
+}
+
 @import '../../vendor/node_modules/bootstrap/scss/bootstrap.scss';
 
 /* Personnalisation des éléments */

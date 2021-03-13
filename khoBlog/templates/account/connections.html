@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'sub_base.html' %}
 {% load socialaccount %}
 
 {% block title %}
@@ -48,9 +48,9 @@
     <h2>Add a 3rd Party Account</h2>
 
     {% include "socialaccount/snippets/login_extra.html" %}
-    <a href="{% provider_login_url "google" process="connect" next="/" %}">Connect a Gmail Account</a>
+    <a href="{% provider_login_url 'google' process='connect' next='/' %}">Connect a Gmail Account</a>
     <br>
-    <a href="{% provider_login_url "discord" process="connect" next="/"  %}">Connect a Discord Account</a>
+    <a href="{% provider_login_url 'discord' process='connect' next='/'  %}">Connect a Discord Account</a>
 
 
 {% endblock content %}
