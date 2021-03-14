@@ -47,18 +47,27 @@
     <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
     <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
 
-    <meta content="Discord - Free Voice and Text Chat" property="og:title">
+    {% block page_head %}
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="{{ title }}">
+        <meta name="description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
-    <meta content="All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+        <!-- Open Graph / Facebook -->
+        <meta property="og:title" content="{{ title }}">
+        <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+        <meta property="og:description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
 
-    Stop paying for TeamSpeak servers and hassling with Skype. Simplify your life." property="og:description">
-
-    <meta content='https://discordapp.com/assets/ba74954dde74ff40a32ff58069e78c36.png' property='og:image'>
-
-    <link type="application/json+oembed" href="https://owo.whats-th.is//e61180.json" />
+        <!-- Twitter -->
+        <meta property="twitter:title" content="{{ title }}">
+        <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
+        <meta property="twitter:description"
+              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+    {% endblock page_head %}
 
     <meta name="theme-color" content="#B362FF">
-    <link rel="alternate" type="application/json+oembed" href="{% static 'khoBlog/js/oembed/oembed.json' %}"
+    <link type="application/json+oembed" href="{% static 'khoBlog/js/oembed/oembed.json' %}"
           title="oEmbed Profile: JSON">
 
     <title>
