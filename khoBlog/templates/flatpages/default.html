@@ -1,5 +1,9 @@
 {% extends 'pages/base_page.html' %}
 
+{% block page_top_title %}
+    <h2 class="clearfix">{{ title }}</h2>
+{% endblock page_top_title %}
+
 {% block page_head %}
     {% if flatpage.page_head %}
         {% autoescape off %}
@@ -23,7 +27,19 @@
 {% endblock page_head %}
 
 {% block main %}
-    {% autoescape off %}
-        {{ flatpage.content }}
-    {% endautoescape %}
+        <div class="card text-white border-secondary bg-dark mb-2">
+            <div class="card-header border-secondary">
+                <span class="d-flex">
+                    <span class="col">
+                        <h2>Post #{{ flatpage.id }}</h2>
+                    </span>
+                </span>
+            </div>
+
+            <div class="card-body">
+                {% autoescape off %}
+                    <span class="card-text">{{ flatpage.content }}</span>
+                {% endautoescape %}
+            </div>
+        </div>
 {% endblock main %}

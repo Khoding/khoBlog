@@ -6,9 +6,43 @@
 {% endblock page_top_title %}
 
 {% block main %}
-    <ol class="list-unstyled mb-0">
+    <div class="row row-cols-1 row-cols-lg-3">
         {% for page in pages %}
-            <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+            <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div id="page-{{ page.slug }}" class="card bg-dark border-secondary shadow h-100">
+
+                    <div class="card-header border-secondary">
+                        <span class="d-flex">
+                            <span class="col">
+                                <strong class="text-muted">Page #{{ page.id }}</strong>
+                                <p class="mb-0 text-muted">Page Slug: {{ page.slug }}</p>
+                            </span>
+                            <span class="col">
+                                {% block super_buttons %}
+                                    {% if user.is_superuser %}
+                                        <div class="float-end btn-group" role="group" aria-label="Edit Group">
+                                            <a class="btn btn-danger" href="{% url 'admin:pages_flatpage_change' object_id=page.id %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endblock super_buttons %}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ page.title }}</h3>
+                        <p class="mb-auto">{{ page.description }}</p>
+                    </div>
+                    <div class="card-footer border-secondary">
+                        <span class="d-flex">
+                            <span class="col">
+                                <a href="{{ page.get_absolute_url }}">Check the Page</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ol>
+    </div>
 {% endblock main %}

@@ -24,4 +24,5 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Project Detail'
+        context['projects'] = self.model.objects.all()
         return context

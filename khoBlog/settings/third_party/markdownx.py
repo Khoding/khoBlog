@@ -23,6 +23,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'pymdownx.escapeall',
     'pymdownx.extra',
     'pymdownx.highlight',
+    'pymdownx.inlinehilite',
     'pymdownx.keys',
     'pymdownx.magiclink',
     'pymdownx.pathconverter',
@@ -49,8 +50,8 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
         'custom_checkbox': True
     },
     'pymdownx.critic': {
-        'mode': 'accept'
-    }
+        'mode': 'view'
+    },
 }
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('images/markdownx/%Y/%m/%d')

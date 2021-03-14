@@ -1,0 +1,23 @@
+<div class="p-4 mb-2 rounded border border-secondary shadow">
+    <h4 class="fst-italic">About</h4>
+    <p class="mb-2">Khodok's Blog, Read at own risks</p>
+
+    <div class="btn-group-vertical d-block mb-2" role="group" aria-label="Group Interesting Links">
+        <a href="{% url 'blog:latest' %}" class="btn btn-primary">Latest Post</a>
+        <a href="{% url 'blog:category_list' %}" class="btn btn-primary">Category List</a>
+        <a href="{% url 'portfolio:project_list' %}" class="btn btn-primary">Portfolio</a>
+
+        {% if user.is_authenticated %}
+            {% if perms.polls.view_question %}
+                <a href="{% url 'polls:index' %}" class="btn btn-primary">Polls</a>
+            {% endif %}
+            {% if user.is_superuser %}
+                <a href="{% url 'todo:index' %}" class="btn btn-primary">Todo</a>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    {% include 'includes/nav/search/small_search.html' %}
+
+</div>
