@@ -11,31 +11,31 @@ $colors: (
 );
 
 $variations: (
-    d2: (
-        function: darken,
+    'd2': (
+        function: get-function(darken),
         parameters: 15%
     ),
-    d1: (
-        function: darken,
+    'd1': (
+        function: get-function(darken),
         parameters: 10%
     ),
-    l1: (
-        function: lighten,
+    'l1': (
+        function: get-function(lighten),
         parameters: 5%
     ),
-    l2: (
-        function: lighten,
+    'l2': (
+        function: get-function(lighten),
         parameters: 20%
     ),
-    fade: (
-        function: rgba,
+    'fade': (
+        function: get-function(rgba),
         parameters: .7
     ),
-    gray: (
-        function: grayscale
+    'gray': (
+        function: get-function(grayscale)
     ),
-    shade: (
-        function: mix,
+    'shade': (
+        function: get-function(mix),
         parameters: white 80%
     )
 );
