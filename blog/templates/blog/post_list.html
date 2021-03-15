@@ -33,7 +33,7 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %} {% endcomment %}
-                                <strong><a class="text-muted" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                <strong><a class="link-secondary gradient-text-secondary-shade" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                             </span>
                             <span class="col-1">
@@ -45,7 +45,7 @@
                         </span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">{{ post.title }}</h3>
+                        <h3 class="card-title text-word-wrap">{{ post.title }}</h3>
                         <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
                         <p class="mb-auto">{{ post.description }}</p>
                     </div>
@@ -62,7 +62,7 @@
                                 </span>
                             {% endif %}
                             <span class="col">
-                                <a role="button" class="link float-end" data-bs-toggle="modal"
+                                <a role="button" class="float-end" data-bs-toggle="modal"
                                     data-bs-target="#postModal-{{ post.id }}">Post Info
                                 </a>
                             </span>

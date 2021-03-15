@@ -7,6 +7,10 @@
 /* Texte */
 
 // Texte quand un résultat est vide
+.empty {
+    @include rfs(1.5rem);
+    color: $white;
+}
 
 // Ellipse
 .text-ellipsis {
@@ -16,6 +20,18 @@
 // Césure
 .text-word-wrap {
     @include word-wrap;
+}
+
+.text-large {
+    @include rfs(1.25rem);
+}
+
+.text-medium {
+    @include rfs(1rem);
+}
+
+.text-small {
+    @include rfs(0.75rem);
 }
 
 // Texte en blanc
@@ -117,7 +133,7 @@
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb:hover {
-    background: lighten($palette-primary, 13%);
+    background: lighten(cv(primary), 13%);
 }
 
 /* Badge des éléments non affichés */
@@ -130,7 +146,7 @@
     line-height: 64px;
     font-size: 1.5em;
     color: $white;
-    background-color: $palette-d2;
+    background-color: cv($primary, d2);
     border-radius: 100%;
     cursor: pointer;
 }
@@ -156,7 +172,7 @@
     background-color: rgba(0, 0, 0, 0.25);
 }
 
-@each $name, $color in $palette {
+@each $name, $color in $colors {
     .bg-name {
         background-color: $color;
     }
@@ -199,14 +215,14 @@
 
 /*
 .formcard a {
-  color: $palette-d2;
-  background-color: white;
-  border-radius: 3px;
-  padding: 2px;
+    color: $palette-d2;
+    background-color: white;
+    border-radius: 3px;
+    padding: 2px;
 }
 */
 .formcard a:hover {
-    color: $palette-d1;
+    color: cv($primary, d1);
 }
 
 /* Infocards */
@@ -293,13 +309,13 @@
         padding: $nav-link-padding-y $nav-link-padding-x;
         margin-top: 0.15rem;
         margin-bottom: 0.15rem;
-
+        
         &:hover {
             box-shadow: 0 0 3px $color;
             color: $color !important;
         }
     }
-
+    
     .pill-#{$name}.active {
         @include pill();
         background-color: $color;
@@ -308,7 +324,7 @@
         padding: $nav-link-padding-y $nav-link-padding-x;
         margin-top: 0.15rem;
         margin-bottom: 0.15rem;
-
+        
         &:hover {
             background-color: darken($color, 2.5%);
             color: $white !important;
@@ -318,53 +334,139 @@
 
 /* Génération de classes par couleur */
 // Palette
-@each $name, $color in $palette {
+@each $name, $color in $colors {
+
     .gradient-#{$name} {
-        @include khoblog-gradient($palette-primary, $color);
+        @include khoblog-gradient(cv($color), $color);
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-
+    
     .gradient-#{$name}-i {
-        @include khoblog-gradient($color, $palette-primary);
+        @include khoblog-gradient($color, cv($color));
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-
+    
     .gradient-text-#{$name} {
-        background: -webkit-radial-gradient($palette-primary, $color);
+        background: -webkit-radial-gradient(cv($color), $color);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
+    
     .gradient-text-#{$name}-i {
-        background: -webkit-radial-gradient($color, $palette-primary);
+        background: -webkit-radial-gradient($color, cv($color));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
+    
+    .gradient-btn-#{$name} {
+        @include khoblog-gradient(cv($color), $color);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        
+        &:hover {
+            background-color: darken($color, 10%) !important;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    }
+    
+    .gradient-btn-#{$name}-i {
+        @include khoblog-gradient($color, cv($color));
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: $white !important;
+        
+        &:hover {
+            background-color: darken($color, 10%);
+        }
+    }
+    
     .btn-#{$name} {
         color: $white;
         background-color: $color;
+        
+        &:hover {
+            color: $white !important;
+            background-color: darken($color, 10%);
+        }
     }
-
-    .btn-#{$name}:hover {
-        color: $white !important;
-        background-color: darken($color, 10%);
-    }
-
+    
     .text-#{$name} {
         color: $color;
     }
-
+    
     .hr-#{$name} {
         border: 2px solid $color;
     }
-}
 
-// Couleurs sémantiques
-@each $name, $color in $semantics {
-    .text-#{$name} {
-        color: $color;
+    @each $name-variation, $variation in $variations {
+
+        .gradient-#{$name}-#{$name-variation} {
+            @include khoblog-gradient(cv($color, $name-variation), $color);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .gradient-#{$name}-#{$name-variation}-i {
+            @include khoblog-gradient($color, cv($color, $name-variation));
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .gradient-text-#{$name}-#{$name-variation} {
+            background: -webkit-radial-gradient(cv($color, $name-variation), $color);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gradient-text-#{$name}-#{$name-variation}-i {
+            background: -webkit-radial-gradient($color, cv($color, $name-variation));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gradient-btn-#{$name}-#{$name-variation} {
+            @include khoblog-gradient(cv($color, $name-variation), $color);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: $white !important;
+            
+            &:hover {
+                background-color: darken(cv($color, $name-variation), 10%) !important;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        }
+        
+        .gradient-btn-#{$name}-#{$name-variation}-i {
+            @include khoblog-gradient($color, cv($color, $name-variation));
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: $white !important;
+            
+            &:hover {
+                color: $white !important;
+                background: darken(cv($color, $name-variation), 10%);
+            }
+        }
+        
+        .btn-#{$name}-#{$name-variation} {
+            color: $white;
+            background: cv($color, $name-variation);
+            
+            &:hover {
+                color: $white !important;
+            }
+        }
+        
+        .text-#{$name}-#{$name-variation} {
+            color: cv($color, $name-variation);
+        }
+        
+        .hr-#{$name}-#{$name-variation} {
+            border: 2px solid cv($color, $name-variation);
+        }
     }
 }

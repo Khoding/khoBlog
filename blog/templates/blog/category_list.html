@@ -6,7 +6,7 @@
     <div class="row row-cols-1 row-cols-lg-3">
         {% for cat in category_list %}
             <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="cat-{{ cat.slug }}" class="card bg-dark border-secondary shadow h-100">
+                <div id="category-{{ cat.slug }}" class="card bg-dark border-secondary shadow h-100">
 
                     <div class="card-header border-secondary">
                         <span class="d-flex">

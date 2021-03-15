@@ -3,7 +3,7 @@
 
 /* Dégradés */
 @mixin khoblog-gradient($color1, $color2) {
-    background-image: radial-gradient(circle at top right, $color1, $color2);
+    background: radial-gradient(circle at top left, $color1, $color2);
 }
 
 /* Texte */

@@ -526,7 +526,7 @@ span.critic:after {
 .blog-footer {
     padding: 0.5rem;
     text-align: center;
-    border-top: 0.05rem solid $palette_secondary;
+    border-top: 0.05rem solid cv($secondary);
 }
 
 .blog-footer p:last-child {

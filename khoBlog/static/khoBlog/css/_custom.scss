@@ -1,29 +1,30 @@
 @import 'variables';
 
-$primary: $palette_primary;
-$secondary: $palette_secondary;
-$success: $palette_success;
-$danger: $palette_danger;
-$warning: $palette_warning;
-$info: $palette_info;
+$primary: cv(primary);
+$secondary: cv(secondary);
+$success: cv(success);
+$danger: cv(danger);
+$warning: cv(warning);
+$info: cv(info);
 
 $dark: $palette_dark;
 
 $link-color: $link-color;
 $link-hover-color: $link-hover-color;
 
-$font-family: $font-family-base;
+$font-family-sans-serif: $sans-serif;
+$font-family-monospace: $monospace;
+
+@import '../../vendor/node_modules/bootstrap/scss/bootstrap.scss';
+
+/* Elements personalization */
 
 .active {
     background-color: $palette_dark !important;
-    border-color: $palette_secondary !important;
-    color: #fff !important;
+    border-color: cv(secondary) !important;
+    color: $white !important;
 }
 
 .nav-link.text-muted:hover {
     text-decoration: underline;
 }
-
-@import '../../vendor/node_modules/bootstrap/scss/bootstrap.scss';
-
-/* Personnalisation des éléments */

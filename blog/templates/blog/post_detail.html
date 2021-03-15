@@ -21,7 +21,7 @@
 
     {% if post.published_date and not post.withdrawn and not post.published_date > now or not post.published_date and user.is_superuser or post.withdrawn and user.is_superuser or post.published_date > now and user.is_superuser %}
 
-        <div class="card text-white border-secondary bg-dark mb-2">
+        <div class="card text-white border-secondary gradient-dark-l1-i mb-2">
             <div class="card-header border-secondary">
                 <span class="d-flex">
                     <span class="col">
