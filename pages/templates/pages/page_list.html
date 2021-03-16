@@ -9,9 +9,9 @@
     <div class="row row-cols-1 row-cols-lg-3">
         {% for page in pages %}
             <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="page-{{ page.slug }}" class="card bg-dark border-secondary shadow h-100">
+                <div id="page-{{ page.slug }}" class="card shadow h-100">
 
-                    <div class="card-header border-secondary">
+                    <div class="card-header">
                         <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted">Page #{{ page.id }}</strong>
@@ -34,10 +34,10 @@
                         <h3 class="card-title">{{ page.title }}</h3>
                         <p class="mb-auto">{{ page.description }}</p>
                     </div>
-                    <div class="card-footer border-secondary">
+                    <div class="card-footer">
                         <span class="d-flex">
                             <span class="col">
-                                <a href="{{ page.get_absolute_url }}">Check the Page</a>
+                                <a class="card-link" href="{{ page.get_absolute_url }}">Check the Page</a>
                             </span>
                         </span>
                     </div>

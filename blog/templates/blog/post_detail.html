@@ -21,8 +21,8 @@
 
     {% if post.published_date and not post.withdrawn and not post.published_date > now or not post.published_date and user.is_superuser or post.withdrawn and user.is_superuser or post.published_date > now and user.is_superuser %}
 
-        <div class="card text-white border-secondary gradient-dark-l1-i mb-2">
-            <div class="card-header border-secondary">
+        <div class="card mb-2">
+            <div class="card-header">
                 <span class="d-flex">
                     <span class="col">
                         <h2>Post #{{ post.id }}</h2>
@@ -47,11 +47,11 @@
                 {% endif %}
                 <span class="card-text">{{ post.body|formatted_markdown|safe }}</span>
                 {% if post.url_post_type %}
-                    <a href="{{ post.url_post_type }}">{{ post.url_post_type_name }}</a>
+                    <a class="card-link" href="{{ post.url_post_type }}">{{ post.url_post_type_name }}</a>
                 {% endif %}
             </div>
 
-            <div id="comments" class="card-footer border-secondary">
+            <div id="comments" class="card-footer">
                 <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
                     <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' pk_post=post.pk %}">Add comment</a>
                 </div>

@@ -23,7 +23,7 @@
 {% block page_top_title %}
         <h2 class="clearfix">{{ title }}
         {% if user.is_superuser %}
-            <a class="btn btn-danger float-end text-white" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
+            <a class="btn btn-danger float-end" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">
                 <i class="bi bi-trash"></i> Delete in Admin
             </a>
         {% endif %}
@@ -31,7 +31,7 @@
 {% endblock page_top_title %}
 
 {% block content %}
-    <div class="card text-white border-secondary bg-dark mb-2 shadow">
+    <div class="card mb-2 shadow">
         <div class="row g-0">
             <div class="col-md-4">
                 {% if object.profile_pic %}
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="card-body border-top border-secondary">
+                <div class="card-body">
                     {% for comment in comments %}
                         {% if comment.author_logged.id == object.id and comment.approved_comment %}
                             <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
@@ -82,7 +82,7 @@
             <div class="table-responsive mt-2">
                 <table class="table table-dark table-striped shadow mb-2">
                     <thead>
-                        <tr class="border-bottom-secondary">
+                        <tr>
                             <th scope="col">#</th>
                             <th scope="col"><a href="{% url 'admin:accounts_customuser_changelist' %}">Username</a></th>
                             <th scope="col">First Name</th>

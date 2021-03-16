@@ -5,6 +5,15 @@ from django.template.defaultfilters import slugify
 
 
 class CustomUser(AbstractUser):
+    THEME_CHOICES = [
+        ('DE', 'default'),
+        ('BA', 'banana'),
+        ('CH', 'cherry'),
+        ('SP', 'sop'),
+        ('LE', 'leaf'),
+        ('SK', 'nightsky'),
+    ]
+
     email = models.EmailField()
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
@@ -13,6 +22,8 @@ class CustomUser(AbstractUser):
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
         max_length=42, blank=True, default="Hello", help_text="The message before your name when you are logged, by default 'Hello'")
+    default_theme = models.CharField(
+        max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default='DE')
 
     def __str__(self):
         return self.username

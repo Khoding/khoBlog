@@ -1,12 +1,12 @@
 {% load read_time %}
 
 {% for post in featured_big %}
-    <div class="p-5 border rounded border-secondary bg-dark mb-2 shadow">
+    <div class="card p-4 rounded mb-2 shadow">
         <div class="container">
-            <strong class="d-inline-block mb-2 gradient-text-primary-l2 text-uppercase">Featured Post</strong>
+            <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Post</strong>
             <h1 class="display-4">{% if post.featured_title %} {{ post.featured_title }} {% else %} {{ post.title }} {% endif %}</h1>
             <p class="lead">{{ post.description }}</p>
-            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Continue Reading</a>
+            <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Continue Reading</a>
         </div>
     </div>
 {% endfor %}
@@ -14,12 +14,12 @@
 <div class="row row-cols-1 row-cols-lg-2">
     {% for post in featured %}
         <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-kho-lg-12' %}">
-            <div class="card bg-dark border-secondary shadow h-100">
+            <div class="card shadow h-100">
                 <div class="card-header">
                     <strong>
-                        <a class="link-warning gradient-text-warning-l2" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
+                        <a class="link-warning" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
                         <span class="d-inline-block text-muted">
-                            • <span class="gradient-text-secondary-l2">Featured Post</span>
+                            • <span class="fst-italic">Featured Post</span>
                         </span>
                     </strong>
                 </div>
@@ -30,7 +30,7 @@
                     <p class="mb-auto">{{ post.description }}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ post.get_absolute_url }}">Continue Reading</a>
+                    <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
                 </div>
             </div>
         </div>

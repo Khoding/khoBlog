@@ -1,4 +1,4 @@
-<div class="p-4 mb-2 rounded border border-secondary shadow">
+<div class="card p-4 mb-2 rounded shadow">
     <h4 class="fst-italic">
         {% with request.resolver_match.view_name as view_name %}
             {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}

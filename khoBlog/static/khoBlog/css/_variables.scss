@@ -1,5 +1,133 @@
 @use "sass:map";
 
+// Color themes
+$themes: (
+    'default': (
+        'text': white,
+        'bg': #212121,
+        'link': #6c757d,
+        'menu-link': #6c757d,
+        'border-color': #444749,
+    ),
+    'banana': (
+        'text':white,
+        'bg': #f1c40f,
+        'link': blue,
+        'menu-link': #6c757d,
+        'border-color': #A599E9,
+    ),
+    'cherry': (
+        'text': white,
+        'bg': #c0392b,
+        'link': blue,
+        'menu-link': blue,
+        'border-color': #A599E9,
+    ),
+    'sop': (
+        'text':  #b362ff,
+        'bg': #1e1e3f,
+        'link': #fad000,
+        'menu-link': #aab2c0,
+        'border-color': #A599E9,
+    ),
+    'leaf': (
+        'text':  white,
+        'bg': #27ae60,
+        'link': blue,
+        'menu-link': #6c757d,
+        'border-color': #A599E9,
+    ),
+    'nightsky': (
+        'text':  white,
+        'bg': #2980b9,
+        'link': blue,
+        'menu-link': #6c757d,
+        'border-color': #A599E9,
+    )
+);
+
+
+// // $themes: (
+// //     default: #212121,
+// //     banana: #f1c40f,
+// //     cherry: #c0392b,
+// //     blueberry: #8e44ad,
+// //     leaf: #27ae60,
+// //     nightsky: #2980b9
+// // );
+
+// // :root {
+// // 	/* Thanks Lea Verou! https://lea.verou.me/2020/10/the-var-space-hack-to-toggle-multiple-values-with-one-custom-property/ */
+// // 	--ON: initial;
+// // 	--OFF: ;
+// // }
+
+// // .default,
+// // .dark {
+// // 	--dark: var(--ON);
+// // 	--banana: var(--OFF);
+// // 	--cherry: var(--OFF);
+// // 	--purple: var(--OFF);
+// // 	--leaf: var(--OFF);
+// // 	--nightsky: var(--OFF);
+// // }
+
+// // .banana {
+// // 	--dark: var(--OFF);
+// // 	--banana: var(--ON);
+// // 	--cherry: var(--OFF);
+// // 	--purple: var(--OFF);
+// // 	--leaf: var(--OFF);
+// // 	--nightsky: var(--OFF);
+// // }
+
+// // .cherry {
+// // 	--dark: var(--OFF);
+// // 	--banana: var(--OFF);
+// // 	--cherry: var(--ON);
+// // 	--purple: var(--OFF);
+// // 	--leaf: var(--OFF);
+// // 	--nightsky: var(--OFF);
+// // }
+
+// // .purple {
+// // 	--dark: var(--OFF);
+// // 	--banana: var(--OFF);
+// // 	--cherry: var(--OFF);
+// // 	--purple: var(--ON);
+// // 	--leaf: var(--OFF);
+// // 	--nightsky: var(--OFF);
+// // }
+
+// // .leaf {
+// // 	--dark: var(--OFF);
+// // 	--banana: var(--OFF);
+// // 	--cherry: var(--OFF);
+// // 	--purple: var(--OFF);
+// // 	--leaf: var(--ON);
+// // 	--nightsky: var(--OFF);
+// // }
+
+// // .nightsky {
+// // 	--dark: var(--OFF);
+// // 	--banana: var(--OFF);
+// // 	--cherry: var(--OFF);
+// // 	--purple: var(--OFF);
+// // 	--leaf: var(--OFF);
+// // 	--nightsky: var(--ON);
+// // }
+
+// // @media (prefers-color-scheme: light) {
+// // 	.default {
+// // 		--dark: var(--OFF);
+// //         --banana: var(--ON);
+// //         --cherry: var(--OFF);
+// //         --purple: var(--OFF);
+// //         --leaf: var(--OFF);
+// //         --nightsky: var(--OFF);
+// // 	}
+// // }
+
 $colors: (
     primary: #5444A6,
     secondary: #444749,
@@ -69,42 +197,6 @@ $variations: (
     @return color-variation($color, $variation);
 }
 
-// $palette-d2: #3B2F74;
-// $palette-d1: #493B91;
-// $palette-primary: #5444A6;
-// $palette-l1: #6F60BE;
-// $palette-l2: #897DCA;
-
-// $palette-s-d2: #1D1F20;
-// $palette-s-d1: #313335;
-// $palette-secondary: #444749;
-// $palette-s-l1: #585D5F;
-// $palette-s-l2: #6C7275;
-
-// $semantics-d-d2: #A21C02;
-// $semantics-d-d1: #CA2302;
-// $semantics-danger: #F22A02;
-// $semantics-d-l1: #FD4521;
-// $semantics-d-l2: #FD6749;
-
-// $semantics-s-d2: #0AAE25;
-// $semantics-s-d1: #0CD42E;
-// $semantics-success: #18F23D;
-// $semantics-s-l1: #3EF45C;
-// $semantics-s-l2: #65F67D;
-
-// $semantics-w-d2: #E02500;
-// $semantics-w-d1: #FF330A;
-// $semantics-warning: #FF5533;
-// $semantics-w-l1: #FF775C;
-// $semantics-w-l2: #FF9985;
-
-// $semantics-i-d2: #6F5FBF;
-// $semantics-i-d1: #897CCB;
-// $semantics-info: #9D92D4;
-// $semantics-i-l1: #BDB6E2;
-// $semantics-i-l2: #D8D3EE;
-
 $palette_light: cv(primary, l2);
 $palette_attenuation: cv(primary, shade);
 $palette_dark: #212121;
@@ -117,55 +209,6 @@ $link-hover-decoration: underline;
 
 $white: #FFFFFF;
 $black: #000000;
-
-// $palette-p: (
-//     'd2': $palette-d2,
-//     'd1': $palette-d1,
-//     'p': $palette-primary,
-//     'l1': $palette-l1,
-//     'l2': $palette-l2
-// );
-
-// $palette-s: (
-//     'd2': $palette-s-d2,
-//     'd1': $palette-s-d1,
-//     's': $palette-secondary,
-//     'l1': $palette-s-l1,
-//     'l2': $palette-s-l2
-// );
-
-// $semantics-d: (
-//     'd2': $semantics-d-d2,
-//     'd1': $semantics-d-d1,
-//     'd': $semantics-danger,
-//     'l1': $semantics-d-l1,
-//     'l2': $semantics-d-l2
-// );
-
-// $semantics-s: (
-//     'd2': $semantics-s-d2,
-//     'd1': $semantics-s-d1,
-//     's': $semantics-success,
-//     'l1': $semantics-s-l1,
-//     'l2': $semantics-s-l2
-// );
-
-// $semantics-w: (
-//     'd2': $semantics-w-d2,
-//     'd1': $semantics-w-d1,
-//     'w': $semantics-warning,
-//     'l1': $semantics-w-l1,
-//     'l2': $semantics-w-l2
-// );
-
-// $semantics-i: (
-//     'd2': $semantics-i-d2,
-//     'd1': $semantics-i-d1,
-//     'i': $semantics-info,
-//     'l1': $semantics-i-l1,
-//     'l2': $semantics-i-l2
-// );
-
 
 $black-white: (
     'white': $white,

@@ -7,8 +7,8 @@
 
 {% block main %}
 
-    <div class="card text-white border-secondary bg-dark mb-2">
-        <div class="card-header border-secondary">
+    <div class="card mb-2">
+        <div class="card-header">
             <h2>Project #{{ project.id }}</h2>
         </div>
 
@@ -18,7 +18,7 @@
         </div>
 
         {% if project.website or project.technology %}
-            <div class="card-footer border-secondary">
+            <div class="card-footer">
                 {% if project.website %}
                     <p class="card-text">Website: <a target="_blank" href="{{ project.website.url }}">{{ project.website }}</a></p>
                 {% endif %}

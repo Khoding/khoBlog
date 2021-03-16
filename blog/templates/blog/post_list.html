@@ -14,7 +14,7 @@
     <div class="row row-cols-1 row-cols-lg-3">
         {% for post in posts %}
             <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="post-{{ post.slug }}" class="card bg-dark border-secondary shadow h-100">
+                <div id="post-{{ post.slug }}" class="card shadow h-100">
 
                     {% if post.published_date %}
                         {% if post.was_published_recently %}
@@ -22,7 +22,7 @@
                         {% endif %}
                     {% endif %}
 
-                    <div class="card-header border-secondary">
+                    <div class="card-header">
                         <span class="d-flex">
                             <span class="col">
                                 {% comment %} {% for cats in post.post_to_category.all %}
@@ -49,20 +49,20 @@
                         <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
                         <p class="mb-auto">{{ post.description }}</p>
                     </div>
-                    <div class="card-footer border-secondary">
+                    <div class="card-footer">
                         <span class="d-flex">
                             <span class="col">
-                                <a href="{{ post.get_absolute_url }}">Continue Reading</a>
+                                <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
                             </span>
                             {% if post.url_post_type %}
                                 <span class="col">
-                                    <a class="float-end" href="{{ post.url_post_type }}">
+                                    <a class="float-end card-link" href="{{ post.url_post_type }}">
                                         <i class="bi bi-link-45deg"></i> External Link
                                     </a>
                                 </span>
                             {% endif %}
                             <span class="col">
-                                <a role="button" class="float-end" data-bs-toggle="modal"
+                                <a role="button" class="float-end card-link" data-bs-toggle="modal"
                                     data-bs-target="#postModal-{{ post.id }}">Post Info
                                 </a>
                             </span>

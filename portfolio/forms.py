@@ -10,9 +10,9 @@ class ProjectForm(forms.ModelForm):
                   'technology', 'repository',)
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'snippet': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'technology': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'repository': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'title': forms.TextInput(),
+            'snippet': forms.Textarea(),
+            'description': forms.Textarea(),
+            'technology': forms.Textarea(),
+            'repository': forms.Textarea(),
         }

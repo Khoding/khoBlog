@@ -6,9 +6,9 @@
     <div class="row row-cols-1 row-cols-lg-3">
         {% for cat in category_list %}
             <div class="card-deck mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="category-{{ cat.slug }}" class="card bg-dark border-secondary shadow h-100">
+                <div id="category-{{ cat.slug }}" class="card shadow h-100">
 
-                    <div class="card-header border-secondary">
+                    <div class="card-header">
                         <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted"><a class="text-muted" href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}">Category #{{ cat.id }}</a></strong>
@@ -36,10 +36,10 @@
                         <p class="mb-auto">{{ cat.description }}</p>
                         <p class="mb-auto">Category Slug: {{ cat.slug }}</p>
                     </div>
-                    <div class="card-footer border-secondary">
+                    <div class="card-footer">
                         <span class="d-flex">
                             <span class="col">
-                                <a href="{{ cat.get_absolute_url }}">See all posts in this Category</a>
+                                <a class="card-link" href="{{ cat.get_absolute_url }}">See all posts in this Category</a>
                             </span>
                         </span>
                     </div>

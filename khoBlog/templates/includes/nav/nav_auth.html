@@ -1,6 +1,6 @@
 {% load socialaccount %}
 
-<div class="p-4 mb-2 rounded border border-secondary shadow">
+<div class="card p-4 mb-2 rounded shadow">
     <h4 class="fst-italic">User</h4>
     {% if user.is_authenticated %}
         <p>{% firstof user.welcome_message 'Hello' %} <span class="{% if user.is_superuser %}superuser{% elif user.is_staff %}staff{% endif %}">{{ user.username }}</span></p>
@@ -26,10 +26,10 @@
 
         {% if user.is_superuser or user.is_staff %}
             <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
-                <a class="mb-0 btn btn-danger text-white" href="{% url 'admin:index' %}">Admin</a>
+                <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
                 {% if user.is_superuser %}
-                    <a class="btn btn-danger text-white" href="{% url 'api-root' 'v1' %}">API V1</a>
-                    <a class="mb-0 btn btn-danger text-white" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
+                    <a class="btn btn-danger" href="{% url 'api-root' 'v1' %}">API V1</a>
+                    <a class="mb-0 btn btn-danger" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
                 {% endif %}
             </div>
         {% endif %}

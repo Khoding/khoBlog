@@ -12,10 +12,10 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name',)
 
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'first_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'last_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'email': forms.EmailInput(attrs={'class': 'bg-dark text-light'}),
+            'username': forms.TextInput(),
+            'first_name': forms.TextInput(),
+            'last_name': forms.TextInput(),
+            'email': forms.EmailInput(),
         }
 
 
@@ -25,14 +25,15 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'bio', 'welcome_message', 'profile_pic',
-                  'slug',)
+                  'slug', 'default_theme',)
 
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'first_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'last_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'bio': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'email': forms.EmailInput(attrs={'class': 'bg-dark text-light'}),
-            'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'welcome_message': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
+            'username': forms.TextInput(),
+            'first_name': forms.TextInput(),
+            'last_name': forms.TextInput(),
+            'bio': forms.Textarea(),
+            'email': forms.EmailInput(),
+            'slug': forms.TextInput(),
+            'welcome_message': forms.TextInput(),
+            'default_theme': forms.Select(),
         }

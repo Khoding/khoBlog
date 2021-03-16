@@ -98,7 +98,7 @@
     {% endif %}
 </head>
 
-<body class="text-white bg-dark">
+<body class="wrapper {% if user.is_authenticated %}{{ user.get_default_theme_display }}{% else %}default{% endif %}">
     {% if not debug_flag %}
         <!-- Google Tag Manager (noscript) -->
         <noscript>
@@ -108,9 +108,9 @@
         <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark shadow-sm" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" aria-label="Main navigation">
         <div class="container-fluid">
-            <a class="navbar-brand gradient-text-warning-l2" href="{% url 'blog:post_list' %}">Khodok's Blog</a>
+            <a class="navbar-brand" href="{% url 'blog:post_list' %}">Khodok's Blog</a>
             <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -125,7 +125,7 @@
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_list' %}">New Post</a>
+                                <a class="nav-link" href="{% url 'blog:post_new' %}">New Post</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
@@ -153,8 +153,20 @@
 
                     {% endif %}
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="theme_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
+                        <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="theme_dropdown">
+                            <li><a class="controls dropdown-item" data-theme="default">Default</a></li>
+                            <li><a class="controls dropdown-item" data-theme="banana">Funny banana</a></li>
+                            <li><a class="controls dropdown-item" data-theme="cherry" disabled>Hot cherry</a></li>
+                            <li><a class="controls dropdown-item" data-theme="sop">Shades of Purple</a></li>
+                            <li><a class="controls dropdown-item" data-theme="leaf">Smooth leaf</a></li>
+                            <li><a class="controls dropdown-item" data-theme="nightsky">Night sky</a></li>
+                        </ul>
+                    </li>
+
                     {% if user.is_authenticated %}
-                        <li class="nav-item dropdown content-align-left">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="account_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="account_dropdown">
                                 <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
@@ -206,11 +218,11 @@
         </div>
     </main>
 
-    <footer class="blog-footer text-white bg-dark">
+    <footer class="blog-footer">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm">
-                    <a href="{% url 'blog:category_list' %}" class="btn btn-dark btn-outline-light">
+                    <a class="btn btn-dark btn-outline-light" href="{% url 'blog:category_list' %}">
                         Category List
                     </a>
                 </div>
@@ -222,7 +234,7 @@
                 </div>
 
                 <div class="col-sm">
-                    <a href="{% url 'blog:latest' %}" class="btn btn-dark btn-outline-light">
+                    <a class="btn btn-dark btn-outline-light" href="{% url 'blog:latest' %}">
                         Latest Post
                     </a>
                 </div>
@@ -234,11 +246,34 @@
     <script src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
     <script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
+    <script>
+        (function(exports) {
+            var themeChanger = {
+                settings: {
+                    wrapper: $('.wrapper'),
+                    buttons: $('.controls .controls')
+                },
+
+                init: function () {
+                    var _self = this;
+                    this.settings.buttons.on('click', function () {
+                        var $node = $(this),
+                            theme = $node.data('theme');
+                        _self.settings.wrapper.removeClass().addClass('wrapper ' + theme);
+                        _self.settings.buttons.removeAttr('disabled');
+                        $node.attr('disabled', true);
+                    });
+                }
+            };
+
+            themeChanger.init();
+        }(window));
+    </script>
 
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
+            return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
 

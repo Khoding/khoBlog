@@ -13,14 +13,14 @@ class PostForm(forms.ModelForm):
                   'description', 'body', 'post_image', 'url_post_type', 'url_post_type_name', 'language',)
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'featured_title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
-            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'url_post_type': forms.URLInput(attrs={'class': 'bg-dark text-light'}),
-            'url_post_type_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'language': forms.Select(attrs={'class': 'bg-dark text-light'}),
+            'title': forms.TextInput(),
+            'featured_title': forms.TextInput(),
+            'categories': forms.SelectMultiple(),
+            'description': forms.Textarea(),
+            'body': forms.Textarea(),
+            'url_post_type': forms.URLInput(),
+            'url_post_type_name': forms.TextInput(),
+            'language': forms.Select(),
         }
 
 
@@ -31,16 +31,16 @@ class EditForm(forms.ModelForm):
                   'body', 'post_image', 'slug', 'withdrawn', 'featured', 'big', 'published_date', 'url_post_type', 'url_post_type_name', 'language',)
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'featured_title': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'bg-dark text-light'}),
-            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'body': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M:%S', attrs={'class': 'bg-dark text-light'}),
-            'url_post_type': forms.URLInput(attrs={'class': 'bg-dark text-light'}),
-            'url_post_type_name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'language': forms.Select(attrs={'class': 'bg-dark text-light'}),
+            'title': forms.TextInput(),
+            'featured_title': forms.TextInput(),
+            'categories': forms.SelectMultiple(),
+            'description': forms.Textarea(),
+            'body': forms.Textarea(),
+            'slug': forms.TextInput(),
+            'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M:%S', ),
+            'url_post_type': forms.URLInput(),
+            'url_post_type_name': forms.TextInput(),
+            'language': forms.Select(),
         }
 
 
@@ -50,9 +50,9 @@ class CategoryAddForm(forms.ModelForm):
         fields = ('name', 'description', 'withdrawn')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'withdrawn': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
+            'name': forms.TextInput(),
+            'description': forms.Textarea(),
+            'withdrawn': forms.CheckboxInput(),
         }
 
 
@@ -62,10 +62,10 @@ class CategoryEditForm(forms.ModelForm):
         fields = ('name', 'description', 'slug', 'withdrawn')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'description': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
-            'slug': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'withdrawn': forms.CheckboxInput(attrs={'class': 'bg-dark text-light'}),
+            'name': forms.TextInput(),
+            'description': forms.Textarea(),
+            'slug': forms.TextInput(),
+            'withdrawn': forms.CheckboxInput(),
         }
 
 
@@ -77,7 +77,7 @@ class CommentForm(forms.ModelForm):
         fields = ('message',)
 
         widgets = {
-            'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'message': forms.Textarea(),
         }
 
 
@@ -89,8 +89,8 @@ class EditPostCommentForm(forms.ModelForm):
         fields = ('author', 'message',)
 
         widgets = {
-            'author': forms.TextInput(attrs={'class': 'bg-dark text-light'}),
-            'message': forms.Textarea(attrs={'class': 'bg-dark text-light'}),
+            'author': forms.TextInput(),
+            'message': forms.Textarea(),
         }
 
 

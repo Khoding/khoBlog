@@ -1,5 +1,7 @@
 @import 'variables';
 
+@import 'mixins';
+
 $primary: cv(primary);
 $secondary: cv(secondary);
 $success: cv(success);
@@ -20,11 +22,65 @@ $font-family-monospace: $monospace;
 /* Elements personalization */
 
 .active {
-    background-color: $palette_dark !important;
-    border-color: cv(secondary) !important;
-    color: $white !important;
+    @include color('text');
+    @include background-color('bg');
+    @include border-color('border-color');
 }
+// .active {
+//     background-color: $palette_dark !important;
+//     border-color: cv(secondary) !important;
+//     color: $white !important;
+// }
 
 .nav-link.text-muted:hover {
     text-decoration: underline;
+}
+
+.card {
+    @include color('text');
+    @include background-color('bg');
+    @include border-color('border-color');
+
+    & .card-link {
+        @include color('link');
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.navbar {
+    @include background-color('bg');
+    @include border-color('border-color');
+
+    & .nav-link, & .navbar-brand{
+        @include color('menu-link');
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+form {
+    & *, & .form-control {
+        @include color('text');
+        @include background-color('bg');
+    }
+
+    & .input-group-text {
+        border: 1px solid;
+        @include border-color('border-color');
+    }
+
+    & .form-control {
+        border: 1px solid;
+        @include border-color('border-color');
+
+        &:hover, &:active {
+            @include color('text');
+            @include background-color('bg');
+        }
+    }
 }
