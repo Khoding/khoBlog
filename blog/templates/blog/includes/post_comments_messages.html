@@ -1,4 +1,4 @@
-<div class="card ps-4 border-start {% if comment.comment_answer %}ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}" style="border-width: 4px !important;">
+<div class="ps-4 comment-card{% if comment.comment_answer %} ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}">
     <div id="comment-{{ comment.id }}" class="card mt-2">
         <div class="card-header">
             <h4>

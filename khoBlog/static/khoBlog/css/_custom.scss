@@ -48,6 +48,15 @@ $font-family-monospace: $monospace;
             text-decoration: underline;
         }
     }
+
+    & .comment-card, & .comment-reply {
+        border-left: 4px solid !important;
+        @include border-color('border-color');
+
+        & .list-group-item {
+            @include background-color('bg');
+        }
+    }
 }
 
 .navbar {
