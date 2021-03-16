@@ -98,7 +98,7 @@
     {% endif %}
 </head>
 
-<body class="wrapper {% if user.is_authenticated %}{{ user.get_default_theme_display }}{% else %}default{% endif %}">
+<body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}default{% endif %}">
     {% if not debug_flag %}
         <!-- Google Tag Manager (noscript) -->
         <noscript>
