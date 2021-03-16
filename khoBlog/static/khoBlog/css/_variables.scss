@@ -7,45 +7,44 @@ $themes: (
         'bg': #212121,
         'link': #6c757d,
         'menu-link': #6c757d,
-        'border-color': #444749,
+        'border-color': #444749
     ),
     'banana': (
-        'text':white,
+        'text': white,
         'bg': #f1c40f,
         'link': blue,
         'menu-link': #6c757d,
-        'border-color': #A599E9,
+        'border-color': #a599e9
     ),
     'cherry': (
         'text': white,
         'bg': #c0392b,
         'link': blue,
         'menu-link': blue,
-        'border-color': #A599E9,
+        'border-color': #a599e9
     ),
     'sop': (
-        'text':  #b362ff,
+        'text': #b362ff,
         'bg': #1e1e3f,
         'link': #fad000,
         'menu-link': #aab2c0,
-        'border-color': #A599E9,
+        'border-color': #a599e9
     ),
     'leaf': (
-        'text':  white,
+        'text': white,
         'bg': #27ae60,
         'link': blue,
         'menu-link': #6c757d,
-        'border-color': #A599E9,
+        'border-color': #a599e9
     ),
     'nightsky': (
-        'text':  white,
+        'text': white,
         'bg': #2980b9,
         'link': blue,
         'menu-link': #6c757d,
-        'border-color': #A599E9,
+        'border-color': #a599e9
     )
 );
-
 
 // // $themes: (
 // //     default: #212121,
@@ -129,13 +128,13 @@ $themes: (
 // // }
 
 $colors: (
-    primary: #5444A6,
+    primary: #5444a6,
     secondary: #444749,
-    danger: #F22A02,
-    success: #18F23D,
-    warning: #FF5533,
-    info: #9D92D4,
-    dark: #212121,
+    danger: #f22a02,
+    success: #18f23d,
+    warning: #ff5533,
+    info: #9d92d4,
+    dark: #212121
 );
 
 $variations: (
@@ -157,7 +156,7 @@ $variations: (
     ),
     'fade': (
         function: get-function(rgba),
-        parameters: .7
+        parameters: 0.7
     ),
     'gray': (
         function: get-function(grayscale)
@@ -169,7 +168,6 @@ $variations: (
 );
 
 @function color-variation($color, $variation: false) {
-
     @if map-has-key($colors, $color) {
         $color: map-get($colors, $color);
     } @else {
@@ -193,7 +191,7 @@ $variations: (
     @return $color;
 }
 
-@function cv($color, $variation:false) {
+@function cv($color, $variation: false) {
     @return color-variation($color, $variation);
 }
 
@@ -207,7 +205,7 @@ $link-hover-color: $palette_attenuation;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
-$white: #FFFFFF;
+$white: #ffffff;
 $black: #000000;
 
 $black-white: (
@@ -215,7 +213,8 @@ $black-white: (
     'black': $black
 );
 
-$sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$headings: 'Merriweather', "Palatino Linotype", "Book Antiqua", Palatino, serif;
-$body: 'Roboto', 'Helvetica', "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-$monospace: 'Overpass Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$sans-serif: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$headings: 'Merriweather', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+$body: 'Roboto', 'Helvetica', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+$monospace: 'Overpass Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;

@@ -50,7 +50,6 @@
 /* Génération de classes par couleur */
 // Palette
 @each $name, $color in $colors {
-
     .gradient-#{$name} {
         @include khoblog-gradient(cv($color), $color);
         background-repeat: no-repeat;
@@ -94,44 +93,43 @@
     }
 
     @each $name-variation, $variation in $variations {
-
         .gradient-#{$name}-#{$name-variation} {
             @include khoblog-gradient(cv($color, $name-variation), $color);
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        
+
         .gradient-#{$name}-#{$name-variation}-i {
             @include khoblog-gradient($color, cv($color, $name-variation));
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        
+
         .gradient-text-#{$name}-#{$name-variation} {
             background: -webkit-radial-gradient(cv($color, $name-variation), $color);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .gradient-text-#{$name}-#{$name-variation}-i {
             background: -webkit-radial-gradient($color, cv($color, $name-variation));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .btn-#{$name}-#{$name-variation} {
             color: $white;
             background: cv($color, $name-variation);
-            
+
             &:hover {
                 color: $white !important;
             }
         }
-        
+
         .text-#{$name}-#{$name-variation} {
             color: cv($color, $name-variation);
         }
-        
+
         .hr-#{$name}-#{$name-variation} {
             border: 2px solid cv($color, $name-variation);
         }

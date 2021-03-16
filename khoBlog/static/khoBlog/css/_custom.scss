@@ -48,14 +48,18 @@ $font-family-monospace: $monospace;
             text-decoration: underline;
         }
     }
+}
 
-    & .comment-card, & .comment-reply {
-        border-left: 4px solid !important;
+.modal-content {
+    @include color('text');
+    @include background-color('bg');
+    @include border-color('border-color');
+
+    & .modal-footer,
+    & .modal-header,
+    & .modal-body,
+    & .nav-tabs {
         @include border-color('border-color');
-
-        & .list-group-item {
-            @include background-color('bg');
-        }
     }
 }
 
@@ -63,7 +67,8 @@ $font-family-monospace: $monospace;
     @include background-color('bg');
     @include border-color('border-color');
 
-    & .nav-link, & .navbar-brand{
+    & .nav-link,
+    & .navbar-brand {
         @include color('menu-link');
 
         &:hover {
@@ -73,7 +78,8 @@ $font-family-monospace: $monospace;
 }
 
 form {
-    & *, & .form-control {
+    & *,
+    & .form-control {
         @include color('text');
         @include background-color('bg');
     }
@@ -87,7 +93,8 @@ form {
         border: 1px solid;
         @include border-color('border-color');
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
             @include color('text');
             @include background-color('bg');
         }

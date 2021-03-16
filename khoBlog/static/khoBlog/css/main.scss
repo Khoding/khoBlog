@@ -49,6 +49,16 @@ body {
     }
 }
 
+.comment-card,
+.comment-reply {
+    border-left: 4px solid !important;
+    @include border-color('border-color');
+
+    & .list-group-item {
+        @include background-color('bg');
+    }
+}
+
 @media (max-width: 991.98px) {
     .offcanvas-collapse {
         position: fixed;

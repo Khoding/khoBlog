@@ -38,7 +38,7 @@
 @mixin themify($property, $key, $themes: $themes) {
     // Iterate over the themes
     @each $theme, $colors in $themes {
-      // Create a selector (e.g. `.media.theme-unicorn, .theme-unicorn .media`)
+        // Create a selector (e.g. `.media.theme-unicorn, .theme-unicorn .media`)
         &.#{$theme},
         .#{$theme} & {
             // Output the declaration
