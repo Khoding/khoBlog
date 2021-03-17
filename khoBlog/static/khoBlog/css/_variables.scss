@@ -3,46 +3,60 @@
 // Color themes
 $themes: (
     'default': (
-        'text': white,
-        'bg': #212121,
-        'link': #6c757d,
-        'menu-link': #6c757d,
-        'border-color': #444749
+        'text': hsl(0, 0%, 100%),
+        'bg': hsl(0, 0%, 13%),
+        'link': hsl(208, 7%, 46%),
+        'menu-link': hsl(208, 7%, 46%),
+        'border-color': hsl(204, 3%, 28%),
+        'side-link': hsl(250, 42%, 66%)
     ),
     'banana': (
-        'text': white,
-        'bg': #f1c40f,
-        'link': blue,
-        'menu-link': #6c757d,
-        'border-color': #a599e9
+        'text': hsl(0, 91%, 70%),
+        'bg': hsl(48, 74%, 54%),
+        'link': hsl(240, 100%, 50%),
+        'menu-link': hsl(208, 7%, 46%),
+        'border-color': hsl(46, 59%, 44%),
+        'side-link': hsl(250, 42%, 66%)
+    ),
+    'uglybanana': (
+        'text': hsl(0, 0%, 100%),
+        'bg': hsl(48, 89%, 50%),
+        'link': hsl(240, 100%, 50%),
+        'menu-link': hsl(208, 7%, 46%),
+        'border-color': hsl(249, 65%, 76%),
+        'side-link': hsl(250, 42%, 66%)
     ),
     'cherry': (
-        'text': white,
-        'bg': #c0392b,
-        'link': blue,
-        'menu-link': blue,
-        'border-color': #a599e9
+        'text': hsl(0, 100%, 77%),
+        'bg': hsl(6, 63%, 46%),
+        'link': hsl(330, 100%, 65%),
+        'menu-link': hsl(342, 74%, 70%),
+        'border-color': hsl(6, 78%, 55%),
+        'side-link': hsl(250, 42%, 66%)
     ),
     'sop': (
-        'text': #b362ff,
-        'bg': #1e1e3f,
-        'link': #fad000,
-        'menu-link': #aab2c0,
-        'border-color': #a599e9
+        'text': hsl(271, 100%, 69%),
+        'bg': hsl(240, 35%, 18%),
+        'link': hsl(50, 100%, 49%),
+        'menu-link': hsl(218, 15%, 71%),
+        'border-color': hsl(249, 66%, 76%),
+        'side-link': hsl(250, 42%, 66%)
     ),
     'leaf': (
-        'text': white,
-        'bg': #27ae60,
-        'link': blue,
-        'menu-link': #6c757d,
-        'border-color': #a599e9
+        'text': hsl(0, 0%, 100%),
+        'bg': hsl(145, 63%, 42%),
+        'link': hsl(240, 100%, 50%),
+        'menu-link': hsl(208, 7%, 46%),
+        'border-color': hsl(249, 65%, 76%),
+        'side-link': hsl(250, 42%, 66%)
     ),
     'nightsky': (
-        'text': white,
-        'bg': #2980b9,
-        'link': blue,
-        'menu-link': #6c757d,
-        'border-color': #a599e9
+        'text': hsl(0, 0%, 100%),
+        'bg': hsl(204, 64%, 44%),
+        'link': hsl(240, 100%, 50%),
+        'menu-link': hsl(208, 7%, 46%),
+        'border-color': hsl(249, 65%, 76%),
+        'side-link': hsl(250, 42%, 66%)
     )
 );
 
@@ -128,13 +142,13 @@ $themes: (
 // // }
 
 $colors: (
-    primary: #5444a6,
-    secondary: #444749,
-    danger: #f22a02,
-    success: #18f23d,
-    warning: #ff5533,
-    info: #9d92d4,
-    dark: #212121
+    primary: hsl(250, 42%, 46%),
+    secondary: hsl(204, 4%, 28%),
+    danger: hsl(10, 98%, 48%),
+    success: hsl(130, 89%, 52%),
+    warning: hsl(10, 100%, 60%),
+    info: hsl(250, 43%, 70%),
+    dark: hsl(0, 0%, 13%)
 );
 
 $variations: (
@@ -163,7 +177,7 @@ $variations: (
     ),
     'shade': (
         function: get-function(mix),
-        parameters: white 80%
+        parameters: hsl(0, 0%, 100%) 80%
     )
 );
 
@@ -205,8 +219,8 @@ $link-hover-color: $palette_attenuation;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
-$white: #ffffff;
-$black: #000000;
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 0%, 0%);
 
 $black-white: (
     'white': $white,

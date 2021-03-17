@@ -32,14 +32,19 @@ $font-family-monospace: $monospace;
 //     color: $white !important;
 // }
 
-.nav-link.text-muted:hover {
-    text-decoration: underline;
-}
-
 .card {
     @include color('text');
     @include background-color('bg');
     @include border-color('border-color');
+
+    & .list-unstyled a {
+        @include color('side-link');
+
+        &:hover {
+            @include color('side-link');
+            text-decoration: underline;
+        }
+    }
 
     & .card-link {
         @include color('link');
@@ -63,7 +68,8 @@ $font-family-monospace: $monospace;
     }
 }
 
-.navbar {
+.navbar,
+.nav-scroller {
     @include background-color('bg');
     @include border-color('border-color');
 
@@ -72,7 +78,8 @@ $font-family-monospace: $monospace;
         @include color('menu-link');
 
         &:hover {
-            text-decoration: underline;
+            @include color('menu-link');
+            text-decoration: underline !important;
         }
     }
 }

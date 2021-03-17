@@ -7,7 +7,8 @@ from django.template.defaultfilters import slugify
 class CustomUser(AbstractUser):
     THEME_CHOICES = [
         ('default', 'Default'),
-        ('banana', 'Funny Banana'),
+        ('uglybanana', 'Funny Banana'),
+        ('banana', 'Pretty Banana'),
         ('cherry', 'Hot Cherry'),
         ('sop', 'Shades Of Purple'),
         ('leaf', 'Smooth Leaf'),
