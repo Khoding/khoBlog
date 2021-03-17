@@ -118,7 +118,7 @@ class Post(models.Model):
 
     def clicked(self):
         self.clicks += 1
-        self.save()
+        self.save(update_fields=['clicks'])
 
     def was_published_recently(self):
         now = timezone.now()
