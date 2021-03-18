@@ -154,22 +154,22 @@
                     {% endif %}
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="theme_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
-                        <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="theme_dropdown">
-                            <li><a class="controls dropdown-item" data-theme="default">Default</a></li>
-                            <li><a class="controls dropdown-item" data-theme="uglybanana">Funny banana</a></li>
-                            <li><a class="controls dropdown-item" data-theme="banana">Pretty banana</a></li>
-                            <li><a class="controls dropdown-item" data-theme="cherry" disabled>Hot cherry</a></li>
-                            <li><a class="controls dropdown-item" data-theme="sop">Shades of Purple</a></li>
-                            <li><a class="controls dropdown-item" data-theme="leaf">Smooth leaf</a></li>
-                            <li><a class="controls dropdown-item" data-theme="nightsky">Night sky</a></li>
+                        <a class="nav-link dropdown-toggle" href="#themes_dropdown" id="themes_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
+                        <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="themes_dropdown">
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'default' %} disabled{% endif %}" data-theme="default">Default</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'uglybanana' %} disabled{% endif %}" data-theme="uglybanana">Funny banana</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'banana' %} disabled{% endif %}" data-theme="banana">Pretty banana</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'cherry' %} disabled{% endif %}" data-theme="cherry">Hot cherry</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'sop' %} disabled{% endif %}" data-theme="sop">Shades of Purple</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'leaf' %} disabled{% endif %}" data-theme="leaf">Smooth leaf</a></li>
+                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'nightsky' %} disabled{% endif %}" data-theme="nightsky">Night sky</a></li>
                         </ul>
                     </li>
 
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="account_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="account_dropdown">
+                            <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
                                 <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
@@ -178,8 +178,8 @@
                         </li>
 
                         {% if user.is_superuser or user.is_staff %}
-                            <li class="nav-item dropdown content-align-left">
-                                <a class="nav-link dropdown-toggle" href="#" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
                                     {% if user.is_superuser %}
@@ -261,8 +261,8 @@
                         var $node = $(this),
                             theme = $node.data('theme');
                         _self.settings.wrapper.removeClass().addClass('wrapper ' + theme);
-                        _self.settings.buttons.removeAttr('disabled');
-                        $node.attr('disabled', true);
+                        _self.settings.buttons.removeClass('disabled');
+                        $node.toggleClass('disabled');
                     });
                 }
             };
