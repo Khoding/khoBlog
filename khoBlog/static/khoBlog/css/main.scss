@@ -540,7 +540,17 @@ span.critic:after {
 .blog-footer {
     padding: 0.5rem;
     text-align: center;
-    border-top: 0.05rem solid cv($secondary);
+    border-top: 0.05rem solid;
+    @include border-color('border-color');
+
+    & .btn {
+        @include border-color('border-color');
+        @include color('text');
+
+        &:hover {
+            color: hsl(0, 0%, 100%);
+        }
+    }
 }
 
 .blog-footer p:last-child {
