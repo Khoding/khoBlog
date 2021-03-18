@@ -33,7 +33,7 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %} {% endcomment %}
-                                <strong><a class="link-secondary gradient-text-secondary-shade" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                                 <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
                             </span>
                             <span class="col-1">
