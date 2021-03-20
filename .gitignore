@@ -19,3 +19,5 @@ settings_dev.py
 .env
 
 *.sqlite3
+my.cnf
+db.json

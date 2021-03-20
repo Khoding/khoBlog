@@ -1,0 +1,4 @@
+[client]
+database = DBNAME
+user = USER
+password = PASSWORD
