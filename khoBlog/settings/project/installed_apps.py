@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'captcha',
 
-    # REST
+    # API
     'rest_framework',
     'drf_yasg',
     'khoBlogAPI',

@@ -45,11 +45,16 @@ site_map_info_dict = {
     'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date'),
 }
 
-extra_patterns = [
-    re_path(r'(?P<version>[v1]+)/',
-            include('khoBlogAPI.urls')),
+api_patterns = [
+    path('', include('khoBlogAPI.urls')),
     path('docs/', schema_view.with_ui('redoc',
                                       cache_timeout=0), name='schema-redoc'),
+]
+
+api_base_patterns = [
+    re_path(r'(?P<version>[v1]+)/',
+            include(api_patterns)),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 urlpatterns = [
@@ -63,7 +68,7 @@ urlpatterns = [
     path('l/', include('links.urls')),
 
     # Rest API
-    path('api/', include(extra_patterns)),
+    path('api/', include(api_base_patterns)),
 
     # Django Admin
     path('admin/docs/', include('django.contrib.admindocs.urls')),
