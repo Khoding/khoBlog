@@ -2,3 +2,5 @@
 database = DBNAME
 user = USER
 password = PASSWORD
+host = HOSTNAME
+default-character-set = utf8mb4
