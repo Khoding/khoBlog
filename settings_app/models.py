@@ -14,8 +14,6 @@ class Settings(models.Model):
 
     name = models.CharField(max_length=200)
     shown = models.BooleanField(default=False)
-    user = models.ForeignKey(
-        'settings_app.UserArea', on_delete=models.CASCADE, related_name='users_area')
     side_menus = models.ManyToManyField(
         'settings_app.SideMenu', related_name='side_menus', blank=True)
     default_theme = models.CharField(
@@ -28,20 +26,10 @@ class Settings(models.Model):
         return self.name
 
 
-class UserArea(models.Model):
-    title = models.CharField(max_length=200)
-    area_visible = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name_plural = "Users Area"
-
-    def __str__(self):
-        return self.title
-
-
 class SideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)
     sub_title = models.CharField(max_length=200, blank=True)
+    is_user_side_menu = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Side Menus"

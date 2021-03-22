@@ -1,30 +1,40 @@
 {% for side in sides %}
     <div class="card p-4 mb-2 rounded shadow">
         <h4 class="fst-italic">{{ side.title }}</h4>
-        {% if side.sub_title %}<p class="mb-2">{{ side.sub_title }}</p>{% endif %}
+        {% if side.sub_title %}
+            <p class="mb-2">
+                {{ side.sub_title }}
+            </p>
+        {% elif side.is_user_side_menu %}
+            <p class="mb-2">{% firstof context.user.welcome_message 'Hello' %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
+        {% endif %}
 
-        <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ side.title }} Group">
-            {% for link in side.side_menu_links.all %}
-                {% if link.visibility != 'D' %}
-                    {% if context.user.is_authenticated %}
-                        {% if link.visibility == 'NP' %}
-                            {% if context.perms.settings_app.view_linkssidemenu %}
-                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
-                            {% endif %}
-                        {% elif link.visibility == 'NS' %}
-                            {% if context.user.is_staff %}
-                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
-                            {% endif %}
-                        {% else %}
-                            {% if context.user.is_superuser %}
-                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+        {% if not side.is_user_side_menu %}
+            <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ side.title }} Group">
+                {% for link in side.side_menu_links.all %}
+                    {% if link.visibility != 'D' %}
+                        {% if context.user.is_authenticated %}
+                            {% if link.visibility == 'NP' %}
+                                {% if context.perms.settings_app.view_linkssidemenu %}
+                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+                                {% endif %}
+                            {% elif link.visibility == 'NS' %}
+                                {% if context.user.is_staff %}
+                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+                                {% endif %}
+                            {% else %}
+                                {% if context.user.is_superuser %}
+                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
+                    {% else %}
+                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
                     {% endif %}
-                {% else %}
-                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
-                {% endif %}
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            {% include 'includes/nav/nav_auth.html' %}
+        {% endif %}
     </div>
 {% endfor %}
