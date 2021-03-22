@@ -1,0 +1,26 @@
+{% for side in sides %}
+    <div class="card p-4 mb-2 rounded shadow">
+        <h4 class="fst-italic">{{ side.title }}</h4>
+        {% if side.sub_title %}<p class="mb-2">{{ side.sub_title }}</p>{% endif %}
+
+        <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ side.title }} Group">
+            {% for link in side.side_menu_links.all %}
+                {% if link.visibility != 'D' %}
+                    {% if context.user.is_authenticated %}
+                        {% if link.visibility == 'NP' %}
+                            {% if context.perms.settings_app.view_linkssidemenu %}
+                                <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
+                            {% endif %}
+                        {% elif link.visibility == 'NA' %}
+                            {% if context.user.is_superuser %}
+                        <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
+                    {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

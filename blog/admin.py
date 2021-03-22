@@ -105,7 +105,7 @@ def make_multi_lingui(modeladmin, request, queryset):
 
 class PostCatsLinkInline(admin.TabularInline):
     model = PostCatsLink
-    extra = 1
+    extra = 0
 
 
 class PostAdmin(admin.ModelAdmin):

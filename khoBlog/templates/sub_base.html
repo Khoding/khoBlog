@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load side_menu_set %}
 
 {% block nav %}
-
-    {% include 'includes/nav/nav_about.html' %}
+    {% setting sides %}
 
     {% include 'includes/nav/nav_auth.html' %}
+
 
     {% block inside_nav %}
     {% endblock inside_nav %}
@@ -13,7 +14,7 @@
 {% endblock nav %}
 
 {% block aside %}
-    {% include 'includes/nav/nav_about.html' %}
+    {% setting sides %}
 
     {% include 'includes/nav/nav_auth.html' %}
 
