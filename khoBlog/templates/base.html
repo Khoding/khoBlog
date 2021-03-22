@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% load default_app_theme_set %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +99,7 @@
     {% endif %}
 </head>
 
-<body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}default{% endif %}">
+<body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% setting themes %}{% endspaceless %}{% endif %}">
     {% if not debug_flag %}
         <!-- Google Tag Manager (noscript) -->
         <noscript>

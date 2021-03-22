@@ -9,16 +9,20 @@
                     {% if context.user.is_authenticated %}
                         {% if link.visibility == 'NP' %}
                             {% if context.perms.settings_app.view_linkssidemenu %}
-                                <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
+                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
                             {% endif %}
-                        {% elif link.visibility == 'NA' %}
+                        {% elif link.visibility == 'NS' %}
+                            {% if context.user.is_staff %}
+                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+                            {% endif %}
+                        {% else %}
                             {% if context.user.is_superuser %}
-                        <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
-                    {% endif %}
+                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 {% else %}
-                    <a class="btn btn-primary" href="{{ link.rel_url }}">{{ link.name }}</a>
+                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.rel_url }}">{{ link.name }}</a>
                 {% endif %}
             {% endfor %}
         </div>
