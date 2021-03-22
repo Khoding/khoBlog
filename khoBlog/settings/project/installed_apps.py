@@ -12,14 +12,15 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django.forms',
 
-    # allauth
+    # Accounts
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.discord',
+    'accounts',
 
-    # packages apps
+    # Packages Apps
     'impostor',
     'markdownx',
     'graphene_django',
@@ -27,18 +28,20 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'captcha',
 
-    # API
+    # APIs Apps
     'rest_framework',
     'drf_yasg',
     'khoBlogAPI',
 
-    # apps
+    # Website Settings App
+    'settings_app',
+
+    # Apps
     'blog',
     'portfolio',
     'pages',
     'polls',
     'todo',
-    'accounts',
     'shortener',
     'links',
 ]

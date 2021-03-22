@@ -1,7 +1,8 @@
 {% load socialaccount %}
+{% load users_set %}
 
 <div class="card p-4 mb-2 rounded shadow">
-    <h4 class="fst-italic">User</h4>
+    {% setting users %}
     {% if user.is_authenticated %}
         <p>{% firstof user.welcome_message 'Hello' %} <span class="{% if user.is_superuser %}superuser{% elif user.is_staff %}staff{% endif %}">{{ user.username }}</span></p>
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Accounts">
