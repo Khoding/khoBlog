@@ -15,6 +15,7 @@ class Category(models.Model):
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ['pk']
         verbose_name_plural = "Categories"
 
     def __str__(self):
