@@ -30,6 +30,7 @@ class SideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)
     sub_title = models.CharField(max_length=200, blank=True)
     is_user_side_menu = models.BooleanField(default=False)
+    is_post_list_side_menu = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Side Menus"

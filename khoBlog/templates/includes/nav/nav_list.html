@@ -1,47 +1,45 @@
-<div class="card p-4 mb-2 rounded shadow">
-    <h4 class="fst-italic">
-        {% with request.resolver_match.view_name as view_name %}
-            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-                {% if view_name != 'blog:category_list' %}
-                    Post
-                {% else %}
-                    Category
-                {% endif %}
+<h4 class="fst-italic">
+    {% with context.request.resolver_match.view_name as view_name %}
+        {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
+            {% if view_name != 'blog:category_list' %}
+                Post
             {% else %}
-                {% if view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-                    Page
-                {% else %}
-                    Project
-                {% endif %}
+                Category
             {% endif %}
-        {% endwith %}
-        List
-    </h4>
-    <ol class="list-unstyled mb-0">
-        {% with request.resolver_match.view_name as view_name %}
-            {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-                {% if view_name != 'post:post_list' and view_name != 'blog:category_list' %}
-                    {% for post in posts %}
-                        {% if forloop.counter <= 21 %}
-                            <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    {% for cat in category_list %}
-                        <li>{{ cat.id }} - <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
-                    {% endfor %}
-                {% endif %}
+        {% else %}
+            {% if view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
+                Page
             {% else %}
-                {% if view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-                    {% for page in pages %}
-                        <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
-                    {% endfor %}
-                {% else %}
-                    {% for project in projects %}
-                        <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
-                    {% endfor %}
-                {% endif %}
+                Project
             {% endif %}
-        {% endwith %}
-    </ol>
-</div>
+        {% endif %}
+    {% endwith %}
+    List
+</h4>
+<ol class="list-unstyled mb-0">
+    {% with context.request.resolver_match.view_name as view_name %}
+        {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
+            {% if view_name != 'post:post_list' and view_name != 'blog:category_list' %}
+                {% for post in context.posts %}
+                    {% if forloop.counter <= 21 %}
+                        <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for cat in context.category_list %}
+                    <li>{{ cat.id }} - <a href="{{ context.cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            {% if view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
+                {% for page in context.pages %}
+                    <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for project in context.projects %}
+                    <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endwith %}
+</ol>

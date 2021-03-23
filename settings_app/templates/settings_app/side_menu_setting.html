@@ -1,6 +1,8 @@
 {% for side in sides %}
     <div class="card p-4 mb-2 rounded shadow">
-        <h4 class="fst-italic">{{ side.title }}</h4>
+        {% if not side.is_post_list_side_menu %}
+            <h4 class="fst-italic">{{ side.title }}</h4>
+        {% endif %}
         {% if side.sub_title %}
             <p class="mb-2">
                 {{ side.sub_title }}
@@ -9,7 +11,7 @@
             <p class="mb-2">{% firstof context.user.welcome_message 'Hello' %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
         {% endif %}
 
-        {% if not side.is_user_side_menu %}
+        {% if not side.is_user_side_menu and not side.is_post_list_side_menu %}
             <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ side.title }} Group">
                 {% for link in side.side_menu_links.all %}
                     {% if link.visibility != 'D' %}
@@ -33,8 +35,10 @@
                     {% endif %}
                 {% endfor %}
             </div>
-        {% else %}
+        {% elif side.is_user_side_menu %}
             {% include 'includes/nav/nav_auth.html' %}
+        {% else %}
+            {% include 'includes/nav/nav_list.html' %}
         {% endif %}
     </div>
 {% endfor %}
