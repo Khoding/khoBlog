@@ -235,8 +235,8 @@ class SearchView(ListView):
     paginate_by = 21
 
     def get_queryset(self):
-        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'posts/?q=', }, {
-            'id': 2, 'title': 'Search in Comments', 'get_absolute_url': 'comments/?q=', }, {'id': 3, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {
+            'id': 2, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 3, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
         return query
 
     def get_context_data(self, **kwargs):
@@ -324,6 +324,20 @@ class AllSearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Everything'
+        return context
+
+
+class RandomSearchResultsView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return query
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Random Search'
         return context
 
 
