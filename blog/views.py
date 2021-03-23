@@ -5,8 +5,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.base import TemplateView
 
-from .forms import EditPostCommentForm, PostForm, CommentForm, EditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
+from .forms import EditPostCommentForm, PostForm, CommentForm, EditPostForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
 from .models import Post, Comment, Category
 
 
@@ -59,7 +60,7 @@ class PostListFromCategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cats'] = self.category
-        context['title'] = self.category.name
+        context['title'] = self.category.title
         return context
 
 
@@ -207,7 +208,7 @@ class EditCategoryView(UpdateView):
 @superuser_required()
 class EditPostView(UpdateView):
     model = Post
-    form_class = EditForm
+    form_class = EditPostForm
     template_name = "blog/post_update.html"
 
     def get_context_data(self, **kwargs):
@@ -228,20 +229,36 @@ class DeletePostView(DeleteView):
         return context
 
 
-class SearchResultsView(ListView):
-    model = Post
-    template_name = 'blog/post_list.html'
-    context_object_name = 'posts'
+class SearchView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+    paginate_by = 21
+
+    def get_queryset(self):
+        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'posts/?q=', }, {
+            'id': 2, 'title': 'Search in Comments', 'get_absolute_url': 'comments/?q=', }, {'id': 3, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+        return query
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Search'
+        return context
+
+
+class PostSearchResultsView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+    paginate_by = 21
 
     def get_queryset(self):
         query = self.request.GET.get('q')
         if self.request.user.is_superuser:
-            return self.model.objects.filter(
+            return Post.objects.filter(
                 Q(title__icontains=query) | Q(
                     body__icontains=query) | Q(description__icontains=query),
             )
         else:
-            return self.model.objects.filter(
+            return Post.objects.filter(
                 Q(title__icontains=query) | Q(
                     body__icontains=query) | Q(description__icontains=query),
             ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
@@ -249,6 +266,64 @@ class SearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Posts'
+        return context
+
+
+class CommentSearchResultsView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+    paginate_by = 21
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if self.request.user.is_superuser:
+            return Comment.objects.filter(
+                Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                    body__icontains=query),
+            )
+        else:
+            return Comment.objects.filter(
+                Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                    body__icontains=query),
+            ).filter(~Q(approbation_state='RE'),)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Search in Comments'
+        return context
+
+
+class AllSearchResultsView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+    paginate_by = 21
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if self.request.user.is_superuser:
+            comment = Comment.objects.filter(
+                Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                    body__icontains=query),
+            )
+            post = Post.objects.filter(
+                Q(title__icontains=query) | Q(
+                    body__icontains=query) | Q(description__icontains=query),
+            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
+            return [post, comment]
+        else:
+            comment = Comment.objects.filter(
+                Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                    body__icontains=query),
+            ).filter(~Q(approbation_state='RE'),)
+            post = Post.objects.filter(
+                Q(title__icontains=query) | Q(
+                    body__icontains=query) | Q(description__icontains=query),
+            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
+            return [post, comment]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Search in Everything'
         return context
 
 

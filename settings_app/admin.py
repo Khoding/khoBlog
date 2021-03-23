@@ -7,11 +7,11 @@ class UsersAdmin(admin.ModelAdmin):
 
 
 class PresetsSettingsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'shown',)
+    list_display = ('title', 'shown',)
 
 
 class LinksGroupSideMenuAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('title',)
 
 
 class LinksSideMenuInline(admin.TabularInline):

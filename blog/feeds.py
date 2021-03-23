@@ -33,7 +33,7 @@ class LatestPostsFeedByCategory(Feed):
         return Category.objects.get(slug=slug)
 
     def title(self, obj):
-        return "Latest posts of %s" % obj.name
+        return "Latest posts of %s" % obj.title
 
     def link(self, obj):
         return obj.get_absolute_url()
@@ -68,7 +68,7 @@ class LatestCommentsFeed(Feed):
         return item.author_logged
 
     def item_description(self, item):
-        return item.message
+        return item.body
 
     def item_link(self, item):
         return item.related_post.get_absolute_url()

@@ -9,7 +9,7 @@ from markdownx.utils import markdownify
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     slug = models.SlugField(unique=True, default="")
     withdrawn = models.BooleanField(default=False)
@@ -19,11 +19,11 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -41,7 +41,7 @@ class PostCatsLink(models.Model):
         verbose_name_plural = "Post to Category Link"
 
     def __str__(self):
-        return '%s - %s' % (self.post.title, self.category.name)
+        return '%s - %s' % (self.post.title, self.category.title)
 
 
 class Post(models.Model):
@@ -157,7 +157,8 @@ class Comment(models.Model):
     )
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged")
-    message = models.TextField(verbose_name="Comment")
+    title = models.CharField(max_length=200, blank=True)
+    body = models.TextField(verbose_name="Comment")
     created_date = models.DateTimeField(default=timezone.now)
     approbation_state = models.CharField(
         max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP')
@@ -169,7 +170,13 @@ class Comment(models.Model):
             author_in_name = self.author_logged
         else:
             author_in_name = self.author
-        return '%s - %s - %s' % (self.related_post.title, author_in_name, self.pk)
+        if self.title:
+            name = '%s - %s - %s - %s' % (self.related_post.title,
+                                          author_in_name, self.title, self.pk)
+        else:
+            name = '%s - %s - %s' % (self.related_post.title,
+                                     author_in_name, self.pk)
+        return name
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug})

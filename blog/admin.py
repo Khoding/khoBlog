@@ -151,10 +151,10 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'slug', 'withdrawn')
+    list_display = ('title', 'description', 'slug', 'withdrawn')
     ordering = ('-pk',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('title',)}
     list_filter = ('withdrawn',)
 
 

@@ -18,7 +18,7 @@ class WebsiteAdmin(admin.ModelAdmin):
 
 
 class TechnologyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'website')
+    list_display = ('title', 'description', 'website')
     ordering = ('-pk',)
 
 

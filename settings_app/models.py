@@ -12,7 +12,7 @@ class Settings(models.Model):
         ('nightsky', 'Night Sky'),
     ]
 
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     shown = models.BooleanField(default=False)
     side_menus = models.ManyToManyField(
         'settings_app.SideMenu', related_name='side_menus', blank=True)
@@ -23,7 +23,7 @@ class Settings(models.Model):
         verbose_name_plural = "Settings Presets"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class SideMenu(models.Model):
@@ -56,7 +56,7 @@ class LinksSideMenu(models.Model):
         ('INF', 'info'),
     ]
 
-    name = models.CharField(max_length=200, blank=True)
+    title = models.CharField(max_length=200, blank=True)
     rel_url = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
     links = models.ForeignKey(
@@ -72,14 +72,14 @@ class LinksSideMenu(models.Model):
         verbose_name_plural = "Side Links"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class LinksGroupSideMenu(models.Model):
-    name = models.CharField(max_length=200, blank=True)
+    title = models.CharField(max_length=200, blank=True)
 
     class Meta:
         verbose_name_plural = "Side Links Group"
 
     def __str__(self):
-        return self.name
+        return self.title

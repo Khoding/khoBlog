@@ -38,7 +38,7 @@ class Website(models.Model):
 
 
 class Technology(models.Model):
-    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     description = models.TextField(default='', blank=True)
     website = models.URLField(default='', blank=True)
 
@@ -46,7 +46,7 @@ class Technology(models.Model):
         verbose_name_plural = "Technologies"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Repository(models.Model):

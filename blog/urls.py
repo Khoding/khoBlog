@@ -3,8 +3,8 @@ from django.urls.conf import include
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AddPostCommentView, EditPostCommentView, PostScheduledListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
-    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, SearchResultsView, AddReplyToComment
+from .views import AddPostCommentView, AllSearchResultsView, EditPostCommentView, PostScheduledListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
+    DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, AddReplyToComment, PostSearchResultsView, SearchView, CommentSearchResultsView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -51,6 +51,16 @@ post_extra_patterns = [
     path('<int:pk_post>/comment/', include(comment_extra_patterns)),
 ]
 
+search_extra_patterns = [
+    path('', SearchView.as_view(), name='search'),
+    path('posts/', PostSearchResultsView.as_view(),
+         name='search_results'),
+    path('comments/', CommentSearchResultsView.as_view(),
+         name='search_results'),
+    path('all/', AllSearchResultsView.as_view(),
+         name='search_results'),
+]
+
 app_name = 'blog'
 urlpatterns = [
     # Lists
@@ -78,5 +88,5 @@ urlpatterns = [
          LatestCommentsFeed(), name='latest_comments_feed'),
 
     # Search Related Links
-    path('search/', SearchResultsView.as_view(), name='search_results'),
+    path('search/', include(search_extra_patterns)),
 ]

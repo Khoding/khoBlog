@@ -24,7 +24,7 @@ class PostForm(forms.ModelForm):
         }
 
 
-class EditForm(forms.ModelForm):
+class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'description',
@@ -47,10 +47,10 @@ class EditForm(forms.ModelForm):
 class CategoryAddForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('name', 'description', 'withdrawn')
+        fields = ('title', 'description', 'withdrawn')
 
         widgets = {
-            'name': forms.TextInput(),
+            'title': forms.TextInput(),
             'description': forms.Textarea(),
             'withdrawn': forms.CheckboxInput(),
         }
@@ -59,10 +59,10 @@ class CategoryAddForm(forms.ModelForm):
 class CategoryEditForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('name', 'description', 'slug', 'withdrawn')
+        fields = ('title', 'description', 'slug', 'withdrawn')
 
         widgets = {
-            'name': forms.TextInput(),
+            'title': forms.TextInput(),
             'description': forms.Textarea(),
             'slug': forms.TextInput(),
             'withdrawn': forms.CheckboxInput(),
@@ -74,10 +74,11 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('message',)
+        fields = ('title', 'body',)
 
         widgets = {
-            'message': forms.Textarea(),
+            'title': forms.TextInput(),
+            'body': forms.Textarea(),
         }
 
 
@@ -86,11 +87,12 @@ class EditPostCommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('author', 'message',)
+        fields = ('author', 'title', 'body',)
 
         widgets = {
             'author': forms.TextInput(),
-            'message': forms.Textarea(),
+            'title': forms.TextInput(),
+            'body': forms.Textarea(),
         }
 
 

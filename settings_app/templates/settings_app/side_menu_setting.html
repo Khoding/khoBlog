@@ -19,32 +19,32 @@
                             {% if link.visibility == 'NP' %}
                                 {% if context.perms.settings_app.view_linkssidemenu %}
                                     {% if link.rel_url %}
-                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.name }}</a>
+                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.title }}</a>
                                     {% elif link.url %}
-                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.name }}</a>
+                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.title }}</a>
                                     {% endif %}
                                 {% endif %}
                             {% elif link.visibility == 'NS' %}
                                 {% if context.user.is_staff %}
                                     {% if link.rel_url %}
-                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.name }}</a>
+                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.title }}</a>
                                     {% elif link.url %}
-                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.name }}</a>
+                                        <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.title }}</a>
                                     {% endif %}
                                 {% endif %}
                             {% else %}
                                 {% if link.rel_url %}
-                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.name }}</a>
+                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.title }}</a>
                                 {% elif link.url %}
-                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.name }}</a>
+                                    <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.title }}</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
                     {% else %}
                         {% if link.rel_url %}
-                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.name }}</a>
+                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="/{{ link.rel_url }}">{{ link.title }}</a>
                         {% elif link.url %}
-                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.name }}</a>
+                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="{{ link.url }}">{{ link.title }}</a>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
