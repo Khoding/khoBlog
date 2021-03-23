@@ -3,13 +3,16 @@
 
 {% block title %} - Log in{% endblock title %}
 
-{% block content %}
+{% block page_top_title %}
     <h2>Log in</h2>
+{% endblock page_top_title %}
+
+{% block content %}
     <form method="POST" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary mt-2">Log in</button>
         {% endbuttons %}
     </form>
 {% endblock content %}

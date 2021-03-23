@@ -2,13 +2,17 @@
 {% load bootstrap5 %}
 {% load markdown_extra %}
 
+
+{% block page_top_title %}
+    <h2>{{ title }}</h2>
+{% endblock page_top_title %}
+
 {% block main %}
-    <h2>New Category</h2>
     <form method="POST" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Add Category</button>
         {% endbuttons %}
     </form>
 

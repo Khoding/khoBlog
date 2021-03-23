@@ -1,15 +1,18 @@
 {% extends "sub_base.html" %}
 {% load bootstrap5 %}
 
-{% block title %} - Logout{% endblock title %}
+{% block title %} - Log out{% endblock title %}
+
+{% block page_top_title %}
+    <h2>Log out</h2>
+{% endblock page_top_title %}
 
 {% block content %}
-    <h2>Logout</h2>
     <form method="POST" class="form">
         {% csrf_token %}
-        <h3>You're About to Logout</h3>
+        <h3>You're About to Log out</h3>
         {{ form.as_p }}
 
-        <button type="submit" class="btn btn-primary">Logout</button>
+        <button type="submit" class="btn btn-primary mt-2">Log out</button>
     </form>
 {% endblock content %}

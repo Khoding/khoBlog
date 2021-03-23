@@ -131,10 +131,10 @@ class Post(models.Model):
         return markdownify(self.body)
 
     def approved_comments(self):
-        return self.comments.filter(approved_comment=True)
+        return self.comments.filter(approbation_state='AP')
 
     def removed_comments(self):
-        return self.comments.filter(removed_comment=True)
+        return self.comments.filter(approbation_state='RE')
 
 
 class Comment(models.Model):
@@ -161,8 +161,6 @@ class Comment(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     approbation_state = models.CharField(
         max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP')
-    approved_comment = models.BooleanField(default=True)
-    removed_comment = models.BooleanField(default=False)
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 
@@ -178,12 +176,8 @@ class Comment(models.Model):
 
     def approve(self):
         self.approbation_state = 'AP'
-        self.removed_comment = False
-        self.approved_comment = True
         self.save()
 
     def remove(self):
         self.approbation_state = 'RE'
-        self.approved_comment = False
-        self.removed_comment = True
         self.save()

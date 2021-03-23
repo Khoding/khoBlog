@@ -2,13 +2,16 @@
 {% load bootstrap5 %}
 {% load markdown_extra %}
 
+{% block page_top_title %}
+    <h2>{{ title }}</h2>
+{% endblock page_top_title %}
+
 {% block main %}
-    <h2>Update Post</h2>
     <form method="POST" enctype="multipart/form-data" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary mt-2">Edit Post</button>
         {% endbuttons %}
     </form>
     {{ form.media }}

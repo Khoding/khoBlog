@@ -306,7 +306,6 @@ class EditPostCommentView(LoginRequiredMixin, UpdateView):
     template_name = 'blog/add_comment_to_post.html'
 
     def form_valid(self, form):
-        form.instance.author_logged = self.request.user
         form.instance.related_post_id = self.kwargs['pk_post']
         form.instance.comment_id = self.kwargs['pk']
         return super().form_valid(form)

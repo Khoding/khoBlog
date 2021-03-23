@@ -1,11 +1,11 @@
 {% if post.approved_comments.count or user.is_superuser %}
     {% for comment in post.comments.all %}
-        {% if comment.approved_comment and not comment.comment_answer or not comment.approved_comment and user.is_superuser %}
+        {% if comment.approbation_state == 'AP' and not comment.comment_answer or not comment.approbation_state == 'AP' and user.is_superuser %}
             {% include 'blog/includes/post_comments_messages.html' %}
         {% endif %}
 
         {% for comment in comment.related_comment.all %}
-            {% if comment.approved_comment %}
+            {% if comment.approbation_state == 'AP' %}
                 {% include 'blog/includes/post_comments_messages.html' %}
             {% endif %}
         {% endfor %}

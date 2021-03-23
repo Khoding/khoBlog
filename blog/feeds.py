@@ -62,7 +62,7 @@ class LatestCommentsFeed(Feed):
         return "Latest comments on Khodok's Blog"
 
     def items(self):
-        return Comment.objects.filter(approved_comment=True).order_by('-pk')
+        return Comment.objects.filter(approbation_state='AP').order_by('-pk')
 
     def item_title(self, item):
         return item.author_logged

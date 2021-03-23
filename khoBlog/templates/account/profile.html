@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 <div class="card-body">
                     {% for comment in comments %}
-                        {% if comment.author_logged.id == object.id and comment.approved_comment %}
+                        {% if comment.author_logged.id == object.id and comment.approbation_state == 'AP' or comment.author_logged.id == object.id and user.is_superuser %}
                             <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.message}}</a></p>
                         {% endif %}
                     {% endfor %}
