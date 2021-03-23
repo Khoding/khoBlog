@@ -16,7 +16,7 @@
             {% if query|isinstance:'list' %}
                 {% for e in element %}
                     <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                        <div id="e-{{ e.slug }}" class="card shadow h-100">
+                        <div id="element-{{ e.slug }}" class="card shadow h-100">
                             <div class="card-header">
                                 <span class="d-flex">
                                     <span class="col">
