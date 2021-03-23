@@ -124,17 +124,7 @@
             <meta property="twitter:description" content="List of categories">
 
         {% else %}
-            <!-- Primary Meta Tags -->
-            <meta name="description"
-                  content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
-
-            <!-- Open Graph / Facebook -->
-            <meta property="og:description"
-                  content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
-
-            <!-- Twitter -->
-            <meta property="twitter:description"
-                  content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+            {{ block.super }}
         {% endif %}
     {% endwith %}
 
