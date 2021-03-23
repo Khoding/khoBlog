@@ -6,7 +6,7 @@
         {% if view_name == 'blog:comment_remove' %}
             {% if comment.author_logged.id == user.id or user.is_superuser %}
                 <h2>Remove Comment</h2>
-                <h3>Delete: {{ comment.related_post }} - {{comment.message}}</h3>
+                <h3>Delete: {{ comment.related_post }} - {{comment.body}}</h3>
                 <form method="POST" enctype="multipart/form-data" class="form">
                     {% csrf_token %}
                     {% bootstrap_form form %}
@@ -21,7 +21,7 @@
         {% else %}
             {% if user.is_superuser %}
                 <h2>Approve Comment</h2>
-                <h3>Approve: {{ comment.related_post }} - {{comment.message}}</h3>
+                <h3>Approve: {{ comment.related_post }} - {{comment.body}}</h3>
                 <form method="POST" enctype="multipart/form-data" class="form">
                     {% csrf_token %}
                     {% bootstrap_form form %}
