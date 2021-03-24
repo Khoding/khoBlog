@@ -68,6 +68,17 @@ $font-family-monospace: $monospace;
     }
 }
 
+.offcanvas {
+    @include color('text');
+    @include background-color('bg');
+    @include border-color('border-color');
+
+    &-header,
+    &-body {
+        @include border-color('border-color');
+    }
+}
+
 .navbar,
 .nav-scroller {
     @include background-color('bg');
