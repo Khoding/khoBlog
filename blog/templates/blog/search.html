@@ -1,15 +1,6 @@
 {% extends 'blog/base_post_main_block.html' %}
 {% load instance %}
 
-{% block page_top_title %}
-    <h2 class="clearfix">
-        {{ title }}
-        <a class="btn btn-primary float-end" href="{% url 'blog:search' %}">
-            Search
-        </a>
-    </h2>
-{% endblock page_top_title %}
-
 {% block content_main %}
     <div class="row row-cols-1 row-cols-lg-3">
         {% for element in query %}

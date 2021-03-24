@@ -6,32 +6,25 @@
 {% block page_top_title %}
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_withdrawn_list' %}
-            <h2>Withdrawn Posts</h2>
-
+            Withdrawn
         {% elif view_name == 'blog:post_draft_list' %}
-            <h2>Drafts</h2>
-
+            Drafts
         {% elif view_name == 'blog:post_scheduled_list' %}
-            <h2>Scheduled Posts</h2>
-
+            Scheduled
         {% elif view_name == 'blog:post_category_list' %}
             {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
-                <h2>
-                    Posts in <b>{{ cats|capfirst }}</b> Category
-                </h2>
-
+                Posts in <b>{{ cats|capfirst }}</b> Category
             {% else %}
-                <h2>
-                    This category is Withdrawn
-                </h2>
+                This category is Withdrawn
             {% endif %}
         {% elif view_name == 'blog:category_list' %}
-            <h2>Category List</h2>
+            Category List
+        {% elif view_name == 'blog:post_list' %}
+            Latest Posts
         {% else %}
-            <h2>Latest Posts</h2>
+            {{ title }}
         {% endif %}
     {% endwith %}
-
 {% endblock page_top_title %}
 
 {% block main %}

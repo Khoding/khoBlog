@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.views.generic.base import TemplateView
 
 from .forms import EditPostCommentForm, PostForm, CommentForm, EditPostForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
 from .models import Post, Comment, Category
@@ -242,6 +241,7 @@ class SearchView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search'
+        context['search_url'] = reverse('blog:search_results')
         return context
 
 
@@ -266,6 +266,7 @@ class PostSearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Posts'
+        context['search_url'] = reverse('blog:post_search_results')
         return context
 
 
@@ -290,6 +291,7 @@ class CommentSearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Comments'
+        context['search_url'] = reverse('blog:comment_search_results')
         return context
 
 
@@ -324,6 +326,7 @@ class AllSearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Everything'
+        context['search_url'] = reverse('blog:search_results')
         return context
 
 
@@ -338,6 +341,7 @@ class RandomSearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Random Search'
+        context['search_url'] = reverse('blog:rnd_search_results')
         return context
 
 

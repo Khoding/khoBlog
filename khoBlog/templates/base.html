@@ -204,8 +204,28 @@
         <div class="row">
             <div class="col-xl-9 col-lg-9 col-md-auto">
 
-                {% block page_top_title %}
-                {% endblock page_top_title %}
+                <h2 class="row clearfix">
+                    <div class="col col-sm-auto">
+                        <div>
+                            {% block page_top_title %}
+                                {{ title }}
+                            {% endblock page_top_title %}
+                        </div>
+                    </div>
+                    <div class="col d-none d-sm-block">
+                        <form action="{{ search_url }}" method="get">
+                            <input type="text" class="form-control" id="search_title" placeholder="Search" name="q"
+                                aria-label="search" aria-describedby="search">
+                        </form>
+                    </div>
+                    <div class="col-auto">
+                        {% block page_top_end %}
+                            <a class="btn btn-primary float-end" href="{% url 'blog:search' %}">
+                                Search
+                            </a>
+                        {% endblock page_top_end %}
+                    </div>
+                </h2>
 
                 {% block content %}
                 {% endblock content %}

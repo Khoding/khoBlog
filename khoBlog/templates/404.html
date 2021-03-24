@@ -5,14 +5,15 @@
 {% block title %}
 {% endblock title %}
 
-{% block page_top_title %}
-    <h2 class="clearfix">Error 404
-        <a class="btn btn-primary float-end" href="{% url 'blog:latest' %}">
-            Latest Post
-        </a>
-    </h2>
-{% endblock page_top_title %}
+{% block page_top_end %}
+    <a class="btn btn-primary float-end" href="{% url 'blog:latest' %}">
+        Latest Post
+    </a>
+{% endblock page_top_end %}
 
 {% block content_main %}
     <a class="btn btn-danger" href="{% url 'pages:kheee' %}">This page doesn't exist</a>
 {% endblock content_main %}
+
+{% block pagination %}
+{% endblock pagination %}

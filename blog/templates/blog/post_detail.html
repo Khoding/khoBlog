@@ -3,19 +3,17 @@
 {% load markdown_extra %}
 {% load read_time %}
 
-{% block page_top_title %}
-    <h2 class="clearfix">{{ title }}
-        <div class="btn-group float-end" role="group" aria-label="Previous / Next">
-            <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
-                <i class="bi bi-chevron-left"></i>
-            </a>
+{% block page_top_end %}
+    <div class="btn-group float-end" role="group" aria-label="Previous / Next">
+        <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
+            <i class="bi bi-chevron-left"></i>
+        </a>
 
-            <a class="btn btn-primary" href="{{ post.get_next_by_created_date.get_absolute_url }}">
-                <i class="bi bi-chevron-right"></i>
-            </a>
-        </div>
-    </h2>
-{% endblock page_top_title %}
+        <a class="btn btn-primary" href="{{ post.get_next_by_created_date.get_absolute_url }}">
+            <i class="bi bi-chevron-right"></i>
+        </a>
+    </div>
+{% endblock page_top_end %}
 
 {% block content_main %}
 
@@ -27,7 +25,7 @@
                     <span class="col">
                         <h2>Post #{{ post.id }}</h2>
                     </span>
-                    <span class="col-1">
+                    <span class="col-auto mx-2">
                         <h4><span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span></h4>
                     </span>
                     <span class="col">

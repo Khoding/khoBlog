@@ -74,6 +74,9 @@ class LinksSideMenu(models.Model):
     def __str__(self):
         return self.title
 
+    def get_rel_url(self):
+        return '/' + self.rel_url
+
 
 class LinksGroupSideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)

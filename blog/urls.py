@@ -54,11 +54,11 @@ post_extra_patterns = [
 search_extra_patterns = [
     path('', SearchView.as_view(), name='search'),
     path('post/', PostSearchResultsView.as_view(),
-         name='search_results'),
+         name='post_search_results'),
     path('comment/', CommentSearchResultsView.as_view(),
-         name='search_results'),
+         name='comment_search_results'),
     path('rnd/', RandomSearchResultsView.as_view(),
-         name='search_results'),
+         name='rnd_search_results'),
     path('all/', AllSearchResultsView.as_view(),
          name='search_results'),
 ]

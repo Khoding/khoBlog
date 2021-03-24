@@ -2,11 +2,6 @@
 {% load bootstrap5 %}
 {% load markdown_extra %}
 
-
-{% block page_top_title %}
-    <h2>{{ title }}</h2>
-{% endblock page_top_title %}
-
 {% block main %}
     <form method="POST" class="form">
         {% csrf_token %}
