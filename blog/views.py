@@ -252,16 +252,19 @@ class PostSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if self.request.user.is_superuser:
-            return Post.objects.filter(
-                Q(title__icontains=query) | Q(
-                    body__icontains=query) | Q(description__icontains=query),
-            )
+        if query:
+            if self.request.user.is_superuser:
+                return Post.objects.filter(
+                    Q(title__icontains=query) | Q(
+                        body__icontains=query) | Q(description__icontains=query),
+                )
+            else:
+                return Post.objects.filter(
+                    Q(title__icontains=query) | Q(
+                        body__icontains=query) | Q(description__icontains=query),
+                ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
         else:
-            return Post.objects.filter(
-                Q(title__icontains=query) | Q(
-                    body__icontains=query) | Q(description__icontains=query),
-            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
+            return ""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -277,16 +280,19 @@ class CommentSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if self.request.user.is_superuser:
-            return Comment.objects.filter(
-                Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                    body__icontains=query),
-            )
+        if query:
+            if self.request.user.is_superuser:
+                return Comment.objects.filter(
+                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                        body__icontains=query),
+                )
+            else:
+                return Comment.objects.filter(
+                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                        body__icontains=query),
+                ).filter(~Q(approbation_state='RE'),)
         else:
-            return Comment.objects.filter(
-                Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                    body__icontains=query),
-            ).filter(~Q(approbation_state='RE'),)
+            return ""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -302,26 +308,29 @@ class AllSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if self.request.user.is_superuser:
-            comment = Comment.objects.filter(
-                Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                    body__icontains=query),
-            )
-            post = Post.objects.filter(
-                Q(title__icontains=query) | Q(
-                    body__icontains=query) | Q(description__icontains=query),
-            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
-            return [post, comment]
+        if query:
+            if self.request.user.is_superuser:
+                comment = Comment.objects.filter(
+                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                        body__icontains=query),
+                )
+                post = Post.objects.filter(
+                    Q(title__icontains=query) | Q(
+                        body__icontains=query) | Q(description__icontains=query),
+                ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
+                return [post, comment]
+            else:
+                comment = Comment.objects.filter(
+                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
+                        body__icontains=query),
+                ).filter(~Q(approbation_state='RE'),)
+                post = Post.objects.filter(
+                    Q(title__icontains=query) | Q(
+                        body__icontains=query) | Q(description__icontains=query),
+                ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
+                return [post, comment]
         else:
-            comment = Comment.objects.filter(
-                Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                    body__icontains=query),
-            ).filter(~Q(approbation_state='RE'),)
-            post = Post.objects.filter(
-                Q(title__icontains=query) | Q(
-                    body__icontains=query) | Q(description__icontains=query),
-            ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True))
-            return [post, comment]
+            return ""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
