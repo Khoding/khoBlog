@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.urls.base import reverse_lazy
+from django.urls.base import reverse
 
 
 def context(request):
