@@ -11,7 +11,7 @@ from markdownx.utils import markdownify
 class Category(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
-    slug = models.SlugField(unique=True, default="")
+    slug = models.SlugField(unique=True, default="", max_length=200)
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
@@ -74,7 +74,7 @@ class Post(models.Model):
     post_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/')
     description = models.TextField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=200)
     categories = models.ManyToManyField(
         'blog.Category', through='PostCatsLink')
     created_date = models.DateTimeField(default=timezone.now)

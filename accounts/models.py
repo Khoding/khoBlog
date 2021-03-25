@@ -19,7 +19,8 @@ class CustomUser(AbstractUser):
     profile_pic = models.ImageField(
         null=True, blank=True, upload_to="images/profile/")
     bio = models.TextField(blank=True, default="")
-    slug = models.SlugField(blank=True, unique=True, default="")
+    slug = models.SlugField(blank=True, unique=True,
+                            default="", max_length=200)
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
         max_length=42, blank=True, default="Hello", help_text="The message before your name when you are logged, by default 'Hello'")

@@ -5,7 +5,7 @@ from django.contrib.flatpages.models import FlatPage as FlatPageOld
 
 
 class FlatPage(FlatPageOld):
-    slug = models.SlugField(unique=True, default="")
+    slug = models.SlugField(unique=True, default="", max_length=200)
     update_date = models.DateTimeField('Last Updated', null=True, blank=True)
     page_head = models.TextField('Page head', blank=True)
     main_page = models.BooleanField(default=False)
