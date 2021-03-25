@@ -3,7 +3,7 @@ from django.urls.conf import include
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AddPostCommentView, AllSearchResultsView, EditPostCommentView, PostScheduledListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
+from .views import AddPostCommentView, AllSearchResultsView, CategorySearchResultsView, EditPostCommentView, PostScheduledListView, PostListView, PostDetailView, PostDraftListView, PostWithdrawnListView, AddPostView, EditPostView, \
     DeletePostView, AddCategoryView, PostListFromCategoryView, CategoryListView, EditCategoryView, ApprovePostCommentView, RemovePostCommentView, AddReplyToComment, PostSearchResultsView, SearchView, CommentSearchResultsView, RandomSearchResultsView
 
 post_action_extra_patterns = [
@@ -55,6 +55,8 @@ search_extra_patterns = [
     path('', SearchView.as_view(), name='search'),
     path('post/', PostSearchResultsView.as_view(),
          name='post_search_results'),
+    path('category/', CategorySearchResultsView.as_view(),
+         name='category_search_results'),
     path('comment/', CommentSearchResultsView.as_view(),
          name='comment_search_results'),
     path('rnd/', RandomSearchResultsView.as_view(),
