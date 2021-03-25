@@ -7,7 +7,7 @@ def context(request):
     context = {
         'CANONICAL_PATH': request.build_absolute_uri(request.path),
         'debug_flag': debug_flag,
-        'search_url': reverse_lazy('blog:search_results')
+        'search_url': reverse('blog:search_results'),
     }
 
     return context
