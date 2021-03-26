@@ -67,32 +67,39 @@ class Post(models.Model):
     ]
 
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author")
-    title = models.CharField(max_length=200)
-    featured_title = models.CharField(max_length=200, default='', blank=True)
-    body = MarkdownxField()
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author", help_text="Post author")
+    title = models.CharField(max_length=200, help_text="Post title")
+    featured_title = models.CharField(
+        max_length=200, default='', blank=True, help_text="Featured post title")
+    body = MarkdownxField(help_text="Post main content")
     post_image = models.ImageField(
-        null=True, blank=True, upload_to='images/post/')
-    description = models.TextField()
-    slug = models.SlugField(unique=True, max_length=200)
+        null=True, blank=True, upload_to='images/post/', help_text="Post image")
+    description = models.TextField(help_text="Post description")
+    slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
     categories = models.ManyToManyField(
-        'blog.Category', through='PostCatsLink')
-    created_date = models.DateTimeField(default=timezone.now)
-    modified_date = models.DateTimeField(auto_now=True)
-    published_date = models.DateTimeField(blank=True, null=True)
+        'blog.Category', through='PostCatsLink', help_text="Post categories")
+    created_date = models.DateTimeField(
+        default=timezone.now, help_text="Creation date")
+    modified_date = models.DateTimeField(
+        auto_now=True, help_text="Last modification")
+    published_date = models.DateTimeField(
+        blank=True, null=True, help_text="Publication date")
     publication_state = models.CharField(
-        max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D')
-    withdrawn = models.BooleanField(default=False)
+        max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D', help_text="Post publication state")
+    withdrawn = models.BooleanField(
+        default=False, help_text="Is the post private")
     featuring_state = models.CharField(
-        max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N')
-    featured = models.BooleanField(default=False)
+        max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N', help_text="Featuring state")
+    featured = models.BooleanField(default=False, help_text="Is it featured")
     big = models.BooleanField(default=False)
     language = models.CharField(
-        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN')
-    url_post_type = models.URLField(default='', blank=True)
+        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the point main language")
+    url_post_type = models.URLField(
+        default='', blank=True, help_text="Url to page that inspired the post")
     url_post_type_name = models.CharField(
-        max_length=200, default='', blank=True)
-    clicks = models.IntegerField(default=0)
+        max_length=200, default='', blank=True, help_text="What will be shown as url name")
+    clicks = models.IntegerField(
+        default=0, help_text="How many times the post has been seen")
 
     def __str__(self):
         return self.title
@@ -144,7 +151,7 @@ class Comment(models.Model):
     ]
 
     related_post = models.ForeignKey(
-        'blog.Post', on_delete=models.CASCADE, related_name='comments')
+        'blog.Post', on_delete=models.CASCADE, related_name='comments', help_text="Comment's related post")
     author = models.CharField(
         max_length=200,
         default='',
@@ -156,12 +163,15 @@ class Comment(models.Model):
         ),
     )
     author_logged = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged")
-    title = models.CharField(max_length=200, blank=True)
-    body = models.TextField(verbose_name="Comment")
-    created_date = models.DateTimeField(default=timezone.now)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment's author (a user with account)")
+    title = models.CharField(max_length=200, blank=True,
+                             help_text="Comment Title")
+    body = models.TextField(verbose_name="Comment",
+                            help_text="Comment's main content")
+    created_date = models.DateTimeField(
+        default=timezone.now, help_text="Creating date")
     approbation_state = models.CharField(
-        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP')
+        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment's approbation state")
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 

@@ -6,7 +6,7 @@ from .models import Post, Comment, Category
 from bootstrap_datepicker_plus import DateTimePickerInput
 
 
-class PostForm(forms.ModelForm):
+class PostAddForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories',
@@ -24,7 +24,7 @@ class PostForm(forms.ModelForm):
         }
 
 
-class EditPostForm(forms.ModelForm):
+class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'description',

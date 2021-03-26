@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import EditPostCommentForm, PostForm, CommentForm, EditPostForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
+from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
 from .models import Post, Comment, Category
 
 
@@ -164,7 +164,7 @@ class PostWithdrawnListView(ListView):
 @superuser_required()
 class AddPostView(CreateView):
     model = Post
-    form_class = PostForm
+    form_class = PostAddForm
     template_name = "blog/post_new.html"
 
     def form_valid(self, form):
@@ -208,7 +208,7 @@ class EditCategoryView(UpdateView):
 @superuser_required()
 class EditPostView(UpdateView):
     model = Post
-    form_class = EditPostForm
+    form_class = PostEditForm
     template_name = "blog/post_update.html"
 
     def get_context_data(self, **kwargs):
@@ -270,7 +270,8 @@ class PostSearchResultsView(ListView):
                 post = Post.objects.all()
                 return post
             else:
-                post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True),)
+                post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
+                    published_date__isnull=True), ~Q(withdrawn=True),)
                 return post
 
     def get_context_data(self, **kwargs):
@@ -409,7 +410,8 @@ class AllSearchResultsView(ListView):
                 comment = Comment.objects.all()
                 return [post, category, comment]
             else:
-                post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True),)
+                post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
+                    published_date__isnull=True), ~Q(withdrawn=True),)
                 category = Category.objects.filter(~Q(withdrawn=True),)
                 comment = Comment.objects.filter(~Q(approbation_state='RE'),)
                 return [post, category, comment]
