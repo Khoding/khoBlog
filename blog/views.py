@@ -253,7 +253,7 @@ class PostSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query:
+        if query != None:
             if self.request.user.is_superuser:
                 return Post.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -266,7 +266,9 @@ class PostSearchResultsView(ListView):
                 ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True),
                          )
         else:
-            return ""
+            query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
+            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+            return query
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -282,7 +284,7 @@ class CategorySearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query:
+        if query != None:
             if self.request.user.is_superuser:
                 return Category.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -295,7 +297,9 @@ class CategorySearchResultsView(ListView):
                 ).filter(~Q(withdrawn=True),
                          )
         else:
-            return ""
+            query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
+            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+            return query
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -311,7 +315,7 @@ class CommentSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query:
+        if query != None:
             if self.request.user.is_superuser:
                 return Comment.objects.filter(
                     Q(title__icontains=query) | Q(author__icontains=query) | Q(
@@ -324,7 +328,9 @@ class CommentSearchResultsView(ListView):
                 ).filter(~Q(approbation_state='RE'),
                          )
         else:
-            return ""
+            query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
+            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+            return query
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -355,7 +361,7 @@ class AllSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query:
+        if query != None:
             if self.request.user.is_superuser:
                 post = Post.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -388,7 +394,9 @@ class AllSearchResultsView(ListView):
                          )
                 return [post, category, comment]
         else:
-            return ""
+            query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
+            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+            return query
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
