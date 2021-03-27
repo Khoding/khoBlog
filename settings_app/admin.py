@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LinksGroupSideMenu, SideMenu, LinksSideMenu, Settings
+from .models import LinksFooter, LinksGroupSideMenu, SideMenu, LinksSideMenu, Settings, Footer
 
 
 class UsersAdmin(admin.ModelAdmin):
@@ -23,6 +23,16 @@ class SideMenuAdmin(admin.ModelAdmin):
     inlines = [LinksSideMenuInline, ]
 
 
+class LinksFooterInline(admin.TabularInline):
+    model = LinksFooter
+    extra = 0
+
+
+class FooterAdmin(admin.ModelAdmin):
+    inlines = [LinksFooterInline, ]
+
+
 admin.site.register(SideMenu, SideMenuAdmin)
+admin.site.register(Footer, FooterAdmin)
 admin.site.register(LinksGroupSideMenu, LinksGroupSideMenuAdmin)
 admin.site.register(Settings, PresetsSettingsAdmin)

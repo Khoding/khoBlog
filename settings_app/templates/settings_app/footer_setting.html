@@ -1,0 +1,21 @@
+{% for footer in footers %}
+    {% for link in footer.footer_links.all %}
+        <div class="{{ link.parent_css_classes }}">
+            <a class="{{ link.link_css_classes }}" href="
+                {% if link.rel_url %}
+                    {{ link.get_rel_url }}
+                {% elif link.url %}
+                    {{ link.url }}
+                {% else %}
+                    /
+                {% endif %}
+                ">
+                {% if link.child_img %}
+                    <img src="{{ link.child_img }}" width="50" alt="{{ link.title }}" />
+                {% else %}
+                    {{ link.title }}
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+{% endfor %}

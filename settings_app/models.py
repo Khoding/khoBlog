@@ -16,6 +16,8 @@ class Settings(models.Model):
     shown = models.BooleanField(default=False)
     side_menus = models.ManyToManyField(
         'settings_app.SideMenu', related_name='side_menus', blank=True)
+    footers = models.ManyToManyField(
+        'settings_app.Footer', related_name='footers', blank=True)
     default_theme = models.CharField(
         max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default='default')
 
@@ -86,3 +88,35 @@ class LinksGroupSideMenu(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Footer(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    sub_title = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Footers"
+
+    def __str__(self):
+        return self.title
+
+
+class LinksFooter(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    rel_url = models.CharField(max_length=200, blank=True)
+    url = models.URLField(blank=True)
+    links = models.ForeignKey(
+        'settings_app.Footer', on_delete=models.CASCADE, related_name='footer_links')
+    parent_css_classes = models.CharField(max_length=200, blank=True)
+    link_css_classes = models.CharField(
+        max_length=200, verbose_name="Classes", blank=True)
+    child_img = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Footer Links"
+
+    def __str__(self):
+        return self.title
+
+    def get_rel_url(self):
+        return '/' + self.rel_url

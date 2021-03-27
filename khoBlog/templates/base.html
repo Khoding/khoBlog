@@ -1,6 +1,7 @@
 {% load static %}
 {% load socialaccount %}
 {% load default_app_theme_set %}
+{% load footer_set %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +100,7 @@
     {% endif %}
 </head>
 
-<body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% setting themes %}{% endspaceless %}{% endif %}">
+<body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
     {% if not debug_flag %}
         <!-- Google Tag Manager (noscript) -->
         <noscript>
@@ -243,23 +244,7 @@
     <footer class="blog-footer">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-sm">
-                    <a class="btn btn-outline-primary" href="{% url 'blog:category_list' %}">
-                        Category List
-                    </a>
-                </div>
-
-                <div class="col-sm my-2">
-                    <a class="linkHome" href="/">
-                        <img src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" width="50" alt="Khodok's Logo"/>
-                    </a>
-                </div>
-
-                <div class="col-sm">
-                    <a class="btn btn-outline-primary" href="{% url 'blog:latest' %}">
-                        Latest Post
-                    </a>
-                </div>
+                {% footer_setting footers %}
             </div>
         </div>
     </footer>

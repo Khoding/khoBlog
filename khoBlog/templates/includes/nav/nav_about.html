@@ -1,7 +1,7 @@
 {% load about_set %}
 
 <div class="card p-4 mb-2 rounded shadow">
-    {% setting abouts %}
+    {% sm_setting abouts %}
 
     <div class="btn-group-vertical d-block mb-2" role="group" aria-label="Group Interesting Links">
         <a class="btn btn-primary" href="{% url 'blog:latest' %}">Latest Post</a>
