@@ -38,7 +38,7 @@ inflection==0.5.1
 itypes==1.2.0
 Jinja2==2.11.3
 jmespath==0.10.0
-lxml==4.6.2
+lxml==4.6.3
 Markdown==3.3.3
 markdown2==2.4.0
 MarkupSafe==1.1.1
