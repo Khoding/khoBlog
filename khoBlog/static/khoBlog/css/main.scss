@@ -10,7 +10,7 @@
 /* Importe les classes utilitaires */
 @import 'utils';
 
-@import '../../vendor/node_modules/bootstrap-icons\font\bootstrap-icons.css';
+@import '../../vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css';
 
 #id_body {
     @include background-color('bg');
