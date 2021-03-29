@@ -1,7 +1,8 @@
 from django import forms
+from .models import TodoGroup
 
 
 class TodoForm(forms.Form):
-    element = forms.CharField(max_length=40,
-                              widget=forms.TextInput(
-                                  attrs={'class': 'form-control', 'placeholder': 'Enter todo e.g. Delete junk files', 'aria-label': 'Todo', 'aria-describedby': 'add-btn'}))
+    title = forms.CharField()
+    todo_group = forms.ModelChoiceField(queryset=TodoGroup.objects.all())
+    description = forms.CharField()

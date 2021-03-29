@@ -2,13 +2,12 @@
 {% load bootstrap5 %}
 
 {% block main %}
-    <h2>Delete Post</h2>
     <h3>Delete: {{ post.title }}</h3>
     <form method="POST" class="form">
         {% csrf_token %}
         <h4>Are you sure ?</h4>
-
         {{ form.as_p }}
+
         {% buttons %}
             <button type="submit" class="btn btn-primary mt-2">Delete Post</button>
         {% endbuttons %}

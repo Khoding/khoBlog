@@ -3,33 +3,39 @@
 {% load bootstrap5 %}
 
 {% block content %}
-    <h2>TODO List</h2>
-
     <form action="{% url 'todo:add' %}" method="POST" class="form">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% bootstrap_form form %}
 
         {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">Save</button>
+            <button type="submit" class="btn btn-primary mt-2">Add New Todo</button>
         {% endbuttons %}
     </form>
 
-    <a class="btn btn-outline-light" href="{% url 'todo:deletecomplete' %}">Delete completed</a>
-    <a class="btn btn-outline-light" href="{% url 'todo:deleteall' %}">Delete all</a>
-
-    <hr>
+    <hr />
 
     <ul class="list-unstyled">
         {% for todo in todo_list %}
             {% if todo.complete %}
-                <li class="text-muted"><i class="bi bi-check2-square"></i> {{ todo.element }}</li>
+                <li class="text-muted">
+                    <i class="bi bi-check2-square"></i>
+                    {{ todo.title }}{% if todo.description %} - {{ todo.description }}{% endif %}
+                    <a class="text-info" href="{% url 'todo:complete' todo.id %}">Mark as Uncomplete</a>
+                    <a class="text-danger float-end" href="{% url 'todo:delete' todo.id %}">Delete</a>
+                </li>
             {% else %}
-                <li><a class="todoTodo" href="{% url 'todo:complete' todo.id %}"><i class="bi bi-x-square"></i> {{ todo.element }}</a></li>
+                <li>
+                    <i class="bi bi-x-square"></i>
+                    {{ todo.title }}{% if todo.description %} - {{ todo.description }}{% endif %}
+                    <a class="text-success" href="{% url 'todo:complete' todo.id %}">Mark as Completed</a>
+                    <a class="text-danger float-end" href="{% url 'todo:delete' pk=todo.pk %}">Delete</a>
+                </li>
             {% endif %}
 
-            {% if not forloop.last %}
-                <hr />
-            {% endif %}
+            <hr />
         {% endfor %}
     </ul>
+
+    <a class="btn btn-outline-light" href="{% url 'todo:delete_complete' %}">Delete completed</a>
+    <a class="btn btn-outline-light" href="{% url 'todo:delete_all' %}">Delete all</a>
 {% endblock content %}

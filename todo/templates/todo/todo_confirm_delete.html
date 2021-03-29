@@ -1,0 +1,16 @@
+{% extends 'sub_base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    <h3>Delete: {{ todo.title }}{% if todo.description %} - {{ todo.description }}{% endif %}</h3>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <h4>Are you sure ?</h4>
+        {{ form.as_p }}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-primary mt-2">Delete Todo</button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}
