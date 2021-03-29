@@ -26,6 +26,7 @@ from django.conf.urls.static import static
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
+from rest_framework.authtoken.views import obtain_auth_token
 
 admin.site.site_header = "Khodok's Blog Admin"
 admin.site.site_title = "Khodok's Blog Admin"
@@ -47,6 +48,7 @@ site_map_info_dict = {
 
 api_patterns = [
     path('', include('khoBlogAPI.urls')),
+    path('learning_resources/', include('learning_resources.urls')),
     path('docs/', schema_view.with_ui('redoc',
                                       cache_timeout=0), name='schema-redoc'),
 ]
@@ -55,6 +57,7 @@ api_base_patterns = [
     re_path(r'(?P<version>[v1]+)/',
             include(api_patterns)),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/token/', obtain_auth_token, name='obtain-token'),
 ]
 
 urlpatterns = [
