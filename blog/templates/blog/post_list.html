@@ -44,14 +44,15 @@
         {% endif %}
 
         {% if previous_week or next_week %}
-
-            {% if previous_week %}
-                Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
-            {% endif %}
-            {% if previous_week and next_week %}--{% endif %}
-            {% if next_week %}
-                Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }}
-            {% endif %}
+            <div>
+                {% if previous_week %}
+                    Previous Week: <a href="{% url 'blog:archive_week' year=previous_week|date:'Y' week=previous_week|date:'W' %}">{{ previous_week|date:"W" }} of {{ previous_week|date:"Y" }}</a>
+                {% endif %}
+                {% if previous_week and next_week %}--{% endif %}
+                {% if next_week %}
+                    Next week: <a href="{% url 'blog:archive_week' year=next_week|date:'Y' week=next_week|date:'W' %}">{{ next_week|date:"W" }} of {{ next_week|date:"Y" }}</a>
+                {% endif %}
+            </div>
         {% endif %}
 
         {% if previous_day or next_day %}
