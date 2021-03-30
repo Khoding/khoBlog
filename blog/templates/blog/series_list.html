@@ -1,0 +1,49 @@
+{% extends 'blog/base_post_main_block.html' %}
+{% load static %}
+{% load markdown_extra %}
+
+{% block content_main %}
+    <div class="row row-cols-1 row-cols-lg-3">
+        {% for series in series_list %}
+            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div id="series-{{ series.slug }}" class="card shadow h-100">
+
+                    <div class="card-header">
+                        <span class="d-flex">
+                            <span class="col">
+                                <strong class="text-muted">Series #{{ series.id }}</strong>
+                            </span>
+                            <span class="col">
+                                {% block super_buttons %}
+                                    {% if user.is_superuser %}
+                                        <div class="float-end btn-group" role="group" aria-label="Edit Group">
+                                            <a class="btn btn-light" href="{% url 'blog:series_edit' slug=series.slug %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+                                            <a class="btn btn-danger" href="{% url 'admin:blog_series_change' object_id=series.id %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endblock super_buttons %}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ series.title }}</h3>
+                        <p class="mb-auto">{{ series.description }}</p>
+                        <p class="mb-auto">Series Slug: {{ series.slug }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="d-flex">
+                            <span class="col">
+                                <a class="card-link" href="{{ series.get_absolute_url }}">See all posts in this Series</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content_main %}

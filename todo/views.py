@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView
 
-from .models import Todo, TodoGroup
+from .models import Todo
 from .forms import TodoForm
 
 

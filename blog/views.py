@@ -6,8 +6,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm
-from .models import Post, Comment, Category
+from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
+from .models import Post, Comment, Category, Series
 
 
 def superuser_required():
@@ -42,7 +42,7 @@ class PostListView(ListView):
         return context
 
 
-class PostListFromCategoryView(ListView):
+class PostInCategoryListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
@@ -60,6 +60,27 @@ class PostListFromCategoryView(ListView):
         context = super().get_context_data(**kwargs)
         context['cats'] = self.category
         context['title'] = self.category.title
+        return context
+
+
+class PostInSeriesListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+
+    def get_queryset(self):
+        self.series = get_object_or_404(
+            Series, slug=self.kwargs['slug'])
+        if self.request.user.is_superuser:
+            return self.model.objects.filter(series=self.series)
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, series=self.series)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['series'] = self.series
+        context['title'] = self.series.title
         return context
 
 
@@ -83,6 +104,25 @@ class CategoryListView(ListView):
         return context
 
 
+class SeriesListView(ListView):
+    model = Series
+    template = 'blog/series_list.html'
+    context_object_name = 'series_list'
+    paginate_by = 21
+    ordering = 'pk'
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            return self.model.objects.filter(withdrawn=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Series List'
+        return context
+
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
@@ -91,6 +131,12 @@ class PostDetailView(DetailView):
         self.post = get_object_or_404(
             Post, slug=self.kwargs['slug'])
         self.post.clicked()
+        if self.request.user.is_superuser:
+            self.series = self.model.objects.filter(
+                series__isnull=False, series=self.post.series)
+        else:
+            self.series = self.model.objects.filter(
+                series__isnull=False, series=self.post.series, withdrawn=False)
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -98,6 +144,7 @@ class PostDetailView(DetailView):
         context['posts'] = self.model.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Post Detail'
+        context['series'] = self.series
         context['now'] = timezone.now()
         return context
 
@@ -162,7 +209,7 @@ class PostWithdrawnListView(ListView):
 
 
 @superuser_required()
-class AddPostView(CreateView):
+class PostCreateView(CreateView):
     model = Post
     form_class = PostAddForm
     template_name = "blog/post_new.html"
@@ -178,7 +225,7 @@ class AddPostView(CreateView):
 
 
 @superuser_required()
-class AddCategoryView(CreateView):
+class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryAddForm
     template_name = "blog/category_new.html"
@@ -194,7 +241,22 @@ class AddCategoryView(CreateView):
 
 
 @superuser_required()
-class EditCategoryView(UpdateView):
+class SeriesCreateView(CreateView):
+    model = Series
+    form_class = SeriesAddForm
+    template_name = "blog/series_new.html"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'New Series'
+        return context
+
+
+@superuser_required()
+class CategoryUpdateView(UpdateView):
     model = Category
     form_class = CategoryEditForm
     template_name = "blog/category_edit.html"
@@ -206,7 +268,19 @@ class EditCategoryView(UpdateView):
 
 
 @superuser_required()
-class EditPostView(UpdateView):
+class SeriesUpdateView(UpdateView):
+    model = Series
+    form_class = SeriesEditForm
+    template_name = "blog/series_edit.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Series'
+        return context
+
+
+@superuser_required()
+class PostUpdateView(UpdateView):
     model = Post
     form_class = PostEditForm
     template_name = "blog/post_update.html"
@@ -218,7 +292,7 @@ class EditPostView(UpdateView):
 
 
 @superuser_required()
-class DeletePostView(DeleteView):
+class PostDeleteView(DeleteView):
     model = Post
     template_name = "blog/post_confirm_delete.html"
     success_url = reverse_lazy('blog:post_list')
@@ -229,7 +303,7 @@ class DeletePostView(DeleteView):
         return context
 
 
-class SearchView(ListView):
+class SearchListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -246,7 +320,7 @@ class SearchView(ListView):
         return context
 
 
-class PostSearchResultsView(ListView):
+class PostSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -281,7 +355,7 @@ class PostSearchResultsView(ListView):
         return context
 
 
-class CategorySearchResultsView(ListView):
+class CategorySearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -315,7 +389,7 @@ class CategorySearchResultsView(ListView):
         return context
 
 
-class CommentSearchResultsView(ListView):
+class CommentSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -349,7 +423,7 @@ class CommentSearchResultsView(ListView):
         return context
 
 
-class RandomSearchResultsView(ListView):
+class RandomSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
 
@@ -364,7 +438,7 @@ class RandomSearchResultsView(ListView):
         return context
 
 
-class AllSearchResultsView(ListView):
+class AllSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -438,7 +512,7 @@ def post_publish_withdrawn(request, slug):
     return redirect('blog:post_detail', slug=slug)
 
 
-class AddPostCommentView(LoginRequiredMixin, CreateView):
+class PostCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = "blog/add_comment_to_post.html"
@@ -454,7 +528,7 @@ class AddPostCommentView(LoginRequiredMixin, CreateView):
         return context
 
 
-class AddReplyToComment(LoginRequiredMixin, CreateView):
+class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = "blog/add_comment_to_post.html"
@@ -471,7 +545,7 @@ class AddReplyToComment(LoginRequiredMixin, CreateView):
         return context
 
 
-class EditPostCommentView(LoginRequiredMixin, UpdateView):
+class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = EditPostCommentForm
     template_name = 'blog/add_comment_to_post.html'
@@ -488,7 +562,7 @@ class EditPostCommentView(LoginRequiredMixin, UpdateView):
 
 
 @superuser_required()
-class ApprovePostCommentView(UpdateView):
+class ApprovePostCommentUpdateView(UpdateView):
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/ar_post_comment.html'
@@ -506,7 +580,7 @@ class ApprovePostCommentView(UpdateView):
         return context
 
 
-class RemovePostCommentView(LoginRequiredMixin, UpdateView):
+class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/ar_post_comment.html'

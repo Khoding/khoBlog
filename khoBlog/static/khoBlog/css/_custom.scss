@@ -37,6 +37,18 @@ $font-family-monospace: $monospace;
     @include background-color('bg');
     @include border-color('border-color');
 
+    & .list-group {
+        @include color('text');
+        @include background-color('bg');
+        @include border-color('border-color');
+
+        &-item {
+            @include color('text');
+            @include background-color('bg');
+            @include border-color('border-color');
+        }
+    }
+
     & .list-unstyled a {
         @include color('side-link');
 
@@ -46,7 +58,14 @@ $font-family-monospace: $monospace;
         }
     }
 
-    & .card-link {
+    &-header,
+    &-footer {
+        @include color('text');
+        @include background-color('bg');
+        @include border-color('border-color');
+    }
+
+    &-link {
         @include color('link');
 
         &:hover {

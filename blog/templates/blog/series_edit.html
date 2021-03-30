@@ -1,0 +1,13 @@
+{% extends 'blog/base_post.html' %}
+{% load bootstrap5 %}
+{% load markdown_extra %}
+
+{% block main %}
+    <form method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary mt-2">Edit Series</button>
+        {% endbuttons %}
+    </form>
+{% endblock main %}

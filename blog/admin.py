@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
 
-from .models import Category, Comment, Post, PostCatsLink
+from .models import Category, Comment, Post, PostCatsLink, Series
 
 
 def export_as_json(modeladmin, request, queryset):
@@ -156,6 +156,12 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('withdrawn',)
+
+
+@admin.register(Series)
+class SeriesAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug',)
+    prepopulated_fields = {'slug': ('title',)}
 
 
 admin.site.register(Post, PostAdmin)

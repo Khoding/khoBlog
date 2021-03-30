@@ -9,10 +9,13 @@ from markdownx.utils import markdownify
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=200, unique=True)
-    description = models.TextField()
-    slug = models.SlugField(unique=True, default="", max_length=200)
-    withdrawn = models.BooleanField(default=False)
+    title = models.CharField(max_length=200, help_text="Category title")
+    description = models.TextField(
+        blank=True, help_text="Category description")
+    slug = models.SlugField(unique=True, default="",
+                            max_length=200, help_text="Category slug")
+    withdrawn = models.BooleanField(
+        default=False, help_text="Is Category withdrawn")
 
     class Meta:
         ordering = ['pk']
@@ -28,6 +31,29 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
+
+
+class Series(models.Model):
+    title = models.CharField(max_length=200, help_text="Series title")
+    description = models.TextField(blank=True, help_text="Series description")
+    slug = models.SlugField(unique=True, default="",
+                            max_length=200, help_text="Series slug")
+    withdrawn = models.BooleanField(
+        default=False, help_text="Is Series withdrawn")
+
+    class Meta:
+        verbose_name_plural = "Series"
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:post_series_list', kwargs={'slug': self.slug})
 
 
 class PostCatsLink(models.Model):
@@ -78,6 +104,8 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
     categories = models.ManyToManyField(
         'blog.Category', through='PostCatsLink', help_text="Post categories")
+    series = models.ForeignKey(
+        'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
     created_date = models.DateTimeField(
         default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(
@@ -87,19 +115,19 @@ class Post(models.Model):
     publication_state = models.CharField(
         max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D', help_text="Post publication state")
     withdrawn = models.BooleanField(
-        default=False, help_text="Is the post private")
+        default=False, help_text="Is Post withdrawn")
     featuring_state = models.CharField(
         max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N', help_text="Featuring state")
-    featured = models.BooleanField(default=False, help_text="Is it featured")
-    big = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False, help_text="Is Post featured")
+    big = models.BooleanField(default=False, help_text="Is Post Big Featured")
     language = models.CharField(
-        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the point main language")
+        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the main language")
     url_post_type = models.URLField(
-        default='', blank=True, help_text="Url to page that inspired the post")
+        default='', blank=True, help_text="Url to page that inspired the Post")
     url_post_type_name = models.CharField(
         max_length=200, default='', blank=True, help_text="What will be shown as url name")
     clicks = models.IntegerField(
-        default=0, help_text="How many times the post has been seen")
+        default=0, help_text="How many times the Post has been seen")
 
     def __str__(self):
         return self.title
@@ -151,7 +179,7 @@ class Comment(models.Model):
     ]
 
     related_post = models.ForeignKey(
-        'blog.Post', on_delete=models.CASCADE, related_name='comments', help_text="Comment's related post")
+        'blog.Post', on_delete=models.CASCADE, related_name='comments', help_text="Comment's related Post")
     author = models.CharField(
         max_length=200,
         default='',
@@ -163,15 +191,15 @@ class Comment(models.Model):
         ),
     )
     author_logged = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment's author (a user with account)")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment author (a user with account)")
     title = models.CharField(max_length=200, blank=True,
-                             help_text="Comment Title")
+                             help_text="Comment title")
     body = models.TextField(verbose_name="Comment",
-                            help_text="Comment's main content")
+                            help_text="Comment main content")
     created_date = models.DateTimeField(
         default=timezone.now, help_text="Creating date")
     approbation_state = models.CharField(
-        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment's approbation state")
+        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment approbation state")
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 

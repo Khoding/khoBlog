@@ -35,6 +35,21 @@
             </div>
 
             <div class="card-body">
+                {% if series %}
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Series: <a href="{% url 'blog:post_series_list' slug=post.series.slug %}">{{ post.series }}</a></strong>{% if post.series.description %} - {{ post.series.description }}{% endif %}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for e in series %}
+                                <li class="list-group-item"><a href="{% url 'blog:post_detail' slug=e.slug %}">{{ forloop.counter }}: {{ e }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <hr />
+                {% endif %}
+
                 <h2 class="card-title">{{ post.title }}</h2>
                 <div>
                     <p class="mb-auto text-muted">{{ post.body|readtime }}</p>

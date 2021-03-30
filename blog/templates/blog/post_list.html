@@ -8,6 +8,12 @@
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_list' %}
             {% include 'blog/includes/featured_posts.html' %}
+        {% elif view_name == 'blog:post_series_list' %}
+            <p>{{ series.description }}</p>
+            <hr />
+        {% elif view_name == 'blog:post_category_list' %}
+            <p>{{ cats.description }}</p>
+            <hr />
         {% endif %}
     {% endwith %}
 
