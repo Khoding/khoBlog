@@ -8,18 +8,17 @@
 
     {% if context.user.is_superuser %}
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Posts">
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
             <a class="mb-0 btn btn-primary" href="{% url 'blog:post_draft_list' %}">Drafts</a>
             <a class="mb-0 btn btn-primary" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
             <a class="mb-0 btn btn-primary"
                 href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
         </div>
+        <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Manage Blog">
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:series_new' %}">New Series</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
+        </div>
     {% endif %}
-
-    <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Categories">
-        {% if context.user.is_superuser %}<a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>{% endif %}
-        <a class="mb-0 btn btn-primary" href="{% url 'blog:category_list' %}">Category List</a>
-    </div>
 
     {% if context.user.is_superuser or context.user.is_staff %}
         <div class="btn-group-vertical d-block" role="group" aria-label="Group Admin">
