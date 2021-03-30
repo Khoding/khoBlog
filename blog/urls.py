@@ -3,7 +3,7 @@ from django.urls.conf import include
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AllSearchResultsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostCommentCreateView, PostCreateView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostScheduledListView, PostSearchResultsListView, PostUpdateView, PostDetailView, PostWithdrawnListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
+from .views import AllSearchResultsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostScheduledListView, PostSearchResultsListView, PostUpdateView, PostDetailView, PostWithdrawnListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -32,7 +32,7 @@ series_extra_patterns = [
 ]
 
 post_comment_action_extra_patterns = [
-    path('edit/', PostCommentCreateView.as_view(),
+    path('edit/', PostCommentUpdateView.as_view(),
          name='edit_post_comment'),
     path('reply/', ReplyToCommentCreateView.as_view(),
          name='add_reply_to_comment'),
