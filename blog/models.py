@@ -106,6 +106,8 @@ class Post(models.Model):
         'blog.Category', through='PostCatsLink', help_text="Post categories")
     series = models.ForeignKey(
         'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
+    post_order_in_series = models.PositiveIntegerField(
+        default=0, help_text="Post order in its series")
     created_date = models.DateTimeField(
         default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(

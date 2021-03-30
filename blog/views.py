@@ -133,10 +133,10 @@ class PostDetailView(DetailView):
         self.post.clicked()
         if self.request.user.is_superuser:
             self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series)
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
         else:
             self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series, withdrawn=False)
+                series__isnull=False, series=self.post.series, withdrawn=False).order_by('post_order_in_series')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
