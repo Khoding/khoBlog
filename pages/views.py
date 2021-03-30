@@ -18,7 +18,6 @@ class PageDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['pages'] = self.model.objects.all().order_by('-pk')
         context['title'] = self.page.title
-        context['now'] = timezone.now()
         return context
 
 

@@ -16,7 +16,6 @@
 {% endblock page_top_end %}
 
 {% block content_main %}
-
     {% if post.published_date and not post.withdrawn and not post.published_date > now or not post.published_date and user.is_superuser or post.withdrawn and user.is_superuser or post.published_date > now and user.is_superuser %}
 
         <div class="card mb-2">

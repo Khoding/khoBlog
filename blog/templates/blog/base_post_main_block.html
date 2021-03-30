@@ -21,6 +21,8 @@
             Category List
         {% elif view_name == 'blog:post_list' %}
             Latest Posts
+        {% elif view_name == 'blog:archive_date_detail' %}
+            Post Detail
         {% else %}
             {{ title }}
         {% endif %}
@@ -28,6 +30,22 @@
 {% endblock page_top_title %}
 
 {% block main %}
+
+    {% block page_top %}
+        {% block page_top_archives %}
+            <strong>
+                Archives by <a href="{% url 'blog:archive_year' year=now|date:'Y' %}">Year</a> -
+                <a href="{% url 'blog:archive_month' year=now|date:'Y' month=now|date:'M' %}">Month</a> -
+                <a href="{% url 'blog:archive_week' year=now|date:'Y' week=now|date:'W' %}">Week</a> -
+                <a href="{% url 'blog:archive_day' year=now|date:'Y' month=now|date:'M' day=now|date:'d' %}">Day</a> -
+                <a href="{% url 'blog:archive_today' %}">Today</a>
+            </strong>
+        {% endblock page_top_archives %}
+
+        {% block page_top_hr %}
+            <hr />
+        {% endblock page_top_hr %}
+    {% endblock page_top %}
 
     {% block content_main %}
     {% endblock content_main %}

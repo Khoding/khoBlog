@@ -3,10 +3,12 @@
 <h4 class="fst-italic">
     {% with context.request.resolver_match.view_name as view_name %}
         {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-            {% if view_name != 'blog:category_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+            {% if view_name != 'blog:category_list' and view_name != 'blog:series_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
                 Post
-            {% elif view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+            {% elif view_name != 'blog:series_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
                 Category
+            {% elif view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+                Series
             {% else %}
                 Search Results
             {% endif %}
@@ -21,15 +23,19 @@
 <ol class="list-unstyled mb-0">
     {% with context.request.resolver_match.view_name as view_name %}
         {% if view_name != 'pages:page_detail' and view_name != 'pages:page_list' and view_name != 'portfolio:project_list' and view_name != 'portfolio:project_detail' %}
-            {% if view_name != 'post:post_list' and view_name != 'blog:category_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+            {% if view_name != 'blog:series_list' and view_name != 'blog:category_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
                 {% for post in context.posts %}
                     {% if forloop.counter <= 21 %}
                         <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
                     {% endif %}
                 {% endfor %}
-            {% elif view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+            {% elif view_name != 'blog:series_list' and view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
                 {% for cat in context.category_list %}
                     <li>{{ cat.id }} - <a href="{{ cat.get_absolute_url }}">{{ cat.title }}</a></li>
+                {% endfor %}
+            {% elif view_name != 'blog:search' and view_name != 'blog:search_results' and view_name != 'blog:post_search_results' and view_name != 'blog:category_search_results' and view_name != 'blog:comment_search_results' and view_name != 'blog:rnd_search_results' %}
+                {% for series in context.series_list %}
+                    <li>{{ series.id }} - <a href="{{ series.get_absolute_url }}">{{ series.title }}</a></li>
                 {% endfor %}
             {% else %}
                 {% for element in context.query %}

@@ -3,19 +3,77 @@
 {% load markdown_extra %}
 {% load read_time %}
 
-{% block content_main %}
+{% block page_top %}
+    {% block page_top_archives %}
+        {{ block.super }}
+    {% endblock page_top_archives %}
 
     {% with request.resolver_match.view_name as view_name %}
         {% if view_name == 'blog:post_list' %}
             {% include 'blog/includes/featured_posts.html' %}
         {% elif view_name == 'blog:post_series_list' %}
             <p>{{ series.description }}</p>
-            <hr />
         {% elif view_name == 'blog:post_category_list' %}
             <p>{{ cats.description }}</p>
-            <hr />
         {% endif %}
     {% endwith %}
+
+    <div class="w-100">
+        {% if previous_year or next_year %}
+            <div>
+                {% if previous_year %}
+                    Previous Year: <a href="{% url 'blog:archive_year' year=previous_year|date:'Y' %}">{{ previous_year|date:"Y" }}</a>
+                {% endif %}
+                {% if previous_year and next_year %}--{% endif %}
+                {% if next_year %}
+                    Next Year: <a href="{% url 'blog:archive_year' year=next_year|date:'Y' %}">{{ next_year|date:"Y" }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if previous_month or next_month %}
+            <div>
+                {% if previous_month %}
+                    Previous Month: <a href="{% url 'blog:archive_month' year=previous_month|date:'Y' month=previous_month|date:'M' %}">{{ previous_month|date:"F Y" }}</a>
+                {% endif %}
+                {% if previous_month and next_month %}--{% endif %}
+                {% if next_month %}
+                    Next Month: <a href="{% url 'blog:archive_month' year=next_month|date:'Y' month=next_month|date:'M' %}">{{ next_month|date:"F Y" }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if previous_week or next_week %}
+
+            {% if previous_week %}
+                Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
+            {% endif %}
+            {% if previous_week and next_week %}--{% endif %}
+            {% if next_week %}
+                Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }}
+            {% endif %}
+        {% endif %}
+
+        {% if previous_day or next_day %}
+            <div>
+                {% if previous_day %}
+                        Previous Day: <a href="{% url 'blog:archive_day' year=previous_day|date:'Y' month=previous_day|date:'M' day=previous_day|date:'d' %}">{{ previous_day }}</a>
+                {% endif %}
+                {% if previous_day and next_day %}--{% endif %}
+                {% if next_day %}
+                        Next Day: <a href="{% url 'blog:archive_day' year=next_day|date:'Y' month=next_day|date:'M' day=next_day|date:'d' %}">{{ next_day }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% block page_top_hr %}
+        {{ block.super }}
+    {% endblock page_top_hr %}
+
+{% endblock page_top %}
+
+{% block content_main %}
 
     <div class="row row-cols-1 row-cols-lg-3">
         {% for post in posts %}
@@ -135,6 +193,10 @@
                     </div>
 
                 </div>
+            </div>
+        {% empty %}
+            <div class="w-100">
+                <p>No content here.</p>
             </div>
         {% endfor %}
     </div>

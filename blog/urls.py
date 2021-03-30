@@ -1,9 +1,11 @@
+from .models import Post
 from django.urls import path
 from django.urls.conf import include
+from django.views.generic.dates import DateDetailView
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AllSearchResultsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostScheduledListView, PostSearchResultsListView, PostUpdateView, PostDetailView, PostWithdrawnListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
+from .views import AllSearchResultsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -15,20 +17,32 @@ post_action_extra_patterns = [
     path('delete/', PostDeleteView.as_view(), name='post_remove'),
 ]
 
-category_extra_patterns = [
-    path('', PostInCategoryListView.as_view(),
-         name='post_category_list'),
+category_action_extra_patterns = [
+    path('', PostInCategoryListView.as_view(), name='post_category_list'),
     path('edit/',
          CategoryUpdateView.as_view(), name='category_edit'),
     path('rss/',
          LatestPostsFeedByCategory(), name='latest_category_post_feed'),
 ]
 
-series_extra_patterns = [
-    path('', PostInSeriesListView.as_view(),
-         name='post_series_list'),
+series_action_extra_patterns = [
+    path('', PostInSeriesListView.as_view(), name='post_series_list'),
     path('edit/',
          SeriesUpdateView.as_view(), name='series_edit'),
+]
+
+category_extra_patterns = [
+    path('', CategoryListView.as_view(),
+         name='category_list'),
+    path('add/', CategoryCreateView.as_view(), name='category_new'),
+    path('<slug:slug>/', include(category_action_extra_patterns)),
+]
+
+series_extra_patterns = [
+    path('', SeriesListView.as_view(),
+         name='series_list'),
+    path('add/', SeriesCreateView.as_view(), name='series_new'),
+    path('<slug:slug>/', include(series_action_extra_patterns)),
 ]
 
 post_comment_action_extra_patterns = [
@@ -49,6 +63,7 @@ comment_extra_patterns = [
 ]
 
 post_extra_patterns = [
+    path('add/', PostCreateView.as_view(), name='post_new'),
     # Goes to Post by redirecting through its ID or directly by slug respectively
     path('<int:pk>/', views.post_detail_through_id, name='post_detail'),
     path('<slug:slug>/', include(post_action_extra_patterns)),
@@ -71,6 +86,36 @@ search_extra_patterns = [
          name='search_results'),
 ]
 
+archive_extra_patterns = [
+    path('',
+         PostArchiveIndexView.as_view(),
+         name="post_archive"),
+    path('<int:year>/',
+         PostYearArchiveView.as_view(), name='archive_year'),
+    # Example: /2012/08/
+    path('<int:year>/<int:month>/',
+         PostMonthArchiveView.as_view(month_format='%m'),
+         name="archive_month_numeric"),
+    # Example: /2012/aug/
+    path('<int:year>/<str:month>/',
+         PostMonthArchiveView.as_view(),
+         name="archive_month"),
+    # Example: /2012/week/23/
+    path('<int:year>/week/<int:week>/',
+         PostWeekArchiveView.as_view(),
+         name="archive_week"),
+    # Example: /2012/Nov/10/
+    path('<int:year>/<str:month>/<int:day>/',
+         PostDayArchiveView.as_view(),
+         name="archive_day"),
+    path('<int:year>/<str:month>/<int:day>/<int:pk>/',
+         DateDetailView.as_view(model=Post, date_field="published_date"),
+         name="archive_date_detail"),
+    path('today/',
+         PostTodayArchiveView.as_view(),
+         name="archive_today"),
+]
+
 app_name = 'blog'
 urlpatterns = [
     # Lists
@@ -84,19 +129,15 @@ urlpatterns = [
 
     # Post Related Patterns
     path('post/', include(post_extra_patterns)),
-    path('add_post/', PostCreateView.as_view(), name='post_new'),
 
     # Category Related Patterns
-    path('category/<slug:slug>/', include(category_extra_patterns)),
-    path('category/', CategoryListView.as_view(),
-         name='category_list'),
-    path('add_category/', CategoryCreateView.as_view(), name='category_new'),
+    path('category/', include(category_extra_patterns)),
 
     # Series Related Patterns
-    path('series/<slug:slug>/', include(series_extra_patterns)),
-    path('series/', SeriesListView.as_view(),
-         name='series_list'),
-    path('add_series/', SeriesCreateView.as_view(), name='series_new'),
+    path('series/', include(series_extra_patterns)),
+
+    # Archives Related Patterns
+    path('archives/', include(archive_extra_patterns)),
 
     # RSS Related Patterns
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),

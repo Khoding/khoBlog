@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
+from django.views.generic.dates import ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
@@ -73,9 +74,9 @@ class PostInSeriesListView(ListView):
         self.series = get_object_or_404(
             Series, slug=self.kwargs['slug'])
         if self.request.user.is_superuser:
-            return self.model.objects.filter(series=self.series)
+            return self.model.objects.filter(series=self.series).order_by('post_order_in_series')
         else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, series=self.series)
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, series=self.series).order_by('post_order_in_series')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -109,7 +110,6 @@ class SeriesListView(ListView):
     template = 'blog/series_list.html'
     context_object_name = 'series_list'
     paginate_by = 21
-    ordering = 'pk'
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -142,10 +142,9 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
         context['title'] = 'Post Detail'
         context['series'] = self.series
-        context['now'] = timezone.now()
         return context
 
 
@@ -203,7 +202,6 @@ class PostWithdrawnListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
         context['title'] = 'Withdrawn'
         return context
 
@@ -595,4 +593,136 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Remove Comment'
+        return context
+
+
+class PostArchiveIndexView(ArchiveIndexView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    allow_empty = True
+    make_object_list = True
+    date_field = "published_date"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Post archives'
+        return context
+
+
+class PostYearArchiveView(YearArchiveView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    allow_empty = True
+    make_object_list = True
+    date_field = "published_date"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted during ' + str(self.get_year())
+        return context
+
+
+class PostMonthArchiveView(MonthArchiveView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    allow_empty = True
+    date_field = "published_date"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted during ' + \
+            str(self.get_month()) + \
+            ' of ' + str(self.get_year())
+        return context
+
+
+class PostWeekArchiveView(WeekArchiveView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    date_field = "published_date"
+    week_format = "%W"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted during Week ' + \
+            str(self.get_week()) + ' of ' + str(self.get_year())
+        return context
+
+
+class PostDayArchiveView(DayArchiveView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    date_field = "published_date"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted the ' + \
+            str(self.get_day()) + ' ' + str(self.get_month()) + \
+            ' ' + str(self.get_year())
+        return context
+
+
+class PostTodayArchiveView(TodayArchiveView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    allow_empty = True
+    date_field = "published_date"
+    allow_future = True
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all().order_by('published_date')
+        else:
+            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted today'
         return context

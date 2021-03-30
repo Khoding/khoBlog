@@ -42,6 +42,7 @@ class Series(models.Model):
         default=False, help_text="Is Series withdrawn")
 
     class Meta:
+        ordering = ['pk']
         verbose_name_plural = "Series"
 
     def __str__(self):
