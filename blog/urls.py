@@ -88,13 +88,13 @@ urlpatterns = [
 
     # Category Related Patterns
     path('category/<slug:slug>/', include(category_extra_patterns)),
-    path('category_list/', CategoryListView.as_view(),
+    path('category/', CategoryListView.as_view(),
          name='category_list'),
     path('add_category/', CategoryCreateView.as_view(), name='category_new'),
 
     # Series Related Patterns
     path('series/<slug:slug>/', include(series_extra_patterns)),
-    path('series_list/', SeriesListView.as_view(),
+    path('series/', SeriesListView.as_view(),
          name='series_list'),
     path('add_series/', SeriesCreateView.as_view(), name='series_new'),
 
