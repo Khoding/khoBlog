@@ -3,12 +3,13 @@
         {% if not side.is_post_list_side_menu %}
             <h4 class="fst-italic">{{ side.title }}</h4>
         {% endif %}
-        {% if side.sub_title %}
+        {% if side.sub_title and not side.is_user_side_menu %}
             <p class="mb-2">
                 {{ side.sub_title }}
             </p>
-        {% elif side.is_user_side_menu %}
-            <p class="mb-2">{% firstof context.user.welcome_message 'Hello' %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
+        {% endif %}
+        {% if side.is_user_side_menu %}
+            <p class="mb-2">{% firstof context.user.welcome_message side.sub_title %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
         {% endif %}
 
         {% if not side.is_user_side_menu and not side.is_post_list_side_menu %}

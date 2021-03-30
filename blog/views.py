@@ -136,7 +136,7 @@ class PostDetailView(DetailView):
                 series__isnull=False, series=self.post.series).order_by('post_order_in_series')
         else:
             self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series, withdrawn=False).order_by('post_order_in_series')
+                series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):

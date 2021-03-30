@@ -92,7 +92,6 @@ class LinksGroupSideMenu(models.Model):
 
 class Footer(models.Model):
     title = models.CharField(max_length=200, blank=True)
-    sub_title = models.CharField(max_length=200, blank=True)
 
     class Meta:
         verbose_name_plural = "Footers"
