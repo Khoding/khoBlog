@@ -158,13 +158,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#themes_dropdown" id="themes_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
                         <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="themes_dropdown">
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'default' %} disabled{% endif %}" data-theme="default">Default</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'uglybanana' %} disabled{% endif %}" data-theme="uglybanana">Funny banana</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'banana' %} disabled{% endif %}" data-theme="banana">Pretty banana</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'cherry' %} disabled{% endif %}" data-theme="cherry">Hot cherry</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'sop' %} disabled{% endif %}" data-theme="sop">Shades of Purple</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'leaf' %} disabled{% endif %}" data-theme="leaf">Smooth leaf</a></li>
-                            <li><a class="controls dropdown-item{% if user.is_authenticated and user.default_theme == 'nightsky' %} disabled{% endif %}" data-theme="nightsky">Night sky</a></li>
+                            {% all_theme_setting themes %}
                         </ul>
                     </li>
 
