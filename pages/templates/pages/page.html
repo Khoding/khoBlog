@@ -10,10 +10,6 @@
     {% endif %}
 {% endblock page_head %}
 
-{% block title %}
-    - {{ title }}
-{% endblock title %}
-
 {% block main %}
     {% autoescape off %}
         {{ flatpage.content }}

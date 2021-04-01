@@ -3,20 +3,33 @@
 {% load markdown_extra %}
 {% load read_time %}
 
+{% block page_head %}
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{{ title }}">
+    <meta name="description"
+        content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description"
+        content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
+    <meta property="twitter:title" content="{{ title }}">
+    <meta property="twitter:description"
+        content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+{% endblock page_head %}
+
 {% block page_top %}
     {% block page_top_archives %}
         {{ block.super }}
     {% endblock page_top_archives %}
 
-    {% with request.resolver_match.view_name as view_name %}
-        {% if view_name == 'blog:post_list' %}
-            {% include 'blog/includes/featured_posts.html' %}
-        {% elif view_name == 'blog:post_series_list' %}
-            <p>{{ series.description }}</p>
-        {% elif view_name == 'blog:post_category_list' %}
-            <p>{{ cats.description }}</p>
-        {% endif %}
-    {% endwith %}
+    {% block page_top_featured %}
+        {% include 'blog/includes/featured_posts.html' %}
+    {% endblock page_top_featured %}
 
     <div class="w-100">
         {% if previous_year or next_year %}

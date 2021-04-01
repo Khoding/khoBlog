@@ -3,6 +3,41 @@
 {% load markdown_extra %}
 {% load read_time %}
 
+{% block page_head %}
+    {% if not post.withdrawn and post.published_date %}
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Post #{{ post.id }} - {{ post.title }}">
+        <meta name="description" content="{{ post.description }}">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:url" content="{{ post.get_absolute_url }}">
+        <meta property="og:title" content="Post #{{ post.id }} - {{ post.title }}">
+        <meta property="og:description" content="{{ post.description }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:url" content="{{ post.get_absolute_url }}">
+        <meta property="twitter:title" content="Post #{{ post.id }} - {{ post.title }}">
+        <meta property="twitter:description" content="{{ post.description }}">
+    {% else %}
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Withdrawn or draft">
+        <meta name="description"
+                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:url" content="{% url 'pages:kheee' %}">
+        <meta property="og:title" content="Withdrawn or draft">
+        <meta property="og:description"
+                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
+
+        <!-- Twitter -->
+        <meta property="twitter:url" content="{% url 'pages:kheee' %}">
+        <meta property="twitter:title" content="Withdrawn or draft">
+        <meta property="twitter:description"
+                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
+    {% endif %}
+{% endblock page_head %}
+
 {% block page_top_end %}
     <div class="btn-group float-end" role="group" aria-label="Previous / Next">
         <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">

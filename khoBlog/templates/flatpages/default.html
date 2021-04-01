@@ -23,19 +23,19 @@
 {% endblock page_head %}
 
 {% block main %}
-        <div class="card mb-2">
-            <div class="card-header">
-                <span class="d-flex">
-                    <span class="col">
-                        <h2>Page #{{ flatpage.id }}</h2>
-                    </span>
+    <div class="card mb-2">
+        <div class="card-header">
+            <span class="d-flex">
+                <span class="col">
+                    <h2>Page #{{ flatpage.id }}</h2>
                 </span>
-            </div>
-
-            <div class="card-body">
-                {% autoescape off %}
-                    <span class="card-text">{{ flatpage.content }}</span>
-                {% endautoescape %}
-            </div>
+            </span>
         </div>
+
+        <div class="card-body">
+            {% autoescape off %}
+                <span class="card-text">{{ flatpage.content }}</span>
+            {% endautoescape %}
+        </div>
+    </div>
 {% endblock main %}

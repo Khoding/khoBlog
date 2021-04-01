@@ -3,32 +3,6 @@
 {% load markdown_extra %}
 {% load i18n %}
 
-{% block page_top_title %}
-    {% with request.resolver_match.view_name as view_name %}
-        {% if view_name == 'blog:post_withdrawn_list' %}
-            Withdrawn
-        {% elif view_name == 'blog:post_draft_list' %}
-            Drafts
-        {% elif view_name == 'blog:post_scheduled_list' %}
-            Scheduled
-        {% elif view_name == 'blog:post_category_list' %}
-            {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
-                Posts in <b>{{ cats|capfirst }}</b> Category
-            {% else %}
-                This category is Withdrawn
-            {% endif %}
-        {% elif view_name == 'blog:category_list' %}
-            Category List
-        {% elif view_name == 'blog:post_list' %}
-            Latest Posts
-        {% elif view_name == 'blog:archive_date_detail' %}
-            Post Detail
-        {% else %}
-            {{ title }}
-        {% endif %}
-    {% endwith %}
-{% endblock page_top_title %}
-
 {% block main %}
 
     {% block page_top %}

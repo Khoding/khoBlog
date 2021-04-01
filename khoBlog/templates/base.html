@@ -73,9 +73,13 @@
           title="oEmbed Profile: JSON">
 
     <title>
-        Khodok's Blog
-        {% block title %}
-        {% endblock title %}
+        Khodok's Blog -
+        {% if title %}
+            {{ title }}
+        {% else %}
+            {% block title %}
+            {% endblock title %}
+        {% endif %}
     </title>
 
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">

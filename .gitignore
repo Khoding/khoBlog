@@ -21,3 +21,4 @@ settings_dev.py
 *.sqlite3
 my.cnf
 db.json
+Search.code-search

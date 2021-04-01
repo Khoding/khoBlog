@@ -1,0 +1,10 @@
+{% extends 'blog/base_post.html' %}
+
+{% block main %}
+    {% if user.is_authenticated %}
+        {% block comments_main %}
+        {% endblock comments_main %}
+    {% else %}
+        You must be logged in
+    {% endif %}
+{% endblock main %}

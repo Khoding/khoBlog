@@ -1,15 +1,5 @@
 {% extends 'sub_base.html' %}
 
-{% block title %}
-    {% with request.resolver_match.view_name as view_name %}
-        {% if view_name != 'pages:page_list' %}
-            - {{ flatpage.title }}
-        {% else %}
-            - {{ title }}
-        {% endif %}
-    {% endwith %}
-{% endblock title %}
-
 {% block content %}
     {% block main %}
     {% endblock main %}

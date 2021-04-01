@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic.dates import ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
+from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
@@ -24,7 +24,7 @@ def superuser_required():
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -45,7 +45,7 @@ class PostListView(ListView):
 
 class PostInCategoryListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_category_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -66,7 +66,7 @@ class PostInCategoryListView(ListView):
 
 class PostInSeriesListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_series_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -87,7 +87,7 @@ class PostInSeriesListView(ListView):
 
 class CategoryListView(ListView):
     model = Category
-    template = 'blog/category_list.html'
+    template_name = 'blog/lists/category_list.html'
     context_object_name = 'category_list'
     paginate_by = 21
     ordering = 'pk'
@@ -107,7 +107,7 @@ class CategoryListView(ListView):
 
 class SeriesListView(ListView):
     model = Series
-    template = 'blog/series_list.html'
+    template_name = 'blog/lists/series_list.html'
     context_object_name = 'series_list'
     paginate_by = 21
 
@@ -142,8 +142,8 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
-        context['title'] = 'Post Detail'
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+        context['title'] = self.post.title
         context['series'] = self.series
         return context
 
@@ -161,7 +161,7 @@ def post_detail_through_id(request, pk):
 @superuser_required()
 class PostDraftListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_draft_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -177,7 +177,7 @@ class PostDraftListView(ListView):
 @superuser_required()
 class PostScheduledListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_scheduled_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -193,7 +193,7 @@ class PostScheduledListView(ListView):
 @superuser_required()
 class PostWithdrawnListView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_withdrawn_list.html'
     context_object_name = 'posts'
     paginate_by = 21
 
@@ -513,7 +513,7 @@ def post_publish_withdrawn(request, slug):
 class PostCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
-    template_name = "blog/add_comment_to_post.html"
+    template_name = "blog/comments/add_comment_to_post.html"
 
     def form_valid(self, form):
         form.instance.author_logged = self.request.user
@@ -529,7 +529,7 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
 class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
-    template_name = "blog/add_comment_to_post.html"
+    template_name = "blog/comments/add_comment_to_post.html"
 
     def form_valid(self, form):
         form.instance.author_logged = self.request.user
@@ -546,7 +546,7 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
 class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = EditPostCommentForm
-    template_name = 'blog/add_comment_to_post.html'
+    template_name = 'blog/comments/edit_comment.html'
 
     def form_valid(self, form):
         form.instance.related_post_id = self.kwargs['pk_post']
@@ -563,8 +563,7 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
 class ApprovePostCommentUpdateView(UpdateView):
     model = Comment
     form_class = ARPostCommentForm
-    template_name = 'blog/ar_post_comment.html'
-    success_url = reverse_lazy('blog:post_list')
+    template_name = 'blog/comments/approve_post_comment.html'
 
     def get_queryset(self):
         self.comment = get_object_or_404(
@@ -581,8 +580,7 @@ class ApprovePostCommentUpdateView(UpdateView):
 class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = ARPostCommentForm
-    template_name = 'blog/ar_post_comment.html'
-    success_url = reverse_lazy('blog:post_list')
+    template_name = 'blog/comments/remove_post_comment.html'
 
     def get_queryset(self):
         self.comment = get_object_or_404(
@@ -598,7 +596,7 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
 class PostArchiveIndexView(ArchiveIndexView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     allow_empty = True
@@ -620,7 +618,7 @@ class PostArchiveIndexView(ArchiveIndexView):
 
 class PostYearArchiveView(YearArchiveView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     allow_empty = True
@@ -642,7 +640,7 @@ class PostYearArchiveView(YearArchiveView):
 
 class PostMonthArchiveView(MonthArchiveView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     allow_empty = True
@@ -665,7 +663,7 @@ class PostMonthArchiveView(MonthArchiveView):
 
 class PostWeekArchiveView(WeekArchiveView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     date_field = "published_date"
@@ -687,7 +685,7 @@ class PostWeekArchiveView(WeekArchiveView):
 
 class PostDayArchiveView(DayArchiveView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     date_field = "published_date"
@@ -709,7 +707,7 @@ class PostDayArchiveView(DayArchiveView):
 
 class PostTodayArchiveView(TodayArchiveView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
     paginate_by = 21
     allow_empty = True

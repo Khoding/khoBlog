@@ -1,0 +1,45 @@
+{% extends 'blog/lists/post_list.html' %}
+
+{% block page_head %}
+    {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="{{ cats }}">
+        <meta name="description" content="{{ cats.description }}">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:url" content="{{ cats.get_absolute_url }}">
+        <meta property="og:title" content="{{ cats }}">
+        <meta property="og:description" content="{{ cats.description }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:url" content="{{ cats.get_absolute_url }}">
+        <meta property="twitter:title" content="{{ cats }}">
+        <meta property="twitter:description" content="{{ cats.description }}">
+    {% else %}
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Withdrawn">
+        <meta name="description" content="This category is Withdrawn">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:url" content="{% url 'pages:kheee' %}">
+        <meta property="og:title" content="Withdrawn">
+        <meta property="og:description" content="This category is Withdrawn">
+
+        <!-- Twitter -->
+        <meta property="twitter:url" content="{% url 'pages:kheee' %}">
+        <meta property="twitter:title" content="Withdrawn">
+        <meta property="twitter:description" content="This category is Withdrawn">
+    {% endif %}
+{% endblock page_head %}
+
+{% block page_top_title %}
+    {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
+        Posts in <b>{{ cats|capfirst }}</b> Category
+    {% else %}
+        This category is Withdrawn
+    {% endif %}
+{% endblock page_top_title %}
+
+{% block page_top_featured %}
+    <p>{{ cats.description }}</p>
+{% endblock page_top_featured %}

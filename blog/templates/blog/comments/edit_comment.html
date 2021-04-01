@@ -1,0 +1,15 @@
+{% extends 'blog/comments/base_comments.html' %}
+{% load bootstrap5 %}
+{% load markdown_extra %}
+
+{% block comments_main %}
+    {% if user.id == comment.author_logged.id or user.is_superuser %}
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
+            {% endbuttons %}
+        </form>
+    {% endif %}
+{% endblock comments_main %}

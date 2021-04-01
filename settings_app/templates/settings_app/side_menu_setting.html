@@ -67,7 +67,11 @@
         {% elif side.is_user_side_menu %}
             {% include 'includes/nav/nav_auth.html' %}
         {% else %}
-            {% include 'includes/nav/nav_list.html' %}
+            {% if context.posts or context.category_list or context.series_list or context.query or context.pages %}
+                {% include 'includes/nav/nav_list.html' %}
+            {% else %}
+                <a href="/">a</a>
+            {% endif %}
         {% endif %}
     </div>
 {% endfor %}

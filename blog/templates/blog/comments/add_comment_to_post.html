@@ -1,12 +1,13 @@
-{% extends 'sub_base.html' %}
+{% extends 'blog/comments/base_comments.html' %}
 {% load bootstrap5 %}
+{% load markdown_extra %}
 
-{% block content %}
-    <form method="POST" enctype="multipart/form-data" class="form">
+{% block comments_main %}
+    <form method="POST" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
         {% endbuttons %}
     </form>
-{% endblock content %}
+{% endblock comments_main %}

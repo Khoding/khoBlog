@@ -14,19 +14,16 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('account_login')
     template_name = 'account/signup.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Sign up'
+        return context
+
 
 class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'account/profile.html'
     view_as = 'self'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Profile'
-        context['users'] = CustomUser.objects.all()
-        context['comments'] = Comment.objects.all()
-        context['view_as'] = self.view_as
-        return context
 
     def get(self, request, *args, **kwargs):
         if request.GET.get("view_as") is None or request.GET.get("view_as") == "" or request.GET.get("view_as") == "self":
@@ -34,6 +31,16 @@ class ProfileView(LoginRequiredMixin, DetailView):
         else:
             self.view_as = 'guest'
         return super(ProfileView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Profile • ' + \
+            str(self.model.objects.get(username=kwargs['object']))
+        context['users'] = CustomUser.objects.all()
+        context['comments'] = Comment.objects.filter(
+            author_logged=kwargs['object'])
+        context['view_as'] = self.view_as
+        return context
 
 
 class UserEditView(UpdateView):
@@ -66,3 +73,8 @@ class PasswordsChangeView(PasswordChangeView):
 class ConnectionsEditView(ConnectionsView):
     form_class = DisconnectForm
     template_name = 'account/connections.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Connections'
+        return context

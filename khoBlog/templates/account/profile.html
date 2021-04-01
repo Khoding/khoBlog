@@ -2,21 +2,19 @@
 {% load bootstrap5 %}
 {% load account %}
 
-{% block title %} - {{ title }} • {{ object.username }}{% endblock title %}
-
 {% block page_head %}
     <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ title }} • {{ object.username }}">
+    <meta name="title" content="{{ title }}">
     <meta name="description" content="{{ object.bio }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:url" content="{{ object.get_absolute_url }}">
-    <meta property="og:title" content="{{ title }} • {{ object.username }}">
+    <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ object.bio }}">
 
     <!-- Twitter -->
     <meta property="twitter:url" content="{{ object.get_absolute_url }}">
-    <meta property="twitter:title" content="{{ title }} • {{ object.username }}">
+    <meta property="twitter:title" content="{{ title }}">
     <meta property="twitter:description" content="{{ object.bio }}">
 {% endblock page_head %}
 
@@ -66,7 +64,7 @@
             <div class="col-md-12">
                 <div class="card-body">
                     {% for comment in comments %}
-                        {% if comment.author_logged.id == object.id and comment.approbation_state == 'AP' or comment.author_logged.id == object.id and user.is_superuser %}
+                        {% if comment.approbation_state == 'AP' or user.is_superuser %}
                             <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.body}}</a></p>
                         {% endif %}
                     {% endfor %}
