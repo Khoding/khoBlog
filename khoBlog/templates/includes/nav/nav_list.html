@@ -40,6 +40,9 @@
         {% for page in context.pages %}
             <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
         {% endfor %}
+    {% endif %}
+
+    {% if context.projects %}
         {% for project in context.projects %}
             <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
         {% endfor %}
