@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 
 from .models import Task
 from .forms import TaskForm
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def index(request):
     tasks = Task.objects.all()
 
@@ -21,6 +23,7 @@ def index(request):
     return render(request, 'todo/list.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def updateTask(request, pk):
     task = Task.objects.get(id=pk)
 
@@ -38,6 +41,7 @@ def updateTask(request, pk):
     return render(request, 'todo/update_task.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def deleteTask(request, pk):
     task = Task.objects.get(id=pk)
 
