@@ -1,0 +1,15 @@
+{% extends 'sub_base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    <h3>Update: {{ task.title }}</h3>
+    <form method="POST" class="form">
+        {% csrf_token %}
+		{% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}

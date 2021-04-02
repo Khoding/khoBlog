@@ -1,9 +1,14 @@
 from django import forms
-from .models import TodoGroup
+
+from .models import Task
 
 
-class TodoForm(forms.Form):
-    title = forms.CharField(required=False)
-    todo_group = forms.ModelChoiceField(
-        queryset=TodoGroup.objects.all(), required=False)
-    description = forms.CharField(required=False)
+class TaskForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(
+        attrs={'placeholder': 'Add new task...', 'class': 'mb-2'}))
+    description = forms.TextInput(
+        attrs={'class': 'mb-2'})
+
+    class Meta:
+        model = Task
+        fields = '__all__'

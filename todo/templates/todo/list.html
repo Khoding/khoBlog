@@ -1,0 +1,38 @@
+{% extends 'sub_base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+{% block content %}
+	<form action="{% url 'todo:list' %}" method="POST" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-primary mt-2">Add New Task</button>
+        {% endbuttons %}
+    </form>
+
+	<hr />
+
+    <ul class="list-unstyled">
+        {% for task in tasks %}
+            {% if task.complete %}
+                <li class="text-muted">
+                    <i class="bi bi-check2-square"></i>
+                    #{{ task.pk }} - {{ task.title }}{% if task.description %} - {{ task.description }}{% endif %}
+					<a class="text-info" href="{% url 'todo:update_task' task.id %}">Update</a>
+                    <a class="text-danger float-end" href="{% url 'todo:delete' task.id %}">Delete</a>
+                </li>
+            {% else %}
+                <li>
+                    <i class="bi bi-x-square"></i>
+                    #{{ task.pk }} - {{ task.title }}{% if task.description %} - {{ task.description }}{% endif %}
+					<a class="text-info" href="{% url 'todo:update_task' task.id %}">Update</a>
+                    <a class="text-danger float-end" href="{% url 'todo:delete' task.id %}">Delete</a>
+                </li>
+            {% endif %}
+
+            <hr />
+        {% endfor %}
+    </ul>
+{% endblock content %}

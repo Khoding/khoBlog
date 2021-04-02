@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import Todo, TodoGroup
+from .models import Task
 
-admin.site.register(Todo)
-admin.site.register(TodoGroup)
+admin.site.register(Task)

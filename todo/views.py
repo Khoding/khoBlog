@@ -1,79 +1,52 @@
-from django.shortcuts import redirect, render
-from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import user_passes_test
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.shortcuts import redirect
-from django.views.generic.edit import DeleteView
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
-from .models import Todo
-from .forms import TodoForm
+from .models import Task
+from .forms import TaskForm
 
 
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
-
-
-@user_passes_test(lambda u: u.is_superuser)
 def index(request):
-    todo_list = Todo.objects.order_by('id')
+    tasks = Task.objects.all()
 
-    form = TodoForm()
+    form = TaskForm()
 
-    context = {'todo_list': todo_list, 'form': form, 'title': 'Todo List'}
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(reverse('todo:list'))
 
-    return render(request, 'todo/todo.html', context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-@require_POST
-def addTodo(request):
-    form = TodoForm(request.POST)
-
-    if form.is_valid():
-        new_todo = Todo(
-            title=request.POST['title'], description=request.POST['description'])
-        new_todo.save()
-
-    return redirect('todo:index')
+    context = {'tasks': tasks, 'form': form,
+               'title': 'Todo List'}
+    return render(request, 'todo/list.html', context)
 
 
-@ user_passes_test(lambda u: u.is_superuser)
-def completion(request, pk):
-    todo = Todo.objects.get(pk=pk)
-    todo.complete = (True, False)[todo.complete]
-    todo.save()
-    return redirect('todo:index')
+def updateTask(request, pk):
+    task = Task.objects.get(id=pk)
+
+    form = TaskForm(instance=task)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('todo:list'))
+
+    context = {'form': form,
+               'title': 'Update Task'}
+
+    return render(request, 'todo/update_task.html', context)
 
 
-@ superuser_required()
-class TodoDeleteView(DeleteView):
-    model = Todo
-    template_name = "todo/todo_confirm_delete.html"
-    success_url = reverse_lazy('todo:index')
+def deleteTask(request, pk):
+    task = Task.objects.get(id=pk)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Delete Todo'
-        return context
+    if request.method == 'POST':
+        task.delete()
+        return redirect(reverse('todo:list'))
 
-
-@ user_passes_test(lambda u: u.is_superuser)
-def deleteCompleted(request):
-    Todo.objects.filter(complete=True).delete()
-
-    return redirect('todo:index')
-
-
-@ user_passes_test(lambda u: u.is_superuser)
-def deleteAll(request):
-    Todo.objects.all().delete()
-
-    return redirect('todo:index')
+    context = {
+        'task': task,
+        'title': 'Delete Task'
+    }
+    return render(request, 'todo/delete.html', context)
