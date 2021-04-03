@@ -1,7 +1,7 @@
 {% load instance %}
 
 <h4 class="fst-italic">
-    {{ context.title }}
+    {% firstof context.side_title context.title %}
 </h4>
 <ol class="list-unstyled mb-0">
     {% if context.posts %}

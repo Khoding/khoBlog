@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.utils import timezone
-from django.views.generic import ListView, DetailView, RedirectView
+from django.views.generic import ListView, DetailView
 
 from .models import FlatPage
 
@@ -18,6 +17,7 @@ class PageDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['pages'] = self.model.objects.all().order_by('-pk')
         context['title'] = self.page.title
+        context['side_title'] = 'Page List'
         return context
 
 

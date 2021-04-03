@@ -34,6 +34,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Latest Posts'
+        context['side_title'] = 'Post List'
         context['featured'] = self.model.objects.filter(
             featured=True, big=False)
         context['featured_big'] = self.model.objects.filter(
@@ -61,6 +62,7 @@ class PostInCategoryListView(ListView):
         context = super().get_context_data(**kwargs)
         context['cats'] = self.category
         context['title'] = self.category.title
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -82,6 +84,7 @@ class PostInSeriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context['series'] = self.series
         context['title'] = self.series.title
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -143,8 +146,9 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
-        context['title'] = self.post.title
         context['series'] = self.series
+        context['title'] = self.post.title
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -218,7 +222,9 @@ class PostCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'New Post'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -234,7 +240,9 @@ class CategoryCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'New Category'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -249,7 +257,9 @@ class SeriesCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'New Series'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -261,7 +271,9 @@ class CategoryUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Edit Category'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -273,7 +285,9 @@ class SeriesUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Edit Series'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -285,7 +299,9 @@ class PostUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Edit Post'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -297,7 +313,9 @@ class PostDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Delete Post'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -522,7 +540,10 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Add Comment'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -539,7 +560,10 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Reply to Comment'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -555,7 +579,10 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Edit Comment'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -573,7 +600,9 @@ class ApprovePostCommentUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Approve Comment'
+        context['side_title'] = 'Post List'
         return context
 
 
@@ -590,7 +619,10 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Remove Comment'
+        context['side_title'] = 'Post List'
         return context
 
 
