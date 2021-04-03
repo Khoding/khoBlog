@@ -175,33 +175,27 @@
                                 {% endif %}
                             </a>
                         </p>
-                        <p>
-                            Created: {{ post.created_date|date:'l, d F Y H:m:s' }} <br />
+                        <div class="mb-2">
+                            <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:m:s' }}</p>
                             {% if post.published_date %}
-                                Published: {{ post.published_date|date:'l, d F Y H:m:s' }}
+                                <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:m:s' }}</p>
                             {% endif %}
                             {% if post.modified_date %}
-                                Updated: {{ post.modified_date|date:'l, d F Y H:m:s' }}
+                                <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:m:s' }}</p>
                             {% endif %}
-                        </p>
-                        <p>
                             {% if post.featured_title %}
-                                Featured Title: {{ post.featured_title }}
+                                <p>Featured Title: {{ post.featured_title }}</p>
                             {% endif %}
-                        </p>
-                        <p>
-                            Description: {{ post.description }}
-                        </p>
-                        <p>
-                            Clicks: {{ post.clicks }}
-                        </p>
-                        <p>
-                            Categories: <br />
+                        </div>
+
+                        <p>Description: {{ post.description }}</p>
+                        <p>Clicks: {{ post.clicks }}</p>
+                        <p>Categories:
                             {% include 'blog/includes/post_categories.html' %}
                         </p>
                         {% if user.is_superuser %}
                             <h6>Admin Information</h6>
-                            <p>Withdrawn: {{ post.withdrawn }}</p>
+                            <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
                             <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
                         {% endif %}
                     </div>
