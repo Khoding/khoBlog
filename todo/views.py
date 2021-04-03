@@ -1,56 +1,71 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import user_passes_test
-from django.urls import reverse
+from django.urls.base import reverse_lazy
+from django.views.generic import UpdateView, DeleteView, ListView
+from django.views.generic.edit import CreateView
 
 from .models import Task
 from .forms import TaskForm
 
-
-@user_passes_test(lambda u: u.is_superuser)
-def index(request):
-    tasks = Task.objects.all()
-
-    form = TaskForm()
-
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect(reverse('todo:list'))
-
-    context = {'tasks': tasks, 'form': form,
-               'title': 'Todo List'}
-    return render(request, 'todo/list.html', context)
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def updateTask(request, pk):
-    task = Task.objects.get(id=pk)
+def superuser_required():
+    def wrapper(wrapped):
+        class WrappedClass(UserPassesTestMixin, wrapped):
+            def test_func(self):
+                return self.request.user.is_superuser
 
-    form = TaskForm(instance=task)
+        return WrappedClass
 
-    if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('todo:list'))
-
-    context = {'form': form,
-               'title': 'Update Task'}
-
-    return render(request, 'todo/update_task.html', context)
+    return wrapper
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def deleteTask(request, pk):
-    task = Task.objects.get(id=pk)
+@superuser_required()
+class TaskListView(ListView):
+    model = Task
+    template_name = 'todo/list.html'
+    context_object_name = 'tasks'
 
-    if request.method == 'POST':
-        task.delete()
-        return redirect(reverse('todo:list'))
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Task List'
+        return context
 
-    context = {
-        'task': task,
-        'title': 'Delete Task'
-    }
-    return render(request, 'todo/delete.html', context)
+
+@superuser_required()
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'todo/create_task.html'
+    success_url = reverse_lazy('todo:list')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Create Task'
+        return context
+
+
+@superuser_required()
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "todo/update_task.html"
+    success_url = reverse_lazy('todo:list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Update Task'
+        return context
+
+
+@superuser_required()
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'todo/delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete Task'
+        return context
