@@ -137,9 +137,23 @@ class PostDetailView(DetailView):
         if self.request.user.is_superuser:
             self.series = self.model.objects.filter(
                 series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+            self.title = self.post.title
+            self.description = self.post.description
         else:
             self.series = self.model.objects.filter(
                 series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
+            if self.post.withdrawn:
+                self.title = 'Withdrawn'
+                self.description = 'This post is Withdrawn'
+            elif not self.post.published_date:
+                self.title = 'Draft'
+                self.description = 'This post is still Draft'
+            elif self.post.published_date >= timezone.now():
+                self.title = 'Scheduled'
+                self.description = 'This post is Scheduled'
+            else:
+                self.title = self.post.title
+                self.description = self.post.description
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -147,7 +161,8 @@ class PostDetailView(DetailView):
         context['posts'] = self.model.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['series'] = self.series
-        context['title'] = self.post.title
+        context['title'] = self.title
+        context['description'] = self.description
         context['side_title'] = 'Post List'
         return context
 

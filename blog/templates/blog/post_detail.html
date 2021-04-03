@@ -4,38 +4,19 @@
 {% load read_time %}
 
 {% block page_head %}
-    {% if not post.withdrawn and post.published_date %}
-        <!-- Primary Meta Tags -->
-        <meta name="title" content="Post #{{ post.id }} - {{ post.title }}">
-        <meta name="description" content="{{ post.description }}">
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Post #{{ post.id }} - {{ title }}">
+    <meta name="description" content="{{ description }}">
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:url" content="{{ post.get_absolute_url }}">
-        <meta property="og:title" content="Post #{{ post.id }} - {{ post.title }}">
-        <meta property="og:description" content="{{ post.description }}">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:url" content="{{ post.get_absolute_url }}">
+    <meta property="og:title" content="Post #{{ post.id }} - {{ title }}">
+    <meta property="og:description" content="{{ description }}">
 
-        <!-- Twitter -->
-        <meta property="twitter:url" content="{{ post.get_absolute_url }}">
-        <meta property="twitter:title" content="Post #{{ post.id }} - {{ post.title }}">
-        <meta property="twitter:description" content="{{ post.description }}">
-    {% else %}
-        <!-- Primary Meta Tags -->
-        <meta name="title" content="Withdrawn or draft">
-        <meta name="description"
-                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:url" content="{% url 'pages:kheee' %}">
-        <meta property="og:title" content="Withdrawn or draft">
-        <meta property="og:description"
-                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
-
-        <!-- Twitter -->
-        <meta property="twitter:url" content="{% url 'pages:kheee' %}">
-        <meta property="twitter:title" content="Withdrawn or draft">
-        <meta property="twitter:description"
-                content="This post is either withdrawn or still a draft, you must be logged in to be able to see it">
-    {% endif %}
+    <!-- Twitter -->
+    <meta property="twitter:url" content="{{ post.get_absolute_url }}">
+    <meta property="twitter:title" content="Post #{{ post.id }} - {{ title }}">
+    <meta property="twitter:description" content="{{ description }}">
 {% endblock page_head %}
 
 {% block page_top_end %}
@@ -84,7 +65,7 @@
                     <hr />
                 {% endif %}
 
-                <h2 class="card-title">{{ post.title }}</h2>
+                <h2 class="card-title">{{ title }}</h2>
                 <div>
                     <p class="mb-auto text-muted">{{ post.body|readtime }}</p>
                     {% include 'blog/includes/post_dates.html' %}
@@ -108,8 +89,7 @@
         </div>
 
     {% else %}
-        <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">This post is either withdrawn or still a draft, you must be logged in
-            to be able to see it</a></h1>
+        <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>
     {% endif %}
 {% endblock content_main %}
 
