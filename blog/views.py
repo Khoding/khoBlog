@@ -147,7 +147,7 @@ class PostDetailView(DetailView):
                 self.description = 'This post is Withdrawn'
             elif not self.post.published_date:
                 self.title = 'Draft'
-                self.description = 'This post is still Draft'
+                self.description = 'This post is still a Draft'
             elif self.post.published_date >= timezone.now():
                 self.title = 'Scheduled'
                 self.description = 'This post is Scheduled'
