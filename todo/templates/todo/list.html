@@ -3,10 +3,10 @@
 {% load bootstrap5 %}
 
 {% block content %}
-
-    <a class="btn btn-primary mt-2" href="{% url 'todo:create_task' %}">Add New Task</a>
-
-	<hr />
+    {% if user.is_superuser %}
+        <a class="btn btn-primary mt-2" href="{% url 'todo:create_task' %}">Add New Task</a>
+        <hr />
+    {% endif %}
 
     <ul class="list-unstyled">
         {% for task in tasks %}
@@ -14,11 +14,16 @@
                 <span class="{% if task.complete %} text-muted{% endif %}">
                     <i class="bi bi-check2-square"></i>
                     Task #{{ task.id }} - {{ task.title }}{% if task.description %} - {{ task.description }}{% endif %}
+                    {% if task.withdrawn %}
+                        <small>(Withdrawn)</small>
+                    {% endif %}
                 </span>
-                <span class="float-end">
-                    <a class="text-info" href="{% url 'todo:update_task' task.id %}">Update</a> -
-                    <a class="text-danger" href="{% url 'todo:delete' task.id %}">Delete</a>
-                </span>
+                {% if user.is_superuser %}
+                    <span class="float-end">
+                        <a class="text-info" href="{% url 'todo:update_task' task.id %}">Update</a> -
+                        <a class="text-danger" href="{% url 'todo:delete' task.id %}">Delete</a>
+                    </span>
+                {% endif %}
             </li>
 
             <hr />

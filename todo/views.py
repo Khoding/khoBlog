@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.urls.base import reverse_lazy
 from django.views.generic import UpdateView, DeleteView, ListView
 from django.views.generic.edit import CreateView
@@ -19,11 +20,16 @@ def superuser_required():
     return wrapper
 
 
-@superuser_required()
 class TaskListView(ListView):
     model = Task
     template_name = 'todo/list.html'
     context_object_name = 'tasks'
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            return self.model.objects.filter(withdrawn=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
