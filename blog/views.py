@@ -555,7 +555,7 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.filter(
+        context['posts'] = Post.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Add Comment'
         context['side_title'] = 'Post List'
@@ -575,7 +575,7 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.filter(
+        context['posts'] = Post.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Reply to Comment'
         context['side_title'] = 'Post List'
@@ -594,7 +594,7 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.filter(
+        context['posts'] = Post.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Edit Comment'
         context['side_title'] = 'Post List'
