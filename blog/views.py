@@ -615,7 +615,7 @@ class ApprovePostCommentUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.all().order_by('-pk')
+        context['posts'] = Post.objects.all().order_by('-pk')
         context['title'] = 'Approve Comment'
         context['side_title'] = 'Post List'
         return context
@@ -634,7 +634,7 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.filter(
+        context['posts'] = Post.objects.filter(
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['title'] = 'Remove Comment'
         context['side_title'] = 'Post List'

@@ -24,8 +24,14 @@ class LatestPostsFeed(Feed):
     def item_pubdate(self, item):
         return item.published_date
 
+    def item_updateddate(self, item):
+        return item.modified_date
+
     def item_author_name(self, item):
         return item.author
+
+    def item_comments(self, item):
+        return item.approved_comments()
 
 
 class LatestPostsFeedByCategory(Feed):
@@ -51,8 +57,14 @@ class LatestPostsFeedByCategory(Feed):
     def item_pubdate(self, item):
         return item.published_date
 
+    def item_updateddate(self, item):
+        return item.modified_date
+
     def item_author_name(self, item):
         return item.author
+
+    def item_comments(self, item):
+        return item.approved_comments()
 
 
 class LatestCommentsFeed(Feed):
@@ -75,3 +87,6 @@ class LatestCommentsFeed(Feed):
 
     def item_pubdate(self, item):
         return item.created_date
+
+    def item_updateddate(self, item):
+        return item.modified_date

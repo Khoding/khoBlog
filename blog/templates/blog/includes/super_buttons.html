@@ -22,7 +22,7 @@
                     <div class="dropdown-divider"></div>
                 {% endif %}
 
-                <a class="dropdown-item" href="{% url 'admin:blog_post_change' object_id=post.pk %}">
+                <a class="dropdown-item" href="{% url 'admin:blog_post_change' object_id=post.id %}">
                     <i class="bi bi-pencil-square"></i> Edit in Admin
                 </a>
 

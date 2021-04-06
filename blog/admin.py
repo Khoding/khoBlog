@@ -141,8 +141,9 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('author_logged', 'author',
+    list_display = ('fulltitle', 'author_logged', 'author',
                     'created_date', 'approbation_state',)
+    list_display_links = ('fulltitle',)
     ordering = ('-author_logged', '-author',)
     search_fields = ('author', 'message',)
     list_filter = ('author_logged', 'approbation_state')

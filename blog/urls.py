@@ -65,7 +65,9 @@ comment_extra_patterns = [
 post_extra_patterns = [
     path('add/', PostCreateView.as_view(), name='post_new'),
     # Goes to Post by redirecting through its ID or directly by slug respectively
-    path('<int:pk>/', views.post_detail_through_id, name='post_detail'),
+    path('<int:pk>/', views.post_detail_through_id,
+         name='post_detail_through_id'),
+    path('<int:pk>/', include(post_action_extra_patterns)),
     path('<slug:slug>/', include(post_action_extra_patterns)),
 
     # Post Comments Related Patterns

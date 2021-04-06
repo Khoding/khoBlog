@@ -195,32 +195,38 @@ class Comment(models.Model):
     )
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment author (a user with account)")
-    title = models.CharField(max_length=200, blank=True,
+    title = models.CharField(max_length=200, null=True, blank=True,
                              help_text="Comment title")
     body = models.TextField(verbose_name="Comment",
                             help_text="Comment main content")
     created_date = models.DateTimeField(
-        default=timezone.now, help_text="Creating date")
+        default=timezone.now, help_text="Creation date")
+    modified_date = models.DateTimeField(
+        auto_now=True, help_text="Last modification")
     approbation_state = models.CharField(
         max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment approbation state")
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 
-    def __str__(self):
-        if self.author_logged:
+    @property
+    def fulltitle(self):
+        if self.author_logged and self.author:
+            author_in_name = f'{self.author_logged} - {self.author}'
+        elif self.author_logged:
             author_in_name = self.author_logged
         else:
             author_in_name = self.author
         if self.title:
-            name = '%s - %s - %s - %s' % (self.related_post.title,
-                                          author_in_name, self.title, self.pk)
+            name = f'{self.related_post.title} - {self.title} - {author_in_name}'
         else:
-            name = '%s - %s - %s' % (self.related_post.title,
-                                     author_in_name, self.pk)
+            name = f'{self.related_post.title} - {author_in_name}'
         return name
 
+    def __str__(self):
+        return self.fulltitle
+
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug})
+        return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug}) + f'#comment-{self.pk}'
 
     def approve(self):
         self.approbation_state = 'AP'

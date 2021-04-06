@@ -13,29 +13,29 @@
                         {{ comment.author_logged }}
                     {% endif %}
                 {% endif %}
-                <a href="{{ post.get_absolute_url }}#comment-{{ comment.id }}"><i class="bi bi-link-45deg"></i></a>
+                <a href="{{ comment.get_absolute_url }}"><i class="bi bi-link-45deg"></i></a>
                 {% if user.is_authenticated %}
                     <span class="float-end">
                         {% if user.id == comment.author_logged.id or user.is_superuser %}
 
                             <div class="btn-group float-end">
-                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.id %}">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
 
-                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="commentActionsDropdown-{{ post.id }}-{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="commentActionsDropdown-{{ post.slug }}-{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown">
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown-{{ post.slug }}-{{ comment.id }}">
                                     {% if user.is_superuser %}
                                         {% if not comment.approbation_state == 'AP' %}
-                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk_post=comment.related_post.pk pk=comment.id %}">
                                                 <i class="bi bi-check2-square"></i> Approve
                                             </a>
                                         {% endif %}
 
-                                        <a class="dropdown-item" href="{% url 'admin:blog_comment_change' object_id=comment.pk %}">
+                                        <a class="dropdown-item" href="{% url 'admin:blog_comment_change' object_id=comment.id %}">
                                             <i class="bi bi-pencil-square"></i> Edit in Admin
                                         </a>
                                     {% endif %}
@@ -45,7 +45,7 @@
                                             <div class="dropdown-divider"></div>
                                         {% endif %}
 
-                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk_post=comment.related_post.pk pk=comment.pk %}">
+                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk_post=comment.related_post.pk pk=comment.id %}">
                                             <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
                                         </a>
                                     {% endif %}
@@ -61,7 +61,7 @@
                 <h2 class="card-title">{{ comment.title }}</h2>
             {% endif %}
             <div class="text-muted">
-                {{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }} {% if comment.comment_answer %}<a href="{{ post.get_absolute_url }}#comment-{{ comment.comment_answer.id }}"><small>&lt;Related Comment&gt;</small></a>{% endif %}
+                {{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }} {% if comment.comment_answer %}<a href="{{ comment.comment_answer.get_absolute_url }}"><small>&lt;Related Comment&gt;</small></a>{% endif %}
             </div>
             {% autoescape on %}
                 <span class="card-text">{{ comment.body }}</span>
@@ -69,7 +69,7 @@
         </div>
         <div class="card-footer">
             <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk_post=comment.related_post.pk pk=comment.pk %}">Reply to this comment</a>
+                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk_post=comment.related_post.pk pk=comment.id %}">Reply to this comment</a>
             </div>
         </div>
     </div>

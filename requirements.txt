@@ -1,6 +1,6 @@
 aniso8601==7.0.0
 appdirs==1.4.4
-asgiref==3.3.1
+asgiref==3.3.2
 autopep8==1.5.5
 beautifulsoup4==4.9.3
 boto3==1.17.9
@@ -14,7 +14,7 @@ cryptography==3.4.6
 cssselect==1.1.0
 defusedxml==0.6.0
 distlib==0.3.1
-Django==3.2rc1
+Django==3.2
 django-allauth==0.44.0
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap-v5==1.0.0
