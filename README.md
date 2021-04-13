@@ -7,3 +7,5 @@ Laziness is present, but I gotta keep the streak xd
 Lol...
 
 Ananothaone
+
+tbh yea
