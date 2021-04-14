@@ -40,15 +40,6 @@ def make_featured(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
-def make_big(modeladmin, request, queryset):
-    updated = queryset.update(featuring_state='B')
-    modeladmin.message_user(request, ngettext(
-        '%d post was successfully marked as big.',
-        '%d posts were successfully marked as big.',
-        updated,
-    ) % updated, messages.SUCCESS)
-
-
 def make_featured_big(modeladmin, request, queryset):
     updated = queryset.update(featuring_state='FB')
     modeladmin.message_user(request, ngettext(
@@ -113,17 +104,17 @@ class PostAdmin(admin.ModelAdmin):
                     'slug', 'publication_state', 'featuring_state', 'clicks', 'language',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
-                     'pk', 'withdrawn', 'featured', 'big', 'url_post_type', 'url_post_type_name',)
+                     'pk', 'withdrawn', 'featuring_state', 'url_post_type', 'url_post_type_name',)
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'publication_state',
-                   'featuring_state', 'published_date', 'withdrawn', 'featured', 'big', 'language',)
+                   'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language',)
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
                            'description', 'author', 'slug', 'body',)}),
         (('States'), {
-         'fields': ('withdrawn', 'featured', 'big', 'publication_state', 'featuring_state', 'language',)}),
+         'fields': ('withdrawn', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {
          'fields': ('post_image', 'url_post_type', 'url_post_type_name',)}),
         (('Dates'), {
@@ -136,8 +127,8 @@ class PostAdmin(admin.ModelAdmin):
         Post.body: {'widget': AdminMarkdownxWidget},
     }
 
-    actions = [make_published, make_withdrawn, make_featured,
-               make_big, make_featured_big, export_as_json, make_baguette, make_english, make_other_language, make_multi_lingui]
+    actions = [make_published, make_withdrawn, make_featured, make_featured_big,
+               export_as_json, make_baguette, make_english, make_other_language, make_multi_lingui]
 
 
 class CommentAdmin(admin.ModelAdmin):

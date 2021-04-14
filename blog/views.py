@@ -35,10 +35,9 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Latest Posts'
         context['side_title'] = 'Post List'
-        context['featured'] = self.model.objects.filter(
-            featured=True, big=False)
+        context['featured'] = self.model.objects.filter(featuring_state="F")
         context['featured_big'] = self.model.objects.filter(
-            featured=True, big=True)
+            featuring_state="FB")
         context['featured_cat'] = self.model.objects.filter(
             post_to_category__featured_cat=True)
         return context

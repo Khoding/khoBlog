@@ -80,7 +80,6 @@ class Post(models.Model):
 
     FEATURING_CHOICES = [
         ('F', 'Featured'),
-        ('B', 'Big'),
         ('FB', 'Featured Big'),
         ('N', 'Not Featured'),
     ]
@@ -121,8 +120,6 @@ class Post(models.Model):
         default=False, help_text="Is Post withdrawn")
     featuring_state = models.CharField(
         max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N', help_text="Featuring state")
-    featured = models.BooleanField(default=False, help_text="Is Post featured")
-    big = models.BooleanField(default=False, help_text="Is Post Big Featured")
     language = models.CharField(
         max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the main language")
     url_post_type = models.URLField(
