@@ -1,6 +1,7 @@
 import datetime
 from django.conf import settings
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -97,7 +98,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, help_text="Post title")
     featured_title = models.CharField(
         max_length=200, default='', blank=True, help_text="Featured post title")
-    body = MarkdownxField(help_text="Post main content")
+    body = MarkdownxField(help_text="Post main content", blank=True)
     post_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/', help_text="Post image")
     description = models.TextField(help_text="Post description")
@@ -170,6 +171,24 @@ class Post(models.Model):
 
     def removed_comments(self):
         return self.comments.filter(approbation_state='RE')
+
+
+class PostContent(models.Model):
+    post = models.ForeignKey(
+        'blog.Post', on_delete=CASCADE, related_name="content")
+    body = MarkdownxField(help_text="Post main content")
+    post_body_image = models.ImageField(
+        null=True, blank=True, upload_to='images/post/body_images/', help_text="Image in text")
+    post_body_image_alt = models.CharField(
+        null=True, blank=True, max_length=200, help_text="Image in text")
+
+    def __str__(self):
+        return self.post.title + '\'s Post Content'
+
+    # Create a property that returns the markdown instead
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.body)
 
 
 class Comment(models.Model):

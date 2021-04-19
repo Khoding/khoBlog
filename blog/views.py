@@ -8,7 +8,7 @@ from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthAr
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
-from .models import Post, Comment, Category, Series
+from .models import Post, Comment, Category, PostContent, Series
 
 
 def superuser_required():
@@ -161,6 +161,8 @@ class PostDetailView(DetailView):
             published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
         context['series'] = self.series
         context['title'] = self.title
+        context['body'] = PostContent.objects.filter(
+            post_id=self.post.pk)
         context['description'] = self.description
         context['side_title'] = 'Post List'
         return context

@@ -1,7 +1,8 @@
 from captcha.fields import CaptchaField
 from django import forms
+from django.forms.models import inlineformset_factory
 
-from .models import Post, Comment, Category, Series
+from .models import Post, Comment, Category, PostContent, Series
 
 from bootstrap_datepicker_plus import DateTimePickerInput
 
@@ -129,3 +130,7 @@ class ARPostCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ()
+
+
+PostContentFormSet = inlineformset_factory(
+    Post, PostContent, extra=1, fields=('body', 'post_body_image', 'post_body_image_alt',))

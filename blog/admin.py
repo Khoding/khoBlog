@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
 
-from .models import Category, Comment, Post, PostCatsLink, Series
+from .models import Category, Comment, Post, PostCatsLink, PostContent, Series
 
 
 def export_as_json(modeladmin, request, queryset):
@@ -99,6 +99,15 @@ class PostCatsLinkInline(admin.TabularInline):
     extra = 0
 
 
+class PostContentInline(admin.TabularInline):
+    model = PostContent
+    extra = 0
+
+    formfield_overrides = {
+        PostContent.body: {'widget': AdminMarkdownxWidget},
+    }
+
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'published_date',
                     'slug', 'publication_state', 'featuring_state', 'clicks', 'language',)
@@ -121,11 +130,7 @@ class PostAdmin(admin.ModelAdmin):
          'fields': ('created_date', 'published_date',)}),
     )
 
-    inlines = [PostCatsLinkInline, ]
-
-    formfield_overrides = {
-        Post.body: {'widget': AdminMarkdownxWidget},
-    }
+    inlines = [PostContentInline, PostCatsLinkInline]
 
     actions = [make_published, make_withdrawn, make_featured, make_featured_big,
                export_as_json, make_baguette, make_english, make_other_language, make_multi_lingui]

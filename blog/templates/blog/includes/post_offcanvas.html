@@ -1,0 +1,50 @@
+<!-- Off Canvas -->
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="postModal-{{ post.id }}" aria-labelledby="postModal-{{ post.id }}Label">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="postModal-{{ post.id }}Label">{{ post.title }} - #{{ post.id }}</h5>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+    </div>
+    <div class="offcanvas-body">
+        <h6>General Information</h6>
+        <p>
+            <a href="{% url 'accounts:profile' slug=post.author.slug %}">
+                Author:
+                {{ post.author }} -
+                {% if post.author.is_superuser %}
+                    {% if post.author.owner %}
+                        Website Owner
+                    {% else %}
+                        Admin
+                    {% endif %}
+                {% elif post.author.is_staff %}
+                    Staff
+                {% else %}
+                    User
+                {% endif %}
+            </a>
+        </p>
+        <div class="mb-2">
+            <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:m:s' }}</p>
+            {% if post.published_date %}
+                <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:m:s' }}</p>
+            {% endif %}
+            {% if post.modified_date %}
+                <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:m:s' }}</p>
+            {% endif %}
+            {% if post.featured_title %}
+                <p>Featured Title: {{ post.featured_title }}</p>
+            {% endif %}
+        </div>
+
+        <p>Description: {{ post.description }}</p>
+        <p>Clicks: {{ post.clicks }}</p>
+        <p>Categories:
+            {% include 'blog/includes/post_categories.html' %}
+        </p>
+        {% if user.is_superuser %}
+            <h6>Admin Information</h6>
+            <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
+            <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
+        {% endif %}
+    </div>
+</div>

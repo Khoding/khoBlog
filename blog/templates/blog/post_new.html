@@ -7,7 +7,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">Add Post</button>
+            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
         {% endbuttons %}
     </form>
     {{ form.media }}

@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
                     <h3 class="card-title text-word-wrap">{% firstof post.featured_title post.title %}</h3>
-                    <p class="mb-0 text-muted">{{ post.body|readtime }}</p>
+                    <p class="mb-0 text-muted">{{ post.contet }}</p>
                     <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
                     <p class="mb-auto">{{ post.description }}</p>
                 </div>
