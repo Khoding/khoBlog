@@ -25,8 +25,14 @@
                 </div>
                 <div class="card-body">
                     <h3 class="card-title text-word-wrap">{% firstof post.featured_title post.title %}</h3>
-                    <p class="mb-0 text-muted">{{ post.contet }}</p>
-                    <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
+                    <div class="mb-0">{% include 'blog/includes/post_dates.html' %}</div>
+                    <p class="mb-2 text-muted">
+                        {% if post.body %}
+                            {{ post.body|readtime }}
+                        {% else %}
+                            A while
+                        {% endif %}
+                    </p>
                     <p class="mb-auto">{{ post.description }}</p>
                 </div>
                 <div class="card-footer">
