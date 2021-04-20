@@ -1,7 +1,6 @@
 import datetime
 from django.conf import settings
 from django.db import models
-from django.db.models.deletion import CASCADE
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -175,7 +174,7 @@ class Post(models.Model):
 
 class PostContent(models.Model):
     post = models.ForeignKey(
-        'blog.Post', on_delete=CASCADE, related_name="content")
+        'blog.Post', on_delete=models.CASCADE, related_name="content")
     body = MarkdownxField(help_text="Post main content")
     post_body_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/body_images/', help_text="Image in text")
