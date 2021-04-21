@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'captcha',
     'storages',
+    'robots',
 
     # APIs Apps
     'rest_framework',

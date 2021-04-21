@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.urls.conf import re_path
 from blog.models import Post
 from django.contrib import admin
@@ -57,7 +58,7 @@ api_base_patterns = [
     re_path(r'(?P<version>[v1]+)/',
             include(api_patterns)),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', obtain_auth_token, name='obtain-token'),
+    path('token/', obtain_auth_token, name='obtain-token'),
 ]
 
 urlpatterns = [
@@ -89,4 +90,5 @@ urlpatterns = [
          {'sitemaps': {'blog': GenericSitemap(
              site_map_info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^robots\.txt', include('robots.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
