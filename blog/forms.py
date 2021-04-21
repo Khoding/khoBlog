@@ -10,7 +10,7 @@ from bootstrap_datepicker_plus import DateTimePickerInput
 class PostAddForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'series', 'post_order_in_series',
+        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series',
                   'description', 'body', 'post_image', 'url_post_type', 'url_post_type_name', 'language',)
 
         widgets = {
@@ -29,7 +29,7 @@ class PostAddForm(forms.ModelForm):
 class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'series', 'post_order_in_series', 'description',
+        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series', 'description',
                   'body', 'post_image', 'slug', 'withdrawn', 'featuring_state', 'published_date', 'url_post_type', 'url_post_type_name', 'language',)
 
         widgets = {

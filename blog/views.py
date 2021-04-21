@@ -170,6 +170,7 @@ class PostDetailView(DetailView):
             post_id=self.post.pk)
         context['description'] = self.description
         context['side_title'] = 'Post List'
+        context['similar_posts'] = self.post.tags.similar_objects()[:5]
         return context
 
 

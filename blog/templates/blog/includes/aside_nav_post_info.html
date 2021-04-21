@@ -31,6 +31,12 @@
     </div>
 
     <p>Description: {{ description }}</p>
+
+    {% if post.tags %}
+        <p>Tags: {% for tags in post.tags.all %}{{ tags }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p>Similar Posts: {% for e in similar_posts %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% endif %}
+
     <p>Clicks: {{ post.clicks }}</p>
     <p>Categories:
         {% include 'blog/includes/post_categories.html' %}

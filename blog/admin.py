@@ -110,18 +110,18 @@ class PostContentInline(admin.TabularInline):
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date', 'published_date',
-                    'slug', 'publication_state', 'featuring_state', 'clicks', 'language',)
+                    'slug', 'publication_state', 'featuring_state', 'tags', 'clicks', 'language',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_post_type', 'url_post_type_name',)
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'publication_state',
-                   'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language',)
+                   'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
-                           'description', 'author', 'slug', 'body',)}),
+                           'description', 'author', 'slug', 'body', 'tags',)}),
         (('States'), {
          'fields': ('withdrawn', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {

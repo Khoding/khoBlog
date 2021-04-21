@@ -7,6 +7,8 @@ from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
+from taggit.managers import TaggableManager
+
 
 class Category(models.Model):
     title = models.CharField(max_length=200, help_text="Category title")
@@ -104,6 +106,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
     categories = models.ManyToManyField(
         'blog.Category', through='PostCatsLink', help_text="Post categories")
+    tags = TaggableManager(blank=True)
     series = models.ForeignKey(
         'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
     post_order_in_series = models.PositiveIntegerField(

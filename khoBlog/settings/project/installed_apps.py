@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'captcha',
     'storages',
     'robots',
+    'taggit',
 
     # APIs Apps
     'rest_framework',
