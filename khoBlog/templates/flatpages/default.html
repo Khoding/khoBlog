@@ -7,19 +7,7 @@
         {% endautoescape %}
     {% endif %}
 
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ title }}">
-    <meta name="description" content="{{ flatpage.description }}">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:url" content="{{ flatpage.get_absolute_url }}">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ flatpage.description }}">
-
-    <!-- Twitter -->
-    <meta property="twitter:url" content="{{ flatpage.get_absolute_url }}">
-    <meta property="twitter:title" content="{{ title }}">
-    <meta property="twitter:description" content="{{ flatpage.description }}">
+    {{ block.super }}
 {% endblock page_head %}
 
 {% block main %}

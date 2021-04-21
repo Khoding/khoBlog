@@ -17,6 +17,7 @@ class PageDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['pages'] = self.model.objects.all().order_by('-pk')
         context['title'] = self.page.title
+        context['description'] = self.page.description
         context['side_title'] = 'Page List'
         return context
 
@@ -32,6 +33,7 @@ class PageListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page List'
+        context['description'] = "List of all Pages"
         return context
 
 

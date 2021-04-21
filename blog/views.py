@@ -52,15 +52,19 @@ class PostInCategoryListView(ListView):
     def get_queryset(self):
         self.category = get_object_or_404(
             Category, slug=self.kwargs['slug'])
-        if self.request.user.is_superuser:
-            return self.model.objects.filter(categories=self.category).order_by('-published_date')
+        if not self.category.withdrawn or self.category.withdrawn and self.request.user.is_superuser:
+            self.title = self.category.title
+            self.description = self.category.description
         else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, categories=self.category).order_by('-published_date')
+            self.title = 'This category is Withdrawn'
+            self.description = 'This category is Withdrawn'
+        return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, categories=self.category).order_by('-published_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cats'] = self.category
-        context['title'] = self.category.title
+        context['title'] = self.title
+        context['description'] = self.description
         context['side_title'] = 'Post List'
         return context
 
@@ -104,6 +108,7 @@ class CategoryListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Category List'
         context['search_url'] = reverse('blog:category_search_results')
+        context['description'] = 'List of categories'
         return context
 
 

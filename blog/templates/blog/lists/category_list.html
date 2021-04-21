@@ -2,24 +2,6 @@
 {% load static %}
 {% load markdown_extra %}
 
-{% block page_head %}
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ title }}">
-    <meta name="description" content="List of categories">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:url" content="{% url 'blog:category_list' %}">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="List of categories">
-
-    <!-- Twitter -->
-    <meta property="twitter:url" content="{% url 'blog:category_list' %}">
-    <meta property="twitter:title" content="{{ title }}">
-    <meta property="twitter:description" content="List of categories">
-
-{% endblock page_head %}
-
-
 {% block content_main %}
     <div class="row row-cols-1 row-cols-lg-3">
         {% for cat in category_list %}

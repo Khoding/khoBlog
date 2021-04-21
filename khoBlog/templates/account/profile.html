@@ -2,22 +2,6 @@
 {% load bootstrap5 %}
 {% load account %}
 
-{% block page_head %}
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ title }}">
-    <meta name="description" content="{{ object.bio }}">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:url" content="{{ object.get_absolute_url }}">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ object.bio }}">
-
-    <!-- Twitter -->
-    <meta property="twitter:url" content="{{ object.get_absolute_url }}">
-    <meta property="twitter:title" content="{{ title }}">
-    <meta property="twitter:description" content="{{ object.bio }}">
-{% endblock page_head %}
-
 {% block page_top_end %}
     {% if user.is_superuser %}
         <a class="btn btn-danger float-end" href="{% url 'admin:accounts_customuser_delete' object_id=object.id %}">

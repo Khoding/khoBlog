@@ -53,19 +53,19 @@
         <!-- Primary Meta Tags -->
         <meta name="title" content="{{ title }}">
         <meta name="description"
-              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+              content="{{ description }}">
 
         <!-- Open Graph / Facebook -->
         <meta property="og:title" content="{{ title }}">
         <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
         <meta property="og:description"
-              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+              content="{{ description }}">
 
         <!-- Twitter -->
         <meta property="twitter:title" content="{{ title }}">
         <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
         <meta property="twitter:description"
-              content="Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project">
+              content="{{ description }}">
     {% endblock page_head %}
 
     <meta name="theme-color" content="#B362FF">

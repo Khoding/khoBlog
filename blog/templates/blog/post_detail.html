@@ -3,22 +3,6 @@
 {% load markdown_extra %}
 {% load read_time %}
 
-{% block page_head %}
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Post #{{ post.id }} - {{ title }}">
-    <meta name="description" content="{{ description }}">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:url" content="{{ post.get_absolute_url }}">
-    <meta property="og:title" content="Post #{{ post.id }} - {{ title }}">
-    <meta property="og:description" content="{{ description }}">
-
-    <!-- Twitter -->
-    <meta property="twitter:url" content="{{ post.get_absolute_url }}">
-    <meta property="twitter:title" content="Post #{{ post.id }} - {{ title }}">
-    <meta property="twitter:description" content="{{ description }}">
-{% endblock page_head %}
-
 {% block page_top_end %}
     <div class="btn-group float-end" role="group" aria-label="Previous / Next">
         <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
