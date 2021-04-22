@@ -63,13 +63,8 @@
     </div>
 
     {% block page_top_hr %}
-        <div class="row">
-            <div class="clearfix col-auto">
-                <span class="float-start">{{ posts.count }}</span>
-            </div>
-            <div class="col">
-                <hr>
-            </div>
+        <div class='text-then-hr'>
+            <span class='hr-title'><span class="me-2">{{ posts.count }} Posts</span></span>
         </div>
     {% endblock page_top_hr %}
 
