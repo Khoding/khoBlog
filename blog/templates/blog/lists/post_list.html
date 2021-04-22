@@ -63,7 +63,14 @@
     </div>
 
     {% block page_top_hr %}
-        {{ block.super }}
+        <div class="row">
+            <div class="clearfix col-auto">
+                <span class="float-start">{{ posts.count }}</span>
+            </div>
+            <div class="col">
+                <hr>
+            </div>
+        </div>
     {% endblock page_top_hr %}
 
 {% endblock page_top %}
