@@ -1,5 +1,5 @@
 {% for side in sides %}
-    {% if not side.is_post_list_side_menu or side.is_post_list_side_menu and context.posts or context.category_list or context.series_list or context.query or context.pages or context.projects%}
+    {% if not side.is_post_list_side_menu or side.is_post_list_side_menu and context.posts or context.category_list or context.series_list or context.query or context.pages or context.projects or context.tags %}
         <div class="card p-4 mb-2 rounded shadow">
             {% if not side.is_post_list_side_menu %}
                 <h4 class="fst-italic">{{ side.title }}</h4>

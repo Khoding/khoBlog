@@ -6,6 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from taggit.models import Tag
 
 from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
 from .models import Post, Comment, Category, PostContent, Series
@@ -237,6 +238,44 @@ class PostWithdrawnListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Withdrawn'
+        return context
+
+
+class AllTagsListView(ListView):
+    model = Tag
+    template_name = 'blog/lists/tags_list.html'
+    context_object_name = 'tags'
+    paginate_by = 21
+    paginate_orphans = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Tag List"
+        context['description'] = "List of all tags"
+        context['side_title'] = 'Tag List'
+        return context
+
+
+class PostWithTagListView(ListView):
+    model = Post
+    template_name = 'blog/lists/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 21
+    paginate_orphans = 5
+
+    def get_queryset(self):
+        self.tags = get_object_or_404(
+            Tag, slug=self.kwargs['slug'])
+        self.title = f'Tag: {self.tags.name}'
+        self.description = f'Posts tagged with {self.tags.name}'
+        return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, tags=self.tags).order_by('-published_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = self.tags
+        context['title'] = self.title
+        context['description'] = self.description
+        context['side_title'] = 'Post List'
         return context
 
 

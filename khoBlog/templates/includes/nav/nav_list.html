@@ -47,4 +47,10 @@
             <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
         {% endfor %}
     {% endif %}
+
+    {% if context.tags %}
+        {% for tag in context.tags.all %}
+            <li><a href="{% url 'blog:post_tagged_with' slug=tag.slug %}">{{ tag.name }}</a></li>
+        {% endfor %}
+    {% endif %}
 </ol>

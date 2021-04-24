@@ -5,7 +5,7 @@ from django.views.generic.dates import DateDetailView
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AllSearchResultsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
+from .views import AllSearchResultsListView, AllTagsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, PostWithTagListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -141,6 +141,14 @@ urlpatterns = [
 
     # Archives Related Patterns
     path('archives/', include(archive_extra_patterns)),
+
+    # Archives Related Patterns
+    path('tags/', AllTagsListView.as_view(),
+         name="all_tags"),
+
+    # Archives Related Patterns
+    path('tags/<slug:slug>/', PostWithTagListView.as_view(),
+         name="post_tagged_with"),
 
     # RSS Related Patterns
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),

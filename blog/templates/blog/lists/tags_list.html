@@ -1,0 +1,25 @@
+{% extends 'blog/base_post_main_block.html' %}
+{% load static %}
+{% load markdown_extra %}
+
+{% block content_main %}
+    <div class="row row-cols-1 row-cols-lg-3">
+        {% for tag in tags %}
+            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div id="tag-{{ tag.slug }}" class="card shadow h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ tag }}</h3>
+                        <p class="mb-auto">Tag Slug: {{ tag.slug }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="d-flex">
+                            <span class="col">
+                                <a class="card-link" href="{% url 'blog:post_tagged_with' slug=tag.slug %}">All posts tagged with {{ tag.name }}</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content_main %}
