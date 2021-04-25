@@ -45,6 +45,13 @@ series_extra_patterns = [
     path('<slug:slug>/', include(series_action_extra_patterns)),
 ]
 
+tags_extra_patterns = [
+    path('', AllTagsListView.as_view(),
+         name="tag_list"),
+    path('<slug:slug>/', PostWithTagListView.as_view(),
+         name="post_tagged_with"),
+]
+
 post_comment_action_extra_patterns = [
     path('edit/', PostCommentUpdateView.as_view(),
          name='edit_post_comment'),
@@ -139,16 +146,11 @@ urlpatterns = [
     # Series Related Patterns
     path('series/', include(series_extra_patterns)),
 
+    # Tags Related Patterns
+    path('tags/', include(tags_extra_patterns)),
+
     # Archives Related Patterns
     path('archives/', include(archive_extra_patterns)),
-
-    # Archives Related Patterns
-    path('tags/', AllTagsListView.as_view(),
-         name="all_tags"),
-
-    # Archives Related Patterns
-    path('tags/<slug:slug>/', PostWithTagListView.as_view(),
-         name="post_tagged_with"),
 
     # RSS Related Patterns
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),
