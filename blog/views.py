@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic.dates import ArchiveIndexView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
+from django.views.generic.dates import ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from taggit.models import Tag
 
@@ -817,6 +817,55 @@ class PostDayArchiveView(DayArchiveView):
         context['title'] = '[Archive] Posted the ' + \
             str(self.get_day()) + ' ' + str(self.get_month()) + \
             ' ' + str(self.get_year())
+        return context
+
+
+class PostDateDetailView(DateDetailView):
+    model = Post
+    template_name = 'blog/archive_date_detail.html'
+    date_field = "published_date"
+
+    def get_queryset(self):
+        self.post = get_object_or_404(
+            Post, slug=self.kwargs['slug'])
+        self.post.clicked()
+        if self.request.user.is_superuser:
+            self.series = self.model.objects.filter(
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+            self.title = self.post.title
+            self.description = self.post.description
+        else:
+            self.series = self.model.objects.filter(
+                series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
+            if self.post.withdrawn:
+                self.title = 'Withdrawn'
+                self.description = 'This post is Withdrawn'
+            elif not self.post.published_date:
+                self.title = 'Draft'
+                self.description = 'This post is still a Draft'
+            elif self.post.published_date >= timezone.now():
+                self.title = 'Scheduled'
+                self.description = 'This post is Scheduled'
+            else:
+                self.title = self.post.title
+                self.description = self.post.description
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = '[Archive] Posted the ' + \
+            str(self.get_day()) + ' ' + str(self.get_month()) + \
+            ' ' + str(self.get_year())
+        context['posts'] = self.model.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+        context['series'] = self.series
+        context['title'] = self.title
+        context['body'] = PostContent.objects.filter(
+            post_id=self.post.pk)
+        context['description'] = self.description
+        context['side_title'] = 'Post List'
+        context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
+            :5]
         return context
 
 

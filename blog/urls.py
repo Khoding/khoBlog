@@ -1,11 +1,9 @@
-from .models import Post
 from django.urls import path
 from django.urls.conf import include
-from django.views.generic.dates import DateDetailView
 
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AllSearchResultsListView, AllTagsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, PostWithTagListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
+from .views import AllSearchResultsListView, AllTagsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDateDetailView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, PostWithTagListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -117,9 +115,8 @@ archive_extra_patterns = [
     path('<int:year>/<str:month>/<int:day>/',
          PostDayArchiveView.as_view(),
          name="archive_day"),
-    path('<int:year>/<str:month>/<int:day>/<int:pk>/',
-         DateDetailView.as_view(model=Post, date_field="published_date",
-                                template_name="blog/archive_date_detail.html"),
+    path('<int:year>/<str:month>/<int:day>/<slug:slug>/',
+         PostDateDetailView.as_view(),
          name="archive_date_detail"),
     path('today/',
          PostTodayArchiveView.as_view(),
