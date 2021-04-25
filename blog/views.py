@@ -149,12 +149,9 @@ class PostDetailView(DetailView):
                 series__isnull=False, series=self.post.series).order_by('post_order_in_series')
             self.title = self.post.title
             self.description = self.post.description
-            self.tags = self.post.tags.similar_objects()[:5]
         else:
             self.series = self.model.objects.filter(
                 series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series')
-            self.tags = self.post.tags.similar_objects()[:5].filter(
-                published_date__lte=timezone.now(), withdrawn=False)
             if self.post.withdrawn:
                 self.title = 'Withdrawn'
                 self.description = 'This post is Withdrawn'
@@ -179,7 +176,8 @@ class PostDetailView(DetailView):
             post_id=self.post.pk)
         context['description'] = self.description
         context['side_title'] = 'Post List'
-        context['similar_posts'] = self.tags
+        context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
+            :5]
         return context
 
 
