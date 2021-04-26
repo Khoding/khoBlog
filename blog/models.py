@@ -182,7 +182,8 @@ class PostContent(models.Model):
     post_body_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/body_images/', help_text="Image in text")
     post_body_image_alt = models.CharField(
-        null=True, blank=True, max_length=200, help_text="Image in text")
+        default='', blank=True, max_length=200, help_text='Image in text'
+    )
 
     def __str__(self):
         return self.post.title + '\'s Post Content'
@@ -213,8 +214,9 @@ class Comment(models.Model):
     )
     author_logged = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment author (a user with account)")
-    title = models.CharField(max_length=200, null=True, blank=True,
-                             help_text="Comment title")
+    title = models.CharField(
+        max_length=200, default='', blank=True, help_text='Comment title'
+    )
     body = models.TextField(verbose_name="Comment",
                             help_text="Comment main content")
     created_date = models.DateTimeField(
