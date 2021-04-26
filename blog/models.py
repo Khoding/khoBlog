@@ -226,6 +226,12 @@ class Comment(models.Model):
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
 
+    def __str__(self):
+        return self.fulltitle
+
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug}) + f'#comment-{self.pk}'
+
     @property
     def fulltitle(self):
         if self.author_logged and self.author:
@@ -239,12 +245,6 @@ class Comment(models.Model):
         else:
             name = f'{self.related_post.title} - {author_in_name}'
         return name
-
-    def __str__(self):
-        return self.fulltitle
-
-    def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug}) + f'#comment-{self.pk}'
 
     def approve(self):
         self.approbation_state = 'AP'
