@@ -1,10 +1,21 @@
 {% extends 'sub_base.html' %}
 
 {% block content %}
-    {% for thing in things %}
-        {% for field in thing %}
-            <p>{{field}}: {{thing.username}}</p>
+    <div class="container">
+        {% for thing in things %}
+            <div class="row">
+                <div class="col-auto">
+                    {% for field in thing %}
+                        <p>{{field}}:</p>
+                    {% endfor %}
+                </div>
+                <div class="col-auto">
+                    {% for value in thing.values %}
+                        <p>{{ value }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
         {% endfor %}
-    {% endfor %}
-
+    </div>
 {% endblock %}
