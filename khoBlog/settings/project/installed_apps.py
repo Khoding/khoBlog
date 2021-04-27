@@ -49,4 +49,5 @@ INSTALLED_APPS = [
     'todo',
     'shortener',
     'links',
+    'reading_apis_app',
 ]

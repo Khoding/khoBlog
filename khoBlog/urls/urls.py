@@ -70,6 +70,7 @@ urlpatterns = [
     path('todo/', include('todo.urls')),
     path('s/', include('shortener.urls')),
     path('l/', include('links.urls')),
+    path('api_read/', include('reading_apis_app.urls')),
 
     # Rest API
     path('api/', include(api_base_patterns)),
