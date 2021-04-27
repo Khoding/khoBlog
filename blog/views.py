@@ -254,6 +254,7 @@ class AllTagsListView(ListView):
         context['title'] = "Tag List"
         context['description'] = "List of all tags"
         context['side_title'] = 'Tag List'
+        context['search_url'] = reverse('blog:tag_search_results')
         return context
 
 
@@ -280,6 +281,7 @@ class PostWithTagListView(ListView):
         context['title'] = self.title
         context['description'] = self.description
         context['side_title'] = 'Post List'
+        context['search_url'] = reverse('blog:tag_search_results')
         return context
 
 
@@ -400,7 +402,7 @@ class SearchListView(ListView):
 
     def get_queryset(self):
         query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
-            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', }, {'id': 5, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
         return query
 
     def get_context_data(self, **kwargs):
@@ -516,6 +518,29 @@ class CommentSearchResultsListView(ListView):
         return context
 
 
+class TagsSearchResultsListView(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'query'
+    paginate_by = 21
+    paginate_orphans = 5
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query != None:
+            return Tag.objects.filter(
+                Q(name__icontains=query)
+            )
+        else:
+            tag = Tag.objects.all()
+            return tag
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Search in Tags'
+        context['search_url'] = reverse('blog:tag_search_results')
+        return context
+
+
 class RandomSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
@@ -553,7 +578,10 @@ class AllSearchResultsListView(ListView):
                     Q(title__icontains=query) | Q(author__icontains=query) | Q(
                         body__icontains=query),
                 )
-                return [post, category, comment]
+                tag = Tag.objects.filter(
+                    Q(name__icontains=query)
+                )
+                return [post, category, comment, tag]
             else:
                 post = Post.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -570,19 +598,24 @@ class AllSearchResultsListView(ListView):
                         body__icontains=query),
                 ).filter(~Q(approbation_state='RE'),
                          )
-                return [post, category, comment]
+                tag = Tag.objects.filter(
+                    Q(name__icontains=query)
+                )
+                return [post, category, comment, tag]
         else:
             if self.request.user.is_superuser:
                 post = Post.objects.all()
                 category = Category.objects.all()
                 comment = Comment.objects.all()
-                return [post, category, comment]
+                tag = Tag.objects.all()
+                return [post, category, comment, tag]
             else:
                 post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
                     published_date__isnull=True), ~Q(withdrawn=True),)
                 category = Category.objects.filter(~Q(withdrawn=True),)
                 comment = Comment.objects.filter(~Q(approbation_state='RE'),)
-                return [post, category, comment]
+                tag = Tag.objects.all()
+                return [post, category, comment, tag]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
