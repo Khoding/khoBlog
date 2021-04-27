@@ -1,0 +1,10 @@
+{% extends 'sub_base.html' %}
+
+{% block content %}
+    {% for thing in things %}
+        {% for field in thing %}
+            <p>{{field}}: {{thing.username}}</p>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

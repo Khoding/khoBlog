@@ -136,6 +136,7 @@ urlpatterns = [
     path('withdrawn/', PostWithdrawnListView.as_view(),
          name='post_withdrawn_list'),
 
+    path('api_read/', views.home, name='home'),  # for the api reading app
     # Post Related Patterns
     path('post/', include(post_extra_patterns)),
 

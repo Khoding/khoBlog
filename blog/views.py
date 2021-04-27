@@ -1,3 +1,5 @@
+from django.shortcuts import render
+import requests
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
@@ -21,6 +23,17 @@ def superuser_required():
         return WrappedClass
 
     return wrapper
+
+
+def home(request):
+    if 'endpoint' in request.GET:
+        api = request.GET['endpoint']
+        url = api
+        response = requests.get(url)
+        thing = response.json()
+        return render(request, 'blog/home.html', {
+            'things': thing,
+        })
 
 
 class PostListView(ListView):
