@@ -1,14 +1,45 @@
+from jsonview.decorators import json_view
 from django.shortcuts import render
 import requests
 
 
-def home(request):
-    if 'endpoint' in request.GET:
-        api = request.GET['endpoint']
-        url = api
-        response = requests.get(url)
+@json_view
+def return_the_api(request):
+    if 'e' in request.GET:
+        api = request.GET['e']
+        response = requests.get(api)
         thing = response.json()
-        return render(request, 'reading_apis_app/detail.html', {
-            'things': thing,
-            'title': 'API Reading App'
-        })
+        if 'format' in request.GET:
+            f = request.GET['format']
+            if f == 'json':
+                context = {'things': thing}
+                return context
+            elif f == 'api' or f is None or f == '':
+                template = 'reading_apis_app/list.html'
+                context = {'things': thing, 'title': 'API Reading App'}
+                return render(request, template, context)
+        else:
+            template = 'reading_apis_app/list.html'
+            context = {'things': thing, 'title': 'API Reading App'}
+            return render(request, template, context)
+
+
+@json_view
+def return_the_api_detail(request):
+    if 'e' in request.GET:
+        api = request.GET['e']
+        response = requests.get(api)
+        thing = response.json()
+        if 'format' in request.GET:
+            f = request.GET['format']
+            if f == 'json':
+                context = {'things': thing}
+                return context
+            elif f == 'api' or f is None or f == '':
+                template = 'reading_apis_app/detail.html'
+                context = {'things': thing, 'title': 'API Reading App'}
+                return render(request, template, context)
+        else:
+            template = 'reading_apis_app/detail.html'
+            context = {'things': thing, 'title': 'API Reading App'}
+            return render(request, template, context)

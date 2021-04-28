@@ -1,24 +1,22 @@
 {% extends 'sub_base.html' %}
 
 {% block content %}
-    {% for thing in things %}
-        <div class="card mb-2">
-            <div class="card-body">
-                <div class="card-text">
-                    <div class="row">
-                <div class="col-auto">
-                    {% for field in thing %}
-                        <p class="mb-0">{{field}}:</p>
-                    {% endfor %}
-                </div>
-                <div class="col-auto">
-                    {% for value in thing.values %}
-                        <p class="mb-0">{{ value }}</p>
-                    {% endfor %}
-                </div>
-            </div>
-                </div>
+    <div class="card mb-2">
+        <div class="card-body">
+            <div class="card-text">
+                {% for item in things.items %}
+                    <p class="mb-0">
+                        {% for data in item %}
+                            {% if not forloop.counter|divisibleby:"2" %}
+                                {{ data }}:
+                            {% endif %}
+                            {% if forloop.counter|divisibleby:"2" %}
+                                {% firstof data "" %}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
-{% endblock %}
+    </div>
+{% endblock content %}
