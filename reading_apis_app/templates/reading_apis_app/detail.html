@@ -11,7 +11,7 @@
                                 {{ data }}:
                             {% endif %}
                             {% if forloop.counter|divisibleby:"2" %}
-                                {% firstof data "" %}
+                                {% firstof data %}
                             {% endif %}
                         {% endfor %}
                     </p>
