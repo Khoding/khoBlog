@@ -49,7 +49,6 @@ site_map_info_dict = {
 
 api_patterns = [
     path('', include('khoBlogAPI.urls')),
-    path('learning_resources/', include('learning_resources.urls')),
     path('docs/', schema_view.with_ui('redoc',
                                       cache_timeout=0), name='schema-redoc'),
 ]
@@ -57,6 +56,7 @@ api_patterns = [
 api_base_patterns = [
     re_path(r'(?P<version>[v1]+)/',
             include(api_patterns)),
+    path('read/', include('reading_apis_app.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('token/', obtain_auth_token, name='obtain-token'),
 ]
@@ -70,7 +70,6 @@ urlpatterns = [
     path('todo/', include('todo.urls')),
     path('s/', include('shortener.urls')),
     path('l/', include('links.urls')),
-    path('api_read/', include('reading_apis_app.urls')),
 
     # Rest API
     path('api/', include(api_base_patterns)),
