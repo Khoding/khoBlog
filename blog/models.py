@@ -7,6 +7,7 @@ from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
+from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
 
@@ -18,6 +19,7 @@ class Category(models.Model):
                             max_length=200, help_text="Category slug")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Category withdrawn")
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ['pk']
@@ -42,6 +44,7 @@ class Series(models.Model):
                             max_length=200, help_text="Series slug")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Series withdrawn")
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ['pk']
@@ -131,6 +134,7 @@ class Post(models.Model):
         max_length=200, default='', blank=True, help_text="What will be shown as url name")
     clicks = models.IntegerField(
         default=0, help_text="How many times the Post has been seen")
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.title
@@ -139,6 +143,14 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+    def save_without_historical_record(self, *args, **kwargs):
+        self.skip_history_when_saving = True
+        try:
+            ret = self.save(*args, **kwargs)
+        finally:
+            del self.skip_history_when_saving
+        return ret
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
@@ -157,7 +169,7 @@ class Post(models.Model):
 
     def clicked(self):
         self.clicks += 1
-        self.save(update_fields=['clicks'])
+        self.save_without_historical_record(update_fields=['clicks'])
 
     def was_published_recently(self):
         now = timezone.now()
@@ -184,6 +196,7 @@ class PostContent(models.Model):
     post_body_image_alt = models.CharField(
         default='', blank=True, max_length=200, help_text='Image in text'
     )
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.post.title + '\'s Post Content'
@@ -227,6 +240,7 @@ class Comment(models.Model):
         max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment approbation state")
     comment_answer = models.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.fulltitle

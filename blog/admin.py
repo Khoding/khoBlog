@@ -3,6 +3,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
+from simple_history.admin import SimpleHistoryAdmin
 
 from .models import Category, Comment, Post, PostCatsLink, PostContent, Series
 
@@ -108,7 +109,7 @@ class PostContentInline(admin.TabularInline):
     }
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SimpleHistoryAdmin):
     list_display = ('title', 'created_date', 'published_date',
                     'slug', 'publication_state', 'featuring_state', 'tags', 'clicks', 'language',)
     ordering = ('-pk',)
@@ -136,7 +137,7 @@ class PostAdmin(admin.ModelAdmin):
                export_as_json, make_baguette, make_english, make_other_language, make_multi_lingui]
 
 
-class CommentAdmin(admin.ModelAdmin):
+class CommentAdmin(SimpleHistoryAdmin):
     list_display = ('fulltitle', 'author_logged', 'author',
                     'created_date', 'approbation_state',)
     list_display_links = ('fulltitle',)
@@ -147,7 +148,7 @@ class CommentAdmin(admin.ModelAdmin):
     actions = [make_approved, ]
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(SimpleHistoryAdmin):
     list_display = ('title', 'description', 'slug', 'withdrawn')
     ordering = ('-pk',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
@@ -156,7 +157,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Series)
-class SeriesAdmin(admin.ModelAdmin):
+class SeriesAdmin(SimpleHistoryAdmin):
     list_display = ('title', 'slug',)
     prepopulated_fields = {'slug': ('title',)}
 

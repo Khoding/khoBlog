@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'storages',
     'robots',
     'taggit',
+    'simple_history',
 
     # APIs Apps
     'rest_framework',
