@@ -1,16 +1,14 @@
-{% extends 'blog/base_post.html' %}
+{% extends 'pages/base_page.html' %}
 {% load bootstrap5 %}
 
 {% block main %}
-    <h3>Delete: {{ post.title }}</h3>
-    <form method="POST" class="form">
+    <form method="POST" enctype="multipart/form-data" class="form">
         {% csrf_token %}
-        <h4>Are you sure ?</h4>
-        {{ form.as_p }}
-
+        {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
         {% endbuttons %}
     </form>
+    {{ form.media }}
 
 {% endblock main %}

@@ -12,11 +12,36 @@
 
 {% block main %}
     <div class="card mb-2">
-        <div class="card-header">
-            <span class="d-flex">
-                <span class="col">
-                    <h2>Page #{{ flatpage.id }}</h2>
-                </span>
+        <div class="card-header d-flex">
+            <span class="col">
+                <h2>Page #{{ flatpage.id }}</h2>
+            </span>
+            <span class="col">
+                {% block super_buttons %}
+                    {% if user.is_superuser %}
+                        <div class="btn-group float-end">
+                            <a class="btn btn-secondary" href="{% url 'pages:page_edit' slug=flatpage.slug %}">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+
+                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="pageAdminDropdown-{{ flatpage.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="projectAdminDropdown">
+                                <a class="dropdown-item" href="{% url 'admin:pages_flatpage_change' object_id=flatpage.id %}">
+                                    <i class="bi bi-pencil-square"></i> Edit in Admin
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="{% url 'pages:page_delete' slug=flatpage.slug %}">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endblock super_buttons %}
             </span>
         </div>
 

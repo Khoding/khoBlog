@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 from .models import Project, Technology, Website, Repository
-from .forms import ProjectForm
+from .forms import ProjectAddForm
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    form_class = ProjectForm
+    form_class = ProjectAddForm
     list_display = ('title', 'snippet', 'description',
                     'technology', 'repository',)
     ordering = ('-pk',)
