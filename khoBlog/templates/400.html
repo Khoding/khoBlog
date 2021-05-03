@@ -2,6 +2,10 @@
 {% load static %}
 {% load markdown_extra %}
 
+{% block page_top_title %}
+    Bad Request
+{% endblock page_top_title %}
+
 {% block page_top_end %}
     <a class="btn btn-primary float-end" href="{% url 'blog:latest' %}">
         Latest Post
