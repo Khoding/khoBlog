@@ -1,4 +1,5 @@
 {% extends 'pages/base_page.html' %}
+{% load comments %}
 
 {% block page_head %}
     {% if flatpage.page_head %}
@@ -51,4 +52,17 @@
             {% endautoescape %}
         </div>
     </div>
+
+    {% if flatpage.enable_comments %}
+        {% get_comment_count for flatpage as comment_count %}
+
+        {% render_comment_form for flatpage %}
+        <hr />
+
+        <p class="text-muted text-small">This page has {{ comment_count }} comments.</p>
+
+        {% render_comment_list for flatpage %}
+    {% else %}
+        <p class="text-muted text-small">This page has comments disabled.</p>
+    {% endif %}
 {% endblock main %}

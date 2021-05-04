@@ -1,0 +1,32 @@
+{% load comments %}
+
+<div id="comments">
+    {% for comment in comment_list %}
+        {% if comment.is_public %}
+        <div>
+            <div id="comment-{{ comment.id }}" class="card mt-2">
+                <div class="card-header">
+                    <h4>
+                        {{ comment.user }}
+                    </h4>
+                    <p class="text-muted text-small mb-0">
+                        <span>{{ comment.submit_date|date:'l, d F Y' }}</span>
+                        -
+                        <span>
+                            <a href="{% get_comment_permalink comment '#comment-%(id)s' %}">
+                                <i class="bi bi-link-45deg"></i> Permalink
+                            </a>
+                        </span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% autoescape on %}
+                        <span class="card-text">{{ comment.comment }}</span>
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+</div>

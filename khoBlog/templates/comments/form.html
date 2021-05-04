@@ -1,0 +1,17 @@
+{% load comments i18n %}
+{% load bootstrap5 %}
+
+{% if user.is_authenticated %}
+    <form action="{% comment_form_target %}" method="POST" class="form">
+        {% csrf_token %}
+        {% get_comment_form for flatpage as form %}
+
+        {% bootstrap_form form exclude="name,email,url" %}
+
+        <input type="hidden" name="next" value="{% url 'pages:page_detail' slug=flatpage.slug %}" />
+        <input class="btn btn-primary" type="submit" value="Add comment" id="id_submit" />
+
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'account_login' %}">Log in</a> to leave a comment.</p>
+{% endif %}
