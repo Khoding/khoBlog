@@ -1,0 +1,18 @@
+{% for message in messages %}
+    {% if message.side_menu.id == context.side.id %}
+        <div class="card mb-2">
+            <div class="card-header">
+                {% if message.showing_rule == 'D' %}
+                    Today
+                {% elif message.showing_rule == 'T' %}
+                    This Hour
+                {% else %}
+                    Today at This Hour
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ message }}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

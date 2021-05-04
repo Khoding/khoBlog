@@ -61,8 +61,6 @@ class LinksSideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)
     rel_url = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
-    links = models.ForeignKey(
-        'settings_app.SideMenu', on_delete=models.CASCADE, related_name='side_menu_links')
     visibility = models.CharField(
         max_length=25, verbose_name="Visibility", choices=VISIBILITY_CHOICES, default='D')
     group = models.ForeignKey(
@@ -82,6 +80,8 @@ class LinksSideMenu(models.Model):
 
 class LinksGroupSideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)
+    menu = models.ForeignKey(
+        'settings_app.SideMenu', on_delete=models.CASCADE, related_name='side_menu_links', null=True)
 
     class Meta:
         verbose_name_plural = "Side Links Group"
@@ -95,6 +95,28 @@ class Footer(models.Model):
 
     class Meta:
         verbose_name_plural = "Footers"
+
+    def __str__(self):
+        return self.title
+
+
+class SpecificDateMessage(models.Model):
+    SHOWING_RULE_CHOICES = [
+        ('D', 'date'),
+        ('T', 'time'),
+        ('DT', 'date_time'),
+    ]
+
+    title = models.CharField(max_length=200, blank=True)
+    showing_date = models.DateTimeField(blank=True, null=True)
+    showing_rule = models.CharField(
+        max_length=25, verbose_name="Showing Rules", choices=SHOWING_RULE_CHOICES, default='D')
+    side_menu = models.ForeignKey(
+        'settings_app.SideMenu', on_delete=models.CASCADE, blank=True, null=True, related_name='side_menu_specific_date_messages')
+    is_recurrent = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Specific Date Messages"
 
     def __str__(self):
         return self.title

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LinksFooter, LinksGroupSideMenu, SideMenu, LinksSideMenu, Settings, Footer
+from .models import LinksFooter, LinksGroupSideMenu, SideMenu, LinksSideMenu, Settings, Footer, SpecificDateMessage
 
 
 class UsersAdmin(admin.ModelAdmin):
@@ -10,17 +10,24 @@ class PresetsSettingsAdmin(admin.ModelAdmin):
     list_display = ('title', 'shown',)
 
 
-class LinksGroupSideMenuAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-
-
 class LinksSideMenuInline(admin.TabularInline):
     model = LinksSideMenu
     extra = 0
 
 
-class SideMenuAdmin(admin.ModelAdmin):
+class LinksGroupSideMenuAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
     inlines = [LinksSideMenuInline, ]
+
+
+class SpecificDateMessageMenuInline(admin.TabularInline):
+    model = SpecificDateMessage
+    extra = 0
+
+
+class SideMenuAdmin(admin.ModelAdmin):
+    inlines = [SpecificDateMessageMenuInline, ]
 
 
 class LinksFooterInline(admin.TabularInline):
