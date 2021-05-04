@@ -82,8 +82,10 @@ class LinksGroupSideMenu(models.Model):
     title = models.CharField(max_length=200, blank=True)
     menu = models.ForeignKey(
         'settings_app.SideMenu', on_delete=models.CASCADE, related_name='side_menu_links', null=True)
+    priority = models.PositiveIntegerField(default=0)
 
     class Meta:
+        ordering = ['priority']
         verbose_name_plural = "Side Links Group"
 
     def __str__(self):
