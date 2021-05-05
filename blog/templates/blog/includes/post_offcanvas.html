@@ -24,12 +24,12 @@
             </a>
         </p>
         <div class="mb-2">
-            <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:m:s' }}</p>
+            <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
             {% if post.published_date %}
-                <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:m:s' }}</p>
+                <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:i:s' }}</p>
             {% endif %}
             {% if post.modified_date %}
-                <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:m:s' }}</p>
+                <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
             {% endif %}
             {% if post.featured_title %}
                 <p>Featured Title: {{ post.featured_title }}</p>
