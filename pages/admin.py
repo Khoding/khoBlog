@@ -4,7 +4,7 @@ from django.contrib.flatpages.models import FlatPage as FlatPageOld
 
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'update_date', 'slug')
+    list_display = ('title', 'modified_date', 'slug')
     ordering = ('title',)
     search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
@@ -12,7 +12,7 @@ class PageAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('title', 'page_head',
-                           'content', 'description', 'update_date', 'sites', 'slug',)}),
+                           'content', 'description', 'modified_date', 'sites', 'slug',)}),
         (('Advanced options'), {
             'classes': ('collapse',),
             'fields': ('registration_required', 'template_name'),

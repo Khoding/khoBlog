@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from comments.models import CustomComment
 from .models import CustomUser
 
 
@@ -18,5 +18,7 @@ class CustomUserAdmin(UserAdmin):
          'fields': ('last_login', 'date_joined',)}),
     )
 
+
+admin.site.register(CustomComment)
 
 admin.site.register(CustomUser, CustomUserAdmin)

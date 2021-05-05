@@ -2,7 +2,6 @@
 
 <div id="comments">
     {% for comment in comment_list %}
-        {% if comment.is_public %}
         <div>
             <div id="comment-{{ comment.id }}" class="card mt-2">
                 <div class="card-header">
@@ -21,12 +20,11 @@
                 </div>
                 <div class="card-body">
                     {% autoescape on %}
+                        <h5>{{ comment.title }}</h5>
                         <span class="card-text">{{ comment.comment }}</span>
                     {% endautoescape %}
                 </div>
             </div>
         </div>
-        {% endif %}
-
     {% endfor %}
 </div>
