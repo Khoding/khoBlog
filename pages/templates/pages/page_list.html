@@ -11,7 +11,7 @@
                         <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted">Page #{{ page.id }}</strong>
-                                <p class="mb-0 text-muted">Page Slug: {{ page.slug }}</p>
+                                <p class="mb-0 text-small text-muted">Page Slug: {{ page.slug }}</p>
                             </span>
                             <span class="col">
                                 {% block super_buttons %}
@@ -43,7 +43,7 @@
                         </span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">{{ page.title }}</h3>
+                        <h3 class="card-title mb-0">{{ page.title }}</h3>
                         <p class="mb-auto">{{ page.description }}</p>
                     </div>
                     <div class="card-footer">

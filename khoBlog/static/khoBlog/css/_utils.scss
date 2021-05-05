@@ -35,6 +35,8 @@
 // Small text
 .text-small {
     @include rfs(0.75rem);
+    font-weight: 500;
+    font-family: 'Montserrat';
 }
 
 // White text

@@ -63,7 +63,7 @@
     </div>
 
     {% block page_top_hr %}
-        <div class='text-then-hr'>
+        <div class='text-then-hr text-small text-muted'>
             <span class='hr-title'><span class="me-2">{{ posts.count }} Posts</span></span>
         </div>
     {% endblock page_top_hr %}
@@ -95,7 +95,7 @@
                                     {% endif %}
                                 {% endfor %} {% endcomment %}
                                 <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                                <p class="mb-0 text-muted">
+                                <p class="mb-0 text-small text-muted">
                                     {% if post.body %}
                                         {{ post.body|readtime }}
                                     {% else %}
@@ -112,8 +112,8 @@
                         </span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title text-word-wrap">{{ post.title }}</h3>
-                        <div class="mb-2">{% include 'blog/includes/post_dates.html' %}</div>
+                        <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
+                        <div>{% include 'blog/includes/post_dates.html' %}</div>
                         <p class="mb-auto">{{ post.description }}</p>
                     </div>
                     <div class="card-footer">
