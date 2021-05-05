@@ -1,9 +1,9 @@
 <div class="d-block">
     <p class="mb-auto text-muted">
     {% if not post.published_date %}
-        {{ post.created_date|date:'l, d F Y H:m:s' }}
+        {{ post.created_date|date:'l, d F Y H:i:s' }}
     {% else %}
-        {{ post.published_date|date:'l, d F Y H:m:s' }}
+        {{ post.published_date|date:'l, d F Y H:i:s' }}
     {% endif %}
         by {{ post.author }}
     </p>
