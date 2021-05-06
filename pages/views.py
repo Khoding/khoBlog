@@ -1,5 +1,7 @@
+from django.urls.base import reverse_lazy
+from pages.forms import FlatPageAddForm, FlatPageEditForm
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from .models import FlatPage
 
@@ -34,6 +36,41 @@ class PageListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page List'
         context['description'] = "List of all Pages"
+        return context
+
+
+class PageCreateView(CreateView):
+    model = FlatPage
+    template_name = 'pages/page_add.html'
+    form_class = FlatPageAddForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Create Page'
+        context['description'] = "Create a Page"
+        return context
+
+
+class PageUpdateView(UpdateView):
+    model = FlatPage
+    template_name = 'pages/page_update.html'
+    form_class = FlatPageEditForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Update Page'
+        context['description'] = "Update a Page"
+        return context
+
+
+class PageDeleteView(DeleteView):
+    model = FlatPage
+    template_name = "pages/page_confirm_delete.html"
+    success_url = reverse_lazy('pages:page_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete Page'
         return context
 
 

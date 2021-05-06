@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from . import dev_urls
 from django.urls.conf import re_path
 from blog.models import Post
 from django.contrib import admin
@@ -78,13 +79,18 @@ urlpatterns = [
     path('admin/docs/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
 
-    # User management
+    # User Management
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     path('captcha/', include('captcha.urls')),
 
+    # Dev Urls
+    path('dev/', include(dev_urls, namespace='dev')),
+
     # Markdownx
     path('markdownx/', include('markdownx.urls')),
+
+    url(r'^comments/', include('django_comments.urls')),
 
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(

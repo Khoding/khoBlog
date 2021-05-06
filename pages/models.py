@@ -2,11 +2,13 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls.base import reverse
 from django.contrib.flatpages.models import FlatPage as FlatPageOld
+from django.utils import timezone
 
 
 class FlatPage(FlatPageOld):
     slug = models.SlugField(unique=True, default="", max_length=200)
-    update_date = models.DateTimeField('Last Updated', null=True, blank=True)
+    modified_date = models.DateTimeField('Last Updated', auto_now=True)
+    created_date = models.DateTimeField('Creation date', default=timezone.now)
     page_head = models.TextField('Page head', blank=True)
     main_page = models.BooleanField(default=False)
     description = models.TextField(blank=True, default="")

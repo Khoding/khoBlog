@@ -32,6 +32,10 @@ INSTALLED_APPS = [
     'taggit',
     'simple_history',
 
+    # Django Packages Apps
+    'django_comments',
+    'comments',
+
     # APIs Apps
     'rest_framework',
     'rest_framework.authtoken',

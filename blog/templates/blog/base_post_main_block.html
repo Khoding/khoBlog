@@ -7,13 +7,13 @@
 
     {% block page_top %}
         {% block page_top_archives %}
-            <strong>
+            <div class="text-small text-muted">
                 Archives by <a href="{% url 'blog:archive_year' year=now|date:'Y' %}">Year</a> -
                 <a href="{% url 'blog:archive_month' year=now|date:'Y' month=now|date:'M' %}">Month</a> -
                 <a href="{% url 'blog:archive_week' year=now|date:'Y' week=now|date:'W' %}">Week</a> -
                 <a href="{% url 'blog:archive_day' year=now|date:'Y' month=now|date:'M' day=now|date:'d' %}">Day</a> -
                 <a href="{% url 'blog:archive_today' %}">Today</a>
-            </strong>
+            </div>
         {% endblock page_top_archives %}
 
         {% block page_top_hr %}

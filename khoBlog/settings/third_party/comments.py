@@ -1,0 +1,1 @@
+COMMENTS_APP = 'comments'
