@@ -4,11 +4,10 @@
 {% if user.is_authenticated %}
     <form action="{% comment_form_target %}" method="POST" class="form">
         {% csrf_token %}
-        {% get_comment_form for flatpage as form %}
 
         {% bootstrap_form form exclude="name,email,url" %}
 
-        <input type="hidden" name="next" value="{% url 'pages:page_detail' slug=flatpage.slug %}" />
+        <input type="hidden" name="next" value="{{ comment_next }}" />
         <input class="btn btn-primary" type="submit" value="Add comment" id="id_submit" />
 
     </form>

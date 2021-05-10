@@ -179,6 +179,7 @@ class PostDetailView(DetailView):
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
             :5]
+        context['comment_next'] = self.post.get_absolute_url()
         return context
 
 
@@ -640,6 +641,7 @@ def post_publish_withdrawn(request, slug):
     return redirect('blog:post_detail', slug=slug)
 
 
+@superuser_required()
 class PostCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -659,6 +661,7 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
+@superuser_required()
 class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm

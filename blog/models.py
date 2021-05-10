@@ -135,6 +135,7 @@ class Post(models.Model):
     clicks = models.IntegerField(
         default=0, help_text="How many times the Post has been seen")
     history = HistoricalRecords()
+    enable_comments = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

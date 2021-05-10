@@ -2,6 +2,7 @@
 {% load static %}
 {% load markdown_extra %}
 {% load read_time %}
+{% load comments %}
 
 {% block page_top_end %}
     <div class="btn-group float-end" role="group" aria-label="Previous / Next">
@@ -89,14 +90,31 @@
                 {% endif %}
             </div>
 
-            <div id="comments" class="card-footer">
-                <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                    <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' pk_post=post.pk %}">Add comment</a>
+            {% if post.approved_comments.count %}
+                <div id="comments_old" class="card-footer">
+                    <p class="text-small text-muted">
+                        <i class="bi bi-info-circle"></i> These are old comments, they will be merged to the new ones at some point
+                    </p>
+                    {% comment %} <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
+                        <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' pk_post=post.pk %}">Add comment</a>
+                    </div> {% endcomment %}
+                    {% include 'blog/includes/post_comments_base.html' %}
                 </div>
-                {% include 'blog/includes/post_comments_base.html' %}
-            </div>
-
+            {% endif %}
         </div>
+
+        {% if post.enable_comments %}
+            {% get_comment_count for post as comment_count %}
+
+            {% render_comment_form for post %}
+            <hr />
+
+            <p class="text-muted text-small">This post has {{ comment_count }} comments.</p>
+
+            {% render_comment_list for post %}
+        {% else %}
+            <p class="text-muted text-small">This page has comments disabled.</p>
+        {% endif %}
 
     {% else %}
         <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>

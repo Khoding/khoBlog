@@ -21,6 +21,7 @@ class PageDetailView(DetailView):
         context['title'] = self.page.title
         context['description'] = self.page.description
         context['side_title'] = 'Page List'
+        context['comment_next'] = self.page.get_absolute_url()
         return context
 
 
