@@ -1,9 +1,7 @@
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -13,9 +11,3 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
-
-CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
-# number of seconds to cache a page for (TTL)
-CACHE_MIDDLEWARE_SECONDS = 600
-# should be used if the cache is shared across multiple sites that use the same Django instance
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
