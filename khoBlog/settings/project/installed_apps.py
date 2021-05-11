@@ -57,8 +57,3 @@ INSTALLED_APPS = [
     'links',
     'reading_apis_app',
 ]
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-    'blog.khodok.xyz'
-]
