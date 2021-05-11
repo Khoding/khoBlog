@@ -1,5 +1,3 @@
-from django.utils.decorators import method_decorator  # NEW
-from django.views.decorators.cache import cache_page  # NEW
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
@@ -25,7 +23,6 @@ def superuser_required():
     return wrapper
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')  # NEW
 class PostListView(ListView):
     model = Post
     template_name = 'blog/lists/post_list.html'
