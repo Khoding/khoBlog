@@ -1,17 +1,15 @@
 {% load read_time %}
 
-{% if featured_big %}
-    {% with featured_big|random as featured_big_post %}
-        <div class="card p-4 rounded shadow">
-            <div class="container">
-                <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Post</strong>
-                <h1 class="display-4">{% if featured_big_post.featured_title %} {{ featured_big_post.featured_title }} {% else %} {{ featured_big_post.title }} {% endif %}</h1>
-                <p class="lead">{{ featured_big_post.description }}</p>
-                <a class="btn btn-primary" href="{{ featured_big_post.get_absolute_url }}">Continue Reading</a>
-            </div>
+{% with featured_big|random as featured_big_post %}
+    <div class="card p-4 rounded shadow">
+        <div class="container">
+            <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Post</strong>
+            <h1 class="display-4">{% if featured_big_post.featured_title %} {{ featured_big_post.featured_title }} {% else %} {{ featured_big_post.title }} {% endif %}</h1>
+            <p class="lead">{{ featured_big_post.description }}</p>
+            <a class="btn btn-primary" href="{{ featured_big_post.get_absolute_url }}">Continue Reading</a>
         </div>
-    {% endwith %}
-{% endif %}
+    </div>
+{% endwith %}
 
 <div class="row row-cols-1 row-cols-lg-2">
     {% for post in featured %}
