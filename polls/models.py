@@ -1,10 +1,10 @@
 import datetime
-
+import auto_prefetch
 from django.db import models
 from django.utils import timezone
 
 
-class Question(models.Model):
+class Question(auto_prefetch.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
@@ -19,8 +19,8 @@ class Question(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 
-class Choice(models.Model):
-    question = models.ForeignKey(
+class Choice(auto_prefetch.Model):
+    question = auto_prefetch.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="related_question")
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)

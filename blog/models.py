@@ -1,4 +1,5 @@
 import datetime
+import auto_prefetch
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -11,7 +12,7 @@ from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
 
-class Category(models.Model):
+class Category(auto_prefetch.Model):
     title = models.CharField(max_length=200, help_text="Category title")
     description = models.TextField(
         blank=True, help_text="Category description")
@@ -37,7 +38,7 @@ class Category(models.Model):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
 
-class Series(models.Model):
+class Series(auto_prefetch.Model):
     title = models.CharField(max_length=200, help_text="Series title")
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="",
@@ -62,10 +63,10 @@ class Series(models.Model):
         return reverse('blog:post_series_list', kwargs={'slug': self.slug})
 
 
-class PostCatsLink(models.Model):
-    post = models.ForeignKey(
+class PostCatsLink(auto_prefetch.Model):
+    post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name='post_to_category')
-    category = models.ForeignKey(
+    category = auto_prefetch.ForeignKey(
         'blog.Category', on_delete=models.CASCADE, related_name='category_to_post')
     featured_cat = models.BooleanField(default=False)
 
@@ -76,7 +77,7 @@ class PostCatsLink(models.Model):
         return '%s - %s' % (self.post.title, self.category.title)
 
 
-class Post(models.Model):
+class Post(auto_prefetch.Model):
     PUBLICATION_CHOICES = [
         ('P', 'Published'),
         ('W', 'Withdrawn'),
@@ -97,7 +98,7 @@ class Post(models.Model):
         ('NS', 'Not Specified'),
     ]
 
-    author = models.ForeignKey(
+    author = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author", help_text="Post author")
     title = models.CharField(max_length=200, help_text="Post title")
     featured_title = models.CharField(
@@ -110,7 +111,7 @@ class Post(models.Model):
     categories = models.ManyToManyField(
         'blog.Category', through='PostCatsLink', help_text="Post categories")
     tags = TaggableManager(blank=True)
-    series = models.ForeignKey(
+    series = auto_prefetch.ForeignKey(
         'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
     post_order_in_series = models.PositiveIntegerField(
         default=0, help_text="Post order in its series")
@@ -188,8 +189,8 @@ class Post(models.Model):
         return self.comments.filter(approbation_state='RE')
 
 
-class PostContent(models.Model):
-    post = models.ForeignKey(
+class PostContent(auto_prefetch.Model):
+    post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name="content")
     body = MarkdownxField(help_text="Post main content")
     post_body_image = models.ImageField(
@@ -208,13 +209,13 @@ class PostContent(models.Model):
         return markdownify(self.body)
 
 
-class Comment(models.Model):
+class Comment(auto_prefetch.Model):
     APPROBATION_CHOICES = [
         ('AP', 'Approved'),
         ('RE', 'Removed'),
     ]
 
-    related_post = models.ForeignKey(
+    related_post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name='comments', help_text="Comment's related Post")
     author = models.CharField(
         max_length=200,
@@ -226,7 +227,7 @@ class Comment(models.Model):
             ' find who wrote the comment'
         ),
     )
-    author_logged = models.ForeignKey(
+    author_logged = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment author (a user with account)")
     title = models.CharField(
         max_length=200, default='', blank=True, help_text='Comment title'
@@ -239,7 +240,7 @@ class Comment(models.Model):
         auto_now=True, help_text="Last modification")
     approbation_state = models.CharField(
         max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment approbation state")
-    comment_answer = models.ForeignKey(
+    comment_answer = auto_prefetch.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
     history = HistoricalRecords()
 

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Django Packages Apps
     'django_comments',
     'comments',
+    'debug_toolbar',
 
     # APIs Apps
     'rest_framework',
@@ -55,4 +56,9 @@ INSTALLED_APPS = [
     'shortener',
     'links',
     'reading_apis_app',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'blog.khodok.xyz'
 ]

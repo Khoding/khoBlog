@@ -2,13 +2,14 @@ from django.db import models
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.urls import reverse
+import auto_prefetch
 
 from django.template.defaultfilters import slugify
 
 from graphql import GraphQLError
 
 
-class URL(models.Model):
+class URL(auto_prefetch.Model):
     title = models.CharField(max_length=200, unique=True)
     full_url = models.URLField(unique=True)
     slug = models.SlugField(unique=True, default="", max_length=200)

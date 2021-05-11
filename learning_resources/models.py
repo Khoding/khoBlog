@@ -1,7 +1,8 @@
+import auto_prefetch
 from django.db import models
 
 
-class Resource(models.Model):
+class Resource(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
     url = models.URLField(blank=True)

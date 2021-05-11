@@ -1,9 +1,10 @@
+import auto_prefetch
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 
 
-class Links(models.Model):
+class Links(auto_prefetch.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=50)
     permalink = models.CharField(max_length=200, unique=True)

@@ -1,7 +1,8 @@
 from django.db import models
+import auto_prefetch
 
 
-class Settings(models.Model):
+class Settings(auto_prefetch.Model):
     THEME_CHOICES = [
         ('default', 'Default'),
         ('uglybanana', 'Funny Banana'),
@@ -28,7 +29,7 @@ class Settings(models.Model):
         return self.title
 
 
-class SideMenu(models.Model):
+class SideMenu(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     sub_title = models.CharField(max_length=200, blank=True)
     is_user_side_menu = models.BooleanField(default=False)
@@ -41,7 +42,7 @@ class SideMenu(models.Model):
         return self.title
 
 
-class LinksSideMenu(models.Model):
+class LinksSideMenu(auto_prefetch.Model):
     VISIBILITY_CHOICES = [
         ('D', 'default'),
         ('NP', 'needs_permission'),
@@ -63,7 +64,7 @@ class LinksSideMenu(models.Model):
     url = models.URLField(blank=True)
     visibility = models.CharField(
         max_length=25, verbose_name="Visibility", choices=VISIBILITY_CHOICES, default='D')
-    group = models.ForeignKey(
+    group = auto_prefetch.ForeignKey(
         'settings_app.LinksGroupSideMenu', on_delete=models.CASCADE, related_name='side_menu_links_group', blank=True, null=True)
     link_css_classes = models.CharField(
         max_length=25, verbose_name="Classes", choices=CLASSES_CHOICES, default='PRI')
@@ -78,9 +79,9 @@ class LinksSideMenu(models.Model):
         return '/' + self.rel_url
 
 
-class LinksGroupSideMenu(models.Model):
+class LinksGroupSideMenu(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
-    menu = models.ForeignKey(
+    menu = auto_prefetch.ForeignKey(
         'settings_app.SideMenu', on_delete=models.CASCADE, related_name='side_menu_links', null=True)
     priority = models.PositiveIntegerField(default=0)
 
@@ -92,7 +93,7 @@ class LinksGroupSideMenu(models.Model):
         return self.title
 
 
-class Footer(models.Model):
+class Footer(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -102,7 +103,7 @@ class Footer(models.Model):
         return self.title
 
 
-class SpecificDateMessage(models.Model):
+class SpecificDateMessage(auto_prefetch.Model):
     SHOWING_RULE_CHOICES = [
         ('D', 'date'),
         ('T', 'time'),
@@ -113,7 +114,7 @@ class SpecificDateMessage(models.Model):
     showing_date = models.DateTimeField(blank=True, null=True)
     showing_rule = models.CharField(
         max_length=25, verbose_name="Showing Rules", choices=SHOWING_RULE_CHOICES, default='D')
-    side_menu = models.ForeignKey(
+    side_menu = auto_prefetch.ForeignKey(
         'settings_app.SideMenu', on_delete=models.CASCADE, blank=True, null=True, related_name='side_menu_specific_date_messages')
     is_recurrent = models.BooleanField(default=True)
 
@@ -124,11 +125,11 @@ class SpecificDateMessage(models.Model):
         return self.title
 
 
-class LinksFooter(models.Model):
+class LinksFooter(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     rel_url = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
-    links = models.ForeignKey(
+    links = auto_prefetch.ForeignKey(
         'settings_app.Footer', on_delete=models.CASCADE, related_name='footer_links')
     parent_css_classes = models.CharField(max_length=200, blank=True)
     link_css_classes = models.CharField(
