@@ -30,6 +30,10 @@ body {
     padding-top: 56px !important;
     @include background-color('bg');
     @include color('text');
+
+    &.offcanvas-open {
+        overflow-y: hidden;
+    }
 }
 
 .linkHome {
