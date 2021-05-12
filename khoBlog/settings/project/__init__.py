@@ -8,3 +8,4 @@ from .middleware import *
 from .others import *
 from .security import *
 from .templates import *
+from .cache import *
