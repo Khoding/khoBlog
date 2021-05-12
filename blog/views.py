@@ -1,5 +1,3 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
@@ -25,7 +23,6 @@ def superuser_required():
     return wrapper
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostListView(ListView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -48,7 +45,6 @@ class PostListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostInCategoryListView(ListView):
     model = Post
     template_name = 'blog/lists/post_category_list.html'
@@ -76,7 +72,6 @@ class PostInCategoryListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostInSeriesListView(ListView):
     model = Post
     template_name = 'blog/lists/post_series_list.html'
@@ -100,7 +95,6 @@ class PostInSeriesListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class CategoryListView(ListView):
     model = Category
     template_name = 'blog/lists/category_list.html'
@@ -123,7 +117,6 @@ class CategoryListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class SeriesListView(ListView):
     model = Series
     template_name = 'blog/lists/series_list.html'
@@ -143,7 +136,6 @@ class SeriesListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
@@ -201,7 +193,6 @@ def post_detail_through_id(request, pk):
 
 
 @superuser_required()
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostDraftListView(ListView):
     model = Post
     template_name = 'blog/lists/post_draft_list.html'
@@ -219,7 +210,6 @@ class PostDraftListView(ListView):
 
 
 @superuser_required()
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostScheduledListView(ListView):
     model = Post
     template_name = 'blog/lists/post_scheduled_list.html'
@@ -237,7 +227,6 @@ class PostScheduledListView(ListView):
 
 
 @superuser_required()
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostWithdrawnListView(ListView):
     model = Post
     template_name = 'blog/lists/post_withdrawn_list.html'
@@ -254,7 +243,6 @@ class PostWithdrawnListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class AllTagsListView(ListView):
     model = Tag
     template_name = 'blog/lists/tags_list.html'
@@ -271,7 +259,6 @@ class AllTagsListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostWithTagListView(ListView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -753,7 +740,6 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostArchiveIndexView(ArchiveIndexView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -773,11 +759,10 @@ class PostArchiveIndexView(ArchiveIndexView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Post archives'
+        context['title'] = '[Archive] Post archives'
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostYearArchiveView(YearArchiveView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -797,11 +782,10 @@ class PostYearArchiveView(YearArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted during ' + str(self.get_year())
+        context['title'] = '[Archive] Posted during ' + str(self.get_year())
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostMonthArchiveView(MonthArchiveView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -820,13 +804,12 @@ class PostMonthArchiveView(MonthArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted during ' + \
+        context['title'] = '[Archive] Posted during ' + \
             str(self.get_month()) + \
             ' of ' + str(self.get_year())
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostWeekArchiveView(WeekArchiveView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -845,12 +828,11 @@ class PostWeekArchiveView(WeekArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted during Week ' + \
+        context['title'] = '[Archive] Posted during Week ' + \
             str(self.get_week()) + ' of ' + str(self.get_year())
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostDayArchiveView(DayArchiveView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -868,13 +850,12 @@ class PostDayArchiveView(DayArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted the ' + \
+        context['title'] = '[Archive] Posted the ' + \
             str(self.get_day()) + ' ' + str(self.get_month()) + \
             ' ' + str(self.get_year())
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostDateDetailView(DateDetailView):
     model = Post
     template_name = 'blog/archive_date_detail.html'
@@ -908,7 +889,7 @@ class PostDateDetailView(DateDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted the ' + \
+        context['title'] = '[Archive] Posted the ' + \
             str(self.get_day()) + ' ' + str(self.get_month()) + \
             ' ' + str(self.get_year())
         context['posts'] = self.model.objects.filter(
@@ -924,7 +905,6 @@ class PostDateDetailView(DateDetailView):
         return context
 
 
-@method_decorator(cache_page(60 * 5), name='dispatch')
 class PostTodayArchiveView(TodayArchiveView):
     model = Post
     template_name = 'blog/lists/post_list.html'
@@ -943,5 +923,5 @@ class PostTodayArchiveView(TodayArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archives] Posted today'
+        context['title'] = '[Archive] Posted today'
         return context
