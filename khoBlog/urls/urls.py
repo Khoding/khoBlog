@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import debug_toolbar
 from django.conf.urls import url
 from . import dev_urls
 from django.urls.conf import re_path
@@ -87,7 +86,6 @@ urlpatterns = [
 
     # Dev Urls
     path('dev/', include(dev_urls, namespace='dev')),
-    path('__debug__/', include(debug_toolbar.urls)),
 
     # Markdownx
     path('markdownx/', include('markdownx.urls')),

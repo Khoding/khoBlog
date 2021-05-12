@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     # Django Packages Apps
     'django_comments',
     'comments',
-    'debug_toolbar',
 
     # APIs Apps
     'rest_framework',
