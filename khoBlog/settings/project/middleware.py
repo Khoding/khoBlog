@@ -12,3 +12,8 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'  # which
+CACHE_MIDDLEWARE_SECONDS = 600
+# should be used if the cache is shared across multiple sites that use the same Django instance
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
