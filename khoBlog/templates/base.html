@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 {% load socialaccount %}
 {% load default_app_theme_set %}
 {% load footer_set %}
@@ -115,90 +116,96 @@
         <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" aria-label="Main navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'blog:post_list' %}">Khodok's Blog</a>
-            <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    {% cache 600 navbar request.user.username %}
 
-            <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top_navbar">
-                <div class="d-block d-lg-none">
-                    {% block nav %}
-                    {% endblock nav %}
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" aria-label="Main navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'blog:post_list' %}">Khodok's Blog</a>
+                <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
-                    {% if user.is_authenticated %}
-                        {% if user.is_superuser %}
+                <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top_navbar">
+                    <div class="d-block d-lg-none">
+                        {% block nav %}
+                        {% endblock nav %}
+                    </div>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'blog:post_new' %}">New Post</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_new' %}">New Post</a>
+                                <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                                <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                                <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
                             </li>
+
                         {% endif %}
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
-                        </li>
 
-                    {% endif %}
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#themes_dropdown" id="themes_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
-                        <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="themes_dropdown">
-                            {% all_theme_setting themes %}
-                        </ul>
-                    </li>
-
-                    {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
-                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
-                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                            <a class="nav-link dropdown-toggle" href="#themes_dropdown" id="themes_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Themes</a>
+                            <ul class="dropdown-menu dropdown-menu-dark controls" aria-labelledby="themes_dropdown">
+                                {% all_theme_setting themes %}
                             </ul>
                         </li>
 
-                        {% if user.is_superuser or user.is_staff %}
+                        {% if user.is_authenticated %}
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
-                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
-                                    {% if user.is_superuser %}
-                                        <li><a class="dropdown-item" href="{% url 'api-root' 'v1' %}">API V1</a></li>
-                                        <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
-                                    {% endif %}
+                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
                                 </ul>
                             </li>
+
+                            {% if user.is_superuser or user.is_staff %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                                        {% if user.is_superuser %}
+                                            <li><a class="dropdown-item" href="{% url 'api-root' 'v1' %}">API V1</a></li>
+                                            <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </ul>
+                    </ul>
 
-                {% include 'includes/nav/search/big_search.html' %}
+                    {% include 'includes/nav/search/big_search.html' %}
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    {% include 'includes/nav/undernav.html' %}
+    {% endcache %}
+
+    {% cache 600 undernav request.user.username %}
+        {% include 'includes/nav/undernav.html' %}
+    {% endcache %}
 
     <main role="main" class="container-fluid mb-2">
         <div class="row">
@@ -233,9 +240,11 @@
             </div>
 
             <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
-                <h2>Menus</h2>
-                {% block aside %}
-                {% endblock aside %}
+                {% cache 600 aside request.user.username %}
+                    <h2>Menus</h2>
+                    {% block aside %}
+                    {% endblock aside %}
+                {% endcache %}
             </aside>
         </div>
     </main>
