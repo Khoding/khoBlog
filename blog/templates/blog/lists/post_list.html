@@ -1,5 +1,6 @@
 {% extends 'blog/base_post_main_block.html' %}
 {% load static %}
+{% load cache %}
 {% load markdown_extra %}
 {% load read_time %}
 
@@ -71,76 +72,78 @@
 {% endblock page_top %}
 
 {% block content_main %}
+    {% cache 600 post_list %}
 
-    <div class="row row-cols-1 row-cols-lg-3">
-        {% for post in posts %}
-            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="post-{{ post.slug }}" class="card shadow h-100">
+        <div class="row row-cols-1 row-cols-lg-3">
+            {% for post in posts %}
+                <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                    <div id="post-{{ post.slug }}" class="card shadow h-100">
 
-                    {% if post.published_date %}
-                        {% if post.was_published_recently %}
-                            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
-                        {% endif %}
-                    {% endif %}
-
-                    <div class="card-header">
-                        <span class="d-flex">
-                            <span class="col">
-                                {% comment %} {% for cats in post.post_to_category.all %}
-                                {{ featured_cat_true }}
-                                    {% if featured_cat_true %}
-                                        {% if cats.featured_cat %}
-                                            <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %} {% endcomment %}
-                                <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                                <p class="mb-0 text-small text-muted">
-                                    {% if post.body %}
-                                        {{ post.body|readtime }}
-                                    {% else %}
-                                        A while
-                                    {% endif %}
-                                </p>
-                            </span>
-                            <span class="col-auto mx-2">
-                                <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
-                            </span>
-                            <span class="col">
-                                {% include 'blog/includes/super_buttons.html' %}
-                            </span>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
-                        <div>{% include 'blog/includes/post_dates.html' %}</div>
-                        <p class="mb-auto">{{ post.description }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
-                            </span>
-                            {% if post.url_post_type %}
-                                <span class="col">
-                                    <a class="float-end card-link" href="{{ post.url_post_type }}">
-                                        <i class="bi bi-link-45deg"></i> External Link
-                                    </a>
-                                </span>
+                        {% if post.published_date %}
+                            {% if post.was_published_recently %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
                             {% endif %}
-                            <span class="col">
-                                <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postModal-{{ post.id }}" aria-controls="postModal-{{ post.id }}">Post Info</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
+                        {% endif %}
 
-                {% include 'blog/includes/post_offcanvas.html' %}
-            </div>
-        {% empty %}
-            <div class="w-100">
-                <p>No content here.</p>
-            </div>
-        {% endfor %}
-    </div>
+                        <div class="card-header">
+                            <span class="d-flex">
+                                <span class="col">
+                                    {% comment %} {% for cats in post.post_to_category.all %}
+                                    {{ featured_cat_true }}
+                                        {% if featured_cat_true %}
+                                            {% if cats.featured_cat %}
+                                                <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %} {% endcomment %}
+                                    <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                    <p class="mb-0 text-small text-muted">
+                                        {% if post.body %}
+                                            {{ post.body|readtime }}
+                                        {% else %}
+                                            A while
+                                        {% endif %}
+                                    </p>
+                                </span>
+                                <span class="col-auto mx-2">
+                                    <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
+                                </span>
+                                <span class="col">
+                                    {% include 'blog/includes/super_buttons.html' %}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
+                            <div>{% include 'blog/includes/post_dates.html' %}</div>
+                            <p class="mb-auto">{{ post.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="d-flex">
+                                <span class="col">
+                                    <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
+                                </span>
+                                {% if post.url_post_type %}
+                                    <span class="col">
+                                        <a class="float-end card-link" href="{{ post.url_post_type }}">
+                                            <i class="bi bi-link-45deg"></i> External Link
+                                        </a>
+                                    </span>
+                                {% endif %}
+                                <span class="col">
+                                    <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postModal-{{ post.id }}" aria-controls="postModal-{{ post.id }}">Post Info</a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    {% include 'blog/includes/post_offcanvas.html' %}
+                </div>
+            {% empty %}
+                <div class="w-100">
+                    <p>No content here.</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endcache %}
 {% endblock content_main %}
