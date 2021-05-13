@@ -52,6 +52,15 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     'pymdownx.critic': {
         'mode': 'view'
     },
+    'pymdownx.magiclink': {
+        'repo_url_shortener': True,
+        'social_url_shortener': True,
+        'repo_url_shorthand': True,
+        'social_url_shorthand': True,
+        'user': 'Khoding',
+        'repo': 'khoBlog',
+        'normalize_issue_symbols': True
+    },
 }
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('images/markdownx/%Y/%m/%d')
