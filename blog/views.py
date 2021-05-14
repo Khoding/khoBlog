@@ -8,6 +8,8 @@ from django.views.generic.dates import ArchiveIndexView, DateDetailView, DayArch
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from taggit.models import Tag
 
+from rules.contrib.views import AutoPermissionRequiredMixin
+
 from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
 from .models import Post, Comment, Category, PostContent, Series
 
@@ -286,8 +288,7 @@ class PostWithTagListView(ListView):
         return context
 
 
-@superuser_required()
-class PostCreateView(CreateView):
+class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Post
     form_class = PostAddForm
     template_name = "blog/post_new.html"
@@ -304,8 +305,7 @@ class PostCreateView(CreateView):
         return context
 
 
-@superuser_required()
-class CategoryCreateView(CreateView):
+class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Category
     form_class = CategoryAddForm
     template_name = "blog/category_new.html"
@@ -322,8 +322,7 @@ class CategoryCreateView(CreateView):
         return context
 
 
-@superuser_required()
-class SeriesCreateView(CreateView):
+class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Series
     form_class = SeriesAddForm
     template_name = "blog/series_new.html"
@@ -339,8 +338,7 @@ class SeriesCreateView(CreateView):
         return context
 
 
-@superuser_required()
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryEditForm
     template_name = "blog/category_edit.html"
@@ -353,8 +351,7 @@ class CategoryUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
-class SeriesUpdateView(UpdateView):
+class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
     model = Series
     form_class = SeriesEditForm
     template_name = "blog/series_edit.html"
@@ -367,8 +364,7 @@ class SeriesUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
-class PostUpdateView(UpdateView):
+class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
     model = Post
     form_class = PostEditForm
     template_name = "blog/post_update.html"
@@ -381,8 +377,7 @@ class PostUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
-class PostDeleteView(DeleteView):
+class PostDeleteView(AutoPermissionRequiredMixin, DeleteView):
     model = Post
     template_name = "blog/post_confirm_delete.html"
     success_url = reverse_lazy('blog:post_list')

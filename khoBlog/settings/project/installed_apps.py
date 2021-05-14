@@ -8,6 +8,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.redirects',
     'django.contrib.sitemaps',
     'django.contrib.flatpages',
     'django.forms',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'robots',
     'taggit',
     'simple_history',
+    'rules',
 
     # Django Packages Apps
     'django_comments',

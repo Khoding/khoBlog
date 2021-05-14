@@ -1,3 +1,4 @@
+import rules
 import datetime
 import auto_prefetch
 from django.conf import settings
@@ -7,12 +8,13 @@ from django.urls import reverse
 from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
+from rules.contrib.models import RulesModelBase, RulesModelMixin
 
 from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
 
-class Category(auto_prefetch.Model):
+class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     title = models.CharField(max_length=200, help_text="Category title")
     description = models.TextField(
         blank=True, help_text="Category description")
@@ -25,6 +27,10 @@ class Category(auto_prefetch.Model):
     class Meta:
         ordering = ['pk']
         verbose_name_plural = "Categories"
+        rules_permissions = {
+            "add": rules.is_superuser,
+            "update": rules.is_superuser,
+        }
 
     def __str__(self):
         return self.title
@@ -38,7 +44,7 @@ class Category(auto_prefetch.Model):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
 
-class Series(auto_prefetch.Model):
+class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     title = models.CharField(max_length=200, help_text="Series title")
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="",
@@ -48,6 +54,10 @@ class Series(auto_prefetch.Model):
     history = HistoricalRecords()
 
     class Meta:
+        rules_permissions = {
+            "add": rules.is_superuser,
+            "update": rules.is_superuser,
+        }
         ordering = ['pk']
         verbose_name_plural = "Series"
 
@@ -77,7 +87,7 @@ class PostCatsLink(auto_prefetch.Model):
         return '%s - %s' % (self.post.title, self.category.title)
 
 
-class Post(auto_prefetch.Model):
+class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     PUBLICATION_CHOICES = [
         ('P', 'Published'),
         ('W', 'Withdrawn'),
@@ -137,6 +147,12 @@ class Post(auto_prefetch.Model):
         default=0, help_text="How many times the Post has been seen")
     history = HistoricalRecords()
     enable_comments = models.BooleanField(default=True)
+
+    class Meta:
+        rules_permissions = {
+            "add": rules.is_superuser,
+            "update": rules.is_superuser,
+        }
 
     def __str__(self):
         return self.title

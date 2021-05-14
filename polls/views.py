@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
 from django.contrib.auth.mixins import UserPassesTestMixin, PermissionRequiredMixin
-from django.contrib.auth.decorators import permission_required
+from rules.contrib.views import permission_required
 
 from .models import Choice, Question
 from django.http import HttpResponseRedirect

@@ -11,4 +11,5 @@ MIDDLEWARE = [
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 ]
