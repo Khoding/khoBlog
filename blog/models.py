@@ -1,3 +1,4 @@
+from blog.managers import PostManager
 import rules
 import datetime
 import auto_prefetch
@@ -147,6 +148,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         default=0, help_text="How many times the Post has been seen")
     history = HistoricalRecords()
     enable_comments = models.BooleanField(default=True)
+
+    objects = PostManager()
 
     class Meta:
         rules_permissions = {
