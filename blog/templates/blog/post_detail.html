@@ -60,7 +60,7 @@
                 <h2 class="card-title">{{ title }}</h2>
                 <div>
                     {% include 'blog/includes/post_dates.html' %}
-                    <p class="mb-auto text-muted">
+                    <p class="mb-0 text-small text-muted">
                         {% if not body %}
                             {{ post.body|readtime }}
                         {% else %}
