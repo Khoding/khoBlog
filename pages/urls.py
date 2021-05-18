@@ -11,7 +11,7 @@ page_extra_patterns = [
 
 app_name = 'pages'
 urlpatterns = [
-    path('', PageListView.as_view(), name='page_list'),
+    path('', PageListView.as_view(), name='index'),
     path('add/', PageCreateView.as_view(), name='page_add'),
     path('<slug:slug>/', include(page_extra_patterns)),
 

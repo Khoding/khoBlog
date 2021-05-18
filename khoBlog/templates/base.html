@@ -135,6 +135,12 @@
                                 <a class="nav-link{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:series_new' %}">New Series</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:category_new' %}">New Category</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a>
                             </li>
                             <li class="nav-item">

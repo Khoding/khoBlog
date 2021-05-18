@@ -2,6 +2,8 @@ import datetime
 import auto_prefetch
 from django.db import models
 from django.utils import timezone
+from django.contrib.contenttypes.models import ContentType
+from django.urls import reverse
 
 
 class Question(auto_prefetch.Model):
@@ -17,6 +19,11 @@ class Question(auto_prefetch.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
+
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:index" % (content_type.app_label))
 
 
 class Choice(auto_prefetch.Model):

@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from blog.managers import PostManager
 import rules
 import datetime
@@ -44,6 +45,11 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_url(self):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+
 
 class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     title = models.CharField(max_length=200, help_text="Series title")
@@ -72,6 +78,11 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_url(self):
         return reverse('blog:post_series_list', kwargs={'slug': self.slug})
+
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
 
 class PostCatsLink(auto_prefetch.Model):
@@ -206,6 +217,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def removed_comments(self):
         return self.comments.filter(approbation_state='RE')
+
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
 
 class PostContent(auto_prefetch.Model):

@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 import auto_prefetch
 
@@ -72,3 +73,8 @@ class CustomUser(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('accounts:profile', kwargs={'slug': self.slug})
+
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:profile" % (content_type.app_label), kwargs={'slug': self.slug})

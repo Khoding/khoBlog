@@ -45,7 +45,7 @@ series_extra_patterns = [
 
 tags_extra_patterns = [
     path('', AllTagsListView.as_view(),
-         name="tag_list"),
+         name='tag_list'),
     path('<slug:slug>/', PostWithTagListView.as_view(),
          name="post_tagged_with"),
 ]

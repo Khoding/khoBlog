@@ -1,6 +1,7 @@
 import auto_prefetch
 from django.db import models
 from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
 
@@ -27,6 +28,11 @@ class Project(auto_prefetch.Model):
 
     def get_absolute_url(self):
         return reverse("portfolio:project_detail", kwargs={"slug": self.slug})
+
+    def get_index_view_url(self):
+        content_type = ContentType.objects.get_for_model(
+            self.__class__)
+        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
 
 class Website(auto_prefetch.Model):

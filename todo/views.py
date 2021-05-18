@@ -42,7 +42,7 @@ class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'todo/create_task.html'
-    success_url = reverse_lazy('todo:list')
+    success_url = reverse_lazy('todo:task_list')
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -58,7 +58,7 @@ class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "todo/update_task.html"
-    success_url = reverse_lazy('todo:list')
+    success_url = reverse_lazy('todo:task_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,7 +70,7 @@ class TaskUpdateView(UpdateView):
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'todo/delete.html'
-    success_url = reverse_lazy('todo:list')
+    success_url = reverse_lazy('todo:task_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

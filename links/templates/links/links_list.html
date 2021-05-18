@@ -1,5 +1,5 @@
 {% for url in urls %}
     {% if url.shown %}
-        <a class="nav-link{% if url.permalink == context.request.path_info or url.get_absolute_permalink == context.request.path_info or url.content_object.get_absolute_url == context.request.path_info %} active{% endif %}" href="{% if url.index %}{{ url.get_absolute_url }}{% else %}{{ url.get_content_object_url }}{% endif %}">{{ url.title }}</a>
+        <a class="nav-link{% if url.permalink == context.request.path_info or url.get_absolute_permalink == context.request.path_info or url.content_object.get_absolute_url == context.request.path_info or url.content_object.get_index_view_url == context.request.path_info and url.index %} active{% endif %}" href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}">{{ url.title }}</a>
     {% endif %}
 {% endfor %}

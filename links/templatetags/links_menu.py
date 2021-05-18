@@ -8,3 +8,8 @@ register = template.Library()
 def links_menu(context, urls):
     urls = Links.objects.filter(shown=True).order_by('priority')
     return {'urls': urls, 'context': context}
+
+
+@register.filter
+def add_slash_to_slug(slug):
+    return '/' + slug
