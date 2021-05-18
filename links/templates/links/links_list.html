@@ -1,5 +1,5 @@
 {% for url in urls %}
     {% if url.shown %}
-        <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
+        <a class="nav-link{% if url.permalink == context.request.path_info or url.get_absolute_permalink == context.request.path_info %} active{% endif %}" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
     {% endif %}
 {% endfor %}

@@ -8,7 +8,8 @@ $themes: (
         'link': hsl(208, 7%, 46%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(204, 3%, 28%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'banana': (
         'text': hsl(0, 91%, 70%),
@@ -16,7 +17,8 @@ $themes: (
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(46, 59%, 44%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'uglybanana': (
         'text': hsl(0, 0%, 100%),
@@ -24,7 +26,8 @@ $themes: (
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'cherry': (
         'text': hsl(0, 100%, 77%),
@@ -32,7 +35,8 @@ $themes: (
         'link': hsl(330, 100%, 65%),
         'menu-link': hsl(342, 74%, 70%),
         'border-color': hsl(6, 78%, 55%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'sop': (
         'text': hsl(271, 100%, 69%),
@@ -40,7 +44,8 @@ $themes: (
         'link': hsl(50, 100%, 49%),
         'menu-link': hsl(218, 15%, 71%),
         'border-color': hsl(249, 66%, 76%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'leaf': (
         'text': hsl(0, 0%, 100%),
@@ -48,7 +53,8 @@ $themes: (
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     ),
     'nightsky': (
         'text': hsl(0, 0%, 100%),
@@ -56,7 +62,8 @@ $themes: (
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%)
+        'side-link': hsl(250, 42%, 66%),
+        'active-color': white
     )
 );
 
@@ -210,11 +217,9 @@ $variations: (
 }
 
 $palette_light: cv(primary, l2);
-$palette_attenuation: cv(primary, shade);
 $palette_dark: #212121;
 
 $link-color: $palette_light;
-$link-hover-color: $palette_attenuation;
 
 $link-decoration: none;
 $link-hover-decoration: underline;

@@ -25,3 +25,8 @@ class Links(auto_prefetch.Model):
 
     def get_absolute_url(self):
         return reverse("links:url_redirect", kwargs={"slug": self.slug})
+
+    @property
+    def get_absolute_permalink(self):
+        self.permalink = self.permalink + '/'
+        return self.permalink

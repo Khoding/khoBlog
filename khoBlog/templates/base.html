@@ -132,24 +132,24 @@
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_new' %}">New Post</a>
+                                <a class="nav-link{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                                <a class="nav-link{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                                <a class="nav-link{% if 'scheduled/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                                <a class="nav-link{% if 'withdrawn/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
                             </li>
                         {% endif %}
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+                            <a class="nav-link{% if 'accounts/login/' in request.path_info %} active{% endif %}" href="{% url 'account_login' %}">Log in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+                            <a class="nav-link{% if 'accounts/signup/' in request.path_info %} active{% endif %}" href="{% url 'accounts:signup' %}">Sign up</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>

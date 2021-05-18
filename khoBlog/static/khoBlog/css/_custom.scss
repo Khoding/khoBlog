@@ -12,7 +12,6 @@ $info: cv(info);
 $dark: $palette_dark;
 
 $link-color: $link-color;
-$link-hover-color: $link-hover-color;
 
 $font-family-sans-serif: $sans-serif;
 $font-family-monospace: $monospace;
@@ -22,15 +21,14 @@ $font-family-monospace: $monospace;
 /* Elements personalization */
 
 .active {
-    @include color('text');
+    @include color('active-color');
     @include background-color('bg');
     @include border-color('border-color');
+
+    &:hover {
+        color: white !important;
+    }
 }
-// .active {
-//     background-color: $palette_dark !important;
-//     border-color: cv(secondary) !important;
-//     color: $white !important;
-// }
 
 .card {
     @include color('text');
@@ -105,6 +103,16 @@ $font-family-monospace: $monospace;
 
     & .nav-link,
     & .navbar-brand {
+        &.active {
+            @include color('active-color');
+            @include background-color('bg');
+            @include border-color('border-color');
+
+            &:hover {
+                color: white !important;
+            }
+        }
+
         @include color('menu-link');
 
         &:hover {
