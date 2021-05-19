@@ -1,15 +1,22 @@
 {% extends 'blog/base_post.html' %}
-{% load bootstrap5 %}
+{% load static %}
+{% load project_tags %}
 {% load markdown_extra %}
 
 {% block main %}
-    <form method="POST" enctype="multipart/form-data" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-        {% endbuttons %}
-    </form>
+    <div class="card formcard">
+        <div class="card-body">
+            <form enctype="multipart/form-data" method="post" novalidate>
+                <div class="text-danger">
+                    {{ form.non_field_errors }}
+                </div>
+
+                {% form form %}
+
+                <button type="submit" class="btn btn-primary">{{ title }}</button>
+            </form>
+        </div>
+    </div>
     {{ form.media }}
 
 {% endblock main %}

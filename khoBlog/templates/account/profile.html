@@ -104,6 +104,7 @@
         <hr />
 
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:edit_password' slug=object.slug %}">Modify Password</a></p>
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_connections' slug=object.slug %}">Edit Connections</a></p>
     {% endif %}
 
