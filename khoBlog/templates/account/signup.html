@@ -1,12 +1,5 @@
 {% extends 'sub_base.html' %}
-{% load bootstrap5 %}
 
 {% block content %}
-    <form method="POST" enctype="multipart/form-data" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-        {% endbuttons %}
-    </form>
+    {% include 'authentication/includes/signup_form.html' %}
 {% endblock content %}

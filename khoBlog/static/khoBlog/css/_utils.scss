@@ -49,6 +49,118 @@
     color: $black;
 }
 
+/* Formcards */
+.card.formcard {
+    border: none !important;
+
+    & .card-body {
+        padding: 0 !important;
+    }
+}
+
+.formcard .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.formcard .card-footer {
+    font-size: 1.25rem;
+}
+
+.formcard .card-header,
+.formcard .card-footer {
+    @include background-color('bg');
+    border: none;
+}
+
+// Arrière-plan transparent et blanc
+.bg-wt {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.bg-wt-50 {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-wt-75 {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.bg-wt-85 {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+// Arrière-plan transparent et noir
+.bg-bt {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Infocards */
+
+// Infocard
+.card.infocard {
+    border: none !important;
+    border-radius: 5px;
+    margin-left: 0;
+    cursor: pointer;
+    min-width: 100%;
+    width: 100%;
+    @include media-breakpoint-up(sm) {
+        min-width: 75%;
+        width: 75%;
+    }
+    @include media-breakpoint-up(md) {
+        min-width: 50%;
+        width: 50%;
+    }
+    @include media-breakpoint-up(lg) {
+        min-width: 37.5%;
+        width: 37.5%;
+    }
+    @include media-breakpoint-up(xl) {
+        min-width: 25%;
+        width: 25%;
+    }
+}
+
+// En-tête des infocards
+.infocard .card-header h1,
+.infocard .card-header h2,
+.infocard .card-header h3,
+.infocard .card-header h4,
+.infocard .card-header h5,
+.infocard .card-header h6 {
+    display: block;
+    @include ellipsis();
+    font-weight: bold;
+}
+
+.infocard .card-img {
+    height: 30%;
+    max-height: 30%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.infocard .card-header,
+.infocard .card-footer {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.infocard .card-header {
+    border-bottom: 1px solid $white;
+}
+
+.infocard .card-footer {
+    background-color: transparent;
+}
+
+.infocard .card-body {
+    background-color: transparent;
+}
+
 /* Génération de classes par couleur */
 // Palette
 @each $name, $color in $colors {

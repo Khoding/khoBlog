@@ -1,5 +1,4 @@
 {% extends "sub_base.html" %}
-{% load bootstrap5 %}
 
 {% block title %}
     Log in
@@ -10,11 +9,5 @@
 {% endblock page_top_title %}
 
 {% block content %}
-    <form method="POST" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">Log in</button>
-        {% endbuttons %}
-    </form>
+    {% include 'authentication/includes/login_form.html' %}
 {% endblock content %}

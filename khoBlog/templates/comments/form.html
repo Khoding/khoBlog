@@ -1,16 +1,72 @@
 {% load comments i18n %}
-{% load bootstrap5 %}
+{% load project_tags %}
+{% load widget_tweaks %}
+
 
 {% if user.is_authenticated %}
-    <form action="{% comment_form_target %}" method="POST" class="form">
-        {% csrf_token %}
+    <div class="card formcard">
+        <div class="card-body">
+            <form action="{% comment_form_target %}" method="post" novalidate>
+                {% csrf_token %}
+                <div class="non-field-errors">
+                    {{ form.non_field_errors }}
+                </div>
 
-        {% bootstrap_form form exclude="name,email,url" %}
+                <div class="hidden-fields-errors">
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field.errors }}
+                        {{ hidden_field }}
+                    {% endfor %}
+                </div>
 
-        <input type="hidden" name="next" value="{{ comment_next }}" />
-        <input class="btn btn-primary" type="submit" value="Add comment" id="id_submit" />
+                {{ form.honeypot }}
 
-    </form>
+                <div class="text-danger">
+                    {{ form.non_field_errors }}
+                </div>
+
+                <div class="field mb-2">
+                    <div class="text-size-1">
+                        {{ form.title.label_tag }}
+                    </div>
+                    <div class="input-group">
+                        {{ form.title|add_class:"form-control" }}
+                    </div>
+                </div>
+                {% for error in form.title.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+
+                <div class="field mb-2">
+                    <div class="text-size-1">
+                        {{ form.comment.label_tag }}
+                    </div>
+                    <div class="input-group">
+                        {{ form.comment|add_class:"form-control" }}
+                    </div>
+                </div>
+                {% for error in form.comment.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+
+                <div class="field mb-2">
+                    <div class="text-size-1">
+                        {{ form.alias_user.label_tag }}
+                    </div>
+                    <div class="input-group">
+                        {{ form.alias_user|add_class:"form-control" }}
+                    </div>
+                </div>
+                {% for error in form.alias_user.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+
+                <input type="hidden" name="next" value="{{ comment_next }}" />
+                <input class="btn btn-primary" type="submit" value="Add comment" id="id_submit" />
+            </form>
+        </div>
+    </div>
+
 {% else %}
     <p>Please <a href="{% url 'account_login' %}">Log in</a> to leave a comment.</p>
 {% endif %}

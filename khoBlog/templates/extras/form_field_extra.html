@@ -1,0 +1,21 @@
+{% load widget_tweaks %}
+
+{% if field|widget_type == "clearablefileinput" %}
+    {{ field|add_class:"form-control" }}
+{% elif field|widget_type == "hiddeninput" %}
+    <div class="d-none input-group">
+        {{ field|add_class:"form-control" }}
+    </div>
+{% elif field|widget_type == "checkboxinput" %}
+    <div class="form-check">
+        {{ field|add_class:"form-check-input" }}
+    </div>
+{% else %}
+    <div class="input-group">
+        {{ field|add_class:"form-control" }}
+    </div>
+{% endif %}
+
+{% for error in field.errors %}
+    <small class="form-text text-danger">{{ error }}</small>
+{% endfor %}

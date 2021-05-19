@@ -124,6 +124,8 @@
 
             <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
                 <div class="d-block d-lg-none">
+                    {% include 'includes/nav/search/small_search.html' %}
+
                     {% block nav %}
                     {% endblock nav %}
                 </div>
@@ -218,11 +220,14 @@
                             {% endblock page_top_title %}
                         </div>
                     </div>
-                    <div class="col d-none d-sm-block">
-                        <form action="{{ search_url }}" method="get">
-                            <input type="text" class="form-control" id="search_title" placeholder="Search" name="q"
-                                aria-label="search" aria-describedby="search">
+                    <div id="main_search" class="col d-none d-sm-block">
+                        <form action="{{ search_url }}" class="search_form" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search" placeholder="Search" name="q"
+                                    aria-label="search" aria-describedby="search">
+                            </div>
                         </form>
+
                     </div>
                     <div class="col-auto">
                         {% block page_top_end %}

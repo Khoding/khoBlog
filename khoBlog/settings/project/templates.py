@@ -13,6 +13,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'khoBlog.context_processors.context',
             ],
+            'libraries': {
+                'project_tags': 'khoBlog.templatetags.forms',
+            }
         },
     },
 ]

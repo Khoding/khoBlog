@@ -122,7 +122,8 @@ $font-family-monospace: $monospace;
     }
 }
 
-form {
+#main_search form.search_form,
+.search_form {
     & *,
     & .form-control {
         @include color('text');

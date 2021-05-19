@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'taggit',
     'simple_history',
     'rules',
+    'widget_tweaks',
 
     # Django Packages Apps
     'django_comments',

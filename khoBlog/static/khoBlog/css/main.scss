@@ -36,6 +36,75 @@ body {
     }
 }
 
+.auth-card {
+    min-width: 25rem;
+    max-width: 25vw;
+}
+
+.auth-card .form-control {
+    background-color: transparent;
+    border-bottom: 2px solid;
+    border-radius: 0;
+    @include border-color('border-color');
+
+    & textarea {
+        resize: both !important;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+        @include color('text');
+        @include background-color('bg');
+        box-shadow: none !important;
+        border-bottom: 2px solid;
+        @include border-color('border-color');
+    }
+}
+
+textarea {
+    resize: both !important;
+}
+
+.formcard {
+    & .form-control {
+        border-radius: 0 0;
+        @include color('text');
+        border-bottom: 2px solid;
+        @include background-color('bg');
+        @include border-color('border-color');
+
+        &:focus {
+            @include color('text');
+            @include background-color('bg');
+            box-shadow: none !important;
+            border-bottom: 2px solid;
+            @include border-color('border-color');
+        }
+
+        &:invalid {
+            border-left: 4px solid $danger;
+        }
+    }
+
+    & .input-group-append > button {
+        border-radius: 100%;
+        width: 26px;
+        height: 26px;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+}
+
 .linkHome {
     &.isHome {
         pointer-events: none;
