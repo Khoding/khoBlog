@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'simple_history',
     'rules',
     'widget_tweaks',
+    'sitetree',
 
     # Django Packages Apps
     'django_comments',

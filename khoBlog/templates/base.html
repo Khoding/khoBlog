@@ -2,6 +2,7 @@
 {% load socialaccount %}
 {% load default_app_theme_set %}
 {% load footer_set %}
+{% load sitetree %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -244,6 +245,8 @@
             </div>
 
             <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
+                {% sitetree_menu from "maintree" include "trunk" %}
+                {% sitetree_breadcrumbs from "maintree" %}
                 <h2>Menus</h2>
                 {% block aside %}
                 {% endblock aside %}
