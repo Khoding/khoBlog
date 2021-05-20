@@ -69,7 +69,7 @@
 
 .formcard .card-header,
 .formcard .card-footer {
-    @include background-color('bg');
+    background-color: transparent;
     border: none;
 }
 
