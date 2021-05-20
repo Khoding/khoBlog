@@ -245,8 +245,10 @@
             </div>
 
             <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
-                {% sitetree_menu from "maintree" include "trunk" %}
-                {% sitetree_breadcrumbs from "maintree" %}
+                {% if sitetree %}
+                    {% sitetree_menu from "maintree" include "trunk" %}
+                    {% sitetree_breadcrumbs from "maintree" %}
+                {% endif %}
                 <h2>Menus</h2>
                 {% block aside %}
                 {% endblock aside %}
