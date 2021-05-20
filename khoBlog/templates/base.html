@@ -213,14 +213,15 @@
         <div class="row">
             <div class="col-xl-9 col-lg-9 col-md-auto">
 
-                <h2 class="row clearfix">
+                <div class="row clearfix">
                     <div class="col col-sm-auto">
-                        <div>
+                        <h2>
                             {% block page_top_title %}
                                 {{ title }}
                             {% endblock page_top_title %}
-                        </div>
+                        </h2>
                     </div>
+
                     <div id="main_search" class="col d-none d-sm-block">
                         <form action="{{ search_url }}" class="search_form" method="get">
                             <div class="input-group">
@@ -228,8 +229,8 @@
                                     aria-label="search" aria-describedby="search">
                             </div>
                         </form>
-
                     </div>
+
                     <div class="col-auto">
                         {% block page_top_end %}
                             <a class="btn btn-primary float-end" href="{% url 'blog:search' %}">
@@ -237,7 +238,13 @@
                             </a>
                         {% endblock page_top_end %}
                     </div>
-                </h2>
+                </div>
+
+                <span class="text-small">
+                    <strong>
+                        {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
+                    </strong>
+                </span>
 
                 {% block content %}
                 {% endblock content %}
@@ -245,10 +252,6 @@
             </div>
 
             <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
-                {% if sitetree %}
-                    {% sitetree_menu from "maintree" include "trunk" %}
-                    {% sitetree_breadcrumbs from "maintree" %}
-                {% endif %}
                 <h2>Menus</h2>
                 {% block aside %}
                 {% endblock aside %}
