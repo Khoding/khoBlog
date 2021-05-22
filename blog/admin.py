@@ -138,11 +138,11 @@ class PostAdmin(SimpleHistoryAdmin):
 
 
 class CommentAdmin(SimpleHistoryAdmin):
-    list_display = ('fulltitle', 'author_logged', 'author',
+    list_display = ('id', 'fulltitle', 'author_logged', 'author',
                     'created_date', 'approbation_state',)
     list_display_links = ('fulltitle',)
-    ordering = ('-author_logged', '-author',)
-    search_fields = ('author', 'message',)
+    ordering = ('created_date',)
+    search_fields = ('author', 'body',)
     list_filter = ('author_logged', 'approbation_state')
 
     actions = [make_approved, ]
