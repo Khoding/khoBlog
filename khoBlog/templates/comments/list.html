@@ -7,13 +7,19 @@
                 <div class="card-header">
                     <h4>
                         {% if not comment.user and not comment.alias_user and comment.user_name %}
-                            {{ comment.user_name }}
+                            {% if not comment.is_removed or user.is_superuser %}
+                                {{ comment.user_name }}
+                            {% endif %}
                         {% elif comment.alias_user or comment.user and comment.alias_user %}
                             {% if user.is_superuser %}
                                 <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
                                 <span class="text-small text-muted">{{ comment.alias_user }}</span>
                             {% else %}
-                                {{ comment.alias_user }}
+                                {% if not comment.is_removed %}
+                                    {{ comment.alias_user }}
+                                {% else %}
+                                    <span class="text-muted">This comments had been removed.</span>
+                                {% endif %}
                             {% endif %}
                         {% else %}
                             {% if user.is_superuser or user.id == comment.user.id %}
@@ -36,27 +42,27 @@
                     </p>
                 </div>
                 <div class="card-body">
-                        {% autoescape on %}
-                            {% if not comment.is_removed and comment.title or comment.is_removed %}
-                                <h5>
-                                    {% if comment.title %}
-                                        {{ comment.title }}
-                                    {% elif comment.is_removed %}
-                                        <span class="text-muted">This comment has been removed.</span>
-                                        {% if comment.title and user.is_superuser %}
-                                            <span class="text-small text-muted">{{ comment.title }}</span>
-                                        {% endif %}
+                    {% autoescape on %}
+                        {% if not comment.is_removed and comment.title or comment.is_removed %}
+                            <h5>
+                                {% if comment.title %}
+                                    {{ comment.title }}
+                                {% elif comment.is_removed %}
+                                    <span class="text-muted">This comment has been removed.</span>
+                                    {% if comment.title and user.is_superuser %}
+                                        <span class="text-small text-muted">{{ comment.title }}</span>
                                     {% endif %}
-                                </h5>
-                            {% endif %}
-                            <span class="card-text">
-                                {% if not comment.is_removed %}
-                                    {{ comment.comment }}
-                                {% elif user.is_superuser %}
-                                    <span class="text-small text-muted">{{ comment.comment }}</span>
                                 {% endif %}
-                            </span>
-                        {% endautoescape %}
+                            </h5>
+                        {% endif %}
+                        <span class="card-text">
+                            {% if not comment.is_removed %}
+                                {{ comment.comment }}
+                            {% elif user.is_superuser %}
+                                <span class="text-small text-muted">{{ comment.comment }}</span>
+                            {% endif %}
+                        </span>
+                    {% endautoescape %}
                 </div>
             </div>
         </div>
