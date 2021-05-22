@@ -43,7 +43,7 @@
                                         {{ comment.title }}
                                     {% elif comment.is_removed %}
                                         This comment has been removed.
-                                        {% if user.is_superuser %}
+                                        {% if comment.title and user.is_superuser %}
                                             <span class="text-small text-muted">{{ comment.title }}</span>
                                         {% endif %}
                                     {% endif %}
