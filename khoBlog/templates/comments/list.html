@@ -37,11 +37,11 @@
                 </div>
                 <div class="card-body">
                         {% autoescape on %}
-                            {% if comment.title %}
+                            {% if not comment.is_removed and comment.title or comment.is_removed %}
                                 <h5>
-                                    {% if not comment.is_removed %}
+                                    {% if comment.title %}
                                         {{ comment.title }}
-                                    {% else %}
+                                    {% elif comment.is_removed %}
                                         This comment has been removed.
                                     {% endif %}
                                 </h5>
