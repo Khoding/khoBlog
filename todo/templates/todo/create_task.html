@@ -1,14 +1,19 @@
 {% extends 'sub_base.html' %}
-{% load bootstrap5 %}
+{% load project_tags %}
 
 {% block content %}
-    <form method="POST" class="form">
-        {% csrf_token %}
-		{% bootstrap_form form %}
+    <div class="card formcard">
+        <div class="card-body">
+            <form method="post" novalidate>
+                <div class="text-danger">
+                    {{ form.non_field_errors }}
+                </div>
 
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-        {% endbuttons %}
-    </form>
+                {% form form %}
+
+                <button type="submit" class="btn btn-primary">{{ title }}</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}
