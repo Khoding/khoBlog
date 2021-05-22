@@ -36,12 +36,22 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    {% autoescape on %}
-                        {% if comment.title %}
-                            <h5>{{ comment.title }}</h5>
-                        {% endif %}
-                        <span class="card-text">{{ comment.comment }}</span>
-                    {% endautoescape %}
+                        {% autoescape on %}
+                            {% if comment.title %}
+                                <h5>
+                                    {% if not comment.is_removed %}
+                                        {{ comment.title }}
+                                    {% else %}
+                                        This comment has been removed.
+                                    {% endif %}
+                                </h5>
+                            {% endif %}
+                            <span class="card-text">
+                                {% if not comment.is_removed %}
+                                    {{ comment.comment }}
+                                {% endif %}
+                            </span>
+                        {% endautoescape %}
                 </div>
             </div>
         </div>

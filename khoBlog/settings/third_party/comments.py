@@ -1,1 +1,2 @@
 COMMENTS_APP = 'comments'
+COMMENTS_HIDE_REMOVED = False
