@@ -6,7 +6,9 @@
             <div id="comment-{{ comment.id }}" class="card mt-2">
                 <div class="card-header">
                     <h4>
-                        {% if comment.alias_user or comment.user and comment.alias_user %}
+                        {% if not comment.user and not comment.alias_user and comment.user_name %}
+                            {{ comment.user_name }}
+                        {% elif comment.alias_user or comment.user and comment.alias_user %}
                             {% if user.is_superuser %}
                                 <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
                                 <span class="text-small text-muted">{{ comment.alias_user }}</span>
@@ -35,7 +37,9 @@
                 </div>
                 <div class="card-body">
                     {% autoescape on %}
-                        <h5>{{ comment.title }}</h5>
+                        {% if comment.title %}
+                            <h5>{{ comment.title }}</h5>
+                        {% endif %}
                         <span class="card-text">{{ comment.comment }}</span>
                     {% endautoescape %}
                 </div>

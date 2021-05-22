@@ -10,6 +10,9 @@ class CustomCommentForm(CommentForm):
     class Meta:
         field = ('title', 'alias_user',)
 
+    def check_for_duplicate_comment(self, new):
+        return new
+
     def get_comment_create_data(self, **kwargs):
         # Use the data of the superclass, and add in the title field
         data = super().get_comment_create_data(**kwargs)
