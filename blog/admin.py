@@ -59,6 +59,15 @@ def make_approved(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
+def make_removed(modeladmin, request, queryset):
+    updated = queryset.update(approbation_state='RE')
+    modeladmin.message_user(request, ngettext(
+        '%d post was successfully marked as removed.',
+        '%d posts were successfully marked as removed.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
 def make_baguette(modeladmin, request, queryset):
     updated = queryset.update(language='FR')
     modeladmin.message_user(request, ngettext(
@@ -145,7 +154,7 @@ class CommentAdmin(SimpleHistoryAdmin):
     search_fields = ('author', 'body',)
     list_filter = ('author_logged', 'approbation_state')
 
-    actions = [make_approved, ]
+    actions = [make_approved, make_removed, ]
 
 
 class CategoryAdmin(SimpleHistoryAdmin):
