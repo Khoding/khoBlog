@@ -5,7 +5,7 @@ from django.utils.translation import ngettext
 from markdownx.widgets import AdminMarkdownxWidget
 from simple_history.admin import SimpleHistoryAdmin
 
-from .models import Category, Comment, Post, PostCatsLink, PostContent, Series
+from .models import Category, Post, PostCatsLink, PostContent, Series
 
 
 def export_as_json(modeladmin, request, queryset):
@@ -172,5 +172,4 @@ class SeriesAdmin(SimpleHistoryAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category, CategoryAdmin)

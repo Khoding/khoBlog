@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 from . import dev_urls
 from django.urls.conf import re_path
 from blog.models import Post
@@ -25,6 +24,8 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+from django_comments.feeds import LatestCommentFeed
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
@@ -90,11 +91,13 @@ urlpatterns = [
     # Markdownx
     path('markdownx/', include('markdownx.urls')),
 
-    url(r'^comments/', include('django_comments.urls')),
+    path('comments/rss/',
+         LatestCommentFeed(), name='latest_comments_feed'),
+    re_path(r'^comments/', include('django_comments.urls')),
 
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(
              site_map_info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
-    url(r'^robots\.txt', include('robots.urls')),
+    re_path(r'^robots\.txt', include('robots.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

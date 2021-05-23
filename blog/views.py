@@ -397,8 +397,8 @@ class SearchListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', }, {
-            'id': 3, 'title': 'Search in Comments', 'get_absolute_url': 'comment/?q=', }, {'id': 4, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', }, {'id': 5, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', },
+                  {'id': 3, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
         return query
 
     def get_context_data(self, **kwargs):
@@ -479,41 +479,6 @@ class CategorySearchResultsListView(ListView):
         return context
 
 
-class CommentSearchResultsListView(ListView):
-    template_name = 'blog/search.html'
-    context_object_name = 'query'
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query != None:
-            if self.request.user.is_superuser:
-                return Comment.objects.filter(
-                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                        body__icontains=query),
-                )
-            else:
-                return Comment.objects.filter(
-                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                        body__icontains=query),
-                ).filter(~Q(approbation_state='RE'),
-                         )
-        else:
-            if self.request.user.is_superuser:
-                comment = Comment.objects.all()
-                return comment
-            else:
-                comment = Comment.objects.filter(~Q(approbation_state='RE'),)
-                return comment
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Search in Comments'
-        context['search_url'] = reverse('blog:comment_search_results')
-        return context
-
-
 class TagsSearchResultsListView(ListView):
     template_name = 'blog/search.html'
     context_object_name = 'query'
@@ -570,14 +535,10 @@ class AllSearchResultsListView(ListView):
                     Q(title__icontains=query) | Q(
                         description__icontains=query),
                 )
-                comment = Comment.objects.filter(
-                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                        body__icontains=query),
-                )
                 tag = Tag.objects.filter(
                     Q(name__icontains=query)
                 )
-                return [post, category, comment, tag]
+                return [post, category, tag]
             else:
                 post = Post.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -589,29 +550,24 @@ class AllSearchResultsListView(ListView):
                         description__icontains=query),
                 ).filter(~Q(withdrawn=True),
                          )
-                comment = Comment.objects.filter(
-                    Q(title__icontains=query) | Q(author__icontains=query) | Q(
-                        body__icontains=query),
-                ).filter(~Q(approbation_state='RE'),
-                         )
                 tag = Tag.objects.filter(
                     Q(name__icontains=query)
                 )
-                return [post, category, comment, tag]
+                return [post, category, tag]
         else:
             if self.request.user.is_superuser:
                 post = Post.objects.all()
                 category = Category.objects.all()
                 comment = Comment.objects.all()
                 tag = Tag.objects.all()
-                return [post, category, comment, tag]
+                return [post, category, tag]
             else:
                 post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
                     published_date__isnull=True), ~Q(withdrawn=True),)
                 category = Category.objects.filter(~Q(withdrawn=True),)
                 comment = Comment.objects.filter(~Q(approbation_state='RE'),)
                 tag = Tag.objects.all()
-                return [post, category, comment, tag]
+                return [post, category, tag]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

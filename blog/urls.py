@@ -2,8 +2,8 @@ from django.urls import path
 from django.urls.conf import include
 
 from . import views
-from .feeds import LatestPostsFeed, LatestPostsFeedByCategory, LatestCommentsFeed
-from .views import AllSearchResultsListView, AllTagsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, CommentSearchResultsListView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDateDetailView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, PostWithTagListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView, TagsSearchResultsListView
+from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
+from .views import AllSearchResultsListView, AllTagsListView, ApprovePostCommentUpdateView, CategoryCreateView, CategoryListView, CategorySearchResultsListView, CategoryUpdateView, PostArchiveIndexView, PostCommentCreateView, PostCommentUpdateView, PostCreateView, PostDateDetailView, PostDayArchiveView, PostDeleteView, PostDraftListView, PostInCategoryListView, PostInSeriesListView, PostListView, PostMonthArchiveView, PostScheduledListView, PostSearchResultsListView, PostTodayArchiveView, PostUpdateView, PostDetailView, PostWeekArchiveView, PostWithdrawnListView, PostYearArchiveView, PostWithTagListView, RandomSearchResultsListView, RemovePostCommentUpdateView, ReplyToCommentCreateView, SearchListView, SeriesCreateView, SeriesListView, SeriesUpdateView, TagsSearchResultsListView
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -85,8 +85,6 @@ search_extra_patterns = [
          name='post_search_results'),
     path('category/', CategorySearchResultsListView.as_view(),
          name='category_search_results'),
-    path('comment/', CommentSearchResultsListView.as_view(),
-         name='comment_search_results'),
     path('tag/', TagsSearchResultsListView.as_view(),
          name='tag_search_results'),
     path('rnd/', RandomSearchResultsListView.as_view(),
@@ -153,8 +151,6 @@ urlpatterns = [
 
     # RSS Related Patterns
     path('latest/rss/', LatestPostsFeed(), name='latest_post_feed'),
-    path('latest_comments/rss/',
-         LatestCommentsFeed(), name='latest_comments_feed'),
 
     # Search Related Patterns
     path('search/', include(search_extra_patterns)),

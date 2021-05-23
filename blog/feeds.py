@@ -65,28 +65,3 @@ class LatestPostsFeedByCategory(Feed):
 
     def item_comments(self, item):
         return item.approved_comments()
-
-
-class LatestCommentsFeed(Feed):
-    link = ''
-
-    def title(self, item):
-        return "Latest comments on Khodok's Blog"
-
-    def items(self):
-        return Comment.objects.filter(approbation_state='AP').order_by('-pk')
-
-    def item_title(self, item):
-        return item.author_logged
-
-    def item_description(self, item):
-        return item.body
-
-    def item_link(self, item):
-        return item.related_post.get_absolute_url()
-
-    def item_pubdate(self, item):
-        return item.created_date
-
-    def item_updateddate(self, item):
-        return item.modified_date
