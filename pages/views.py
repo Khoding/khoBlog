@@ -13,13 +13,28 @@ class PageDetailView(DetailView):
     def get_queryset(self):
         self.page = get_object_or_404(
             FlatPage, slug=self.kwargs['slug'])
+        if self.request.user.is_superuser:
+            self.title = self.page.title
+            self.description = self.page.description
+            self.pages = self.model.objects.all().order_by('-pk')
+        else:
+            if self.page.withdrawn:
+                self.title = 'Withdrawn'
+                self.description = 'This page is Withdrawn'
+                self.pages = self.model.objects.filter(
+                    withdrawn=False).order_by('-pk')
+            else:
+                self.title = self.page.title
+                self.description = self.page.description
+                self.pages = self.model.objects.filter(
+                    withdrawn=False).order_by('-pk')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pages'] = self.model.objects.all().order_by('-pk')
-        context['title'] = self.page.title
-        context['description'] = self.page.description
+        context['pages'] = self.pages
+        context['title'] = self.title
+        context['description'] = self.description
         context['side_title'] = 'Page List'
         context['comment_next'] = self.page.get_absolute_url()
         return context
@@ -29,9 +44,15 @@ class PageListView(ListView):
     model = FlatPage
     template_name = 'pages/page_list.html'
     context_object_name = 'pages'
+    paginate_by = 21
+    paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.all()
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        else:
+            return self.model.objects.filter(
+                withdrawn=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

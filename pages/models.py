@@ -13,6 +13,7 @@ class FlatPage(FlatPageOld):
     page_head = models.TextField('Page head', blank=True)
     main_page = models.BooleanField(default=False)
     description = models.TextField(blank=True, default="")
+    withdrawn = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
