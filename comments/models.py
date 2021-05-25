@@ -10,4 +10,8 @@ class CustomComment(CommentAbstractModel):
     comment = models.TextField()
 
     def __str__(self):
-        return f'{self.content_object.title} - {self.title} • {self.comment}'
+        fulltitle = ''
+        if self.title:
+            fulltitle = fulltitle + self.title + ' - '
+        fulltitle = fulltitle + self.comment
+        return fulltitle

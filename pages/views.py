@@ -3,18 +3,18 @@ from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
-from pages.forms import FlatPageAddForm, FlatPageEditForm
+from pages.forms import PageAddForm, PageEditForm
 
-from .models import FlatPage
+from .models import Page
 
 
 class PageDetailView(DetailView):
-    model = FlatPage
+    model = Page
     template_name = 'flatpages/default.html'
 
     def get_queryset(self):
         self.page = get_object_or_404(
-            FlatPage, slug=self.kwargs['slug'])
+            Page, slug=self.kwargs['slug'])
         if self.request.user.is_superuser:
             self.title = self.page.title
             self.description = self.page.description
@@ -43,7 +43,7 @@ class PageDetailView(DetailView):
 
 
 class PageListView(ListView):
-    model = FlatPage
+    model = Page
     template_name = 'pages/page_list.html'
     context_object_name = 'pages'
     paginate_by = 21
@@ -64,9 +64,9 @@ class PageListView(ListView):
 
 
 class PageCreateView(CreateView):
-    model = FlatPage
+    model = Page
     template_name = 'pages/page_add.html'
-    form_class = FlatPageAddForm
+    form_class = PageAddForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -76,9 +76,9 @@ class PageCreateView(CreateView):
 
 
 class PageUpdateView(UpdateView):
-    model = FlatPage
+    model = Page
     template_name = 'pages/page_update.html'
-    form_class = FlatPageEditForm
+    form_class = PageEditForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -88,7 +88,7 @@ class PageUpdateView(UpdateView):
 
 
 class PageDeleteView(DeleteView):
-    model = FlatPage
+    model = Page
     template_name = "pages/page_confirm_delete.html"
     success_url = reverse_lazy('pages:page_list')
 
@@ -99,5 +99,5 @@ class PageDeleteView(DeleteView):
 
 
 def kheee_special_case(request, slug, *args):
-    url = get_object_or_404(FlatPage, slug='kheee')
+    url = get_object_or_404(Page, slug='kheee')
     return redirect(url)

@@ -1,17 +1,17 @@
 from django import forms
 
-from .models import FlatPage
+from .models import Page
 
 
-class FlatPageAddForm(forms.ModelForm):
+class PageAddForm(forms.ModelForm):
     class Meta:
-        model = FlatPage
-        fields = ('title', 'page_head', 'content', 'description', 'withdrawn',
+        model = Page
+        fields = ('title', 'page_head', 'content', 'tags', 'description', 'withdrawn',
                   'enable_comments', 'main_page', 'sites',)
 
 
-class FlatPageEditForm(forms.ModelForm):
+class PageEditForm(forms.ModelForm):
     class Meta:
-        model = FlatPage
-        fields = ('title', 'page_head', 'content', 'description', 'withdrawn',
+        model = Page
+        fields = ('title', 'page_head', 'content', 'tags', 'description', 'withdrawn',
                   'enable_comments', 'main_page', 'slug', 'sites',)
