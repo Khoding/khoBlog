@@ -2,10 +2,18 @@ from django.contrib import admin, messages
 from django.core import serializers
 from django.http import HttpResponse
 from django.utils.translation import ngettext
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 from markdownx.widgets import AdminMarkdownxWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from .models import Category, Post, PostCatsLink, PostContent, Series
+
+
+class PostResource(resources.ModelResource):
+
+    class Meta:
+        model = Post
 
 
 def export_as_json(modeladmin, request, queryset):
@@ -118,7 +126,8 @@ class PostContentInline(admin.TabularInline):
     }
 
 
-class PostAdmin(SimpleHistoryAdmin):
+class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
+    resource_class = PostResource
     list_display = ('title', 'created_date', 'published_date',
                     'slug', 'publication_state', 'featuring_state', 'tags', 'clicks', 'language',)
     ordering = ('-pk',)
