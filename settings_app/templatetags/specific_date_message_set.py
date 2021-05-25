@@ -1,7 +1,8 @@
+from datetime import datetime
+
 from django import template
 from django.db.models import Q
 from settings_app.models import SpecificDateMessage
-from datetime import datetime
 
 register = template.Library()
 

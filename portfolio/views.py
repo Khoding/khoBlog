@@ -1,8 +1,10 @@
 from django.urls.base import reverse_lazy
-from portfolio.forms import ProjectAddForm, ProjectUpdateForm
-from .models import Project
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from portfolio.forms import ProjectAddForm, ProjectUpdateForm
+
+from .models import Project
 
 
 class ProjectListView(ListView):

@@ -5,8 +5,8 @@ DOC : https://docs.djangoproject.com/en/stable/topics/http/urls/
 
 from django.urls import path
 
-from .dev_views import Error404View, Error400View, Error403View, Error500View
 from ..settings import DEBUG
+from .dev_views import Error400View, Error403View, Error404View, Error500View
 
 app_name = 'dev'
 

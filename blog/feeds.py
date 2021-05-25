@@ -1,7 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.utils import timezone
 
-from .models import Post, Category, Comment
+from .models import Category, Post
 
 
 class LatestPostsFeed(Feed):

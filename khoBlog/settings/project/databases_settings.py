@@ -1,4 +1,5 @@
 from ..django import BASE_DIR
+
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
 DATABASES = {
     'default': {

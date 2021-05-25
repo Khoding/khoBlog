@@ -1,7 +1,7 @@
 import auto_prefetch
 from django.contrib.contenttypes.models import ContentType
-from django.urls import reverse
 from django.db import models
+from django.urls import reverse
 
 
 class Task(auto_prefetch.Model):

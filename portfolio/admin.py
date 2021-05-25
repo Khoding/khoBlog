@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Project, Technology, Website, Repository
 from .forms import ProjectAddForm
+from .models import Project, Repository, Technology, Website
 
 
 class ProjectAdmin(admin.ModelAdmin):

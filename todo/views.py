@@ -1,12 +1,10 @@
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls.base import reverse_lazy
-from django.views.generic import UpdateView, DeleteView, ListView
+from django.views.generic import DeleteView, ListView, UpdateView
 from django.views.generic.edit import CreateView
 
-from .models import Task
 from .forms import TaskForm
-
-from django.contrib.auth.mixins import UserPassesTestMixin
+from .models import Task
 
 
 def superuser_required():

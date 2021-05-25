@@ -1,8 +1,8 @@
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
-from shortener.views import short_redirect
-
 from graphene_django.views import GraphQLView
+
+from shortener.views import short_redirect
 
 app_name = 'shortener'
 urlpatterns = [

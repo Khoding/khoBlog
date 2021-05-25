@@ -1,6 +1,8 @@
 from django.urls import path
 from django.urls.conf import include
-from .views import PageCreateView, PageDeleteView, PageDetailView, PageListView, PageUpdateView, kheee_special_case
+
+from .views import (PageCreateView, PageDeleteView, PageDetailView,
+                    PageListView, PageUpdateView, kheee_special_case)
 
 page_extra_patterns = [
     path('', PageDetailView.as_view(), name='page_detail'),

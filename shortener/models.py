@@ -1,11 +1,9 @@
-from django.db import models
-from django.core.validators import URLValidator
-from django.core.exceptions import ValidationError
-from django.urls import reverse
 import auto_prefetch
-
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+from django.db import models
 from django.template.defaultfilters import slugify
-
+from django.urls import reverse
 from graphql import GraphQLError
 
 

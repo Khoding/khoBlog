@@ -1,10 +1,9 @@
+from bootstrap_datepicker_plus import DateTimePickerInput
 from captcha.fields import CaptchaField
 from django import forms
 from django.forms.models import inlineformset_factory
 
-from .models import Post, Comment, Category, PostContent, Series
-
-from bootstrap_datepicker_plus import DateTimePickerInput
+from .models import Category, Comment, Post, PostContent, Series
 
 
 class PostAddForm(forms.ModelForm):

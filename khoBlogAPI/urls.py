@@ -1,6 +1,7 @@
-from khoBlogAPI.views import CategoryViewSet, CommentViewSet, PostViewSet
 from learning_resources.views import ResourceViewSet
 from rest_framework import routers
+
+from khoBlogAPI.views import CategoryViewSet, CommentViewSet, PostViewSet
 
 router = routers.DefaultRouter()
 router.register('post', PostViewSet, basename='post')

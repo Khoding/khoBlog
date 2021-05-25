@@ -1,8 +1,8 @@
 import auto_prefetch
-from django.db import models
-from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 class Project(auto_prefetch.Model):

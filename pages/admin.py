@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import FlatPage
 from django.contrib.flatpages.models import FlatPage as FlatPageOld
+
+from .models import FlatPage
 
 
 class PageAdmin(admin.ModelAdmin):

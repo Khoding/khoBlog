@@ -4,14 +4,19 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic.dates import ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView, WeekArchiveView, YearArchiveView, TodayArchiveView
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
+from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
+                                        DayArchiveView, MonthArchiveView,
+                                        TodayArchiveView, WeekArchiveView,
+                                        YearArchiveView)
+from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
 
-from rules.contrib.views import AutoPermissionRequiredMixin
-
-from .forms import EditPostCommentForm, PostAddForm, CommentForm, PostEditForm, CategoryAddForm, CategoryEditForm, ARPostCommentForm, SeriesAddForm, SeriesEditForm
-from .models import Post, Comment, Category, PostContent, Series
+from .forms import (ARPostCommentForm, CategoryAddForm, CategoryEditForm,
+                    CommentForm, EditPostCommentForm, PostAddForm,
+                    PostEditForm, SeriesAddForm, SeriesEditForm)
+from .models import Category, Comment, Post, PostContent, Series
 
 
 def superuser_required():

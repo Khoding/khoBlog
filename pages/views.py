@@ -1,7 +1,9 @@
-from django.urls.base import reverse_lazy
-from pages.forms import FlatPageAddForm, FlatPageEditForm
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.urls.base import reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
+
+from pages.forms import FlatPageAddForm, FlatPageEditForm
 
 from .models import FlatPage
 

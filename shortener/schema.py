@@ -1,6 +1,6 @@
 import graphene
-from graphene_django import DjangoObjectType
 from django.db.models import Q
+from graphene_django import DjangoObjectType
 
 from .models import URL
 

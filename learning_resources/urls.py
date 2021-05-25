@@ -1,7 +1,8 @@
 from django.urls import path
 from django.urls.conf import include
 
-from .views import ResourceDeleteView, ResourceUpdateView, ResourceCreateView, ResourceDetailView
+from .views import (ResourceCreateView, ResourceDeleteView, ResourceDetailView,
+                    ResourceUpdateView)
 
 actions_extra_patterns = [
     path('', ResourceDetailView.as_view(), name='resource_detail'),

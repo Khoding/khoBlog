@@ -13,23 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from . import dev_urls
-from django.urls.conf import re_path
 from blog.models import Post
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
-from django.utils import timezone
 from django.urls import include, path
-from django.conf import settings
-from django.conf.urls.static import static
-
-
+from django.urls.conf import re_path
+from django.utils import timezone
 from django_comments.feeds import LatestCommentFeed
-from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
+
+from . import dev_urls
 
 admin.site.site_header = "Khodok's Blog Admin"
 admin.site.site_title = "Khodok's Blog Admin"

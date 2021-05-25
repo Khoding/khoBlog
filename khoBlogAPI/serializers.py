@@ -1,5 +1,5 @@
+from blog.models import Category, Comment, Post, PostCatsLink
 from rest_framework import serializers
-from blog.models import Category, Post, Comment, PostCatsLink
 
 
 class CategorySerializer(serializers.ModelSerializer):

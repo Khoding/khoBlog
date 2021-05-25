@@ -1,6 +1,8 @@
 from django.conf.urls import include
 from django.urls import path
-from .views import SignUpView, ProfileView, UserEditView, PasswordsChangeView, ConnectionsEditView
+
+from .views import (ConnectionsEditView, PasswordsChangeView, ProfileView,
+                    SignUpView, UserEditView)
 
 app_name = "accounts"
 extra_patterns = [

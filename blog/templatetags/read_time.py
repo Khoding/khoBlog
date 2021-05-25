@@ -1,5 +1,5 @@
-from django import template
 import readtime
+from django import template
 
 register = template.Library()
 

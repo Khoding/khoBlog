@@ -1,5 +1,5 @@
-from django.db import models
 import auto_prefetch
+from django.db import models
 
 
 class Settings(auto_prefetch.Model):

@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import LinksFooter, LinksGroupSideMenu, SideMenu, LinksSideMenu, Settings, Footer, SpecificDateMessage
+
+from .models import (Footer, LinksFooter, LinksGroupSideMenu, LinksSideMenu,
+                     Settings, SideMenu, SpecificDateMessage)
 
 
 class UsersAdmin(admin.ModelAdmin):

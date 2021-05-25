@@ -1,9 +1,9 @@
-from django.urls import reverse
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.contrib.contenttypes.models import ContentType
-from django.template.defaultfilters import slugify
 import auto_prefetch
+from django.contrib.auth.models import AbstractUser
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 class Role(auto_prefetch.Model):

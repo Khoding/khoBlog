@@ -1,6 +1,7 @@
-from blog.models import Post, Category, Comment
+from blog.models import Category, Comment, Post
 from rest_framework import viewsets
-from .serializers import PostSerializer, CategorySerializer, CommentsSerializer
+
+from .serializers import CategorySerializer, CommentsSerializer, PostSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):

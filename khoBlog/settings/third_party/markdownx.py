@@ -1,5 +1,6 @@
-from ..django import BASE_DIR
 from datetime import datetime
+
+from ..django import BASE_DIR
 
 # Markdown extensions
 MARKDOWNX_MARKDOWN_EXTENSIONS = [

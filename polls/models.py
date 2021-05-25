@@ -1,9 +1,10 @@
 import datetime
+
 import auto_prefetch
-from django.db import models
-from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Question(auto_prefetch.Model):

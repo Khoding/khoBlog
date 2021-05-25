@@ -1,8 +1,8 @@
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls.base import reverse
-from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from django.utils import timezone
 
 

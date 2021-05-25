@@ -1,9 +1,9 @@
-from django.contrib.contenttypes.models import ContentType
-from blog.managers import PostManager
-import rules
 import datetime
+
 import auto_prefetch
+import rules
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -11,9 +11,10 @@ from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from rules.contrib.models import RulesModelBase, RulesModelMixin
-
 from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
+
+from blog.managers import PostManager
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):

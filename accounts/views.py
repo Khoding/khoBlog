@@ -1,12 +1,13 @@
+from allauth.socialaccount.views import ConnectionsView, DisconnectForm
+from blog.models import Comment
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
-from allauth.socialaccount.views import ConnectionsView, DisconnectForm
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
-from blog.models import Comment
 
 
 class SignUpView(CreateView):
