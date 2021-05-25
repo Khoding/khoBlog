@@ -10,8 +10,15 @@ class CustomComment(CommentAbstractModel):
     comment = models.TextField()
 
     def __str__(self):
-        fulltitle = ''
-        if self.title:
-            fulltitle = fulltitle + self.title + ' - '
-        fulltitle = fulltitle + self.comment
-        return fulltitle
+        return self.full_title
+
+    @property
+    def full_title(self):
+        full_t = ''
+        if self.content_object:
+            full_t = full_t + str(self.content_type.model) + \
+                ' - ' + str(self.content_object.title) + ' - '
+        elif self.title:
+            full_t = self.title + ' - '
+        full_t = full_t + self.comment
+        return full_t
