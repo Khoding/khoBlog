@@ -43,10 +43,10 @@ class Page(auto_prefetch.Model):
     description = models.TextField(blank=True, default="")
     page_head = models.TextField('Page head', blank=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
-    modified_date = models.DateTimeField('Last Updated', auto_now=True)
     created_date = models.DateTimeField('Creation date', default=timezone.now)
+    modified_date = models.DateTimeField('Last Updated', auto_now=True)
     main_page = models.BooleanField(default=False)
-    enable_comments = models.BooleanField(_('enable comments'), default=False)
+    enable_comments = models.BooleanField(_('enable comments'), default=True)
     withdrawn = models.BooleanField(default=False)
     template_name = models.CharField(
         _('template name'),
