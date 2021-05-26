@@ -22,3 +22,6 @@ class CustomComment(CommentAbstractModel):
             full_t = self.title + ' - '
         full_t = full_t + self.comment
         return full_t
+
+    def get_absolute_url(self, anchor_pattern="#comment-%(id)s"):
+        return self.get_content_object_url() + (anchor_pattern % self.__dict__)

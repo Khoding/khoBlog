@@ -90,8 +90,7 @@ urlpatterns = [
     # Markdownx
     path('markdownx/', include('markdownx.urls')),
 
-    path('comments/rss/',
-         LatestCommentFeed(), name='latest_comments_feed'),
+    re_path(r'^comments/', include('comments.urls')),
     re_path(r'^comments/', include('django_comments.urls')),
 
     path('sitemap.xml', sitemap,
