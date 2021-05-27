@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'sitetree',
     'import_export',
+    'compressor',
 
     # Django Packages Apps
     'django_comments',

@@ -17,9 +17,11 @@ diff-match-patch==20200713
 distlib==0.3.1
 Django==3.2.3
 django-allauth==0.44.0
+django-appconf==1.0.4
 django-auto-prefetch==0.0.6
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap-v5==1.0.3
+django-compressor==2.4.1
 django-contrib-comments==2.1.0
 django-environ==0.4.5
 django-import-export==2.5.0
@@ -75,9 +77,11 @@ python-dotenv==0.17.0
 python3-openid==3.2.0
 pytz==2021.1
 PyYAML==5.4.1
+rcssmin==1.0.6
 readtime==1.1.1
 requests==2.25.1
 requests-oauthlib==1.3.0
+rjsmin==1.1.0
 ruamel.yaml==0.17.4
 ruamel.yaml.clib==0.2.2
 rules==3.0
