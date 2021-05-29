@@ -2,7 +2,7 @@
     {% if user.is_superuser %}
 
         <div class="btn-group float-end">
-            <a class="btn btn-secondary" href="{% url 'blog:post_edit' slug=post.slug %}">
+            <a class="btn btn-secondary" href="{{ post.get_absolute_update_url }}">
                 <i class="bi bi-pencil-square"></i> Edit
             </a>
 
@@ -11,24 +11,24 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="postAdminDropdown">
                 {% if not post.published_date %}
-                    <a class="dropdown-item" href="{% url 'blog:post_publish' slug=post.slug %}">
+                    <a class="dropdown-item" href="{{ post.get_absolute_publish_url }}">
                         <i class="bi bi-file-earmark-arrow-up"></i> Publish
                     </a>
 
-                    <a class="dropdown-item" href="{% url 'blog:post_publish_withdrawn' slug=post.slug %}">
+                    <a class="dropdown-item" href="{{ post.get_absolute_publish_withdrawn_url }}">
                         <i class="bi bi-file-earmark-lock"></i> Publish Withdrawn
                     </a>
 
                     <div class="dropdown-divider"></div>
                 {% endif %}
 
-                <a class="dropdown-item" href="{% url 'admin:blog_post_change' object_id=post.id %}">
+                <a class="dropdown-item" href="{{ post.get_absolute_admin_update_url }}">
                     <i class="bi bi-pencil-square"></i> Edit in Admin
                 </a>
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="{% url 'blog:post_remove' slug=post.slug %}">
+                <a class="dropdown-item" href="{{ post.get_absolute_delete_url }}">
                     <i class="bi bi-trash"></i> Delete
                 </a>
             </ul>

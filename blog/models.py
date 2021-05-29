@@ -188,6 +188,21 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
+    def get_absolute_update_url(self):
+        return reverse('blog:post_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_delete_url(self):
+        return reverse('blog:post_remove', kwargs={'slug': self.slug})
+
+    def get_absolute_publish_url(self):
+        return reverse('blog:post_publish', kwargs={'slug': self.slug})
+
+    def get_absolute_publish_withdrawn_url(self):
+        return reverse('blog:post_publish_withdrawn', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:blog_post_change', kwargs={'object_id': self.pk})
+
     def publish(self):
         self.published_date = timezone.now()
         self.publication_state = 'P'
