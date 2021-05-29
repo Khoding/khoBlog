@@ -23,6 +23,7 @@
                         <div class="text-danger">
                             {{ form.non_field_errors }}
                         </div>
+
                         <div id="profile-fields">
                             <h4 class="mb-0">Basic profile</h4>
                             <p class="text-small">Some basic profile data</p>
@@ -32,7 +33,7 @@
 
                                 <div class="field mb-2">
                                     <div class="form-floating">
-                                        {{ form.username|add_class:"form-control w-25"|attr:"placeholder:" }}
+                                        {{ form.username|add_class:"form-control w-25"|attr:"placeholder: Username" }}
                                         {{ form.username.label_tag }}
                                     </div>
                                     {% if form.username.help_text %}
@@ -128,7 +129,7 @@
                             <p class="text-small">These fields aren't meant to be changed at first. You can change them here, and changing them won't break anything, but make sure to know what each field is before changing it</p>
                             <div class="field row mb-2">
                                 <div class="input-group col-auto">
-                                    <span class="input-group-text">{{ request.get_host }}/accounts/profile/</span>
+                                    <span class="input-group-text">https://{{ request.get_host }}/accounts/profile/</span>
                                     {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
                                 </div>
                                 {% if form.slug.help_text %}

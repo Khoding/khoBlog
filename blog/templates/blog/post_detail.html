@@ -85,8 +85,8 @@
                         {{ post.body|formatted_markdown|safe }}
                     {% endif %}
                 </div>
-                {% if post.url_post_type %}
-                    <a class="card-link" href="{{ post.url_post_type }}">{{ post.url_post_type_name }}</a>
+                {% if post.url_to_article %}
+                    <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
                 {% endif %}
             </div>
 

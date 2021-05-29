@@ -10,7 +10,7 @@ class PostAddForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series',
-                  'description', 'body', 'post_image', 'url_post_type', 'url_post_type_name', 'language',)
+                  'description', 'body', 'post_image', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
@@ -18,8 +18,8 @@ class PostAddForm(forms.ModelForm):
             'categories': forms.SelectMultiple(),
             'description': forms.Textarea(),
             'body': forms.Textarea(),
-            'url_post_type': forms.URLInput(),
-            'url_post_type_name': forms.TextInput(),
+            'url_to_article': forms.URLInput(),
+            'url_to_article_title': forms.TextInput(),
             'series': forms.Select(),
             'language': forms.Select(),
         }
@@ -29,7 +29,7 @@ class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series', 'description',
-                  'body', 'post_image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_post_type', 'url_post_type_name', 'language',)
+                  'body', 'post_image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
@@ -39,8 +39,8 @@ class PostEditForm(forms.ModelForm):
             'body': forms.Textarea(),
             'slug': forms.TextInput(),
             'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M:%S', ),
-            'url_post_type': forms.URLInput(),
-            'url_post_type_name': forms.TextInput(),
+            'url_to_article': forms.URLInput(),
+            'url_to_article_title': forms.TextInput(),
             'series': forms.Select(),
             'language': forms.Select(),
         }

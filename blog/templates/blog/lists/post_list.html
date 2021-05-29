@@ -123,9 +123,9 @@
                             <span class="col">
                                 <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
                             </span>
-                            {% if post.url_post_type %}
+                            {% if post.url_to_article %}
                                 <span class="col">
-                                    <a class="float-end card-link" href="{{ post.url_post_type }}">
+                                    <a class="float-end card-link" href="{{ post.url_to_article }}">
                                         <i class="bi bi-link-45deg"></i> External Link
                                     </a>
                                 </span>

@@ -152,9 +152,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N', help_text="Featuring state")
     language = models.CharField(
         max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the main language")
-    url_post_type = models.URLField(
+    url_to_article = models.URLField(
         default='', blank=True, help_text="Url to page that inspired the Post")
-    url_post_type_name = models.CharField(
+    url_to_article_title = models.CharField(
         max_length=200, default='', blank=True, help_text="What will be shown as url name")
     clicks = models.IntegerField(
         default=0, help_text="How many times the Post has been seen")

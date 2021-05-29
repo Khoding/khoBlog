@@ -58,14 +58,14 @@ body {
 }
 
 textarea {
-    resize: both !important;
     min-width: 100% !important;
     min-height: 250px !important;
 }
 
 .formcard {
-    .form-control {
-        border-bottom: 2px solid;
+    .form-control,
+    .form-select {
+        border-bottom: 1px solid;
         @include border-color('border-color');
     }
 

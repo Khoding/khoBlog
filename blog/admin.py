@@ -132,7 +132,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     'slug', 'publication_state', 'featuring_state', 'tags', 'clicks', 'language',)
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
-                     'pk', 'withdrawn', 'featuring_state', 'url_post_type', 'url_post_type_name',)
+                     'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'publication_state',
@@ -144,7 +144,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         (('States'), {
          'fields': ('withdrawn', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {
-         'fields': ('post_image', 'url_post_type', 'url_post_type_name',)}),
+         'fields': ('post_image', 'url_to_article', 'url_to_article_title',)}),
         (('Dates'), {
          'fields': ('created_date', 'published_date',)}),
     )
