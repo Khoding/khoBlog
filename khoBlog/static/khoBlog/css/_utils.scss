@@ -53,7 +53,7 @@
 .card.formcard {
     border: none !important;
 
-    & .card-body {
+    .card-body {
         padding: 0 !important;
     }
 }
@@ -64,7 +64,8 @@
 }
 
 .formcard .card-footer {
-    font-size: 1.25rem;
+    font-size: 1rem;
+    padding-left: 0;
 }
 
 .formcard .card-header,

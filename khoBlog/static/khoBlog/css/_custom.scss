@@ -85,6 +85,18 @@ $font-family-monospace: $monospace;
     }
 }
 
+.form-check {
+    display: inline-block;
+    min-height: $form-check-min-height;
+    padding-left: $form-check-padding-start;
+    margin-bottom: $form-check-margin-bottom;
+
+    .form-check-input {
+        float: none !important;
+        margin-left: $form-check-padding-start * -1;
+    }
+}
+
 .offcanvas {
     @include color('text');
     @include background-color('bg');
