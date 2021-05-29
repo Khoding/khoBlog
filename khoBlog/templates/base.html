@@ -82,13 +82,14 @@
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
 
     <script defer src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script defer src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
+
     {% compress js %}
         <script defer src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
         <script defer src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
-        <script async defer src="{% static 'vendor/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
 
+        <script defer src="{% static 'vendor/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
         <script defer src="{% static 'khoBlog/js/scripts/themes.js' %}"></script>
-        <script defer src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
     {% endcompress js %}
 
     {% block rel %}
