@@ -52,10 +52,10 @@ class CustomUser(AbstractUser):
 
     email = models.EmailField()
     profile_pic = models.ImageField(
-        null=True, blank=True, upload_to="images/profile/")
+        null=True, blank=True, upload_to="images/profile/", verbose_name="Profile picture")
     bio = models.TextField(blank=True, default="")
     slug = models.SlugField(blank=True, unique=True,
-                            default="", max_length=200)
+                            default="", max_length=200, help_text="The slug is the direct link to your profile, it's auto generated based on your Username")
     owner = models.BooleanField(default=False)
     welcome_message = models.CharField(
         max_length=42, blank=True, default="Hello", help_text="The message before your name when you are logged, by default 'Hello'")

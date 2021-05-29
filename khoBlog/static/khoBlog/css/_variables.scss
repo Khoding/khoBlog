@@ -5,6 +5,7 @@ $themes: (
     'default': (
         'text': hsl(0, 0%, 100%),
         'bg': hsl(0, 0%, 13%),
+        'darker-bg': darken(hsl(0, 0%, 13%), 1%),
         'link': hsl(208, 7%, 46%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(204, 3%, 28%),
@@ -14,6 +15,7 @@ $themes: (
     'banana': (
         'text': hsl(0, 91%, 70%),
         'bg': hsl(48, 74%, 54%),
+        'darker-bg': darken(hsl(48, 74%, 54%), 1%),
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(46, 59%, 44%),
@@ -23,6 +25,7 @@ $themes: (
     'uglybanana': (
         'text': hsl(0, 0%, 100%),
         'bg': hsl(48, 89%, 50%),
+        'darker-bg': darken(hsl(48, 89%, 50%), 1%),
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),
@@ -32,6 +35,7 @@ $themes: (
     'cherry': (
         'text': hsl(0, 100%, 77%),
         'bg': hsl(6, 63%, 46%),
+        'darker-bg': darken(hsl(6, 63%, 46%), 1%),
         'link': hsl(330, 100%, 65%),
         'menu-link': hsl(342, 74%, 70%),
         'border-color': hsl(6, 78%, 55%),
@@ -41,6 +45,7 @@ $themes: (
     'sop': (
         'text': hsl(271, 100%, 69%),
         'bg': hsl(240, 35%, 18%),
+        'darker-bg': darken(hsl(240, 35%, 18%), 1%),
         'link': hsl(50, 100%, 49%),
         'menu-link': hsl(218, 15%, 71%),
         'border-color': hsl(249, 66%, 76%),
@@ -50,6 +55,7 @@ $themes: (
     'leaf': (
         'text': hsl(0, 0%, 100%),
         'bg': hsl(145, 63%, 42%),
+        'darker-bg': darken(hsl(145, 63%, 42%), 1%),
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),
@@ -59,6 +65,7 @@ $themes: (
     'nightsky': (
         'text': hsl(0, 0%, 100%),
         'bg': hsl(204, 64%, 44%),
+        'darker-bg': darken(hsl(204, 64%, 44%), 1%),
         'link': hsl(240, 100%, 50%),
         'menu-link': hsl(208, 7%, 46%),
         'border-color': hsl(249, 65%, 76%),

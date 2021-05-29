@@ -26,11 +26,9 @@
                 </div>
 
                 <div class="field mb-2">
-                    <div class="text-size-1">
+                    <div class="form-floating">
+                        {{ form.title|add_class:"form-control"|attr:"placeholder:" }}
                         {{ form.title.label_tag }}
-                    </div>
-                    <div class="input-group">
-                        {{ form.title|add_class:"form-control" }}
                     </div>
                 </div>
                 {% for error in form.title.errors %}
@@ -38,11 +36,9 @@
                 {% endfor %}
 
                 <div class="field mb-2">
-                    <div class="text-size-1">
+                    <div class="form-floating">
+                        {{ form.comment|add_class:"form-control"|attr:"placeholder:" }}
                         {{ form.comment.label_tag }}
-                    </div>
-                    <div class="input-group">
-                        {{ form.comment|add_class:"form-control" }}
                     </div>
                 </div>
                 {% for error in form.comment.errors %}
@@ -50,12 +46,11 @@
                 {% endfor %}
 
                 <div class="field mb-2">
-                    <div class="text-size-1">
+                    <div class="form-floating">
+                        {{ form.alias_user|add_class:"form-control"|attr:"placeholder:" }}
                         {{ form.alias_user.label_tag }}
                     </div>
-                    <div class="input-group">
-                        {{ form.alias_user|add_class:"form-control" }}
-                    </div>
+                    <span class="text-small text-muted">{{ form.alias_user.help_text }}</span>
                 </div>
                 {% for error in form.alias_user.errors %}
                     <small class="form-text text-danger">{{ error }}</small>

@@ -93,7 +93,7 @@ $font-family-monospace: $monospace;
 
     .form-check-input {
         float: none !important;
-        margin-left: $form-check-padding-start * -1;
+        margin-left: $form-check-padding-start * -0.9;
     }
 }
 

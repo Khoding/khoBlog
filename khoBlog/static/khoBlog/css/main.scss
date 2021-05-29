@@ -47,10 +47,6 @@ body {
     border-radius: 0;
     @include border-color('border-color');
 
-    & textarea {
-        resize: both !important;
-    }
-
     &:focus {
         box-shadow: none !important;
         @include color('text');
@@ -63,15 +59,26 @@ body {
 
 textarea {
     resize: both !important;
+    min-width: 100% !important;
+    min-height: 250px !important;
 }
 
 .formcard {
-    & .form-control {
+    .form-control {
+        border-bottom: 2px solid;
+        @include border-color('border-color');
+    }
+
+    .form-control,
+    .form-select,
+    .form-floating {
         border-radius: 0 0;
         @include color('text');
-        border-bottom: 2px solid;
         @include background-color('bg');
-        @include border-color('border-color');
+
+        &.markdownx {
+            border-bottom: none !important;
+        }
 
         &:focus {
             @include color('text');
@@ -86,10 +93,31 @@ textarea {
         }
     }
 
-    & .input-group-append > button {
-        border-radius: 100%;
-        width: 26px;
-        height: 26px;
+    .input-group-text {
+        border-radius: 0 0;
+        border: 1px;
+        border-bottom: 2px;
+        border-style: solid;
+        @include border-color('border-color');
+        @include color('text');
+        @include background-color('darker-bg');
+    }
+
+    .input-group-addon .input-group-text {
+        height: 100%;
+    }
+
+    .bootstrap-datetimepicker-widget {
+        border-radius: 0 0;
+        height: 100%;
+        border: 1px solid;
+        @include border-color('border-color');
+        @include color('text');
+        @include background-color('bg');
+
+        * {
+            @include background-color('bg');
+        }
     }
 
     input:-webkit-autofill,

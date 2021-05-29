@@ -1,8 +1,6 @@
 <form action="{{ search_url }}" class="d-none d-lg-block search_form" method="get">
     <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="search_label_big"><a href="{% url 'blog:search' %}">Search</a></span>
-        </div>
+        <span class="input-group-text" id="search_label_big"><a href="{% url 'blog:search' %}">Search</a></span>
         <input type="text" class="form-control" id="search" placeholder="Search" name="q"
             aria-label="search" aria-describedby="search">
     </div>
