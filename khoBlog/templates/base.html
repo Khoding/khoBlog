@@ -137,23 +137,21 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                    <li><a class="dropdown-item{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a></li>
+                                    <li><a class="dropdown-item{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:series_new' %}">New Series</a></li>
+                                    <li><a class="dropdown-item{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:category_new' %}">New Category</a></li>
+                                </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:series_new' %}">New Series</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:category_new' %}">New Category</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'scheduled/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link{% if 'withdrawn/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                    <li><a class="dropdown-item{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
+                                    <li><a class="dropdown-item{% if 'scheduled/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
+                                    <li><a class="dropdown-item{% if 'withdrawn/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
+                                </ul>
                             </li>
                         {% endif %}
                     {% else %}
@@ -214,7 +212,7 @@
 
     <main role="main" class="container-fluid mb-2">
         <div class="row">
-            <div class="col-xl-9 col-lg-9 col-md-auto">
+            <div class="col-xl-9 col-lg-9 col-lg-auto">
 
                 <div class="row clearfix">
                     <div class="col col-sm-auto">
