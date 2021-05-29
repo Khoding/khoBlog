@@ -24,7 +24,7 @@
                     {{ form.non_field_errors }}
                 </div>
 
-                <div class="field d-none d-lg-block mb-2">
+                <div class="field mb-2">
                     <div class="input-group">
                         <span class="input-group-text">Title</span>
                         {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Post title" }}
@@ -39,32 +39,6 @@
                     {% for error in form.title.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
-                    {% for error in form.featured_title.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field d-lg-none d-block mb-2">
-                    <div class="form-floating">
-                        {{ form.title|add_class:"form-control"|attr:"placeholder:Post title" }}
-                        {{ form.title.label_tag }}
-                    </div>
-                    {% if form.title.help_text %}
-                        <span class="text-small text-muted">{{ form.title.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.title.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field d-lg-none d-block mb-2">
-                    <div class="form-floating">
-                        {{ form.featured_title|add_class:"form-control"|attr:"placeholder:Post featured title" }}
-                        {{ form.featured_title.label_tag }}
-                    </div>
-                    {% if form.featured_title.help_text %}
-                        <span class="text-small text-muted">{{ form.featured_title.help_text }}</span>
-                    {% endif %}
                     {% for error in form.featured_title.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
@@ -148,7 +122,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="field mb-2">
+                <div class="field d-none d-lg-block mb-2">
                     <div class="input-group">
                         <span class="input-group-text">Linked article</span>
                         {{ form.url_to_article|add_class:"form-control w-50"|attr:"placeholder:Linked article's URL" }}

@@ -138,16 +138,16 @@
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                <a class="nav-link dropdown-toggle" href="#create_dropdown" id="create_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="create_dropdown">
                                     <li><a class="dropdown-item{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a></li>
                                     <li><a class="dropdown-item{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:series_new' %}">New Series</a></li>
                                     <li><a class="dropdown-item{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:category_new' %}">New Category</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                <a class="nav-link dropdown-toggle" href="#lists_dropdown" id="lists_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="lists_dropdown">
                                     <li><a class="dropdown-item{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
                                     <li><a class="dropdown-item{% if 'scheduled/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
                                     <li><a class="dropdown-item{% if 'withdrawn/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
@@ -214,7 +214,7 @@
         <div class="row">
             <div class="col-xl-9 col-lg-9 col-lg-auto">
 
-                <div class="row clearfix">
+                <div class="row clearfix mb-2 mb-md-0">
                     <div class="col col-sm-auto">
                         <h2>
                             {% block page_top_title %}

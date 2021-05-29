@@ -1,6 +1,6 @@
 {% extends 'sub_base.html' %}
-{% load project_tags %}
 {% load widget_tweaks %}
+{% load project_tags %}
 
 {% block content %}
     {% if user.is_authenticated %}
@@ -76,7 +76,7 @@
 
                                 <div class="field mb-2">
                                     <div class="input-group">
-                                        <span class="input-group-text">First and last name</span>
+                                        <span class="input-group-text">Name</span>
                                         {{ form.first_name|add_class:"form-control"|attr:"placeholder:First name" }}
                                         {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
                                     </div>
@@ -148,7 +148,7 @@
                             <p class="text-small">Some fields that change the design of the website, some of the texts on it, only affects you</p>
                             <div class="field mb-2">
                                 <div class="form-floating">
-                                    {{ form.welcome_message|add_class:"form-control w-50"|attr:"placeholder:Welcome message" }}
+                                    {{ form.welcome_message|add_class:"form-control"|attr:"placeholder:Welcome message" }}
                                     {{ form.welcome_message.label_tag }}
                                 </div>
                                 {% if form.welcome_message.help_text %}
@@ -161,7 +161,7 @@
 
                             <div class="field mb-2">
                                 <div class="form-floating">
-                                    {{ form.default_theme|add_class:"form-select w-auto"|attr:"placeholder:Choose a theme" }}
+                                    {{ form.default_theme|add_class:"form-select"|attr:"placeholder:Choose a theme" }}
                                     {{ form.default_theme.label_tag }}
                                 </div>
                                 {% if form.default_theme.help_text %}
