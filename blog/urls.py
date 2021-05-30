@@ -17,7 +17,7 @@ from .views import (AllSearchResultsListView, AllTagsListView,
                     PostWithTagListView, PostYearArchiveView,
                     RandomSearchResultsListView, RemovePostCommentUpdateView,
                     ReplyToCommentCreateView, SearchListView, SeriesCreateView,
-                    SeriesListView, SeriesUpdateView,
+                    SeriesListView, SeriesUpdateView, TagUpdateView,
                     TagsSearchResultsListView)
 
 post_action_extra_patterns = [
@@ -44,6 +44,13 @@ series_action_extra_patterns = [
          SeriesUpdateView.as_view(), name='series_edit'),
 ]
 
+
+tags_action_extra_patterns = [
+    path('', PostWithTagListView.as_view(), name='post_tagged_with'),
+    path('edit/',
+         TagUpdateView.as_view(), name='tag_edit'),
+]
+
 category_extra_patterns = [
     path('', CategoryListView.as_view(),
          name='category_list'),
@@ -61,8 +68,7 @@ series_extra_patterns = [
 tags_extra_patterns = [
     path('', AllTagsListView.as_view(),
          name='tag_list'),
-    path('<slug:slug>/', PostWithTagListView.as_view(),
-         name="post_tagged_with"),
+    path('<slug:slug>/', include(tags_action_extra_patterns)),
 ]
 
 post_comment_action_extra_patterns = [

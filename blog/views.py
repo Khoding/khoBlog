@@ -293,6 +293,21 @@ class PostWithTagListView(ListView):
         return context
 
 
+@superuser_required()
+class TagUpdateView(UpdateView):
+    model = Tag
+    fields = ('__all__')
+    template_name = "blog/category_edit.html"
+    success_url = reverse_lazy('blog:tag_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.model.objects.all().order_by('-pk')[:21]
+        context['title'] = 'Edit Tag'
+        context['side_title'] = 'Tag List'
+        return context
+
+
 class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Post
     form_class = PostAddForm

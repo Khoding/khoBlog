@@ -7,6 +7,28 @@
         {% for tag in tags %}
             <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
                 <div id="tag-{{ tag.slug }}" class="card shadow h-100">
+                    <div class="card-header">
+                        <span class="d-flex">
+                            <span class="col">
+                                <strong class="text-muted">Tag #{{ tag.id }}</strong>
+                            </span>
+                            <span class="col">
+                                {% block super_buttons %}
+                                    {% if user.is_superuser %}
+                                        <div class="float-end btn-group" role="group" aria-label="Edit Group">
+                                            <a class="btn btn-light" href="{% url 'blog:tag_edit' slug=tag.slug %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+                                            <a class="btn btn-danger" href="{% url 'admin:taggit_tag_change' object_id=tag.id %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endblock super_buttons %}
+                            </span>
+                        </span>
+                    </div>
                     <div class="card-body">
                         <h3 class="card-title">{{ tag }}</h3>
                         <p class="mb-auto">Tag Slug: {{ tag.slug }}</p>
