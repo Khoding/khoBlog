@@ -1,15 +1,22 @@
 {% extends 'blog/comments/base_comments.html' %}
-{% load bootstrap5 %}
-{% load markdown_extra %}
+{% load project_tags %}
 
 {% block comments_main %}
-    {% if user.id == comment.author_logged.id or user.is_superuser %}
-        <form method="POST" class="form">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-            {% endbuttons %}
-        </form>
+    {% if user.id == comment.user.id or user.is_superuser %}
+        <div class="card formcard">
+            <div class="card-body">
+                <form method="post" novalidate>
+                    <div class="text-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+
+                    {% form form %}
+
+                    <button type="submit" class="btn btn-primary">{{ title }}</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        It's not your comment.
     {% endif %}
 {% endblock comments_main %}
