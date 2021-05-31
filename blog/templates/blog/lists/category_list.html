@@ -35,7 +35,7 @@
                         <h3 class="card-title">{{ cat.title }}</h3>
                         <p class="mb-auto">{{ cat.description }}</p>
                         <p class="mb-auto">Category slug: {{ cat.slug }}</p>
-                        {% if cat.category_children %}
+                        {% if cat.category_children.all %}
                             <div class="mb-0">
                                 Sub categories:
                                 {% for child in cat.category_children.all %}
