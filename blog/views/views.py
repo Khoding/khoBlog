@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.utils.functional import keep_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
@@ -48,8 +47,8 @@ class PostListView(ListView):
         context['featured'] = self.model.objects.filter(featuring_state="F")
         context['featured_big'] = self.model.objects.filter(
             featuring_state="FB")
-        context['featured_cat'] = self.model.objects.filter(
-            post_to_category__featured_cat=True)
+        # context['featured_cat'] = self.model.objects.filter(
+        #     post_to_category__featured_cat=True)
         return context
 
 
