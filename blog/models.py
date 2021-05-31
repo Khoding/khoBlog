@@ -206,7 +206,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return reverse('admin:blog_post_change', kwargs={'object_id': self.pk})
 
     def get_featured_cat(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, category=5, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
             return post_cat
 
     def publish(self):

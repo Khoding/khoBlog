@@ -19,7 +19,11 @@
             <div class="card shadow h-100">
                 <div class="card-header">
                     <strong>
-                        <a class="card-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
+                        {% if post.get_featured_cat %}
+                            <a class="card-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.get_featured_cat.category|capfirst }}</a>
+                        {% else %}
+                            <a class="card-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
+                        {% endif %}
                         <span class="d-inline-block text-muted">
                             • <span class="fst-italic">Featured Post</span>
                         </span>
