@@ -25,6 +25,7 @@
             <a class="mb-0 btn btn-danger" href="{% url 'admin:index' %}">Admin</a>
             {% if context.user.is_superuser %}
                 <a class="btn btn-danger" href="{% url 'api-root' 'v1' %}">API V1</a>
+                <a class="btn btn-danger" href="{% url 'api-root' 'v2' %}">API V2</a>
                 <a class="mb-0 btn btn-danger" href="https://eu.pythonanywhere.com">Pythonanywhere</a>
             {% endif %}
         </div>
