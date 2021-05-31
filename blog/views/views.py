@@ -13,10 +13,10 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
 from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
 
-from .forms import (ARPostCommentForm, CategoryAddForm, CategoryEditForm,
-                    CommentForm, EditPostCommentForm, PostAddForm,
-                    PostEditForm, SeriesAddForm, SeriesEditForm)
-from .models import Category, Comment, Post, PostContent, Series
+from ..forms import (ARPostCommentForm, CategoryAddForm, CategoryEditForm,
+                     CommentForm, EditPostCommentForm, PostAddForm,
+                     PostEditForm, SeriesAddForm, SeriesEditForm)
+from ..models import Category, Comment, Post, PostContent, Series
 
 
 def superuser_required():

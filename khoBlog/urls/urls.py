@@ -54,9 +54,17 @@ api_patterns = [
                                       cache_timeout=0), name='schema-redoc'),
 ]
 
+api_patterns_v2 = [
+    path('', include('blog.blogAPIurls')),
+    path('docs/', schema_view.with_ui('redoc',
+                                      cache_timeout=0), name='schema-redoc'),
+]
+
 api_base_patterns = [
     re_path(r'(?P<version>[v1]+)/',
             include(api_patterns)),
+    re_path(r'(?P<version>[v2]+)/',
+            include(api_patterns_v2)),
     path('read/', include('reading_apis_app.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('token/', obtain_auth_token, name='obtain-token'),
