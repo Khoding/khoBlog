@@ -90,9 +90,9 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
 class PostCatsLink(auto_prefetch.Model):
     post = auto_prefetch.ForeignKey(
-        'blog.Post', on_delete=models.CASCADE, related_name='post_to_category')
+        'blog.Post', on_delete=models.CASCADE)
     category = auto_prefetch.ForeignKey(
-        'blog.Category', on_delete=models.CASCADE, related_name='category_to_post')
+        'blog.Category', on_delete=models.CASCADE)
     featured_cat = models.BooleanField(default=False)
 
     class Meta:
@@ -204,6 +204,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_post_change', kwargs={'object_id': self.pk})
+
+    def get_featured_cat(self):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, category=5, featured_cat=True).select_related('post', 'category'):
+            return post_cat
 
     def publish(self):
         self.published_date = timezone.now()

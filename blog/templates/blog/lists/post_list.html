@@ -85,15 +85,11 @@
                     <div class="card-header">
                         <span class="d-flex">
                             <span class="col">
-                                {% comment %} {% for cats in post.post_to_category.all %}
-                                {{ featured_cat_true }}
-                                    {% if featured_cat_true %}
-                                        {% if cats.featured_cat %}
-                                            <strong><a class="text-muted" href="{{ cats.category.get_absolute_url }}">{{ cats.category|capfirst }}</a></strong>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %} {% endcomment %}
-                                <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                {% if post.get_featured_cat %}
+                                    <strong><a href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.get_featured_cat.category|capfirst }}</a></strong>
+                                {% else %}
+                                    <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                {% endif %}
                                 <p class="mb-0 text-small text-muted">
                                     {% if post.body %}
                                         {{ post.body|readtime }}
