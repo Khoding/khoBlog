@@ -22,7 +22,6 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
 from django.utils import timezone
-from django_comments.feeds import LatestCommentFeed
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
