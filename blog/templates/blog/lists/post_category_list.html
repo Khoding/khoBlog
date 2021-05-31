@@ -7,13 +7,3 @@
         This category is Withdrawn
     {% endif %}
 {% endblock page_top_title %}
-
-{% block page_top_featured %}
-    <p class="mb-0">
-        {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
-            {{ cats.description }}
-        {% else %}
-            This category is Withdrawn
-        {% endif %}
-    </p>
-{% endblock page_top_featured %}

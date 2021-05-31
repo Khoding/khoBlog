@@ -18,6 +18,8 @@ from blog.managers import PostManager
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
+    parent = auto_prefetch.ForeignKey(
+        'self', on_delete=models.CASCADE, related_name="category_children", null=True, blank=True)
     title = models.CharField(max_length=200, help_text="Category title")
     description = models.TextField(
         blank=True, help_text="Category description")

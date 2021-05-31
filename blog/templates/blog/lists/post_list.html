@@ -1,12 +1,9 @@
-{% extends 'blog/base_post_main_block.html' %}
+{% extends 'blog/base_post.html' %}
 {% load static %}
 {% load markdown_extra %}
 {% load read_time %}
 
 {% block page_top %}
-    {% block page_top_archives %}
-        {{ block.super }}
-    {% endblock page_top_archives %}
 
     {% block page_top_featured %}
         {% include 'blog/includes/featured_posts.html' %}

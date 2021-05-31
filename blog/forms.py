@@ -49,11 +49,12 @@ class PostEditForm(forms.ModelForm):
 class CategoryAddForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('title', 'description', 'withdrawn')
+        fields = ('title', 'description', 'parent', 'withdrawn',)
 
         widgets = {
             'title': forms.TextInput(),
             'description': forms.Textarea(),
+            'parent': forms.Select(),
             'withdrawn': forms.CheckboxInput(),
         }
 
@@ -61,11 +62,12 @@ class CategoryAddForm(forms.ModelForm):
 class CategoryEditForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ('title', 'description', 'slug', 'withdrawn')
+        fields = ('title', 'description', 'parent', 'slug', 'withdrawn',)
 
         widgets = {
             'title': forms.TextInput(),
             'description': forms.Textarea(),
+            'parent': forms.Select(),
             'slug': forms.TextInput(),
             'withdrawn': forms.CheckboxInput(),
         }

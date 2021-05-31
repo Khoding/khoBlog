@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
+from django.utils.functional import keep_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
@@ -112,12 +113,15 @@ class CategoryListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return self.model.objects.all()
+            self.category_list = self.model.objects.filter(parent=None)
         else:
-            return self.model.objects.filter(withdrawn=False)
+            self.category_list = self.model.objects.filter(
+                parent=None, withdrawn=False)
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['category_list'] = self.category_list
         context['title'] = 'Category List'
         context['search_url'] = reverse('blog:category_search_results')
         context['description'] = 'List of categories'

@@ -1,4 +1,4 @@
-{% extends 'blog/base_post_main_block.html' %}
+{% extends 'blog/base_post.html' %}
 {% load static %}
 {% load markdown_extra %}
 
@@ -34,7 +34,15 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ cat.title }}</h3>
                         <p class="mb-auto">{{ cat.description }}</p>
-                        <p class="mb-auto">Category Slug: {{ cat.slug }}</p>
+                        <p class="mb-auto">Category slug: {{ cat.slug }}</p>
+                        {% if cat.category_children %}
+                            <div class="mb-0">
+                                Sub categories:
+                                {% for child in cat.category_children.all %}
+                                    <span><a href="{{ child.get_absolute_url }}">{{ child }}</a>{% if not forloop.last %}, {% endif %}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="card-footer">
                         <span class="d-flex">

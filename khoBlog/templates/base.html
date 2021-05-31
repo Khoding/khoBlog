@@ -216,7 +216,7 @@
         <div class="row">
             <div class="col-xl-9 col-lg-9 col-lg-auto">
 
-                <div class="row clearfix mb-2 mb-md-0">
+                <div class="row clearfix">
                     <div class="col col-sm-auto">
                         <h2>
                             {% block page_top_title %}
@@ -248,6 +248,9 @@
                         {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
                     </strong>
                 </span>
+
+                {% block page_top_archives %}
+                {% endblock page_top_archives %}
 
                 {% block content %}
                 {% endblock content %}

@@ -25,3 +25,13 @@ class PostManager(auto_prefetch.Manager):
 
     def get_by_clicks(self):
         return self.get_queryset().get_by_clicks()
+
+
+class CategoryQuerySet(auto_prefetch.QuerySet):
+    pass
+
+
+class CategoryManager(auto_prefetch.Manager):
+
+    def get_queryset(self):
+        return CategoryQuerySet(self.model, using=self._db)
