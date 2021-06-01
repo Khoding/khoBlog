@@ -48,6 +48,12 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
+                        {% if cat.parent %}
+                            <div class="mb-0">
+                                Parent:
+                                <span><a href="{{ cat.parent.get_absolute_url }}">{{ cat.parent }}</a></span>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="card-footer">
                         <span class="d-flex">
