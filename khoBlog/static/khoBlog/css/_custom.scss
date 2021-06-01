@@ -49,7 +49,6 @@ $font-family-monospace: $monospace;
 
     .cat-link {
         @include color('side-link');
-        font-weight: 400;
 
         &:hover {
             @include color('side-link');
