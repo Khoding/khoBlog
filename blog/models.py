@@ -14,7 +14,7 @@ from rules.contrib.models import RulesModelBase, RulesModelMixin
 from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
-from blog.managers import PostManager
+from blog.managers import CategoryManager, PostManager
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -28,6 +28,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     withdrawn = models.BooleanField(
         default=False, help_text="Is Category withdrawn")
     history = HistoricalRecords()
+
+    objects = CategoryManager()
 
     class Meta:
         ordering = ['pk']
@@ -47,6 +49,14 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_url(self):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
+
+    @property
+    def get_post_count_in_category(self):
+        return self.postcatslink_set.filter(post__withdrawn=False).count()
+
+    @property
+    def get_superuser_post_count_in_category(self):
+        return self.postcatslink_set.count()
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(

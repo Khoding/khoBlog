@@ -47,8 +47,6 @@ class PostListView(ListView):
         context['featured'] = self.model.objects.filter(featuring_state="F")
         context['featured_big'] = self.model.objects.filter(
             featuring_state="FB")
-        # context['featured_cat'] = self.model.objects.filter(
-        #     post_to_category__featured_cat=True)
         return context
 
 

@@ -16,12 +16,12 @@ class PostCatsLinkSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True, read_only=True)
-    post_to_category = PostCatsLinkSerializer(many=True)
+    postcatslink_set = PostCatsLinkSerializer(many=True)
 
     class Meta:
         model = Post
         fields = ('title',
-                  'description', 'body', 'categories', 'post_to_category',)
+                  'description', 'body', 'categories', 'postcatslink_set',)
         prepopulated_fields = {'slug': ('title',)}
 
 
