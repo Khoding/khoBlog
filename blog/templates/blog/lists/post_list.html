@@ -103,8 +103,10 @@
                             </span>
                             <span class="col">
                                 {% block super_buttons %}
-                                    {% include 'blog/includes/super_buttons.html' %}
-                                {% endblock %}
+                                    {% if user.is_superuser %}
+                                        {% include 'blog/includes/super_buttons.html' %}
+                                    {% endif %}
+                                {% endblock super_buttons %}
                             </span>
                         </div>
                     </div>

@@ -36,7 +36,11 @@
                         <h4><span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span></h4>
                     </span>
                     <span class="col">
-                        {% include 'blog/includes/super_buttons.html' %}
+                        {% block super_buttons %}
+                            {% if user.is_superuser %}
+                                {% include 'blog/includes/super_buttons.html' %}
+                            {% endif %}
+                        {% endblock super_buttons %}
                     </span>
                 </span>
             </div>
