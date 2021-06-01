@@ -12,7 +12,7 @@
                         <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted"><a class="text-muted" href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}">Category #{{ cat.id }}</a></strong>
-                                <p class="mb-0 text-muted">Category Post Count: {% if user.is_superuser %}{{ cat.get_superuser_post_count_in_category }}{% endif %} | {{ cat.get_post_count_in_category }}</p>
+                                <p class="mb-0 text-muted">Category Post Count: {% if user.is_superuser %}{{ cat.get_superuser_post_count_in_category }} | {% endif %}{{ cat.get_post_count_in_category }}</p>
                             </span>
                             <span class="col-auto">
                                 {% block super_buttons %}
