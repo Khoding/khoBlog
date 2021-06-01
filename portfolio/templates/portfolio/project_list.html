@@ -22,9 +22,10 @@
                     <div class="card shadow mb-2">
                         <div class="card-header d-flex">
                             <span class="col">
-                                <h2>Project #{{ project.id }}</h2>
+                                <strong class="text-muted">Project #{{ project.id }}</strong>
+                                <p class="mb-0 text-small text-muted">Project slug: {{ project.slug }}</p>
                             </span>
-                            <span class="col">
+                            <span class="col-auto">
                                 {% block super_buttons %}
                                     {% if user.is_superuser %}
                                         <div class="btn-group float-end">

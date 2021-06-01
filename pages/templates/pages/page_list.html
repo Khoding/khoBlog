@@ -11,9 +11,9 @@
                         <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted">Page #{{ page.id }}</strong>
-                                <p class="mb-0 text-small text-muted">Page Slug: {{ page.slug }}</p>
+                                <p class="mb-0 text-small text-muted">Page slug: {{ page.slug }}</p>
                             </span>
-                            <span class="col">
+                            <span class="col-auto">
                                 {% block super_buttons %}
                                     {% if user.is_superuser %}
                                         <div class="btn-group float-end">
