@@ -172,21 +172,6 @@
                                 {% endfor %}
                             </div>
                         </div>
-
-                        <hr />
-
-                        <div class="field mb-2">
-                            {{ form.captcha.label_tag }}
-                            {{ form.captcha|add_class:"form-control"|attr:"placeholder:Captcha" }}
-                            {% if form.captcha.help_text %}
-                                <span class="text-small text-muted">{{ form.captcha.help_text }}</span>
-                            {% endif %}
-                            {% for error in form.captcha.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">{{ title }}</button>
                     </form>
                 </div>
             </div>
