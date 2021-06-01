@@ -47,6 +47,15 @@ $font-family-monospace: $monospace;
         }
     }
 
+    .cat-link {
+        @include color('side-link');
+
+        &:hover {
+            @include color('side-link');
+            text-decoration: underline;
+        }
+    }
+
     & .list-unstyled a {
         @include color('side-link');
 

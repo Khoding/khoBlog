@@ -86,9 +86,9 @@
                         <div class="d-flex">
                             <span class="col">
                                 {% if post.get_featured_cat %}
-                                    <strong><a href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a></strong>
+                                    <strong><a class="cat-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a></strong>
                                 {% else %}
-                                    <strong><a href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
+                                    <strong><a class="cat-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                                 {% endif %}
                                 <p class="mb-0 text-small text-muted">
                                     {% if post.body %}
