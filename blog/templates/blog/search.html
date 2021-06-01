@@ -9,12 +9,32 @@
                     <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
                         <div id="element-{{ e.slug }}" class="card shadow h-100">
                             <div class="card-header">
-                                <span class="d-flex">
+                                <div class="d-flex">
                                     <span class="col">
                                         <p class="mb-0 text-muted">#{{ e.id }}</p>
                                         <p class="mb-0 text-muted">{{ e.author }}</p>
                                     </span>
-                                </span>
+                                    {% if user.is_superuser %}
+                                        <span class="col-auto">
+                                            {% block super_buttons %}
+                                                <div class="btn-group float-end">
+                                                    <a class="btn btn-secondary" href="{{ e.get_absolute_update_url }}">
+                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                    </a>
+
+                                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="elementAdminDropdown-{{ e.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="elementAdminDropdown-{{ e.id }}">
+                                                        <a class="dropdown-item" href="{{ e.get_absolute_admin_update_url }}">
+                                                            <i class="bi bi-pencil-square"></i> Edit in Admin
+                                                        </a>
+                                                    </ul>
+                                                </div>
+                                            {% endblock super_buttons %}
+                                        </span>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title text-word-wrap">{% firstof e.title e %}</h3>
