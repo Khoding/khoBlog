@@ -58,7 +58,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__withdrawn=False).count()
+        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False).count()
 
     @property
     def get_superuser_post_count_in_category(self):
