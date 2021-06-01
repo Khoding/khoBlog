@@ -11,7 +11,7 @@ def context(request):
         'search_url': reverse('blog:search_results'),
         'search_title': "Search in Everything",
         'now': timezone.now(),
-        'description': "Khodok's Blog was a simple test for Django for school at first before Khodok (the dev of this stupid website) started to like it and continued it as a personal project",
+        'description': "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
     }
 
     return context
