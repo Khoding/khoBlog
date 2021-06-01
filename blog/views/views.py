@@ -110,10 +110,9 @@ class CategoryListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            self.category_list = self.model.objects.filter(parent=None)
+            self.category_list = self.model.objects.all()
         else:
-            self.category_list = self.model.objects.filter(
-                parent=None, withdrawn=False)
+            self.category_list = self.model.objects.filter(withdrawn=False)
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):

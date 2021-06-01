@@ -83,7 +83,7 @@
                     {% endif %}
 
                     <div class="card-header">
-                        <span class="d-flex">
+                        <div class="d-flex">
                             <span class="col">
                                 {% if post.get_featured_cat %}
                                     <strong><a href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a></strong>
@@ -102,9 +102,11 @@
                                 <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
                             </span>
                             <span class="col">
-                                {% include 'blog/includes/super_buttons.html' %}
+                                {% block super_buttons %}
+                                    {% include 'blog/includes/super_buttons.html' %}
+                                {% endblock %}
                             </span>
-                        </span>
+                        </div>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>

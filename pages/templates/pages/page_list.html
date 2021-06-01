@@ -21,11 +21,11 @@
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </a>
 
-                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="postAdminDropdown-{{ post.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="pageAdminDropdown-{{ page.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span class="visually-hidden">Toggle Dropdown</span>
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="postAdminDropdown">
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="pageAdminDropdown-{{ page.id }}">
                                                 <a class="dropdown-item" href="{% url 'admin:pages_page_change' object_id=page.id %}">
                                                     <i class="bi bi-pencil-square"></i> Edit in Admin
                                                 </a>

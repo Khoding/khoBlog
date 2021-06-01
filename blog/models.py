@@ -50,6 +50,12 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_url(self):
         return reverse('blog:post_category_list', kwargs={'slug': self.slug})
 
+    def get_absolute_update_url(self):
+        return reverse('blog:category_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:blog_category_change', kwargs={'object_id': self.pk})
+
     @property
     def get_post_count_in_category(self):
         return self.postcatslink_set.filter(post__withdrawn=False).count()
@@ -91,6 +97,12 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_url(self):
         return reverse('blog:post_series_list', kwargs={'slug': self.slug})
+
+    def get_absolute_update_url(self):
+        return reverse('blog:series_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:blog_series_change', kwargs={'object_id': self.pk})
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(

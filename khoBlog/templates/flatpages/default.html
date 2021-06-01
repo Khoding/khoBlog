@@ -30,7 +30,7 @@
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="projectAdminDropdown">
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="pageAdminDropdown-{{ page.id }}">
                                     <a class="dropdown-item" href="{% url 'admin:pages_page_change' object_id=page.id %}">
                                         <i class="bi bi-pencil-square"></i> Edit in Admin
                                     </a>

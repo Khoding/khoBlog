@@ -9,26 +9,31 @@
                 <div id="series-{{ series.slug }}" class="card shadow h-100">
 
                     <div class="card-header">
-                        <span class="d-flex">
+                        <div class="d-flex">
                             <span class="col">
                                 <strong class="text-muted">Series #{{ series.id }}</strong>
                             </span>
-                            <span class="col-auto">
-                                {% block super_buttons %}
-                                    {% if user.is_superuser %}
-                                        <div class="float-end btn-group" role="group" aria-label="Edit Group">
-                                            <a class="btn btn-light" href="{% url 'blog:series_edit' slug=series.slug %}">
-                                                <i class="bi bi-pencil-square"></i>
+                            {% if user.is_superuser %}
+                                <span class="col-auto">
+                                    {% block super_buttons %}
+                                        <div class="btn-group float-end">
+                                            <a class="btn btn-secondary" href="{{ series.get_absolute_update_url }}">
+                                                <i class="bi bi-pencil-square"></i> Edit
                                             </a>
 
-                                            <a class="btn btn-danger" href="{% url 'admin:blog_series_change' object_id=series.id %}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="seriesAdminDropdown-{{ series.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="visually-hidden">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="seriesAdminDropdown-{{ series.id }}">
+                                                <a class="dropdown-item" href="{{ series.get_absolute_admin_update_url }}">
+                                                    <i class="bi bi-pencil-square"></i> Edit in Admin
+                                                </a>
+                                            </ul>
                                         </div>
-                                    {% endif %}
-                                {% endblock super_buttons %}
-                            </span>
-                        </span>
+                                    {% endblock super_buttons %}
+                                </span>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">{{ series.title }}</h3>
