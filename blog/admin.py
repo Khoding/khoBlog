@@ -128,8 +128,9 @@ class PostContentInline(admin.TabularInline):
 
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     resource_class = PostResource
-    list_display = ('title', 'created_date', 'published_date',
-                    'slug', 'publication_state', 'featuring_state', 'tags', 'clicks', 'language',)
+    list_display = ('pk', 'title', 'created_date', 'published_date',
+                    'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language',)
+    list_display_links = ('pk', 'title', )
     ordering = ('-pk',)
     search_fields = ('title', 'featured_title', 'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)

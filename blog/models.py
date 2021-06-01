@@ -205,10 +205,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_post_change', kwargs={'object_id': self.pk})
 
-    def get_featured_cat(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
-            return post_cat
-
     def publish(self):
         self.published_date = timezone.now()
         self.publication_state = 'P'
@@ -233,6 +229,16 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def formatted_markdown(self):
         return markdownify(self.body)
+
+    @property
+    def get_featured_cat(self):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
+            return post_cat
+
+    @property
+    def featured_cat_title(self):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
+            return post_cat.category
 
     def approved_comments(self):
         return self.comments.filter(approbation_state='AP')

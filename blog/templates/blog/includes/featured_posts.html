@@ -20,7 +20,7 @@
                 <div class="card-header">
                     <strong>
                         {% if post.get_featured_cat %}
-                            <a class="card-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.get_featured_cat.category|capfirst }}</a>
+                            <a class="card-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a>
                         {% else %}
                             <a class="card-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
                         {% endif %}
