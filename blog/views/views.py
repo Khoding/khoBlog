@@ -120,6 +120,7 @@ class CategoryListView(ListView):
         context['category_list'] = self.category_list
         context['title'] = 'Category List'
         context['search_url'] = reverse('blog:category_search_results')
+        context['search_title'] = "Search in Categories"
         context['description'] = 'List of categories'
         return context
 
@@ -263,6 +264,7 @@ class AllTagsListView(ListView):
         context['description'] = "List of all tags"
         context['side_title'] = 'Tag List'
         context['search_url'] = reverse('blog:tag_search_results')
+        context['search_title'] = "Search in Tags"
         return context
 
 
@@ -290,6 +292,7 @@ class PostWithTagListView(ListView):
         context['description'] = self.description
         context['side_title'] = 'Post List'
         context['search_url'] = reverse('blog:tag_search_results')
+        context['search_title'] = "Search in Tags"
         return context
 
 
@@ -425,6 +428,7 @@ class SearchListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search'
         context['search_url'] = reverse('blog:search_results')
+        context['search_title'] = "Search in Everything"
         return context
 
 
@@ -461,6 +465,7 @@ class PostSearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Posts'
         context['search_url'] = reverse('blog:post_search_results')
+        context['search_title'] = "Search in Posts"
         return context
 
 
@@ -496,6 +501,7 @@ class CategorySearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Categories'
         context['search_url'] = reverse('blog:category_search_results')
+        context['search_title'] = "Search in Categories"
         return context
 
 
@@ -519,6 +525,7 @@ class TagsSearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Tags'
         context['search_url'] = reverse('blog:tag_search_results')
+        context['search_title'] = "Search in Tags"
         return context
 
 
@@ -534,6 +541,7 @@ class RandomSearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Random Search'
         context['search_url'] = reverse('blog:rnd_search_results')
+        context['search_title'] = "Have fun"
         return context
 
 
@@ -578,14 +586,12 @@ class AllSearchResultsListView(ListView):
             if self.request.user.is_superuser:
                 post = Post.objects.all()
                 category = Category.objects.all()
-                comment = Comment.objects.all()
                 tag = Tag.objects.all()
                 return [post, category, tag]
             else:
                 post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
                     published_date__isnull=True), ~Q(withdrawn=True),)
                 category = Category.objects.filter(~Q(withdrawn=True),)
-                comment = Comment.objects.filter(~Q(approbation_state='RE'),)
                 tag = Tag.objects.all()
                 return [post, category, tag]
 
@@ -593,6 +599,7 @@ class AllSearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Everything'
         context['search_url'] = reverse('blog:search_results')
+        context['search_title'] = "Search in Everything"
         return context
 
 
