@@ -55,6 +55,9 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse('blog:category_edit', kwargs={'slug': self.slug})
 
+    def get_absolute_delete_url(self):
+        return reverse('blog:category_remove', kwargs={'slug': self.slug})
+
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_category_change', kwargs={'object_id': self.pk})
 
@@ -108,6 +111,9 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_update_url(self):
         return reverse('blog:series_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_delete_url(self):
+        return reverse('blog:series_remove', kwargs={'slug': self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_series_change', kwargs={'object_id': self.pk})

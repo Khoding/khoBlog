@@ -3,7 +3,7 @@
 
 {% block main %}
     {% if comment.author_logged.id == user.id or user.is_superuser %}
-        <h3>Delete: {{ comment.related_post }} - {{comment.body}}</h3>
+        <h3>Delete: {{ comment.related_post }} - {{ comment.body }}</h3>
         <form method="POST" enctype="multipart/form-data" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}

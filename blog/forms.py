@@ -53,6 +53,20 @@ class PostDeleteForm(forms.ModelForm):
         fields = ()
 
 
+class CategoryDeleteForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = ()
+
+
+class SeriesDeleteForm(forms.ModelForm):
+
+    class Meta:
+        model = Series
+        fields = ()
+
+
 class CategoryAddForm(forms.ModelForm):
     class Meta:
         model = Category

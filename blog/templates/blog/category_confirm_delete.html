@@ -2,7 +2,7 @@
 {% load bootstrap5 %}
 
 {% block main %}
-    <h3>Delete: {{ post.id }} - {{ post.title }}</h3>
+    <h3>Delete: {{ category.id }} - {{ category.title }}</h3>
     <form method="POST" enctype="multipart/form-data" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}

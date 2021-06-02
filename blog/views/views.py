@@ -13,9 +13,9 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
 from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
 
-from ..forms import (ARPostCommentForm, CategoryAddForm, CategoryEditForm,
+from ..forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
                      CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
-                     PostEditForm, SeriesAddForm, SeriesEditForm)
+                     PostEditForm, SeriesAddForm, SeriesDeleteForm, SeriesEditForm)
 from ..models import Category, Comment, Post, PostContent, Series
 
 
@@ -374,6 +374,26 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
         return context
 
 
+class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
+    model = Category
+    template_name = 'blog/category_confirm_delete.html'
+    form_class = CategoryDeleteForm
+    success_url = reverse_lazy('blog:category_list')
+
+    def get_queryset(self):
+        self.category = get_object_or_404(
+            Category, slug=self.kwargs['slug'])
+        self.category.remove()
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
+        context['title'] = 'Delete Category'
+        context['side_title'] = 'Category List'
+        return context
+
+
 class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
     model = Series
     form_class = SeriesEditForm
@@ -384,6 +404,26 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context['posts'] = self.model.objects.all().order_by('-pk')
         context['title'] = 'Edit Series'
         context['side_title'] = 'Post List'
+        return context
+
+
+class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
+    model = Series
+    template_name = 'blog/series_confirm_delete.html'
+    form_class = SeriesDeleteForm
+    success_url = reverse_lazy('blog:series_list')
+
+    def get_queryset(self):
+        self.series = get_object_or_404(
+            Series, slug=self.kwargs['slug'])
+        self.series.remove()
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all().order_by('-pk')
+        context['title'] = 'Delete Series'
+        context['side_title'] = 'Series List'
         return context
 
 
