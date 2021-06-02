@@ -143,7 +143,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         (None, {'fields': ('title', 'featured_title',
                            'description', 'author', 'slug', 'body', 'tags',)}),
         (('States'), {
-         'fields': ('withdrawn', 'publication_state', 'featuring_state', 'language',)}),
+         'fields': ('withdrawn', 'is_removed', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {
          'fields': ('post_image', 'url_to_article', 'url_to_article_title',)}),
         (('Dates'), {

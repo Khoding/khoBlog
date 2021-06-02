@@ -14,7 +14,7 @@ from rules.contrib.models import RulesModelBase, RulesModelMixin
 from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
-from blog.managers import CategoryManager, PostManager
+from blog.managers import CategoryManager, PostManager, SeriesManager
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -89,6 +89,8 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     is_removed = models.BooleanField('is removed', default=False, db_index=True,
                                      help_text=('Soft delete'))
     history = HistoricalRecords()
+
+    objects = SeriesManager()
 
     class Meta:
         rules_permissions = {
@@ -278,12 +280,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_featured_cat(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
             return post_cat
 
     @property
     def featured_cat_title(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
             return post_cat.category
 
     def approved_comments(self):
