@@ -2,15 +2,13 @@
 {% load bootstrap5 %}
 
 {% block main %}
-    <h3>Delete: {{ post.title }}</h3>
-    <form method="POST" class="form">
+    <h3>Delete: {{ post.id }} - {{post.title}}</h3>
+    <form method="POST" enctype="multipart/form-data" class="form">
         {% csrf_token %}
-        <h4>Are you sure ?</h4>
-        {{ form.as_p }}
-
+        {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
         {% endbuttons %}
     </form>
-
+    {{ form.media }}
 {% endblock main %}

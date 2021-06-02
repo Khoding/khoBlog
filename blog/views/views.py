@@ -14,7 +14,7 @@ from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
 
 from ..forms import (ARPostCommentForm, CategoryAddForm, CategoryEditForm,
-                     CommentForm, EditPostCommentForm, PostAddForm,
+                     CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
                      PostEditForm, SeriesAddForm, SeriesEditForm)
 from ..models import Category, Comment, Post, PostContent, Series
 
@@ -400,10 +400,17 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
         return context
 
 
-class PostDeleteView(AutoPermissionRequiredMixin, DeleteView):
+class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
     model = Post
-    template_name = "blog/post_confirm_delete.html"
+    template_name = 'blog/post_confirm_delete.html'
+    form_class = PostDeleteForm
     success_url = reverse_lazy('blog:post_list')
+
+    def get_queryset(self):
+        self.removing_post = get_object_or_404(
+            Post, slug=self.kwargs['slug'])
+        self.removing_post.remove()
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

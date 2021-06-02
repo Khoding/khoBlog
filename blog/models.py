@@ -27,6 +27,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                             max_length=200, help_text="Category slug")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Category withdrawn")
+    is_removed = models.BooleanField('is removed', default=False, db_index=True,
+                                     help_text=('Soft delete'))
     history = HistoricalRecords()
 
     objects = CategoryManager()
@@ -56,6 +58,10 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_category_change', kwargs={'object_id': self.pk})
 
+    def remove(self):
+        self.is_removed = True
+        self.save()
+
     @property
     def get_post_count_in_category(self):
         return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False).count()
@@ -77,6 +83,8 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                             max_length=200, help_text="Series slug")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Series withdrawn")
+    is_removed = models.BooleanField('is removed', default=False, db_index=True,
+                                     help_text=('Soft delete'))
     history = HistoricalRecords()
 
     class Meta:
@@ -103,6 +111,10 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_series_change', kwargs={'object_id': self.pk})
+
+    def remove(self):
+        self.is_removed = True
+        self.save()
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(
@@ -183,6 +195,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(
         default=0, help_text="How many times the Post has been seen")
     history = HistoricalRecords()
+    is_removed = models.BooleanField('is removed', default=False, db_index=True,
+                                     help_text=('Soft delete'))
     enable_comments = models.BooleanField(default=True)
 
     objects = PostManager()
@@ -246,6 +260,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.published_date <= now
+
+    def remove(self):
+        self.is_removed = True
+        self.save()
 
     # Create a property that returns the markdown instead
     @property
