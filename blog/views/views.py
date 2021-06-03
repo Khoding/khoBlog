@@ -64,13 +64,18 @@ class PostInCategoryListView(ListView):
         if not self.category.withdrawn or self.category.withdrawn and self.request.user.is_superuser:
             self.title = self.category.title
             self.description = self.category.description
+            self.posts = self.model.objects.filter(categories=self.category).order_by(
+                '-published_date').get_without_removed()
         else:
             self.title = 'This category is Withdrawn'
             self.description = 'This category is Withdrawn'
-        return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, categories=self.category).order_by('-published_date').get_without_removed()
+            self.posts = self.model.objects.filter(published_date__lte=timezone.now(
+            ), withdrawn=False, categories=self.category).order_by('-published_date')
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = self.posts
         context['cats'] = self.category
         context['title'] = self.title
         context['description'] = self.description
