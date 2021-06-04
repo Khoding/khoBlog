@@ -158,11 +158,7 @@ class PostDetailView(DetailView):
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('post_order_in_series')
-            if self.post.withdrawn:
-                raise PermissionDenied
-            elif not self.post.published_date:
-                raise PermissionDenied
-            elif self.post.published_date >= timezone.now():
+            if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
             else:
                 self.title = self.post.title
@@ -891,11 +887,7 @@ class PostDateDetailView(DateDetailView):
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('post_order_in_series')
-            if self.post.withdrawn:
-                raise PermissionDenied
-            elif not self.post.published_date:
-                raise PermissionDenied
-            elif self.post.published_date >= timezone.now():
+            if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
             else:
                 self.title = self.post.title
