@@ -18,7 +18,7 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False)
         context['title'] = 'Edit Comment'
         context['side_title'] = 'Post List'
         context['comment'] = self.comment

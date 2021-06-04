@@ -12,11 +12,12 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         YearArchiveView)
 from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
+from django.core.exceptions import PermissionDenied
 
-from ..forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
-                     CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
-                     PostEditForm, SeriesAddForm, SeriesDeleteForm, SeriesEditForm)
-from ..models import Category, Comment, Post, PostContent, Series
+from .forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
+                    CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
+                    PostEditForm, SeriesAddForm, SeriesDeleteForm, SeriesEditForm)
+from .models import Category, Comment, Post, PostContent, Series
 
 
 def superuser_required():
@@ -38,7 +39,7 @@ class PostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,16 +62,12 @@ class PostInCategoryListView(ListView):
     def get_queryset(self):
         self.category = get_object_or_404(
             Category, slug=self.kwargs['slug'])
-        if not self.category.withdrawn or self.category.withdrawn and self.request.user.is_superuser:
+        if not self.category.withdrawn or self.request.user.is_superuser:
             self.title = self.category.title
             self.description = self.category.description
-            return self.model.objects.filter(categories=self.category).order_by(
-                '-published_date').get_without_removed()
         else:
-            self.title = 'This category is Withdrawn'
-            self.description = 'This category is Withdrawn'
-            return self.model.objects.filter(published_date__lte=timezone.now(
-            ), withdrawn=False, categories=self.category).order_by('-published_date').get_without_removed()
+            raise PermissionDenied
+        return self.model.objects.get_common_queryset(self.request.user).filter(categories=self.category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,10 +88,7 @@ class PostInSeriesListView(ListView):
     def get_queryset(self):
         self.series = get_object_or_404(
             Series, slug=self.kwargs['slug'])
-        if self.request.user.is_superuser:
-            return self.model.objects.filter(series=self.series).order_by('post_order_in_series').get_without_removed()
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, series=self.series).order_by('post_order_in_series').get_without_removed()
+        return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by('post_order_in_series')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -152,30 +146,24 @@ class PostDetailView(DetailView):
     template_name = 'blog/post_detail.html'
 
     def get_queryset(self):
-        self.post = get_object_or_404(
-            Post, slug=self.kwargs['slug'])
+        self.post = get_object_or_404(Post, slug=self.kwargs['slug'])
         self.post.clicked()
         if self.post.is_removed:
-            self.series = None
-            self.title = 'Removed'
-            self.description = 'This post is Removed'
+            raise PermissionDenied
         elif self.request.user.is_superuser:
-            self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series').get_without_removed()
+            self.series = self.model.objects.get_common_queryset(self.request.user).filter(
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
             self.title = self.post.title
             self.description = self.post.description
         else:
-            self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series').get_without_removed()
+            self.series = self.model.objects.get_common_queryset(self.request.user).filter(
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
             if self.post.withdrawn:
-                self.title = 'Withdrawn'
-                self.description = 'This post is Withdrawn'
+                raise PermissionDenied
             elif not self.post.published_date:
-                self.title = 'Draft'
-                self.description = 'This post is still a Draft'
+                raise PermissionDenied
             elif self.post.published_date >= timezone.now():
-                self.title = 'Scheduled'
-                self.description = 'This post is Scheduled'
+                raise PermissionDenied
             else:
                 self.title = self.post.title
                 self.description = self.post.description
@@ -183,8 +171,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = self.model.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date').get_without_removed()
+        context['posts'] = self.model.objects.get_base_common_queryset()
         context['series'] = self.series
         context['title'] = self.title
         context['body'] = PostContent.objects.filter(
@@ -233,7 +220,7 @@ class PostScheduledListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(published_date__gte=timezone.now(), withdrawn=False).order_by('-published_date').get_without_removed()
+        return self.model.objects.filter(published_date__gte=timezone.now(), withdrawn=False).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -250,7 +237,7 @@ class PostWithdrawnListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(withdrawn=True).order_by('-published_date').get_without_removed()
+        return self.model.objects.filter(withdrawn=True).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -287,10 +274,7 @@ class PostWithTagListView(ListView):
             Tag, slug=self.kwargs['slug'])
         self.title = f'Tag: {self.tags.name}'
         self.description = f'Posts tagged with {self.tags.name}'
-        if self.request.user.is_superuser:
-            return self.model.objects.filter(tags=self.tags).order_by('-published_date').get_without_removed()
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False, tags=self.tags).order_by('-published_date').get_without_removed()
+        return self.model.objects.get_common_queryset(self.request.user).filter(tags=self.tags)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -700,7 +684,7 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False)
         context['title'] = 'Add Comment'
         context['side_title'] = 'Post List'
         return context
@@ -721,7 +705,7 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False)
         context['title'] = 'Reply to Comment'
         context['side_title'] = 'Post List'
         return context
@@ -741,7 +725,7 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+            published_date__lte=timezone.now(), withdrawn=False)
         context['title'] = 'Edit Comment'
         context['side_title'] = 'Post List'
         return context
@@ -767,7 +751,8 @@ class ApprovePostCommentUpdateView(UpdateView):
         return context
 
 
-class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
+@superuser_required()
+class RemovePostCommentUpdateView(UpdateView):
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/comments/remove_post_comment.html'
@@ -781,7 +766,7 @@ class RemovePostCommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date').get_without_removed()
+            published_date__lte=timezone.now(), withdrawn=False)
         context['title'] = 'Remove Comment'
         context['side_title'] = 'Post List'
         return context
@@ -799,10 +784,7 @@ class PostArchiveIndexView(ArchiveIndexView):
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.get_without_removed().order_by('published_date')
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_common_queryset(self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -822,10 +804,7 @@ class PostYearArchiveView(YearArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.get_without_removed().order_by('published_date')
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -844,10 +823,7 @@ class PostMonthArchiveView(MonthArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.get_without_removed().order_by('published_date')
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -863,15 +839,12 @@ class PostWeekArchiveView(WeekArchiveView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    date_field = "published_date"
-    week_format = "%W"
+    date_field = 'published_date'
+    week_format = '%W'
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.get_without_removed().order_by('published_date')
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -886,14 +859,11 @@ class PostDayArchiveView(DayArchiveView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    date_field = "published_date"
+    date_field = 'published_date'
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.get_without_removed().order_by('published_date')
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -909,30 +879,24 @@ class PostDateDetailView(DateDetailView):
     date_field = "published_date"
 
     def get_queryset(self):
-        self.post = get_object_or_404(
-            Post, slug=self.kwargs['slug'])
+        self.post = get_object_or_404(Post, slug=self.kwargs['slug'])
         self.post.clicked()
         if self.post.is_removed:
-            self.series = None
-            self.title = 'Removed'
-            self.description = 'This post is Removed'
-        elif not self.post.is_removed and self.request.user.is_superuser:
-            self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series').get_without_removed()
+            raise PermissionDenied
+        elif self.request.user.is_superuser:
+            self.series = self.model.objects.get_common_queryset(self.request.user).filter(
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
             self.title = self.post.title
             self.description = self.post.description
         else:
-            self.series = self.model.objects.filter(
-                series__isnull=False, series=self.post.series, published_date__lte=timezone.now(), withdrawn=False).order_by('post_order_in_series').get_without_removed()
+            self.series = self.model.objects.get_common_queryset(self.request.user).filter(
+                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
             if self.post.withdrawn:
-                self.title = 'Withdrawn'
-                self.description = 'This post is Withdrawn'
+                raise PermissionDenied
             elif not self.post.published_date:
-                self.title = 'Draft'
-                self.description = 'This post is still a Draft'
+                raise PermissionDenied
             elif self.post.published_date >= timezone.now():
-                self.title = 'Scheduled'
-                self.description = 'This post is Scheduled'
+                raise PermissionDenied
             else:
                 self.title = self.post.title
                 self.description = self.post.description
@@ -943,10 +907,9 @@ class PostDateDetailView(DateDetailView):
         context['title'] = '[Archive] Posted the ' + \
             str(self.get_day()) + ' ' + str(self.get_month()) + \
             ' ' + str(self.get_year())
-        context['posts'] = self.model.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date').get_without_removed()
+        context['posts'] = self.model.objects.get_common_queryset(
+            self.request.user)
         context['series'] = self.series
-        context['title'] = self.title
         context['body'] = PostContent.objects.filter(
             post_id=self.post.pk)
         context['description'] = self.description
@@ -967,10 +930,7 @@ class PostTodayArchiveView(TodayArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return self.model.objects.all().order_by('published_date').get_without_removed()
-        else:
-            return self.model.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('published_date').get_without_removed()
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

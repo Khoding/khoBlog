@@ -1,7 +1,5 @@
 {% extends 'blog/base_post.html' %}
 {% load static %}
-{% load markdown_extra %}
-{% load read_time %}
 {% load comments %}
 
 {% block page_top_end %}
@@ -24,108 +22,19 @@
 {% endblock page_top %}
 
 {% block content_main %}
-    {% if not post.is_removed %}
-        {% if post.published_date and not post.withdrawn and not post.published_date > now or not post.published_date and user.is_superuser or post.withdrawn and user.is_superuser or post.published_date > now and user.is_superuser %}
+    {% include 'blog/base_post_card.html' %}
 
-            <div class="card mb-2">
-                <div class="card-header">
-                    <span class="d-flex">
-                        <span class="col">
-                            <h2>Post #{{ post.id }}</h2>
-                        </span>
-                        <span class="col-auto mx-2">
-                            <h4><span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span></h4>
-                        </span>
-                        <span class="col">
-                            {% block super_buttons %}
-                                {% if user.is_superuser %}
-                                    {% include 'blog/includes/super_buttons.html' %}
-                                {% endif %}
-                            {% endblock super_buttons %}
-                        </span>
-                    </span>
-                </div>
+    {% if post.enable_comments %}
+        {% get_comment_count for post as comment_count %}
 
-                <div class="card-body">
-                    {% if series %}
-                        <div class="card">
-                            <div class="card-header">
-                                <strong>Series: <a href="{% url 'blog:post_series_list' slug=post.series.slug %}">{{ post.series }}</a></strong>{% if post.series.description %} - {{ post.series.description }}{% endif %}
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                {% for e in series %}
-                                    <li class="list-group-item"><a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}: {{ e }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+        {% render_comment_form for post %}
+        <hr />
 
-                        <hr />
-                    {% endif %}
+        <p class="text-muted text-small">This post has {{ comment_count }} comments.</p>
 
-                    <h2 class="card-title">{{ title }}</h2>
-                    <div>
-                        {% include 'blog/includes/post_dates.html' %}
-                        <p class="mb-0 text-small text-muted">
-                            {% if not body %}
-                                {{ post.body|readtime }}
-                            {% else %}
-                                A while
-                            {% endif %}
-                        </p>
-                    </div>
-
-                    {% if post.post_image %}
-                        <img src="{{ post.post_image.url }}" alt="Post image" />
-                    {% endif %}
-
-                    <div class="card-text">
-                        {% if body %}
-                            {% for content in body %}
-                                {{ content.body|formatted_markdown|safe }}
-                                {% if content.post_body_image %}
-                                    <img src="{{ content.post_body_image.url }}" alt="{{ content.post_body_image_alt }}">
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            {{ post.body|formatted_markdown|safe }}
-                        {% endif %}
-                    </div>
-                    {% if post.url_to_article %}
-                        <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
-                    {% endif %}
-                </div>
-
-                {% if post.approved_comments.count %}
-                    <div id="comments_old" class="card-footer">
-                        <p class="text-small text-muted">
-                            <i class="bi bi-info-circle"></i> These are old comments, they will be merged to the new ones at some point
-                        </p>
-                        {% comment %} <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                            <a class="btn btn-primary d-block" href="{% url 'blog:add_comment_to_post' pk_post=post.pk %}">Add comment</a>
-                        </div> {% endcomment %}
-                        {% include 'blog/includes/post_comments_base.html' %}
-                    </div>
-                {% endif %}
-            </div>
-
-            {% if post.enable_comments %}
-                {% get_comment_count for post as comment_count %}
-
-                {% render_comment_form for post %}
-                <hr />
-
-                <p class="text-muted text-small">This post has {{ comment_count }} comments.</p>
-
-                {% render_comment_list for post %}
-            {% else %}
-                <p class="text-muted text-small">This page has comments disabled.</p>
-            {% endif %}
-
-        {% else %}
-            <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>
-        {% endif %}
+        {% render_comment_list for post %}
     {% else %}
-        <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>
+        <p class="text-muted text-small">This post has comments disabled.</p>
     {% endif %}
 {% endblock content_main %}
 

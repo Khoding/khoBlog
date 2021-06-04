@@ -10,7 +10,7 @@ class LatestPostsFeed(Feed):
     description = 'Latest posts of my blog.'
 
     def items(self):
-        return Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date')
+        return Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False)
 
     def item_title(self, item):
         return item.title

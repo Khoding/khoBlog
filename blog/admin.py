@@ -129,14 +129,15 @@ class PostContentInline(admin.TabularInline):
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     resource_class = PostResource
     list_display = ('pk', 'title', 'created_date', 'published_date',
-                    'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language', 'is_removed')
+                    'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language', 'is_removed',)
     list_display_links = ('pk', 'title', )
-    ordering = ('-pk',)
+    list_editable = ('is_removed',)
+    ordering = ('-pk', 'title', '-published_date', 'is_removed',)
     search_fields = ('title', 'featured_title', 'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)
     prepopulated_fields = {
         'slug': ('title',), }
-    list_filter = ('categories', 'publication_state',
+    list_filter = ('categories', 'is_removed', 'publication_state',
                    'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
 
     fieldsets = (
@@ -168,17 +169,22 @@ class CommentAdmin(SimpleHistoryAdmin):
 
 
 class CategoryAdmin(SimpleHistoryAdmin):
-    list_display = ('title', 'description', 'slug', 'withdrawn')
-    ordering = ('-pk',)
+    list_display = ('title', 'description', 'slug', 'withdrawn', 'is_removed')
+    list_editable = ('is_removed',)
+    ordering = ('-pk', 'title', 'is_removed',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('withdrawn',)
+    list_filter = ('withdrawn', 'is_removed', 'parent',)
 
 
 @admin.register(Series)
 class SeriesAdmin(SimpleHistoryAdmin):
-    list_display = ('title', 'slug',)
+    list_display = ('title', 'description', 'slug', 'withdrawn', 'is_removed')
+    list_editable = ('is_removed',)
+    ordering = ('-pk', 'title', 'is_removed',)
+    search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
+    list_filter = ('withdrawn', 'is_removed', )
 
 
 admin.site.register(Post, PostAdmin)

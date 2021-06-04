@@ -44,7 +44,7 @@ schema_view = get_schema_view(
 )
 
 site_map_info_dict = {
-    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False).order_by('-published_date'),
+    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False),
 }
 
 api_patterns = [

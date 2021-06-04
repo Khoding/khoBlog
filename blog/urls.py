@@ -1,4 +1,4 @@
-from blog.views.views import CategoryDeleteView, SeriesDeleteView
+from blog.views import CategoryDeleteView, SeriesDeleteView
 from django.urls import path
 from django.urls.conf import include
 
