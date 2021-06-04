@@ -132,7 +132,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language', 'is_removed',)
     list_display_links = ('pk', 'title', )
     list_editable = ('is_removed',)
-    ordering = ('-pk', 'title', '-published_date', 'is_removed',)
+    ordering = ('-pk', 'title', '-published_date', '-is_removed',)
     search_fields = ('title', 'featured_title', 'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)
     prepopulated_fields = {
@@ -171,7 +171,7 @@ class CommentAdmin(SimpleHistoryAdmin):
 class CategoryAdmin(SimpleHistoryAdmin):
     list_display = ('title', 'description', 'slug', 'withdrawn', 'is_removed')
     list_editable = ('is_removed',)
-    ordering = ('-pk', 'title', 'is_removed',)
+    ordering = ('-pk', 'title', '-is_removed',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('withdrawn', 'is_removed', 'parent',)
@@ -181,7 +181,7 @@ class CategoryAdmin(SimpleHistoryAdmin):
 class SeriesAdmin(SimpleHistoryAdmin):
     list_display = ('title', 'description', 'slug', 'withdrawn', 'is_removed')
     list_editable = ('is_removed',)
-    ordering = ('-pk', 'title', 'is_removed',)
+    ordering = ('-pk', 'title', '-is_removed',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('withdrawn', 'is_removed', )
