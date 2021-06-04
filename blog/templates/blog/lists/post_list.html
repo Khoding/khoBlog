@@ -79,7 +79,9 @@
                     {% if post.published_date %}
                         {% if post.was_published_recently %}
                             <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
-                        {% elif post.withdrawn %}
+                        {% elif post.published_date > now %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-warning p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">Withdrawn</span></span>
+                        {% elif post.withdrawn not post.published_date %}
                             <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">Withdrawn</span></span>
                         {% endif %}
                     {% endif %}
