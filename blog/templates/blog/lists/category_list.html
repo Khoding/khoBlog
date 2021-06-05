@@ -30,11 +30,11 @@
                                                     <i class="bi bi-pencil-square"></i> Edit in Admin
                                                 </a>
 
-                                                <div class="dropdown-divider"></div>
+                                                {% comment %} <div class="dropdown-divider"></div>
 
                                                 <a class="dropdown-item" href="{{ cat.get_absolute_delete_url }}">
                                                     <i class="bi bi-trash"></i> Delete
-                                                </a>
+                                                </a> {% endcomment %}
                                             </ul>
                                         </div>
                                     {% endblock super_buttons %}
