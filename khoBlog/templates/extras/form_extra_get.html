@@ -1,0 +1,8 @@
+{% load project_tags %}
+{% load widget_tweaks %}
+
+{% for field in form %}
+    <div class="field {{ field|widget_type }} mb-2">
+        {% form_field field %}
+    </div>
+{% endfor %}

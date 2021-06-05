@@ -8,6 +8,11 @@ def form(form_obj):
     return {'form': form_obj}
 
 
+@register.inclusion_tag('extras/form_extra_get.html')
+def form_get(form_obj):
+    return {'form': form_obj}
+
+
 @register.inclusion_tag('extras/form_field_extra.html')
 def form_field(field):
     return {

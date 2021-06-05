@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'sitetree',
     'import_export',
     'compressor',
+    'django_filters',
 
     # Django Packages Apps
     'django_comments',

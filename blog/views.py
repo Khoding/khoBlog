@@ -1,3 +1,4 @@
+from blog.filters import PostFilter
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
@@ -485,6 +486,8 @@ class PostSearchResultsListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
+        self.f = PostFilter(self.request.GET,
+                            queryset=self.model.objects.all())
         if query != None:
             if self.request.user.is_superuser:
                 return self.model.objects.filter(
@@ -511,6 +514,7 @@ class PostSearchResultsListView(ListView):
         context['title'] = 'Search in Posts'
         context['search_url'] = reverse('blog:post_search_results')
         context['search_title'] = "Search in Posts"
+        context['filter'] = self.f
         return context
 
 
