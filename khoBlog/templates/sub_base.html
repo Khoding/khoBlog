@@ -12,16 +12,18 @@
 
 {% block aside %}
     {% if filter %}
-        <form class="card formcard p-4 mb-2 rounded shadow" method="get">
-            <h4 class="fst-italic">Filters</h4>
-            <div class="text-danger">
-                {{ form.non_field_errors }}
-            </div>
+        <div class="card p-4 mb-2 rounded shadow">
+            <form class="card formcard" method="get">
+                <h4 class="fst-italic">Filters</h4>
+                <div class="text-danger">
+                    {{ form.non_field_errors }}
+                </div>
 
-            {% form_get filter.form %}
+                {% form_get filter.form %}
 
-            <input class="btn btn-primary" type="submit" />
-        </form>
+                <input class="btn btn-primary" type="submit" />
+            </form>
+        </div>
     {% endif %}
 
     {% sm_setting sides %}
