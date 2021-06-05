@@ -24,30 +24,29 @@
 {% block content_main %}
     {% include 'blog/base_post_card.html' %}
 
-    {% if post.enable_comments %}
-        {% get_comment_count for post as comment_count %}
+    <div class="card p-2 comments shadow mt-2">
+        <h5 class="text-muted">Comments</h5>
+        {% if post.enable_comments %}
+            {% get_comment_count for post as comment_count %}
 
-        {% render_comment_form for post %}
-        <hr />
+            {% render_comment_form for post %}
+            <hr />
 
-        <p class="text-muted text-small">This post has {{ comment_count }} comments.</p>
+            <p class="text-muted text-small">This post has {{ comment_count }} comments.</p>
 
-        {% render_comment_list for post %}
-    {% else %}
-        <p class="text-muted text-small">This post has comments disabled.</p>
-    {% endif %}
+            {% render_comment_list for post %}
+        {% else %}
+            <p class="text-muted text-small">This post has comments disabled.</p>
+        {% endif %}
+    </div>
 {% endblock content_main %}
 
 {% block inside_aside %}
-    {% if not post.is_removed %}
-        {% include 'blog/includes/aside_nav_post_info.html' %}
-    {% endif %}
+    {% include 'blog/includes/aside_nav_post_info.html' %}
 {% endblock inside_aside %}
 
 {% block inside_nav %}
-    {% if not post.is_removed %}
-        {% include 'blog/includes/aside_nav_post_info.html' %}
-    {% endif %}
+    {% include 'blog/includes/aside_nav_post_info.html' %}
 {% endblock inside_nav %}
 
 {% block pagination %}

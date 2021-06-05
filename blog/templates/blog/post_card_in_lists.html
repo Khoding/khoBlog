@@ -1,0 +1,31 @@
+{% extends 'blog/base_post_card.html' %}
+
+{% block card_div %}
+    <div id="post-{{ post.slug }}" class="card shadow h-100">
+{% endblock card_div %}
+
+{% block card_body %}
+    <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
+    <div>{% include 'blog/includes/post_dates.html' %}</div>
+    <p class="mb-auto">{{ post.description }}</p>
+{% endblock card_body %}
+
+{% block card_footer %}
+    <div class="card-footer">
+        <span class="d-flex">
+            <span class="col">
+                <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
+            </span>
+            {% if post.url_to_article %}
+                <span class="col">
+                    <a class="float-end card-link" href="{{ post.url_to_article }}">
+                        <i class="bi bi-link-45deg"></i> External Link
+                    </a>
+                </span>
+            {% endif %}
+            <span class="col">
+                <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.id }}" aria-controls="postOffCanvas-{{ post.id }}">Post Info</a>
+            </span>
+        </span>
+    </div>
+{% endblock card_footer %}
