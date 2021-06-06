@@ -15,14 +15,20 @@
                             <span class="col-auto">
                                 {% block super_buttons %}
                                     {% if user.is_superuser %}
-                                        <div class="float-end btn-group" role="group" aria-label="Edit Group">
-                                            <a class="btn btn-light" href="{% url 'blog:tag_edit' slug=tag.slug %}">
-                                                <i class="bi bi-pencil-square"></i>
+                                        <div class="btn-group float-end">
+                                            <a class="btn btn-secondary" href="{% url 'blog:tag_edit' slug=tag.slug %}">
+                                                <i class="bi bi-pencil-square"></i> Edit
                                             </a>
 
-                                            <a class="btn btn-danger" href="{% url 'admin:taggit_tag_change' object_id=tag.id %}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
+                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="tagAdminDropdown-{{ tag.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span class="visually-hidden">Toggle Dropdown</span>
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="tagAdminDropdown-{{ tag.id }}">
+                                                <a class="dropdown-item" href="{% url 'admin:taggit_tag_change' object_id=tag.id %} ">
+                                                    <i class="bi bi-pencil-square"></i> Edit in Admin
+                                                </a>
+                                            </ul>
                                         </div>
                                     {% endif %}
                                 {% endblock super_buttons %}
