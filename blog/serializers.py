@@ -16,8 +16,8 @@ class PostCatsLinkSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True, read_only=True)
-    postcatslink_set = PostCatsLinkSerializer(many=True)
+    # categories = CategorySerializer(many=True, read_only=True)
+    # postcatslink_set = PostCatsLinkSerializer(many=True)
 
     class Meta:
         model = Post
