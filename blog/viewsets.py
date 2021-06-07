@@ -10,5 +10,5 @@ from django.utils import timezone
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Post.objects.filter(
-        published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        published_date__lte=timezone.now(), withdrawn=False, is_removed=False)[:25]
     serializer_class = PostSerializer
