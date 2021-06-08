@@ -28,7 +28,7 @@ class TestView(APIView):
 
 class ResourceViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Resource.objects.all()
+    queryset = Resource.objects.filter(withdrawn=False)
     serializer_class = ResourceSerializer
 
 
@@ -40,7 +40,7 @@ class ResourceCreateView(generics.CreateAPIView):
 
 class ResourceDetailView(generics.RetrieveAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Resource.objects.all()
+    queryset = Resource.objects.filter(withdrawn=False)
     serializer_class = ResourceSerializer
 
 
