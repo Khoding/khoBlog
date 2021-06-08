@@ -1,6 +1,6 @@
 # third party imports
 from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -27,6 +27,7 @@ class TestView(APIView):
 
 
 class ResourceViewSet(viewsets.ModelViewSet):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
 
@@ -38,9 +39,9 @@ class ResourceCreateView(generics.CreateAPIView):
 
 
 class ResourceDetailView(generics.RetrieveAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    permission_classes = (IsAdminUser, )
 
 
 class ResourceUpdateView(generics.UpdateAPIView):
