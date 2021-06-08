@@ -12,5 +12,43 @@
         },
         "python.pythonPath": "venv\\Scripts\\python.exe",
         "git.ignoreLimitWarning": true,
+        "colorTabs.config": [
+            {
+                "regex": ".*/account|accounts/.*",
+                "color": "#ccc",
+                "label": "ACCOUNTS"
+            },
+            {
+                "regex": "blog/.*",
+                "color": "#c00",
+                "label": "BLOG"
+            },
+            {
+                "regex": "comments/.*",
+                "color": "#555",
+                "label": "COMMENTS"
+            },
+            {
+                "regex": ".*khoBlog/templates/.*",
+                "color": "#005583",
+                "label": "BASE_TEMPLATES"
+            },
+            {
+                "regex": ".*khoBlog/settings/.*",
+                "color": "#0000ff",
+                "label": "BASE_SETTINGS"
+            },
+            {
+                "regex": ".*khoBlog/.*",
+                "color": "#474747",
+                "label": "BASE_KHOBLOG"
+            }
+        ],
+        "workbench.colorCustomizations": {
+            "tab.activeBorder": "#555",
+            "statusBar.background": "#555",
+            "statusBar.foreground": "#ffffff"
+        },
+        "window.title": "~[COMMENTS]~${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}"
     }
 }
