@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from blog.filters import PostFilter
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -14,7 +13,7 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         YearArchiveView)
 from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
-from django.core.exceptions import FieldError, PermissionDenied, ValidationError
+from django.core.exceptions import PermissionDenied
 
 from .forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
                     CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
