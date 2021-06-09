@@ -14,7 +14,7 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         YearArchiveView)
 from rules.contrib.views import AutoPermissionRequiredMixin
 from taggit.models import Tag
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import FieldError, PermissionDenied, ValidationError
 
 from .forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
                     CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
@@ -375,9 +375,13 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('blog:category_list')
 
     def get_queryset(self):
-        self.category = get_object_or_404(
-            Category, slug=self.kwargs['slug'])
-        self.category.remove()
+        if self.request.user.is_superuser:
+            self.category = get_object_or_404(
+                Category, slug=self.kwargs['slug'])
+            if self.get_form().is_valid():
+                self.category.remove()
+        else:
+            raise PermissionDenied()
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -410,9 +414,13 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('blog:series_list')
 
     def get_queryset(self):
-        self.series = get_object_or_404(
-            Series, slug=self.kwargs['slug'])
-        self.series.remove()
+        if self.request.user.is_superuser:
+            self.series = get_object_or_404(
+                Series, slug=self.kwargs['slug'])
+            if self.get_form().is_valid():
+                self.series.remove()
+        else:
+            raise PermissionDenied()
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -445,9 +453,13 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('blog:post_list')
 
     def get_queryset(self):
-        self.removing_post = get_object_or_404(
-            Post, slug=self.kwargs['slug'])
-        self.removing_post.remove()
+        if self.request.user.is_superuser:
+            self.removing_post = get_object_or_404(
+                Post, slug=self.kwargs['slug'])
+            if self.get_form().is_valid():
+                self.removing_post.remove()
+        else:
+            raise PermissionDenied()
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
