@@ -67,10 +67,5 @@
                 <span class="card-text">{{ comment.body }}</span>
             {% endautoescape %}
         </div>
-        {% comment %} <div class="card-footer">
-            <div class="btn-group-vertical d-flex col-12 col-lg-5 p-0" role="group" aria-label="Comments Group">
-                <a class="btn btn-primary d-block" href="{% url 'blog:add_reply_to_comment' pk_post=comment.related_post.pk pk=comment.id %}">Reply to this comment</a>
-            </div>
-        </div> {% endcomment %}
     </div>
 </div>

@@ -55,16 +55,6 @@
                                                     <a class="dropdown-item" href="{% url 'admin:comments_customcomment_change' object_id=comment.id %}">
                                                         <i class="bi bi-pencil-square"></i> Edit in Admin
                                                     </a>
-
-                                                {% comment %} {% if comment.is_public == True %}
-                                                    {% if user.is_superuser %}
-                                                        <div class="dropdown-divider"></div>
-                                                    {% endif %}
-
-                                                    <a class="dropdown-item" href="{% url 'comments-delete' comment_id=comment.id %}">
-                                                        <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
-                                                    </a>
-                                                {% endif %} {% endcomment %}
                                             </ul>
                                         {% endif %}
                                     </div>

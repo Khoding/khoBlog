@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from blog.filters import PostFilter
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -480,34 +481,13 @@ class SearchListView(ListView):
 class PostSearchResultsListView(ListView):
     model = Post
     template_name = 'blog/search.html'
-    context_object_name = 'query'
-    paginate_by = 21
-    paginate_orphans = 5
+    context_object_name = 'filter'
+    # paginate_by = 21
+    # paginate_orphans = 5
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
         self.f = PostFilter(self.request.GET,
                             queryset=self.model.objects.all())
-        if query != None:
-            if self.request.user.is_superuser:
-                return self.model.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        body__icontains=query) | Q(description__icontains=query),
-                ).get_without_removed()
-            else:
-                return self.model.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        body__icontains=query) | Q(description__icontains=query),
-                ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True),
-                         ).get_without_removed()
-        else:
-            if self.request.user.is_superuser:
-                post = self.model.objects.get_without_removed()
-                return post
-            else:
-                post = self.model.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
-                    published_date__isnull=True), ~Q(withdrawn=True),).get_without_removed()
-                return post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

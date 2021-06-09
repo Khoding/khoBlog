@@ -1,5 +1,4 @@
 import auto_prefetch
-from django.db.models.query_utils import Q
 from django.utils import timezone
 
 
@@ -8,13 +7,13 @@ class PostQuerySet(auto_prefetch.QuerySet):
         return self.filter(is_removed=False)
 
     def get_base_common_queryset(self):
-        return self.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))
+        return self.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def get_common_queryset(self, user):
         if user.is_superuser:
             return self.filter(is_removed=False)
         else:
-            return self.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))
+            return self.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def get_by_author(self, author_username):
         return self.filter(author__username=author_username)
@@ -54,14 +53,23 @@ class CategoryQuerySet(auto_prefetch.QuerySet):
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
+    def get_common_queryset(self, user):
+        if user.is_superuser:
+            return self.filter(is_removed=False)
+        else:
+            return self.filter(withdrawn=False, is_removed=False)
+
 
 class CategoryManager(auto_prefetch.Manager):
 
     def get_queryset(self):
-        return SeriesQuerySet(self.model, using=self._db)
+        return CategoryQuerySet(self.model, using=self._db)
 
     def get_without_removed(self):
         return self.get_queryset().get_without_removed()
+
+    def get_common_queryset(self, user):
+        return self.get_queryset().get_common_queryset(user)
 
 
 class SeriesQuerySet(auto_prefetch.QuerySet):

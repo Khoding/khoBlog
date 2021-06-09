@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
+from django.db.models.query_utils import Q
+from django.utils import timezone
+from .models import Category, Post
 from taggit.models import Tag
 import django_filters
-
-from .models import Post
 
 
 class PostFilter(django_filters.FilterSet):
@@ -9,10 +11,17 @@ class PostFilter(django_filters.FilterSet):
     description = django_filters.CharFilter(lookup_expr='icontains')
     body = django_filters.CharFilter(lookup_expr='icontains')
     slug = django_filters.CharFilter(lookup_expr='icontains')
-    tags = django_filters.ModelMultipleChoiceFilter(
+    categories = django_filters.ModelChoiceFilter(
+        queryset=Category.objects.filter(withdrawn=False, is_removed=False))
+    tags = django_filters.ModelChoiceFilter(
         queryset=Tag.objects.all())
 
     class Meta:
         model = Post
-        fields = ['id', 'tags', 'title', 'description',
-                  'slug', 'categories', 'body', ]
+        fields = ['id', 'title', 'description', 'body',
+                  'slug', 'language', 'categories', 'tags', ]
+
+    @property
+    def qs(self):
+        parent = super().qs
+        return parent.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))

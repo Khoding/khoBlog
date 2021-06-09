@@ -49,15 +49,6 @@
                     <p class="card-text">{{ object.bio }}</p>
                 </div>
             </div>
-            {% comment %} <div class="col-md-12">
-                <div class="card-body">
-                    {% for comment in comments %}
-                        {% if comment.approbation_state == 'AP' or user.is_superuser %}
-                            <p class="mb-0"><a href="{{ comment.get_absolute_url }}#comment-{{ comment.id }}">{{ comment.related_post }} - {{comment.body}}</a></p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div> {% endcomment %}
         </div>
     </div>
 
