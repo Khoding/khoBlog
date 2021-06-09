@@ -89,7 +89,7 @@ class PostInSeriesListView(ListView):
     def get_queryset(self):
         self.series = get_object_or_404(
             Series, slug=self.kwargs['slug'])
-        return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by('post_order_in_series')
+        return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by('order_in_series')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -153,12 +153,12 @@ class PostDetailView(DetailView):
             raise PermissionDenied
         elif self.request.user.is_superuser:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+                series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
             self.description = self.post.description
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+                series__isnull=False, series=self.post.series).order_by('order_in_series')
             if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
             else:
@@ -885,12 +885,12 @@ class PostDateDetailView(DateDetailView):
             raise PermissionDenied
         elif self.request.user.is_superuser:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+                series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
             self.description = self.post.description
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
-                series__isnull=False, series=self.post.series).order_by('post_order_in_series')
+                series__isnull=False, series=self.post.series).order_by('order_in_series')
             if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
             else:

@@ -9,8 +9,8 @@ from .models import Category, Comment, Post, PostContent, Series
 class PostAddForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series',
-                  'description', 'body', 'post_image', 'url_to_article', 'url_to_article_title', 'language',)
+        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series',
+                  'description', 'body', 'image', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
@@ -28,8 +28,8 @@ class PostAddForm(forms.ModelForm):
 class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'post_order_in_series', 'description',
-                  'body', 'post_image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language',)
+        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series', 'description',
+                  'body', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
@@ -155,4 +155,4 @@ class ARPostCommentForm(forms.ModelForm):
 
 
 PostContentFormSet = inlineformset_factory(
-    Post, PostContent, extra=1, fields=('body', 'post_body_image', 'post_body_image_alt',))
+    Post, PostContent, extra=1, fields=('body', 'body_image', 'body_image_alt',))

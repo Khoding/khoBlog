@@ -79,16 +79,16 @@
                 </p>
             </div>
 
-            {% if post.post_image %}
-                <img src="{{ post.post_image.url }}" alt="Post image" />
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="Post image" />
             {% endif %}
 
             <div class="card-text">
                 {% if body %}
                     {% for content in body %}
                         {{ content.body|formatted_markdown|safe }}
-                        {% if content.post_body_image %}
-                            <img src="{{ content.post_body_image.url }}" alt="{{ content.post_body_image_alt }}">
+                        {% if content.body_image %}
+                            <img src="{{ content.body_image.url }}" alt="{{ content.body_image_alt }}">
                         {% endif %}
                     {% endfor %}
                 {% else %}

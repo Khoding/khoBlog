@@ -76,7 +76,7 @@
                             {{ form.series|add_class:"form-select"|attr:"placeholder:Post series" }}
                             {{ form.series.label_tag }}
                         </div>
-                        {{ form.post_order_in_series|add_class:"form-control col-auto"|attr:"placeholder:Post order in series" }}
+                        {{ form.order_in_series|add_class:"form-control col-auto"|attr:"placeholder:Post order in series" }}
                     </div>
                     {% if form.series.help_text %}
                         <span class="text-small text-muted">{{ form.series.help_text }}</span>
@@ -112,12 +112,12 @@
                 </div>
 
                 <div class="field mb-2">
-                    {{ form.post_image.label_tag }}
-                    {{ form.post_image|add_class:"form-control"|attr:"placeholder:Post image" }}
-                    {% if form.post_image.help_text %}
-                        <span class="text-small text-muted">{{ form.post_image.help_text }}</span>
+                    {{ form.image.label_tag }}
+                    {{ form.image|add_class:"form-control"|attr:"placeholder:Post image" }}
+                    {% if form.image.help_text %}
+                        <span class="text-small text-muted">{{ form.image.help_text }}</span>
                     {% endif %}
-                    {% for error in form.post_image.errors %}
+                    {% for error in form.image.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
                 </div>

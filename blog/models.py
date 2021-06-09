@@ -171,7 +171,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     featured_title = models.CharField(
         max_length=200, default='', blank=True, help_text="Featured post title")
     body = MarkdownxField(help_text="Post main content", blank=True)
-    post_image = models.ImageField(
+    image = models.ImageField(
         null=True, blank=True, upload_to='images/post/', help_text="Post image")
     description = models.TextField(help_text="Post description")
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
@@ -180,7 +180,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     tags = TaggableManager(blank=True)
     series = auto_prefetch.ForeignKey(
         'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
-    post_order_in_series = models.PositiveIntegerField(
+    order_in_series = models.PositiveIntegerField(
         default=0, help_text="Post order in its series")
     created_date = models.DateTimeField(
         default=timezone.now, help_text="Creation date")
@@ -305,9 +305,9 @@ class PostContent(auto_prefetch.Model):
     post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name="content")
     body = MarkdownxField(help_text="Post main content")
-    post_body_image = models.ImageField(
+    body_image = models.ImageField(
         null=True, blank=True, upload_to='images/post/body_images/', help_text="Image in text")
-    post_body_image_alt = models.CharField(
+    body_image_alt = models.CharField(
         default='', blank=True, max_length=200, help_text='Image in text'
     )
     history = HistoricalRecords()
