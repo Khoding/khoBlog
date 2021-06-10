@@ -1,6 +1,6 @@
 # khoBlog
 
-If you want to use for yourself:
+If you want to use it for yourself:
 1. Clone this repository
 2. Create a database called khoBlog in localhost (using wamp or xampp, you need mysql timezones if you don't have them, and you need to use this collation `utf8mb4_unicode_520_ci`)
 3. `pip install -r requirements.txt` in a venv
