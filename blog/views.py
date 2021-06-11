@@ -293,10 +293,10 @@ class TagUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['query'] = self.model.objects.all().order_by(
+        context['posts'] = Post.objects.all().order_by(
             '-pk')[:21]
         context['title'] = 'Edit Tag'
-        context['side_title'] = 'Tag List'
+        context['side_title'] = 'Post List'
         return context
 
 
