@@ -75,10 +75,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def is_visible_user(self):
-        if self.request.user.is_superuser:
-            filters = self.objects.filter(is_removed=False)
-        else:
-            filters = self.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        filters = self.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
         return filters
 
 
