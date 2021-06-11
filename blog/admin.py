@@ -7,7 +7,7 @@ from import_export.admin import ImportExportModelAdmin
 from markdownx.widgets import AdminMarkdownxWidget
 from simple_history.admin import SimpleHistoryAdmin
 
-from .models import Category, Post, PostCatsLink, PostContent, Series
+from .models import Category, Comment, Post, PostCatsLink, PostContent, Series
 
 
 class PostResource(resources.ModelResource):
@@ -188,4 +188,5 @@ class SeriesAdmin(SimpleHistoryAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category, CategoryAdmin)
