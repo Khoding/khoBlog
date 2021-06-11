@@ -29,11 +29,7 @@
                         <strong><a class="cat-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
                     {% endif %}
                     <p class="mb-0 text-small text-muted">
-                        {% if post.body %}
-                            {{ post.body|readtime }}
-                        {% else %}
-                            A while
-                        {% endif %}
+                        Post #{{ post.id }}
                     </p>
                 </span>
                 <span class="col-auto mx-2">

@@ -1,7 +1,7 @@
 {% load comments %}
 
-<div class="ps-4 comment-card{% if comment.parent %} ms-4 comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
-    <div id="comment-{{ comment.id }}" class="card mt-2">
+<div class="ps-4 comment-card{% if comment.parent %} comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
+    <div id="comment-{{ comment.id }}" class="card mt-2{% if comment.parent %} ms-4{% endif %}">
         <div class="card-header">
             <h4>
                 {% if not comment.user and not comment.alias_user and comment.user_name %}
@@ -71,9 +71,9 @@
                 {% if comment.parent %}
                     -
                     <span>
-                        Reply to :
+                        Response to :
                         <a href="{{ comment.parent.get_absolute_url }}">
-                            <i class="bi bi-link-45deg"></i> {% firstof comment.parent.title %} {% if comment.parent.title %} - {% endif %}{{ comment.parent.comment }}
+                            <i class="bi bi-link-45deg"></i> {% firstof comment.parent.title %} {% if comment.parent.title %} - {% endif %}{{ comment.parent.comment|truncatechars_html:50 }}
                         </a>
                     </span>
                 {% endif %}

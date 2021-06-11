@@ -220,7 +220,7 @@
                     <div class="col col-sm-auto">
                         <h2>
                             {% block page_top_title %}
-                                {{ title }}
+                                {{ title|truncatewords_html:7 }}
                             {% endblock page_top_title %}
                         </h2>
                     </div>

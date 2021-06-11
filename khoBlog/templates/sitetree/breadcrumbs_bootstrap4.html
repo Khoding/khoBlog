@@ -6,9 +6,9 @@
         <ol class="breadcrumb">
             {% for item in sitetree_items %}
                 {% if not forloop.last %}
-                    <li class="breadcrumb-item"><a href="{% sitetree_url for item %}">{{ item.title_resolved }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% sitetree_url for item %}">{{ item.title_resolved|truncatewords_html:7 }}</a></li>
                 {% else %}
-                    <li class="breadcrumb-item active">{{ item.title_resolved }}</li>
+                    <li class="breadcrumb-item active">{{ item.title_resolved|truncatewords_html:7 }}</li>
                 {% endif %}
             {% endfor %}
         </ol>
