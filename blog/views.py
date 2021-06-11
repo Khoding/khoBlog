@@ -293,7 +293,7 @@ class TagUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['query'] = self.model.objects.get_without_removed().order_by(
+        context['query'] = self.model.objects.all().order_by(
             '-pk')[:21]
         context['title'] = 'Edit Tag'
         context['side_title'] = 'Tag List'
@@ -332,7 +332,7 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
         context['posts'] = self.model.objects.get_without_removed().order_by(
             '-pk')
         context['title'] = 'New Category'
-        context['side_title'] = 'Post List'
+        context['side_title'] = 'Category List'
         return context
 
 
@@ -349,7 +349,7 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
         context['posts'] = self.model.objects.get_without_removed().order_by(
             '-pk')
         context['title'] = 'New Series'
-        context['side_title'] = 'Post List'
+        context['side_title'] = 'Series List'
         return context
 
 
@@ -363,7 +363,7 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context['posts'] = self.model.objects.get_without_removed().order_by(
             '-pk')
         context['title'] = 'Edit Category'
-        context['side_title'] = 'Post List'
+        context['side_title'] = 'Category List'
         return context
 
 
@@ -402,7 +402,7 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context['posts'] = self.model.objects.get_without_removed().order_by(
             '-pk')
         context['title'] = 'Edit Series'
-        context['side_title'] = 'Post List'
+        context['side_title'] = 'Series List'
         return context
 
 
