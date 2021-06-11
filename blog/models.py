@@ -364,9 +364,9 @@ class Comment(auto_prefetch.Model):
 
     @property
     def full_title(self):
-        full_t = self.related_post.title
+        full_t = self.related_post.title + ' - '
         if self.title:
-            full_t = full_t + ' - ' + self.title + ' - '
+            full_t = full_t + self.title + ' - '
         full_t = full_t + self.body
         return full_t
 
