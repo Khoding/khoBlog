@@ -12,8 +12,6 @@
 
 {% block aside %}
 
-    {% sm_setting sides %}
-
     {% if filter %}
         <div class="card p-4 mb-2 rounded shadow">
             <form class="card formcard" method="get">
@@ -28,6 +26,8 @@
             </form>
         </div>
     {% endif %}
+
+    {% sm_setting sides %}
 
     {% block inside_aside %}
     {% endblock inside_aside %}
