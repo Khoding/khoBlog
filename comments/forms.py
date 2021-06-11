@@ -1,5 +1,19 @@
 from django import forms
+from django.forms.models import ModelForm
 from django_comments.forms import CommentForm
+from .models import CustomComment
+
+
+class CustomCommentChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        full_t = ''
+        if obj.content_object:
+            full_t = full_t + str(obj.content_type.model) + \
+                ' - ' + str(obj.content_object.title) + ' - '
+        elif obj.title:
+            full_t = obj.title + ' - '
+        full_t = full_t + str(obj.comment)[:50]
+        return full_t
 
 
 class CustomCommentForm(CommentForm):
@@ -19,3 +33,7 @@ class CustomCommentForm(CommentForm):
         data['title'] = self.cleaned_data['title']
         data['alias_user'] = self.cleaned_data['alias_user']
         return data
+
+
+class AdminForm(ModelForm):
+    parent = CustomCommentChoiceField(queryset=CustomComment.objects.all())

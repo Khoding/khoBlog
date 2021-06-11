@@ -1,70 +1,105 @@
-<div class="ps-4 comment-card{% if comment.comment_answer %} ms-4 comment-reply comment-reply-{{ comment.comment_answer.pk }}{% endif %}">
+{% load comments %}
+
+<div class="ps-4 comment-card{% if comment.parent %} ms-4 comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
     <div id="comment-{{ comment.id }}" class="card mt-2">
         <div class="card-header">
             <h4>
-                {% if comment.author or comment.author_logged and comment.author %}
-                    {{ comment.author }}
-                {% else %}
-                    {% if user.is_superuser or user.id == comment.author_logged.id %}
-                        <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
-                    {% elif comment.author_logged.owner and user.is_authenticated %}
-                        <a href="{{ comment.author_logged.get_absolute_url }}">{{ comment.author_logged }}</a>
+                {% if not comment.user and not comment.alias_user and comment.user_name %}
+                    {% if not comment.is_removed or user.is_superuser %}
+                        {{ comment.user_name }}
+                    {% endif %}
+                {% elif comment.alias_user or comment.user and comment.alias_user %}
+                    {% if user.is_superuser %}
+                        <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
+                        <span class="text-small text-muted">{{ comment.alias_user }}</span>
                     {% else %}
-                        {{ comment.author_logged }}
+                        {% if not comment.is_removed %}
+                            {{ comment.alias_user }}
+                        {% else %}
+                            <span class="text-muted">This comment has been removed.</span>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {% if user.is_superuser or user.id == comment.user.id %}
+                        <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
+                    {% elif comment.user.owner and user.is_authenticated %}
+                        <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
+                    {% else %}
+                        {{ comment.user }}
                     {% endif %}
                 {% endif %}
-                <a href="{{ comment.get_absolute_url }}"><i class="bi bi-link-45deg"></i></a>
+
                 {% if user.is_authenticated %}
                     <span class="float-end">
-                        {% if user.id == comment.author_logged.id or user.is_superuser %}
+                        {% if user.id == comment.user_id or user.is_superuser %}
 
                             <div class="btn-group float-end">
-                                <a class="btn btn-secondary" href="{% url 'blog:edit_post_comment' pk_post=comment.related_post.pk pk=comment.id %}">
+                                <a class="btn btn-secondary" href="{% url 'comments:comments-edit' pk=comment.id %}">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
 
-                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="commentActionsDropdown-{{ post.slug }}-{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
+                                {% if user.is_superuser %}
+                                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="commentActionsDropdown-{{ comment.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
 
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown-{{ post.slug }}-{{ comment.id }}">
-                                    {% if user.is_superuser %}
-                                        {% if not comment.approbation_state == 'AP' %}
-                                            <a class="dropdown-item" href="{% url 'blog:comment_approve' pk_post=comment.related_post.pk pk=comment.id %}">
-                                                <i class="bi bi-check2-square"></i> Approve
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="commentActionsDropdown-{{ comment.id }}">
+                                            {% if comment.is_public == False %}
+                                                <a class="dropdown-item" href="{% url 'comments-approve' comment_id=comment.id %}">
+                                                    <i class="bi bi-check2-square"></i> Approve
+                                                </a>
+                                            {% endif %}
+
+                                            <a class="dropdown-item" href="{% url 'admin:comments_customcomment_change' object_id=comment.id %}">
+                                                <i class="bi bi-pencil-square"></i> Edit in Admin
                                             </a>
-                                        {% endif %}
-
-                                        <a class="dropdown-item" href="{% url 'admin:blog_comment_change' object_id=comment.id %}">
-                                            <i class="bi bi-pencil-square"></i> Edit in Admin
-                                        </a>
-                                    {% endif %}
-
-                                    {% if comment.approbation_state == 'AP' %}
-                                        {% if user.is_superuser %}
-                                            <div class="dropdown-divider"></div>
-                                        {% endif %}
-
-                                        <a class="dropdown-item" href="{% url 'blog:comment_remove' pk_post=comment.related_post.pk pk=comment.id %}">
-                                            <i class="bi bi-trash"></i>{% if user.is_superuser %} Disapprove {% else %} Delete {% endif %}
-                                        </a>
-                                    {% endif %}
-                                </ul>
+                                    </ul>
+                                {% endif %}
                             </div>
                         {% endif %}
                     </span>
                 {% endif %}
             </h4>
+            <p class="text-muted text-small mb-0">
+                <span>{{ comment.submit_date|date:'l, d F Y' }}</span>
+                -
+                <span>
+                    <a href="{% get_comment_permalink comment '#comment-%(id)s' %}">
+                        <i class="bi bi-link-45deg"></i> Permalink
+                    </a>
+                </span>
+                -
+                {% if comment.parent %}
+                    <span>
+                        Reply to :
+                        <a href="{{ comment.parent.get_absolute_url }}">
+                            <i class="bi bi-link-45deg"></i> {% firstof comment.parent.title %} {% if comment.parent.title %} - {% endif %}{{ comment.parent.comment }}
+                        </a>
+                    </span>
+                {% endif %}
+            </p>
         </div>
         <div class="card-body">
-            {% if comment.title %}
-                <h2 class="card-title">{{ comment.title }}</h2>
-            {% endif %}
-            <div class="text-muted">
-                {{ comment.created_date|date:'l, d F Y' }} - {{ comment.created_date|time:"G:i:s" }} {% if comment.comment_answer %}<a href="{{ comment.comment_answer.get_absolute_url }}"><small>&lt;Related Comment&gt;</small></a>{% endif %}
-            </div>
             {% autoescape on %}
-                <span class="card-text">{{ comment.body }}</span>
+                {% if not comment.is_removed and comment.title or comment.is_removed %}
+                    <h5>
+                        {% if comment.title %}
+                            {{ comment.title }}
+                        {% elif comment.is_removed %}
+                            <span class="text-muted">This comment has been removed.</span>
+                            {% if comment.title and user.is_superuser %}
+                                <span class="text-small text-muted">{{ comment.title }}</span>
+                            {% endif %}
+                        {% endif %}
+                    </h5>
+                {% endif %}
+                <span class="card-text">
+                    {% if not comment.is_removed %}
+                        {{ comment.comment }}
+                    {% elif user.is_superuser %}
+                        <span class="text-small text-muted">{{ comment.comment }}</span>
+                    {% endif %}
+                </span>
             {% endautoescape %}
         </div>
     </div>

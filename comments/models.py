@@ -13,7 +13,7 @@ class CustomComment(CommentAbstractModel):
         'self', on_delete=models.CASCADE, related_name="comment_children", null=True, blank=True)
 
     class Meta:
-        ordering = ['-submit_date']
+        ordering = ['submit_date']
 
     def __str__(self):
         return self.full_title

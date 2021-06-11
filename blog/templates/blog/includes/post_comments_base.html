@@ -1,17 +1,9 @@
-{% if post.approved_comments.count or user.is_superuser %}
-    {% for comment in post.comments.all %}
-        {% if comment.approbation_state == 'AP' and not comment.comment_answer or not comment.approbation_state == 'AP' and user.is_superuser %}
-            {% include 'blog/includes/post_comments_messages.html' %}
-        {% endif %}
+{% for comment in comment_list %}
+    {% if not comment.parent %}
+        {% include 'blog/includes/post_comments_messages.html' %}
+    {% endif %}
 
-        {% for comment in comment.related_comment.all %}
-            {% if comment.approbation_state == 'AP' %}
-                {% include 'blog/includes/post_comments_messages.html' %}
-            {% endif %}
-        {% endfor %}
-    {% empty %}
-        <p>No comments here yet.</p>
+    {% for comment in comment.comment_children.all %}
+        {% include 'blog/includes/post_comments_messages.html' %}
     {% endfor %}
-{% else %}
-    <p>No comments here yet.</p>
-{% endif %}
+{% endfor %}
