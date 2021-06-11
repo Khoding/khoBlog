@@ -9,6 +9,9 @@ class CustomComment(CommentAbstractModel):
                                   'incognito (note that Moderators can still know it\'s you)', verbose_name="alias_name")
     comment = models.TextField()
 
+    class Meta:
+        ordering = ['-submit_date']
+
     def __str__(self):
         return self.full_title
 
