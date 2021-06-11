@@ -10,7 +10,7 @@ class CommentsAdmin(CommentsAdmin):
     form = AdminForm
 
     list_display = ('pk', 'full_title', 'name', 'content_type', 'object_pk',
-                    'ip_address', 'submit_date', 'is_public', 'is_removed')
+                    'ip_address', 'submit_date', 'is_public', 'is_removed', 'parent',)
     list_display_links = ('full_title',)
     ordering = ('pk',)
 
