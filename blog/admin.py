@@ -163,7 +163,7 @@ class CommentAdmin(SimpleHistoryAdmin):
     list_display_links = ('fulltitle',)
     ordering = ('created_date',)
     search_fields = ('author', 'body',)
-    list_filter = ('author_logged', 'approbation_state')
+    list_filter = ('author_logged', 'approbation_state', 'comment_answer',)
 
     actions = [make_approved, make_removed, ]
 
