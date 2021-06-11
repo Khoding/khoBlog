@@ -1,3 +1,4 @@
+import auto_prefetch
 from django.db import models
 from django_comments.abstracts import CommentAbstractModel
 
@@ -8,6 +9,8 @@ class CustomComment(CommentAbstractModel):
                                   help_text="You can add an Alias Name to your comment if you wish to be "
                                   'incognito (note that Moderators can still know it\'s you)', verbose_name="alias_name")
     comment = models.TextField()
+    parent = auto_prefetch.ForeignKey(
+        'self', on_delete=models.CASCADE, related_name="comment_children", null=True, blank=True)
 
     class Meta:
         ordering = ['-submit_date']
