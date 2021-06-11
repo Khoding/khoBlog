@@ -67,11 +67,21 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False).count()
+        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False, post__is_removed=False).count()
 
     @property
     def get_superuser_post_count_in_category(self):
-        return self.postcatslink_set.count()
+        return self.postcatslink_set.filter(post__is_removed=False).count()
+
+    @property
+    def is_visible_user(self):
+        if self.request.user.is_superuser:
+            filters = self.objects.filter(is_removed=False)
+        else:
+            filters = self.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        return filters
+
+
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(
