@@ -1,7 +1,7 @@
 {% load comments %}
 
-<div class="ps-4 comment-card{% if comment.parent %} comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
-    <div id="comment-{{ comment.id }}" class="card mt-2{% if comment.parent %} ms-4{% endif %}">
+<div class="ps-4 comment-card{% if comment.parent %} ms-4 comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
+    <div id="comment-{{ comment.id }}" class="card mt-2">
         <div class="card-header">
             <h4>
                 {% if not comment.user and not comment.alias_user and comment.user_name %}
