@@ -158,9 +158,9 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
 
 
 class CommentAdmin(SimpleHistoryAdmin):
-    list_display = ('id', 'fulltitle', 'author_logged', 'author',
+    list_display = ('id', 'full_title', 'author_logged', 'author',
                     'created_date', 'approbation_state', 'comment_answer',)
-    list_display_links = ('fulltitle',)
+    list_display_links = ('full_title',)
     ordering = ('created_date',)
     search_fields = ('author', 'body',)
     list_filter = ('author_logged', 'approbation_state',)

@@ -357,24 +357,18 @@ class Comment(auto_prefetch.Model):
     history = HistoricalRecords()
 
     def __str__(self):
-        return self.fulltitle
+        return self.full_title
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.related_post.slug}) + f'#comment-{self.pk}'
 
     @property
-    def fulltitle(self):
-        if self.author_logged and self.author:
-            author_in_name = f'{self.author_logged} - {self.author}'
-        elif self.author_logged:
-            author_in_name = self.author_logged
-        else:
-            author_in_name = self.author
+    def full_title(self):
+        full_t = self.related_post.title
         if self.title:
-            name = f'{self.related_post.title} - {self.title} - {author_in_name}'
-        else:
-            name = f'{self.related_post.title} - {author_in_name}'
-        return name
+            full_t = full_t + ' - ' + self.title + ' - '
+        full_t = full_t + self.body
+        return full_t
 
     def approve(self):
         self.approbation_state = 'AP'
