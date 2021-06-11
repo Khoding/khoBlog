@@ -73,9 +73,11 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_superuser_post_count_in_category(self):
         return self.postcatslink_set.filter(post__is_removed=False).count()
 
-    @property
-    def is_visible_user(self):
-        filters = self.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+    def is_visible_user(self, user):
+        if user.is_superuser:
+            filters = self.objects.filter(is_removed=False)
+        else:
+            filters = self.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
         return filters
 
 
