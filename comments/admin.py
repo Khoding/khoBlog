@@ -12,7 +12,7 @@ class CommentsAdmin(CommentsAdmin):
     list_display = ('pk', 'full_title', 'name', 'content_type', 'object_pk',
                     'ip_address', 'submit_date', 'is_public', 'is_removed')
     list_display_links = ('full_title',)
-    ordering = ('-pk',)
+    ordering = ('pk',)
 
     fieldsets = (
         (
