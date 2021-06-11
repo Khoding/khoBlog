@@ -40,7 +40,7 @@ class PostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.is_visible_user(user=self.request.user)
+        return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
