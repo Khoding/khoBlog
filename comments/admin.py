@@ -26,6 +26,8 @@ class CommentsAdmin(CommentsAdmin):
         ),
     )
 
+    list_filter = ('submit_date', 'site', 'is_public', 'is_removed', 'parent',)
+
 
 admin.site.unregister(CustomComment)
 admin.site.register(CustomComment, CommentsAdmin)
