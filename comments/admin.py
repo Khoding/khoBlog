@@ -9,6 +9,10 @@ from .models import CustomComment
 class CommentsAdmin(CommentsAdmin):
     form = AdminForm
 
+    list_display = ('full_title', 'name', 'content_type', 'object_pk',
+                    'ip_address', 'submit_date', 'is_public', 'is_removed')
+    list_display_links = ('full_title',)
+
     fieldsets = (
         (
             None,
