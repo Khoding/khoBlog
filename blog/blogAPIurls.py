@@ -1,4 +1,3 @@
-from rest_framework import permissions
 from learning_resources.views import ResourceViewSet
 from django.urls.conf import include, path
 from rest_framework import routers
