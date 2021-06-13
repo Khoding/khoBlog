@@ -12,3 +12,4 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.filter(
         published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
     serializer_class = PostSerializer
+    lookup_field = 'slug'

@@ -23,3 +23,4 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('__all__')
         prepopulated_fields = {'slug': ('title',)}
+        lookup_field = 'slug'

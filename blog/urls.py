@@ -1,5 +1,3 @@
-from blog.models import Post
-from django_filters.views import FilterView
 from blog.views import CategoryDeleteView, SeriesDeleteView
 from django.urls import path
 from django.urls.conf import include
