@@ -62,7 +62,7 @@ api_patterns_v2 = [
 api_base_patterns = [
     re_path(r'(?P<version>[v1]+)/',
             include(api_patterns)),
-    re_path(r'(?P<version>[v2]+)/',
+    re_path(r'(?P<version>[v2|v3]+)/',
             include(api_patterns_v2)),
     path('read/', include('reading_apis_app.urls')),
     path('api-auth/', include('rest_framework.urls')),
