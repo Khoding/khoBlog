@@ -21,6 +21,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('__all__')
+        fields = ('pk', 'author_name', 'title', 'formatted_markdown', 'description',
+                  'slug', 'created_date', 'modified_date', 'published_date',)
         prepopulated_fields = {'slug': ('title',)}
         lookup_field = 'slug'

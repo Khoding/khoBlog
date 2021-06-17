@@ -280,6 +280,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return markdownify(self.body)
 
     @property
+    def author_name(self):
+        return self.author.username
+
+    @property
     def get_featured_cat(self):
         for post_cat in PostCatsLink.objects.filter(post=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
             return post_cat
