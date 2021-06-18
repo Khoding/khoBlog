@@ -195,8 +195,6 @@
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
                                     {% if user.is_superuser %}
-                                        <li><a class="dropdown-item" href="{% url 'api-root' 'v1' %}">API V1</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'api-root' 'v2' %}">API V2</a></li>
                                         <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
                                     {% endif %}
                                 </ul>
