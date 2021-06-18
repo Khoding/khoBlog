@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .serializers import PostSerializer, PostSerializerV3
+from .serializers import PostSerializer, PostSerializerDetailV3, PostSerializerV3
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 from .models import Post
@@ -16,5 +16,8 @@ class PostViewSet(viewsets.ModelViewSet):
         if self.request.version == 'v2':
             return PostSerializer
         else:
-            return PostSerializerV3
+            if not self.detail:
+                return PostSerializerV3
+            else:
+                return PostSerializerDetailV3
     lookup_field = 'slug'
