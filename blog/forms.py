@@ -25,8 +25,8 @@ class PostAddForm(forms.ModelForm):
 
 
 class PostEditForm(forms.ModelForm):
-    published_date = forms.SplitDateTimeField(widget=forms.widgets.SplitDateTimeWidget(
-        date_attrs={'type': 'date'}, time_attrs={'type': 'time'}))
+    published_date = forms.SplitDateTimeField(input_date_formats=['%Y-%m-%d'], input_time_formats=['%H:%M:%S'], widget=forms.SplitDateTimeWidget(
+        date_attrs={'type': 'date'}, date_format='%Y-%m-%d', time_attrs={'type': 'time'}, time_format='%H:%M:%S'))
 
     class Meta:
         model = Post
