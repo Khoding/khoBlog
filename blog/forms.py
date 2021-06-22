@@ -1,4 +1,3 @@
-from bootstrap_datepicker_plus import DateTimePickerInput
 from captcha.fields import CaptchaField
 from django import forms
 from django.forms.models import inlineformset_factory
@@ -26,6 +25,9 @@ class PostAddForm(forms.ModelForm):
 
 
 class PostEditForm(forms.ModelForm):
+    published_date = forms.SplitDateTimeField(widget=forms.widgets.SplitDateTimeWidget(
+        date_attrs={'type': 'date'}, time_attrs={'type': 'time'}))
+
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series', 'description',
@@ -38,7 +40,6 @@ class PostEditForm(forms.ModelForm):
             'description': forms.Textarea(),
             'body': forms.Textarea(),
             'slug': forms.TextInput(),
-            'published_date': DateTimePickerInput(format='%d/%m/%Y %H:%M:%S', ),
             'url_to_article': forms.URLInput(),
             'url_to_article_title': forms.TextInput(),
             'series': forms.Select(),

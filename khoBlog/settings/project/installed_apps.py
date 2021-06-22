@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'markdownx',
     'graphene_django',
     'bootstrap5',
-    'bootstrap_datepicker_plus',
     'captcha',
     'storages',
     'robots',

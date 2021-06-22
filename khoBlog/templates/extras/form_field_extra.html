@@ -16,11 +16,6 @@
     <div class="input-group">
         {{ field|add_class:"form-control"|attr:"multiple" }}
     </div>
-{% elif field|widget_type == "datetimepickerinput" %}
-    {{ field.label_tag }}
-    <div class="input-group">
-        {{ field|add_class:"form-control" }}
-    </div>
 {% elif field|widget_type == "markdownxwidget" %}
     {{ field|add_class:"form-control"|attr:"placeholder:" }}
 {% else %}

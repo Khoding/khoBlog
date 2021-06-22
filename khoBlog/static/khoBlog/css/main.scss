@@ -106,19 +106,6 @@ textarea {
         height: 100%;
     }
 
-    .bootstrap-datetimepicker-widget {
-        border-radius: 0 0;
-        height: 100%;
-        border: 1px solid;
-        @include border-color('border-color');
-        @include color('text');
-        @include background-color('bg');
-
-        * {
-            @include background-color('bg');
-        }
-    }
-
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,

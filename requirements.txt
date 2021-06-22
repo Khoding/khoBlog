@@ -19,7 +19,6 @@ Django==3.2.4
 django-allauth==0.44.0
 django-appconf==1.0.4
 django-auto-prefetch==0.0.6
-django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap-v5==1.0.3
 django-compressor==2.4.1
 django-contrib-comments==2.1.0
