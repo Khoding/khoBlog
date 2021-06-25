@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'import_export',
     'compressor',
     'django_filters',
+    'pinax.referrals',
+    'analytical',
 
     # Django Packages Apps
     'django_comments',

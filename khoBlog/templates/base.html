@@ -1,21 +1,9 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% if not debug_flag %}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7PT0XGK3G"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js', new Date());
-
-            gtag('config', 'G-V7PT0XGK3G');
-        </script>
+        {% analytical_head_top %}
 
         <!-- Google Tag Manager -->
         <script>(function (w, d, s, l, i) {
@@ -107,11 +95,15 @@
 
     {% if not debug_flag %}
         <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+
+        {% analytical_head_bottom %}
     {% endif %}
 </head>
 
 <body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
     {% if not debug_flag %}
+        {% analytical_body_top %}
+
         <!-- Google Tag Manager (noscript) -->
         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ"
@@ -271,5 +263,8 @@
         </div>
     </footer>
 
+    {% if not debug_flag %}
+        {% analytical_body_bottom %}
+    {% endif %}
 </body>
 </html>

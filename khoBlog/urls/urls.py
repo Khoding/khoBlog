@@ -105,4 +105,6 @@ urlpatterns = [
              site_map_info_dict, priority=0.6)}},
          name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^robots\.txt', include('robots.urls')),
+    re_path(r'^referrals/', include('pinax.referrals.urls',
+            namespace="pinax_referrals")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

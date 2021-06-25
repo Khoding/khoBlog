@@ -17,6 +17,7 @@ diff-match-patch==20200713
 distlib==0.3.1
 Django==3.2.4
 django-allauth==0.44.0
+django-analytical==3.0.0
 django-appconf==1.0.4
 django-auto-prefetch==0.0.6
 django-bootstrap-v5==1.0.3
@@ -62,6 +63,7 @@ odfpy==1.4.1
 openpyxl==3.0.7
 packaging==20.9
 Pillow==8.2.0
+pinax-referrals==4.0.1
 promise==2.3
 pycodestyle==2.7.0
 pycparser==2.20
