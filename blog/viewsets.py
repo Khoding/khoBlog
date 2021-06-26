@@ -9,8 +9,11 @@ from django.utils import timezone
 
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Post.objects.filter(
-        published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        return queryset
 
     def get_serializer_class(self):
         if self.request.version == 'v2':
