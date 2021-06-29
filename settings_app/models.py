@@ -117,6 +117,7 @@ class SpecificDateMessage(auto_prefetch.Model):
     side_menu = auto_prefetch.ForeignKey(
         'settings_app.SideMenu', on_delete=models.CASCADE, blank=True, null=True, related_name='side_menu_specific_date_messages')
     is_recurrent = models.BooleanField(default=True)
+    link = models.URLField(blank=True)
 
     class Meta:
         verbose_name_plural = "Specific Date Messages"
