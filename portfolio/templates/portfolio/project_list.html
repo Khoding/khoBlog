@@ -15,12 +15,19 @@
         {% endif %}
     {% endfor %}
 
-    <div class="row">
+    {% block page_top_hr %}
+        <div class='text-then-hr text-small text-muted'>
+            <span class='hr-title'><span class="me-2">{{ projects.count }} Projects</span></span>
+        </div>
+    {% endblock page_top_hr %}
+
+    <div class="row row-cols-1 row-cols-lg-3">
         {% for project in projects %}
-            {% if not project.featured %}
-                <div class="col-lg-4">
-                    <div class="card shadow mb-2">
-                        <div class="card-header d-flex">
+            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div id="project-{{ project.slug }}" class="card shadow h-100">
+
+                    <div class="card-header">
+                        <span class="d-flex">
                             <span class="col">
                                 <strong class="text-muted">Project #{{ project.id }}</strong>
                                 <p class="mb-0 text-small text-muted">Project slug: {{ project.slug }}</p>
@@ -37,7 +44,7 @@
                                                 <span class="visually-hidden">Toggle Dropdown</span>
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="projectAdminDropdown">
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="projectAdminDropdown-{{ project.id }}">
                                                 <a class="dropdown-item" href="{% url 'admin:portfolio_project_change' object_id=project.id %}">
                                                     <i class="bi bi-pencil-square"></i> Edit in Admin
                                                 </a>
@@ -52,24 +59,21 @@
                                     {% endif %}
                                 {% endblock super_buttons %}
                             </span>
-                        </div>
-
-                        <div class="card-body">
-                            <h2 class="card-title mb-0">{{ project.title }}</h2>
-                            <p class="card-text">{{ project.snippet }}</p>
-                        </div>
-
-                        <div class="card-footer">
-                            <span class="d-flex">
-                                <span class="col">
-                                    <a class="card-link" href="{{ project.get_absolute_url }}">Check the Project</a>
-                                </span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title mb-0">{{ project.title }}</h3>
+                        <p class="mb-auto">{{ project.snippet }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="d-flex">
+                            <span class="col">
+                                <a class="card-link" href="{{ project.get_absolute_url }}">See details</a>
                             </span>
-                        </div>
-
+                        </span>
                     </div>
                 </div>
-            {% endif %}
+            </div>
         {% endfor %}
     </div>
 {% endblock main %}
