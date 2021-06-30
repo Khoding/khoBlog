@@ -12,9 +12,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'khoBlog.context_processors.context',
+                'khoBlog.context_processors.selected_settings'
             ],
             'libraries': {
                 'project_tags': 'khoBlog.templatetags.forms',
+                'version': 'khoBlog.templatetags.version',
             }
         },
     },

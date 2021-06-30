@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag version %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -261,6 +261,15 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 {% footer_setting footers %}
+            </div>
+            <div class="row align-items-center mt-2 text-muted text-small">
+                <div class="col">
+                    Version number: {{ APP_VERSION_NAME }}
+                </div>
+                <div class="col">Last updated: {% version_date %}</div>
+                <div class="col">
+                    Version code: {{ APP_VERSION_NUMBER }}
+                </div>
             </div>
         </div>
     </footer>
