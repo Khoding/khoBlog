@@ -1,9 +1,8 @@
 major = 0
-minor = 9
-patch = 8
-build = 0
+minor = 4
+patch = 2
 
-version_code = major * 10000 + minor * 1000 + patch * 100 + build
+version_code = major * 1000 + minor * 100 + patch * 10
 version_name = f"{major}.{minor}.{patch}"
 
 __version__ = version_name
