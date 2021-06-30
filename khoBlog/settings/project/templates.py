@@ -16,7 +16,6 @@ TEMPLATES = [
             ],
             'libraries': {
                 'project_tags': 'khoBlog.templatetags.forms',
-                'version': 'khoBlog.templatetags.version',
             }
         },
     },

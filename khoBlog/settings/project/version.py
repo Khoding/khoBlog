@@ -1,6 +1,6 @@
 major = 0
 minor = 9
-patch = 5
+patch = 7
 build = 0
 
 version_code = major * 10000 + minor * 1000 + patch * 100 + build
