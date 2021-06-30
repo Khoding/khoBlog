@@ -11,7 +11,13 @@
                 {% endif %}
             </div>
             <div class="card-body">
-                <p class="card-text">{{ message }}</p>
+                <p class="card-text">
+                    {% if message.link %}
+                        <a class="card-link" href="{{ message.link }}">{{ message }}</a>
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
+                </p>
             </div>
         </div>
     {% endif %}
