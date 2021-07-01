@@ -1,3 +1,4 @@
+from custom_taggit.models import CustomTaggedItem
 import auto_prefetch
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.flatpages.models import FlatPage as FlatPageOld
@@ -64,7 +65,7 @@ class Page(auto_prefetch.Model):
         default=False,
     )
     sites = models.ManyToManyField(Site, verbose_name=_('sites'))
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, through=CustomTaggedItem)
     history = HistoricalRecords()
 
     def __str__(self):

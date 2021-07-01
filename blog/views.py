@@ -12,7 +12,7 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         TodayArchiveView, WeekArchiveView,
                                         YearArchiveView)
 from rules.contrib.views import AutoPermissionRequiredMixin
-from taggit.models import Tag
+from custom_taggit.models import CustomTag
 from django.core.exceptions import PermissionDenied
 
 from .forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
@@ -243,7 +243,7 @@ class PostWithdrawnListView(ListView):
 
 
 class AllTagsListView(ListView):
-    model = Tag
+    model = CustomTag
     template_name = 'blog/lists/tags_list.html'
     context_object_name = 'tags'
     paginate_by = 21
@@ -268,7 +268,7 @@ class PostWithTagListView(ListView):
 
     def get_queryset(self):
         self.tags = get_object_or_404(
-            Tag, slug=self.kwargs['slug'])
+            CustomTag, slug=self.kwargs['slug'])
         self.title = f'Tag: {self.tags.name}'
         self.description = f'Posts tagged with {self.tags.name}'
         return self.model.objects.get_common_queryset(self.request.user).filter(tags=self.tags)
@@ -286,7 +286,7 @@ class PostWithTagListView(ListView):
 
 @superuser_required()
 class TagUpdateView(UpdateView):
-    model = Tag
+    model = CustomTag
     fields = ('__all__')
     template_name = "blog/category_edit.html"
     success_url = reverse_lazy('blog:tag_list')
@@ -556,11 +556,11 @@ class TagsSearchResultsListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query != None:
-            return Tag.objects.filter(
+            return CustomTag.objects.filter(
                 Q(name__icontains=query)
             )
         else:
-            tag = Tag.objects.all()
+            tag = CustomTag.objects.all()
             return tag
 
     def get_context_data(self, **kwargs):
@@ -605,7 +605,7 @@ class AllSearchResultsListView(ListView):
                     Q(title__icontains=query) | Q(
                         description__icontains=query),
                 ).get_without_removed()
-                tag = Tag.objects.filter(
+                tag = CustomTag.objects.filter(
                     Q(name__icontains=query)
                 )
                 return [post, category, tag]
@@ -620,7 +620,7 @@ class AllSearchResultsListView(ListView):
                         description__icontains=query),
                 ).filter(~Q(withdrawn=True),
                          ).get_without_removed()
-                tag = Tag.objects.filter(
+                tag = CustomTag.objects.filter(
                     Q(name__icontains=query)
                 )
                 return [post, category, tag]
@@ -628,14 +628,14 @@ class AllSearchResultsListView(ListView):
             if self.request.user.is_superuser:
                 post = Post.objects.get_without_removed()
                 category = Category.objects.get_without_removed()
-                tag = Tag.objects.all()
+                tag = CustomTag.objects.all()
                 return [post, category, tag]
             else:
                 post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
                     published_date__isnull=True), ~Q(withdrawn=True),).get_without_removed()
                 category = Category.objects.filter(
                     ~Q(withdrawn=True),).get_without_removed()
-                tag = Tag.objects.all()
+                tag = CustomTag.objects.all()
                 return [post, category, tag]
 
     def get_context_data(self, **kwargs):

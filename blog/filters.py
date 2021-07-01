@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.db.models.query_utils import Q
 from django.utils import timezone
 from .models import Category, Post
-from taggit.models import Tag
+from custom_taggit.models import CustomTaggedItem
 import django_filters
 
 
@@ -14,7 +13,7 @@ class PostFilter(django_filters.FilterSet):
     categories = django_filters.ModelChoiceFilter(
         queryset=Category.objects.filter(withdrawn=False, is_removed=False))
     tags = django_filters.ModelChoiceFilter(
-        queryset=Tag.objects.all())
+        queryset=CustomTaggedItem.objects.all())
 
     class Meta:
         model = Post

@@ -1,3 +1,4 @@
+from custom_taggit.models import CustomTaggedItem
 import datetime
 
 import auto_prefetch
@@ -177,7 +178,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
     categories = models.ManyToManyField(
         'blog.Category', through='PostCatsLink', help_text="Post categories")
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, through=CustomTaggedItem)
     series = auto_prefetch.ForeignKey(
         'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
     order_in_series = models.PositiveIntegerField(
