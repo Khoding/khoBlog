@@ -5,49 +5,51 @@
 {% block content_main %}
     <div class="row row-cols-1 row-cols-lg-3">
         {% for tag in tags %}
-            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
-                <div id="tag-{{ tag.slug }}" class="card shadow h-100">
-                    <div class="card-header">
-                        <span class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted">Tag #{{ tag.id }}</strong>
-                            </span>
-                            <span class="col-auto">
-                                {% block super_buttons %}
-                                    {% if user.is_superuser %}
-                                        <div class="btn-group float-end">
-                                            <a class="btn btn-secondary" href="{% url 'blog:tag_edit' slug=tag.slug %}">
-                                                <i class="bi bi-pencil-square"></i> Edit
-                                            </a>
-
-                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="tagAdminDropdown-{{ tag.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span class="visually-hidden">Toggle Dropdown</span>
-                                            </button>
-
-                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="tagAdminDropdown-{{ tag.id }}">
-                                                <a class="dropdown-item" href="{% url 'admin:taggit_tag_change' object_id=tag.id %} ">
-                                                    <i class="bi bi-pencil-square"></i> Edit in Admin
+            {% if not tag.withdrawn or user.is_superuser %}
+                <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                    <div id="tag-{{ tag.slug }}" class="card shadow h-100">
+                        <div class="card-header">
+                            <span class="d-flex">
+                                <span class="col">
+                                    <strong class="text-muted">Tag #{{ tag.id }}</strong>
+                                </span>
+                                <span class="col-auto">
+                                    {% block super_buttons %}
+                                        {% if user.is_superuser %}
+                                            <div class="btn-group float-end">
+                                                <a class="btn btn-secondary" href="{% url 'blog:tag_edit' slug=tag.slug %}">
+                                                    <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                            </ul>
-                                        </div>
-                                    {% endif %}
-                                {% endblock super_buttons %}
+
+                                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="tagAdminDropdown-{{ tag.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                                </button>
+
+                                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="tagAdminDropdown-{{ tag.id }}">
+                                                    <a class="dropdown-item" href="{% url 'admin:taggit_tag_change' object_id=tag.id %} ">
+                                                        <i class="bi bi-pencil-square"></i> Edit in Admin
+                                                    </a>
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    {% endblock super_buttons %}
+                                </span>
                             </span>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">{{ tag }}</h3>
-                        <p class="mb-auto">Tag Slug: {{ tag.slug }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{% url 'blog:post_tagged_with' slug=tag.slug %}">All posts tagged with {{ tag.name }}</a>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ tag }}</h3>
+                            <p class="mb-auto">Tag Slug: {{ tag.slug }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="d-flex">
+                                <span class="col">
+                                    <a class="card-link" href="{% url 'blog:post_tagged_with' slug=tag.slug %}">All posts tagged with {{ tag.name }}</a>
+                                </span>
                             </span>
-                        </span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock content_main %}

@@ -556,11 +556,19 @@ class TagsSearchResultsListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query != None:
-            return CustomTag.objects.filter(
-                Q(name__icontains=query)
-            )
+            if not self.request.user.is_superuser:
+                return CustomTag.objects.filter(
+                    Q(name__icontains=query, withdrawn=False)
+                )
+            else:
+                return CustomTag.objects.filter(
+                    Q(name__icontains=query)
+                )
         else:
-            tag = CustomTag.objects.all()
+            if not self.request.user.is_superuser:
+                tag = CustomTag.objects.filter(withdrawn=False)
+            else:
+                tag = CustomTag.objects.all()
             return tag
 
     def get_context_data(self, **kwargs):

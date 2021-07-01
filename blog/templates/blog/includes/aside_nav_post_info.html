@@ -33,7 +33,14 @@
     <p>Description: {{ description }}</p>
 
     {% if post.tags %}
-        <p>Tags: {% for tags in post.tags.all %} <a href="{% url 'blog:post_tagged_with' slug=tags.slug %}">{{ tags }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p>Tags:
+            {% for tags in post.tags.all %}
+                {% if not tags.withdrawn or user.is_superuser %}
+                    {% comment %} TODO: Make a list of the public tags, the withdrawn one, and subtract to get the actual number for both users and supers {% endcomment %}
+                    <a href="{% url 'blog:post_tagged_with' slug=tags.slug %}">{{ tags }}</a>{% if not forloop.last %}, {% endif %}
+                {% endif %}
+            {% endfor %}
+        </p>
         <p>Similar Posts: {% for e in similar_posts %}{% if not e.withdrawn and e.published_date <= now or user.is_superuser %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</p>
     {% endif %}
 

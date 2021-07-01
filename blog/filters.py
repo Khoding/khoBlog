@@ -1,7 +1,7 @@
 from django.db.models.query_utils import Q
 from django.utils import timezone
 from .models import Category, Post
-from custom_taggit.models import CustomTaggedItem
+from custom_taggit.models import CustomTag
 import django_filters
 
 
@@ -13,14 +13,14 @@ class PostFilter(django_filters.FilterSet):
     categories = django_filters.ModelChoiceFilter(
         queryset=Category.objects.filter(withdrawn=False, is_removed=False))
     tags = django_filters.ModelChoiceFilter(
-        queryset=CustomTaggedItem.objects.all())
+        queryset=CustomTag.objects.filter(withdrawn=False))
 
     class Meta:
         model = Post
         fields = ['id', 'title', 'description', 'body',
                   'slug', 'language', 'categories', 'tags', ]
 
-    @property
+    @ property
     def qs(self):
         parent = super().qs
         return parent.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))
