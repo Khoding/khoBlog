@@ -34,7 +34,7 @@ django-simple-captcha==0.5.14
 django-simple-history==3.0.0
 django-sitetree==1.16.0
 django-storages==1.11.1
-django-taggit==1.4.0
+django-taggit==1.5.0
 django-widget-tweaks==1.4.8
 djangorestframework==3.12.4
 docutils==0.17.1
@@ -62,7 +62,7 @@ oauthlib==3.1.0
 odfpy==1.4.1
 openpyxl==3.0.7
 packaging==20.9
-Pillow==8.2.0
+Pillow==8.3.0
 pinax-referrals==4.0.1
 promise==2.3
 pycodestyle==2.7.0
@@ -97,8 +97,8 @@ tablib==3.0.0
 text-unidecode==1.3
 toml==0.10.2
 uritemplate==3.0.1
-urllib3==1.26.5
-virtualenv==20.4.4
+urllib3==1.26.6
+virtualenv==20.4.7
 xlrd==2.0.1
 xlwt==1.3.0
 zipp==3.4.1
