@@ -21,6 +21,9 @@ class FlatPage(FlatPageOld):
     description = models.TextField(blank=True, default="")
     withdrawn = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-pk']
+
     def __str__(self):
         return self.title
 

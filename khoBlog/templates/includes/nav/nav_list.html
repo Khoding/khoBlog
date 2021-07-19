@@ -28,10 +28,10 @@
         {% for element in context.query %}
             {% if context.query|isinstance:'list' %}
                 {% for e in element %}
-                    <li>{{ e.id }} - <a href="{{ e.get_absolute_url }}">{% firstof e.title e %}</a></li>
+                    <li>{{ e.id }} - <a href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}">{% firstof e.title e %}</a></li>
                 {% endfor %}
             {% else %}
-                <li>{{ element.id }} - <a href="{{ element.get_absolute_url }}">{% firstof element.title element %}</a></li>
+                <li>{{ element.id }} - <a href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}">{% firstof element.title element %}</a></li>
             {% endif %}
         {% endfor %}
     {% endif %}

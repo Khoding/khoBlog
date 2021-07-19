@@ -44,7 +44,7 @@
                                 <div class="card-footer">
                                     <span class="d-flex">
                                         <span class="col">
-                                            <a class="card-link" href="{{ e.get_absolute_url }}">Continue Reading</a>
+                                            <a class="card-link" href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}">Continue Reading</a>
                                         </span>
                                     </span>
                                 </div>
@@ -71,7 +71,7 @@
                             <div class="card-footer">
                                 <span class="d-flex">
                                     <span class="col">
-                                        <a class="card-link" href="{{ element.get_absolute_url }}">Continue Reading</a>
+                                        <a class="card-link" href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}">Continue Reading</a>
                                     </span>
                                 </span>
                             </div>
