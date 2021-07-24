@@ -68,6 +68,7 @@ class LinksSideMenu(auto_prefetch.Model):
         'settings_app.LinksGroupSideMenu', on_delete=models.CASCADE, related_name='side_menu_links_group', blank=True, null=True)
     link_css_classes = models.CharField(
         max_length=25, verbose_name="Classes", choices=CLASSES_CHOICES, default='PRI')
+    is_target_blank = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Side Links"

@@ -35,7 +35,11 @@
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
-                                                ">{{ link.title }}
+                                                "
+                                                {% if link.is_target_blank %}
+                                                    target="_blank"
+                                                {% endif %}
+                                                >{{ link.title }}
                                             </a>
                                         {% endif %}
                                     {% elif link.visibility == 'NS' %}
@@ -46,7 +50,11 @@
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
-                                                ">{{ link.title }}
+                                                "
+                                                {% if link.is_target_blank %}
+                                                    target="_blank"
+                                                {% endif %}
+                                                >{{ link.title }}
                                             </a>
                                         {% endif %}
                                     {% else %}
@@ -57,7 +65,11 @@
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
-                                                ">{{ link.title }}
+                                                "
+                                                {% if link.is_target_blank %}
+                                                    target="_blank"
+                                                {% endif %}
+                                                >{{ link.title }}
                                             </a>
                                         {% endif %}
                                     {% endif %}
@@ -69,7 +81,11 @@
                                     {% elif link.url %}
                                         {{ link.url }}
                                     {% endif %}
-                                    ">{{ link.title }}
+                                    "
+                                    {% if link.is_target_blank %}
+                                        target="_blank"
+                                    {% endif %}
+                                    >{{ link.title }}
                                 </a>
                             {% endif %}
                         {% endfor %}
