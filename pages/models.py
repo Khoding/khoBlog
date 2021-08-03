@@ -72,7 +72,7 @@ class Page(auto_prefetch.Model):
     history = HistoricalRecords()
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ['pk']
 
     def __str__(self):
         return self.title
