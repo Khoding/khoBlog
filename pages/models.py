@@ -71,6 +71,9 @@ class Page(auto_prefetch.Model):
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
     history = HistoricalRecords()
 
+    class Meta:
+        ordering = ['-pk']
+
     def __str__(self):
         return self.title
 
