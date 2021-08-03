@@ -6,9 +6,9 @@ with open(BASE_DIR + "/version.txt") as v_file:
 major = int(APP_VERSION_NUMBER.split('.')[0])
 minor = int(APP_VERSION_NUMBER.split('.')[1])
 patch = int(APP_VERSION_NUMBER.split('.')[2])
-build = int(APP_VERSION_NUMBER.split('.')[3])
+build = APP_VERSION_NUMBER.split('.')[3]
 
-version_code = f"{major * 10000 + minor * 1000 + patch * 100}-{build}"
+version_code = f"{major * 10000 + minor * 1000 + patch * 100}{build}"
 version_name = f"{major}.{minor}.{patch}-{build}"
 
 __version__ = version_name
