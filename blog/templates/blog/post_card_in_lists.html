@@ -8,13 +8,13 @@
 {% block card_body %}
     <h3 class="card-title text-word-wrap mb-0">{{ post.title|truncatewords_html:7 }}</h3>
     <div>{% include 'blog/includes/post_dates.html' %}</div>
-    {% comment %} <p class="mb-0 text-small text-muted">
-        {% if not body %}
+    <p class="mb-0 text-small text-muted">
+        {% if post.body %}
             {{ post.body|readtime }}
         {% else %}
             A while
         {% endif %}
-    </p> {% endcomment %}
+    </p>
     <p class="mb-auto">{{ post.description }}</p>
 {% endblock card_body %}
 
