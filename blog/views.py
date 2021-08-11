@@ -15,9 +15,9 @@ from rules.contrib.views import AutoPermissionRequiredMixin
 from custom_taggit.models import CustomTag
 from django.core.exceptions import PermissionDenied
 
-from .forms import (ARPostCommentForm, CategoryAddForm, CategoryDeleteForm, CategoryEditForm,
-                    CommentForm, EditPostCommentForm, PostAddForm, PostDeleteForm,
-                    PostEditForm, SeriesAddForm, SeriesDeleteForm, SeriesEditForm)
+from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm, CategoryEditForm,
+                    CommentForm, EditPostCommentForm, PostCreateForm, PostDeleteForm,
+                    PostEditForm, SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
 from .models import Category, Comment, Post, PostContent, Series
 
 
@@ -302,8 +302,8 @@ class TagUpdateView(UpdateView):
 
 class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Post
-    form_class = PostAddForm
-    template_name = "blog/post_new.html"
+    form_class = PostCreateForm
+    template_name = "blog/create_post.html"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -320,8 +320,8 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
 
 class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Category
-    form_class = CategoryAddForm
-    template_name = "blog/category_new.html"
+    form_class = CategoryCreateForm
+    template_name = "blog/create_category.html"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -338,8 +338,8 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
 
 class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
     model = Series
-    form_class = SeriesAddForm
-    template_name = "blog/series_new.html"
+    form_class = SeriesCreateForm
+    template_name = "blog/create_series.html"
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -442,6 +442,30 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
             '-pk')
         context['title'] = 'Edit Post'
         context['side_title'] = 'Post List'
+        return context
+
+
+class PostCloneView(AutoPermissionRequiredMixin, CreateView):
+    """
+    Clone View for Posts
+    """
+
+    model = Post
+    template_name = 'blog/create_post.html'
+    form_class = PostCreateForm
+    success_url = reverse_lazy('blog:post_list')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        post = self.get_object()
+
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Clone Post'
+        context['side_title'] = 'Post List'
+        context['form'] = PostCreateForm(instance=post)
         return context
 
 

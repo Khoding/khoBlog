@@ -1,11 +1,13 @@
-from custom_taggit.models import CustomTaggedItem
 import datetime
+import itertools
 
 import auto_prefetch
 import rules
+from custom_taggit.models import CustomTaggedItem
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -222,7 +224,20 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            max_length = Post._meta.get_field('slug').max_length
+            self.slug = orig = slugify(self.title)[:max_length]
+            for x in itertools.count(2):
+                if self.pk:
+                    if Post.objects.filter(Q(slug=self.slug),
+                                           Q(author=self.author),
+                                           Q(id=self.pk),
+                                           ).exists():
+                        break
+                if not Post.objects.filter(slug=self.slug).exists():
+                    break
+
+                # Truncate & Minus 1 for the hyphen.
+                self.slug = "%s-%d" % (orig[:max_length - len(str(x)) - 1], x)
         return super().save(*args, **kwargs)
 
     def save_without_historical_record(self, *args, **kwargs):
@@ -247,6 +262,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def get_absolute_publish_withdrawn_url(self):
         return reverse('blog:post_publish_withdrawn', kwargs={'slug': self.slug})
+
+    def get_absolute_clone_url(self):
+        return reverse('blog:clone_post', kwargs={'slug': self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse('admin:blog_post_change', kwargs={'object_id': self.pk})

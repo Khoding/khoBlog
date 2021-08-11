@@ -5,7 +5,7 @@ from django.forms.models import inlineformset_factory
 from .models import Category, Comment, Post, PostContent, Series
 
 
-class PostAddForm(forms.ModelForm):
+class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series',
@@ -68,7 +68,7 @@ class SeriesDeleteForm(forms.ModelForm):
         fields = ()
 
 
-class CategoryAddForm(forms.ModelForm):
+class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('title', 'description', 'parent', 'withdrawn',)
@@ -95,7 +95,7 @@ class CategoryEditForm(forms.ModelForm):
         }
 
 
-class SeriesAddForm(forms.ModelForm):
+class SeriesCreateForm(forms.ModelForm):
     class Meta:
         model = Series
         fields = ('title', 'description', 'withdrawn')

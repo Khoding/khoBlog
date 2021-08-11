@@ -19,6 +19,10 @@
             <div class="dropdown-divider"></div>
         {% endif %}
 
+        <a class="dropdown-item" href="{{ post.get_absolute_clone_url }}">
+            <i class="bi bi-stickies"></i> Clone
+        </a>
+
         <a class="dropdown-item" href="{{ post.get_absolute_admin_update_url }}">
             <i class="bi bi-pencil-square"></i> Edit in Admin
         </a>

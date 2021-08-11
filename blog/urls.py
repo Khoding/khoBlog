@@ -7,7 +7,7 @@ from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (AllSearchResultsListView, AllTagsListView,
                     ApprovePostCommentUpdateView, CategoryCreateView,
                     CategoryListView, CategorySearchResultsListView,
-                    CategoryUpdateView, PostArchiveIndexView,
+                    CategoryUpdateView, PostArchiveIndexView, PostCloneView,
                     PostCommentCreateView, PostCommentUpdateView,
                     PostCreateView, PostDateDetailView, PostDayArchiveView,
                     PostDeleteView, PostDetailView, PostDraftListView,
@@ -25,6 +25,7 @@ post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
 
     path('edit/', PostUpdateView.as_view(), name='post_edit'),
+    path('clone/', PostCloneView.as_view(), name='clone_post'),
     path('publish/', views.post_publish, name='post_publish'),
     path('publish_withdrawn/',
          views.post_publish_withdrawn, name='post_publish_withdrawn'),
@@ -57,14 +58,14 @@ tags_action_extra_patterns = [
 category_extra_patterns = [
     path('', CategoryListView.as_view(),
          name='category_list'),
-    path('add/', CategoryCreateView.as_view(), name='category_new'),
+    path('add/', CategoryCreateView.as_view(), name='create_category'),
     path('<slug:slug>/', include(category_action_extra_patterns)),
 ]
 
 series_extra_patterns = [
     path('', SeriesListView.as_view(),
          name='series_list'),
-    path('add/', SeriesCreateView.as_view(), name='series_new'),
+    path('add/', SeriesCreateView.as_view(), name='create_series'),
     path('<slug:slug>/', include(series_action_extra_patterns)),
 ]
 
@@ -92,7 +93,7 @@ comment_extra_patterns = [
 ]
 
 post_extra_patterns = [
-    path('add/', PostCreateView.as_view(), name='post_new'),
+    path('add/', PostCreateView.as_view(), name='create_post'),
     # Goes to Post by redirecting through its ID or directly by slug respectively
     path('<int:pk>/', views.post_detail_through_id,
          name='post_detail_through_id'),

@@ -14,9 +14,9 @@
                 href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
         </div>
         <div class="btn-group-vertical mb-2 d-block" role="group" aria-label="Group Manage Blog">
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:post_new' %}">New Post</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:series_new' %}">New Series</a>
-            <a class="mb-0 btn btn-primary" href="{% url 'blog:category_new' %}">New Category</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:create_post' %}">New Post</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:create_series' %}">New Series</a>
+            <a class="mb-0 btn btn-primary" href="{% url 'blog:create_category' %}">New Category</a>
         </div>
     {% endif %}
 

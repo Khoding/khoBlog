@@ -135,9 +135,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#create_dropdown" id="create_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="create_dropdown">
-                                    <li><a class="dropdown-item{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_new' %}">New Post</a></li>
-                                    <li><a class="dropdown-item{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:series_new' %}">New Series</a></li>
-                                    <li><a class="dropdown-item{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:category_new' %}">New Category</a></li>
+                                    <li><a class="dropdown-item{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_post' %}">New Post</a></li>
+                                    <li><a class="dropdown-item{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_series' %}">New Series</a></li>
+                                    <li><a class="dropdown-item{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_category' %}">New Category</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
