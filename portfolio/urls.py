@@ -5,11 +5,6 @@ from .views import (ProjectCreateView, ProjectDeleteView, ProjectDetailView,
                     ProjectListView, ProjectUpdateView)
 
 app_name = 'portfolio'
-urlpatterns = [
-    path('', ProjectListView.as_view(), name='project_list'),
-    path('<slug:slug>/', ProjectDetailView.as_view(), name='project_detail'),
-]
-
 project_extra_patterns = [
     path('', ProjectDetailView.as_view(), name='project_detail'),
 
