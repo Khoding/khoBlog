@@ -2,6 +2,7 @@
 
 {% block main %}
     <h4>{{ question.question_text }}</h4>
+    <a href="{% url 'polls:results' question.id %}">See the results without voting</a>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
