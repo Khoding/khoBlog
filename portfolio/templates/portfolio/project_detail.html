@@ -45,7 +45,7 @@
         {% if project.website or project.technology %}
             <div class="card-footer">
                 {% if project.website %}
-                    <p class="card-text">Website: <a target="_blank" href="{{ project.website.url }}">{{ project.website }}</a></p>
+                    <p class="card-text">Website: <a target="_blank" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a></p>
                 {% endif %}
                 {% if project.technology %}
                     <div class="card-text">
@@ -56,7 +56,7 @@
                     </div>
                 {% endif %}
                 {% if project.repository %}
-                    <p class="card-text">Repository: <a target="_blank" href="{{ project.repository.url }}">{{ project.repository }}</a></p>
+                    <p class="card-text">Repository: <a target="_blank" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a></p>
                 {% endif %}
             </div>
         {% endif %}
