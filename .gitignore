@@ -10,7 +10,6 @@ Pipfile.lock
 
 /.vscode
 /.idea
-/.github
 node_modules
 /static
 /media
