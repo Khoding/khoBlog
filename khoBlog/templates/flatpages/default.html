@@ -14,6 +14,10 @@
 {% block main %}
     {% if not page.withdrawn or user.is_superuser %}
         <div class="card mb-2">
+            {% if page.withdrawn %}
+                <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
+            {% endif %}
+
             <div class="card-header d-flex">
                 <span class="col">
                     <h2>Page #{{ page.id }}</h2>
