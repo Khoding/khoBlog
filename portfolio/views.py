@@ -18,6 +18,8 @@ class ProjectListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Projects'
+        context['description'] = "List of Projects"
+        context['app_title'] = 'Portfolio'
         return context
 
 
@@ -29,6 +31,8 @@ class ProjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['projects'] = self.model.objects.all()
         context['title'] = 'Project Detail'
+        context['description'] = "Details of a Project"
+        context['app_title'] = 'Portfolio'
         context['side_title'] = 'Projects'
         return context
 
@@ -42,6 +46,7 @@ class ProjectCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Create Project'
         context['description'] = "Create a Project"
+        context['app_title'] = 'Portfolio'
         return context
 
 
@@ -54,6 +59,7 @@ class ProjectUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Project'
         context['description'] = "Update a Project"
+        context['app_title'] = 'Portfolio'
         return context
 
 
@@ -65,4 +71,6 @@ class ProjectDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Delete Project'
+        context['description'] = "Delete a Project"
+        context['app_title'] = 'Portfolio'
         return context

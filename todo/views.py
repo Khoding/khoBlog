@@ -32,6 +32,8 @@ class TaskListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Task List'
+        context['description'] = "List of Tasks"
+        context['app_title'] = 'Todo'
         return context
 
 
@@ -48,6 +50,8 @@ class TaskCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Create Task'
+        context['description'] = "Create a Task"
+        context['app_title'] = 'Todo'
         return context
 
 
@@ -61,6 +65,8 @@ class TaskUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Task'
+        context['description'] = "Update a Task"
+        context['app_title'] = 'Todo'
         return context
 
 
@@ -73,4 +79,6 @@ class TaskDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Delete Task'
+        context['description'] = "Delete a Task"
+        context['app_title'] = 'Todo'
         return context

@@ -12,6 +12,7 @@ def context(request):
         'search_title': "Search in Everything",
         'now': timezone.now(),
         'description': "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
+        'app_title': 'Blog',
     }
 
     return context

@@ -36,6 +36,7 @@ class PageDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['pages'] = self.pages
         context['title'] = self.title
+        context['app_title'] = 'Pages'
         context['description'] = self.description
         context['side_title'] = 'Page List'
         context['comment_next'] = self.page.get_absolute_url()
@@ -59,6 +60,7 @@ class PageListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page List'
+        context['app_title'] = 'Pages'
         context['description'] = "List of all Pages"
         return context
 
@@ -71,6 +73,7 @@ class PageCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Create Page'
+        context['app_title'] = 'Pages'
         context['description'] = "Create a Page"
         return context
 
@@ -83,6 +86,7 @@ class PageUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Page'
+        context['app_title'] = 'Pages'
         context['description'] = "Update a Page"
         return context
 
@@ -95,6 +99,8 @@ class PageDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Delete Page'
+        context['app_title'] = 'Pages'
+        context['description'] = "Delete a Page"
         return context
 
 
