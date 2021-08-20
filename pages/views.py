@@ -60,8 +60,8 @@ class PageListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Page List'
-        context['app_title'] = 'Pages'
         context['description'] = "List of all Pages"
+        context['app_title'] = 'Pages'
         return context
 
 
@@ -73,8 +73,8 @@ class PageCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Create Page'
-        context['app_title'] = 'Pages'
         context['description'] = "Create a Page"
+        context['app_title'] = 'Pages'
         return context
 
 
@@ -86,8 +86,8 @@ class PageUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Update Page'
-        context['app_title'] = 'Pages'
         context['description'] = "Update a Page"
+        context['app_title'] = 'Pages'
         return context
 
 
@@ -99,8 +99,8 @@ class PageDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Delete Page'
-        context['app_title'] = 'Pages'
         context['description'] = "Delete a Page"
+        context['app_title'] = 'Pages'
         return context
 
 

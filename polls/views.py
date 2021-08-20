@@ -37,6 +37,8 @@ class IndexView(PermissionRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Polls List'
+        context['description'] = 'Polls List'
+        context['app_title'] = 'Polls'
         return context
 
 
@@ -54,6 +56,8 @@ class PollsDetailView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Poll Detail'
+        context['description'] = 'Polls Details'
+        context['app_title'] = 'Polls'
         return context
 
 
@@ -65,6 +69,8 @@ class ResultsView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Poll Results'
+        context['description'] = 'Polls Results'
+        context['app_title'] = 'Polls'
         return context
 
 
