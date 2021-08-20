@@ -13,6 +13,7 @@ def context(request):
         'now': timezone.now(),
         'description': "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
         'app_title': 'Blog',
+        'app_direct_link': reverse('blog:post_list'),
     }
 
     return context

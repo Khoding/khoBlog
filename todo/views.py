@@ -34,6 +34,7 @@ class TaskListView(ListView):
         context['title'] = 'Task List'
         context['description'] = "List of Tasks"
         context['app_title'] = 'Todo'
+        context['app_direct_link'] = reverse_lazy('todo:task_list')
         return context
 
 
@@ -52,6 +53,7 @@ class TaskCreateView(CreateView):
         context['title'] = 'Create Task'
         context['description'] = "Create a Task"
         context['app_title'] = 'Todo'
+        context['app_direct_link'] = reverse_lazy('todo:task_list')
         return context
 
 
@@ -67,6 +69,7 @@ class TaskUpdateView(UpdateView):
         context['title'] = 'Update Task'
         context['description'] = "Update a Task"
         context['app_title'] = 'Todo'
+        context['app_direct_link'] = reverse_lazy('todo:task_list')
         return context
 
 
@@ -81,4 +84,5 @@ class TaskDeleteView(DeleteView):
         context['title'] = 'Delete Task'
         context['description'] = "Delete a Task"
         context['app_title'] = 'Todo'
+        context['app_direct_link'] = reverse_lazy('todo:task_list')
         return context

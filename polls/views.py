@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import (PermissionRequiredMixin,
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.urls.base import reverse_lazy
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 from rules.contrib.views import permission_required
@@ -39,6 +40,7 @@ class IndexView(PermissionRequiredMixin, ListView):
         context['title'] = 'Polls List'
         context['description'] = 'Polls List'
         context['app_title'] = 'Polls'
+        context['app_direct_link'] = reverse_lazy('polls:index')
         return context
 
 
@@ -58,6 +60,7 @@ class PollsDetailView(PermissionRequiredMixin, DetailView):
         context['title'] = 'Poll Detail'
         context['description'] = 'Polls Details'
         context['app_title'] = 'Polls'
+        context['app_direct_link'] = reverse_lazy('polls:index')
         return context
 
 
@@ -71,6 +74,7 @@ class ResultsView(PermissionRequiredMixin, DetailView):
         context['title'] = 'Poll Results'
         context['description'] = 'Polls Results'
         context['app_title'] = 'Polls'
+        context['app_direct_link'] = reverse_lazy('polls:index')
         return context
 
 

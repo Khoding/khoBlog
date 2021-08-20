@@ -20,6 +20,7 @@ class ProjectListView(ListView):
         context['title'] = 'Projects'
         context['description'] = "List of Projects"
         context['app_title'] = 'Portfolio'
+        context['app_direct_link'] = reverse_lazy('portfolio:project_list')
         return context
 
 
@@ -33,6 +34,7 @@ class ProjectDetailView(DetailView):
         context['title'] = 'Project Detail'
         context['description'] = "Details of a Project"
         context['app_title'] = 'Portfolio'
+        context['app_direct_link'] = reverse_lazy('portfolio:project_list')
         context['side_title'] = 'Projects'
         return context
 
@@ -47,6 +49,7 @@ class ProjectCreateView(CreateView):
         context['title'] = 'Create Project'
         context['description'] = "Create a Project"
         context['app_title'] = 'Portfolio'
+        context['app_direct_link'] = reverse_lazy('portfolio:project_list')
         return context
 
 
@@ -60,6 +63,7 @@ class ProjectUpdateView(UpdateView):
         context['title'] = 'Update Project'
         context['description'] = "Update a Project"
         context['app_title'] = 'Portfolio'
+        context['app_direct_link'] = reverse_lazy('portfolio:project_list')
         return context
 
 
@@ -73,4 +77,5 @@ class ProjectDeleteView(DeleteView):
         context['title'] = 'Delete Project'
         context['description'] = "Delete a Project"
         context['app_title'] = 'Portfolio'
+        context['app_direct_link'] = reverse_lazy('portfolio:project_list')
         return context
