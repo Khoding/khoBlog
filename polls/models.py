@@ -8,11 +8,11 @@ from django.utils import timezone
 
 
 class Question(auto_prefetch.Model):
-    question_text = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.question_text
+        return self.title
 
     def was_published_recently(self):
         now = timezone.now()
@@ -30,8 +30,8 @@ class Question(auto_prefetch.Model):
 class Choice(auto_prefetch.Model):
     question = auto_prefetch.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="related_question")
-    choice_text = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.choice_text
+        return self.title

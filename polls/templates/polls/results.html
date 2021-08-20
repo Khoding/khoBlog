@@ -1,11 +1,11 @@
 {% extends 'polls/base_polls.html' %}
 
 {% block main %}
-    <h4>{{ question.question_text }}</h4>
+    <h4>{{ question.title }}</h4>
 
     <ul class="mb-2">
         {% for choice in question.related_question.all %}
-            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            <li>{{ choice.title }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
         {% endfor %}
     </ul>
 
