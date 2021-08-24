@@ -1,0 +1,30 @@
+{% extends 'sub_base_main.html' %}
+
+{% block main %}
+    <div id="comments" class="mb-2">
+        {% include 'blog/includes/post_comments_base.html' %}
+    </div>
+
+    {% block pagination %}
+        <nav class="blog-pagination">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-secondary" href="?page=1">&laquo; First</a>
+                        <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        <a class="btn btn-secondary"
+                        href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </nav>
+    {% endblock pagination %}
+{% endblock main %}
