@@ -8,12 +8,11 @@ from .models import Category, Comment, Post, PostContent, Series
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series',
+        fields = ('title', 'categories', 'tags', 'series', 'order_in_series',
                   'description', 'body', 'image', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
-            'featured_title': forms.TextInput(),
             'categories': forms.SelectMultiple(),
             'description': forms.Textarea(),
             'body': forms.Textarea(),
@@ -30,12 +29,11 @@ class PostEditForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series', 'description',
+        fields = ('title', 'categories', 'tags', 'series', 'order_in_series', 'description',
                   'body', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
-            'featured_title': forms.TextInput(),
             'categories': forms.SelectMultiple(),
             'description': forms.Textarea(),
             'body': forms.Textarea(),
