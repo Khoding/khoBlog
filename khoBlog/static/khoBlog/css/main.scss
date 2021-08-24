@@ -137,6 +137,18 @@ textarea {
     }
 }
 
+// .comments {
+//     & .comment-card .card::before,
+//     & #comments::before {
+//         display: block;
+//         content: ' ';
+//         margin-top: -56px;
+//         height: 56px;
+//         visibility: hidden;
+//         pointer-events: none;
+//     }
+// }
+
 .comment-card,
 .comment-reply {
     border-left: 4px solid !important;
@@ -355,6 +367,22 @@ aside p:last-child {
         border: 0;
         border-top: 1px solid hsla(0, 0%, 50%, 0.33);
         margin: 2em 0;
+    }
+
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        &::before {
+            display: block;
+            content: ' ';
+            margin-top: -56px;
+            height: 56px;
+            visibility: hidden;
+            pointer-events: none;
+        }
     }
 }
 
