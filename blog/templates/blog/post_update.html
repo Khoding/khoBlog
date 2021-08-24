@@ -139,6 +139,19 @@
                 </div>
 
                 <div class="field mb-2">
+                    {{ form.is_outdated.label_tag }}
+                    <div class="form-check">
+                        {{ form.is_outdated|add_class:"form-check-input" }}
+                    </div>
+                    {% if form.is_outdated.help_text %}
+                        <span class="text-small text-muted">{{ form.is_outdated.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.is_outdated.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
                     <div class="form-floating">
                         {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post featuring state" }}
                         {{ form.featuring_state.label_tag }}

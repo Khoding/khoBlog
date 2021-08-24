@@ -30,7 +30,7 @@ class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'categories', 'tags', 'series', 'order_in_series', 'description',
-                  'body', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language',)
+                  'body', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'published_date', 'url_to_article', 'url_to_article_title', 'language', 'is_outdated',)
 
         widgets = {
             'title': forms.TextInput(),
