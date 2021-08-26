@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block main %}
-    <div class="row row-cols-1 row-cols-lg-3">
+    <div class="row row-cols-1 row-cols-lg-3 me-0">
         {% for page in pages %}
-            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+            <div class="mb-2 pe-lg-0">
                 <div id="page-{{ page.slug }}" class="card shadow h-100">
                     {% if page.withdrawn %}
                         <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>

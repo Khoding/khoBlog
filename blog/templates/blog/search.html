@@ -2,12 +2,12 @@
 {% load instance %}
 
 {% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3">
+    <div class="row row-cols-1 row-cols-lg-3 me-0">
         {% if not filter %}
             {% for element in query %}
                 {% if query|isinstance:'list' %}
                     {% for e in element %}
-                        <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                        <div class="mb-2 pe-lg-0">
                             <div id="element-{{ e.slug }}" class="card shadow h-100">
                                 <div class="card-header">
                                     <div class="d-flex">
@@ -52,7 +52,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                    <div class="mb-2 pe-lg-0">
                         <div id="element-{{ element.slug }}" class="card shadow h-100">
                             <div class="card-header">
                                 <span class="d-flex">
@@ -81,7 +81,7 @@
             {% endfor %}
         {% else %}
             {% for element in filter.qs %}
-                <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+                <div class="mb-2 pe-lg-0">
                     <div id="element-{{ element.slug }}" class="card shadow h-100">
                         <div class="card-header">
                             <span class="d-flex">

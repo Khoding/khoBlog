@@ -2,9 +2,9 @@
 {% load static markdown_extra %}
 
 {% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3">
+    <div class="row row-cols-1 row-cols-lg-3 me-0">
         {% for cat in category_list %}
-            <div class="mb-2 {% cycle 'pe-lg-0' 'pe-lg-0' 'pe-kho-lg-12' %}">
+            <div class="mb-2 pe-lg-0">
                 <div id="category-{{ cat.slug }}" class="card shadow h-100">
 
                     <div class="card-header">
