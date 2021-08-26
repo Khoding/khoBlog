@@ -5,7 +5,7 @@
     <div class="row row-cols-1 row-cols-lg-3 me-0">
         {% for tag in tags %}
             {% if not tag.withdrawn or user.is_superuser %}
-                <div class="mb-2 pe-lg-0">
+                <div class="mb-2 pe-0">
                     <div id="tag-{{ tag.slug }}" class="card shadow h-100">
                         <div class="card-header">
                             <span class="d-flex">
