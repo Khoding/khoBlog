@@ -304,12 +304,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_featured_cat(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
             return post_cat
 
     @property
     def featured_cat_title(self):
-        for post_cat in PostCatsLink.objects.filter(post=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
             return post_cat.category
 
     def approved_comments(self):
