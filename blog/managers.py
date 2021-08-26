@@ -11,9 +11,9 @@ class PostQuerySet(auto_prefetch.QuerySet):
 
     def get_common_queryset(self, user):
         if user.is_superuser:
-            return self.filter(is_removed=False)
+            return self.defer('body', 'image').filter(is_removed=False)
         else:
-            return self.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+            return self.defer('body', 'image').filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def get_by_author(self, author_username):
         return self.filter(author__username=author_username)
