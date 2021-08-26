@@ -66,15 +66,15 @@
         {% endif %}
     </title>
 
-    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
 
     <script defer src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script defer src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
 
     {% compress js %}
-        <script defer src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
-        <script defer src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
+        <script async defer src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
+        <script async defer src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
     {% endcompress js %}
 
     {% block rel %}
@@ -83,12 +83,12 @@
 
         <!-- rel! Fonts / Icons -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="screen">
 
         {% compress css %}
             <!-- rel! Themes -->
-            <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}">
-            <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}">
+            <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
+            <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
         {% endcompress css %}
     {% endblock rel %}
 
