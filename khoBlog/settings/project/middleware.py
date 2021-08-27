@@ -2,7 +2,7 @@ from ..django import DEBUG
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'khoBlog.middleware.WwwRedirectMiddleware',
+    # 'khoBlog.middleware.WwwRedirectMiddleware',
 ]
 
 if not DEBUG:
