@@ -1,5 +1,5 @@
 {% extends "sub_base.html" %}
-{% load bootstrap5 account %}
+{% load bootstrap5 account socialaccount %}
 
 {% block page_top_end %}
     {% if user.is_superuser %}
@@ -45,7 +45,18 @@
                             {% endif %}
                         </small>
                     </h6>
-                    <p class="card-text">{{ object.bio }}</p>
+                    <div class="card-text">
+                        <p class="mb-0">{{ object.bio }}</p>
+                        {% get_social_accounts object as accounts %}
+
+                        {% if accounts.github and object.show_github %}
+                            <p class="mb-0">
+                                {% for github in accounts.github %}
+                                    Github: <a href="{{ github.extra_data.html_url }}">{{ github.extra_data.login }}</a>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

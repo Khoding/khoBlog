@@ -24,7 +24,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'bio', 'welcome_message', 'profile_pic',
-                  'slug', 'default_theme',)
+                  'slug', 'show_github', 'default_theme',)
 
         widgets = {
             'username': forms.TextInput(),

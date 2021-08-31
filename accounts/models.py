@@ -62,6 +62,8 @@ class CustomUser(AbstractUser):
     default_theme = models.CharField(
         max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default='default')
     roles = models.ManyToManyField(Role, blank=True, default="User")
+    show_github = models.BooleanField(
+        default=True, help_text="Show Github link on your profile page")
 
     def __str__(self):
         return self.username

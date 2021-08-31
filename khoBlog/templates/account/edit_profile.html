@@ -159,6 +159,19 @@
                             </div>
 
                             <div class="field mb-2">
+                                {{ form.show_github.label_tag }}
+                                <div class="form-check">
+                                    {{ form.show_github|add_class:"form-check-input" }}
+                                </div>
+                                {% if form.show_github.help_text %}
+                                    <span class="text-small text-muted">{{ form.show_github.help_text }}</span>
+                                {% endif %}
+                                {% for error in form.show_github.errors %}
+                                    <small class="form-text text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+
+                            <div class="field mb-2">
                                 <div class="form-floating">
                                     {{ form.default_theme|add_class:"form-select"|attr:"placeholder:Choose a theme" }}
                                     {{ form.default_theme.label_tag }}
