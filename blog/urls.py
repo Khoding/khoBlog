@@ -19,7 +19,7 @@ from .views import (AllSearchResultsListView, AllTagsListView,
                     RandomSearchResultsListView, RemovePostCommentUpdateView,
                     ReplyToCommentCreateView, SearchListView, SeriesCreateView,
                     SeriesListView, SeriesUpdateView, TagUpdateView,
-                    TagsSearchResultsListView)
+                    TagsSearchResultsListView, WeblogTemplateView)
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),
@@ -153,6 +153,7 @@ urlpatterns = [
     # Lists
     path('', PostListView.as_view(), name='post_list'),
     path('latest/', views.redirect_to_latest, name='latest'),
+    path('weblog/', WeblogTemplateView.as_view(), name='weblog'),
     path('drafts/', PostDraftListView.as_view(), name='post_draft_list'),
     path('scheduled/', PostScheduledListView.as_view(),
          name='post_scheduled_list'),

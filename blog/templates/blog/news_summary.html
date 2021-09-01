@@ -1,0 +1,31 @@
+<div class="card shadow mb-2">
+    {% if not hide_header %}
+        <div class="card-header">
+            <strong class="d-inline-block text-muted fst-italic">{{ show_reason|default:'Latest Post' }}</strong>
+        </div>
+    {% endif %}
+
+    <div class="card-body">
+        <{{ header_tag|default:'h2' }} class="card-title text-word-wrap mb-0">
+            {{ object.title|truncatewords_html:7 }}
+        </{{ header_tag|default:'h2' }}>
+
+        {% if summary_first %}
+            <p class="mb-0">{{ object.description|safe }}</p>
+        {% endif %}
+
+        <span class="text-small text-muted d-block">
+            Posted by <strong>{{ object.author }}</strong> on {{ object.published_date|date:"F j, Y" }}
+        </span>
+
+        {% if not summary_first %}
+            <p class="mb-0">{{ object.description|safe }}</p>
+        {% endif %}
+    </div>
+
+    {% if not hide_readmore %}
+        <div class="card-footer">
+            <a class="card-link" href="{{ object.get_absolute_url }}">Continue Reading</a>
+        </div>
+    {% endif %}
+</div>

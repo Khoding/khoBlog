@@ -22,7 +22,7 @@ class PostQuerySet(auto_prefetch.QuerySet):
         return self.filter(tags__name=tags_name)
 
     def get_by_clicks(self):
-        return self.order_by('clicks')
+        return self.order_by('-clicks')
 
 
 class PostManager(auto_prefetch.Manager):

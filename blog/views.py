@@ -1,23 +1,25 @@
-from blog.filters import PostFilter
+from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import (CreateView, DetailView, ListView,
-                                  UpdateView)
+                                  TemplateView, UpdateView)
 from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         DayArchiveView, MonthArchiveView,
                                         TodayArchiveView, WeekArchiveView,
                                         YearArchiveView)
 from rules.contrib.views import AutoPermissionRequiredMixin
-from custom_taggit.models import CustomTag
-from django.core.exceptions import PermissionDenied
 
-from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm, CategoryEditForm,
-                    CommentForm, EditPostCommentForm, PostCreateForm, PostDeleteForm,
-                    PostEditForm, SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
+from blog.filters import PostFilter
+
+from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm,
+                    CategoryEditForm, CommentForm, EditPostCommentForm,
+                    PostCreateForm, PostDeleteForm, PostEditForm,
+                    SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
 from .models import Category, Comment, Post, PostContent, Series
 
 
@@ -50,6 +52,15 @@ class PostListView(ListView):
             featuring_state="F").get_without_removed()
         context['featured_big'] = self.model.objects.filter(
             featuring_state="FB").get_without_removed()
+        return context
+
+
+class WeblogTemplateView(TemplateView):
+    template_name = 'blog/lists/weblog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Weblog'
         return context
 
 
