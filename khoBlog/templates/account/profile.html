@@ -46,17 +46,26 @@
                         </small>
                     </h6>
                     <div class="card-text">
-                        <p class="mb-0">{{ object.bio }}</p>
+                        <p>{{ object.bio }}</p>
                         {% get_social_accounts object as accounts %}
 
                         {% if accounts.github and object.show_github %}
-                            <div class="mb-0">
-                                {% for github in accounts.github %}
-                                    <p class="mb-0">Github: <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a></p>
-                                    <p class="mb-0"><a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a></p>
-                                    <p class="mb-0">{{ github.extra_data.bio }}</p>
-                                {% endfor %}
-                            </div>
+                            {% for github in accounts.github %}
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        Github
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-0">Github: <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a></p>
+                                        {% if github.extra_data.blog %}
+                                            <p class="mb-0">Blog: <a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a></p>
+                                        {% endif %}
+                                        {% if github.extra_data.bio %}
+                                            <p class="mb-0">Bio: {{ github.extra_data.bio }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                     </div>
                 </div>
