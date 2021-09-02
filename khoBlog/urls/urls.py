@@ -60,11 +60,11 @@ api_patterns_v2 = [
 ]
 
 api_base_patterns = [
+    path('read/', include('reading_apis_app.urls')),
     re_path(r'(?P<version>[old]+)/',
             include(api_patterns)),
     re_path(r'(?P<version>[v2|v3]+)/',
             include(api_patterns_v2)),
-    path('read/', include('reading_apis_app.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('token/', obtain_auth_token, name='obtain-token'),
 ]
