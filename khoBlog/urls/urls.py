@@ -36,11 +36,11 @@ admin.site.index_title = "Khodok's Blog Admin"
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",
-        default_version='v1',
-        description="Test description",
+        default_version='v3',
+        description="API v3",
     ),
     public=False,
-    permission_classes=(permissions.IsAdminUser,),
+    permission_classes=(permissions.DjangoModelPermissionsOrAnonReadOnly,),
 )
 
 site_map_info_dict = {
