@@ -50,11 +50,13 @@
                         {% get_social_accounts object as accounts %}
 
                         {% if accounts.github and object.show_github %}
-                            <p class="mb-0">
+                            <div class="mb-0">
                                 {% for github in accounts.github %}
-                                    Github: <a href="{{ github.extra_data.html_url }}">{{ github.extra_data.login }}</a>
+                                    <p class="mb-0">Github: <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a></p>
+                                    <p class="mb-0"><a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a></p>
+                                    <p class="mb-0">{{ github.extra_data.bio }}</p>
                                 {% endfor %}
-                            </p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
