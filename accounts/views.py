@@ -1,16 +1,18 @@
+from allauth.account.views import (PasswordChangeView, PasswordResetDoneView,
+                                   PasswordResetFromKeyDoneView,
+                                   PasswordResetFromKeyView, PasswordResetView,
+                                   PasswordSetView, SignupView)
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 from blog.models import Comment
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
 
-class SignUpView(CreateView):
+class SignUpView(SignupView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('account_login')
     template_name = 'account/signup.html'
@@ -46,12 +48,10 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return context
 
 
-class UserEditView(UpdateView):
+class UserEditView(LoginRequiredMixin, UpdateView):
     form_class = CustomUserChangeForm
     template_name = 'account/edit_profile.html'
-
-    def get_queryset(self):
-        return CustomUser.objects.all()
+    model = CustomUser
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,13 +59,21 @@ class UserEditView(UpdateView):
         return context
 
 
-class PasswordsChangeView(PasswordChangeView):
-    form_class = PasswordChangeForm
-    template_name = 'account/change_password.html'
+class CustomPasswordSetView(LoginRequiredMixin, PasswordSetView):
+    template_name = 'account/password_set.html'
     success_url = reverse_lazy('account_login')
+    model = CustomUser
 
-    def get_queryset(self):
-        return CustomUser.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Set Password'
+        return context
+
+
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'account/password_change.html'
+    success_url = reverse_lazy('account_login')
+    model = CustomUser
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,9 +81,38 @@ class PasswordsChangeView(PasswordChangeView):
         return context
 
 
-class ConnectionsEditView(ConnectionsView):
+class CustomPasswordResetView(PasswordResetView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Reset Password'
+        return context
+
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Password requested'
+        return context
+
+
+class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Set a new password'
+        return context
+
+
+class CustomPasswordResetFromKeyDoneView(PasswordResetFromKeyDoneView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'New password set'
+        return context
+
+
+class ConnectionsEditView(LoginRequiredMixin, ConnectionsView):
     form_class = DisconnectForm
     template_name = 'account/connections.html'
+    model = CustomUser
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

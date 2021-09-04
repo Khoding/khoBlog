@@ -13,6 +13,7 @@
         </form>
     </div>
     <div class="card-footer">
-        <p>Don't have an account? <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Sign up</a></p>
+        <p class="mb-0">Don't have an account ? <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Sign up</a></p>
+        <p class="mb-0">Forgot your password ? <a href="{% url 'accounts:reset_password' %}">Request a new one</a></p>
     </div>
 </div>

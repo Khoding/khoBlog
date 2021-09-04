@@ -15,7 +15,7 @@
     @include color('text');
 }
 
-.form .mb-3 .form-label[for='id_honeypot'],
+.form .form-label[for='id_honeypot'],
 #id_honeypot {
     display: none;
 }

@@ -116,12 +116,12 @@
         {% endif %}
     {% endif %}
 
-    {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
+    {% if object.id == user.id and view_as == "self" %}
         <hr />
 
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:edit_password' slug=object.slug %}">Modify Password</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:edit_connections' slug=object.slug %}">Edit Connections</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:edit_connections' %}">Edit Connections</a></p>
     {% endif %}
 
     {% if object.id == user.id and view_as == "self" %}

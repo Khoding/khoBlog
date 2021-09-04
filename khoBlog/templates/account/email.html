@@ -44,13 +44,14 @@
     {% endif %}
 
     {% if can_add_email %}
+        <hr />
         <h3>{% trans "Add E-mail Address" %}</h3>
 
         <form method="post" action="{% url 'account_email' %}" class="form add_email">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
-                <button type="submit" class="btn btn-primary mt-2">{% trans "Add E-mail" %}</button>
+                <button type="submit" class="btn btn-primary">{% trans "Add E-mail" %}</button>
             {% endbuttons %}
         </form>
     {% endif %}
