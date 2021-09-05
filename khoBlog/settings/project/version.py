@@ -8,7 +8,13 @@ minor = int(APP_VERSION_NUMBER.split('.')[1])
 patch = int(APP_VERSION_NUMBER.split('.')[2])
 build = APP_VERSION_NUMBER.split('.')[3]
 
-version_code = f"{major * 10000 + minor * 1000 + patch * 100}{build}"
+if isinstance(build, str):
+    ver_code = f"{major * 10000 + minor * 1000 + patch * 100}{build}"
+else:
+    ver_code = f"{major * 10000 + minor * 1000 + patch * 100 + build}"
+
+
+version_code = ver_code
 version_name = f"{major}.{minor}.{patch}-{build}"
 
 __version__ = version_name
