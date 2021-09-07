@@ -85,6 +85,7 @@ urlpatterns = [
     # Django Admin
     path('admin/docs/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
+    path('baton/', include('baton.urls')),
 
     # User Management
     path('accounts/', include('accounts.urls')),

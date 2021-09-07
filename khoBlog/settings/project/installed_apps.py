@@ -1,5 +1,6 @@
 # Application definition
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -65,4 +66,5 @@ INSTALLED_APPS = [
     'shortener',
     'links',
     'reading_apis_app',
+    'baton.autodiscover',
 ]
