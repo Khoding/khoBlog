@@ -10,7 +10,7 @@ If you want to use it for yourself:
 7. `python manage.py createsuperuser`.
 8. `cd khoBlog/static/vendor`.
 9. `npm install`.
-10. Generate the CSS with the CSS (Either use the sass CLI or Watch SASS 2.0 on VSCode, you can also use whatever else Editor integrated SASS Generator you have, just make sure that it's not using Ruby Sass because it breaks).
+10. Generate the CSS from the SCSS (Either use the sass CLI or Watch SASS 2.0 on VSCode, you can also use whatever else Editor integrated SASS Generator you have, just make sure that it's not using Ruby Sass because it breaks).
 11. You'll then have to either have already set up an email verification in `.env` or change the value manually in phpmyadmin or whatever you use to see your database.
 12. And I believe I'm not missing anything, if it crashes, check Django's Documentation, btw you're expected to know how to use Django and Python before using this for yourself, I will not debug your issues, so feel free to not ask me for help unless you're absolutely certain the problem comes from me (which would probably mean that my website is down while you're trying).
 13. Also please Idc if you use it fully in production but gimme credits and don't just copy my content, and I'm not responsible of any problems you encounter.
