@@ -1,7 +1,7 @@
-from blog.views import CategoryDeleteView, SeriesDeleteView
 from django.urls import path
 from django.urls.conf import include
 
+from blog.views import CategoryDeleteView, SeriesDeleteView
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (AllSearchResultsListView, AllTagsListView,
@@ -47,7 +47,6 @@ series_action_extra_patterns = [
          SeriesUpdateView.as_view(), name='series_edit'),
     path('delete/', SeriesDeleteView.as_view(), name='series_remove'),
 ]
-
 
 tags_action_extra_patterns = [
     path('', PostWithTagListView.as_view(), name='post_tagged_with'),

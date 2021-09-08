@@ -2,7 +2,9 @@ from django.conf.urls import include
 from django.urls import path
 from django.urls.conf import re_path
 
-from .views import (ConnectionsEditView, CustomPasswordChangeView, CustomPasswordResetDoneView, CustomPasswordResetFromKeyDoneView, CustomPasswordResetFromKeyView, CustomPasswordResetView, CustomPasswordSetView, ProfileView,
+from .views import (ConnectionsEditView, CustomPasswordChangeView, CustomPasswordResetDoneView,
+                    CustomPasswordResetFromKeyDoneView, CustomPasswordResetFromKeyView, CustomPasswordResetView,
+                    CustomPasswordSetView, ProfileView,
                     SignUpView, UserEditView)
 
 app_name = "accounts"

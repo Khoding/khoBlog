@@ -9,8 +9,7 @@ from .serializers import ResourceSerializer
 
 
 class TestView(APIView):
-
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
         qs = Resource.objects.all()
@@ -35,7 +34,7 @@ class ResourceViewSet(viewsets.ModelViewSet):
 class ResourceCreateView(generics.CreateAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)
 
 
 class ResourceDetailView(generics.RetrieveAPIView):
@@ -47,10 +46,10 @@ class ResourceDetailView(generics.RetrieveAPIView):
 class ResourceUpdateView(generics.UpdateAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)
 
 
 class ResourceDeleteView(generics.DestroyAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)

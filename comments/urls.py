@@ -1,6 +1,7 @@
-from comments.views import CommentListView, CommentUpdateView
 from django.urls import path
 from django_comments.feeds import LatestCommentFeed
+
+from comments.views import CommentListView, CommentUpdateView
 
 app_name = 'comments'
 urlpatterns = [

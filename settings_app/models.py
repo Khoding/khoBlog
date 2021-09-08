@@ -65,7 +65,8 @@ class LinksSideMenu(auto_prefetch.Model):
     visibility = models.CharField(
         max_length=25, verbose_name="Visibility", choices=VISIBILITY_CHOICES, default='D')
     group = auto_prefetch.ForeignKey(
-        'settings_app.LinksGroupSideMenu', on_delete=models.CASCADE, related_name='side_menu_links_group', blank=True, null=True)
+        'settings_app.LinksGroupSideMenu', on_delete=models.CASCADE, related_name='side_menu_links_group', blank=True,
+        null=True)
     link_css_classes = models.CharField(
         max_length=25, verbose_name="Classes", choices=CLASSES_CHOICES, default='PRI')
     is_target_blank = models.BooleanField(default=False)
@@ -116,7 +117,8 @@ class SpecificDateMessage(auto_prefetch.Model):
     showing_rule = models.CharField(
         max_length=25, verbose_name="Showing Rules", choices=SHOWING_RULE_CHOICES, default='D')
     side_menu = auto_prefetch.ForeignKey(
-        'settings_app.SideMenu', on_delete=models.CASCADE, blank=True, null=True, related_name='side_menu_specific_date_messages')
+        'settings_app.SideMenu', on_delete=models.CASCADE, blank=True, null=True,
+        related_name='side_menu_specific_date_messages')
     is_recurrent = models.BooleanField(default=True)
     link = models.URLField(blank=True)
 

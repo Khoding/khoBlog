@@ -1,4 +1,5 @@
 from django import template
+
 from settings_app.models import SideMenu
 
 register = template.Library()

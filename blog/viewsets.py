@@ -1,10 +1,9 @@
+from django.utils import timezone
 from rest_framework import viewsets
-from .serializers import PostSerializer, PostSerializerDetailV3, PostSerializerV3
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 from .models import Post
-
-from django.utils import timezone
+from .serializers import PostSerializer, PostSerializerDetailV3, PostSerializerV3
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -23,4 +22,5 @@ class PostViewSet(viewsets.ModelViewSet):
                 return PostSerializerV3
             else:
                 return PostSerializerDetailV3
+
     lookup_field = 'slug'

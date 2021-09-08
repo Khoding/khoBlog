@@ -3,11 +3,11 @@ from allauth.account.views import (PasswordChangeView, PasswordResetDoneView,
                                    PasswordResetFromKeyView, PasswordResetView,
                                    PasswordSetView, SignupView)
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
-from blog.models import Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
+from blog.models import Comment
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
@@ -29,7 +29,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
     view_as = 'self'
 
     def get(self, request, *args, **kwargs):
-        if request.GET.get("view_as") is None or request.GET.get("view_as") == "" or request.GET.get("view_as") == "self":
+        if request.GET.get("view_as") is None or request.GET.get("view_as") == "" or request.GET.get(
+                "view_as") == "self":
             self.view_as = 'self'
         else:
             self.view_as = 'guest'
@@ -38,7 +39,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Profile • ' + \
-            str(self.model.objects.get(username=kwargs['object']))
+                           str(self.model.objects.get(username=kwargs['object']))
         context['description'] = str(
             self.model.objects.get(username=kwargs['object']).bio)
         context['users'] = CustomUser.objects.all()

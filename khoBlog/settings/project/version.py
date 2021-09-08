@@ -13,7 +13,6 @@ if isinstance(build, str):
 else:
     ver_code = f"{major * 10000 + minor * 1000 + patch * 100 + build}"
 
-
 version_code = ver_code
 version_name = f"{major}.{minor}.{patch}-{build}"
 

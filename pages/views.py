@@ -4,7 +4,6 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from pages.forms import PageAddForm, PageEditForm
-
 from .models import Page
 
 

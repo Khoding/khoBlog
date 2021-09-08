@@ -3,7 +3,6 @@ import itertools
 
 import auto_prefetch
 import rules
-from custom_taggit.models import CustomTaggedItem
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -18,6 +17,7 @@ from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
+from custom_taggit.models import CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -70,7 +70,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False, post__is_removed=False).count()
+        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False,
+                                            post__is_removed=False).count()
 
     @property
     def get_superuser_post_count_in_category(self):
@@ -180,7 +181,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         'blog.Category', through='PostCatsLink', help_text="Post categories")
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
     series = auto_prefetch.ForeignKey(
-        'blog.Series', on_delete=models.CASCADE, related_name="post_series",  help_text="Post series", blank=True, null=True)
+        'blog.Series', on_delete=models.CASCADE, related_name="post_series", help_text="Post series", blank=True,
+        null=True)
     order_in_series = models.PositiveIntegerField(
         default=0, help_text="Post order in its series")
     created_date = models.DateTimeField(
@@ -190,13 +192,15 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     published_date = models.DateTimeField(
         blank=True, null=True, help_text="Publication date")
     publication_state = models.CharField(
-        max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D', help_text="Post publication state")
+        max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D',
+        help_text="Post publication state")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Post withdrawn")
     featuring_state = models.CharField(
         max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default='N', help_text="Featuring state")
     language = models.CharField(
-        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN', help_text="What's the main language")
+        max_length=25, verbose_name="Language", choices=LANGUAGE_CHOICES, default='EN',
+        help_text="What's the main language")
     is_outdated = models.BooleanField(
         default=False, help_text="Is Post content's outdated")
     url_to_article = models.URLField(
@@ -274,6 +278,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         Return True if the event is publicly accessible.
         """
         return self.published_date <= timezone.now() and not self.withdrawn and not self.is_removed
+
     is_published.boolean = True
 
     def publish(self):
@@ -311,12 +316,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_featured_cat(self):
-        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False,
+                                                    featured_cat=True).select_related('post', 'category'):
             return post_cat
 
     @property
     def featured_cat_title(self):
-        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False, featured_cat=True).select_related('post', 'category'):
+        for post_cat in PostCatsLink.objects.filter(post_id=self.pk, category__is_removed=False,
+                                                    featured_cat=True).select_related('post', 'category'):
             return post_cat.category
 
     def approved_comments(self):
@@ -370,7 +377,8 @@ class Comment(auto_prefetch.Model):
         ),
     )
     author_logged = auto_prefetch.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged", help_text="Comment author (a user with account)")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="comment_author_logged",
+        help_text="Comment author (a user with account)")
     title = models.CharField(
         max_length=200, default='', blank=True, help_text='Comment title'
     )
@@ -381,7 +389,8 @@ class Comment(auto_prefetch.Model):
     modified_date = models.DateTimeField(
         auto_now=True, help_text="Last modification")
     approbation_state = models.CharField(
-        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP', help_text="Comment approbation state")
+        max_length=25, verbose_name="Approbation", choices=APPROBATION_CHOICES, default='AP',
+        help_text="Comment approbation state")
     comment_answer = auto_prefetch.ForeignKey(
         'blog.Comment', on_delete=models.CASCADE, related_name='related_comment', null=True, blank=True)
     history = HistoricalRecords()

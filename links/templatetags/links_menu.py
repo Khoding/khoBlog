@@ -1,4 +1,5 @@
 from django import template
+
 from links.models import Links
 
 register = template.Library()

@@ -1,7 +1,7 @@
-from learning_resources.views import ResourceViewSet
 from django.urls.conf import include, path
 from rest_framework import routers
 
+from learning_resources.views import ResourceViewSet
 from .viewsets import PostViewSet
 
 router = routers.DefaultRouter()

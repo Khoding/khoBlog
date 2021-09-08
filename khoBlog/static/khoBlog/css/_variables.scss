@@ -2,76 +2,76 @@
 
 // Color themes
 $themes: (
-    'default': (
-        'text': hsl(0, 0%, 100%),
-        'bg': hsl(0, 0%, 13%),
-        'darker-bg': darken(hsl(0, 0%, 13%), 1%),
-        'link': hsl(0, 100%, 62%),
-        'menu-link': hsl(0, 0%, 64%),
-        'border-color': hsl(180, 2%, 56%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'banana': (
-        'text': hsl(0, 91%, 70%),
-        'bg': hsl(48, 74%, 54%),
-        'darker-bg': darken(hsl(48, 74%, 54%), 1%),
-        'link': hsl(240, 100%, 50%),
-        'menu-link': hsl(208, 7%, 46%),
-        'border-color': hsl(46, 59%, 44%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'uglybanana': (
-        'text': hsl(0, 0%, 100%),
-        'bg': hsl(48, 89%, 50%),
-        'darker-bg': darken(hsl(48, 89%, 50%), 1%),
-        'link': hsl(240, 100%, 50%),
-        'menu-link': hsl(208, 7%, 46%),
-        'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'cherry': (
-        'text': hsl(0, 100%, 77%),
-        'bg': hsl(6, 63%, 46%),
-        'darker-bg': darken(hsl(6, 63%, 46%), 1%),
-        'link': hsl(330, 100%, 65%),
-        'menu-link': hsl(342, 74%, 70%),
-        'border-color': hsl(6, 78%, 55%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'sop': (
-        'text': hsl(271, 100%, 69%),
-        'bg': hsl(240, 35%, 18%),
-        'darker-bg': darken(hsl(240, 35%, 18%), 1%),
-        'link': hsl(50, 100%, 49%),
-        'menu-link': hsl(218, 15%, 71%),
-        'border-color': hsl(249, 66%, 76%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'leaf': (
-        'text': hsl(0, 0%, 100%),
-        'bg': hsl(145, 63%, 42%),
-        'darker-bg': darken(hsl(145, 63%, 42%), 1%),
-        'link': hsl(240, 100%, 50%),
-        'menu-link': hsl(208, 7%, 46%),
-        'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    ),
-    'nightsky': (
-        'text': hsl(0, 0%, 100%),
-        'bg': hsl(204, 64%, 44%),
-        'darker-bg': darken(hsl(204, 64%, 44%), 1%),
-        'link': hsl(240, 100%, 50%),
-        'menu-link': hsl(208, 7%, 46%),
-        'border-color': hsl(249, 65%, 76%),
-        'side-link': hsl(250, 42%, 66%),
-        'active-color': white
-    )
+        'default': (
+                'text': hsl(0, 0%, 100%),
+                'bg': hsl(0, 0%, 13%),
+                'darker-bg': darken(hsl(0, 0%, 13%), 1%),
+                'link': hsl(0, 100%, 62%),
+                'menu-link': hsl(0, 0%, 64%),
+                'border-color': hsl(180, 2%, 56%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'banana': (
+                'text': hsl(0, 91%, 70%),
+                'bg': hsl(48, 74%, 54%),
+                'darker-bg': darken(hsl(48, 74%, 54%), 1%),
+                'link': hsl(240, 100%, 50%),
+                'menu-link': hsl(208, 7%, 46%),
+                'border-color': hsl(46, 59%, 44%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'uglybanana': (
+                'text': hsl(0, 0%, 100%),
+                'bg': hsl(48, 89%, 50%),
+                'darker-bg': darken(hsl(48, 89%, 50%), 1%),
+                'link': hsl(240, 100%, 50%),
+                'menu-link': hsl(208, 7%, 46%),
+                'border-color': hsl(249, 65%, 76%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'cherry': (
+                'text': hsl(0, 100%, 77%),
+                'bg': hsl(6, 63%, 46%),
+                'darker-bg': darken(hsl(6, 63%, 46%), 1%),
+                'link': hsl(330, 100%, 65%),
+                'menu-link': hsl(342, 74%, 70%),
+                'border-color': hsl(6, 78%, 55%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'sop': (
+                'text': hsl(271, 100%, 69%),
+                'bg': hsl(240, 35%, 18%),
+                'darker-bg': darken(hsl(240, 35%, 18%), 1%),
+                'link': hsl(50, 100%, 49%),
+                'menu-link': hsl(218, 15%, 71%),
+                'border-color': hsl(249, 66%, 76%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'leaf': (
+                'text': hsl(0, 0%, 100%),
+                'bg': hsl(145, 63%, 42%),
+                'darker-bg': darken(hsl(145, 63%, 42%), 1%),
+                'link': hsl(240, 100%, 50%),
+                'menu-link': hsl(208, 7%, 46%),
+                'border-color': hsl(249, 65%, 76%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        ),
+        'nightsky': (
+                'text': hsl(0, 0%, 100%),
+                'bg': hsl(204, 64%, 44%),
+                'darker-bg': darken(hsl(204, 64%, 44%), 1%),
+                'link': hsl(240, 100%, 50%),
+                'menu-link': hsl(208, 7%, 46%),
+                'border-color': hsl(249, 65%, 76%),
+                'side-link': hsl(250, 42%, 66%),
+                'active-color': white
+        )
 );
 
 // // $themes: (
@@ -156,43 +156,43 @@ $themes: (
 // // }
 
 $colors: (
-    primary: hsl(250, 42%, 46%),
-    secondary: hsl(204, 4%, 28%),
-    danger: hsl(10, 98%, 48%),
-    success: hsl(130, 89%, 52%),
-    warning: hsl(10, 100%, 60%),
-    info: hsl(250, 43%, 70%),
-    dark: hsl(0, 0%, 13%)
+        primary: hsl(250, 42%, 46%),
+        secondary: hsl(204, 4%, 28%),
+        danger: hsl(10, 98%, 48%),
+        success: hsl(130, 89%, 52%),
+        warning: hsl(10, 100%, 60%),
+        info: hsl(250, 43%, 70%),
+        dark: hsl(0, 0%, 13%)
 );
 
 $variations: (
-    'd2': (
-        function: get-function(darken),
-        parameters: 15%
-    ),
-    'd1': (
-        function: get-function(darken),
-        parameters: 10%
-    ),
-    'l1': (
-        function: get-function(lighten),
-        parameters: 5%
-    ),
-    'l2': (
-        function: get-function(lighten),
-        parameters: 20%
-    ),
-    'fade': (
-        function: get-function(rgba),
-        parameters: 0.7
-    ),
-    'gray': (
-        function: get-function(grayscale)
-    ),
-    'shade': (
-        function: get-function(mix),
-        parameters: hsl(0, 0%, 100%) 80%
-    )
+        'd2': (
+                function: get-function(darken),
+                parameters: 15%
+        ),
+        'd1': (
+                function: get-function(darken),
+                parameters: 10%
+        ),
+        'l1': (
+                function: get-function(lighten),
+                parameters: 5%
+        ),
+        'l2': (
+                function: get-function(lighten),
+                parameters: 20%
+        ),
+        'fade': (
+                function: get-function(rgba),
+                parameters: 0.7
+        ),
+        'gray': (
+                function: get-function(grayscale)
+        ),
+        'shade': (
+                function: get-function(mix),
+                parameters: hsl(0, 0%, 100%) 80%
+        )
 );
 
 @function color-variation($color, $variation: false) {
@@ -235,15 +235,15 @@ $white: hsl(0, 0%, 100%);
 $black: hsl(0, 0%, 0%);
 
 $black-white: (
-    'white': $white,
-    'black': $black
+        'white': $white,
+        'black': $black
 );
 
 $enable-grid-classes: true;
 $enable-cssgrid: false;
 
 $sans-serif: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
 $headings: 'Merriweather', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 $body: 'Roboto', 'Helvetica', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 $monospace: 'Overpass Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;

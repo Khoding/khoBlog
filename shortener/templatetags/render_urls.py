@@ -1,4 +1,5 @@
 from django import template
+
 from shortener.models import URL
 
 register = template.Library()

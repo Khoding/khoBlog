@@ -15,7 +15,7 @@ class FlatPageAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('title', 'page_head',
-                           'content', 'description', 'sites', 'created_date',  'slug',)}),
+                           'content', 'description', 'sites', 'created_date', 'slug',)}),
         (('Advanced options'), {
             'classes': ('collapse',),
             'fields': ('registration_required', 'template_name'),
@@ -33,7 +33,7 @@ class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
 
     fieldsets = (
         (None, {'fields': ('title', 'page_head',
-                           'content', 'description', 'sites', 'created_date',  'slug',)}),
+                           'content', 'description', 'sites', 'created_date', 'slug',)}),
         (('Advanced options'), {
             'classes': ('collapse',),
             'fields': ('registration_required', 'template_name'),

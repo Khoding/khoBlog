@@ -6,7 +6,8 @@ register = template.Library()
 
 
 @register.inclusion_tag('blog/entry_snippet.html')
-def render_latest_blog_entries(num, summary_first=False, hide_readmore=False, hide_header=False, show_reason='', header_tag=''):
+def render_latest_blog_entries(num, summary_first=False, hide_readmore=False, hide_header=False, show_reason='',
+                               header_tag=''):
     entries = Post.objects.get_base_common_queryset()[:num]
     return {
         'entries': entries,

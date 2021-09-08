@@ -4,7 +4,6 @@ from django.utils.translation import ngettext
 from django_comments.admin import CommentsAdmin
 
 from comments.forms import AdminForm
-
 from .models import CustomComment
 
 

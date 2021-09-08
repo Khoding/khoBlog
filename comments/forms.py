@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.models import ModelForm
 from django_comments.forms import CommentForm
+
 from .models import CustomComment
 
 
@@ -9,7 +10,7 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
         full_t = ''
         if obj.content_object:
             full_t = full_t + str(obj.content_type.model) + \
-                ' - ' + str(obj.content_object.title) + ' - '
+                     ' - ' + str(obj.content_object.title) + ' - '
         elif obj.title:
             full_t = obj.title + ' - '
         full_t = full_t + str(obj.comment)[:50]
@@ -18,8 +19,10 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
 
 class CustomCommentForm(CommentForm):
     title = forms.CharField(max_length=200)
-    alias_user = forms.CharField(max_length=200, required=False, help_text="You can add an Alias Name to your comment if you wish to be "
-                                 'incognito (note that Moderators can still know it\'s you)', label="Alias Name")
+    alias_user = forms.CharField(max_length=200, required=False,
+                                 help_text="You can add an Alias Name to your comment if you wish to be "
+                                           'incognito (note that Moderators can still know it\'s you)',
+                                 label="Alias Name")
 
     class Meta:
         field = ('title', 'alias_user',)

@@ -256,6 +256,7 @@ aside p:last-child {
 .markdownx-preview,
 .card-body .card-text {
     font-variant-ligatures: common-ligatures;
+
     & ol,
     ul {
         padding: 0 32px;
@@ -447,6 +448,7 @@ aside p:last-child {
         padding-bottom: 0.1em;
         font-size: initial;
     }
+
     &.block:before,
     &.block:after {
         content: '';

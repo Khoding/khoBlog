@@ -1,5 +1,5 @@
 function i() {
-    this.D = function() {
+    this.D = function () {
         const t = h.atan(this.i / this.d);
         l.save(),
             l.translate(this.b, this.a),
@@ -9,6 +9,7 @@ function i() {
             l.restore();
     };
 }
+
 window;
 const h = Math,
     r = h.random,
@@ -25,9 +26,9 @@ const h = Math,
             (t.j = h.sqrt(t.i * t.i + t.f)),
             (t.a += t.d * i),
             (t.b += t.i * i),
-            t.a > w && (t.a = -u),
-            t.b > b && (t.b = -u),
-            t.b < -u && (t.b = b),
+        t.a > w && (t.a = -u),
+        t.b > b && (t.b = -u),
+        t.b < -u && (t.b = b),
             t.D();
     }
 }),
@@ -37,35 +38,45 @@ const h = Math,
     (n = t => {
         (c.width = _ = innerWidth), (c.height = f = innerHeight), (w = f + u), (b = _ + u), s();
     });
+
 class d {
     constructor(t, e = !0) {
         (this._ts = o()), (this._p = !0), (this._pa = o()), (this.d = t), e && this.s();
     }
+
     get et() {
         return this.ip ? this._pa - this._ts : o() - this._ts;
     }
+
     get rt() {
         return h.max(0, this.d - this.et);
     }
+
     get ip() {
         return this._p;
     }
+
     get ic() {
         return this.et >= this.d;
     }
+
     s() {
         return (this._ts = o() - this.et), (this._p = !1), this;
     }
+
     r() {
         return (this._pa = this._ts = o()), this;
     }
+
     p() {
         return (this._p = !0), (this._pa = o()), this;
     }
+
     st() {
         return (this._p = !0), this;
     }
 }
+
 const c = a.createElement('canvas');
 (H = c.style),
     (H.position = 'fixed'),

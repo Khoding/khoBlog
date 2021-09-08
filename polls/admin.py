@@ -10,9 +10,9 @@ class ChoiceInline(admin.TabularInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['title']}),
+        (None, {'fields': ['title']}),
         ('Date information', {'fields': [
-         'pub_date'], 'classes': ['collapse']}),
+            'pub_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]
     list_display = ('title', 'pub_date', 'was_published_recently')

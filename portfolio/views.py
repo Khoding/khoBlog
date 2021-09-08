@@ -3,7 +3,6 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from portfolio.forms import ProjectAddForm, ProjectUpdateForm
-
 from .models import Project
 
 

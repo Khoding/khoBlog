@@ -11,7 +11,6 @@ from .models import Category, Post, PostCatsLink, PostContent, Series
 
 
 class PostResource(resources.ModelResource):
-
     class Meta:
         model = Post
 
@@ -129,8 +128,9 @@ class PostContentInline(admin.TabularInline):
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     resource_class = PostResource
     list_display = ('pk', 'title', 'created_date', 'published_date',
-                    'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language', 'is_removed',)
-    list_display_links = ('pk', 'title', )
+                    'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language',
+                    'is_removed',)
+    list_display_links = ('pk', 'title',)
     list_editable = ('is_removed',)
     ordering = ('-pk', 'title', '-published_date', '-is_removed',)
     search_fields = ('title', 'slug',
@@ -144,11 +144,11 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         (None, {'fields': ('title',
                            'description', 'author', 'slug', 'body', 'tags',)}),
         (('States'), {
-         'fields': ('withdrawn', 'is_removed', 'publication_state', 'featuring_state', 'language',)}),
+            'fields': ('withdrawn', 'is_removed', 'publication_state', 'featuring_state', 'language',)}),
         (('Post Type'), {
-         'fields': ('image', 'url_to_article', 'url_to_article_title',)}),
+            'fields': ('image', 'url_to_article', 'url_to_article_title',)}),
         (('Dates'), {
-         'fields': ('created_date', 'published_date',)}),
+            'fields': ('created_date', 'published_date',)}),
     )
 
     inlines = [PostContentInline, PostCatsLinkInline]
@@ -184,7 +184,7 @@ class SeriesAdmin(SimpleHistoryAdmin):
     ordering = ('-pk', 'title', '-is_removed',)
     search_fields = ('title', 'slug', 'pk', 'withdrawn')
     prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('withdrawn', 'is_removed', )
+    list_filter = ('withdrawn', 'is_removed',)
 
 
 admin.site.register(Post, PostAdmin)

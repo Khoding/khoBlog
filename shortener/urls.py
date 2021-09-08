@@ -1,7 +1,7 @@
-from shortener.views import short_redirect
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
+from shortener.views import short_redirect
 from .views import PrivateGraphQLView
 
 app_name = 'shortener'

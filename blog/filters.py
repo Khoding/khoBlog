@@ -1,8 +1,9 @@
+import django_filters
 from django.db.models.query_utils import Q
 from django.utils import timezone
-from .models import Category, Post
+
 from custom_taggit.models import CustomTag
-import django_filters
+from .models import Category, Post
 
 
 class PostFilter(django_filters.FilterSet):
@@ -20,7 +21,7 @@ class PostFilter(django_filters.FilterSet):
         fields = ['id', 'title', 'description', 'body',
                   'slug', 'language', 'categories', 'tags', ]
 
-    @ property
+    @property
     def qs(self):
         parent = super().qs
         return parent.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))

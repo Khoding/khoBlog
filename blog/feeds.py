@@ -48,7 +48,8 @@ class LatestPostsFeedByCategory(Feed):
         return obj.description
 
     def items(self, obj):
-        return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), withdrawn=False, is_removed=False).order_by(
+        return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), withdrawn=False,
+                                   is_removed=False).order_by(
             '-published_date')
 
     def item_description(self, item):

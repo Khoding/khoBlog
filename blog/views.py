@@ -1,4 +1,3 @@
-from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -15,7 +14,7 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
-
+from custom_taggit.models import CustomTag
 from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm,
                     CategoryEditForm, CommentForm, EditPostCommentForm,
                     PostCreateForm, PostDeleteForm, PostEditForm,
@@ -100,7 +99,8 @@ class PostInSeriesListView(ListView):
     def get_queryset(self):
         self.series = get_object_or_404(
             Series, slug=self.kwargs['slug'])
-        return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by('order_in_series')
+        return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by(
+            'order_in_series')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -187,7 +187,7 @@ class PostDetailView(DetailView):
         context['description'] = self.description
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
-            :5]
+                                               :5]
         context['comment_next'] = self.post.get_absolute_url()
         return context
 
@@ -512,8 +512,10 @@ class SearchListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', }, {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', },
-                  {'id': 3, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', }, {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
+        query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', },
+                  {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', },
+                  {'id': 3, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', },
+                  {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
         return query
 
     def get_context_data(self, **kwargs):
@@ -528,6 +530,7 @@ class PostSearchResultsListView(ListView):
     model = Post
     template_name = 'blog/search.html'
     context_object_name = 'filter'
+
     # paginate_by = 21
     # paginate_orphans = 5
 
@@ -571,7 +574,7 @@ class CategorySearchResultsListView(ListView):
                 return category
             else:
                 category = self.model.objects.filter(
-                    ~Q(withdrawn=True),).get_without_removed()
+                    ~Q(withdrawn=True), ).get_without_removed()
                 return category
 
     def get_context_data(self, **kwargs):
@@ -675,9 +678,9 @@ class AllSearchResultsListView(ListView):
                 return [post, category, tag]
             else:
                 post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
-                    published_date__isnull=True), ~Q(withdrawn=True),).get_without_removed()
+                    published_date__isnull=True), ~Q(withdrawn=True), ).get_without_removed()
                 category = Category.objects.filter(
-                    ~Q(withdrawn=True),).get_without_removed()
+                    ~Q(withdrawn=True), ).get_without_removed()
                 tag = CustomTag.objects.all()
                 return [post, category, tag]
 
@@ -862,8 +865,8 @@ class PostMonthArchiveView(MonthArchiveView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = '[Archive] Posted during ' + \
-            str(self.get_month()) + \
-            ' of ' + str(self.get_year())
+                           str(self.get_month()) + \
+                           ' of ' + str(self.get_year())
         return context
 
 
@@ -883,7 +886,7 @@ class PostWeekArchiveView(WeekArchiveView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = '[Archive] Posted during Week ' + \
-            str(self.get_week()) + ' of ' + str(self.get_year())
+                           str(self.get_week()) + ' of ' + str(self.get_year())
         return context
 
 
@@ -902,8 +905,8 @@ class PostDayArchiveView(DayArchiveView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = '[Archive] Posted the ' + \
-            str(self.get_day()) + ' ' + str(self.get_month()) + \
-            ' ' + str(self.get_year())
+                           str(self.get_day()) + ' ' + str(self.get_month()) + \
+                           ' ' + str(self.get_year())
         return context
 
 
@@ -935,8 +938,8 @@ class PostDateDetailView(DateDetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = '[Archive] Posted the ' + \
-            str(self.get_day()) + ' ' + str(self.get_month()) + \
-            ' ' + str(self.get_year())
+                           str(self.get_day()) + ' ' + str(self.get_month()) + \
+                           ' ' + str(self.get_year())
         context['posts'] = self.model.objects.get_common_queryset(
             self.request.user)
         context['series'] = self.series
@@ -945,7 +948,7 @@ class PostDateDetailView(DateDetailView):
         context['description'] = self.description
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
-            :5]
+                                               :5]
         return context
 
 

@@ -1,5 +1,7 @@
-from custom_taggit.models import CustomTag, CustomTaggedItem
 from django.contrib import admin
+
+from custom_taggit.models import CustomTag, CustomTaggedItem
+
 
 # Register your models here.
 
