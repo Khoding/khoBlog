@@ -3,9 +3,10 @@ appdirs==1.4.4
 asgiref==3.4.1
 autopep8==1.5.7
 backports.entry-points-selectable==1.1.0
-beautifulsoup4==4.9.3
-boto3==1.18.33
-botocore==1.21.33
+beautifulsoup4==4.10.0
+boto3==1.18.37
+botocore==1.21.37
+cachetools==4.2.2
 certifi==2021.5.30
 cffi==1.14.6
 chardet==4.0.0
@@ -26,7 +27,7 @@ django-bootstrap-v5==1.0.5
 django-compressor==2.4.1
 django-contrib-comments==2.1.0
 django-debug-toolbar==3.2.2
-django-environ==0.5.0
+django-environ==0.6.0
 django-filter==2.4.0
 django-import-export==2.5.0
 django-jsonview==2.0.0
@@ -65,7 +66,7 @@ oauthlib==3.1.1
 odfpy==1.4.1
 openpyxl==3.0.7
 packaging==21.0
-Pillow==8.3.1
+Pillow==8.3.2
 pinax-referrals==4.0.1
 platformdirs==2.3.0
 promise==2.3
