@@ -553,7 +553,7 @@ class CategorySearchResultsListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query != None:
+        if query is not None:
             if self.request.user.is_superuser:
                 return self.model.objects.filter(
                     Q(title__icontains=query) | Q(
@@ -590,7 +590,7 @@ class TagsSearchResultsListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query != None:
+        if query is not None:
             if not self.request.user.is_superuser:
                 return CustomTag.objects.filter(
                     Q(name__icontains=query, withdrawn=False)
@@ -638,7 +638,7 @@ class AllSearchResultsListView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        if query != None:
+        if query is not None:
             if self.request.user.is_superuser:
                 post = Post.objects.filter(
                     Q(title__icontains=query) | Q(
