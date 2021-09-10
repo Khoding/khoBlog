@@ -231,12 +231,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
             max_length = Post._meta.get_field('slug').max_length
             self.slug = orig = slugify(self.title)[:max_length]
             for x in itertools.count(2):
-                if self.pk:
-                    if Post.objects.filter(Q(slug=self.slug),
-                                           Q(author=self.author),
-                                           Q(id=self.pk),
-                                           ).exists():
-                        break
+                if (
+                    self.pk
+                    and Post.objects.filter(Q(slug=self.slug),
+                                       Q(author=self.author),
+                                       Q(id=self.pk),
+                                       ).exists()
+                ):
+                    break
                 if not Post.objects.filter(slug=self.slug).exists():
                     break
 
