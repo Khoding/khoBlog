@@ -99,6 +99,11 @@ class PostInSeriesListView(ListView):
     def get_queryset(self):
         self.series = get_object_or_404(
             Series, slug=self.kwargs['slug'])
+        if not self.series.withdrawn or self.request.user.is_superuser:
+            self.title = self.series.title
+            self.description = self.series.description
+        else:
+            raise PermissionDenied
         return self.model.objects.get_common_queryset(self.request.user).filter(series=self.series).order_by(
             'order_in_series')
 
