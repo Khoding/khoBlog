@@ -561,13 +561,12 @@ class CategorySearchResultsListView(ListView):
                     description__icontains=query),
             ).filter(~Q(withdrawn=True),
                      ).get_without_removed()
-        else:
-            if self.request.user.is_superuser:
-                category = self.model.objects.get_without_removed()
-                return category
-            category = self.model.objects.filter(
-                ~Q(withdrawn=True), ).get_without_removed()
+        if self.request.user.is_superuser:
+            category = self.model.objects.get_without_removed()
             return category
+        category = self.model.objects.filter(
+            ~Q(withdrawn=True), ).get_without_removed()
+        return category
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -593,12 +592,11 @@ class TagsSearchResultsListView(ListView):
             return CustomTag.objects.filter(
                 Q(name__icontains=query)
             )
+        if not self.request.user.is_superuser:
+            tag = CustomTag.objects.filter(withdrawn=False)
         else:
-            if not self.request.user.is_superuser:
-                tag = CustomTag.objects.filter(withdrawn=False)
-            else:
-                tag = CustomTag.objects.all()
-            return tag
+            tag = CustomTag.objects.all()
+        return tag
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -660,18 +658,17 @@ class AllSearchResultsListView(ListView):
                 Q(name__icontains=query)
             )
             return [post, category, tag]
-        else:
-            if self.request.user.is_superuser:
-                post = Post.objects.get_without_removed()
-                category = Category.objects.get_without_removed()
-                tag = CustomTag.objects.all()
-                return [post, category, tag]
-            post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
-                published_date__isnull=True), ~Q(withdrawn=True), ).get_without_removed()
-            category = Category.objects.filter(
-                ~Q(withdrawn=True), ).get_without_removed()
+        if self.request.user.is_superuser:
+            post = Post.objects.get_without_removed()
+            category = Category.objects.get_without_removed()
             tag = CustomTag.objects.all()
             return [post, category, tag]
+        post = Post.objects.filter(~Q(published_date__gt=timezone.now()), ~Q(
+            published_date__isnull=True), ~Q(withdrawn=True), ).get_without_removed()
+        category = Category.objects.filter(
+            ~Q(withdrawn=True), ).get_without_removed()
+        tag = CustomTag.objects.all()
+        return [post, category, tag]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
