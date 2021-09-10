@@ -17,10 +17,8 @@ class PostViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.request.version == 'v2':
             return PostSerializer
-        else:
-            if not self.detail:
-                return PostSerializerV3
-            else:
-                return PostSerializerDetailV3
+        if not self.detail:
+            return PostSerializerV3
+        return PostSerializerDetailV3
 
     lookup_field = 'slug'

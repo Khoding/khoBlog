@@ -14,7 +14,7 @@ def return_the_api(request):
             if f == 'json':
                 context = {'things': thing}
                 return context
-            elif f == 'api' or f is None or f == '':
+            if f == 'api' or f is None or f == '':
                 template = 'reading_apis_app/list.html'
                 context = {'things': thing, 'title': 'API Reading App'}
                 return render(request, template, context)
@@ -35,7 +35,7 @@ def return_the_api_detail(request):
             if f == 'json':
                 context = {'things': thing}
                 return context
-            elif f == 'api' or f is None or f == '':
+            if f == 'api' or f is None or f == '':
                 template = 'reading_apis_app/detail.html'
                 context = {'things': thing, 'title': 'API Reading App'}
                 return render(request, template, context)
