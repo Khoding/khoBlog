@@ -184,7 +184,7 @@ class PostDetailView(DetailView):
         context['description'] = self.description
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
-                                               :5]
+            :5]
         context['comment_next'] = self.post.get_absolute_url()
         return context
 
@@ -507,8 +507,10 @@ class SearchListView(ListView):
 
     def get_queryset(self):
         query = [[{'id': 1, 'title': 'Search in Posts', 'get_absolute_url': 'post/?q=', },
-                  {'id': 2, 'title': 'Search in Categories', 'get_absolute_url': 'category/?q=', },
-                  {'id': 3, 'title': 'Search in Tags', 'get_absolute_url': 'tag/?q=', },
+                  {'id': 2, 'title': 'Search in Categories',
+                      'get_absolute_url': 'category/?q=', },
+                  {'id': 3, 'title': 'Search in Tags',
+                      'get_absolute_url': 'tag/?q=', },
                   {'id': 4, 'title': 'Search in Everything', 'get_absolute_url': 'all/?q='}, ]]
         return query
 
@@ -656,7 +658,8 @@ class AllSearchResultsListView(ListView):
                      ).get_without_removed()
             tag = CustomTag.objects.filter(
                 Q(name__icontains=query)
-            )
+            ).filter(~Q(withdrawn=True),
+                     )
             return [post, category, tag]
         if self.request.user.is_superuser:
             post = Post.objects.get_without_removed()
@@ -667,7 +670,8 @@ class AllSearchResultsListView(ListView):
             published_date__isnull=True), ~Q(withdrawn=True), ).get_without_removed()
         category = Category.objects.filter(
             ~Q(withdrawn=True), ).get_without_removed()
-        tag = CustomTag.objects.all()
+        tag = CustomTag.objects.filter(~Q(withdrawn=True),
+                                       )
         return [post, category, tag]
 
     def get_context_data(self, **kwargs):
@@ -933,7 +937,7 @@ class PostDateDetailView(DateDetailView):
         context['description'] = self.description
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
-                                               :5]
+            :5]
         return context
 
 
