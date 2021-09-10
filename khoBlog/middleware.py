@@ -11,5 +11,4 @@ class WwwRedirectMiddleware:
             return HttpResponsePermanentRedirect(
                 "https://khodok.xyz" + request.path
             )
-        else:
-            return self.get_response(request)
+        return self.get_response(request)
