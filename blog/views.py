@@ -162,7 +162,7 @@ class PostDetailView(DetailView):
         self.post.clicked()
         if self.post.is_removed:
             raise PermissionDenied
-        elif self.request.user.is_superuser:
+        if self.request.user.is_superuser:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
@@ -172,9 +172,8 @@ class PostDetailView(DetailView):
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
-            else:
-                self.title = self.post.title
-                self.description = self.post.description
+            self.title = self.post.title
+            self.description = self.post.description
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -917,7 +916,7 @@ class PostDateDetailView(DateDetailView):
         self.post.clicked()
         if self.post.is_removed:
             raise PermissionDenied
-        elif self.request.user.is_superuser:
+        if self.request.user.is_superuser:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
@@ -927,9 +926,8 @@ class PostDateDetailView(DateDetailView):
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             if self.post.withdrawn or not self.post.published_date or self.post.published_date >= timezone.now():
                 raise PermissionDenied
-            else:
-                self.title = self.post.title
-                self.description = self.post.description
+            self.title = self.post.title
+            self.description = self.post.description
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
