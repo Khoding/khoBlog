@@ -9,7 +9,8 @@ class LatestPostsFeed(Feed):
     link = ''
     description = 'Latest posts of my blog.'
 
-    def items(self):
+    @staticmethod
+    def items():
         return Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def item_title(self, item):
@@ -21,16 +22,20 @@ class LatestPostsFeed(Feed):
     def item_link(self, item):
         return item.get_absolute_url()
 
-    def item_pubdate(self, item):
+    @staticmethod
+    def item_pubdate(item):
         return item.published_date
 
-    def item_updateddate(self, item):
+    @staticmethod
+    def item_updateddate(item):
         return item.modified_date
 
-    def item_author_name(self, item):
+    @staticmethod
+    def item_author_name(item):
         return item.author
 
-    def item_comments(self, item):
+    @staticmethod
+    def item_comments(item):
         return item.approved_comments()
 
 
@@ -38,16 +43,20 @@ class LatestPostsFeedByCategory(Feed):
     def get_object(self, request, slug):
         return Category.objects.get(slug=slug)
 
-    def title(self, obj):
+    @staticmethod
+    def title(obj):
         return "Latest posts of %s" % obj.title
 
-    def link(self, obj):
+    @staticmethod
+    def link(obj):
         return obj.get_absolute_url()
 
-    def description(self, obj):
+    @staticmethod
+    def description(obj):
         return obj.description
 
-    def items(self, obj):
+    @staticmethod
+    def items(obj):
         return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), withdrawn=False,
                                    is_removed=False).order_by(
             '-published_date')
@@ -55,14 +64,18 @@ class LatestPostsFeedByCategory(Feed):
     def item_description(self, item):
         return item.description
 
-    def item_pubdate(self, item):
+    @staticmethod
+    def item_pubdate(item):
         return item.published_date
 
-    def item_updateddate(self, item):
+    @staticmethod
+    def item_updateddate(item):
         return item.modified_date
 
-    def item_author_name(self, item):
+    @staticmethod
+    def item_author_name(item):
         return item.author
 
-    def item_comments(self, item):
+    @staticmethod
+    def item_comments(item):
         return item.approved_comments()
