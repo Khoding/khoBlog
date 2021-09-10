@@ -352,9 +352,6 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
     form_class = SeriesCreateForm
     template_name = "blog/create_series.html"
 
-    def form_valid(self, form):
-        return super().form_valid(form)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = self.model.objects.get_without_removed().order_by(
