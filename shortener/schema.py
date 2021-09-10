@@ -14,7 +14,8 @@ class Query(graphene.ObjectType):
     urls = graphene.List(URLType, url=graphene.String(),
                          first=graphene.Int(), skip=graphene.Int())
 
-    def resolve_urls(self, info, url=None, first=None, skip=None, **kwargs):
+    @staticmethod
+    def resolve_urls(info, url=None, first=None, skip=None, **kwargs):
         queryset = URL.objects.all()
 
         if url:
@@ -37,7 +38,8 @@ class CreateURL(graphene.Mutation):
         full_url = graphene.String()
         title = graphene.String()
 
-    def mutate(self, info, full_url, title):
+    @staticmethod
+    def mutate(info, full_url, title):
         url = URL(full_url=full_url, title=title)
         url.save()
 

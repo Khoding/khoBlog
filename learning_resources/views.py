@@ -11,13 +11,15 @@ from .serializers import ResourceSerializer
 class TestView(APIView):
     permission_classes = (IsAdminUser,)
 
-    def get(self, request, *args, **kwargs):
+    @staticmethod
+    def get(request, *args, **kwargs):
         qs = Resource.objects.all()
         post = qs.first()
         serializer = ResourceSerializer(post)
         return Response(serializer.data)
 
-    def post(self, request, *args, **kwargs):
+    @staticmethod
+    def post(request, *args, **kwargs):
         serializer = ResourceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
