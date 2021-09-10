@@ -234,9 +234,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                 if (
                     self.pk
                     and Post.objects.filter(Q(slug=self.slug),
-                                       Q(author=self.author),
-                                       Q(id=self.pk),
-                                       ).exists()
+                                            Q(author=self.author),
+                                            Q(id=self.pk),
+                                            ).exists()
                 ):
                     break
                 if not Post.objects.filter(slug=self.slug).exists():
