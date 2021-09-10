@@ -262,6 +262,11 @@ class AllTagsListView(ListView):
     paginate_by = 21
     paginate_orphans = 5
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return self.model.objects.all()
+        return self.model.objects.filter(withdrawn=False)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Tag List"
