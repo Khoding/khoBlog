@@ -8,6 +8,7 @@ class CustomTag(TagBase):
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
+        ordering = ['pk']
         verbose_name = _("Tag")
         verbose_name_plural = _("Tags")
 
