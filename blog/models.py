@@ -218,6 +218,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     class Meta:
         ordering = ['-published_date']
+        get_latest_by = ['id']
         rules_permissions = {
             "add": rules.is_superuser,
             "update": rules.is_superuser,
