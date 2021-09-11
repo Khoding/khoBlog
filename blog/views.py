@@ -195,7 +195,11 @@ class PostDetailView(DetailView):
 
 
 def redirect_to_latest(request):
-    latest = Post.objects.latest('id')
+    if request.user.is_superuser:
+        latest = Post.objects.latest()
+    else:
+        latest = Post.objects.filter(
+            published_date__lte=timezone.now(), withdrawn=False, is_removed=False).latest()
     return redirect(reverse('blog:post_detail', args=(latest.slug,)))
 
 
