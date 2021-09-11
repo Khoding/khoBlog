@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
+from blog.models import Post
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -26,7 +28,6 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 
-from blog.models import Post
 from . import dev_urls
 
 admin.site.site_header = "Khodok's Blog Admin"
@@ -44,7 +45,7 @@ schema_view = get_schema_view(
 )
 
 site_map_info_dict = {
-    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False),
+    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False),
 }
 
 api_patterns = [
@@ -107,4 +108,6 @@ urlpatterns = [
                   re_path(r'^robots\.txt', include('robots.urls')),
                   re_path(r'^referrals/', include('pinax.referrals.urls',
                                                   namespace="pinax_referrals")),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
+    path('__debug__/', include(debug_toolbar.urls)),
+]

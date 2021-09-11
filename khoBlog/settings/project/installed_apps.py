@@ -1,4 +1,6 @@
 # Application definition
+from ..django import DEBUG
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -66,3 +68,9 @@ INSTALLED_APPS = [
     'links',
     'reading_apis_app',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+        "template_profiler_panel",
+    ]

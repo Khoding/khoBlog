@@ -17,9 +17,7 @@
                 <p class="mb-2">{% firstof context.user.welcome_message side.sub_title %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
             {% endif %}
 
-            {% if side.side_menu_specific_date_messages.all %}
-                {% specific_date_message_setting messages %}
-            {% endif %}
+            {% specific_date_message_setting messages %}
 
             {% if not side.is_user_side_menu and not side.is_post_list_side_menu %}
                 {% for group in side.side_menu_links.all %}

@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static markdown_extra %}
+{% load static %}
 
 {% block page_top %}
 
@@ -75,7 +75,7 @@
                 {% include 'blog/post_card_in_lists.html' %}
             </div>
 
-            {% include 'blog/includes/post_offcanvas.html' %}
+            {% comment %} {% include 'blog/includes/post_offcanvas.html' %} {% endcomment %}
         {% empty %}
             <div class="w-100">
                 <p>No content here.</p>

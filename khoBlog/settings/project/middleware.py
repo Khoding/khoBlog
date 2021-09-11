@@ -10,6 +10,11 @@ if not DEBUG:
         'django.middleware.cache.UpdateCacheMiddleware',
     ]
 
+if DEBUG:
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
 MIDDLEWARE += [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

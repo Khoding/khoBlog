@@ -9,5 +9,8 @@ DATABASES = {
             'init_command': "SET sql_mode='STRICT_ALL_TABLES'; SET default_storage_engine=INNODB;",
             'charset': 'utf8mb4', 'use_unicode': True,
         },
+        'CONN_MAX_AGE': 60
     }
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
