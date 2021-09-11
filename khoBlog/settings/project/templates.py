@@ -4,7 +4,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [(BASE_DIR + '/khoBlog/templates')],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -16,13 +16,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'project_tags': 'khoBlog.templatetags.forms',
-            },
-            'loaders': [
-                ('django.template.loaders.cached.Loader', [
-                    'django.template.loaders.filesystem.Loader',
-                    'django.template.loaders.app_directories.Loader',
-                ]),
-            ]
+            }
         },
     },
 ]
