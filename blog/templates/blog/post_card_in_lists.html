@@ -22,18 +22,18 @@
     <div class="card-footer">
         <span class="d-flex">
             <span class="col">
-                <a class="card-link" href="{{ post.get_absolute_url }}">Continue Reading</a>
+                <a class="card-link" href="{{ post.get_absolute_url }}">Continue reading</a>
             </span>
             {% if post.url_to_article %}
                 <span class="col">
                     <a class="float-end card-link" href="{{ post.url_to_article }}">
-                        <i class="bi bi-link-45deg"></i> External Link
+                        <i class="bi bi-link-45deg"></i> External link
                     </a>
                 </span>
             {% endif %}
-            <span class="col">
-                <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.id }}" aria-controls="postOffCanvas-{{ post.id }}">Post Info</a>
-            </span>
+            {% comment %} <span class="col">
+                <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.slug }}" aria-controls="postOffCanvas-{{ post.slug }}">Post Info</a>
+            </span> {% endcomment %}
         </span>
     </div>
 {% endblock card_footer %}
