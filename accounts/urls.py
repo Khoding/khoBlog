@@ -1,3 +1,4 @@
+from allauth.account.views import EmailView
 from django.conf.urls import include
 from django.urls import path
 from django.urls.conf import re_path
@@ -46,6 +47,8 @@ urlpatterns = [
     path('profile/<int:pk>/', include(extra_patterns)),
     path('profile/<slug:slug>/', include(extra_patterns)),
     path('password/', include(password_extra_patterns)),
-    path('edit_connections/', ConnectionsEditView.as_view(),
-         name='edit_connections'),
+    path('connections/', ConnectionsEditView.as_view(),
+         name='connections'),
+    path('email/', EmailView.as_view(),
+         name='email'),
 ]

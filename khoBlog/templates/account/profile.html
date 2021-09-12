@@ -121,7 +121,8 @@
 
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
         <p><a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:edit_connections' %}">Edit Connections</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:connections' %}">Edit Connections</a></p>
+        <p><a class="btn btn-primary" href="{% url 'accounts:email' %}">Edit Email</a></p>
     {% endif %}
 
     {% if object.id == user.id and view_as == "self" %}
