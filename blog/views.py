@@ -170,16 +170,27 @@ class PostDetailView(DetailView):
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
             self.description = self.post.description
-            self.prev_post = (Post.objects
-                              .filter(published_date__lt=self.post.published_date, is_removed=False)
-                              .exclude(pk=self.post.pk)
-                              .order_by('-published_date')
-                              .first())
-            self.next_post = (Post.objects
-                              .filter(published_date__gt=self.post.published_date, is_removed=False)
-                              .exclude(pk=self.post.pk)
-                              .order_by('published_date')
-                              .first())
+            if self.post.published_date:
+                self.prev_post = (Post.objects
+                                  .filter(published_date__lt=self.post.published_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('-published_date')
+                                  .first())
+                self.next_post = (Post.objects
+                                  .filter(published_date__gt=self.post.published_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('published_date')
+                                  .first())
+            else:
+                self.prev_post = (Post.objects
+                                  .filter(created_date__lt=self.post.created_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('-created_date')
+                                  .first())
+                self.next_post = (Post.objects
+                                  .filter(created_date__gt=self.post.created_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('created_date'))
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
