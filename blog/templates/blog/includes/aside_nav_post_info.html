@@ -25,6 +25,9 @@
         {% if post.modified_date %}
             <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
         {% endif %}
+        {% if post.featured_title %}
+            <p>Featured Title: {{ post.featured_title }}</p>
+        {% endif %}
     </div>
 
     <p>Description: {{ description }}</p>
@@ -33,7 +36,7 @@
         <p>Tags:
             {% for tags in post.tags.all %}
                 {% if not tags.withdrawn or user.is_superuser %}
-                    {% comment %} TODO: Make a list of the public tags, the withdrawn one, and subtract to get the actual number for both users and supers {% endcomment %}
+                    {% comment %} TODO: Make a list of the public tags, the withdrawn ones, and subtract to get the actual number for both users and supers {% endcomment %}
                     <a href="{% url 'blog:post_tagged_with' slug=tags.slug %}">{{ tags }}</a>{% if not forloop.last %}, {% endif %}
                 {% endif %}
             {% endfor %}

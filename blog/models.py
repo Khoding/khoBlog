@@ -172,6 +172,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     author = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author", help_text="Post author")
     title = models.CharField(max_length=200, help_text="Post title")
+    featured_title = models.CharField(
+        max_length=27, default='', blank=True, help_text="Featured post title")
     body = MarkdownxField(help_text="Post main content", blank=True)
     image = models.ImageField(
         null=True, blank=True, upload_to='images/post/', help_text="Post image")

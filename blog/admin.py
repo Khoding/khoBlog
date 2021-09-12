@@ -133,7 +133,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     list_display_links = ('pk', 'title',)
     list_editable = ('is_removed',)
     ordering = ('-pk', 'title', '-published_date', '-is_removed',)
-    search_fields = ('title', 'slug',
+    search_fields = ('title', 'featured_title',  'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)
     prepopulated_fields = {
         'slug': ('title',), }
@@ -141,7 +141,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                    'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
 
     fieldsets = (
-        (None, {'fields': ('title',
+        (None, {'fields': ('title', 'featured_title',
                            'description', 'author', 'slug', 'body', 'tags',)}),
         (('States'), {
             'fields': ('withdrawn', 'is_removed', 'publication_state', 'featuring_state', 'language',)}),
