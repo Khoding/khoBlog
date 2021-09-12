@@ -3,11 +3,11 @@
 
 {% block page_top_end %}
     <div class="btn-group float-end" role="group" aria-label="Previous / Next">
-        <a class="btn btn-primary" href="{{ post.get_previous_by_created_date.get_absolute_url }}">
+        <a class="btn btn-primary" href="{{ prev_post.get_absolute_url }}">
             <i class="bi bi-chevron-left"></i>
         </a>
 
-        <a class="btn btn-primary" href="{{ post.get_next_by_created_date.get_absolute_url }}">
+        <a class="btn btn-primary" href="{{ next_post.get_absolute_url }}">
             <i class="bi bi-chevron-right"></i>
         </a>
     </div>

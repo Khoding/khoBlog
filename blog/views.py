@@ -170,6 +170,16 @@ class PostDetailView(DetailView):
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
             self.description = self.post.description
+            self.prev_post = (Post.objects
+                              .filter(published_date__lt=self.post.published_date, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('-published_date')
+                              .first())
+            self.next_post = (Post.objects
+                              .filter(published_date__gt=self.post.published_date, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('published_date')
+                              .first())
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
@@ -177,6 +187,18 @@ class PostDetailView(DetailView):
                 raise PermissionDenied
             self.title = self.post.title
             self.description = self.post.description
+            self.prev_post = (Post.objects
+                              .filter(published_date__lt=self.post.published_date,
+                                      published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('-published_date')
+                              .first())
+            self.next_post = (Post.objects
+                              .filter(published_date__gt=self.post.published_date,
+                                      published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('published_date')
+                              .first())
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -191,6 +213,8 @@ class PostDetailView(DetailView):
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
             :5]
         context['comment_next'] = self.post.get_absolute_url()
+        context['next_post'] = self.next_post
+        context['prev_post'] = self.prev_post
         return context
 
 
