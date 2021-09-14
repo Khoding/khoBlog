@@ -1,6 +1,6 @@
 {% load read_time %}
 
-<article id="post-{{ object.slug }}" class="card shadow mb-2">
+<article id="post-{{ object.slug }}" class="card shadow{% if not forloop.last %} mb-2{% endif %}">
     {% if not hide_header %}
         <header class="card-header">
             <section class="d-flex">

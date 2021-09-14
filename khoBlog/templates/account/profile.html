@@ -119,16 +119,16 @@
     {% if object.id == user.id and view_as == "self" %}
         <hr />
 
-        <p><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:connections' %}">Edit Connections</a></p>
-        <p><a class="btn btn-primary" href="{% url 'accounts:email' %}">Edit Email</a></p>
+        <p class="mb-2"><a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a></p>
+        <p class="mb-2"><a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a></p>
+        <p class="mb-2"><a class="btn btn-primary" href="{% url 'accounts:connections' %}">Edit Connections</a></p>
+        <p class="mb-2"><a class="btn btn-primary" href="{% url 'accounts:email' %}">Edit Email</a></p>
     {% endif %}
 
     {% if object.id == user.id and view_as == "self" %}
         <hr />
 
-        <p><a class="btn btn-primary" href="?view_as=guest">View as Guest</a></p>
+        <p class="mb-auto"><a class="btn btn-primary" href="?view_as=guest">View as Guest</a></p>
     {% elif object.id == user.id and view_as == "guest" %}
         <hr />
 
