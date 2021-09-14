@@ -21,6 +21,18 @@ from custom_taggit.models import CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
+    """Category model
+
+    A model for Category
+
+    Args:
+        RulesModelMixin ([type]): [description]
+        auto_prefetch ([type]): [description]
+        metaclass ([type], optional): [description]. Defaults to RulesModelBase.
+
+    Returns:
+        Category: A model for Category
+    """
     parent = auto_prefetch.ForeignKey(
         'self', on_delete=models.CASCADE, related_name="category_children", null=True, blank=True)
     title = models.CharField(max_length=200, help_text="Category title")
@@ -84,6 +96,18 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
 
 class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
+    """Series Model
+
+    A model for Series
+
+    Args:
+        RulesModelMixin ([type]): [description]
+        auto_prefetch ([type]): [description]
+        metaclass ([type], optional): [description]. Defaults to RulesModelBase.
+
+    Returns:
+        Series: A model for Series
+    """
     title = models.CharField(max_length=200, help_text="Series title")
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="",
@@ -135,6 +159,16 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
 
 class PostCatsLink(auto_prefetch.Model):
+    """PostCatsLink Through Table Model
+
+    A through table Model linking Post and Category
+
+    Args:
+        auto_prefetch ([type]): [description]
+
+    Returns:
+        PostCatsLink: postcatslink_set
+    """
     post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE)
     category = auto_prefetch.ForeignKey(
@@ -149,6 +183,18 @@ class PostCatsLink(auto_prefetch.Model):
 
 
 class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
+    """Post Model
+
+    A model for Blog Posts
+
+    Args:
+        RulesModelMixin ([type]): [description]
+        auto_prefetch ([type]): [description]
+        metaclass ([type], optional): [description]. Defaults to RulesModelBase.
+
+    Returns:
+        Post: A model for Post
+    """
     PUBLICATION_CHOICES = [
         ('P', 'Published'),
         ('W', 'Withdrawn'),
@@ -344,6 +390,16 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
 
 class PostContent(auto_prefetch.Model):
+    """PostContent Model
+
+    A model for Post Content
+
+    Args:
+        auto_prefetch ([type]): [description]
+
+    Returns:
+        PostContent: A model for Post Content
+    """
     post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name="content")
     body = MarkdownxField(help_text="Post main content")
@@ -364,6 +420,16 @@ class PostContent(auto_prefetch.Model):
 
 
 class Comment(auto_prefetch.Model):
+    """Comment Model
+
+    An old Model for Comments system on Post
+
+    Args:
+        auto_prefetch ([type]): [description]
+
+    Returns:
+        Comment: An old Model for Comments
+    """
     APPROBATION_CHOICES = [
         ('AP', 'Approved'),
         ('RE', 'Removed'),

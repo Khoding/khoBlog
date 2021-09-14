@@ -34,6 +34,16 @@ def superuser_required():
 
 
 class PostListView(ListView):
+    """PostListView List View
+
+    The default List View for Posts
+
+    Args:
+        ListView (ListView): Lists elements
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -55,6 +65,16 @@ class PostListView(ListView):
 
 
 class WeblogTemplateView(TemplateView):
+    """WeblogTemplateView TemplateView
+
+    An alternative List View for Posts
+
+    Args:
+        TemplateView (TemplateView): A List View
+
+    Returns:
+        posts: A list of posts
+    """
     template_name = 'blog/lists/weblog.html'
 
     def get_context_data(self, **kwargs):
@@ -64,6 +84,19 @@ class WeblogTemplateView(TemplateView):
 
 
 class PostInCategoryListView(ListView):
+    """PostInCategoryListView List View
+
+    Lists all Posts in a particular Category
+
+    Args:
+        ListView (ListView): A list View
+
+    Raises:
+        PermissionDenied: If the currently logged in user doesn't have access to the requested Category
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_category_list.html'
     context_object_name = 'posts'
@@ -90,6 +123,19 @@ class PostInCategoryListView(ListView):
 
 
 class PostInSeriesListView(ListView):
+    """PostInSeriesListView List View
+
+    Lists all Posts in a particular Series
+
+    Args:
+        ListView (ListView): A list View
+
+    Raises:
+        PermissionDenied: If the currently logged in user doesn't have access to the requested Series
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_series_list.html'
     context_object_name = 'posts'
@@ -116,6 +162,16 @@ class PostInSeriesListView(ListView):
 
 
 class CategoryListView(ListView):
+    """CategoryListView ListView
+
+    A list of Categories
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        category_list: A list of Categories
+    """
     model = Category
     template_name = 'blog/lists/category_list.html'
     context_object_name = 'category_list'
@@ -139,6 +195,16 @@ class CategoryListView(ListView):
 
 
 class SeriesListView(ListView):
+    """SeriesListView ListView
+
+    A list of Series
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        series_list: A list of Series
+    """
     model = Series
     template_name = 'blog/lists/series_list.html'
     context_object_name = 'series_list'
@@ -157,6 +223,20 @@ class SeriesListView(ListView):
 
 
 class PostDetailView(DetailView):
+    """PostDetailView DetailView
+
+    A view showing the Details of a Post
+
+    Args:
+        DetailView ([type]): [description]
+
+    Raises:
+        PermissionDenied: Post is removed
+        PermissionDenied: User doesn't have access to requested Post
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/post_detail.html'
 
@@ -245,6 +325,16 @@ def post_detail_through_id(request, pk):
 
 @superuser_required()
 class PostDraftListView(ListView):
+    """PostDraftListView ListView
+
+    Lists Draft Posts
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_draft_list.html'
     context_object_name = 'posts'
@@ -262,6 +352,16 @@ class PostDraftListView(ListView):
 
 @superuser_required()
 class PostScheduledListView(ListView):
+    """PostScheduledListView ListView
+
+    Lists Scheduled Posts
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_scheduled_list.html'
     context_object_name = 'posts'
@@ -279,6 +379,16 @@ class PostScheduledListView(ListView):
 
 @superuser_required()
 class PostWithdrawnListView(ListView):
+    """PostWithdrawnListView ListView
+
+    Lists Withdrawn Posts
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_withdrawn_list.html'
     context_object_name = 'posts'
@@ -295,6 +405,16 @@ class PostWithdrawnListView(ListView):
 
 
 class AllTagsListView(ListView):
+    """AllTagsListView ListView
+
+    Lists all Tags
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        tags: A list of tags
+    """
     model = CustomTag
     template_name = 'blog/lists/tags_list.html'
     context_object_name = 'tags'
@@ -317,6 +437,16 @@ class AllTagsListView(ListView):
 
 
 class PostWithTagListView(ListView):
+    """PostWithTagListView ListView
+
+    Lists all Posts tagged with a given Tag
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        posts: A list of posts
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -343,6 +473,16 @@ class PostWithTagListView(ListView):
 
 @superuser_required()
 class TagUpdateView(UpdateView):
+    """TagUpdateView UpdateView
+
+    A view to Update a Tag
+
+    Args:
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = CustomTag
     fields = ('__all__')
     template_name = "blog/category_edit.html"
@@ -358,6 +498,17 @@ class TagUpdateView(UpdateView):
 
 
 class PostCreateView(AutoPermissionRequiredMixin, CreateView):
+    """PostCreateView CreateView
+
+    A view to create a Post
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to create a Post
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     form_class = PostCreateForm
     template_name = "blog/create_post.html"
@@ -376,6 +527,17 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
 
 
 class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
+    """CategoryCreateView
+
+    View to Create a Category
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to create a Category
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Category
     form_class = CategoryCreateForm
     template_name = "blog/create_category.html"
@@ -394,6 +556,17 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
 
 
 class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
+    """SeriesCreateView
+
+    A view to create a Series
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to create a Series
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Series
     form_class = SeriesCreateForm
     template_name = "blog/create_series.html"
@@ -408,6 +581,17 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
 
 
 class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
+    """CategoryUpdateView
+
+    View to update a Category
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Category
     form_class = CategoryEditForm
     template_name = "blog/category_edit.html"
@@ -422,6 +606,20 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
+    """CategoryDeleteView
+
+    A view to delete a Category
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Raises:
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Category
     template_name = 'blog/category_confirm_delete.html'
     form_class = CategoryDeleteForm
@@ -447,6 +645,17 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
+    """SeriesUpdateView
+
+    A view to update a Series
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Series
     form_class = SeriesEditForm
     template_name = "blog/series_edit.html"
@@ -461,6 +670,20 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
+    """SeriesDeleteView
+
+    View to delete a Series
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Raises:
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Series
     template_name = 'blog/series_confirm_delete.html'
     form_class = SeriesDeleteForm
@@ -486,6 +709,17 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
+    """PostUpdateView
+
+    View to update a Post
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     form_class = PostEditForm
     template_name = "blog/post_update.html"
@@ -500,10 +734,17 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class PostCloneView(AutoPermissionRequiredMixin, CreateView):
-    """
-    Clone View for Posts
-    """
+    """PostCloneView Create View
 
+    A view to clone a Post
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/create_post.html'
     form_class = PostCreateForm
@@ -524,6 +765,20 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
 
 
 class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
+    """PostDeleteView
+
+    View to delete a Post
+
+    Args:
+        AutoPermissionRequiredMixin ([type]): Tests if the User has the permission to do that
+        UpdateView ([type]): [description]
+
+    Raises:
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/post_confirm_delete.html'
     form_class = PostDeleteForm
@@ -549,6 +804,16 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
 
 class SearchListView(ListView):
+    """SearchListView
+
+    Search View
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -572,6 +837,16 @@ class SearchListView(ListView):
 
 
 class PostSearchResultsListView(ListView):
+    """PostSearchResultsListView
+
+    Search result list view
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/search.html'
     context_object_name = 'filter'
@@ -593,6 +868,16 @@ class PostSearchResultsListView(ListView):
 
 
 class CategorySearchResultsListView(ListView):
+    """CategorySearchResultsListView
+
+    Category results listing view
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Category
     template_name = 'blog/search.html'
     context_object_name = 'query'
@@ -628,6 +913,16 @@ class CategorySearchResultsListView(ListView):
 
 
 class TagsSearchResultsListView(ListView):
+    """TagsSearchResultsListView
+
+    Tags search result listing view
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -658,6 +953,16 @@ class TagsSearchResultsListView(ListView):
 
 
 class RandomSearchResultsListView(ListView):
+    """RandomSearchResultsListView
+
+    Random search view
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     template_name = 'blog/search.html'
     context_object_name = 'query'
 
@@ -674,6 +979,16 @@ class RandomSearchResultsListView(ListView):
 
 
 class AllSearchResultsListView(ListView):
+    """AllSearchResultsListView
+
+    Search everywhere results list view
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -748,6 +1063,17 @@ def post_publish_withdrawn(request, slug):
 
 @superuser_required()
 class PostCommentCreateView(LoginRequiredMixin, CreateView):
+    """PostCommentCreateView
+
+    Create a comment
+
+    Args:
+        LoginRequiredMixin ([type]): [description]
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Comment
     form_class = CommentForm
     template_name = "blog/comments/add_comment_to_post.html"
@@ -768,6 +1094,17 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
 
 @superuser_required()
 class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
+    """ReplyToCommentCreateView
+
+    Reply to a comment
+
+    Args:
+        LoginRequiredMixin ([type]): [description]
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Comment
     form_class = CommentForm
     template_name = "blog/comments/add_comment_to_post.html"
@@ -789,6 +1126,17 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
 
 @superuser_required()
 class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
+    """PostCommentUpdateView
+
+    Update a comment
+
+    Args:
+        LoginRequiredMixin ([type]): [description]
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Comment
     form_class = EditPostCommentForm
     template_name = 'blog/comments/edit_comment.html'
@@ -809,6 +1157,16 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
 
 @superuser_required()
 class ApprovePostCommentUpdateView(UpdateView):
+    """ApprovePostCommentUpdateView
+
+    Approve a comment
+
+    Args:
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/comments/approve_post_comment.html'
@@ -829,6 +1187,16 @@ class ApprovePostCommentUpdateView(UpdateView):
 
 @superuser_required()
 class RemovePostCommentUpdateView(UpdateView):
+    """RemovePostCommentUpdateView
+
+    Remove a comment
+
+    Args:
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/comments/remove_post_comment.html'
@@ -849,6 +1217,16 @@ class RemovePostCommentUpdateView(UpdateView):
 
 
 class PostArchiveIndexView(ArchiveIndexView):
+    """PostArchiveIndexView
+
+    Archive view
+
+    Args:
+        ArchiveIndexView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -869,6 +1247,16 @@ class PostArchiveIndexView(ArchiveIndexView):
 
 
 class PostYearArchiveView(YearArchiveView):
+    """PostYearArchiveView
+
+    Archive by year
+
+    Args:
+        YearArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -889,6 +1277,16 @@ class PostYearArchiveView(YearArchiveView):
 
 
 class PostMonthArchiveView(MonthArchiveView):
+    """PostMonthArchiveView
+
+    Archive by month
+
+    Args:
+        MonthArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -910,6 +1308,16 @@ class PostMonthArchiveView(MonthArchiveView):
 
 
 class PostWeekArchiveView(WeekArchiveView):
+    """PostWeekArchiveView
+
+    Archive by week
+
+    Args:
+        WeekArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -930,6 +1338,16 @@ class PostWeekArchiveView(WeekArchiveView):
 
 
 class PostDayArchiveView(DayArchiveView):
+    """PostDayArchiveView
+
+    Archive by day
+
+    Args:
+        DayArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -950,6 +1368,20 @@ class PostDayArchiveView(DayArchiveView):
 
 
 class PostDateDetailView(DateDetailView):
+    """PostDateDetailView
+
+    Detail for Archive by day
+
+    Args:
+        DateDetailView ([type]): [description]
+
+    Raises:
+        PermissionDenied: [description]
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/archive_date_detail.html'
     date_field = "published_date"
@@ -991,6 +1423,16 @@ class PostDateDetailView(DateDetailView):
 
 
 class PostTodayArchiveView(TodayArchiveView):
+    """PostTodayArchiveView
+
+    Archive for today
+
+    Args:
+        TodayArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
