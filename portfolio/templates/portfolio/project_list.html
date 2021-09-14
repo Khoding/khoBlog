@@ -17,7 +17,7 @@
 
     {% block page_top_hr %}
         <div class='text-then-hr text-small text-muted'>
-            <span class='hr-title'><span class="me-2">{{ projects.count }} Projects</span></span>
+            <span class='hr-title'><span class="me-2">{{ projects.count }} Project{{ projects.count|pluralize:'s' }}</span></span>
         </div>
     {% endblock page_top_hr %}
 

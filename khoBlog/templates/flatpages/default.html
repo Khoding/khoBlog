@@ -64,7 +64,7 @@
             {% render_comment_form for page %}
             <hr />
 
-            <p class="text-muted text-small">This page has {{ comment_count }} comments.</p>
+            <p class="text-muted text-small">This page has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}</p>
 
             {% render_comment_list for page %}
         {% else %}
