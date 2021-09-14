@@ -11,5 +11,6 @@ class ResourceSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'url',
+            'withdrawn',
             'done'
         )

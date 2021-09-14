@@ -29,44 +29,54 @@ class TestView(APIView):
 
 class ResourceViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    serializer_class = ResourceSerializer
 
     def get_queryset(self):
         queryset = Resource.objects.filter(withdrawn=False)
         return queryset
 
+    def get_serializer_class(self):
+        return ResourceSerializer
+
 
 class ResourceCreateView(generics.CreateAPIView):
-    serializer_class = ResourceSerializer
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
         queryset = Resource.objects.all()
         return queryset
+
+    def get_serializer_class(self):
+        return ResourceSerializer
 
 
 class ResourceDetailView(generics.RetrieveAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    serializer_class = ResourceSerializer
 
     def get_queryset(self):
         queryset = Resource.objects.filter(withdrawn=False)
         return queryset
 
+    def get_serializer_class(self):
+        return ResourceSerializer
+
 
 class ResourceUpdateView(generics.UpdateAPIView):
-    serializer_class = ResourceSerializer
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
         queryset = Resource.objects.all()
         return queryset
+
+    def get_serializer_class(self):
+        return ResourceSerializer
 
 
 class ResourceDeleteView(generics.DestroyAPIView):
-    serializer_class = ResourceSerializer
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
         queryset = Resource.objects.all()
         return queryset
+
+    def get_serializer_class(self):
+        return ResourceSerializer
