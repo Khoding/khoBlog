@@ -44,6 +44,7 @@ class PostListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -75,6 +76,7 @@ class WeblogTemplateView(TemplateView):
     Returns:
         posts: A list of posts
     """
+
     template_name = 'blog/lists/weblog.html'
 
     def get_context_data(self, **kwargs):
@@ -97,6 +99,7 @@ class PostInCategoryListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_category_list.html'
     context_object_name = 'posts'
@@ -136,6 +139,7 @@ class PostInSeriesListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_series_list.html'
     context_object_name = 'posts'
@@ -172,6 +176,7 @@ class CategoryListView(ListView):
     Returns:
         category_list: A list of Categories
     """
+
     model = Category
     template_name = 'blog/lists/category_list.html'
     context_object_name = 'category_list'
@@ -205,6 +210,7 @@ class SeriesListView(ListView):
     Returns:
         series_list: A list of Series
     """
+
     model = Series
     template_name = 'blog/lists/series_list.html'
     context_object_name = 'series_list'
@@ -237,6 +243,7 @@ class PostDetailView(DetailView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/post_detail.html'
 
@@ -335,6 +342,7 @@ class PostDraftListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_draft_list.html'
     context_object_name = 'posts'
@@ -362,6 +370,7 @@ class PostScheduledListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_scheduled_list.html'
     context_object_name = 'posts'
@@ -389,6 +398,7 @@ class PostWithdrawnListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_withdrawn_list.html'
     context_object_name = 'posts'
@@ -415,6 +425,7 @@ class AllTagsListView(ListView):
     Returns:
         tags: A list of tags
     """
+
     model = CustomTag
     template_name = 'blog/lists/tags_list.html'
     context_object_name = 'tags'
@@ -447,6 +458,7 @@ class PostWithTagListView(ListView):
     Returns:
         posts: A list of posts
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -483,6 +495,7 @@ class TagUpdateView(UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = CustomTag
     fields = ('__all__')
     template_name = "blog/category_edit.html"
@@ -509,6 +522,7 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     form_class = PostCreateForm
     template_name = "blog/create_post.html"
@@ -538,6 +552,7 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Category
     form_class = CategoryCreateForm
     template_name = "blog/create_category.html"
@@ -567,6 +582,7 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Series
     form_class = SeriesCreateForm
     template_name = "blog/create_series.html"
@@ -592,6 +608,7 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Category
     form_class = CategoryEditForm
     template_name = "blog/category_edit.html"
@@ -620,6 +637,7 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Category
     template_name = 'blog/category_confirm_delete.html'
     form_class = CategoryDeleteForm
@@ -656,6 +674,7 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Series
     form_class = SeriesEditForm
     template_name = "blog/series_edit.html"
@@ -684,6 +703,7 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Series
     template_name = 'blog/series_confirm_delete.html'
     form_class = SeriesDeleteForm
@@ -720,6 +740,7 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     form_class = PostEditForm
     template_name = "blog/post_update.html"
@@ -745,6 +766,7 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/create_post.html'
     form_class = PostCreateForm
@@ -779,6 +801,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/post_confirm_delete.html'
     form_class = PostDeleteForm
@@ -814,6 +837,7 @@ class SearchListView(ListView):
     Returns:
         [type]: [description]
     """
+
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -847,6 +871,7 @@ class PostSearchResultsListView(ListView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/search.html'
     context_object_name = 'filter'
@@ -878,6 +903,7 @@ class CategorySearchResultsListView(ListView):
     Returns:
         [type]: [description]
     """
+
     model = Category
     template_name = 'blog/search.html'
     context_object_name = 'query'
@@ -923,6 +949,7 @@ class TagsSearchResultsListView(ListView):
     Returns:
         [type]: [description]
     """
+
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -963,6 +990,7 @@ class RandomSearchResultsListView(ListView):
     Returns:
         [type]: [description]
     """
+
     template_name = 'blog/search.html'
     context_object_name = 'query'
 
@@ -989,6 +1017,7 @@ class AllSearchResultsListView(ListView):
     Returns:
         [type]: [description]
     """
+
     template_name = 'blog/search.html'
     context_object_name = 'query'
     paginate_by = 21
@@ -1074,6 +1103,7 @@ class PostCommentCreateView(LoginRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Comment
     form_class = CommentForm
     template_name = "blog/comments/add_comment_to_post.html"
@@ -1105,6 +1135,7 @@ class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
     Returns:
         [type]: [description]
     """
+
     model = Comment
     form_class = CommentForm
     template_name = "blog/comments/add_comment_to_post.html"
@@ -1137,6 +1168,7 @@ class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Comment
     form_class = EditPostCommentForm
     template_name = 'blog/comments/edit_comment.html'
@@ -1167,6 +1199,7 @@ class ApprovePostCommentUpdateView(UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/comments/approve_post_comment.html'
@@ -1197,6 +1230,7 @@ class RemovePostCommentUpdateView(UpdateView):
     Returns:
         [type]: [description]
     """
+
     model = Comment
     form_class = ARPostCommentForm
     template_name = 'blog/comments/remove_post_comment.html'
@@ -1227,6 +1261,7 @@ class PostArchiveIndexView(ArchiveIndexView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -1257,6 +1292,7 @@ class PostYearArchiveView(YearArchiveView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -1287,6 +1323,7 @@ class PostMonthArchiveView(MonthArchiveView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -1318,6 +1355,7 @@ class PostWeekArchiveView(WeekArchiveView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -1348,6 +1386,7 @@ class PostDayArchiveView(DayArchiveView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'
@@ -1382,6 +1421,7 @@ class PostDateDetailView(DateDetailView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/archive_date_detail.html'
     date_field = "published_date"
@@ -1433,6 +1473,7 @@ class PostTodayArchiveView(TodayArchiveView):
     Returns:
         [type]: [description]
     """
+
     model = Post
     template_name = 'blog/lists/post_list.html'
     context_object_name = 'posts'

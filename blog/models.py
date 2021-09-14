@@ -33,6 +33,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     Returns:
         Category: A model for Category
     """
+
     parent = auto_prefetch.ForeignKey(
         'self', on_delete=models.CASCADE, related_name="category_children", null=True, blank=True)
     title = models.CharField(max_length=200, help_text="Category title")
@@ -108,6 +109,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     Returns:
         Series: A model for Series
     """
+
     title = models.CharField(max_length=200, help_text="Series title")
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="",
@@ -169,6 +171,7 @@ class PostCatsLink(auto_prefetch.Model):
     Returns:
         PostCatsLink: postcatslink_set
     """
+
     post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE)
     category = auto_prefetch.ForeignKey(
@@ -195,6 +198,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     Returns:
         Post: A model for Post
     """
+
     PUBLICATION_CHOICES = [
         ('P', 'Published'),
         ('W', 'Withdrawn'),
@@ -400,6 +404,7 @@ class PostContent(auto_prefetch.Model):
     Returns:
         PostContent: A model for Post Content
     """
+
     post = auto_prefetch.ForeignKey(
         'blog.Post', on_delete=models.CASCADE, related_name="content")
     body = MarkdownxField(help_text="Post main content")
@@ -430,6 +435,7 @@ class Comment(auto_prefetch.Model):
     Returns:
         Comment: An old Model for Comments
     """
+
     APPROBATION_CHOICES = [
         ('AP', 'Approved'),
         ('RE', 'Removed'),
