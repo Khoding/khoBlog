@@ -31,7 +31,10 @@ class ResourceViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
-        queryset = Resource.objects.filter(withdrawn=False)
+        if self.request.user.is_superuser:
+            queryset = Resource.objects.all()
+        else:
+            queryset = Resource.objects.filter(withdrawn=False)
         return queryset
 
     def get_serializer_class(self):
@@ -53,7 +56,10 @@ class ResourceDetailView(generics.RetrieveAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
-        queryset = Resource.objects.filter(withdrawn=False)
+        if self.request.user.is_superuser:
+            queryset = Resource.objects.all()
+        else:
+            queryset = Resource.objects.filter(withdrawn=False)
         return queryset
 
     def get_serializer_class(self):
