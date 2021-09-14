@@ -1,7 +1,7 @@
 {% load markdown_extra read_time %}
 
 {% block card_div %}
-    <div id="post-{{ post.slug }}" class="card shadow">
+    <article id="post-{{ post.slug }}" class="card shadow">
 {% endblock card_div %}
     {% if post.published_date %}
         {% if post.was_published_recently %}
@@ -19,9 +19,9 @@
         <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
     {% endif %}
 
-    <div class="card-header">
+    <header class="card-header">
         {% block card_header %}
-            <div class="d-flex">
+            <section class="d-flex">
                 <span class="col">
                     {% if post.get_featured_cat %}
                         <strong><a class="cat-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a></strong>
@@ -42,29 +42,29 @@
                         {% endif %}
                     {% endblock super_buttons %}
                 </span>
-            </div>
+            </section>
         {% endblock card_header %}
-    </div>
+    </header>
 
-    <div class="card-body">
+    <section class="card-body">
         {% block card_body %}
             {% if series %}
-                <div class="card shadow">
-                    <div class="card-header">
+                <article class="card shadow">
+                    <header class="card-header">
                         <strong>Series: <a href="{% url 'blog:post_series_list' slug=post.series.slug %}">{{ post.series }}</a></strong>{% if post.series.description %} - {{ post.series.description }}{% endif %}
-                    </div>
+                    </header>
                     <ul class="list-group list-group-flush">
                         {% for e in series %}
                             <li class="list-group-item"><a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}: {{ e }}</a></li>
                         {% endfor %}
                     </ul>
-                </div>
+                </article>
 
                 <hr />
             {% endif %}
 
             <h2 class="card-title">{{ title }}</h2>
-            <div>
+            <section>
                 {% include 'blog/includes/post_dates.html' %}
                 <p class="mb-0 text-small text-muted">
                     {% if not body %}
@@ -73,13 +73,13 @@
                         A while
                     {% endif %}
                 </p>
-            </div>
+            </section>
 
             {% if post.image %}
                 <img src="{{ post.image.url }}" class="post-image" alt="Post image" />
             {% endif %}
 
-            <div class="card-text">
+            <section class="card-text">
                 {% if body %}
                     {% for content in body %}
                         {{ content.body|formatted_markdown|safe }}
@@ -90,13 +90,13 @@
                 {% else %}
                     {{ post.body|formatted_markdown|safe }}
                 {% endif %}
-            </div>
+            </section>
             {% if post.url_to_article %}
                 <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
             {% endif %}
         {% endblock card_body %}
-    </div>
+    </section>
 
     {% block card_footer %}
     {% endblock card_footer %}
-</div>
+</article>

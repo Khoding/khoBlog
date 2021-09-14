@@ -2,7 +2,7 @@
 {% load static comments %}
 
 {% block page_top_end %}
-    <div class="btn-group float-end" role="group" aria-label="Previous / Next">
+    <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
         <a class="btn btn-primary" href="{{ prev_post.get_absolute_url }}">
             <i class="bi bi-chevron-left"></i>
         </a>
@@ -10,7 +10,7 @@
         <a class="btn btn-primary" href="{{ next_post.get_absolute_url }}">
             <i class="bi bi-chevron-right"></i>
         </a>
-    </div>
+    </nav>
 {% endblock page_top_end %}
 
 {% block page_top %}
@@ -23,7 +23,7 @@
 {% block content_main %}
     {% include 'blog/base_post_card.html' %}
 
-    <div class="card p-2 comments shadow mt-2">
+    <article class="card p-2 comments shadow mt-2">
         <h5 class="text-muted">Comments</h5>
         {% if post.enable_comments %}
             {% get_comment_count for post as comment_count %}
@@ -37,7 +37,7 @@
         {% else %}
             <p class="text-muted text-small">This post has comments disabled.</p>
         {% endif %}
-    </div>
+    </article>
 {% endblock content_main %}
 
 {% block inside_aside %}

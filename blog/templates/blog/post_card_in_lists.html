@@ -2,12 +2,12 @@
 {% load read_time %}
 
 {% block card_div %}
-    <div id="post-{{ post.slug }}" class="card shadow h-100">
+    <article id="post-{{ post.slug }}" class="card shadow h-100">
 {% endblock card_div %}
 
 {% block card_body %}
     <h3 class="card-title text-word-wrap mb-0">{{ post.title|truncatewords_html:7 }}</h3>
-    <div>{% include 'blog/includes/post_dates.html' %}</div>
+    <section>{% include 'blog/includes/post_dates.html' %}</section>
     <p class="mb-0 text-small text-muted">
         {% if post.body %}
             {{ post.body|readtime }}
@@ -19,7 +19,7 @@
 {% endblock card_body %}
 
 {% block card_footer %}
-    <div class="card-footer">
+    <footer class="card-footer">
         <span class="d-flex">
             <span class="col">
                 <a class="card-link" href="{{ post.get_absolute_url }}">Continue reading</a>
@@ -35,5 +35,5 @@
                 <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.slug }}" aria-controls="postOffCanvas-{{ post.slug }}">Post Info</a>
             </span> {% endcomment %}
         </span>
-    </div>
+    </footer>
 {% endblock card_footer %}
