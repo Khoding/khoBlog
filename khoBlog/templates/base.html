@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8" />
     {% if not debug_flag %}
         {% analytical_head_top %}
 
@@ -22,7 +23,16 @@
         <!-- End Google Tag Manager -->
     {% endif %}
 
-    <meta charset="UTF-8"/>
+    <title>
+        Khodok's Blog -
+        {% if title %}
+            {{ title }}
+        {% else %}
+            {% block title %}
+            {% endblock title %}
+        {% endif %}
+    </title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
@@ -56,15 +66,6 @@
     <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json"
           title="oEmbed Profile: JSON">
 
-    <title>
-        Khodok's Blog -
-        {% if title %}
-            {{ title }}
-        {% else %}
-            {% block title %}
-            {% endblock title %}
-        {% endif %}
-    </title>
 
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
