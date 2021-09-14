@@ -38,6 +38,8 @@ class ResourceViewSet(viewsets.ModelViewSet):
         return queryset
 
     def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return ResourceSerializer
         return ResourceSerializer
 
 
@@ -49,6 +51,8 @@ class ResourceCreateView(generics.CreateAPIView):
         return queryset
 
     def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return ResourceSerializer
         return ResourceSerializer
 
 
@@ -63,6 +67,8 @@ class ResourceDetailView(generics.RetrieveAPIView):
         return queryset
 
     def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return ResourceSerializer
         return ResourceSerializer
 
 
@@ -74,6 +80,8 @@ class ResourceUpdateView(generics.UpdateAPIView):
         return queryset
 
     def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return ResourceSerializer
         return ResourceSerializer
 
 
@@ -85,4 +93,6 @@ class ResourceDeleteView(generics.DestroyAPIView):
         return queryset
 
     def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return ResourceSerializer
         return ResourceSerializer
