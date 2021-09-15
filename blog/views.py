@@ -915,12 +915,12 @@ class CategorySearchResultsListView(ListView):
         if query is not None:
             if self.request.user.is_superuser:
                 return self.model.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        description__icontains=query),
+                    Q(title__contains=query) | Q(
+                        description__contains=query),
                 ).get_without_removed()
             return self.model.objects.filter(
-                Q(title__icontains=query) | Q(
-                    description__icontains=query),
+                Q(title__contains=query) | Q(
+                    description__contains=query),
             ).filter(~Q(withdrawn=True),
                      ).get_without_removed()
         if self.request.user.is_superuser:
@@ -960,10 +960,10 @@ class TagsSearchResultsListView(ListView):
         if query is not None:
             if not self.request.user.is_superuser:
                 return CustomTag.objects.filter(
-                    Q(name__icontains=query, withdrawn=False)
+                    Q(name__contains=query, withdrawn=False)
                 )
             return CustomTag.objects.filter(
-                Q(name__icontains=query)
+                Q(name__contains=query)
             )
         if not self.request.user.is_superuser:
             tag = CustomTag.objects.filter(withdrawn=False)
@@ -1028,29 +1028,29 @@ class AllSearchResultsListView(ListView):
         if query is not None:
             if self.request.user.is_superuser:
                 post = Post.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        body__icontains=query) | Q(description__icontains=query),
+                    Q(title__contains=query) | Q(
+                        body__contains=query) | Q(description__contains=query),
                 ).get_without_removed()
                 category = Category.objects.filter(
-                    Q(title__icontains=query) | Q(
-                        description__icontains=query),
+                    Q(title__contains=query) | Q(
+                        description__contains=query),
                 ).get_without_removed()
                 tag = CustomTag.objects.filter(
-                    Q(name__icontains=query)
+                    Q(name__contains=query)
                 )
                 return [post, category, tag]
             post = Post.objects.filter(
-                Q(title__icontains=query) | Q(
-                    body__icontains=query) | Q(description__icontains=query),
+                Q(title__contains=query) | Q(
+                    body__contains=query) | Q(description__contains=query),
             ).filter(~Q(published_date__gt=timezone.now()), ~Q(published_date__isnull=True), ~Q(withdrawn=True),
                      ).get_without_removed()
             category = Category.objects.filter(
-                Q(title__icontains=query) | Q(
-                    description__icontains=query),
+                Q(title__contains=query) | Q(
+                    description__contains=query),
             ).filter(~Q(withdrawn=True),
                      ).get_without_removed()
             tag = CustomTag.objects.filter(
-                Q(name__icontains=query)
+                Q(name__contains=query)
             ).filter(~Q(withdrawn=True),
                      )
             return [post, category, tag]

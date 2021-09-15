@@ -7,10 +7,10 @@ from .models import Category, Post
 
 
 class PostFilter(django_filters.FilterSet):
-    title = django_filters.CharFilter(lookup_expr='icontains')
-    description = django_filters.CharFilter(lookup_expr='icontains')
-    body = django_filters.CharFilter(lookup_expr='icontains')
-    slug = django_filters.CharFilter(lookup_expr='icontains')
+    title = django_filters.CharFilter(lookup_expr='contains')
+    description = django_filters.CharFilter(lookup_expr='contains')
+    body = django_filters.CharFilter(lookup_expr='contains')
+    slug = django_filters.CharFilter(lookup_expr='contains')
     categories = django_filters.ModelChoiceFilter(
         queryset=Category.objects.filter(withdrawn=False, is_removed=False))
     tags = django_filters.ModelChoiceFilter(
