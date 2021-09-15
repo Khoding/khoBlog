@@ -24,4 +24,4 @@ class PostFilter(django_filters.FilterSet):
     @property
     def qs(self):
         parent = super().qs
-        return parent.filter(Q(published_date__lte=timezone.now(), withdrawn=False, is_removed=False))
+        return parent.filter(is_removed=False)
