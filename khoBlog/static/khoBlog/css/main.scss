@@ -448,265 +448,266 @@ aside p:last-child {
             pointer-events: none;
         }
     }
-}
 
-.tabbed-set {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-}
+    .tabbed-set {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+    }
 
-.tabbed-set .tabbed-content {
-    display: none;
-    order: 99;
-    width: 100%;
-}
+    .tabbed-set .tabbed-content {
+        display: none;
+        order: 99;
+        width: 100%;
+        padding: 0 2rem;
+    }
 
-.tabbed-set label {
-    width: auto;
-    margin: 0 0.5em;
-    padding: 0.25em;
-    font-size: 120%;
-    cursor: pointer;
-}
+    .tabbed-set label {
+        width: auto;
+        margin: 0 0.5em;
+        padding: 0.25em;
+        font-size: 120%;
+        cursor: pointer;
+    }
 
-.tabbed-set input {
-    position: absolute;
-    opacity: 0;
-}
+    .tabbed-set input {
+        position: absolute;
+        opacity: 0;
+    }
 
-.tabbed-set input:nth-child(n + 1) {
-    color: #333333;
-}
+    .tabbed-set input:nth-child(n + 1) {
+        color: #333333;
+    }
 
-.tabbed-set input:nth-child(n + 1):checked + label {
-    color: #ff5252;
-}
+    .tabbed-set input:nth-child(n + 1):checked + label {
+        color: #ff5252;
+    }
 
-.tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
-    display: block;
-}
+    .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
+        display: block;
+    }
 
-/* Critic Markup */
-.critic {
-    font-family: inherit;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
-    text-decoration: none;
-    color: $palette_dark;
-
-    &:before,
-    &:after {
-        content: '\00a0';
+    /* Critic Markup */
+    .critic {
+        font-family: inherit;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
         padding-top: 0.1em;
         padding-bottom: 0.1em;
-        font-size: initial;
+        text-decoration: none;
+        color: $palette_dark;
+
+        &:before,
+        &:after {
+            content: '\00a0';
+            padding-top: 0.1em;
+            padding-bottom: 0.1em;
+            font-size: initial;
+        }
+
+        &.block:before,
+        &.block:after {
+            content: '';
+        }
     }
 
-    &.block:before,
-    &.block:after {
+    mark.critic {
+        border-color: #ff8600;
+        background: #ffddaa;
+    }
+
+    ins.critic {
+        border-color: #00bb00;
+        background: #ddffdd;
+    }
+
+    del.critic {
+        border-color: #dd0000;
+        background: #ffdddd;
+    }
+
+    ins.break,
+    del.break {
+        font-size: 0;
+        border: none;
+    }
+
+    ins.break:before,
+    del.break:before {
+        content: '\00a0\b6\00a0';
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    ins.after,
+    del.after {
         content: '';
     }
-}
 
-mark.critic {
-    border-color: #ff8600;
-    background: #ffddaa;
-}
+    ins.break:before {
+        color: #00bb00;
+        border: 1px solid #00bb00;
+        background: #ddffdd;
+    }
 
-ins.critic {
-    border-color: #00bb00;
-    background: #ddffdd;
-}
+    del.break:before {
+        color: #bb0000;
+        border: 1px solid #bb0000;
+        background: #ffdddd;
+    }
 
-del.critic {
-    border-color: #dd0000;
-    background: #ffdddd;
-}
+    span.critic {
+        background: #ddddff;
+        border: 0;
+        border-top: 1px solid #0000bb;
+        border-bottom: 1px solid #0000bb;
+    }
 
-ins.break,
-del.break {
-    font-size: 0;
-    border: none;
-}
+    span.critic:before,
+    span.critic:after {
+        font-size: inherit;
+        background: #ddddff;
+        border: 1px solid #0000bb;
+    }
 
-ins.break:before,
-del.break:before {
-    content: '\00a0\b6\00a0';
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
+    span.critic:before {
+        content: '\00a0\bb';
+        border-right: none;
+        -webkit-border-top-left-radius: 3px;
+        -moz-border-top-left-radius: 3px;
+        border-top-left-radius: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        -moz-border-bottom-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
 
-ins.after,
-del.after {
-    content: '';
-}
+    span.critic:after {
+        content: '\ab\00a0';
+        border-left: none;
+        -webkit-border-top-right-radius: 3px;
+        -moz-border-top-right-radius: 3px;
+        border-top-right-radius: 3px;
+        -webkit-border-bottom-right-radius: 3px;
+        -moz-border-bottom-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
 
-ins.break:before {
-    color: #00bb00;
-    border: 1px solid #00bb00;
-    background: #ddffdd;
-}
+    .progress-label {
+        position: absolute;
+        text-align: center;
+        font-weight: 700;
+        width: 100%;
+        margin: 0;
+        line-height: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 
-del.break:before {
-    color: #bb0000;
-    border: 1px solid #bb0000;
-    background: #ffdddd;
-}
+    .progress-bar {
+        height: 1.2rem;
+        float: left;
+        background-color: #2979ff;
+    }
 
-span.critic {
-    background: #ddddff;
-    border: 0;
-    border-top: 1px solid #0000bb;
-    border-bottom: 1px solid #0000bb;
-}
+    .progress {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+        height: 1.2rem;
+        background-color: #eeeeee;
+        position: relative;
+    }
 
-span.critic:before,
-span.critic:after {
-    font-size: inherit;
-    background: #ddddff;
-    border: 1px solid #0000bb;
-}
+    .progress.thin {
+        margin-top: 0.9rem;
+        height: 0.4rem;
+    }
 
-span.critic:before {
-    content: '\00a0\bb';
-    border-right: none;
-    -webkit-border-top-left-radius: 3px;
-    -moz-border-top-left-radius: 3px;
-    border-top-left-radius: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    -moz-border-bottom-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
+    .progress.thin .progress-label {
+        margin-top: -0.4rem;
+    }
 
-span.critic:after {
-    content: '\ab\00a0';
-    border-left: none;
-    -webkit-border-top-right-radius: 3px;
-    -moz-border-top-right-radius: 3px;
-    border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    -moz-border-bottom-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
+    .progress.thin .progress-bar {
+        height: 0.4rem;
+    }
 
-.progress-label {
-    position: absolute;
-    text-align: center;
-    font-weight: 700;
-    width: 100%;
-    margin: 0;
-    line-height: 1.2rem;
-    white-space: nowrap;
-    overflow: hidden;
-}
+    .progress-100plus .progress-bar {
+        background-color: #00e676;
+    }
 
-.progress-bar {
-    height: 1.2rem;
-    float: left;
-    background-color: #2979ff;
-}
+    .progress-80plus .progress-bar {
+        background-color: #fbc02d;
+    }
 
-.progress {
-    display: block;
-    width: 100%;
-    margin: 0.5rem 0;
-    height: 1.2rem;
-    background-color: #eeeeee;
-    position: relative;
-}
+    .progress-60plus .progress-bar {
+        background-color: #ff9100;
+    }
 
-.progress.thin {
-    margin-top: 0.9rem;
-    height: 0.4rem;
-}
+    .progress-40plus .progress-bar {
+        background-color: #ff5252;
+    }
 
-.progress.thin .progress-label {
-    margin-top: -0.4rem;
-}
+    .progress-20plus .progress-bar {
+        background-color: #ff1744;
+    }
 
-.progress.thin .progress-bar {
-    height: 0.4rem;
-}
+    .progress-0plus .progress-bar {
+        background-color: #f50057;
+    }
 
-.progress-100plus .progress-bar {
-    background-color: #00e676;
-}
+    .task-list-item {
+        list-style-type: none !important;
+    }
 
-.progress-80plus .progress-bar {
-    background-color: #fbc02d;
-}
+    .task-list-item input[type='checkbox'] {
+        margin: 0 4px 0.25em -20px;
+        vertical-align: middle;
+    }
 
-.progress-60plus .progress-bar {
-    background-color: #ff9100;
-}
+    .task-list-control {
+        display: inline;
+        /* Ensure label is inline incase theme sets it to block.*/
+    }
 
-.progress-40plus .progress-bar {
-    background-color: #ff5252;
-}
+    .task-list-control {
+        position: relative;
+        display: inline-block;
+        color: #555;
+        cursor: pointer;
+    }
 
-.progress-20plus .progress-bar {
-    background-color: #ff1744;
-}
+    .task-list-control input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        /* Put the input behind the label so it doesn't overlay text */
+    }
 
-.progress-0plus .progress-bar {
-    background-color: #f50057;
-}
+    .task-list-indicator {
+        position: absolute;
+        top: -8px;
+        left: -18px;
+        display: block;
+        width: 14px;
+        height: 14px;
+        color: #eee;
+        background-color: #eee;
+        border-radius: 0.25rem;
+    }
 
-.task-list-item {
-    list-style-type: none !important;
-}
-
-.task-list-item input[type='checkbox'] {
-    margin: 0 4px 0.25em -20px;
-    vertical-align: middle;
-}
-
-.task-list-control {
-    display: inline;
-    /* Ensure label is inline incase theme sets it to block.*/
-}
-
-.task-list-control {
-    position: relative;
-    display: inline-block;
-    color: #555;
-    cursor: pointer;
-}
-
-.task-list-control input[type='checkbox'] {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-    /* Put the input behind the label so it doesn't overlay text */
-}
-
-.task-list-indicator {
-    position: absolute;
-    top: -8px;
-    left: -18px;
-    display: block;
-    width: 14px;
-    height: 14px;
-    color: #eee;
-    background-color: #eee;
-    border-radius: 0.25rem;
-}
-
-.task-list-control input[type='checkbox']:checked + .task-list-indicator::before {
-    display: block;
-    margin-top: -4px;
-    margin-left: 2px;
-    font-size: 16px;
-    line-height: 1;
-    content: '✔';
-    color: #1ebb52;
+    .task-list-control input[type='checkbox']:checked + .task-list-indicator::before {
+        display: block;
+        margin-top: -4px;
+        margin-left: 2px;
+        font-size: 16px;
+        line-height: 1;
+        content: '✔';
+        color: #1ebb52;
+    }
 }
 
 .display-4 {
