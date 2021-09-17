@@ -254,6 +254,30 @@ aside p:last-child {
 }
 
 .markdownx-preview,
+.card-body .card-text,
+details {
+    @each $names, $prop in $old-admonitions {
+        $name: nth($names, 1);
+
+        // Define base class
+        .#{$name} {
+            border-left: 0.4rem solid !important;
+            border-color: var(--md-admonition-icon-color--#{$name}) !important;
+            box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3), 0 0 0.05rem rgba(0, 0, 0, 0.2);
+        }
+
+        // Define synonyms for base class
+        @if length($names) > 1 {
+            @for $n from 2 through length($names) {
+                .#{nth($names, $n)} {
+                    @extend .#{$name};
+                }
+            }
+        }
+    }
+}
+
+.markdownx-preview,
 .card-body .card-text {
     font-variant-ligatures: common-ligatures;
 
@@ -322,26 +346,38 @@ aside p:last-child {
     details {
         width: 75%;
         margin: 0 0;
-        background: #282828;
         margin-bottom: 0.5rem;
-        box-shadow: 0 0.1rem 1rem -0.5rem rgba(0, 0, 0, 0.4);
+        padding-right: 1rem;
+        @include background-color('lighter-bg');
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         border-radius: 5px;
         overflow: hidden;
 
         details,
         p {
             width: 100%;
+            margin-right: 0px !important;
+        }
+
+        details {
             margin: 0.5rem;
-            padding-right: 1rem;
+            padding-right: 0;
+        }
+
+        p {
+            padding: 0.5rem;
+            margin-bottom: 0;
         }
     }
 
     summary {
-        padding: 1rem;
-        display: block;
-        background: #333;
-        padding-left: 2.2rem;
         position: relative;
+        display: block;
+        @include background-color('lightest-bg');
+        margin-right: -1rem;
+        padding: 1rem;
+        padding-left: 2.2rem;
+        border-radius: 5px;
         cursor: pointer;
     }
 
@@ -359,8 +395,12 @@ aside p:last-child {
     }
 
     /* THE MAGIC 🧙‍♀️ */
-    details[open] > summary:before {
-        transform: rotate(90deg);
+    details[open] > summary {
+        border-radius: 5px 5px 0 0;
+
+        &:before {
+            transform: rotate(90deg);
+        }
     }
 
     details summary::-webkit-details-marker {
@@ -459,7 +499,7 @@ aside p:last-child {
         display: none;
         order: 99;
         width: 100%;
-        padding: 0 2rem;
+        padding: 0 0 0 1rem;
 
         h1,
         h2,
