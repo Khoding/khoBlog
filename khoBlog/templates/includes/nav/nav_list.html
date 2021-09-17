@@ -6,7 +6,7 @@
 <ol class="list-unstyled mb-0">
     {% if context.posts %}
         {% for post in context.posts %}
-            {% if forloop.counter <= 21 %}
+            {% if forloop.counter <= 27 %}
                 <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
             {% endif %}
         {% endfor %}
