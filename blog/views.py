@@ -1269,7 +1269,6 @@ class PostArchiveIndexView(ArchiveIndexView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    allow_empty = True
     make_object_list = True
     date_field = "published_date"
     allow_future = True
@@ -1300,7 +1299,6 @@ class PostYearArchiveView(YearArchiveView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    allow_empty = True
     make_object_list = True
     date_field = "published_date"
     allow_future = True
@@ -1331,7 +1329,6 @@ class PostMonthArchiveView(MonthArchiveView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    allow_empty = True
     date_field = "published_date"
     allow_future = True
 
@@ -1431,6 +1428,7 @@ class PostDateDetailView(DateDetailView):
     model = Post
     template_name = 'blog/archive_date_detail.html'
     date_field = "published_date"
+    allow_future = True
 
     def get_queryset(self):
         self.post = get_object_or_404(Post, slug=self.kwargs['slug'])
@@ -1520,7 +1518,6 @@ class PostTodayArchiveView(TodayArchiveView):
     context_object_name = 'posts'
     paginate_by = 21
     paginate_orphans = 5
-    allow_empty = True
     date_field = "published_date"
     allow_future = True
 
