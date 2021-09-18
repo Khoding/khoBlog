@@ -1275,7 +1275,7 @@ class PostArchiveIndexView(ArchiveIndexView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_common_queryset(self.request.user)
+        return self.model.objects.get_common_queryset(self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1306,7 +1306,7 @@ class PostYearArchiveView(YearArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_base_common_queryset()
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1336,7 +1336,7 @@ class PostMonthArchiveView(MonthArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_base_common_queryset()
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1368,7 +1368,7 @@ class PostWeekArchiveView(WeekArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_base_common_queryset()
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1398,7 +1398,7 @@ class PostDayArchiveView(DayArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_base_common_queryset()
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1438,6 +1438,27 @@ class PostDateDetailView(DateDetailView):
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
             self.title = self.post.title
             self.description = self.post.description
+            if self.post.published_date:
+                self.prev_post = (Post.objects
+                                  .filter(published_date__lt=self.post.published_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('-published_date')
+                                  .first())
+                self.next_post = (Post.objects
+                                  .filter(published_date__gt=self.post.published_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('published_date')
+                                  .first())
+            else:
+                self.prev_post = (Post.objects
+                                  .filter(created_date__lt=self.post.created_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('-created_date')
+                                  .first())
+                self.next_post = (Post.objects
+                                  .filter(created_date__gt=self.post.created_date, is_removed=False)
+                                  .exclude(pk=self.post.pk)
+                                  .order_by('created_date'))
         else:
             self.series = self.model.objects.get_common_queryset(self.request.user).filter(
                 series__isnull=False, series=self.post.series).order_by('order_in_series')
@@ -1445,6 +1466,18 @@ class PostDateDetailView(DateDetailView):
                 raise PermissionDenied
             self.title = self.post.title
             self.description = self.post.description
+            self.prev_post = (Post.objects
+                              .filter(published_date__lt=self.post.published_date,
+                                      published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('-published_date')
+                              .first())
+            self.next_post = (Post.objects
+                              .filter(published_date__gt=self.post.published_date,
+                                      published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+                              .exclude(pk=self.post.pk)
+                              .order_by('published_date')
+                              .first())
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -1461,6 +1494,8 @@ class PostDateDetailView(DateDetailView):
         context['side_title'] = 'Post List'
         context['similar_posts'] = self.tags = self.post.tags.similar_objects()[
             :5]
+        context['next_post'] = self.next_post
+        context['prev_post'] = self.prev_post
         return context
 
 
@@ -1486,7 +1521,7 @@ class PostTodayArchiveView(TodayArchiveView):
     allow_future = True
 
     def get_queryset(self):
-        return self.model.objects.get_base_common_queryset()
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
