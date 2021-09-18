@@ -1310,7 +1310,7 @@ class PostYearArchiveView(YearArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archive] Posted during ' + str(self.get_year())
+        context['title'] = '[Archive] Posted in ' + str(self.get_year())
         return context
 
 
@@ -1340,7 +1340,7 @@ class PostMonthArchiveView(MonthArchiveView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = '[Archive] Posted during ' + \
+        context['title'] = '[Archive] Posted in ' + \
                            str(self.get_month()) + \
                            ' of ' + str(self.get_year())
         return context
@@ -1405,6 +1405,10 @@ class PostDayArchiveView(DayArchiveView):
         context['title'] = '[Archive] Posted the ' + \
                            str(self.get_day()) + ' ' + str(self.get_month()) + \
                            ' ' + str(self.get_year())
+        context['archive'] = True
+        context['g_day'] = f'{self.get_day()}'
+        context['g_month'] = f'{self.get_month()}'
+        context['g_year'] = f'{self.get_year()}'
         return context
 
 
