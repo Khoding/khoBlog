@@ -4,7 +4,7 @@ from django_comments.abstracts import CommentAbstractModel
 
 
 class CustomComment(CommentAbstractModel):
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200, default="")
     alias_user = models.CharField(max_length=200, null=True, blank=True,
                                   help_text="You can add an Alias Name to your comment if you wish to be "
                                             'incognito (note that Moderators can still know it\'s you)',
@@ -24,10 +24,10 @@ class CustomComment(CommentAbstractModel):
         full_t = ''
         if self.content_object:
             full_t = full_t + str(self.content_type.model) + \
-                     ' - ' + str(self.content_object.title) + ' - '
-        elif self.title:
-            full_t = self.title + ' - '
-        full_t = full_t + self.comment
+                ' - ' + str(self.content_object.title) + ' - '
+        if self.title:
+            full_t = full_t + self.title + ' - '
+        full_t = full_t + self.comment[:25]
         return full_t
 
     def get_absolute_url(self, anchor_pattern="#comment-%(id)s"):

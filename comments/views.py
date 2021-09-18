@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView
 
 from blog.models import Post
-from comments.forms import CustomCommentForm
 from .models import CustomComment
 
 
@@ -47,15 +46,16 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
 class CommentReplyView(LoginRequiredMixin, CreateView):
     model = CustomComment
     template_name = 'blog/comments/add_comment_to_post.html'
-    form_class = CustomCommentForm
-
-    def get_queryset(self):
-        self.comment = get_object_or_404(CustomComment, pk=self.kwargs['pk'])
-        return super().get_queryset()
+    fields = ('title', 'alias_user', 'comment',)
 
     def form_valid(self, form):
-        form.instance.related_post_id = self.kwargs['pk_post']
-        form.instance.parent = self.comment
+        comment = get_object_or_404(CustomComment, pk=self.kwargs['pk'])
+
+        form.instance.content_type_id = comment.content_type.pk
+        form.instance.user = self.request.user
+        form.instance.object_pk = comment.object_pk
+        form.instance.site_id = comment.site.pk
+        form.instance.parent_id = comment.pk
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

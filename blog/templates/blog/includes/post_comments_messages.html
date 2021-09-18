@@ -31,9 +31,12 @@
 
                 {% if user.is_authenticated %}
                     <span class="float-end">
-                        {% if user.id == comment.user_id or user.is_superuser %}
+                        <div class="btn-group float-end">
+                            <a class="btn btn-primary" href="{% url 'comments:comments-reply' pk=comment.id %}">
+                                <i class="bi bi-reply-fill"></i> Reply
+                            </a>
 
-                            <div class="btn-group float-end">
+                            {% if user.id == comment.user_id or user.is_superuser %}
                                 <a class="btn btn-secondary" href="{% url 'comments:comments-edit' pk=comment.id %}">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
@@ -55,8 +58,8 @@
                                             </a>
                                     </ul>
                                 {% endif %}
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </span>
                 {% endif %}
             </h4>
