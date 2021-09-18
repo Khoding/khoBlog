@@ -1,6 +1,9 @@
 import auto_prefetch
 from django.db import models
+from django.db.models import F, Q
 from django_comments.abstracts import CommentAbstractModel
+from django_comments_xtd import get_model
+from django_comments_xtd.models import XtdComment
 
 
 class CustomComment(CommentAbstractModel):

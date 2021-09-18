@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'analytical',
 
     # Django Packages Apps
+    'django_comments_xtd',
     'django_comments',
-    'comments',
+    # 'comments',
 
     # APIs Apps
     'rest_framework',

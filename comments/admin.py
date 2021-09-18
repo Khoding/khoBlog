@@ -4,7 +4,7 @@ from django.utils.translation import ngettext
 from django_comments.admin import CommentsAdmin
 
 from comments.forms import AdminForm
-from .models import CustomComment
+# from .models import CustomComment
 
 
 def make_site_khoblog(modeladmin, request, queryset):
@@ -57,5 +57,5 @@ class CommentsAdmin(CommentsAdmin):
                "remove_comments", make_site_khoblog, make_site_localhost]
 
 
-admin.site.unregister(CustomComment)
-admin.site.register(CustomComment, CommentsAdmin)
+# admin.site.unregister(CustomComment)
+# admin.site.register(CustomComment, CommentsAdmin)

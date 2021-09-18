@@ -2,7 +2,7 @@ from django import forms
 from django.forms.models import ModelForm
 from django_comments.forms import CommentForm
 
-from .models import CustomComment
+# from .models import CustomComment
 
 
 class CustomCommentChoiceField(forms.ModelChoiceField):
@@ -10,7 +10,7 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
         full_t = ''
         if obj.content_object:
             full_t = full_t + str(obj.content_type.model) + \
-                     ' - ' + str(obj.content_object.title) + ' - '
+                ' - ' + str(obj.content_object.title) + ' - '
         elif obj.title:
             full_t = obj.title + ' - '
         full_t = full_t + str(obj.comment)[:50]
@@ -39,4 +39,5 @@ class CustomCommentForm(CommentForm):
 
 
 class AdminForm(ModelForm):
-    parent = CustomCommentChoiceField(queryset=CustomComment.objects.all())
+    pass
+    # parent = CustomCommentChoiceField(queryset=CustomComment.objects.all())
