@@ -11,7 +11,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
         return queryset
 
     def get_serializer_class(self):

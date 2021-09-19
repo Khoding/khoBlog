@@ -3,6 +3,7 @@ import itertools
 
 import auto_prefetch
 import rules
+from custom_taggit.models import CustomTaggedItem
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -17,7 +18,6 @@ from simple_history.models import HistoricalRecords
 from taggit.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
-from custom_taggit.models import CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -83,7 +83,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__published_date__lte=timezone.now(), post__withdrawn=False,
+        return self.postcatslink_set.filter(post__pub_date__lte=timezone.now(), post__withdrawn=False,
                                             post__is_removed=False).count()
 
     @property
@@ -241,7 +241,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(
         auto_now=True, help_text="Last modification")
-    published_date = models.DateTimeField(
+    pub_date = models.DateTimeField(
         blank=True, null=True, help_text="Publication date")
     publication_state = models.CharField(
         max_length=25, verbose_name="Publication", choices=PUBLICATION_CHOICES, default='D',
@@ -269,7 +269,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     objects = PostManager()
 
     class Meta:
-        ordering = ['-published_date']
+        ordering = ['-pub_date']
         get_latest_by = ['id']
         rules_permissions = {
             "add": rules.is_superuser,
@@ -332,18 +332,18 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """
         Return True if the event is publicly accessible.
         """
-        return self.published_date <= timezone.now() and not self.withdrawn and not self.is_removed
+        return self.pub_date <= timezone.now() and not self.withdrawn and not self.is_removed
 
     is_published.boolean = True
 
     def publish(self):
-        self.published_date = timezone.now()
+        self.pub_date = timezone.now()
         self.publication_state = 'P'
         self.withdrawn = False
         self.save()
 
     def publish_withdrawn(self):
-        self.published_date = timezone.now()
+        self.pub_date = timezone.now()
         self.publication_state = 'W'
         self.withdrawn = True
         self.save()
@@ -354,7 +354,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def was_published_recently(self):
         now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.published_date <= now
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def remove(self):
         self.is_removed = True

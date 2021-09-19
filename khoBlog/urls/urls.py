@@ -45,7 +45,7 @@ schema_view = get_schema_view(
 )
 
 site_map_info_dict = {
-    'queryset': Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False),
+    'queryset': Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False),
 }
 
 api_patterns = [
@@ -71,43 +71,43 @@ api_base_patterns = [
 ]
 
 urlpatterns = [
-                  # My Apps
-                  path('', include('blog.urls')),
-                  path('projects/', include('portfolio.urls')),
-                  path('pages/', include('pages.urls')),
-                  path('polls/', include('polls.urls')),
-                  path('todo/', include('todo.urls')),
-                  path('s/', include('shortener.urls')),
-                  path('l/', include('links.urls')),
+    # My Apps
+    path('', include('blog.urls')),
+    path('projects/', include('portfolio.urls')),
+    path('pages/', include('pages.urls')),
+    path('polls/', include('polls.urls')),
+    path('todo/', include('todo.urls')),
+    path('s/', include('shortener.urls')),
+    path('l/', include('links.urls')),
 
-                  # Rest API
-                  path('api/', include(api_base_patterns)),
+    # Rest API
+    path('api/', include(api_base_patterns)),
 
-                  # Django Admin
-                  path('admin/docs/', include('django.contrib.admindocs.urls')),
-                  path('admin/', admin.site.urls),
+    # Django Admin
+    path('admin/docs/', include('django.contrib.admindocs.urls')),
+    path('admin/', admin.site.urls),
 
-                  # User Management
-                  path('accounts/', include('accounts.urls')),
-                  path('accounts/', include('allauth.urls')),
-                  path('captcha/', include('captcha.urls')),
+    # User Management
+    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('captcha/', include('captcha.urls')),
 
-                  # Dev Urls
-                  path('dev/', include(dev_urls, namespace='dev')),
+    # Dev Urls
+    path('dev/', include(dev_urls, namespace='dev')),
 
-                  # Markdownx
-                  path('markdownx/', include('markdownx.urls')),
+    # Markdownx
+    path('markdownx/', include('markdownx.urls')),
 
-                  re_path(r'^comments/', include('comments.urls')),
-                  re_path(r'^comments/', include('django_comments.urls')),
+    re_path(r'^comments/', include('comments.urls')),
+    re_path(r'^comments/', include('django_comments.urls')),
 
-                  path('sitemap.xml', sitemap,
-                       {'sitemaps': {'blog': GenericSitemap(
-                           site_map_info_dict, priority=0.6)}},
-                       name='django.contrib.sitemaps.views.sitemap'),
-                  re_path(r'^robots\.txt', include('robots.urls')),
-                  re_path(r'^referrals/', include('pinax.referrals.urls',
-                                                  namespace="pinax_referrals")),
+    path('sitemap.xml', sitemap,
+         {'sitemaps': {'blog': GenericSitemap(
+             site_map_info_dict, priority=0.6)}},
+         name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^robots\.txt', include('robots.urls')),
+    re_path(r'^referrals/', include('pinax.referrals.urls',
+                                    namespace="pinax_referrals")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     path('__debug__/', include(debug_toolbar.urls)),
 ]

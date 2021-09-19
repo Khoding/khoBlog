@@ -1,8 +1,8 @@
 <div class="d-none d-xl-block">
     <p class="mb-auto text-muted">Created at: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
 
-    {% if post.published_date %}
-        <p class="mb-auto text-muted">Published at: {{ post.published_date|date:'l, d F Y H:i:s' }}</p>
+    {% if post.pub_date %}
+        <p class="mb-auto text-muted">Published at: {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
     {% endif %}
 
     {% if post.modified_date %}

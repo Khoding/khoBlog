@@ -10,7 +10,7 @@ class LatestPostsFeed(Feed):
     description = 'Latest posts'
 
     def items(self):
-        return Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        return Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def item_title(self, item):
         return item.title
@@ -22,7 +22,7 @@ class LatestPostsFeed(Feed):
         return item.get_absolute_url()
 
     def item_pubdate(self, item):
-        return item.published_date
+        return item.pub_date
 
     def item_updateddate(self, item):
         return item.modified_date
@@ -48,15 +48,15 @@ class LatestPostsFeedByCategory(Feed):
         return obj.description
 
     def items(self, obj):
-        return Post.objects.filter(categories=obj, published_date__lte=timezone.now(), withdrawn=False,
+        return Post.objects.filter(categories=obj, pub_date__lte=timezone.now(), withdrawn=False,
                                    is_removed=False).order_by(
-            '-published_date')
+            '-pub_date')
 
     def item_description(self, item):
         return item.description
 
     def item_pubdate(self, item):
-        return item.published_date
+        return item.pub_date
 
     def item_updateddate(self, item):
         return item.modified_date

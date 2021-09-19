@@ -127,18 +127,18 @@ class PostContentInline(admin.TabularInline):
 
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     resource_class = PostResource
-    list_display = ('pk', 'title', 'created_date', 'published_date',
+    list_display = ('pk', 'title', 'created_date', 'pub_date',
                     'slug', 'publication_state', 'featuring_state', 'featured_cat_title', 'clicks', 'language',
                     'is_removed',)
     list_display_links = ('pk', 'title',)
     list_editable = ('is_removed',)
-    ordering = ('-pk', 'title', '-published_date', '-is_removed',)
+    ordering = ('-pk', 'title', '-pub_date', '-is_removed',)
     search_fields = ('title', 'featured_title',  'slug',
                      'pk', 'withdrawn', 'featuring_state', 'url_to_article', 'url_to_article_title',)
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'is_removed', 'publication_state',
-                   'featuring_state', 'published_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
+                   'featuring_state', 'pub_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
@@ -148,7 +148,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         (('Post Type'), {
             'fields': ('image', 'url_to_article', 'url_to_article_title',)}),
         (('Dates'), {
-            'fields': ('created_date', 'published_date',)}),
+            'fields': ('created_date', 'pub_date',)}),
     )
 
     inlines = [PostContentInline, PostCatsLinkInline]

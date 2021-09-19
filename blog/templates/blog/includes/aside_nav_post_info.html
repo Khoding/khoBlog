@@ -19,8 +19,8 @@
     </p>
     <div class="mb-2">
         <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
-        {% if post.published_date %}
-            <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:i:s' }}</p>
+        {% if post.pub_date %}
+            <p class="mb-0">Published: {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
         {% endif %}
         {% if post.modified_date %}
             <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
@@ -41,7 +41,7 @@
                 {% endif %}
             {% endfor %}
         </p>
-        <p>Similar Posts: {% for e in similar_posts %}{% if not e.withdrawn and e.published_date <= now or user.is_superuser %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</p>
+        <p>Similar Posts: {% for e in similar_posts %}{% if not e.withdrawn and e.pub_date <= now or user.is_superuser %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</p>
     {% endif %}
 
     <p>Clicks: {{ post.clicks }}</p>
@@ -51,6 +51,6 @@
     {% if user.is_superuser %}
         <h6>Admin Information</h6>
         <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
-        <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
+        <p>Scheduled: {% if post.pub_date > now %}True{% else %}False{% endif %}</p>
     {% endif %}
 </div>

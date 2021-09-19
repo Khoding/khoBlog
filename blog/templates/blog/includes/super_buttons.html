@@ -7,8 +7,8 @@
         <span class="visually-hidden">Toggle Dropdown</span>
     </button>
     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="objectAdminDropdown-{{ object.id }}">
-        {% if not object.published_date %}
-            {% if object.get_absolute_publish_url or object.get_absolute_publish_withdrawn_url %}
+        {% if object.get_absolute_publish_url or object.get_absolute_publish_withdrawn_url %}
+            {% if not object.pub_date %}
                 {% if object.get_absolute_publish_url %}
                     <a class="dropdown-item" href="{{ object.get_absolute_publish_url }}">
                         <i class="bi bi-file-earmark-arrow-up"></i> Publish

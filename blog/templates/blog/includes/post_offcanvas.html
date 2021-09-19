@@ -25,8 +25,8 @@
         </p>
         <div class="mb-2">
             <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
-            {% if post.published_date %}
-                <p class="mb-0">Published: {{ post.published_date|date:'l, d F Y H:i:s' }}</p>
+            {% if post.pub_date %}
+                <p class="mb-0">Published: {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
             {% endif %}
             {% if post.modified_date %}
                 <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
@@ -44,7 +44,7 @@
         {% if user.is_superuser %}
             <h6>Admin Information</h6>
             <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
-            <p>Scheduled: {% if post.published_date > now %}True{% else %}False{% endif %}</p>
+            <p>Scheduled: {% if post.pub_date > now %}True{% else %}False{% endif %}</p>
         {% endif %}
     </div>
 </div>

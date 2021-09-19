@@ -185,12 +185,12 @@
                 </div>
 
                 <div class="field mb-2">
-                    {{ form.published_date.label_tag }}
-                    {{ form.published_date|add_class:"form-control" }}
-                    {% if form.published_date.help_text %}
-                        <span class="text-small text-muted">{{ form.published_date.help_text }}</span>
+                    {{ form.pub_date.label_tag }}
+                    {{ form.pub_date|add_class:"form-control" }}
+                    {% if form.pub_date.help_text %}
+                        <span class="text-small text-muted">{{ form.pub_date.help_text }}</span>
                     {% endif %}
-                    {% for error in form.published_date.errors %}
+                    {% for error in form.pub_date.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
                 </div>

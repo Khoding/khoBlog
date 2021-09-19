@@ -36,7 +36,7 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
         context['title'] = 'Edit Comment'
         context['side_title'] = 'Post List'
         context['comment'] = self.comment
@@ -61,7 +61,7 @@ class CommentReplyView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(
-            published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
         context['title'] = 'Reply to Comment'
         context['side_title'] = 'Post List'
         return context

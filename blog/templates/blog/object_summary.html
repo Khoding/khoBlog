@@ -37,16 +37,16 @@
 
         <section>
             <p class="mb-auto text-small text-muted">
-                {% if not object.published_date %}
+                {% if not object.pub_date %}
                     Created
                 {% else %}
                     Published
                 {% endif %}
                 by <strong>{{ object.author }}</strong> on
-                {% if not object.published_date %}
+                {% if not object.pub_date %}
                     {{ object.created_date|date:'F j, Y' }} at {{ object.created_date|time:'H:i:s' }}
                 {% else %}
-                    {{ object.published_date|date:'F j, Y' }} at {{ object.published_date|time:'H:i:s' }}
+                    {{ object.pub_date|date:'F j, Y' }} at {{ object.pub_date|time:'H:i:s' }}
                 {% endif %}
             </p>
             {% if object.modified_date %}
