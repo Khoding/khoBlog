@@ -86,6 +86,15 @@ class Page(auto_prefetch.Model):
     def get_absolute_url(self):
         return reverse("pages:page_detail", kwargs={"slug": self.slug})
 
+    def get_absolute_update_url(self):
+        return reverse('pages:page_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_delete_url(self):
+        return reverse('pages:page_delete', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:pages_page_change', kwargs={'object_id': self.pk})
+
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(
             self.__class__)

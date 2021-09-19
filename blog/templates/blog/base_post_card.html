@@ -1,4 +1,4 @@
-{% load markdown_extra read_time %}
+{% load markdown_extra read_time super_buttons %}
 
 {% block card_div %}
     <article id="post-{{ post.slug }}" class="card shadow">
@@ -36,11 +36,9 @@
                     <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
                 </span>
                 <span class="col">
-                    {% block super_buttons %}
-                        {% if user.is_superuser %}
-                            {% include 'blog/includes/super_buttons.html' %}
-                        {% endif %}
-                    {% endblock super_buttons %}
+                    {% if user.is_superuser %}
+                        {% sb post %}
+                    {% endif %}
                 </span>
             </section>
         {% endblock card_header %}

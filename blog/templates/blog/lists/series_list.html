@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static %}
+{% load static super_buttons %}
 
 {% block content_main %}
     <div class="row row-cols-1 row-cols-lg-3 me-0">
@@ -14,28 +14,7 @@
                             </span>
                             {% if user.is_superuser %}
                                 <span class="col-auto">
-                                    {% block super_buttons %}
-                                        <div class="btn-group float-end">
-                                            <a class="btn btn-secondary" href="{{ series.get_absolute_update_url }}">
-                                                <i class="bi bi-pencil-square"></i> Edit
-                                            </a>
-
-                                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="seriesAdminDropdown-{{ series.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span class="visually-hidden">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="seriesAdminDropdown-{{ series.id }}">
-                                                <a class="dropdown-item" href="{{ series.get_absolute_admin_update_url }}">
-                                                    <i class="bi bi-pencil-square"></i> Edit in Admin
-                                                </a>
-
-                                                <div class="dropdown-divider"></div>
-
-                                                <a class="dropdown-item" href="{{ series.get_absolute_delete_url }}">
-                                                    <i class="bi bi-trash"></i> Delete
-                                                </a>
-                                            </ul>
-                                        </div>
-                                    {% endblock super_buttons %}
+                                    {% sb series %}
                                 </span>
                             {% endif %}
                         </div>

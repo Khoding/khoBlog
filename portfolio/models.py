@@ -27,7 +27,16 @@ class Project(auto_prefetch.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("portfolio:project_detail", kwargs={"slug": self.slug})
+        return reverse('portfolio:project_detail', kwargs={"slug": self.slug})
+
+    def get_absolute_update_url(self):
+        return reverse('portfolio:project_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_delete_url(self):
+        return reverse('portfolio:project_delete', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:portfolio_project_change', kwargs={'object_id': self.pk})
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(

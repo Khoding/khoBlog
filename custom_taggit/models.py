@@ -1,7 +1,7 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-
-from taggit.models import TagBase, GenericTaggedItemBase
+from taggit.models import GenericTaggedItemBase, TagBase
 
 
 class CustomTag(TagBase):
@@ -11,6 +11,15 @@ class CustomTag(TagBase):
         ordering = ['pk']
         verbose_name = _("Tag")
         verbose_name_plural = _("Tags")
+
+    def get_absolute_url(self):
+        return reverse('blog:post_tagged_with', kwargs={'slug': self.slug})
+
+    def get_absolute_update_url(self):
+        return reverse('blog:tag_edit', kwargs={'slug': self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse('admin:custom_taggit_customtag_change', kwargs={'object_id': self.pk})
 
 
 class CustomTaggedItem(GenericTaggedItemBase):

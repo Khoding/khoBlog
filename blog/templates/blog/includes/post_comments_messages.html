@@ -1,6 +1,6 @@
 {% load comments %}
 
-<div class="ps-4 comment-card{% if comment.parent %} ms-4 comment-reply comment-reply-{{ comment.parent.pk }}{% endif %}">
+<div class="ps-4 comment-card{% if comment.parent %} ms-4 comment-reply comment-reply-{{ comment.parent.id }}{% endif %}">
     <div id="comment-{{ comment.id }}" class="card mt-2">
         <div class="card-header">
             <h4>

@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load static %}
+{% load super_buttons %}
 
 {% block main %}
 
@@ -9,31 +9,9 @@
                 <h2>Project #{{ project.id }}</h2>
             </span>
             <span class="col-auto">
-                {% block super_buttons %}
-                    {% if user.is_superuser %}
-                        <div class="btn-group float-end">
-                            <a class="btn btn-secondary" href="{% url 'portfolio:project_edit' slug=project.slug %}">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </a>
-
-                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="projectAdminDropdown-{{ project.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="projectAdminDropdown">
-                                <a class="dropdown-item" href="{% url 'admin:portfolio_project_change' object_id=project.id %}">
-                                    <i class="bi bi-pencil-square"></i> Edit in Admin
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="{% url 'portfolio:project_delete' slug=project.slug %}">
-                                    <i class="bi bi-trash"></i> Delete
-                                </a>
-                            </ul>
-                        </div>
-                    {% endif %}
-                {% endblock super_buttons %}
+                {% if user.is_superuser %}
+                    {% sb project %}
+                {% endif %}
             </span>
         </div>
 
