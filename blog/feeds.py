@@ -7,7 +7,7 @@ from .models import Category, Post
 class LatestPostsFeed(Feed):
     title = 'Khodok\'s Blog'
     link = ''
-    description = 'Latest posts of my blog.'
+    description = 'Latest posts'
 
     def items(self):
         return Post.objects.filter(published_date__lte=timezone.now(), withdrawn=False, is_removed=False)
@@ -39,7 +39,7 @@ class LatestPostsFeedByCategory(Feed):
         return Category.objects.get(slug=slug)
 
     def title(self, obj):
-        return "Latest posts of %s" % obj.title
+        return "Latest posts in %s" % obj.title
 
     def link(self, obj):
         return obj.get_absolute_url()
