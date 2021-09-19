@@ -1,0 +1,16 @@
+[display]
+fullscreen=true
+
+[gource]
+auto-skip-seconds=1
+caption-file=caption-file.txt
+caption-size=42
+hide=progress,mouse
+key=true
+loop=true
+max-file-lag=3
+path=combined2.txt
+seconds-per-day=2
+title=Khodok's Blog Project Git graphical visualization
+user-image-dir=img
+
