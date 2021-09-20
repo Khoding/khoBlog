@@ -40,7 +40,7 @@ class CommentsAdmin(CommentsAdmin):
         ),
         (
             _('Content'),
-            {'fields': ('user', 'user_name', 'user_email',
+            {'fields': ('title', 'user', 'alias_user', 'user_name', 'user_email',
                         'user_url', 'comment')}
         ),
         (
@@ -54,7 +54,7 @@ class CommentsAdmin(CommentsAdmin):
                    'is_removed',)
 
     actions = ["flag_comments", "approve_comments",
-               "remove_comments", make_site_khoblog, make_site_localhost]
+               "remove_comments", "make_site_khoblog", "make_site_localhost"]
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
@@ -66,7 +66,7 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
     list_display_links = ('cid', 'title')
     fieldsets = (
         (None,          {'fields': ('content_type', 'object_pk', 'site')}),
-        (_('Content'),  {'fields': ('title', 'user', 'user_name', 'user_email',
+        (_('Content'),  {'fields': ('title', 'user', 'alias_user', 'user_name', 'user_email',
                                     'user_url', 'comment', 'followup')}),
         (_('Metadata'), {'fields': ('submit_date', 'ip_address',
                                     'is_public', 'is_removed')}),
@@ -76,7 +76,7 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
                    'is_removed',)
 
     actions = ["flag_comments", "approve_comments",
-               "remove_comments", make_site_khoblog, make_site_localhost]
+               "remove_comments", "make_site_khoblog", "make_site_localhost"]
 
 
 admin.site.unregister(CustomComment)
