@@ -54,7 +54,7 @@ class CommentsAdmin(CommentsAdmin):
                    'is_removed',)
 
     actions = ["flag_comments", "approve_comments",
-               "remove_comments", "make_site_khoblog", "make_site_localhost"]
+               "remove_comments", make_site_khoblog, make_site_localhost]
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
@@ -76,7 +76,7 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
                    'is_removed',)
 
     actions = ["flag_comments", "approve_comments",
-               "remove_comments", "make_site_khoblog", "make_site_localhost"]
+               "remove_comments", make_site_khoblog, make_site_localhost]
 
 
 admin.site.unregister(CustomComment)

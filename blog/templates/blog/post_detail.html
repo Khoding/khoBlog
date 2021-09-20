@@ -26,14 +26,22 @@
     <article class="card p-2 comments shadow mt-2">
         <h5 class="text-muted">Comments</h5>
         {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-            {% get_xtdcomment_count as comment_count for blog.post %}
+            {% if not comments_use_old_system %}
+                {% get_xtdcomment_count as comment_count for blog.post %}
+            {% else %}
+                {% get_comment_count for post as comment_count %}
+            {% endif %}
 
             {% render_comment_form for post %}
             <hr />
 
             <p class="text-muted text-small">This post has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
 
-            {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+            {% if not comments_use_old_system %}
+                {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+            {% else %}
+                {% render_comment_list for post %}
+            {% endif %}
         {% elif post.enable_comments and comments_disabled_globally_flag %}
             <p class="text-muted text-small">Comments were disabled globally.</p>
         {% else %}
