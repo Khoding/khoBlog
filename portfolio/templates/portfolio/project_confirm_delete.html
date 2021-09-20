@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load bootstrap5 %}
+{% load widget_tweaks project_tags %}
 
 {% block main %}
     <h3>Delete: {{ project.title }}</h3>
@@ -8,9 +8,7 @@
         <h4>Are you sure ?</h4>
         {{ form.as_p }}
 
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-        {% endbuttons %}
+        <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
     </form>
 
 {% endblock main %}

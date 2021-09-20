@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'impostor',
     'markdownx',
     'graphene_django',
-    'bootstrap5',
     'captcha',
     'storages',
     'robots',
@@ -43,8 +42,10 @@ INSTALLED_APPS = [
     'django_filters',
     'pinax.referrals',
     'analytical',
+    'django_markdown2',
 
     # Django Packages Apps
+    'django_comments_xtd',
     'django_comments',
     'comments',
 

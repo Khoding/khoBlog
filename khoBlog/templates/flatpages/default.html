@@ -1,5 +1,5 @@
 {% extends 'pages/base_page.html' %}
-{% load comments super_buttons %}
+{% load comments comments_xtd super_buttons %}
 
 {% block page_head %}
     {% if page.page_head %}
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        {% if page.enable_comments %}
+        {% comment %} {% if page.enable_comments %}
             {% get_comment_count for page as comment_count %}
 
             {% render_comment_form for page %}
@@ -47,7 +47,25 @@
             {% render_comment_list for page %}
         {% else %}
             <p class="text-muted text-small">This page has comments disabled.</p>
-        {% endif %}
+        {% endif %} {% endcomment %}
+
+        <article class="card p-2 comments shadow mt-2">
+            <h5 class="text-muted">Comments</h5>
+            {% if page.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+                {% get_xtdcomment_count as comment_count for pages.page %}
+
+                {% render_comment_form for page %}
+                <hr />
+
+                <p class="text-muted text-small">This page has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
+
+                {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback %}
+            {% elif page.enable_comments and comments_disabled_globally_flag %}
+                <p class="text-muted text-small">Comments were disabled globally.</p>
+            {% else %}
+                <p class="text-muted text-small">This page has comments disabled.</p>
+            {% endif %}
+        </article>
     {% else %}
         <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>
     {% endif %}

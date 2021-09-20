@@ -1,11 +1,10 @@
-from allauth.account.views import EmailView
 from django.conf.urls import include
 from django.urls import path
 from django.urls.conf import re_path
 
 from .views import (ConnectionsEditView, CustomPasswordChangeView, CustomPasswordResetDoneView,
                     CustomPasswordResetFromKeyDoneView, CustomPasswordResetFromKeyView, CustomPasswordResetView,
-                    CustomPasswordSetView, ProfileView,
+                    CustomPasswordSetView, EmailEditView, ProfileView,
                     SignUpView, UserEditView)
 
 app_name = "accounts"
@@ -49,6 +48,6 @@ urlpatterns = [
     path('password/', include(password_extra_patterns)),
     path('connections/', ConnectionsEditView.as_view(),
          name='connections'),
-    path('email/', EmailView.as_view(),
+    path('email/', EmailEditView.as_view(),
          name='email'),
 ]

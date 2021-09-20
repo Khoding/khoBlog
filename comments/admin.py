@@ -2,9 +2,9 @@ from django.contrib import admin, messages
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 from django_comments.admin import CommentsAdmin
-
+from django_comments_xtd.admin import XtdCommentsAdmin
 from comments.forms import AdminForm
-from .models import CustomComment
+from .models import CustomComment, CustomCommentXTD
 
 
 def make_site_khoblog(modeladmin, request, queryset):
@@ -57,5 +57,28 @@ class CommentsAdmin(CommentsAdmin):
                "remove_comments", make_site_khoblog, make_site_localhost]
 
 
+class CommentsXTDAdmin(XtdCommentsAdmin):
+    form = AdminForm
+
+    list_display = ('thread_level', 'title', 'cid', 'name', 'content_type',
+                    'object_pk', 'submit_date', 'followup', 'is_public',
+                    'is_removed')
+    list_display_links = ('cid', 'title')
+    fieldsets = (
+        (None,          {'fields': ('content_type', 'object_pk', 'site')}),
+        (_('Content'),  {'fields': ('title', 'user', 'user_name', 'user_email',
+                                    'user_url', 'comment', 'followup')}),
+        (_('Metadata'), {'fields': ('submit_date', 'ip_address',
+                                    'is_public', 'is_removed')}),
+    )
+
+    list_filter = ('submit_date', 'site', 'is_public',
+                   'is_removed',)
+
+    actions = ["flag_comments", "approve_comments",
+               "remove_comments", make_site_khoblog, make_site_localhost]
+
+
 admin.site.unregister(CustomComment)
 admin.site.register(CustomComment, CommentsAdmin)
+admin.site.register(CustomCommentXTD, CommentsXTDAdmin)

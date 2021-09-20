@@ -1,10 +1,23 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from pages.forms import PageAddForm, PageEditForm
+from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
+
 from .models import Page
+
+
+def superuser_required():
+    def wrapper(wrapped):
+        class WrappedClass(UserPassesTestMixin, wrapped):
+            def test_func(self):
+                return self.request.user.is_superuser
+
+        return WrappedClass
+
+    return wrapper
 
 
 class PageDetailView(DetailView):
@@ -14,21 +27,24 @@ class PageDetailView(DetailView):
     def get_queryset(self):
         self.page = get_object_or_404(
             Page, slug=self.kwargs['slug'])
+        if self.page.is_removed:
+            raise PermissionDenied
         if self.request.user.is_superuser:
             self.title = self.page.title
             self.description = self.page.description
-            self.pages = self.model.objects.all().order_by('-pk')
+            self.pages = self.model.objects.filter(
+                is_removed=False).order_by('-pk')
         else:
             if self.page.withdrawn:
                 self.title = 'Withdrawn'
                 self.description = 'This page is Withdrawn'
                 self.pages = self.model.objects.filter(
-                    withdrawn=False).order_by('-pk')
+                    withdrawn=False, is_removed=False).order_by('-pk')
             else:
                 self.title = self.page.title
                 self.description = self.page.description
                 self.pages = self.model.objects.filter(
-                    withdrawn=False).order_by('-pk')
+                    withdrawn=False, is_removed=False).order_by('-pk')
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -52,9 +68,9 @@ class PageListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return self.model.objects.all()
+            return self.model.objects.filter(is_removed=False)
         return self.model.objects.filter(
-            withdrawn=False)
+            withdrawn=False, is_removed=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,6 +81,7 @@ class PageListView(ListView):
         return context
 
 
+@superuser_required()
 class PageCreateView(CreateView):
     model = Page
     template_name = 'pages/page_add.html'
@@ -79,6 +96,7 @@ class PageCreateView(CreateView):
         return context
 
 
+@superuser_required()
 class PageUpdateView(UpdateView):
     model = Page
     template_name = 'pages/page_update.html'
@@ -93,10 +111,33 @@ class PageUpdateView(UpdateView):
         return context
 
 
-class PageDeleteView(DeleteView):
+@superuser_required()
+class PageDeleteView(UpdateView):
+    """PageDeleteView
+
+    View to delete a Page
+
+    Raises:
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     model = Page
-    template_name = "pages/page_confirm_delete.html"
+    template_name = 'pages/page_confirm_delete.html'
+    form_class = PageDeleteForm
     success_url = reverse_lazy('pages:index')
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            self.removing_page = get_object_or_404(
+                Page, slug=self.kwargs['slug'])
+            if self.get_form().is_valid():
+                self.removing_page.remove()
+        else:
+            raise PermissionDenied()
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

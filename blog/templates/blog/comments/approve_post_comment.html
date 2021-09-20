@@ -1,17 +1,15 @@
 {% extends 'sub_base_main.html' %}
-{% load bootstrap5 %}
+{% load widget_tweaks project_tags %}
 
 {% block main %}
     {% if user.is_superuser %}
         <h3>Approve: {{ comment.related_post }} - {{comment.body}}</h3>
         <form method="POST" enctype="multipart/form-data" class="form">
             {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-            {% endbuttons %}
+            {% form form %}
+
+            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
         </form>
-        {{ form.media }}
     {% else %}
         <p>You aren't allowed to do this</p>
     {% endif %}

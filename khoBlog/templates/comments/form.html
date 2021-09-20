@@ -3,7 +3,7 @@
 {% if user.is_authenticated %}
     <div class="card formcard">
         <div class="card-body">
-            <form action="{% comment_form_target %}" method="post" novalidate>
+            <form method="POST" action="{% comment_form_target %}" onsubmit="post.disabled = true; return true;">
                 {% csrf_token %}
                 <div class="non-field-errors">
                     {{ form.non_field_errors }}
@@ -53,7 +53,7 @@
                     <small class="form-text text-danger">{{ error }}</small>
                 {% endfor %}
 
-                <input type="hidden" name="next" value="{{ comment_next }}" />
+                <input type="hidden" name="next" value="{% url 'comments-xtd-sent' %}" />
                 <input class="btn btn-primary" type="submit" value="Add comment" id="id_submit" />
             </form>
         </div>

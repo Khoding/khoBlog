@@ -99,7 +99,8 @@ urlpatterns = [
     path('markdownx/', include('markdownx.urls')),
 
     re_path(r'^comments/', include('comments.urls')),
-    re_path(r'^comments/', include('django_comments.urls')),
+    # re_path(r'^comments/', include('django_comments.urls')),
+    re_path(r'^comments/', include('django_comments_xtd.urls')),
 
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(

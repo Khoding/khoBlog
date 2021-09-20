@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static comments %}
+{% load static comments comments_xtd %}
 
 {% block page_top_end %}
     <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
@@ -25,15 +25,17 @@
 
     <article class="card p-2 comments shadow mt-2">
         <h5 class="text-muted">Comments</h5>
-        {% if post.enable_comments %}
-            {% get_comment_count for post as comment_count %}
+        {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+            {% get_xtdcomment_count as comment_count for blog.post %}
 
             {% render_comment_form for post %}
             <hr />
 
             <p class="text-muted text-small">This post has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
 
-            {% render_comment_list for post %}
+            {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+        {% elif post.enable_comments and comments_disabled_globally_flag %}
+            <p class="text-muted text-small">Comments were disabled globally.</p>
         {% else %}
             <p class="text-muted text-small">This post has comments disabled.</p>
         {% endif %}

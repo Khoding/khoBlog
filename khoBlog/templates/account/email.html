@@ -1,5 +1,5 @@
 {% extends "sub_base.html" %}
-{% load i18n bootstrap5 %}
+{% load i18n widget_tweaks project_tags %}
 
 {% block page_top_title %}
     {% trans "E-mail Addresses" %}
@@ -49,10 +49,9 @@
 
         <form method="post" action="{% url 'account_email' %}" class="form add_email">
             {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">{% trans "Add E-mail" %}</button>
-            {% endbuttons %}
+            {% form form %}
+
+            <button type="submit" class="btn btn-primary">{% trans "Add E-mail" %}</button>
         </form>
     {% endif %}
 

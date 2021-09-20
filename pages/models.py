@@ -70,6 +70,8 @@ class Page(auto_prefetch.Model):
     )
     sites = models.ManyToManyField(Site, verbose_name=_('sites'))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
+    is_removed = models.BooleanField('is removed', default=False, db_index=True,
+                                     help_text=('Soft delete'))
     history = HistoricalRecords()
 
     class Meta:
@@ -94,6 +96,10 @@ class Page(auto_prefetch.Model):
 
     def get_absolute_admin_update_url(self):
         return reverse('admin:pages_page_change', kwargs={'object_id': self.pk})
+
+    def remove(self):
+        self.is_removed = True
+        self.save()
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(

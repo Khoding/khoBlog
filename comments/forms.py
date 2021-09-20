@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.models import ModelForm
 from django_comments.forms import CommentForm
+from django_comments_xtd.forms import XtdCommentForm
 
 from .models import CustomComment
 
@@ -10,7 +11,7 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
         full_t = ''
         if obj.content_object:
             full_t = full_t + str(obj.content_type.model) + \
-                     ' - ' + str(obj.content_object.title) + ' - '
+                ' - ' + str(obj.content_object.title) + ' - '
         elif obj.title:
             full_t = obj.title + ' - '
         full_t = full_t + str(obj.comment)[:50]
@@ -18,6 +19,27 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
 
 
 class CustomCommentForm(CommentForm):
+    title = forms.CharField(max_length=200)
+    alias_user = forms.CharField(max_length=200, required=False,
+                                 help_text="You can add an Alias Name to your comment if you wish to be "
+                                           'incognito (note that Moderators can still know it\'s you)',
+                                 label="Alias Name")
+
+    class Meta:
+        field = ('title', 'alias_user',)
+
+    def check_for_duplicate_comment(self, new):
+        return new
+
+    def get_comment_create_data(self, **kwargs):
+        # Use the data of the superclass, and add in the title field
+        data = super().get_comment_create_data(**kwargs)
+        data['title'] = self.cleaned_data['title']
+        data['alias_user'] = self.cleaned_data['alias_user']
+        return data
+
+
+class CustomCommentXTDForm(XtdCommentForm):
     title = forms.CharField(max_length=200)
     alias_user = forms.CharField(max_length=200, required=False,
                                  help_text="You can add an Alias Name to your comment if you wish to be "

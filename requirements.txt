@@ -23,7 +23,7 @@ django-allauth==0.45.0
 django-analytical==3.0.0
 django-appconf==1.0.4
 django-auto-prefetch==0.0.6
-django-bootstrap-v5==1.0.5
+django-comments-xtd==2.9.2
 django-compressor==2.4.1
 django-contrib-comments==2.1.0
 django-debug-toolbar==3.2.2
@@ -32,6 +32,7 @@ django-environ==0.7.0
 django-filter==2.4.0
 django-import-export==2.6.0
 django-jsonview==2.0.0
+django-markdown2==0.3.1
 django-markdownx==3.0.1
 django-ranged-response==0.2.0
 django-robots==4.0

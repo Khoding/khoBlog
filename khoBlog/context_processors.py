@@ -5,6 +5,7 @@ from django.utils import timezone
 
 def context(request):
     debug_flag = settings.DEBUG
+    comments_disabled_globally_flag = settings.COMMENTS_DISABLED_GLOBALLY
     context = {
         'CANONICAL_PATH': request.build_absolute_uri(request.path_info),
         'debug_flag': debug_flag,
@@ -14,6 +15,7 @@ def context(request):
         'description': "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
         'app_title': 'Blog',
         'app_direct_link': reverse('blog:post_list'),
+        'comments_disabled_globally_flag': comments_disabled_globally_flag,
     }
 
     return context

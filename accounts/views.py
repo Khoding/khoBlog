@@ -1,13 +1,14 @@
-from allauth.account.views import (PasswordChangeView, PasswordResetDoneView,
+from allauth.account.views import (EmailView, PasswordChangeView,
+                                   PasswordResetDoneView,
                                    PasswordResetFromKeyDoneView,
                                    PasswordResetFromKeyView, PasswordResetView,
                                    PasswordSetView, SignupView)
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
+from blog.models import Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
-from blog.models import Comment
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
@@ -39,7 +40,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Profile • ' + \
-                           str(self.model.objects.get(username=kwargs['object']))
+                           str(self.model.objects.get(
+                               username=kwargs['object']))
         context['description'] = str(
             self.model.objects.get(username=kwargs['object']).bio)
         context['users'] = CustomUser.objects.all()
@@ -118,4 +120,13 @@ class ConnectionsEditView(LoginRequiredMixin, ConnectionsView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Edit Connections'
+        return context
+
+
+class EmailEditView(LoginRequiredMixin, EmailView):
+    model = CustomUser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Email'
         return context

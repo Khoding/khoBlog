@@ -33,7 +33,7 @@
                     <span class="float-end">
                         <div class="btn-group float-end">
                             <a class="btn btn-primary" href="{% url 'comments:comments-reply' pk=comment.id %}">
-                                <i class="bi bi-reply-fill"></i> Reply
+                                <i class="bi bi-reply"></i> Reply
                             </a>
 
                             {% if user.id == comment.user_id or user.is_superuser %}

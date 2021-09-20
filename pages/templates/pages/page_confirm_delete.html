@@ -1,16 +1,14 @@
 {% extends 'sub_base_main.html' %}
-{% load bootstrap5 %}
+{% load widget_tweaks project_tags %}
 
 {% block main %}
-    <h3>Delete: {{ flatpage.title }}</h3>
+    <h3>Delete: {{ page.title }}</h3>
     <form method="POST" class="form">
         {% csrf_token %}
         <h4>Are you sure ?</h4>
         {{ form.as_p }}
 
-        {% buttons %}
-            <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-        {% endbuttons %}
+        <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
     </form>
 
 {% endblock main %}
