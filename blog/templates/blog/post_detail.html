@@ -26,11 +26,7 @@
     <article class="card p-2 comments shadow mt-2">
         <h5 class="text-muted">Comments</h5>
         {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-            {% if not comments_use_old_system %}
-                {% get_xtdcomment_count as comment_count for blog.post %}
-            {% else %}
-                {% get_comment_count for post as comment_count %}
-            {% endif %}
+            {% get_comment_count for post as comment_count %}
 
             {% render_comment_form for post %}
             <hr />
