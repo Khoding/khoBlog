@@ -378,7 +378,7 @@ class PostScheduledListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(pub_date__gte=timezone.now(), withdrawn=False).get_without_removed()
+        return self.model.objects.filter(pub_date__gte=timezone.now(), withdrawn=False).get_without_removed().order_by('pub_date')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
