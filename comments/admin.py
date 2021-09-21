@@ -58,17 +58,22 @@ class CommentsAdmin(CommentsAdmin):
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
-    list_display = ('thread_level', 'title', 'cid', 'name', 'content_type',
-                    'object_pk', 'submit_date', 'followup', 'is_public',
-                    'is_removed')
-    list_display_links = ('cid', 'title')
+    list_display = ('cid', 'thread_level', 'nested_count', 'name',
+                    'content_type', 'object_pk', 'ip_address', 'submit_date',
+                    'followup', 'is_public', 'is_removed')
+    list_display_links = ('cid',)
+    list_filter = ('content_type', 'is_public', 'is_removed', 'followup')
     fieldsets = (
-        (None,          {'fields': ('content_type', 'object_pk', 'site')}),
-        (_('Content'),  {'fields': ('title', 'user', 'alias_user', 'user_name', 'user_email',
-                                    'user_url', 'comment', 'followup')}),
-        (_('Metadata'), {'fields': ('submit_date', 'ip_address',
-                                    'is_public', 'is_removed')}),
+        (None, {'fields': ('content_type', 'object_pk', 'site')}),
+        ('Content', {'fields': ('title', 'user', 'alias_user', 'user_name', 'user_email',
+                                'user_url', 'comment', 'followup')}),
+        ('Metadata', {'fields': ('submit_date', 'ip_address',
+                                 'is_public', 'is_removed')}),
     )
+    date_hierarchy = 'submit_date'
+    ordering = ('thread_id', 'order')
+    search_fields = ['object_pk', 'user__username', 'user_name', 'user_email',
+                     'comment']
 
     list_filter = ('submit_date', 'site', 'is_public',
                    'is_removed',)
