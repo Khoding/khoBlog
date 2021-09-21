@@ -1,5 +1,5 @@
 {% extends "sub_base.html" %}
-{% load account socialaccount %}
+{% load account socialaccount comments_xtd %}
 
 {% block page_top_end %}
     {% if user.is_superuser %}
@@ -19,15 +19,14 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h3 class="card-title">{% user_display object %}
+                    <h3 class="card-title mb-0">
+                        {% user_display object %}
                         {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
                             {% if object.first_name or object.last_name %}
                                 - <span>{% if object.first_name %}{{ object.first_name }}{% endif %}{% if object.last_name %} {{ object.last_name }}{% endif %}</span>
                             {% endif %}
                         {% endif %}
-                    </h3>
-                    <h6 class="card-subtitle">
-                        <small class="text-muted">
+                        <span class="badge border p-2 py-1">
                             {% if object.roles.last %}
                                 {{ object.roles.last }}
                             {% else %}
@@ -43,20 +42,20 @@
                                     User
                                 {% endif %}
                             {% endif %}
-                        </small>
-                    </h6>
+                        </span>
+                    </h3>
                     <div class="card-text">
-                        <p>{{ object.bio }}</p>
+                        <p class="mb-0">{{ object.bio }}</p>
                         {% get_social_accounts object as accounts %}
 
                         {% if accounts.github and object.show_github %}
                             {% for github in accounts.github %}
                                 <div class="card shadow">
                                     <div class="card-header">
-                                        Github
+                                        Github • <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a>
                                     </div>
                                     <div class="card-body">
-                                        <p class="mb-0">Github: <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a></p>
+                                        <p class="mb-0">Profile: <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.html_url }}</a></p>
                                         {% if github.extra_data.blog %}
                                             <p class="mb-0">Blog: <a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a></p>
                                         {% endif %}
