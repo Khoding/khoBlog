@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load bootstrap5 %}
+{% load widget_tweaks project_tags %}
 
 {% block title %}
     Flag Comment
@@ -12,14 +12,12 @@
 {% block main %}
     <h3>Flag: {{ comment.comment }}</h3>
     <form method="POST" class="form">
-        {% csrf_token %}
         <h4>Are you sure ?</h4>
-        {{ form.as_p }}
 
-        {% buttons %}
-            <input type="hidden" name="next" value="{% url 'pages:page_list' %}" />
-            <button type="submit" class="btn btn-primary mt-2">Flag Comment</button>
-        {% endbuttons %}
+        {% form form %}
+
+        <input type="hidden" name="next" value="{% url 'blog:post_list' %}" />
+        <button type="submit" class="btn btn-primary mt-2">Flag Comment</button>
     </form>
 
 {% endblock main %}
