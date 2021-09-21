@@ -62,7 +62,19 @@
                     </span>
                 </h6>
                 {% if item.comment.is_removed %}
-                    <p class="text-muted{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}"><em>{% trans "This comment has been removed." %}</em></p>
+                    {% if not user.is_superuser %}
+                        <p class="text-muted{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}"><em>This comment has been removed.</em></p>
+                    {% else %}
+                        <div class="content text-muted{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
+                            <em>
+                                {% if item.comment.title %}
+                                    <h4>{{ item.comment.title }}</h4>
+                                {% endif %}
+
+                                {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
+                            </em>
+                        </div>
+                    {% endif %}
                 {% else %}
                     <div class="content{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
                         {% if item.comment.title %}
