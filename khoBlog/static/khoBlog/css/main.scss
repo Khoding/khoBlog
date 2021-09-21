@@ -16,14 +16,9 @@
 }
 
 .form .form-label[for='id_honeypot'],
+label[for='id_honeypot'],
 #id_honeypot {
     display: none;
-}
-
-@media (min-width: lg) {
-    .pe-kho-lg-12 {
-        padding-right: 12px;
-    }
 }
 
 body {

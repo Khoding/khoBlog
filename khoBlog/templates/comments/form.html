@@ -1,6 +1,6 @@
 {% load i18n comments project_tags widget_tweaks %}
-
-{% if user.is_authenticated %}
+{% comment %}
+{% if user.is_authenticated %} {% endcomment %}
     <div class="card formcard">
         <div class="card-body">
             {% if not comments_use_old_system %}
@@ -8,8 +8,10 @@
             {% else %}
                 <form action="{% comment_form_target %}" method="post" novalidate>
             {% endif %}
-                {% csrf_token %}
-                <div class="non-field-errors">
+                {% form form %}
+                {% comment %} {% csrf_token %} {% endcomment %}
+
+                {% comment %} <div class="non-field-errors">
                     {{ form.non_field_errors }}
                 </div>
 
@@ -38,6 +40,16 @@
 
                 <div class="field mb-2">
                     <div class="form-floating">
+                        {{ form.name|add_class:"form-control"|attr:"placeholder:" }}
+                        {{ form.name.label_tag }}
+                    </div>
+                </div>
+                {% for error in form.name.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+
+                <div class="field mb-2">
+                    <div class="form-floating">
                         {{ form.comment|add_class:"form-control"|attr:"placeholder:" }}
                         {{ form.comment.label_tag }}
                     </div>
@@ -55,7 +67,7 @@
                 </div>
                 {% for error in form.alias_user.errors %}
                     <small class="form-text text-danger">{{ error }}</small>
-                {% endfor %}
+                {% endfor %} {% endcomment %}
 
                 {% if not comments_use_old_system %}
                     <input type="hidden" name="next" value="{% url 'comments-xtd-sent' %}" />
@@ -66,7 +78,7 @@
             </form>
         </div>
     </div>
-
+{% comment %}
 {% else %}
     <p>Please <a href="{% url 'account_login' %}">Log in</a> to leave a comment.</p>
-{% endif %}
+{% endif %} {% endcomment %}

@@ -47,7 +47,7 @@ class CustomCommentXTDForm(XtdCommentForm):
                                  label="Alias Name")
 
     class Meta:
-        field = ('title', 'alias_user',)
+        field = ('__all__')
 
     def check_for_duplicate_comment(self, new):
         return new
