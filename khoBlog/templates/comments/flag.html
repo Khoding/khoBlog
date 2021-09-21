@@ -16,7 +16,7 @@
 
         {% form form %}
 
-        <input type="hidden" name="next" value="{% url 'blog:post_list' %}" />
+        <input type="hidden" name="next" value="{{ comment.get_absolute_url }}" />
         <button type="submit" class="btn btn-primary mt-2">Flag Comment</button>
     </form>
 
