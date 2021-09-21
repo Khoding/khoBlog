@@ -58,8 +58,6 @@ class CommentsAdmin(CommentsAdmin):
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
-    form = AdminForm
-
     list_display = ('thread_level', 'title', 'cid', 'name', 'content_type',
                     'object_pk', 'submit_date', 'followup', 'is_public',
                     'is_removed')
