@@ -7,33 +7,31 @@
         <div class="card-body">
             <div class="comment pb-2">
                 <h4>
-                    {% spaceless %}
-                        {% if not item.comment.user and not item.comment.alias_user and item.comment.user_name %}
-                            {% if not item.comment.is_removed or user.is_superuser %}
-                                <span>{{ item.comment.user_name }}</span>
-                            {% endif %}
-                        {% elif item.comment.alias_user or item.comment.user and item.comment.alias_user %}
-                            {% if user.is_superuser %}
-                                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-                                <span class="text-small text-muted">{{ item.comment.alias_user }}</span>
-                            {% else %}
-                                {% if not item.comment.is_removed %}
-                                    {{ item.comment.alias_user }}
-                                {% else %}
-                                    <span class="text-muted">This comment has been removed.</span>
-                                {% endif %}
-                            {% endif %}
+                    {% if not item.comment.user and not item.comment.alias_user and item.comment.user_name %}
+                        {% if not item.comment.is_removed or user.is_superuser %}
+                            <span>{{ item.comment.user_name }}</span>
+                        {% endif %}
+                    {% elif item.comment.alias_user or item.comment.user and item.comment.alias_user %}
+                        {% if user.is_superuser %}
+                            <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+                            <span class="text-small text-muted">{{ item.comment.alias_user }}</span>
                         {% else %}
-                            {% if user.is_superuser or user.id == item.comment.user.id %}
-                                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-                            {% elif item.comment.user.owner and user.is_authenticated %}
-                                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+                            {% if not item.comment.is_removed %}
+                                {{ item.comment.alias_user }}
                             {% else %}
-                                <span>{{ item.comment.user }}</span>
+                                <span class="text-muted">This comment has been removed.</span>
                             {% endif %}
                         {% endif %}
-                        {% if item.comment.user and item.comment.user|has_permission:"django_comments.can_moderate" %}&nbsp;<span class="badge bg-secondary p-1">Moderator</span>{% endif %}
-                    {% endspaceless %}
+                    {% else %}
+                        {% if user.is_superuser or user.id == item.comment.user.id %}
+                            <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+                        {% elif item.comment.user.owner and user.is_authenticated %}
+                            <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+                        {% else %}
+                            <span>{{ item.comment.user }}</span>
+                        {% endif %}
+                    {% endif %}
+                    {% if item.comment.user and item.comment.user|has_permission:"django_comments.can_moderate" %}&nbsp;<span class="badge bg-secondary p-1">Moderator</span>{% endif %}
                 </h4>
                 <h6 class="text-small d-flex">
                     {% spaceless %}
