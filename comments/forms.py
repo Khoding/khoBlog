@@ -40,7 +40,7 @@ class CustomCommentForm(CommentForm):
 
 
 class CustomCommentXTDForm(XtdCommentForm):
-    title = forms.CharField(max_length=200)
+    title = forms.CharField(max_length=200, required=False)
     alias_user = forms.CharField(max_length=200, required=False,
                                  help_text="You can add an Alias Name to your comment if you wish to be "
                                            'incognito (note that Moderators can still know it\'s you)',
