@@ -1,0 +1,53 @@
+{% extends 'blog/comments/base_comments.html' %}
+{% load comments comments_xtd %}
+
+{% block title %}Confirm your opinion{% endblock %}
+
+{% block page_top_title %}Confirm your opinion{% endblock page_top_title %}
+
+{% block comments_main %}
+    <div class="mb-2">
+        <h3>
+            {% if already_liked_it %}
+                You liked this comment, do you want to change it ?
+            {% else %}
+                Do you like this comment ?
+            {% endif %}
+        </h3>
+        {% include 'django_comments_xtd/comment.html' %}
+
+        {% with object_absolute_url=comment.content_object.get_absolute_url %}
+            {% if object_absolute_url %}
+                <p>
+                    Posted to&nbsp;<a href="{{ object_absolute_url }}">{{ comment.content_object }}</a>
+                </p>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card mt-2">
+            <div class="card-body">
+                {% if already_liked_it %}
+                    <div class="alert alert-warning text-center">
+                        Click on the "Withdraw" button if you want to withdraw your positive opinion on this comment.
+                    </div>
+                {% else %}
+                    <div class="lead">Please, confirm your opinion about the comment</div>
+                {% endif %}
+
+                <form action="." method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ comment.get_absolute_url }}" />
+                    <div class="form-group">
+                        {% if already_liked_it %}
+                            <input type="submit" name="submit" class="btn btn-warning" value="Withdraw" />
+                        {% else %}
+                            <input type="submit" name="submit" class="btn btn-primary" value="I like it" />
+                        {% endif %}
+
+                        <a class="btn btn-secondary" href="{{ comment.get_absolute_url }}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock comments_main %}
