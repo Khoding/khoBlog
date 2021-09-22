@@ -1,21 +1,30 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 
 from blog.models import Post
 from .models import CustomComment
 
 
+def superuser_required():
+    def wrapper(wrapped):
+        class WrappedClass(UserPassesTestMixin, wrapped):
+            def test_func(self):
+                return self.request.user.is_superuser
+
+        return WrappedClass
+
+    return wrapper
+
+
+@superuser_required()
 class CommentListView(LoginRequiredMixin, ListView):
     model = CustomComment
     template_name = 'blog/comments/comment_list.html'
     context_object_name = 'comment_list'
     paginate_by = 21
     paginate_orphans = 5
-
-    def get_queryset(self):
-        return self.model.objects.get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,6 +33,7 @@ class CommentListView(LoginRequiredMixin, ListView):
         return context
 
 
+@superuser_required()
 class CommentUpdateView(LoginRequiredMixin, UpdateView):
     model = CustomComment
     template_name = 'blog/comments/edit_comment.html'
@@ -43,6 +53,7 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
+@superuser_required()
 class CommentReplyView(LoginRequiredMixin, CreateView):
     model = CustomComment
     template_name = 'blog/comments/add_comment_to_post.html'
