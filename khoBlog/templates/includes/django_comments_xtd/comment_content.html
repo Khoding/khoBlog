@@ -1,3 +1,2 @@
-{% load md2 %}
-
-{{ content|markdown:"safe, code-friendly, code-color" }}
+{% load markup_tags %}
+{{ content|apply_markup:"markdown"|apply_markup:"widont" }}

@@ -4,6 +4,7 @@ asgiref==3.4.1
 autopep8==1.5.7
 backports.entry-points-selectable==1.1.0
 beautifulsoup4==4.10.0
+bleach==4.1.0
 boto3==1.18.45
 botocore==1.21.45
 cachetools==4.2.2
@@ -32,8 +33,8 @@ django-environ==0.7.0
 django-filter==2.4.0
 django-import-export==2.6.0
 django-jsonview==2.0.0
-django-markdown2==0.3.1
 django-markdownx==3.0.1
+django-markup==1.5
 django-ranged-response==0.2.0
 django-robots==4.0
 django-simple-captcha==0.5.14
@@ -51,6 +52,7 @@ graphene==2.1.9
 graphene-django==2.15.0
 graphql-core==2.3.2
 graphql-relay==2.0.1
+html5lib==1.1
 idna==2.10
 importlib-metadata==2.1.1
 Impostor==2.0.5
@@ -81,6 +83,7 @@ PyJWT==2.1.0
 pymdown-extensions==8.2
 pyparsing==2.4.7
 pyquery==1.4.3
+python-creole==1.4.10
 python-dateutil==2.8.2
 python-dotenv==0.19.0
 python3-openid==3.2.0
@@ -88,6 +91,7 @@ pytz==2021.1
 PyYAML==5.4.1
 rcssmin==1.0.6
 readtime==1.1.1
+regex==2021.8.28
 requests==2.26.0
 requests-oauthlib==1.3.0
 rjsmin==1.1.0
@@ -98,14 +102,17 @@ Rx==1.6.1
 s3transfer==0.5.0
 singledispatch==3.7.0
 six==1.16.0
+smartypants==2.0.1
 soupsieve==2.2.1
 sqlparse==0.4.2
 tablib==3.0.0
 text-unidecode==1.3
+textile==4.0.1
 toml==0.10.2
 uritemplate==3.0.1
 urllib3==1.26.6
 virtualenv==20.7.2
+webencodings==0.5.1
 wrapt==1.12.1
 xlrd==2.0.1
 xlwt==1.3.0

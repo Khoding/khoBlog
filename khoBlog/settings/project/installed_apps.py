@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'pinax.referrals',
     'analytical',
-    'django_markdown2',
+    'django_markup',
 
     # Django Packages Apps
     'django_comments_xtd',
