@@ -1,9 +1,9 @@
+from blog.models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
-from blog.models import Post
 from .models import CustomComment
 
 

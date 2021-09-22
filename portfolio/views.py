@@ -1,9 +1,21 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from portfolio.forms import ProjectAddForm, ProjectUpdateForm
 from .models import Project
+
+
+def superuser_required():
+    def wrapper(wrapped):
+        class WrappedClass(UserPassesTestMixin, wrapped):
+            def test_func(self):
+                return self.request.user.is_superuser
+
+        return WrappedClass
+
+    return wrapper
 
 
 class ProjectListView(ListView):
@@ -38,6 +50,7 @@ class ProjectDetailView(DetailView):
         return context
 
 
+@superuser_required()
 class ProjectCreateView(CreateView):
     model = Project
     template_name = 'portfolio/project_add.html'
@@ -52,6 +65,7 @@ class ProjectCreateView(CreateView):
         return context
 
 
+@superuser_required()
 class ProjectUpdateView(UpdateView):
     model = Project
     template_name = 'portfolio/project_update.html'
@@ -66,6 +80,7 @@ class ProjectUpdateView(UpdateView):
         return context
 
 
+@superuser_required()
 class ProjectDeleteView(DeleteView):
     model = Project
     template_name = "portfolio/project_confirm_delete.html"
