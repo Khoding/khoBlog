@@ -1,3 +1,5 @@
 {% for url in urls %}
-    <a class="nav-link{% if url.get_absolute_url in context.request.path_info %} active{% endif %}" href="{{ url.get_absolute_url }}">{% firstof url.featured_title url.title %}</a>
+    <li>
+        <a class="nav-link" href="{{ url.get_absolute_url }}">{% firstof url.featured_title url.title %}</a>
+    </li>
 {% endfor %}

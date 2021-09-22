@@ -1,5 +1,7 @@
 {% for url in urls %}
     {% if url.featured %}
-        <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
+        <li>
+            <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
+        </li>
     {% endif %}
 {% endfor %}

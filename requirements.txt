@@ -20,10 +20,12 @@ defusedxml==0.7.1
 diff-match-patch==20200713
 distlib==0.3.2
 Django==3.2.7
+django-activeurl==0.2.0
 django-allauth==0.45.0
 django-analytical==3.0.0
 django-appconf==1.0.4
 django-auto-prefetch==0.0.6
+django-classy-tags==2.0.0
 django-comments-xtd==2.9.3
 django-compressor==2.4.1
 django-contrib-comments==2.1.0

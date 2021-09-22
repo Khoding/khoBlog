@@ -1,10 +1,12 @@
-{% load render_urls links_menu featured_post %}
+{% load render_urls links_menu featured_post activeurl %}
 
 <div class="nav-scroller shadow mb-2">
-    <nav class="nav nav-underline d-flex justify-content-between">
-        {% links_menu urls %}
-        {% featured_big_post_list urls %}
-        {% featured_post_list urls %}
-        {% links urls %}
-    </nav>
+    {% activeurl menu="no" parent_tag="self" %}
+        <nav class="nav nav-underline d-flex justify-content-between">
+            {% links_menu urls %}
+            {% featured_big_post_list urls %}
+            {% featured_post_list urls %}
+            {% links urls %}
+        </nav>
+    {% endactiveurl %}
 </div>

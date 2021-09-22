@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,70 +126,71 @@
                     {% block nav %}
                     {% endblock nav %}
                 </div>
+                {% activeurl %}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#create_dropdown" id="create_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="create_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#lists_dropdown" id="lists_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="lists_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% provider_login_url 'github' %}">Log in with Github</a>
+                            </li>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
-                    {% if user.is_authenticated %}
-                        {% if user.is_superuser %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#create_dropdown" id="create_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="create_dropdown">
-                                    <li><a class="dropdown-item{% if 'post/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_post' %}">New Post</a></li>
-                                    <li><a class="dropdown-item{% if 'series/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_series' %}">New Series</a></li>
-                                    <li><a class="dropdown-item{% if 'category/add/' in request.path_info %} active{% endif %}" href="{% url 'blog:create_category' %}">New Category</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#lists_dropdown" id="lists_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="lists_dropdown">
-                                    <li><a class="dropdown-item{% if 'drafts/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
-                                    <li><a class="dropdown-item{% if 'scheduled/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
-                                    <li><a class="dropdown-item{% if 'withdrawn/' in request.path_info %} active{% endif %}" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
-                                </ul>
-                            </li>
                         {% endif %}
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link{% if 'accounts/login/' in request.path_info %} active{% endif %}" href="{% url 'account_login' %}">Log in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link{% if 'accounts/signup/' in request.path_info %} active{% endif %}" href="{% url 'accounts:signup' %}">Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% provider_login_url 'github' %}">Log in with Github</a>
-                        </li>
 
-                    {% endif %}
-
-                    {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
-                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
-                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
-                            </ul>
-                        </li>
-
-                        {% if user.is_superuser or user.is_staff %}
+                        {% if user.is_authenticated %}
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
-                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
-                                    {% if user.is_superuser %}
-                                        <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
-                                    {% endif %}
+                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
                                 </ul>
                             </li>
+
+                            {% if user.is_superuser or user.is_staff %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                                        {% if user.is_superuser %}
+                                            <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </ul>
+                    </ul>
+                {% endactiveurl %}
 
                 {% include 'includes/nav/search/big_search.html' %}
             </div>
