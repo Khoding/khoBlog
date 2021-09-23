@@ -138,7 +138,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     prepopulated_fields = {
         'slug': ('title',), }
     list_filter = ('categories', 'is_removed', 'publication_state',
-                   'featuring_state', 'pub_date', 'withdrawn', 'featuring_state', 'language', 'tags',)
+                   'featuring_state', 'pub_date', 'withdrawn', 'featuring_state', 'language', 'tags', 'content')
 
     fieldsets = (
         (None, {'fields': ('title', 'featured_title',
