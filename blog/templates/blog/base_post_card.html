@@ -88,9 +88,10 @@
                 {% else %}
                     {{ post.body|formatted_markdown|safe }}
                 {% endif %}
-                {% load editorjs %}
-                {{ post.body_default }}
-                {{ post.body_editorjs|editorjs}}
+
+                    {% load editorjs %}
+                    {{ post.body_default|editorjs }}
+                    {{ post.body_custom|editorjs }}
             </section>
             {% if post.url_to_article %}
                 <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>

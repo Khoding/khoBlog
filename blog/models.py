@@ -241,12 +241,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                     }
                 }
             },
-            'Link': {
-                'class': 'LinkTool',
-                'config': {
-                    'endpoints': '/fetchUrl',
-                }
-            },
         },
         null=True,
         blank=True,

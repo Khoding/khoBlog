@@ -15,7 +15,7 @@
         <div class="card-body">
             <form enctype="multipart/form-data" method="post" novalidate>
                 {% csrf_token %}
-                {% comment %} <div class="non-field-errors">
+                <div class="non-field-errors">
                     {{ form.non_field_errors }}
                 </div>
 
@@ -114,6 +114,8 @@
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
                 </div>
+
+                {{ form.body_custom }}
 
                 <div class="field mb-2">
                     {{ form.image.label_tag }}
@@ -233,9 +235,7 @@
                     {% for error in form.language.errors %}
                         <small class="form-text text-danger">{{ error }}</small>
                     {% endfor %}
-                </div> {% endcomment %}
-
-                {% form form %}
+                </div>
 
                 <button type="submit" class="btn btn-primary">{{ title }}</button>
             </form>
