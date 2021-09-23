@@ -16,7 +16,7 @@ from rules.contrib.views import AutoPermissionRequiredMixin
 from blog.filters import PostFilter
 from custom_taggit.models import CustomTag
 from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm,
-                    CategoryEditForm, CommentForm, EditPostCommentForm,
+                    CategoryEditForm, CommentForm, EditPostCommentForm, PostCloneForm,
                     PostCreateForm, PostDeleteForm, PostEditForm,
                     SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
 from .models import Category, Comment, Post, PostContent, Series
@@ -768,9 +768,8 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
     """
 
     model = Post
-    template_name = 'blog/create_post.html'
-    form_class = PostCreateForm
-    success_url = reverse_lazy('blog:post_list')
+    template_name = 'blog/clone_post.html'
+    form_class = PostCloneForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -782,7 +781,7 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Clone Post'
         context['side_title'] = 'Post List'
-        context['form'] = PostCreateForm(instance=post)
+        context['form'] = PostCloneForm(instance=post)
         return context
 
 
