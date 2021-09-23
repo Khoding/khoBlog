@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # Packages Apps
     'impostor',
     'markdownx',
+    'django_editorjs_fields',
     'graphene_django',
     'captcha',
     'storages',
