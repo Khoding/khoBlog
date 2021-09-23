@@ -8,7 +8,7 @@ from django.urls.base import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
-from taggit.managers import TaggableManager
+from taggit_selectize.managers import TaggableManager
 
 from custom_taggit.models import CustomTaggedItem
 
