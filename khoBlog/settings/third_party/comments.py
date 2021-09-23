@@ -9,7 +9,7 @@ if not COMMENTS_USE_OLD_SYSTEM:
     COMMENTS_XTD_CONFIRM_EMAIL = False
     COMMENTS_XTD_MODEL = 'comments.models.CustomCommentXTD'
     COMMENTS_XTD_FORM_CLASS = 'comments.forms.CustomCommentXTDForm'
-    COMMENTS_XTD_MAX_THREAD_LEVEL = 5
+    COMMENTS_XTD_MAX_THREAD_LEVEL = 6
 else:
     COMMENTS_APP = 'comments'
 

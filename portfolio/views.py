@@ -68,7 +68,7 @@ class ProjectCreateView(CreateView):
 @superuser_required()
 class ProjectUpdateView(UpdateView):
     model = Project
-    template_name = 'portfolio/project_update.html'
+    template_name = 'portfolio/edit_project.html'
     form_class = ProjectUpdateForm
 
     def get_context_data(self, **kwargs):

@@ -99,7 +99,7 @@ class PageCreateView(CreateView):
 @superuser_required()
 class PageUpdateView(UpdateView):
     model = Page
-    template_name = 'pages/page_update.html'
+    template_name = 'pages/edit_page.html'
     form_class = PageEditForm
 
     def get_context_data(self, **kwargs):

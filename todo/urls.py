@@ -4,7 +4,7 @@ from django.urls.conf import include
 from . import views
 
 task_action_extra_patterns = [
-    path('edit/', views.TaskUpdateView.as_view(), name="update_task"),
+    path('edit/', views.TaskUpdateView.as_view(), name="edit_task"),
     path('delete/', views.TaskDeleteView.as_view(), name="delete"),
 ]
 

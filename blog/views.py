@@ -498,7 +498,7 @@ class TagUpdateView(UpdateView):
 
     model = CustomTag
     fields = ('__all__')
-    template_name = "blog/category_edit.html"
+    template_name = "blog/edit_category.html"
     success_url = reverse_lazy('blog:tag_list')
 
     def get_context_data(self, **kwargs):
@@ -611,7 +611,7 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     model = Category
     form_class = CategoryEditForm
-    template_name = "blog/category_edit.html"
+    template_name = "blog/edit_category.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -677,7 +677,7 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     model = Series
     form_class = SeriesEditForm
-    template_name = "blog/series_edit.html"
+    template_name = "blog/edit_series.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -743,7 +743,7 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     model = Post
     form_class = PostEditForm
-    template_name = "blog/post_update.html"
+    template_name = "blog/edit_post.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
