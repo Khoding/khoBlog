@@ -108,6 +108,7 @@ smartypants==2.0.1
 soupsieve==2.2.1
 sqlparse==0.4.2
 tablib==3.0.0
+taggit-selectize==2.10.0
 text-unidecode==1.3
 textile==4.0.1
 toml==0.10.2

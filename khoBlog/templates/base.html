@@ -66,6 +66,8 @@
     <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json"
           title="oEmbed Profile: JSON">
 
+    {% block additional_js %}{% endblock additional_js %}
+    {% block additional_css %}{% endblock additional_css %}
 
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">

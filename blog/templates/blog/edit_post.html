@@ -1,6 +1,14 @@
 {% extends 'sub_base_main.html' %}
 {% load static widget_tweaks project_tags markdown_extra %}
 
+{% block additional_js %}
+    <script src="{% static 'vendor\node_modules\jquery\dist\jquery.min.js' %}"></script>
+{% endblock additional_js %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+{% endblock additional_css %}
+
 {% block main %}
     <div class="card formcard">
         <div class="card-body">
@@ -55,10 +63,8 @@
                 </div>
 
                 <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.tags|add_class:"form-control"|attr:"placeholder:Post tags" }}
-                        {{ form.tags.label_tag }}
-                    </div>
+                    {{ form.tags.label_tag }}
+                    {{ form.tags }}
                     {% if form.tags.help_text %}
                         <span class="text-small text-muted">{{ form.tags.help_text }}</span>
                     {% endif %}

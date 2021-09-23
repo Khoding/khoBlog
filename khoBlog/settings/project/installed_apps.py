@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'robots',
     'taggit',
     'custom_taggit',
+    'taggit_selectize',
     'simple_history',
     'rules',
     'widget_tweaks',

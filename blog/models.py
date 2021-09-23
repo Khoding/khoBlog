@@ -15,7 +15,7 @@ from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from rules.contrib.models import RulesModelBase, RulesModelMixin
 from simple_history.models import HistoricalRecords
-from taggit.managers import TaggableManager
+from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
 

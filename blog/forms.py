@@ -1,6 +1,7 @@
 from captcha.fields import CaptchaField
 from django import forms
 from django.forms.models import inlineformset_factory
+from taggit_selectize.widgets import TagSelectize
 
 from .models import Category, Comment, Post, PostContent, Series
 
@@ -15,6 +16,7 @@ class PostCreateForm(forms.ModelForm):
             'title': forms.TextInput(),
             'featured_title': forms.TextInput(),
             'categories': forms.SelectMultiple(),
+            'tags': TagSelectize(),
             'description': forms.Textarea(),
             'body': forms.Textarea(),
             'url_to_article': forms.URLInput(),
@@ -43,6 +45,7 @@ class PostEditForm(forms.ModelForm):
             'featured_title': forms.TextInput(),
             'categories': forms.SelectMultiple(),
             'description': forms.Textarea(),
+            'tags': TagSelectize(),
             'body': forms.Textarea(),
             'slug': forms.TextInput(),
             'url_to_article': forms.URLInput(),
