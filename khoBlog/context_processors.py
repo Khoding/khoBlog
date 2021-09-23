@@ -6,7 +6,6 @@ from django.utils import timezone
 def context(request):
     debug_flag = settings.DEBUG
     comments_disabled_globally_flag = settings.COMMENTS_DISABLED_GLOBALLY
-    comments_use_old_system = settings.COMMENTS_USE_OLD_SYSTEM
     context = {
         'CANONICAL_PATH': request.build_absolute_uri(request.path_info),
         'debug_flag': debug_flag,
@@ -17,7 +16,6 @@ def context(request):
         'app_title': 'Blog',
         'app_direct_link': reverse('blog:post_list'),
         'comments_disabled_globally_flag': comments_disabled_globally_flag,
-        'comments_use_old_system': comments_use_old_system,
     }
 
     return context

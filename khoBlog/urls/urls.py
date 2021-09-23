@@ -95,13 +95,15 @@ urlpatterns = [
     # Dev Urls
     path('dev/', include(dev_urls, namespace='dev')),
 
-    # Markdownx
+    # Markdownx and Taggit
     path('markdownx/', include('markdownx.urls')),
+    re_path(r'^taggit/', include('taggit_selectize.urls')),
 
     re_path(r'^comments/', include('comments.urls')),
     re_path(r'^comments/', include('django_comments.urls')),
     re_path(r'^comments/', include('django_comments_xtd.urls')),
 
+    # Misc
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(
              site_map_info_dict, priority=0.6)}},
@@ -109,7 +111,6 @@ urlpatterns = [
     re_path(r'^robots\.txt', include('robots.urls')),
     re_path(r'^referrals/', include('pinax.referrals.urls',
                                     namespace="pinax_referrals")),
-    re_path(r'^taggit/', include('taggit_selectize.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     path('__debug__/', include(debug_toolbar.urls)),
 ]

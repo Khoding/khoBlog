@@ -1,9 +1,0 @@
-{% for comment in comment_list %}
-    {% if not comment.parent %}
-        {% include 'blog/includes/post_comments_messages.html' %}
-    {% endif %}
-
-    {% for comment in comment.comment_children.all %}
-        {% include 'blog/includes/post_comments_messages.html' %}
-    {% endfor %}
-{% endfor %}
