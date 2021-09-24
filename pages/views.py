@@ -192,6 +192,5 @@ def kheee_special_case():
     Returns:
         [type]: [description]
     """
-
     url = get_object_or_404(Page, slug='kheee')
     return redirect(url)
