@@ -165,19 +165,33 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% provider_login_url 'github' %}">Log in with Github</a>
                             </li>
-
                         {% endif %}
 
                         {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
-                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
-                                </ul>
-                            </li>
+                            {% if user.is_superuser %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'account_logout' %}">Log out</a>
+                                </li>
+                            {% endif %}
 
                             {% if user.is_superuser or user.is_staff %}
                                 <li class="nav-item dropdown">
