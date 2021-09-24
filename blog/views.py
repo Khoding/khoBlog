@@ -44,6 +44,11 @@ class PostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        query = PostFilter(self.request.GET,
+                           queryset=self.model.objects.filter(
+                               Q(pub_date__lte=timezone.now(), withdrawn=False)))
+        if query != None or query != "":
+            return query.qs
         return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
@@ -54,6 +59,7 @@ class PostListView(ListView):
             featuring_state="F").get_without_removed()
         context['featured_big'] = self.model.objects.filter(
             featuring_state="FB").get_without_removed()
+        context['filter_form'] = PostFilter()
         return context
 
 
