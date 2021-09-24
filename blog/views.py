@@ -1,5 +1,6 @@
+from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
@@ -11,26 +12,17 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         DayArchiveView, MonthArchiveView,
                                         TodayArchiveView, WeekArchiveView,
                                         YearArchiveView)
+from khoBlog.utils import superuser_required
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
-from custom_taggit.models import CustomTag
+
 from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm,
-                    CategoryEditForm, CommentForm, EditPostCommentForm, PostCloneForm,
-                    PostCreateForm, PostDeleteForm, PostEditForm,
-                    SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
+                    CategoryEditForm, CommentForm, EditPostCommentForm,
+                    PostCloneForm, PostCreateForm, PostDeleteForm,
+                    PostEditForm, SeriesCreateForm, SeriesDeleteForm,
+                    SeriesEditForm)
 from .models import Category, Comment, Post, PostContent, Series
-
-
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
 
 
 class PostListView(ListView):

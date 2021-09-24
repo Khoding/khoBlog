@@ -1,23 +1,12 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from khoBlog.utils import superuser_required
 
 from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
 
 from .models import Page
-
-
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
 
 
 class PageDetailView(DetailView):

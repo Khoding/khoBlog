@@ -1,21 +1,11 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from khoBlog.utils import superuser_required
 
 from portfolio.forms import ProjectAddForm, ProjectUpdateForm
+
 from .models import Project
-
-
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
 
 
 class ProjectListView(ListView):
