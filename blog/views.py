@@ -47,7 +47,7 @@ class PostListView(ListView):
         query = PostFilter(self.request.GET,
                            queryset=self.model.objects.filter(
                                Q(pub_date__lte=timezone.now(), withdrawn=False)))
-        if query != None or query != "":
+        if query is not None or query != "":
             return query.qs
         return self.model.objects.get_base_common_queryset()
 
