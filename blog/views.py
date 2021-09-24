@@ -1546,12 +1546,12 @@ def link_fetching(request):
     image = ""
     for meta in metas:
         if 'property' in meta.attrs:
-            if (meta.attrs['property'] == 'og:image'):
+            if meta.attrs['property'] == 'og:image':
                 image = meta.attrs['content']
         elif 'name' in meta.attrs:
-            if (meta.attrs['name'] == 'description'):
+            if meta.attrs['name'] == 'description':
                 description = meta.attrs['content']
-            if (meta.attrs['name'] == 'title'):
+            if meta.attrs['name'] == 'title':
                 title = meta.attrs['content']
 
     return JsonResponse({'success': 1, 'meta': {'description': description, 'title': title, 'image': {'url': image}}})
