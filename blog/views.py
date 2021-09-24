@@ -1533,7 +1533,6 @@ class PostTodayArchiveView(TodayArchiveView):
 
 def link_fetching(request):
     '''linkfetching For EditorJS Link Plugin'''
-
     import requests
     from bs4 import BeautifulSoup
 
