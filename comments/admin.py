@@ -27,7 +27,7 @@ def make_site_localhost(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
-class CommentsAdmin(CommentsAdmin):
+class CustomCommentsAdmin(CommentsAdmin):
     form = AdminForm
 
     list_display = ('pk', 'full_title', 'name', 'content_type', 'object_pk',
@@ -85,5 +85,5 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
 
 
 admin.site.unregister(CustomComment)
-# admin.site.register(CustomComment, CommentsAdmin)
+# admin.site.register(CustomComment, CustomCommentsAdmin)
 admin.site.register(CustomCommentXTD, CommentsXTDAdmin)
