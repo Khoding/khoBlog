@@ -866,6 +866,8 @@ class PostSearchResultsListView(ListView):
     model = Post
     template_name = 'blog/lists/filter_list.html'
     context_object_name = 'filter'
+    paginate_by = 21
+    paginate_orphans = 5
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -875,13 +877,14 @@ class PostSearchResultsListView(ListView):
             query = PostFilter(self.request.GET,
                                queryset=self.model.objects.filter(
                                    Q(pub_date__lte=timezone.now(), withdrawn=False)))
-        return query
+        return query.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Posts'
         context['search_url'] = reverse('blog:post_search_results')
         context['search_title'] = "Search in Posts"
+        context['filter_form'] = PostFilter()
         return context
 
 
