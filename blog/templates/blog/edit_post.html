@@ -114,6 +114,8 @@
                     {% endfor %}
                 </div>
 
+                {{ form.body_custom }}
+
                 <div class="field mb-2">
                     {{ form.image.label_tag }}
                     {{ form.image|add_class:"form-control"|attr:"placeholder:Post image" }}

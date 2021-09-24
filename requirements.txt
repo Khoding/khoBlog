@@ -31,6 +31,7 @@ django-compressor==2.4.1
 django-contrib-comments==2.1.0
 django-debug-toolbar==3.2.2
 django-debug-toolbar-template-profiler==2.0.2
+django-editorjs-fields==0.2.3
 django-environ==0.7.0
 django-filter==2.4.0
 django-import-export==2.6.0

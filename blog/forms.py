@@ -4,6 +4,7 @@ from django.forms.models import inlineformset_factory
 from taggit_selectize.widgets import TagSelectize
 
 from .models import Category, Comment, Post, PostContent, Series
+from django_editorjs_fields import EditorJsWidget
 
 
 class PostCreateForm(forms.ModelForm):
@@ -18,7 +19,7 @@ class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series',
-                  'description', 'body', 'image', 'url_to_article', 'url_to_article_title', 'language',)
+                  'description', 'body', 'body_custom', 'image', 'url_to_article', 'url_to_article_title', 'language',)
 
         widgets = {
             'title': forms.TextInput(),
@@ -31,6 +32,7 @@ class PostCreateForm(forms.ModelForm):
             'url_to_article_title': forms.TextInput(),
             'series': forms.Select(),
             'language': forms.Select(),
+            'body_custom': EditorJsWidget(config={'minHeight': 100}),
         }
 
 
@@ -53,7 +55,7 @@ class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'featured_title',  'categories', 'tags', 'series', 'order_in_series', 'description',
-                  'body', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'pub_date',
+                  'body', 'body_custom', 'image', 'slug', 'withdrawn', 'featuring_state', 'publication_state', 'pub_date',
                   'url_to_article', 'url_to_article_title', 'language', 'is_outdated',)
 
         widgets = {
@@ -68,6 +70,7 @@ class PostEditForm(forms.ModelForm):
             'url_to_article_title': forms.TextInput(),
             'series': forms.Select(),
             'language': forms.Select(),
+            'body_custom': EditorJsWidget(config={'minHeight': 100}),
         }
 
 
