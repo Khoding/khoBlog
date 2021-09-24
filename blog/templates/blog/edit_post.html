@@ -1,12 +1,10 @@
 {% extends 'sub_base_main.html' %}
-{% load static widget_tweaks project_tags markdown_extra %}
-
-{% block additional_js %}
-    <script src="{% static 'vendor\node_modules\jquery\dist\jquery.min.js' %}"></script>
-{% endblock additional_js %}
+{% load static widget_tweaks project_tags markdown_extra compress %}
 
 {% block additional_css %}
-    <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+    {% endcompress css %}
 {% endblock additional_css %}
 
 {% block main %}

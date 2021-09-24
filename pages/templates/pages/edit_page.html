@@ -1,12 +1,10 @@
 {% extends 'pages/base_page.html' %}
-{% load static project_tags %}
-
-{% block additional_js %}
-    <script src="{% static 'vendor\node_modules\jquery\dist\jquery.min.js' %}"></script>
-{% endblock additional_js %}
+{% load static project_tags compress %}
 
 {% block additional_css %}
-    <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+    {% endcompress css %}
 {% endblock additional_css %}
 
 {% block main %}

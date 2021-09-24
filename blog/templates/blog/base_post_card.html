@@ -1,9 +1,5 @@
 {% load static markdown_extra read_time super_buttons %}
 
-{% block additional_js %}
-    <script src="{% static 'vendor\node_modules\@editorjs\link\dist\bundle.js' %}"></script>
-{% endblock additional_js %}
-
 {% block card_div %}
     <article id="post-{{ post.slug }}" class="card shadow">
 {% endblock card_div %}
