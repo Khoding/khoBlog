@@ -1,5 +1,4 @@
-from django.contrib.auth.mixins import (PermissionRequiredMixin,
-                                        UserPassesTestMixin)
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -9,17 +8,6 @@ from django.views.generic import DetailView, ListView
 from rules.contrib.views import permission_required
 
 from .models import Choice, Question
-
-
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
 
 
 class IndexView(PermissionRequiredMixin, ListView):

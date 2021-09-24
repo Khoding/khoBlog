@@ -105,6 +105,7 @@ urlpatterns = [
     re_path(r'^comments/', include('django_comments.urls')),
     re_path(r'^comments/', include('django_comments_xtd.urls')),
 
+    # Misc
     path('sitemap.xml', sitemap,
          {'sitemaps': {'blog': GenericSitemap(
              site_map_info_dict, priority=0.6)}},

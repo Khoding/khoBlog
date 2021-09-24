@@ -3,11 +3,11 @@
 
 {% block page_top_end %}
     <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
-        <a class="btn btn-primary" href="{{ prev_post.get_absolute_url }}">
+        <a class="btn btn-primary btn-sm" href="{{ prev_post.get_absolute_url }}">
             <i class="bi bi-chevron-left"></i>
         </a>
 
-        <a class="btn btn-primary" href="{{ next_post.get_absolute_url }}">
+        <a class="btn btn-primary btn-sm" href="{{ next_post.get_absolute_url }}">
             <i class="bi bi-chevron-right"></i>
         </a>
     </nav>
@@ -33,11 +33,7 @@
 
             <p class="text-muted text-small">This post has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
 
-            {% if not comments_use_old_system %}
-                {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
-            {% else %}
-                {% render_comment_list for post %}
-            {% endif %}
+            {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
         {% elif post.enable_comments and comments_disabled_globally_flag %}
             <p class="text-muted text-small">Comments were disabled globally.</p>
         {% else %}

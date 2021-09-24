@@ -1,26 +1,29 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from khoBlog.utils import superuser_required
 
 from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
 
 from .models import Page
 
 
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
-
-
 class PageDetailView(DetailView):
+    """PageDetailView
+
+    Details of a Page
+
+    Args:
+        DetailView ([type]): [description]
+
+    Raises:
+        PermissionDenied: [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     model = Page
     template_name = 'flatpages/default.html'
 
@@ -60,6 +63,17 @@ class PageDetailView(DetailView):
 
 
 class PageListView(ListView):
+    """PageListView
+
+    A list of Pages
+
+    Args:
+        ListView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     model = Page
     template_name = 'pages/page_list.html'
     context_object_name = 'pages'
@@ -83,6 +97,17 @@ class PageListView(ListView):
 
 @superuser_required()
 class PageCreateView(CreateView):
+    """PageCreateView
+
+    A view for creating a Page
+
+    Args:
+        CreateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     model = Page
     template_name = 'pages/page_add.html'
     form_class = PageAddForm
@@ -98,6 +123,17 @@ class PageCreateView(CreateView):
 
 @superuser_required()
 class PageUpdateView(UpdateView):
+    """PageUpdateView
+
+    A view for updating a Page
+
+    Args:
+        UpdateView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     model = Page
     template_name = 'pages/edit_page.html'
     form_class = PageEditForm
@@ -148,6 +184,13 @@ class PageDeleteView(UpdateView):
         return context
 
 
-def kheee_special_case(request, slug, *args):
+def kheee_special_case():
+    """kheee_special_case
+
+    A direct link to kheee Page
+
+    Returns:
+        [type]: [description]
+    """
     url = get_object_or_404(Page, slug='kheee')
     return redirect(url)

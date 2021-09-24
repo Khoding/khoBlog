@@ -125,7 +125,70 @@
                     {% endfor %}
                 </div>
 
-                <div class="field d-none d-lg-block mb-2">
+                <div class="field mb-2">
+                    {{ form.withdrawn.label_tag }}
+                    <div class="form-check">
+                        {{ form.withdrawn|add_class:"form-check-input" }}
+                    </div>
+                    {% if form.withdrawn.help_text %}
+                        <span class="text-small text-muted">{{ form.withdrawn.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.withdrawn.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
+                    {{ form.is_outdated.label_tag }}
+                    <div class="form-check">
+                        {{ form.is_outdated|add_class:"form-check-input" }}
+                    </div>
+                    {% if form.is_outdated.help_text %}
+                        <span class="text-small text-muted">{{ form.is_outdated.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.is_outdated.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
+                    <div class="form-floating">
+                        {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post featuring state" }}
+                        {{ form.featuring_state.label_tag }}
+                    </div>
+                    {% if form.featuring_state.help_text %}
+                        <span class="text-small text-muted">{{ form.featuring_state.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.featuring_state.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
+                    <div class="form-floating">
+                        {{ form.publication_state|add_class:"form-select"|attr:"placeholder:Post publication state" }}
+                        {{ form.publication_state.label_tag }}
+                    </div>
+                    {% if form.publication_state.help_text %}
+                        <span class="text-small text-muted">{{ form.publication_state.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.publication_state.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
+                    {{ form.pub_date.label_tag }}
+                    {{ form.pub_date|add_class:"form-control" }}
+                    {% if form.pub_date.help_text %}
+                        <span class="text-small text-muted">{{ form.pub_date.help_text }}</span>
+                    {% endif %}
+                    {% for error in form.pub_date.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field mb-2">
                     <div class="input-group">
                         <span class="input-group-text">Linked article</span>
                         {{ form.url_to_article|add_class:"form-control w-50"|attr:"placeholder:Linked article's URL" }}

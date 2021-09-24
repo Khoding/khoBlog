@@ -8,6 +8,14 @@ from django_editorjs_fields import EditorJsWidget
 
 
 class PostCreateForm(forms.ModelForm):
+    """PostCreateForm
+
+    A form to create a Post
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Post
         fields = ('title', 'featured_title', 'categories', 'tags', 'series', 'order_in_series',
@@ -29,6 +37,14 @@ class PostCreateForm(forms.ModelForm):
 
 
 class PostEditForm(forms.ModelForm):
+    """PostEditForm
+
+    A form to edit a Post
+
+    Args:
+        forms ([type]): [description]
+    """
+
     pub_date = forms.SplitDateTimeField(required=False, input_date_formats=['%Y-%m-%d'],
                                         input_time_formats=[
         '%H:%M:%S', '%H:%M'],
@@ -58,25 +74,94 @@ class PostEditForm(forms.ModelForm):
         }
 
 
+class PostCloneForm(forms.ModelForm):
+    """PostCloneForm
+
+    A form to clone a Post
+
+    Args:
+        forms ([type]): [description]
+    """
+
+    pub_date = forms.SplitDateTimeField(required=False, input_date_formats=['%Y-%m-%d'],
+                                        input_time_formats=[
+        '%H:%M:%S', '%H:%M'],
+        widget=forms.SplitDateTimeWidget(
+        date_attrs={'type': 'date'}, date_format='%Y-%m-%d',
+        time_attrs={'type': 'time'}, time_format='%H:%M:%S'))
+
+    class Meta:
+        model = Post
+        fields = ('title', 'featured_title',  'categories', 'tags', 'series', 'order_in_series', 'description',
+                  'body', 'image', 'withdrawn', 'featuring_state', 'publication_state', 'pub_date',
+                  'url_to_article', 'url_to_article_title', 'language', 'is_outdated',)
+
+        widgets = {
+            'title': forms.TextInput(),
+            'featured_title': forms.TextInput(),
+            'categories': forms.SelectMultiple(),
+            'description': forms.Textarea(),
+            'tags': TagSelectize(),
+            'body': forms.Textarea(),
+            'slug': forms.TextInput(),
+            'url_to_article': forms.URLInput(),
+            'url_to_article_title': forms.TextInput(),
+            'series': forms.Select(),
+            'language': forms.Select(),
+        }
+
+
 class PostDeleteForm(forms.ModelForm):
+    """PostDeleteForm
+
+    A form to delete a Post
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Post
         fields = ()
 
 
 class CategoryDeleteForm(forms.ModelForm):
+    """CategoryDeleteForm
+
+    A form to delete a Category
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Category
         fields = ()
 
 
 class SeriesDeleteForm(forms.ModelForm):
+    """SeriesDeleteForm
+
+    A form to delete a Series
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Series
         fields = ()
 
 
 class CategoryCreateForm(forms.ModelForm):
+    """CategoryCreateForm
+
+    A form to create a Category
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Category
         fields = ('title', 'description', 'parent', 'withdrawn',)
@@ -90,6 +175,14 @@ class CategoryCreateForm(forms.ModelForm):
 
 
 class CategoryEditForm(forms.ModelForm):
+    """CategoryEditForm
+
+    A form to edit a Category
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Category
         fields = ('title', 'description', 'parent', 'slug', 'withdrawn',)
@@ -104,6 +197,14 @@ class CategoryEditForm(forms.ModelForm):
 
 
 class SeriesCreateForm(forms.ModelForm):
+    """SeriesCreateForm
+
+    A form to create a Series
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Series
         fields = ('title', 'description', 'withdrawn')
@@ -116,6 +217,14 @@ class SeriesCreateForm(forms.ModelForm):
 
 
 class SeriesEditForm(forms.ModelForm):
+    """SeriesEditForm
+
+    A form to edit a Series
+
+    Args:
+        forms ([type]): [description]
+    """
+
     class Meta:
         model = Series
         fields = ('title', 'description', 'slug', 'withdrawn')
@@ -129,6 +238,14 @@ class SeriesEditForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """CommentForm Deprecated
+
+    A form to create Comments
+
+    Args:
+        forms ([type]): [description]
+    """
+
     captcha = CaptchaField()
 
     class Meta:
@@ -142,6 +259,14 @@ class CommentForm(forms.ModelForm):
 
 
 class EditPostCommentForm(forms.ModelForm):
+    """EditPostCommentForm Deprecated
+
+    A form to edit old Comments
+
+    Args:
+        forms ([type]): [description]
+    """
+
     captcha = CaptchaField()
 
     class Meta:
@@ -156,6 +281,14 @@ class EditPostCommentForm(forms.ModelForm):
 
 
 class ARPostCommentForm(forms.ModelForm):
+    """ARPostCommentForm Deprecated
+
+    A form to reply to old comments
+
+    Args:
+        forms ([type]): [description]
+    """
+
     captcha = CaptchaField()
 
     class Meta:

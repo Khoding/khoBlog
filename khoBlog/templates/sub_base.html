@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load side_menu_set project_tags %}
+{% load side_menu_set %}
 
 {% block nav %}
     {% sm_setting sides %}
@@ -10,21 +10,6 @@
 {% endblock nav %}
 
 {% block aside %}
-
-    {% if filter %}
-        <div class="card p-4 mb-2 rounded shadow">
-            <form class="card formcard" method="get">
-                <h4 class="fst-italic">Filters</h4>
-                <div class="text-danger">
-                    {{ form.non_field_errors }}
-                </div>
-
-                {% form_get filter.form %}
-
-                <input class="btn btn-primary" type="submit" />
-            </form>
-        </div>
-    {% endif %}
 
     {% sm_setting sides %}
 

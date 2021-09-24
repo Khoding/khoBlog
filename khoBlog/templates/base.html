@@ -123,8 +123,6 @@
 
             <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
                 <div class="d-block d-lg-none">
-                    {% include 'includes/nav/search/small_search.html' %}
-
                     {% block nav %}
                     {% endblock nav %}
                 </div>
@@ -165,19 +163,33 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% provider_login_url 'github' %}">Log in with Github</a>
                             </li>
-
                         {% endif %}
 
                         {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
-                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as Guest</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
-                                </ul>
-                            </li>
+                            {% if user.is_superuser %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
+                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-inherit" href="{% url 'account_logout' %}">Log out</a>
+                                </li>
+                            {% endif %}
 
                             {% if user.is_superuser or user.is_staff %}
                                 <li class="nav-item dropdown">
@@ -193,8 +205,6 @@
                         {% endif %}
                     </ul>
                 {% endactiveurl %}
-
-                {% include 'includes/nav/search/big_search.html' %}
             </div>
         </div>
     </nav>
@@ -206,31 +216,27 @@
             <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
 
                 <div class="row clearfix">
-                    <div class="col col-sm-auto">
-                        <h2>
+                    <div class="col">
+                        <h2 class="mb-1">
                             {% block page_top_title %}
                                 {{ title|truncatewords_html:7 }}
                             {% endblock page_top_title %}
                         </h2>
                     </div>
 
-                    <div id="main_search" class="col d-none d-sm-block">
-                        <form action="{{ search_url }}" class="search_form" method="get">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="search" placeholder="{{ search_title }}" name="q"
-                                    aria-label="search" aria-describedby="search">
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-auto mb-2">
-                        {% block page_top_end %}
-                            <a class="btn btn-primary float-end" href="{% url 'blog:search' %}">
-                                Search
+                    <div class="col-auto mb-1">
+                        {% if filter_form %}
+                            <a class="btn btn-primary btn-sm float-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Filters
                             </a>
+                        {% endif %}
+
+                        {% block page_top_end %}
                         {% endblock page_top_end %}
                     </div>
                 </div>
+
+                <hr class="my-0" />
 
                 <span class="text-small">
                     <strong>

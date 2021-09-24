@@ -1,6 +1,14 @@
 {% extends 'pages/base_page.html' %}
 {% load static project_tags %}
 
+{% block additional_js %}
+    <script src="{% static 'vendor\node_modules\jquery\dist\jquery.min.js' %}"></script>
+{% endblock additional_js %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
+{% endblock additional_css %}
+
 {% block main %}
     <div class="card formcard">
         <div class="card-body">

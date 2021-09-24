@@ -1,5 +1,6 @@
+from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
@@ -11,26 +12,17 @@ from django.views.generic.dates import (ArchiveIndexView, DateDetailView,
                                         DayArchiveView, MonthArchiveView,
                                         TodayArchiveView, WeekArchiveView,
                                         YearArchiveView)
+from khoBlog.utils import superuser_required
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
-from custom_taggit.models import CustomTag
+
 from .forms import (ARPostCommentForm, CategoryCreateForm, CategoryDeleteForm,
                     CategoryEditForm, CommentForm, EditPostCommentForm,
-                    PostCreateForm, PostDeleteForm, PostEditForm,
-                    SeriesCreateForm, SeriesDeleteForm, SeriesEditForm)
+                    PostCloneForm, PostCreateForm, PostDeleteForm,
+                    PostEditForm, SeriesCreateForm, SeriesDeleteForm,
+                    SeriesEditForm)
 from .models import Category, Comment, Post, PostContent, Series
-
-
-def superuser_required():
-    def wrapper(wrapped):
-        class WrappedClass(UserPassesTestMixin, wrapped):
-            def test_func(self):
-                return self.request.user.is_superuser
-
-        return WrappedClass
-
-    return wrapper
 
 
 class PostListView(ListView):
@@ -52,6 +44,11 @@ class PostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        query = PostFilter(self.request.GET,
+                           queryset=self.model.objects.filter(
+                               Q(pub_date__lte=timezone.now(), withdrawn=False)))
+        if query is not None or query != "":
+            return query.qs
         return self.model.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
@@ -62,6 +59,7 @@ class PostListView(ListView):
             featuring_state="F").get_without_removed()
         context['featured_big'] = self.model.objects.filter(
             featuring_state="FB").get_without_removed()
+        context['filter_form'] = PostFilter()
         return context
 
 
@@ -768,9 +766,8 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
     """
 
     model = Post
-    template_name = 'blog/create_post.html'
-    form_class = PostCreateForm
-    success_url = reverse_lazy('blog:post_list')
+    template_name = 'blog/clone_post.html'
+    form_class = PostCloneForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -782,7 +779,7 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Clone Post'
         context['side_title'] = 'Post List'
-        context['form'] = PostCreateForm(instance=post)
+        context['form'] = PostCloneForm(instance=post)
         return context
 
 
@@ -875,6 +872,8 @@ class PostSearchResultsListView(ListView):
     model = Post
     template_name = 'blog/lists/filter_list.html'
     context_object_name = 'filter'
+    paginate_by = 21
+    paginate_orphans = 5
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -884,13 +883,14 @@ class PostSearchResultsListView(ListView):
             query = PostFilter(self.request.GET,
                                queryset=self.model.objects.filter(
                                    Q(pub_date__lte=timezone.now(), withdrawn=False)))
-        return query
+        return query.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Search in Posts'
         context['search_url'] = reverse('blog:post_search_results')
         context['search_title'] = "Search in Posts"
+        context['filter_form'] = PostFilter()
         return context
 
 

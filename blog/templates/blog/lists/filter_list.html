@@ -3,7 +3,7 @@
 
 {% block content_main %}
     <section class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for post in filter.qs %}
+        {% for post in filter %}
             <section class="mb-2 pe-0">
                 {% include 'blog/post_card_in_lists.html' %}
             </section>

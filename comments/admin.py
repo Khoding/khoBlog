@@ -3,7 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 from django_comments.admin import CommentsAdmin
 from django_comments_xtd.admin import XtdCommentsAdmin
+
 from comments.forms import AdminForm
+
 from .models import CustomComment, CustomCommentXTD
 
 
@@ -25,7 +27,7 @@ def make_site_localhost(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
-class CommentsAdmin(CommentsAdmin):
+class CustomCommentsAdmin(CommentsAdmin):
     form = AdminForm
 
     list_display = ('pk', 'full_title', 'name', 'content_type', 'object_pk',
@@ -83,5 +85,5 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
 
 
 admin.site.unregister(CustomComment)
-admin.site.register(CustomComment, CommentsAdmin)
+# admin.site.register(CustomComment, CustomCommentsAdmin)
 admin.site.register(CustomCommentXTD, CommentsXTDAdmin)

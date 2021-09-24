@@ -15,7 +15,7 @@ class PostResource(resources.ModelResource):
         model = Post
 
 
-def export_as_json(modeladmin, request, queryset):
+def export_as_json(queryset):
     response = HttpResponse(content_type="application/json")
     serializers.serialize("json", queryset, stream=response)
     return response
