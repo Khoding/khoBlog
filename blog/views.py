@@ -2,6 +2,7 @@ from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -1528,3 +1529,29 @@ class PostTodayArchiveView(TodayArchiveView):
         context = super().get_context_data(**kwargs)
         context['title'] = '[Archive] Posted today'
         return context
+
+
+def link_fetching(request):
+    '''linkfetching For EditorJS Link Plugin'''
+
+    import requests
+    from bs4 import BeautifulSoup
+
+    url = request.GET['url']
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, features="html.parser")
+    metas = soup.find_all('meta')
+    title = ""
+    description = ""
+    image = ""
+    for meta in metas:
+        if 'property' in meta.attrs:
+            if (meta.attrs['property'] == 'og:image'):
+                image = meta.attrs['content']
+        elif 'name' in meta.attrs:
+            if (meta.attrs['name'] == 'description'):
+                description = meta.attrs['content']
+            if (meta.attrs['name'] == 'title'):
+                title = meta.attrs['content']
+
+    return JsonResponse({'success': 1, 'meta': {'description': description, 'title': title, 'image': {'url': image}}})

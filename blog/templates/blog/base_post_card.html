@@ -1,4 +1,8 @@
-{% load markdown_extra read_time super_buttons %}
+{% load static markdown_extra read_time super_buttons %}
+
+{% block additional_js %}
+    <script src="{% static 'vendor\node_modules\@editorjs\link\dist\bundle.js' %}"></script>
+{% endblock additional_js %}
 
 {% block card_div %}
     <article id="post-{{ post.slug }}" class="card shadow">
@@ -65,7 +69,7 @@
             <section>
                 {% include 'blog/includes/post_dates.html' %}
                 <p class="mb-0 text-small text-muted">
-                    {% if not body %}
+                    {% if post.body %}
                         {{ post.body|readtime }}
                     {% else %}
                         A while
@@ -89,9 +93,10 @@
                     {{ post.body|formatted_markdown|safe }}
                 {% endif %}
 
-                    {% load editorjs %}
-                    {{ post.body_default|editorjs }}
+                {% if post.body_custom %}
+                    {% load editorjs_more %}
                     {{ post.body_custom|editorjs }}
+                {% endif %}
             </section>
             {% if post.url_to_article %}
                 <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>

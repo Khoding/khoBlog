@@ -19,7 +19,7 @@ from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
 
-from django_editorjs_fields import EditorJsJSONField, EditorJsTextField
+from django_editorjs_fields import EditorJsJSONField
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -228,18 +228,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         max_length=27, default='', blank=True, help_text="Featured post title")
     body = MarkdownxField(help_text="Post main content", blank=True)
     body_default = models.TextField(default="")
-    body_editorjs = EditorJsJSONField(
-        readOnly=False, autofocus=True)
     body_custom = EditorJsJSONField(
         tools={
-            "Image": {
-                'class': 'ImageTool',
-                "config": {
-                    "endpoints": {
-                        # Your custom backend file uploader endpoint
-                        "byFile": "images/post/body_images/"
-                    }
-                }
+            'LinkTool': {
+                'class': 'LinkTool',
+                'inlineToolbar': True,
+                'config': {"endpoint": '/editorjs/link_fetching/'}
             },
         },
         null=True,

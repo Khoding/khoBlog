@@ -15,6 +15,7 @@ Including another URLconf
 """
 import debug_toolbar
 from blog.models import Post
+from blog.views import link_fetching
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -23,6 +24,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
@@ -70,6 +72,10 @@ api_base_patterns = [
     path('token/', obtain_auth_token, name='obtain-token'),
 ]
 
+more_editorjs = [
+    path('link_fetching/', csrf_exempt(link_fetching))
+]
+
 urlpatterns = [
     # My Apps
     path('', include('blog.urls')),
@@ -99,6 +105,7 @@ urlpatterns = [
     path('markdownx/', include('markdownx.urls')),
     re_path(r'^taggit/', include('taggit_selectize.urls')),
     path('editorjs/', include('django_editorjs_fields.urls')),
+    path('editorjs/', include(more_editorjs)),
 
     # Comments
     re_path(r'^comments/', include('comments.urls')),

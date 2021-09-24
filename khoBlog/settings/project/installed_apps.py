@@ -81,11 +81,9 @@ if DEBUG:
 
 EDITORJS_DEFAULT_PLUGINS = (
     '@editorjs/paragraph',
-    '@editorjs/image',
     '@editorjs/header',
     '@editorjs/list',
     '@editorjs/checklist',
-    '@editorjs/hyperlink',
     '@editorjs/quote',
     '@editorjs/raw',
     '@editorjs/code',
@@ -93,15 +91,17 @@ EDITORJS_DEFAULT_PLUGINS = (
     '@editorjs/embed',
     '@editorjs/delimiter',
     '@editorjs/warning',
+    '@editorjs/link',
     '@editorjs/marker',
     '@editorjs/table',
 )
 
 EDITORJS_DEFAULT_CONFIG_TOOLS = {
-    'Image': {
-        'class': 'ImageTool',
+    'LinkTool': {
+        'class': 'LinkTool',
         'inlineToolbar': True,
-        "config": {"endpoints": {"byFile": "/editorjs/image_upload/"}},
+        'config': {"endpoint": '/editorjs/link_fetching/'},
+        'shortcut': 'CMD+SHIFT+L'
     },
     'Header': {
         'class': 'Header',
@@ -112,7 +112,6 @@ EDITORJS_DEFAULT_CONFIG_TOOLS = {
             'defaultLevel': 2,
         }
     },
-    'Checklist': {'class': 'Checklist', 'inlineToolbar': True},
     'Checklist': {'class': 'Checklist', 'inlineToolbar': True},
     'List': {'class': 'List', 'inlineToolbar': True},
     'Quote': {'class': 'Quote', 'inlineToolbar': True},
