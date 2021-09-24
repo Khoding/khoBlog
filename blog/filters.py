@@ -1,12 +1,21 @@
 import django_filters
-from django.db.models.query_utils import Q
-from django.utils import timezone
-
 from custom_taggit.models import CustomTag
+
 from .models import Category, Post
 
 
 class PostFilter(django_filters.FilterSet):
+    """PostFilter
+
+    A filter for Posts
+
+    Args:
+        django_filters ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     title = django_filters.CharFilter(lookup_expr='contains')
     description = django_filters.CharFilter(lookup_expr='contains')
     body = django_filters.CharFilter(lookup_expr='contains')

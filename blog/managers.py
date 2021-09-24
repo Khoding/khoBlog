@@ -3,6 +3,14 @@ from django.utils import timezone
 
 
 class PostQuerySet(auto_prefetch.QuerySet):
+    """PostQuerySet
+
+    A custom QuerySet for Post
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
+
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
@@ -28,6 +36,13 @@ class PostQuerySet(auto_prefetch.QuerySet):
 
 
 class PostManager(auto_prefetch.Manager):
+    """PostManager
+
+    A custom Manager for Post
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
 
     def get_queryset(self):
         return PostQuerySet(self.model, using=self._db)
@@ -52,6 +67,14 @@ class PostManager(auto_prefetch.Manager):
 
 
 class CategoryQuerySet(auto_prefetch.QuerySet):
+    """CategoryQuerySet
+
+    A custom QuerySet for Category
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
+
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
@@ -64,6 +87,13 @@ class CategoryQuerySet(auto_prefetch.QuerySet):
 
 
 class CategoryManager(auto_prefetch.Manager):
+    """CategoryManager
+
+    A custom Manager for Category
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
 
     def get_queryset(self):
         return CategoryQuerySet(self.model, using=self._db)
@@ -76,11 +106,26 @@ class CategoryManager(auto_prefetch.Manager):
 
 
 class SeriesQuerySet(auto_prefetch.QuerySet):
+    """SeriesQuerySet
+
+    A custom QuerySet for Series
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
+
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
 
 class SeriesManager(auto_prefetch.Manager):
+    """SeriesManager
+
+    A custom Manager for Series
+
+    Args:
+        auto_prefetch ([type]): [description]
+    """
 
     def get_queryset(self):
         return SeriesQuerySet(self.model, using=self._db)
