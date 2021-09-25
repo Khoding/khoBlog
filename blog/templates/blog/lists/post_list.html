@@ -1,11 +1,14 @@
 {% extends 'blog/base_post.html' %}
-{% load static %}
+{% load static featured_post %}
 
 {% block page_top %}
 
-    {% block page_top_featured %}
-        {% include 'blog/includes/featured_posts.html' %}
-    {% endblock page_top_featured %}
+    {% if show_featured %}
+        {% block page_top_featured %}
+            {% featured_big_posts %}
+            {% featured_posts %}
+        {% endblock page_top_featured %}
+    {% endif %}
 
     {% if previous_year or next_year or previous_month or next_month or previous_week or next_week or previous_day or next_day %}
         <nav class="w-100">
@@ -74,8 +77,6 @@
             <section class="mb-2 pe-0">
                 {% include 'blog/post_card_in_lists.html' %}
             </section>
-
-            {% comment %} {% include 'blog/includes/post_offcanvas.html' %} {% endcomment %}
         {% empty %}
             <section class="w-100">
                 <p>No content here.</p>

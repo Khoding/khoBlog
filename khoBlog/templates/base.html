@@ -241,11 +241,7 @@
 
                 <hr class="my-0" />
 
-                <span class="text-small">
-                    <strong>
-                        {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
-                    </strong>
-                </span>
+                {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
 
                 {% block page_top_archives %}
                 {% endblock page_top_archives %}

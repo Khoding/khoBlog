@@ -16,3 +16,17 @@ def featured_post_list(context, urls):
     urls = Post.objects.defer('body', 'image').filter(
         featuring_state='F')
     return {'urls': urls, 'context': context}
+
+
+@register.inclusion_tag('blog/includes/featured_posts.html')
+def featured_big_posts():
+    featured_big = Post.objects.defer('body', 'image').filter(
+        featuring_state='FB')
+    return {'featured_big': featured_big}
+
+
+@register.inclusion_tag('blog/includes/featured_posts.html')
+def featured_posts():
+    featured = Post.objects.defer('body', 'image').filter(
+        featuring_state='F')
+    return {'featured': featured}

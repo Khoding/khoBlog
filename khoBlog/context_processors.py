@@ -15,6 +15,7 @@ def context(request):
         'description': "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
         'app_title': 'Blog',
         'app_direct_link': reverse('blog:post_list'),
+        'show_featured': False,
         'comments_disabled_globally_flag': comments_disabled_globally_flag,
     }
 

@@ -22,11 +22,11 @@
     <footer class="card-footer">
         <span class="d-flex">
             <span class="col">
-             {% if not archive %}
-                <a class="card-link" href="{{ post.get_absolute_url }}">Continue reading</a>
-            {% else %}
-                <a class="card-link" href="{% url 'blog:archive_date_detail' year=g_year month=g_month day=g_day slug=post.slug %}">Continue reading</a>
-            {% endif %}
+                {% if not archive %}
+                    <a class="card-link" href="{{ post.get_absolute_url }}">Continue reading</a>
+                {% else %}
+                    <a class="card-link" href="{% url 'blog:archive_date_detail' year=g_year month=g_month day=g_day slug=post.slug %}">Continue reading</a>
+                {% endif %}
             </span>
             {% if post.url_to_article %}
                 <span class="col">
@@ -35,9 +35,6 @@
                     </a>
                 </span>
             {% endif %}
-            {% comment %} <span class="col">
-                <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.slug }}" aria-controls="postOffCanvas-{{ post.slug }}">Post Info</a>
-            </span> {% endcomment %}
         </span>
     </footer>
 {% endblock card_footer %}

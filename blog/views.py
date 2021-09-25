@@ -2,8 +2,8 @@ from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.http import JsonResponse
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
@@ -48,7 +48,7 @@ class PostListView(ListView):
         query = PostFilter(self.request.GET,
                            queryset=self.model.objects.filter(
                                Q(pub_date__lte=timezone.now(), withdrawn=False)))
-        if query is not None or query != "":
+        if query is not None and query != "":
             return query.qs
         return self.model.objects.get_base_common_queryset()
 
@@ -56,10 +56,7 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Latest Posts'
         context['side_title'] = 'Post List'
-        context['featured'] = self.model.objects.filter(
-            featuring_state="F").get_without_removed()
-        context['featured_big'] = self.model.objects.filter(
-            featuring_state="FB").get_without_removed()
+        context['show_featured'] = True
         context['filter_form'] = PostFilter()
         return context
 
