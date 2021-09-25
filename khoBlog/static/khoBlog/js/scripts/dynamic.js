@@ -1,4 +1,4 @@
-var isRoot = location.pathname == '/';
+var isRoot = location.pathname === '/' && location.hash === '' && location.search === '';
 
 if (isRoot) {
     var ele = document.getElementsByClassName('linkHome');
