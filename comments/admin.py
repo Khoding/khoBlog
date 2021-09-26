@@ -67,8 +67,24 @@ class CustomCommentsAdmin(CommentsAdmin):
                 )
             },
         ),
-        (_("Content"), {"fields": ("title", "user", "alias_user", "user_name", "user_email", "user_url", "comment")}),
-        (_("Metadata"), {"fields": ("submit_date", "ip_address", "is_public", "is_removed")}),
+        (
+            _("Content"),
+            {
+                "fields": (
+                    "title",
+                    "user",
+                    "alias_user",
+                    "user_name",
+                    "user_email",
+                    "user_url",
+                    "comment",
+                )
+            },
+        ),
+        (
+            _("Metadata"),
+            {"fields": ("submit_date", "ip_address", "is_public", "is_removed")},
+        ),
     )
 
     list_filter = (
@@ -78,7 +94,13 @@ class CustomCommentsAdmin(CommentsAdmin):
         "is_removed",
     )
 
-    actions = ["flag_comments", "approve_comments", "remove_comments", make_site_khoblog, make_site_localhost]
+    actions = [
+        "flag_comments",
+        "approve_comments",
+        "remove_comments",
+        make_site_khoblog,
+        make_site_localhost,
+    ]
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
@@ -101,13 +123,33 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
         (None, {"fields": ("content_type", "object_pk", "site")}),
         (
             "Content",
-            {"fields": ("title", "user", "alias_user", "user_name", "user_email", "user_url", "comment", "followup")},
+            {
+                "fields": (
+                    "title",
+                    "user",
+                    "alias_user",
+                    "user_name",
+                    "user_email",
+                    "user_url",
+                    "comment",
+                    "followup",
+                )
+            },
         ),
-        ("Metadata", {"fields": ("submit_date", "ip_address", "is_public", "is_removed")}),
+        (
+            "Metadata",
+            {"fields": ("submit_date", "ip_address", "is_public", "is_removed")},
+        ),
     )
     date_hierarchy = "submit_date"
     ordering = ("thread_id", "order")
-    search_fields = ["object_pk", "user__username", "user_name", "user_email", "comment"]
+    search_fields = [
+        "object_pk",
+        "user__username",
+        "user_name",
+        "user_email",
+        "comment",
+    ]
 
     list_filter = (
         "submit_date",
@@ -116,7 +158,13 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
         "is_removed",
     )
 
-    actions = ["flag_comments", "approve_comments", "remove_comments", make_site_khoblog, make_site_localhost]
+    actions = [
+        "flag_comments",
+        "approve_comments",
+        "remove_comments",
+        make_site_khoblog,
+        make_site_localhost,
+    ]
 
 
 admin.site.unregister(CustomComment)

@@ -16,7 +16,11 @@ class CustomComment(CommentAbstractModel):
     )
     comment = models.TextField()
     parent = auto_prefetch.ForeignKey(
-        "self", on_delete=models.CASCADE, related_name="comment_children", null=True, blank=True
+        "self",
+        on_delete=models.CASCADE,
+        related_name="comment_children",
+        null=True,
+        blank=True,
     )
 
     class Meta:
@@ -29,7 +33,13 @@ class CustomComment(CommentAbstractModel):
     def full_title(self):
         full_t = ""
         if self.content_object:
-            full_t = full_t + str(self.content_type.model) + " - " + str(self.content_object.title) + " - "
+            full_t = (
+                full_t
+                + str(self.content_type.model)
+                + " - "
+                + str(self.content_object.title)
+                + " - "
+            )
         if self.title:
             full_t = full_t + self.title + " - "
         full_t = full_t + self.comment[:25]
@@ -57,7 +67,13 @@ class CustomCommentXTD(XtdComment):
     def full_title(self):
         full_t = ""
         if self.content_object:
-            full_t = full_t + str(self.content_type.model) + " - " + str(self.content_object.title) + " - "
+            full_t = (
+                full_t
+                + str(self.content_type.model)
+                + " - "
+                + str(self.content_object.title)
+                + " - "
+            )
         if self.title:
             full_t = full_t + self.title + " - "
         full_t = full_t + self.comment[:25]

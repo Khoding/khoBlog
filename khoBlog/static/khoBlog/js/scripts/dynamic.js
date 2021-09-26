@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+
 const isRoot = location.pathname === '/' && location.hash === '' && location.search === '';
 
 if (isRoot) {

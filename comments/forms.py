@@ -10,7 +10,13 @@ class CustomCommentChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         full_t = ""
         if obj.content_object:
-            full_t = full_t + str(obj.content_type.model) + " - " + str(obj.content_object.title) + " - "
+            full_t = (
+                full_t
+                + str(obj.content_type.model)
+                + " - "
+                + str(obj.content_object.title)
+                + " - "
+            )
         elif obj.title:
             full_t = obj.title + " - "
         full_t = full_t + str(obj.comment)[:50]

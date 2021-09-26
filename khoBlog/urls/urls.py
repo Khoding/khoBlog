@@ -106,10 +106,17 @@ urlpatterns = (
         re_path(r"^comments/", include("django_comments_xtd.urls")),
         # Sitemaps
         path("sitemap.xml", index, {"sitemaps": sitemaps}),
-        path("sitemap-<section>.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+        path(
+            "sitemap-<section>.xml",
+            sitemap,
+            {"sitemaps": sitemaps},
+            name="django.contrib.sitemaps.views.sitemap",
+        ),
         # Misc
         re_path(r"^robots\.txt", include("robots.urls")),
-        re_path(r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")),
+        re_path(
+            r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")
+        ),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -15,7 +15,9 @@ class PostQuerySet(auto_prefetch.QuerySet):
         return self.filter(is_removed=False)
 
     def get_base_common_queryset(self):
-        return self.defer("body", "image").filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        return self.defer("body", "image").filter(
+            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
+        )
 
     def get_common_queryset(self, user):
         if user.is_superuser:

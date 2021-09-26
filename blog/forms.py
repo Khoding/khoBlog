@@ -63,7 +63,10 @@ class PostEditForm(forms.ModelForm):
         input_date_formats=["%Y-%m-%d"],
         input_time_formats=["%H:%M:%S", "%H:%M"],
         widget=forms.SplitDateTimeWidget(
-            date_attrs={"type": "date"}, date_format="%Y-%m-%d", time_attrs={"type": "time"}, time_format="%H:%M:%S"
+            date_attrs={"type": "date"},
+            date_format="%Y-%m-%d",
+            time_attrs={"type": "time"},
+            time_format="%H:%M:%S",
         ),
     )
 
@@ -121,7 +124,10 @@ class PostCloneForm(forms.ModelForm):
         input_date_formats=["%Y-%m-%d"],
         input_time_formats=["%H:%M:%S", "%H:%M"],
         widget=forms.SplitDateTimeWidget(
-            date_attrs={"type": "date"}, date_format="%Y-%m-%d", time_attrs={"type": "time"}, time_format="%H:%M:%S"
+            date_attrs={"type": "date"},
+            date_format="%Y-%m-%d",
+            time_attrs={"type": "time"},
+            time_format="%H:%M:%S",
         ),
     )
 

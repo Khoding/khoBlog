@@ -36,15 +36,23 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     """
 
     parent = auto_prefetch.ForeignKey(
-        "self", on_delete=models.CASCADE, related_name="category_children", null=True, blank=True
+        "self",
+        on_delete=models.CASCADE,
+        related_name="category_children",
+        null=True,
+        blank=True,
     )
     title = models.CharField(max_length=200, help_text="Category title")
     description = models.TextField(blank=True, help_text="Category description")
-    slug = models.SlugField(unique=True, default="", max_length=200, help_text="Category slug")
+    slug = models.SlugField(
+        unique=True, default="", max_length=200, help_text="Category slug"
+    )
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    is_removed = models.BooleanField(
+        "is removed", default=False, db_index=True, help_text=("Soft delete")
+    )
     history = HistoricalRecords()
 
     objects: CategoryManager = CategoryManager()
@@ -84,7 +92,9 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def get_post_count_in_category(self):
         return self.postcatslink_set.filter(
-            post__pub_date__lte=timezone.now(), post__withdrawn=False, post__is_removed=False
+            post__pub_date__lte=timezone.now(),
+            post__withdrawn=False,
+            post__is_removed=False,
         ).count()
 
     @property
@@ -112,11 +122,15 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     title = models.CharField(max_length=200, help_text="Series title")
     description = models.TextField(blank=True, help_text="Series description")
-    slug = models.SlugField(unique=True, default="", max_length=200, help_text="Series slug")
+    slug = models.SlugField(
+        unique=True, default="", max_length=200, help_text="Series slug"
+    )
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    is_removed = models.BooleanField(
+        "is removed", default=False, db_index=True, help_text=("Soft delete")
+    )
     history = HistoricalRecords()
 
     objects: SeriesManager = SeriesManager()
@@ -216,10 +230,15 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     ]
 
     author = auto_prefetch.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="post_author", help_text="Post author"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="post_author",
+        help_text="Post author",
     )
     title = models.CharField(max_length=200, help_text="Post title")
-    featured_title = models.CharField(max_length=27, default="", blank=True, help_text="Featured post title")
+    featured_title = models.CharField(
+        max_length=27, default="", blank=True, help_text="Featured post title"
+    )
     body = MarkdownxField(help_text="Post main content", blank=True)
     body_default = models.TextField(default="")
     body_custom = EditorJsJSONField(
@@ -234,10 +253,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         blank=True,
     )
 
-    image = models.ImageField(null=True, blank=True, upload_to="images/post/", help_text="Post image")
+    image = models.ImageField(
+        null=True, blank=True, upload_to="images/post/", help_text="Post image"
+    )
     description = models.TextField(help_text="Post description")
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
-    categories = models.ManyToManyField("blog.Category", through="PostCatsLink", help_text="Post categories")
+    categories = models.ManyToManyField(
+        "blog.Category", through="PostCatsLink", help_text="Post categories"
+    )
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
     series = auto_prefetch.ForeignKey(
         "blog.Series",
@@ -247,7 +270,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         blank=True,
         null=True,
     )
-    order_in_series = models.PositiveIntegerField(default=0, help_text="Post order in its series")
+    order_in_series = models.PositiveIntegerField(
+        default=0, help_text="Post order in its series"
+    )
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
@@ -260,7 +285,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     )
     withdrawn = models.BooleanField(default=False, help_text="Is Post withdrawn")
     featuring_state = models.CharField(
-        max_length=25, verbose_name="Featuring", choices=FEATURING_CHOICES, default="N", help_text="Featuring state"
+        max_length=25,
+        verbose_name="Featuring",
+        choices=FEATURING_CHOICES,
+        default="N",
+        help_text="Featuring state",
     )
     language = models.CharField(
         max_length=25,
@@ -269,14 +298,25 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         default="EN",
         help_text="What's the main language",
     )
-    is_outdated = models.BooleanField(default=False, help_text="Is Post content's outdated")
-    url_to_article = models.URLField(default="", blank=True, help_text="Url to page that inspired the Post")
-    url_to_article_title = models.CharField(
-        max_length=200, default="", blank=True, help_text="What will be shown as url name"
+    is_outdated = models.BooleanField(
+        default=False, help_text="Is Post content's outdated"
     )
-    clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
+    url_to_article = models.URLField(
+        default="", blank=True, help_text="Url to page that inspired the Post"
+    )
+    url_to_article_title = models.CharField(
+        max_length=200,
+        default="",
+        blank=True,
+        help_text="What will be shown as url name",
+    )
+    clicks = models.IntegerField(
+        default=0, help_text="How many times the Post has been seen"
+    )
     history = HistoricalRecords()
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    is_removed = models.BooleanField(
+        "is removed", default=False, db_index=True, help_text=("Soft delete")
+    )
     enable_comments = models.BooleanField(default=True)
 
     objects: PostManager = PostManager()
@@ -346,7 +386,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """
         Return True if the event is publicly accessible.
         """
-        return self.pub_date <= timezone.now() and not self.withdrawn and not self.is_removed
+        return (
+            self.pub_date <= timezone.now()
+            and not self.withdrawn
+            and not self.is_removed
+        )
 
     is_published.boolean = True
 
@@ -420,12 +464,19 @@ class PostContent(auto_prefetch.Model):
         PostContent: A model for Post Content
     """
 
-    post = auto_prefetch.ForeignKey("blog.Post", on_delete=models.CASCADE, related_name="content")
+    post = auto_prefetch.ForeignKey(
+        "blog.Post", on_delete=models.CASCADE, related_name="content"
+    )
     body = MarkdownxField(help_text="Post main content")
     body_image = models.ImageField(
-        null=True, blank=True, upload_to="images/post/body_images/", help_text="Image in text"
+        null=True,
+        blank=True,
+        upload_to="images/post/body_images/",
+        help_text="Image in text",
     )
-    body_image_alt = models.CharField(default="", blank=True, max_length=200, help_text="Image in text")
+    body_image_alt = models.CharField(
+        default="", blank=True, max_length=200, help_text="Image in text"
+    )
     history = HistoricalRecords()
 
     def __str__(self):
@@ -455,7 +506,10 @@ class Comment(auto_prefetch.Model):
     ]
 
     related_post = auto_prefetch.ForeignKey(
-        "blog.Post", on_delete=models.CASCADE, related_name="comments", help_text="Comment's related Post"
+        "blog.Post",
+        on_delete=models.CASCADE,
+        related_name="comments",
+        help_text="Comment's related Post",
     )
     author = models.CharField(
         max_length=200,
@@ -475,7 +529,9 @@ class Comment(auto_prefetch.Model):
         related_name="comment_author_logged",
         help_text="Comment author (a user with account)",
     )
-    title = models.CharField(max_length=200, default="", blank=True, help_text="Comment title")
+    title = models.CharField(
+        max_length=200, default="", blank=True, help_text="Comment title"
+    )
     body = models.TextField(verbose_name="Comment", help_text="Comment main content")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
@@ -487,7 +543,11 @@ class Comment(auto_prefetch.Model):
         help_text="Comment approbation state",
     )
     comment_answer = auto_prefetch.ForeignKey(
-        "blog.Comment", on_delete=models.CASCADE, related_name="related_comment", null=True, blank=True
+        "blog.Comment",
+        on_delete=models.CASCADE,
+        related_name="related_comment",
+        null=True,
+        blank=True,
     )
     history = HistoricalRecords()
 
@@ -495,7 +555,10 @@ class Comment(auto_prefetch.Model):
         return self.full_title
 
     def get_absolute_url(self):
-        return reverse("blog:post_detail", kwargs={"slug": self.related_post.slug}) + f"#comment-{self.pk}"
+        return (
+            reverse("blog:post_detail", kwargs={"slug": self.related_post.slug})
+            + f"#comment-{self.pk}"
+        )
 
     @property
     def full_title(self):

@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 function i() {
     this.D = function () {
         const t = h.atan(this.i / this.d);
@@ -11,29 +13,29 @@ function i() {
 }
 
 window;
-const h = Math,
-    r = h.random,
-    a = document,
-    o = Date.now;
+const h = Math;
+const r = h.random;
+const a = document;
+const o = Date.now;
 (e = t => {
     l.clearRect(0, 0, _, f), l.fill(), requestAnimationFrame(e);
     const i = 0.001 * y.et;
     y.r();
     const s = L.et * g;
-    for (var n = 0; n < C.length; ++n) {
+    for (let n = 0; n < C.length; ++n) {
         const t = C[n];
         (t.i = h.sin(s + t.g) * t.h),
             (t.j = h.sqrt(t.i * t.i + t.f)),
             (t.a += t.d * i),
             (t.b += t.i * i),
-        t.a > w && (t.a = -u),
-        t.b > b && (t.b = -u),
-        t.b < -u && (t.b = b),
+            t.a > w && (t.a = -u),
+            t.b > b && (t.b = -u),
+            t.b < -u && (t.b = b),
             t.D();
     }
 }),
     (s = t => {
-        for (var e = 0; e < p; ++e) (C[e].a = r() * (f + u)), (C[e].b = r() * _);
+        for (let e = 0; e < p; ++e) (C[e].a = r() * (f + u)), (C[e].b = r() * _);
     }),
     (n = t => {
         (c.width = _ = innerWidth), (c.height = f = innerHeight), (w = f + u), (b = _ + u), s();
@@ -87,23 +89,23 @@ const c = a.createElement('canvas');
     (H.zIndex = '100000'),
     (H.pointerEvents = 'none'),
     a.body.insertBefore(c, a.body.children[0]);
-const l = c.getContext('2d'),
-    p = 300,
-    g = 5e-4,
-    u = 20;
-let _ = (c.width = innerWidth),
-    f = (c.height = innerHeight),
-    w = f + u,
-    b = _ + u;
-const v = 15.2,
-    m = a.createElement('canvas'),
-    E = m.getContext('2d'),
-    x = E.createRadialGradient(7.6, 7.6, 0, 7.6, 7.6, 7.6);
+const l = c.getContext('2d');
+const p = 300;
+const g = 5e-4;
+const u = 20;
+let _ = (c.width = innerWidth);
+let f = (c.height = innerHeight);
+let w = f + u;
+let b = _ + u;
+const v = 15.2;
+const m = a.createElement('canvas');
+const E = m.getContext('2d');
+const x = E.createRadialGradient(7.6, 7.6, 0, 7.6, 7.6, 7.6);
 x.addColorStop(0, 'hsla(255,255%,255%,1)'), x.addColorStop(1, 'hsla(255,255%,255%,0)'), (E.fillStyle = x), E.fillRect(0, 0, v, v);
-let y = new d(0, !0),
-    C = [],
-    L = new d(0, !0);
-for (var j = 0; j < p; ++j) {
+const y = new d(0, !0);
+const C = [];
+const L = new d(0, !0);
+for (let j = 0; j < p; ++j) {
     const t = new i();
     (t.a = r() * (f + u)),
         (t.b = r() * _),

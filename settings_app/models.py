@@ -15,9 +15,15 @@ class Settings(auto_prefetch.Model):
 
     title = models.CharField(max_length=200)
     shown = models.BooleanField(default=False)
-    side_menus = models.ManyToManyField("settings_app.SideMenu", related_name="side_menus", blank=True)
-    footers = models.ManyToManyField("settings_app.Footer", related_name="footers", blank=True)
-    default_theme = models.CharField(max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default")
+    side_menus = models.ManyToManyField(
+        "settings_app.SideMenu", related_name="side_menus", blank=True
+    )
+    footers = models.ManyToManyField(
+        "settings_app.Footer", related_name="footers", blank=True
+    )
+    default_theme = models.CharField(
+        max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default"
+    )
 
     class Meta:
         verbose_name_plural = "Settings Presets"
@@ -59,7 +65,12 @@ class LinksSideMenu(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     rel_url = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
-    visibility = models.CharField(max_length=25, verbose_name="Visibility", choices=VISIBILITY_CHOICES, default="D")
+    visibility = models.CharField(
+        max_length=25,
+        verbose_name="Visibility",
+        choices=VISIBILITY_CHOICES,
+        default="D",
+    )
     group = auto_prefetch.ForeignKey(
         "settings_app.LinksGroupSideMenu",
         on_delete=models.CASCADE,
@@ -67,7 +78,9 @@ class LinksSideMenu(auto_prefetch.Model):
         blank=True,
         null=True,
     )
-    link_css_classes = models.CharField(max_length=25, verbose_name="Classes", choices=CLASSES_CHOICES, default="PRI")
+    link_css_classes = models.CharField(
+        max_length=25, verbose_name="Classes", choices=CLASSES_CHOICES, default="PRI"
+    )
     is_target_blank = models.BooleanField(default=False)
 
     class Meta:
@@ -83,7 +96,10 @@ class LinksSideMenu(auto_prefetch.Model):
 class LinksGroupSideMenu(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     menu = auto_prefetch.ForeignKey(
-        "settings_app.SideMenu", on_delete=models.CASCADE, related_name="side_menu_links", null=True
+        "settings_app.SideMenu",
+        on_delete=models.CASCADE,
+        related_name="side_menu_links",
+        null=True,
     )
     priority = models.PositiveIntegerField(default=0)
 
@@ -115,7 +131,10 @@ class SpecificDateMessage(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     showing_date = models.DateTimeField(blank=True, null=True)
     showing_rule = models.CharField(
-        max_length=25, verbose_name="Showing Rules", choices=SHOWING_RULE_CHOICES, default="D"
+        max_length=25,
+        verbose_name="Showing Rules",
+        choices=SHOWING_RULE_CHOICES,
+        default="D",
     )
     side_menu = auto_prefetch.ForeignKey(
         "settings_app.SideMenu",
@@ -138,9 +157,13 @@ class LinksFooter(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
     rel_url = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
-    links = auto_prefetch.ForeignKey("settings_app.Footer", on_delete=models.CASCADE, related_name="footer_links")
+    links = auto_prefetch.ForeignKey(
+        "settings_app.Footer", on_delete=models.CASCADE, related_name="footer_links"
+    )
     parent_css_classes = models.CharField(max_length=200, blank=True)
-    link_css_classes = models.CharField(max_length=200, verbose_name="Classes", blank=True)
+    link_css_classes = models.CharField(
+        max_length=200, verbose_name="Classes", blank=True
+    )
     child_img = models.CharField(max_length=200, blank=True)
 
     class Meta:

@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 // javascript: (function() {
 //     var js = document.body.appendChild(document.createElement('script'));
 //     js.onerror = function() {
@@ -7,13 +9,13 @@
 // })();
 
 // Randomize the first marker.
-var turn = Math.random() < 1 / 2 ? 0 : 1;
+let turn = Math.random() < 1 / 2 ? 0 : 1;
 
 // Set unit size.
-var unit = 100 / 11;
+const unit = 100 / 11;
 
 // Create menu.
-var menu = document.createElement('div');
+const menu = document.createElement('div');
 menu.style.position = 'fixed';
 menu.style.top = '50%';
 menu.style.left = '50%';
@@ -25,7 +27,7 @@ menu.innerHTML = "<a style='background:white;position:absolute;left:100%;cursor:
 document.body.appendChild(menu);
 
 // Create board.
-var board = document.createElement('div');
+const board = document.createElement('div');
 board.style.background = 'rgba(255,255,255,0.9)';
 board.style.position = 'absolute';
 board.style.top = 0;
@@ -41,8 +43,8 @@ boxes = [[], [], [], [], [], [], [], [], []];
 
 // Fill the board.
 for (var i = 0; i < 3; i++) {
-    for (var j = 0; j < 3; j++) {
-        var BOX = document.createElement('div');
+    for (let j = 0; j < 3; j++) {
+        const BOX = document.createElement('div');
         BOX.style.position = 'absolute';
         BOX.style.top = (i * 100) / 3 + '%';
         BOX.style.left = (j * 100) / 3 + '%';
@@ -50,9 +52,9 @@ for (var i = 0; i < 3; i++) {
         BOX.style.width = 100 / 3 + '%';
         BOX.mark = null;
 
-        for (var k = 0; k < 3; k++) {
-            for (var l = 0; l < 3; l++) {
-                var box = document.createElement('div');
+        for (let k = 0; k < 3; k++) {
+            for (let l = 0; l < 3; l++) {
+                const box = document.createElement('div');
 
                 box.setAttribute('onMouseOver', "this.style.background='rgba(0,0,0,0.25)'");
                 box.setAttribute('onMouseOut', "this.style.background='transparent'");
@@ -95,7 +97,7 @@ for (var i = 0; i < 3; i++) {
 
 // Check for victories.
 function check(m) {
-    var checkmark = 0;
+    let checkmark = 0;
     if (m[0].mark != null) {
         if ((m[0].mark == m[1].mark && m[1].mark == m[2].mark) || (m[0].mark == m[3].mark && m[3].mark == m[6].mark)) {
             checkmark = 1;
@@ -148,7 +150,7 @@ function draw(obj) {
 function marker(obj) {
     // Place an O.
     if (turn == 0) {
-        var o = document.createElement('div');
+        const o = document.createElement('div');
         o.style.boxSizing = 'border-box';
         o.style.position = 'absolute';
         o.style.top = '10%';
@@ -156,8 +158,8 @@ function marker(obj) {
         o.style.height = '80%';
         o.style.width = '80%';
         // Set O border size based on nested box level, because for some reason percentage isn't supported.
-        var inBOXES = 0;
-        for (var i = 0; i < 9; i++) {
+        let inBOXES = 0;
+        for (let i = 0; i < 9; i++) {
             if (obj == BOXES[i]) {
                 inBOXES = 1;
                 break;
@@ -169,7 +171,7 @@ function marker(obj) {
     }
     // Place an X.
     else {
-        var x1 = document.createElement('div');
+        const x1 = document.createElement('div');
         x1.style.boxSizing = 'border-box';
         x1.style.background = 'black';
         x1.style.position = 'absolute';
@@ -179,7 +181,7 @@ function marker(obj) {
         x1.style.width = '20%';
         x1.style.transform = 'rotate(45deg)';
         obj.appendChild(x1);
-        var x2 = x1.cloneNode();
+        const x2 = x1.cloneNode();
         x2.style.transform = 'rotate(-45deg)';
         obj.appendChild(x2);
     }

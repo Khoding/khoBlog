@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 function cssCheck() {
     let domStyle = document.getElementById('domStylee');
     if (domStyle) {

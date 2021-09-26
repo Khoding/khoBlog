@@ -28,7 +28,9 @@ class Question(auto_prefetch.Model):
 
 
 class Choice(auto_prefetch.Model):
-    question = auto_prefetch.ForeignKey(Question, on_delete=models.CASCADE, related_name="related_question")
+    question = auto_prefetch.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="related_question"
+    )
     title = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 

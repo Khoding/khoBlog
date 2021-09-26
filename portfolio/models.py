@@ -15,16 +15,30 @@ class Project(auto_prefetch.Model):
     created_date = models.DateTimeField("Creation date", default=timezone.now)
     modified_date = models.DateTimeField("Last Updated", auto_now=True)
     website = auto_prefetch.ForeignKey(
-        "portfolio.Website", on_delete=models.CASCADE, related_name="websites", null=True, blank=True
+        "portfolio.Website",
+        on_delete=models.CASCADE,
+        related_name="websites",
+        null=True,
+        blank=True,
     )
     featured = models.BooleanField(default=False)
     repository = auto_prefetch.ForeignKey(
-        "portfolio.Repository", on_delete=models.DO_NOTHING, related_name="repositories", null=True, blank=True
+        "portfolio.Repository",
+        on_delete=models.DO_NOTHING,
+        related_name="repositories",
+        null=True,
+        blank=True,
     )
     technology = auto_prefetch.ForeignKey(
-        "portfolio.Technology", on_delete=models.DO_NOTHING, related_name="technologies", null=True, blank=True
+        "portfolio.Technology",
+        on_delete=models.DO_NOTHING,
+        related_name="technologies",
+        null=True,
+        blank=True,
     )
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    is_removed = models.BooleanField(
+        "is removed", default=False, db_index=True, help_text=("Soft delete")
+    )
 
     class Meta:
         ordering = ["pk"]

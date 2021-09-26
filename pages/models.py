@@ -62,12 +62,16 @@ class Page(auto_prefetch.Model):
     )
     registration_required = models.BooleanField(
         _("registration required"),
-        help_text=_("If this is checked, only logged-in users will be able to view the page."),
+        help_text=_(
+            "If this is checked, only logged-in users will be able to view the page."
+        ),
         default=False,
     )
     sites = models.ManyToManyField(Site, verbose_name=_("sites"))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    is_removed = models.BooleanField(
+        "is removed", default=False, db_index=True, help_text=("Soft delete")
+    )
     history = HistoricalRecords()
 
     class Meta:
