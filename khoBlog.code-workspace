@@ -12,6 +12,7 @@
         },
         "python.pythonPath": "venv\\Scripts\\python.exe",
         "git.ignoreLimitWarning": true,
-        "python.formatting.provider": "black"
+        "python.formatting.provider": "black",
+        "prettier.tabWidth": 4
     }
 }
