@@ -2,6 +2,7 @@ from django.urls import path
 from django.urls.conf import include
 
 from blog.views import CategoryDeleteView, SeriesDeleteView
+
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (AllSearchResultsListView, AllTagsListView,
@@ -18,8 +19,9 @@ from .views import (AllSearchResultsListView, AllTagsListView,
                     PostWithTagListView, PostYearArchiveView,
                     RandomSearchResultsListView, RemovePostCommentUpdateView,
                     ReplyToCommentCreateView, SearchListView, SeriesCreateView,
-                    SeriesListView, SeriesUpdateView, TagUpdateView,
-                    TagsSearchResultsListView, WeblogTemplateView)
+                    SeriesListView, SeriesUpdateView,
+                    TagsSearchResultsListView, TagUpdateView,
+                    WeblogTemplateView)
 
 post_action_extra_patterns = [
     path('', PostDetailView.as_view(), name='post_detail'),

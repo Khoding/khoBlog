@@ -3,20 +3,30 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Project(auto_prefetch.Model):
     title = models.CharField(max_length=100)
     snippet = models.TextField()
     description = models.TextField()
-    technology = auto_prefetch.ForeignKey(
-        'portfolio.Technology', on_delete=models.DO_NOTHING, related_name='technologies', null=True, blank=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
+    start_date = models.DateTimeField(
+        'Project\'s start date', null=True, blank=True)
+    created_date = models.DateTimeField('Creation date', default=timezone.now)
+    modified_date = models.DateTimeField('Last Updated', auto_now=True)
     website = auto_prefetch.ForeignKey(
         'portfolio.Website', on_delete=models.CASCADE, related_name='websites', null=True, blank=True)
     featured = models.BooleanField(default=False)
     repository = auto_prefetch.ForeignKey(
         'portfolio.Repository', on_delete=models.DO_NOTHING, related_name='repositories', null=True, blank=True)
+    technology = auto_prefetch.ForeignKey(
+        'portfolio.Technology', on_delete=models.DO_NOTHING, related_name='technologies', null=True, blank=True)
+    is_removed = models.BooleanField('is removed', default=False, db_index=True,
+                                     help_text=('Soft delete'))
+
+    class Meta:
+        ordering = ['pk']
 
     def __str__(self):
         return self.title

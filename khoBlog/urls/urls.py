@@ -1,7 +1,7 @@
 """khoBlog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+    https://docs.djangoproject.com/en/latest/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,19 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import debug_toolbar
-from blog.models import Post
+from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
 from blog.views import link_fetching
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.sitemaps import GenericSitemap
-from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps.views import index, sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
-from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from pages.sitemap import PageSitemap
+from portfolio.sitemap import ProjectSitemap
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -46,9 +46,12 @@ schema_view = get_schema_view(
     permission_classes=(permissions.DjangoModelPermissionsOrAnonReadOnly,),
 )
 
-site_map_info_dict = {
-    'queryset': Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False),
-}
+sitemaps = {'blog': PostSitemap,
+            'category': CategorySitemap,
+            'series': SeriesSitemap,
+            'pages': PageSitemap,
+            'projects': ProjectSitemap,
+            }
 
 api_patterns = [
     path('', include('khoBlogAPI.urls')),
@@ -112,11 +115,13 @@ urlpatterns = [
     re_path(r'^comments/', include('django_comments.urls')),
     re_path(r'^comments/', include('django_comments_xtd.urls')),
 
-    # Misc
-    path('sitemap.xml', sitemap,
-         {'sitemaps': {'blog': GenericSitemap(
-             site_map_info_dict, priority=0.6)}},
+    # Sitemaps
+    path('sitemap.xml', index, {'sitemaps': sitemaps}),
+    path('sitemap-<section>.xml', sitemap,
+         {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
+
+    # Misc
     re_path(r'^robots\.txt', include('robots.urls')),
     re_path(r'^referrals/', include('pinax.referrals.urls',
                                     namespace="pinax_referrals")),

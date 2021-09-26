@@ -78,6 +78,9 @@ class CategoryQuerySet(auto_prefetch.QuerySet):
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
+    def get_base_common_queryset(self):
+        return self.filter(withdrawn=False, is_removed=False)
+
     def get_common_queryset(self, user):
         if user.is_superuser:
             queryset = self.filter(is_removed=False)
@@ -101,6 +104,9 @@ class CategoryManager(auto_prefetch.Manager):
     def get_without_removed(self):
         return self.get_queryset().get_without_removed()
 
+    def get_base_common_queryset(self):
+        return self.get_queryset().get_base_common_queryset()
+
     def get_common_queryset(self, user):
         return self.get_queryset().get_common_queryset(user)
 
@@ -117,6 +123,9 @@ class SeriesQuerySet(auto_prefetch.QuerySet):
     def get_without_removed(self):
         return self.filter(is_removed=False)
 
+    def get_base_common_queryset(self):
+        return self.filter(withdrawn=False, is_removed=False)
+
 
 class SeriesManager(auto_prefetch.Manager):
     """SeriesManager
@@ -132,3 +141,6 @@ class SeriesManager(auto_prefetch.Manager):
 
     def get_without_removed(self):
         return self.get_queryset().get_without_removed()
+
+    def get_base_common_queryset(self):
+        return self.get_queryset().get_base_common_queryset()

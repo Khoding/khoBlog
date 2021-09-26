@@ -1,4 +1,5 @@
 import auto_prefetch
+from custom_taggit.models import CustomTaggedItem
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from django.contrib.sites.models import Site
@@ -9,8 +10,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
-
-from custom_taggit.models import CustomTaggedItem
 
 
 class FlatPage(FlatPageOld):

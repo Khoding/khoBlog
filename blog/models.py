@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
+from django_editorjs_fields import EditorJsJSONField
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from rules.contrib.models import RulesModelBase, RulesModelMixin
@@ -18,8 +19,6 @@ from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
-
-from django_editorjs_fields import EditorJsJSONField
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -43,13 +42,17 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         blank=True, help_text="Category description")
     slug = models.SlugField(unique=True, default="",
                             max_length=200, help_text="Category slug")
+    created_date = models.DateTimeField(
+        default=timezone.now, help_text="Creation date")
+    modified_date = models.DateTimeField(
+        auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Category withdrawn")
     is_removed = models.BooleanField('is removed', default=False, db_index=True,
                                      help_text=('Soft delete'))
     history = HistoricalRecords()
 
-    objects = CategoryManager()
+    objects: CategoryManager = CategoryManager()
 
     class Meta:
         ordering = ['pk']
@@ -85,12 +88,12 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__pub_date__lte=timezone.now(), post__withdrawn=False,
-                                            post__is_removed=False).count()
+        return self.objects.filter(post__pub_date__lte=timezone.now(), post__withdrawn=False,
+                                   post__is_removed=False).count()
 
     @property
     def get_superuser_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__is_removed=False).count()
+        return self.objects.postcatslink_set.filter(post__is_removed=False).count()
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(
@@ -116,13 +119,17 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="",
                             max_length=200, help_text="Series slug")
+    created_date = models.DateTimeField(
+        default=timezone.now, help_text="Creation date")
+    modified_date = models.DateTimeField(
+        auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(
         default=False, help_text="Is Series withdrawn")
     is_removed = models.BooleanField('is removed', default=False, db_index=True,
                                      help_text=('Soft delete'))
     history = HistoricalRecords()
 
-    objects = SeriesManager()
+    objects: SeriesManager = SeriesManager()
 
     class Meta:
         rules_permissions = {
@@ -281,7 +288,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                                      help_text=('Soft delete'))
     enable_comments = models.BooleanField(default=True)
 
-    objects = PostManager()
+    objects: PostManager = PostManager()
 
     class Meta:
         ordering = ['-pub_date']
@@ -397,10 +404,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
             return post_cat.category
 
     def approved_comments(self):
-        return self.comments.filter(approbation_state='AP')
+        return self.objects.comments.filter(approbation_state='AP')
 
     def removed_comments(self):
-        return self.comments.filter(approbation_state='RE')
+        return self.objects.comments.filter(approbation_state='RE')
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(
