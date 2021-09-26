@@ -7,22 +7,41 @@ from .models import Page
 class PageAddForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ('title', 'page_head', 'content', 'tags', 'description', 'withdrawn',
-                  'enable_comments', 'main_page', 'sites',)
+        fields = (
+            "title",
+            "page_head",
+            "content",
+            "tags",
+            "description",
+            "withdrawn",
+            "enable_comments",
+            "main_page",
+            "sites",
+        )
 
         widgets = {
-            'tags': TagSelectize(),
+            "tags": TagSelectize(),
         }
 
 
 class PageEditForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ('title', 'page_head', 'content', 'tags', 'description', 'withdrawn',
-                  'enable_comments', 'main_page', 'slug', 'sites',)
+        fields = (
+            "title",
+            "page_head",
+            "content",
+            "tags",
+            "description",
+            "withdrawn",
+            "enable_comments",
+            "main_page",
+            "slug",
+            "sites",
+        )
 
         widgets = {
-            'tags': TagSelectize(),
+            "tags": TagSelectize(),
         }
 
 

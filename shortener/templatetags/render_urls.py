@@ -5,7 +5,7 @@ from shortener.models import URL
 register = template.Library()
 
 
-@register.inclusion_tag('shortener/links_list.html')
+@register.inclusion_tag("shortener/links_list.html")
 def links(urls):
     urls = URL.objects.filter(featured=True)
-    return {'urls': urls}
+    return {"urls": urls}

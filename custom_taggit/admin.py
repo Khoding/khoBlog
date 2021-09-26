@@ -4,9 +4,6 @@ from taggit.models import Tag
 from custom_taggit.models import CustomTag, CustomTaggedItem
 
 
-# Register your models here.
-
-
 class CustomTaggedItemAdmin(admin.StackedInline):
     model = CustomTaggedItem
     extra = 0
@@ -14,9 +11,15 @@ class CustomTaggedItemAdmin(admin.StackedInline):
 
 @admin.register(CustomTag)
 class CustomTagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'withdrawn',)
+    list_display = (
+        "name",
+        "slug",
+        "withdrawn",
+    )
 
-    inlines = [CustomTaggedItemAdmin, ]
+    inlines = [
+        CustomTaggedItemAdmin,
+    ]
 
 
 admin.site.unregister(Tag)

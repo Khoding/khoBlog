@@ -12,15 +12,15 @@ def random_int(a, b=None):
     return random.randint(a, b)
 
 
-@register.filter(name='prefix')
-def prefix(value, prefix=''):
-    if value != '':
-        return f'{prefix}{value}'
-    return ''
+@register.filter(name="prefix")
+def prefix(value, prefix=""):
+    if value != "":
+        return f"{prefix}{value}"
+    return ""
 
 
-@register.filter(name='suffix')
-def suffix(value, suffix=''):
-    if value != '':
-        return f'{value}{suffix}'
-    return ''
+@register.filter(name="suffix")
+def suffix(value, suffix=""):
+    if value != "":
+        return f"{value}{suffix}"
+    return ""

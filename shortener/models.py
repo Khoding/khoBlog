@@ -26,7 +26,7 @@ class URL(auto_prefetch.Model):
         try:
             validate(self.full_url)
         except ValidationError as e:
-            raise GraphQLError('invalid url')
+            raise GraphQLError("invalid url")
 
         return super().save(*args, **kwargs)
 

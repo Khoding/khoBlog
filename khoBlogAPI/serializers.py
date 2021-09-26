@@ -12,7 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PostCatsLinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostCatsLink
-        fields = ('post', 'category', 'featured_cat')
+        fields = ("post", "category", "featured_cat")
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -21,9 +21,14 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('title',
-                  'description', 'body', 'categories', 'postcatslink_set',)
-        prepopulated_fields = {'slug': ('title',)}
+        fields = (
+            "title",
+            "description",
+            "body",
+            "categories",
+            "postcatslink_set",
+        )
+        prepopulated_fields = {"slug": ("title",)}
 
 
 class CommentsSerializer(serializers.ModelSerializer):

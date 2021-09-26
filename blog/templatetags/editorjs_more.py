@@ -7,35 +7,35 @@ register = template.Library()
 
 
 def generate_paragraph(data):
-    text = data.get('text').replace('&nbsp;', ' ')
-    return f'<p>{text}</p>'
+    text = data.get("text").replace("&nbsp;", " ")
+    return f"<p>{text}</p>"
 
 
 def generate_list(data):
-    list_li = ''.join([f'<li>{item}</li>' for item in data.get('items')])
-    tag = 'ol' if data.get('style') == 'ordered' else 'ul'
-    return f'<{tag}>{list_li}</{tag}>'
+    list_li = "".join([f"<li>{item}</li>" for item in data.get("items")])
+    tag = "ol" if data.get("style") == "ordered" else "ul"
+    return f"<{tag}>{list_li}</{tag}>"
 
 
 def generate_header(data):
-    text = data.get('text').replace('&nbsp;', ' ')
-    level = data.get('level')
-    return f'<h{level}>{text}</h{level}>'
+    text = data.get("text").replace("&nbsp;", " ")
+    level = data.get("level")
+    return f"<h{level}>{text}</h{level}>"
 
 
 def generate_image(data):
-    url = data.get('file', {}).get('url')
-    caption = data.get('caption')
+    url = data.get("file", {}).get("url")
+    caption = data.get("caption")
     classes = []
 
-    if data.get('stretched'):
-        classes.append('stretched')
-    if data.get('withBorder'):
-        classes.append('withBorder')
-    if data.get('withBackground'):
-        classes.append('withBackground')
+    if data.get("stretched"):
+        classes.append("stretched")
+    if data.get("withBorder"):
+        classes.append("withBorder")
+    if data.get("withBackground"):
+        classes.append("withBackground")
 
-    classes = ' '.join(classes)
+    classes = " ".join(classes)
 
     return f'<img src="{url}" alt="{caption}" class="{classes}" />'
 
@@ -45,20 +45,20 @@ def generate_delimiter():
 
 
 def generate_table(data):
-    rows = data.get('content', [])
-    table = ''
+    rows = data.get("content", [])
+    table = ""
 
     for row in rows:
-        table += '<tr>'
+        table += "<tr>"
         for cell in row:
-            table += f'<td>{cell}</td>'
-        table += '</tr>'
+            table += f"<td>{cell}</td>"
+        table += "</tr>"
 
-    return f'<table>{table}</table>'
+    return f"<table>{table}</table>"
 
 
 def generate_warning(data):
-    title, message = data.get('title'), data.get('message')
+    title, message = data.get("title"), data.get("message")
 
     if title:
         title = f'<div class="alert__title">{title}</div>'
@@ -69,40 +69,40 @@ def generate_warning(data):
 
 
 def generate_quote(data):
-    alignment = data.get('alignment')
-    caption = data.get('caption')
-    text = data.get('text')
+    alignment = data.get("alignment")
+    caption = data.get("caption")
+    text = data.get("text")
 
     if caption:
-        caption = f'<cite>{caption}</cite>'
+        caption = f"<cite>{caption}</cite>"
 
-    classes = f'align-{alignment}' if alignment else None
+    classes = f"align-{alignment}" if alignment else None
 
     return f'<blockquote class="{classes}">{text}{caption}</blockquote>'
 
 
 def generate_code(data):
-    code = data.get('code')
+    code = data.get("code")
     return f'<code class="code">{code}</code>'
 
 
 def generate_raw(data):
-    return data.get('html')
+    return data.get("html")
 
 
 def generate_link(data):
-    meta = data.get('meta')
-    url = data.get('link')
-    title = meta.get('title')
-    image = meta.get('image', {}).get('url')
-    description = meta.get('description')
+    meta = data.get("meta")
+    url = data.get("link")
+    title = meta.get("title")
+    image = meta.get("image", {}).get("url")
+    description = meta.get("description")
     return f'<div class="link-tool"><a class="link-tool__content link-tool__content--rendered" target="_blank" rel="nofollow noindex noreferrer" href="{url}"><div class="link-tool__image" style="background-image: url({image});"></div><div class="link-tool__title">{title}</div><p class="link-tool__description">{description}</p><span class="link-tool__anchor">{url}</span></a></div>'
 
 
 def generate_embed(data):
-    service = data.get('service')
-    caption = data.get('caption')
-    embed = data.get('embed')
+    service = data.get("service")
+    caption = data.get("caption")
+    embed = data.get("embed")
     iframe = f'<iframe src="{embed}" allow="autoplay" allowfullscreen="allowfullscreen"></iframe>'
 
     return f'<div class="embed {service}">{iframe}{caption}</div>'
@@ -110,7 +110,7 @@ def generate_embed(data):
 
 @register.filter(is_safe=True)
 def editorjs(value):
-    if not value or value == 'null':
+    if not value or value == "null":
         return ""
 
     if not isinstance(value, dict):
@@ -122,33 +122,33 @@ def editorjs(value):
             return value
 
     html_list = []
-    for item in value['blocks']:
+    for item in value["blocks"]:
 
-        type, data = item.get('type'), item.get('data')
+        type, data = item.get("type"), item.get("data")
 
-        if type == 'paragraph':
+        if type == "paragraph":
             html_list.append(generate_paragraph(data))
-        elif type == 'Header':
+        elif type == "Header":
             html_list.append(generate_header(data))
-        elif type == 'List':
+        elif type == "List":
             html_list.append(generate_list(data))
-        elif type == 'Image':
+        elif type == "Image":
             html_list.append(generate_image(data))
-        elif type == 'Delimiter':
+        elif type == "Delimiter":
             html_list.append(generate_delimiter())
-        elif type == 'Warning':
+        elif type == "Warning":
             html_list.append(generate_warning(data))
-        elif type == 'Table':
+        elif type == "Table":
             html_list.append(generate_table(data))
-        elif type == 'Code':
+        elif type == "Code":
             html_list.append(generate_code(data))
-        elif type == 'Raw':
+        elif type == "Raw":
             html_list.append(generate_raw(data))
-        elif type == 'Embed':
+        elif type == "Embed":
             html_list.append(generate_embed(data))
-        elif type == 'Quote':
+        elif type == "Quote":
             html_list.append(generate_quote(data))
-        elif type == 'LinkTool':
+        elif type == "LinkTool":
             html_list.append(generate_link(data))
 
-    return mark_safe(''.join(html_list))
+    return mark_safe("".join(html_list))

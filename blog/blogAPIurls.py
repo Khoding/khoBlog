@@ -5,9 +5,7 @@ from learning_resources.views import ResourceViewSet
 from .viewsets import PostViewSet
 
 router = routers.DefaultRouter()
-router.register('post', PostViewSet, basename='post')
-router.register('resource', ResourceViewSet, basename='resource')
+router.register("post", PostViewSet, basename="post")
+router.register("resource", ResourceViewSet, basename="resource")
 
-urlpatterns = [
-    path('', include(router.urls))
-]
+urlpatterns = [path("", include(router.urls))]

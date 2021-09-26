@@ -15,14 +15,15 @@ class PostQuerySet(auto_prefetch.QuerySet):
         return self.filter(is_removed=False)
 
     def get_base_common_queryset(self):
-        return self.defer('body', 'image').filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        return self.defer("body", "image").filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def get_common_queryset(self, user):
         if user.is_superuser:
-            queryset = self.defer('body', 'image').filter(is_removed=False)
+            queryset = self.defer("body", "image").filter(is_removed=False)
         else:
-            queryset = self.defer('body', 'image').filter(
-                pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+            queryset = self.defer("body", "image").filter(
+                pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
+            )
         return queryset
 
     def get_by_author(self, author_username):
@@ -32,7 +33,7 @@ class PostQuerySet(auto_prefetch.QuerySet):
         return self.filter(tags__name=tags_name)
 
     def get_by_clicks(self):
-        return self.order_by('-clicks')
+        return self.order_by("-clicks")
 
 
 class PostManager(auto_prefetch.Manager):

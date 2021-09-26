@@ -1,15 +1,20 @@
 from django.contrib import admin
 
-from .models import (Footer, LinksFooter, LinksGroupSideMenu, LinksSideMenu,
-                     Settings, SideMenu, SpecificDateMessage)
+from .models import Footer, LinksFooter, LinksGroupSideMenu, LinksSideMenu, Settings, SideMenu, SpecificDateMessage
 
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('title', 'area_visible',)
+    list_display = (
+        "title",
+        "area_visible",
+    )
 
 
 class PresetsSettingsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'shown',)
+    list_display = (
+        "title",
+        "shown",
+    )
 
 
 class LinksSideMenuInline(admin.TabularInline):
@@ -18,9 +23,11 @@ class LinksSideMenuInline(admin.TabularInline):
 
 
 class LinksGroupSideMenuAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ("title",)
 
-    inlines = [LinksSideMenuInline, ]
+    inlines = [
+        LinksSideMenuInline,
+    ]
 
 
 class SpecificDateMessageMenuInline(admin.TabularInline):
@@ -29,7 +36,9 @@ class SpecificDateMessageMenuInline(admin.TabularInline):
 
 
 class SideMenuAdmin(admin.ModelAdmin):
-    inlines = [SpecificDateMessageMenuInline, ]
+    inlines = [
+        SpecificDateMessageMenuInline,
+    ]
 
 
 class LinksFooterInline(admin.TabularInline):
@@ -38,7 +47,9 @@ class LinksFooterInline(admin.TabularInline):
 
 
 class FooterAdmin(admin.ModelAdmin):
-    inlines = [LinksFooterInline, ]
+    inlines = [
+        LinksFooterInline,
+    ]
 
 
 admin.site.register(SideMenu, SideMenuAdmin)

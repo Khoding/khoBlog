@@ -10,29 +10,44 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name',)
+        fields = (
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+        )
 
         widgets = {
-            'username': forms.TextInput(),
-            'first_name': forms.TextInput(),
-            'last_name': forms.TextInput(),
-            'email': forms.EmailInput(),
+            "username": forms.TextInput(),
+            "first_name": forms.TextInput(),
+            "last_name": forms.TextInput(),
+            "email": forms.EmailInput(),
         }
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'bio', 'welcome_message', 'profile_pic',
-                  'slug', 'show_github', 'default_theme',)
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "bio",
+            "welcome_message",
+            "profile_pic",
+            "slug",
+            "show_github",
+            "default_theme",
+        )
 
         widgets = {
-            'username': forms.TextInput(),
-            'first_name': forms.TextInput(),
-            'last_name': forms.TextInput(),
-            'bio': forms.Textarea(),
-            'email': forms.EmailInput(),
-            'slug': forms.TextInput(),
-            'welcome_message': forms.TextInput(),
-            'default_theme': forms.Select(),
+            "username": forms.TextInput(),
+            "first_name": forms.TextInput(),
+            "last_name": forms.TextInput(),
+            "bio": forms.Textarea(),
+            "email": forms.EmailInput(),
+            "slug": forms.TextInput(),
+            "welcome_message": forms.TextInput(),
+            "default_theme": forms.Select(),
         }

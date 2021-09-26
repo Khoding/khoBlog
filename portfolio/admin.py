@@ -6,25 +6,30 @@ from .models import Project, Repository, Technology, Website
 
 class ProjectAdmin(admin.ModelAdmin):
     form_class = ProjectAddForm
-    list_display = ('title', 'snippet', 'description',
-                    'technology', 'repository',)
-    ordering = ('-pk',)
-    prepopulated_fields = {'slug': ('title',)}
+    list_display = (
+        "title",
+        "snippet",
+        "description",
+        "technology",
+        "repository",
+    )
+    ordering = ("-pk",)
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class WebsiteAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url')
-    ordering = ('-pk',)
+    list_display = ("title", "url")
+    ordering = ("-pk",)
 
 
 class TechnologyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'website')
-    ordering = ('-pk',)
+    list_display = ("title", "description", "website")
+    ordering = ("-pk",)
 
 
 class RepositoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url')
-    ordering = ('-pk',)
+    list_display = ("title", "url")
+    ordering = ("-pk",)
 
 
 admin.site.register(Project, ProjectAdmin)

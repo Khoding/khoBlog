@@ -15,6 +15,5 @@ class Task(auto_prefetch.Model):
         return self.title
 
     def get_index_view_url(self):
-        content_type = ContentType.objects.get_for_model(
-            self.__class__)
+        content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))

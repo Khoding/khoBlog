@@ -8,4 +8,4 @@ def read(html):
     return readtime.of_html(html)
 
 
-register.filter('readtime', read)
+register.filter("readtime", read)

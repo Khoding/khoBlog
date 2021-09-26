@@ -6,7 +6,7 @@ from .models import Project
 class ProjectSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.5
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return Project.objects.filter(is_removed=False)

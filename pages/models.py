@@ -14,15 +14,15 @@ from taggit_selectize.managers import TaggableManager
 
 class FlatPage(FlatPageOld):
     slug = models.SlugField(unique=True, default="", max_length=200)
-    modified_date = models.DateTimeField('Last Updated', auto_now=True)
-    created_date = models.DateTimeField('Creation date', default=timezone.now)
-    page_head = models.TextField('Page head', blank=True)
+    modified_date = models.DateTimeField("Last Updated", auto_now=True)
+    created_date = models.DateTimeField("Creation date", default=timezone.now)
+    page_head = models.TextField("Page head", blank=True)
     main_page = models.BooleanField(default=False)
     description = models.TextField(blank=True, default="")
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ["-pk"]
 
     def __str__(self):
         return self.title
@@ -36,45 +36,42 @@ class FlatPage(FlatPageOld):
         return reverse("pages:page_detail", kwargs={"slug": self.slug})
 
     def get_index_view_url(self):
-        content_type = ContentType.objects.get_for_model(
-            self.__class__)
+        content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:index" % (content_type.app_label))
 
 
 class Page(auto_prefetch.Model):
-    title = models.CharField(_('title'), max_length=200)
-    content = models.TextField(_('content'), blank=True)
+    title = models.CharField(_("title"), max_length=200)
+    content = models.TextField(_("content"), blank=True)
     description = models.TextField(blank=True, default="")
-    page_head = models.TextField('Page head', blank=True)
+    page_head = models.TextField("Page head", blank=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
-    created_date = models.DateTimeField('Creation date', default=timezone.now)
-    modified_date = models.DateTimeField('Last Updated', auto_now=True)
+    created_date = models.DateTimeField("Creation date", default=timezone.now)
+    modified_date = models.DateTimeField("Last Updated", auto_now=True)
     main_page = models.BooleanField(default=False)
-    enable_comments = models.BooleanField(_('enable comments'), default=True)
+    enable_comments = models.BooleanField(_("enable comments"), default=True)
     withdrawn = models.BooleanField(default=False)
     template_name = models.CharField(
-        _('template name'),
+        _("template name"),
         max_length=70,
         blank=True,
         help_text=_(
-            'Example: “flatpages/contact_page.html”. If this isn’t provided, '
-            'the system will use “flatpages/default.html”.'
+            "Example: “flatpages/contact_page.html”. If this isn’t provided, "
+            "the system will use “flatpages/default.html”."
         ),
     )
     registration_required = models.BooleanField(
-        _('registration required'),
-        help_text=_(
-            "If this is checked, only logged-in users will be able to view the page."),
+        _("registration required"),
+        help_text=_("If this is checked, only logged-in users will be able to view the page."),
         default=False,
     )
-    sites = models.ManyToManyField(Site, verbose_name=_('sites'))
+    sites = models.ManyToManyField(Site, verbose_name=_("sites"))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
-    is_removed = models.BooleanField('is removed', default=False, db_index=True,
-                                     help_text=('Soft delete'))
+    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
     history = HistoricalRecords()
 
     class Meta:
-        ordering = ['pk']
+        ordering = ["pk"]
 
     def __str__(self):
         return self.title
@@ -88,19 +85,18 @@ class Page(auto_prefetch.Model):
         return reverse("pages:page_detail", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
-        return reverse('pages:page_edit', kwargs={'slug': self.slug})
+        return reverse("pages:page_edit", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
-        return reverse('pages:page_delete', kwargs={'slug': self.slug})
+        return reverse("pages:page_delete", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
-        return reverse('admin:pages_page_change', kwargs={'object_id': self.pk})
+        return reverse("admin:pages_page_change", kwargs={"object_id": self.pk})
 
     def remove(self):
         self.is_removed = True
         self.save()
 
     def get_index_view_url(self):
-        content_type = ContentType.objects.get_for_model(
-            self.__class__)
+        content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:index" % (content_type.app_label))

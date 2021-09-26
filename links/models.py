@@ -15,14 +15,16 @@ class BaseLinkAbstractModel(auto_prefetch.Model):
     """
 
     # Content-object field
-    content_type = auto_prefetch.ForeignKey(ContentType,
-                                            verbose_name=_('content type'),
-                                            related_name="content_type_set_for_%(class)s",
-                                            on_delete=models.CASCADE, blank=True, null=True)
-    object_pk = models.CharField(
-        _('object ID'), db_index=True, max_length=64, blank=True, null=True)
-    content_object = GenericForeignKey(
-        ct_field="content_type", fk_field="object_pk")
+    content_type = auto_prefetch.ForeignKey(
+        ContentType,
+        verbose_name=_("content type"),
+        related_name="content_type_set_for_%(class)s",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    object_pk = models.CharField(_("object ID"), db_index=True, max_length=64, blank=True, null=True)
+    content_object = GenericForeignKey(ct_field="content_type", fk_field="object_pk")
 
     index = models.BooleanField(default=False)
 
@@ -36,10 +38,7 @@ class BaseLinkAbstractModel(auto_prefetch.Model):
         """
         Get a URL suitable for redirecting to the content object.
         """
-        return reverse(
-            "links:link-url-redirect",
-            args=(self.content_type_id, self.object_pk)
-        )
+        return reverse("links:link-url-redirect", args=(self.content_type_id, self.object_pk))
 
 
 class Links(BaseLinkAbstractModel):
@@ -68,11 +67,8 @@ class Links(BaseLinkAbstractModel):
         """
         Get a URL suitable for redirecting to the content object.
         """
-        return reverse(
-            "links:link-url-redirect",
-            args=(self.content_type_id, self.object_pk)
-        )
+        return reverse("links:link-url-redirect", args=(self.content_type_id, self.object_pk))
 
     def get_absolute_permalink(self):
-        self.permalink = self.permalink + '/'
+        self.permalink = self.permalink + "/"
         return self.permalink

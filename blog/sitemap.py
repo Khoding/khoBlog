@@ -6,7 +6,7 @@ from .models import Category, Post, Series
 class PostSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.7
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return Post.objects.get_base_common_queryset()
@@ -18,7 +18,7 @@ class PostSitemap(Sitemap):
 class CategorySitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.4
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return Category.objects.get_base_common_queryset()
@@ -30,7 +30,7 @@ class CategorySitemap(Sitemap):
 class SeriesSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.4
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return Series.objects.get_base_common_queryset()

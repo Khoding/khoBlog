@@ -11,6 +11,7 @@ def superuser_required():
     class ExampleView(View):
         ...
     """
+
     def wrapper(wrapped):
         class WrappedClass(UserPassesTestMixin, wrapped):
             def test_func(self):

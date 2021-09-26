@@ -39,92 +39,81 @@ admin.site.index_title = "Khodok's Blog Admin"
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",
-        default_version='v3',
+        default_version="v3",
         description="API v3",
     ),
     public=False,
     permission_classes=(permissions.DjangoModelPermissionsOrAnonReadOnly,),
 )
 
-sitemaps = {'blog': PostSitemap,
-            'category': CategorySitemap,
-            'series': SeriesSitemap,
-            'pages': PageSitemap,
-            'projects': ProjectSitemap,
-            }
+sitemaps = {
+    "blog": PostSitemap,
+    "category": CategorySitemap,
+    "series": SeriesSitemap,
+    "pages": PageSitemap,
+    "projects": ProjectSitemap,
+}
 
 api_patterns = [
-    path('', include('khoBlogAPI.urls')),
-    path('docs/', schema_view.with_ui('redoc',
-                                      cache_timeout=0), name='schema-redoc'),
+    path("", include("khoBlogAPI.urls")),
+    path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
 
 api_patterns_v2 = [
-    path('', include('blog.blogAPIurls')),
-    path('docs/', schema_view.with_ui('redoc',
-                                      cache_timeout=0), name='schema-redoc'),
+    path("", include("blog.blogAPIurls")),
+    path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
 
 api_base_patterns = [
-    path('read/', include('reading_apis_app.urls')),
-    re_path(r'(?P<version>[old]+)/',
-            include(api_patterns)),
-    re_path(r'(?P<version>[v2|v3]+)/',
-            include(api_patterns_v2)),
-    path('api-auth/', include('rest_framework.urls')),
-    path('token/', obtain_auth_token, name='obtain-token'),
+    path("read/", include("reading_apis_app.urls")),
+    re_path(r"(?P<version>[old]+)/", include(api_patterns)),
+    re_path(r"(?P<version>[v2|v3]+)/", include(api_patterns_v2)),
+    path("api-auth/", include("rest_framework.urls")),
+    path("token/", obtain_auth_token, name="obtain-token"),
 ]
 
-more_editorjs = [
-    path('link_fetching/', csrf_exempt(link_fetching))
-]
+more_editorjs = [path("link_fetching/", csrf_exempt(link_fetching))]
 
-urlpatterns = [
-    # My Apps
-    path('', include('blog.urls')),
-    path('projects/', include('portfolio.urls')),
-    path('pages/', include('pages.urls')),
-    path('polls/', include('polls.urls')),
-    path('todo/', include('todo.urls')),
-    path('s/', include('shortener.urls')),
-    path('l/', include('links.urls')),
-
-    # Rest API
-    path('api/', include(api_base_patterns)),
-
-    # Django Admin
-    path('admin/docs/', include('django.contrib.admindocs.urls')),
-    path('admin/', admin.site.urls),
-
-    # User Management
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('captcha/', include('captcha.urls')),
-
-    # Dev Urls
-    path('dev/', include(dev_urls, namespace='dev')),
-
-    # Markdownx, taggit and editorjs
-    path('markdownx/', include('markdownx.urls')),
-    re_path(r'^taggit/', include('taggit_selectize.urls')),
-    path('editorjs/', include('django_editorjs_fields.urls')),
-    path('editorjs/', include(more_editorjs)),
-
-    # Comments
-    re_path(r'^comments/', include('comments.urls')),
-    re_path(r'^comments/', include('django_comments.urls')),
-    re_path(r'^comments/', include('django_comments_xtd.urls')),
-
-    # Sitemaps
-    path('sitemap.xml', index, {'sitemaps': sitemaps}),
-    path('sitemap-<section>.xml', sitemap,
-         {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap'),
-
-    # Misc
-    re_path(r'^robots\.txt', include('robots.urls')),
-    re_path(r'^referrals/', include('pinax.referrals.urls',
-                                    namespace="pinax_referrals")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
-    path('__debug__/', include(debug_toolbar.urls)),
-]
+urlpatterns = (
+    [
+        # My Apps
+        path("", include("blog.urls")),
+        path("projects/", include("portfolio.urls")),
+        path("pages/", include("pages.urls")),
+        path("polls/", include("polls.urls")),
+        path("todo/", include("todo.urls")),
+        path("s/", include("shortener.urls")),
+        path("l/", include("links.urls")),
+        # Rest API
+        path("api/", include(api_base_patterns)),
+        # Django Admin
+        path("admin/docs/", include("django.contrib.admindocs.urls")),
+        path("admin/", admin.site.urls),
+        # User Management
+        path("accounts/", include("accounts.urls")),
+        path("accounts/", include("allauth.urls")),
+        path("captcha/", include("captcha.urls")),
+        # Dev Urls
+        path("dev/", include(dev_urls, namespace="dev")),
+        # Markdownx, taggit and editorjs
+        path("markdownx/", include("markdownx.urls")),
+        re_path(r"^taggit/", include("taggit_selectize.urls")),
+        path("editorjs/", include("django_editorjs_fields.urls")),
+        path("editorjs/", include(more_editorjs)),
+        # Comments
+        re_path(r"^comments/", include("comments.urls")),
+        re_path(r"^comments/", include("django_comments.urls")),
+        re_path(r"^comments/", include("django_comments_xtd.urls")),
+        # Sitemaps
+        path("sitemap.xml", index, {"sitemaps": sitemaps}),
+        path("sitemap-<section>.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+        # Misc
+        re_path(r"^robots\.txt", include("robots.urls")),
+        re_path(r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")),
+    ]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ]
+)

@@ -1,3 +1,3 @@
 GRAPHENE = {
-    'SCHEMA': 'khoBlog.schema.schema',
+    "SCHEMA": "khoBlog.schema.schema",
 }

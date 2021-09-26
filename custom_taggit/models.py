@@ -9,18 +9,18 @@ class CustomTag(TagBase):
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['pk']
+        ordering = ["pk"]
         verbose_name = _("Tag")
         verbose_name_plural = _("Tags")
 
     def get_absolute_url(self):
-        return reverse('blog:post_tagged_with', kwargs={'slug': self.slug})
+        return reverse("blog:post_tagged_with", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
-        return reverse('blog:tag_edit', kwargs={'slug': self.slug})
+        return reverse("blog:tag_edit", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
-        return reverse('admin:custom_taggit_customtag_change', kwargs={'object_id': self.pk})
+        return reverse("admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
         return reverse("blog:tag_list")
