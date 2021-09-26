@@ -1,34 +1,19 @@
-{% load widget_tweaks %}
-
-{% if field|widget_type == "clearablefileinput" %}
-    {{ field|add_class:"form-control" }}
-{% elif field|widget_type == "hiddeninput" %}
-    <div class="d-none input-group">
-        {{ field|add_class:"form-control" }}
-    </div>
-{% elif field|widget_type == "checkboxinput" %}
-    {{ field.label_tag }}
-    <div class="form-check">
-        {{ field|add_class:"form-check-input" }}
-    </div>
-{% elif field|widget_type == "selectmultiple" %}
-    {{ field.label_tag }}
-    <div class="input-group">
-        {{ field|add_class:"form-control"|attr:"multiple" }}
-    </div>
-{% elif field|widget_type == "markdownxwidget" %}
-    {{ field|add_class:"form-control"|attr:"placeholder:" }}
-{% else %}
-    <div class="form-floating">
-        {{ field|add_class:"form-control"|attr:"placeholder:" }}
-        {{ field.label_tag }}
-    </div>
-{% endif %}
-
-{% if field.help_text %}
-    <span class="text-small text-muted">{{ field.help_text }}</span>
-{% endif %}
-
-{% for error in field.errors %}
-    <small class="form-text text-danger">{{ error }}</small>
+{% load widget_tweaks %} {% if field|widget_type == "clearablefileinput" %} {{
+field|add_class:"form-control" }} {% elif field|widget_type == "hiddeninput" %}
+<div class="d-none input-group">{{ field|add_class:"form-control" }}</div>
+{% elif field|widget_type == "checkboxinput" %} {{ field.label_tag }}
+<div class="form-check">{{ field|add_class:"form-check-input" }}</div>
+{% elif field|widget_type == "selectmultiple" %} {{ field.label_tag }}
+<div class="input-group">
+  {{ field|add_class:"form-control"|attr:"multiple" }}
+</div>
+{% elif field|widget_type == "markdownxwidget" %} {{
+field|add_class:"form-control"|attr:"placeholder:" }} {% else %}
+<div class="form-floating">
+  {{ field|add_class:"form-control"|attr:"placeholder:" }} {{ field.label_tag }}
+</div>
+{% endif %} {% if field.help_text %}
+<span class="text-small text-muted">{{ field.help_text }}</span>
+{% endif %} {% for error in field.errors %}
+<small class="form-text text-danger">{{ error }}</small>
 {% endfor %}

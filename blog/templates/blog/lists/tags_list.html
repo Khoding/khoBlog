@@ -1,36 +1,34 @@
-{% extends 'blog/base_post.html' %}
-{% load super_buttons %}
-
-{% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for tag in tags %}
-            <div class="mb-2 pe-0">
-                <div id="tag-{{ tag.slug }}" class="card shadow h-100">
-                    <div class="card-header">
-                        <span class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted">Tag #{{ tag.id }}</strong>
-                            </span>
-                            <span class="col-auto">
-                                {% if user.is_superuser %}
-                                    {% sb tag %}
-                                {% endif %}
-                            </span>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">{{ tag }}</h3>
-                        <p class="mb-auto">Tag slug: {{ tag.slug }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ tag.get_absolute_url }}">All posts tagged with {{ tag.name }}</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{% extends 'blog/base_post.html' %} {% load super_buttons %} {% block
+content_main %}
+<div class="row row-cols-1 row-cols-lg-3 me-0">
+  {% for tag in tags %}
+  <div class="mb-2 pe-0">
+    <div id="tag-{{ tag.slug }}" class="card shadow h-100">
+      <div class="card-header">
+        <span class="d-flex">
+          <span class="col">
+            <strong class="text-muted">Tag #{{ tag.id }}</strong>
+          </span>
+          <span class="col-auto">
+            {% if user.is_superuser %} {% sb tag %} {% endif %}
+          </span>
+        </span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">{{ tag }}</h3>
+        <p class="mb-auto">Tag slug: {{ tag.slug }}</p>
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a class="card-link" href="{{ tag.get_absolute_url }}"
+              >All posts tagged with {{ tag.name }}</a
+            >
+          </span>
+        </span>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock content_main %}

@@ -1,243 +1,236 @@
-{% extends 'sub_base_main.html' %}
-{% load static widget_tweaks project_tags markdown_extra compress %}
+{% extends 'sub_base_main.html' %} {% load static widget_tweaks project_tags
+markdown_extra compress %} {% block additional_css %} {% compress css %}
+<link
+  rel="stylesheet"
+  href="{% static 'khoBlog/css/selectize/selectize.css' %}"
+/>
+{% endcompress css %} {% endblock additional_css %} {% block main %}
+<div class="card formcard">
+  <div class="card-body">
+    <form enctype="multipart/form-data" method="post" novalidate>
+      {% csrf_token %}
+      <div class="non-field-errors">{{ form.non_field_errors }}</div>
 
-{% block additional_css %}
-    {% compress css %}
-        <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
-    {% endcompress css %}
-{% endblock additional_css %}
+      <div class="hidden-fields-errors">
+        {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }}
+        {{ hidden_field }} {% endfor %}
+      </div>
 
-{% block main %}
-    <div class="card formcard">
-        <div class="card-body">
-            <form enctype="multipart/form-data" method="post" novalidate>
-                {% csrf_token %}
-                <div class="non-field-errors">
-                    {{ form.non_field_errors }}
-                </div>
+      <div class="text-danger">{{ form.non_field_errors }}</div>
 
-                <div class="hidden-fields-errors">
-                    {% for hidden_field in form.hidden_fields %}
-                        {{ hidden_field.errors }}
-                        {{ hidden_field }}
-                    {% endfor %}
-                </div>
-
-                <div class="text-danger">
-                    {{ form.non_field_errors }}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="input-group">
-                        <span class="input-group-text">Title</span>
-                        {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Post title" }}
-                        {{ form.featured_title|add_class:"form-control"|attr:"placeholder:Post featured title" }}
-                    </div>
-                    {% if form.title.help_text %}
-                        <span class="text-small text-muted">{{ form.title.help_text }}</span>
-                    {% endif %}
-                    {% if form.featured_title.help_text %}
-                        <span class="text-small text-muted">{{ form.featured_title.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.title.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                    {% for error in form.featured_title.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    {{ form.categories.label_tag }}
-                    <div class="input-group">
-                        {{ form.categories|add_class:"form-select"|attr:"multiple" }}
-                    </div>
-                    {% if form.categories.help_text %}
-                        <span class="text-small text-muted">{{ form.categories.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.categories.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    {{ form.tags.label_tag }}
-                    {{ form.tags }}
-                    {% if form.tags.help_text %}
-                        <span class="text-small text-muted">{{ form.tags.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.tags.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="input-group">
-                        <div class="form-floating col-10">
-                            {{ form.series|add_class:"form-select"|attr:"placeholder:Post series" }}
-                            {{ form.series.label_tag }}
-                        </div>
-                        {{ form.order_in_series|add_class:"form-control col-auto"|attr:"placeholder:Post order in series" }}
-                    </div>
-                    {% if form.series.help_text %}
-                        <span class="text-small text-muted">{{ form.series.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.series.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
-                        {{ form.description.label_tag }}
-                    </div>
-                    {% if form.description.help_text %}
-                        <span class="text-small text-muted">{{ form.description.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.description.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
-                    </div>
-                    {% if form.body.help_text %}
-                        <span class="text-small text-muted">{{ form.body.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.body.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                {{ form.body_custom }}
-
-                <div class="field mb-2">
-                    {{ form.image.label_tag }}
-                    {{ form.image|add_class:"form-control"|attr:"placeholder:Post image" }}
-                    {% if form.image.help_text %}
-                        <span class="text-small text-muted">{{ form.image.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.image.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field row mb-2">
-                    <div class="input-group col-auto">
-                        <span class="input-group-text">https://{{ request.get_host }}/post/</span>
-                        {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
-                    </div>
-                    {% if form.slug.help_text %}
-                        <span class="text-small text-muted">{{ form.slug.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.slug.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    {{ form.withdrawn.label_tag }}
-                    <div class="form-check">
-                        {{ form.withdrawn|add_class:"form-check-input" }}
-                    </div>
-                    {% if form.withdrawn.help_text %}
-                        <span class="text-small text-muted">{{ form.withdrawn.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.withdrawn.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    {{ form.is_outdated.label_tag }}
-                    <div class="form-check">
-                        {{ form.is_outdated|add_class:"form-check-input" }}
-                    </div>
-                    {% if form.is_outdated.help_text %}
-                        <span class="text-small text-muted">{{ form.is_outdated.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.is_outdated.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post featuring state" }}
-                        {{ form.featuring_state.label_tag }}
-                    </div>
-                    {% if form.featuring_state.help_text %}
-                        <span class="text-small text-muted">{{ form.featuring_state.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.featuring_state.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.publication_state|add_class:"form-select"|attr:"placeholder:Post publication state" }}
-                        {{ form.publication_state.label_tag }}
-                    </div>
-                    {% if form.publication_state.help_text %}
-                        <span class="text-small text-muted">{{ form.publication_state.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.publication_state.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    {{ form.pub_date.label_tag }}
-                    {{ form.pub_date|add_class:"form-control" }}
-                    {% if form.pub_date.help_text %}
-                        <span class="text-small text-muted">{{ form.pub_date.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.pub_date.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="input-group">
-                        <span class="input-group-text">Linked article</span>
-                        {{ form.url_to_article|add_class:"form-control w-50"|attr:"placeholder:Linked article's URL" }}
-                        {{ form.url_to_article_title|add_class:"form-control"|attr:"placeholder:Linked article's title" }}
-                    </div>
-                    {% if form.url_to_article.help_text %}
-                        <span class="text-small text-muted">{{ form.url_to_article.help_text }}</span>
-                    {% endif %}
-                    {% if form.url_to_article_title.help_text %}
-                        <span class="text-small text-muted">{{ form.url_to_article_title.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.url_to_article.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                    {% for error in form.url_to_article_title.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <div class="field mb-2">
-                    <div class="form-floating">
-                        {{ form.language|add_class:"form-select"|attr:"placeholder:Post language" }}
-                        {{ form.language.label_tag }}
-                    </div>
-                    {% if form.language.help_text %}
-                        <span class="text-small text-muted">{{ form.language.help_text }}</span>
-                    {% endif %}
-                    {% for error in form.language.errors %}
-                        <small class="form-text text-danger">{{ error }}</small>
-                    {% endfor %}
-                </div>
-
-                <button type="submit" class="btn btn-primary">{{ title }}</button>
-            </form>
+      <div class="field mb-2">
+        <div class="input-group">
+          <span class="input-group-text">Title</span>
+          {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Post
+          title" }} {{
+          form.featured_title|add_class:"form-control"|attr:"placeholder:Post
+          featured title" }}
         </div>
-    </div>
-    {{ form.media }}
+        {% if form.title.help_text %}
+        <span class="text-small text-muted">{{ form.title.help_text }}</span>
+        {% endif %} {% if form.featured_title.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.featured_title.help_text }}</span
+        >
+        {% endif %} {% for error in form.title.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %} {% for error in form.featured_title.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
 
-{% endblock main %}
+      <div class="field mb-2">
+        {{ form.categories.label_tag }}
+        <div class="input-group">
+          {{ form.categories|add_class:"form-select"|attr:"multiple" }}
+        </div>
+        {% if form.categories.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.categories.help_text }}</span
+        >
+        {% endif %} {% for error in form.categories.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        {{ form.tags.label_tag }} {{ form.tags }} {% if form.tags.help_text %}
+        <span class="text-small text-muted">{{ form.tags.help_text }}</span>
+        {% endif %} {% for error in form.tags.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="input-group">
+          <div class="form-floating col-10">
+            {{ form.series|add_class:"form-select"|attr:"placeholder:Post
+            series" }} {{ form.series.label_tag }}
+          </div>
+          {{ form.order_in_series|add_class:"form-control
+          col-auto"|attr:"placeholder:Post order in series" }}
+        </div>
+        {% if form.series.help_text %}
+        <span class="text-small text-muted">{{ form.series.help_text }}</span>
+        {% endif %} {% for error in form.series.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="form-floating">
+          {{ form.description|add_class:"form-control"|attr:"placeholder:Post
+          description" }} {{ form.description.label_tag }}
+        </div>
+        {% if form.description.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.description.help_text }}</span
+        >
+        {% endif %} {% for error in form.description.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="form-floating">
+          {{ form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
+        </div>
+        {% if form.body.help_text %}
+        <span class="text-small text-muted">{{ form.body.help_text }}</span>
+        {% endif %} {% for error in form.body.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      {{ form.body_custom }}
+
+      <div class="field mb-2">
+        {{ form.image.label_tag }} {{
+        form.image|add_class:"form-control"|attr:"placeholder:Post image" }} {%
+        if form.image.help_text %}
+        <span class="text-small text-muted">{{ form.image.help_text }}</span>
+        {% endif %} {% for error in form.image.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field row mb-2">
+        <div class="input-group col-auto">
+          <span class="input-group-text"
+            >https://{{ request.get_host }}/post/</span
+          >
+          {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
+        </div>
+        {% if form.slug.help_text %}
+        <span class="text-small text-muted">{{ form.slug.help_text }}</span>
+        {% endif %} {% for error in form.slug.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        {{ form.withdrawn.label_tag }}
+        <div class="form-check">
+          {{ form.withdrawn|add_class:"form-check-input" }}
+        </div>
+        {% if form.withdrawn.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.withdrawn.help_text }}</span
+        >
+        {% endif %} {% for error in form.withdrawn.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        {{ form.is_outdated.label_tag }}
+        <div class="form-check">
+          {{ form.is_outdated|add_class:"form-check-input" }}
+        </div>
+        {% if form.is_outdated.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.is_outdated.help_text }}</span
+        >
+        {% endif %} {% for error in form.is_outdated.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="form-floating">
+          {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post
+          featuring state" }} {{ form.featuring_state.label_tag }}
+        </div>
+        {% if form.featuring_state.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.featuring_state.help_text }}</span
+        >
+        {% endif %} {% for error in form.featuring_state.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="form-floating">
+          {{
+          form.publication_state|add_class:"form-select"|attr:"placeholder:Post
+          publication state" }} {{ form.publication_state.label_tag }}
+        </div>
+        {% if form.publication_state.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.publication_state.help_text }}</span
+        >
+        {% endif %} {% for error in form.publication_state.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        {{ form.pub_date.label_tag }} {{ form.pub_date|add_class:"form-control"
+        }} {% if form.pub_date.help_text %}
+        <span class="text-small text-muted">{{ form.pub_date.help_text }}</span>
+        {% endif %} {% for error in form.pub_date.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="input-group">
+          <span class="input-group-text">Linked article</span>
+          {{ form.url_to_article|add_class:"form-control
+          w-50"|attr:"placeholder:Linked article's URL" }} {{
+          form.url_to_article_title|add_class:"form-control"|attr:"placeholder:Linked
+          article's title" }}
+        </div>
+        {% if form.url_to_article.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.url_to_article.help_text }}</span
+        >
+        {% endif %} {% if form.url_to_article_title.help_text %}
+        <span class="text-small text-muted"
+          >{{ form.url_to_article_title.help_text }}</span
+        >
+        {% endif %} {% for error in form.url_to_article.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %} {% for error in form.url_to_article_title.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <div class="field mb-2">
+        <div class="form-floating">
+          {{ form.language|add_class:"form-select"|attr:"placeholder:Post
+          language" }} {{ form.language.label_tag }}
+        </div>
+        {% if form.language.help_text %}
+        <span class="text-small text-muted">{{ form.language.help_text }}</span>
+        {% endif %} {% for error in form.language.errors %}
+        <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">{{ title }}</button>
+    </form>
+  </div>
+</div>
+{{ form.media }} {% endblock main %}

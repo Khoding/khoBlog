@@ -52,7 +52,11 @@ post_action_extra_patterns = [
     path("edit/", PostUpdateView.as_view(), name="post_edit"),
     path("clone/", PostCloneView.as_view(), name="clone_post"),
     path("publish/", views.post_publish, name="post_publish"),
-    path("publish_withdrawn/", views.post_publish_withdrawn, name="post_publish_withdrawn"),
+    path(
+        "publish_withdrawn/",
+        views.post_publish_withdrawn,
+        name="post_publish_withdrawn",
+    ),
     path("delete/", PostDeleteView.as_view(), name="post_remove"),
 ]
 
@@ -116,7 +120,11 @@ post_extra_patterns = [
 search_extra_patterns = [
     path("", SearchListView.as_view(), name="search"),
     path("post/", PostSearchResultsListView.as_view(), name="post_search_results"),
-    path("category/", CategorySearchResultsListView.as_view(), name="category_search_results"),
+    path(
+        "category/",
+        CategorySearchResultsListView.as_view(),
+        name="category_search_results",
+    ),
     path("tag/", TagsSearchResultsListView.as_view(), name="tag_search_results"),
     path("rnd/", RandomSearchResultsListView.as_view(), name="rnd_search_results"),
     path("all/", AllSearchResultsListView.as_view(), name="search_results"),
@@ -126,14 +134,32 @@ archive_extra_patterns = [
     path("", PostArchiveIndexView.as_view(), name="post_archive"),
     path("<int:year>/", PostYearArchiveView.as_view(), name="archive_year"),
     # Example: /2012/08/
-    path("<int:year>/<int:month>/", PostMonthArchiveView.as_view(month_format="%m"), name="archive_month_numeric"),
+    path(
+        "<int:year>/<int:month>/",
+        PostMonthArchiveView.as_view(month_format="%m"),
+        name="archive_month_numeric",
+    ),
     # Example: /2012/aug/
-    path("<int:year>/<str:month>/", PostMonthArchiveView.as_view(), name="archive_month"),
+    path(
+        "<int:year>/<str:month>/", PostMonthArchiveView.as_view(), name="archive_month"
+    ),
     # Example: /2012/week/23/
-    path("<int:year>/week/<int:week>/", PostWeekArchiveView.as_view(), name="archive_week"),
+    path(
+        "<int:year>/week/<int:week>/",
+        PostWeekArchiveView.as_view(),
+        name="archive_week",
+    ),
     # Example: /2012/Nov/10/
-    path("<int:year>/<str:month>/<int:day>/", PostDayArchiveView.as_view(), name="archive_day"),
-    path("<int:year>/<str:month>/<int:day>/<slug:slug>/", PostDateDetailView.as_view(), name="archive_date_detail"),
+    path(
+        "<int:year>/<str:month>/<int:day>/",
+        PostDayArchiveView.as_view(),
+        name="archive_day",
+    ),
+    path(
+        "<int:year>/<str:month>/<int:day>/<slug:slug>/",
+        PostDateDetailView.as_view(),
+        name="archive_date_detail",
+    ),
     path("today/", PostTodayArchiveView.as_view(), name="archive_today"),
 ]
 

@@ -1,14 +1,12 @@
-{% extends 'sub_base.html' %}
-{% load widget_tweaks project_tags %}
+{% extends 'sub_base.html' %} {% load widget_tweaks project_tags %} {% block
+content %}
+<h3>Delete: {{ task.title }}</h3>
+<form method="POST" class="form">
+  {% csrf_token %}
+  <h4>Are you sure ?</h4>
+  {{ form.as_p }}
 
-{% block content %}
-    <h3>Delete: {{ task.title }}</h3>
-    <form method="POST" class="form">
-        {% csrf_token %}
-        <h4>Are you sure ?</h4>
-        {{ form.as_p }}
-
-        <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
-    </form>
+  <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
+</form>
 
 {% endblock content %}

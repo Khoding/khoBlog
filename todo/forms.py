@@ -4,7 +4,11 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Add new task...", "class": "mb-2"}))
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"placeholder": "Add new task...", "class": "mb-2"}
+        )
+    )
     description = forms.TextInput(attrs={"class": "mb-2"})
 
     class Meta:

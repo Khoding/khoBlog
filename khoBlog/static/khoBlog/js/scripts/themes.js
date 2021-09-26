@@ -1,21 +1,21 @@
 (function (exports) {
-    var themeChanger = {
-        settings: {
-            wrapper: $('.wrapper'),
-            buttons: $('.controls .controls')
-        },
+  const themeChanger = {
+    settings: {
+      wrapper: $(".wrapper"),
+      buttons: $(".controls .controls"),
+    },
 
-        init: function () {
-            var _self = this;
-            this.settings.buttons.on('click', function () {
-                var $node = $(this),
-                    theme = $node.data('theme');
-                _self.settings.wrapper.removeClass().addClass('wrapper ' + theme);
-                _self.settings.buttons.removeClass('disabled');
-                $node.toggleClass('disabled');
-            });
-        }
-    };
+    init: function () {
+      const _self = this;
+      this.settings.buttons.on("click", function () {
+        const $node = $(this);
+        const theme = $node.data("theme");
+        _self.settings.wrapper.removeClass().addClass("wrapper " + theme);
+        _self.settings.buttons.removeClass("disabled");
+        $node.toggleClass("disabled");
+      });
+    },
+  };
 
-    themeChanger.init();
+  themeChanger.init();
 })(window);

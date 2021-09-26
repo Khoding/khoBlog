@@ -1,98 +1,101 @@
-{% extends 'blog/base_post.html' %}
-{% load instance super_buttons %}
-
-{% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% if not filter %}
-            {% for element in query %}
-                {% if query|isinstance:'list' %}
-                    {% for e in element %}
-                        <div class="mb-2 pe-0">
-                            <div id="element-{{ e.slug }}" class="card shadow h-100">
-                                <div class="card-header">
-                                    <div class="d-flex">
-                                        <span class="col">
-                                            <p class="mb-0 text-muted">#{{ e.id }}</p>
-                                            <p class="mb-0 text-muted">{{ e.author }}</p>
-                                        </span>
-                                        {% if user.is_superuser %}
-                                            <span class="col-auto">
-                                                {% sb e %}
-                                            </span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title text-word-wrap">{% firstof e.title e %}</h3>
-                                    <p class="mb-auto">{% firstof e.description e.body %}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="d-flex">
-                                        <span class="col">
-                                            <a class="card-link" href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}">Continue reading</a>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="mb-2 pe-0">
-                        <div id="element-{{ element.slug }}" class="card shadow h-100">
-                            <div class="card-header">
-                                <span class="d-flex">
-                                    <span class="col">
-                                        <p class="mb-0 text-muted">#{{ element.id }}</p>
-                                    </span>
-                                    <span class="col">
-                                        <p class="mb-0 text-muted">{{ element.author }}</p>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title text-word-wrap">{% firstof element.title element %}</h3>
-                                <p class="mb-auto">{% firstof element.description element.body %}</p>
-                            </div>
-                            <div class="card-footer">
-                                <span class="d-flex">
-                                    <span class="col">
-                                        <a class="card-link" href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}">Continue reading</a>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            {% for element in filter.qs %}
-                <div class="mb-2 pe-0">
-                    <div id="element-{{ element.slug }}" class="card shadow h-100">
-                        <div class="card-header">
-                            <span class="d-flex">
-                                <span class="col">
-                                    <p class="mb-0 text-muted">#{{ element.id }}</p>
-                                </span>
-                                <span class="col">
-                                    <p class="mb-0 text-muted">{{ element.author }}</p>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title text-word-wrap">{% firstof element.title element %}</h3>
-                            <p class="mb-auto">{% firstof element.description element.body %}</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="d-flex">
-                                <span class="col">
-                                    <a class="card-link" href="{{ element.get_absolute_url }}">Continue reading</a>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+{% extends 'blog/base_post.html' %} {% load instance super_buttons %} {% block
+content_main %}
+<div class="row row-cols-1 row-cols-lg-3 me-0">
+  {% if not filter %} {% for element in query %} {% if query|isinstance:'list'
+  %} {% for e in element %}
+  <div class="mb-2 pe-0">
+    <div id="element-{{ e.slug }}" class="card shadow h-100">
+      <div class="card-header">
+        <div class="d-flex">
+          <span class="col">
+            <p class="mb-0 text-muted">#{{ e.id }}</p>
+            <p class="mb-0 text-muted">{{ e.author }}</p>
+          </span>
+          {% if user.is_superuser %}
+          <span class="col-auto"> {% sb e %} </span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title text-word-wrap">{% firstof e.title e %}</h3>
+        <p class="mb-auto">{% firstof e.description e.body %}</p>
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a
+              class="card-link"
+              href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}"
+              >Continue reading</a
+            >
+          </span>
+        </span>
+      </div>
     </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="mb-2 pe-0">
+    <div id="element-{{ element.slug }}" class="card shadow h-100">
+      <div class="card-header">
+        <span class="d-flex">
+          <span class="col">
+            <p class="mb-0 text-muted">#{{ element.id }}</p>
+          </span>
+          <span class="col">
+            <p class="mb-0 text-muted">{{ element.author }}</p>
+          </span>
+        </span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title text-word-wrap">
+          {% firstof element.title element %}
+        </h3>
+        <p class="mb-auto">{% firstof element.description element.body %}</p>
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a
+              class="card-link"
+              href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}"
+              >Continue reading</a
+            >
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  {% endif %} {% endfor %} {% else %} {% for element in filter.qs %}
+  <div class="mb-2 pe-0">
+    <div id="element-{{ element.slug }}" class="card shadow h-100">
+      <div class="card-header">
+        <span class="d-flex">
+          <span class="col">
+            <p class="mb-0 text-muted">#{{ element.id }}</p>
+          </span>
+          <span class="col">
+            <p class="mb-0 text-muted">{{ element.author }}</p>
+          </span>
+        </span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title text-word-wrap">
+          {% firstof element.title element %}
+        </h3>
+        <p class="mb-auto">{% firstof element.description element.body %}</p>
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a class="card-link" href="{{ element.get_absolute_url }}"
+              >Continue reading</a
+            >
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+</div>
 
 {% endblock content_main %}

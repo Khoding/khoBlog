@@ -1,59 +1,64 @@
-{% extends 'pages/base_page.html' %}
-{% load comments comments_xtd super_buttons %}
+{% extends 'pages/base_page.html' %} {% load comments comments_xtd super_buttons
+%} {% block page_head %} {% if page.page_head %} {% autoescape off %} {{
+page.page_head }} {% endautoescape %} {% endif %} {{ block.super }} {% endblock
+page_head %} {% block main %} {% if not page.withdrawn or user.is_superuser %}
+<div class="card mb-2">
+  {% if page.withdrawn %}
+  <span
+    class="
+      position-absolute
+      top-0
+      start-100
+      translate-middle
+      badge
+      border border-light
+      rounded-circle
+      bg-danger
+      p-1
+    "
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="Withdrawn"
+    ><span class="visually-hidden">Withdrawn</span></span
+  >
+  {% endif %}
 
-{% block page_head %}
-    {% if page.page_head %}
-        {% autoescape off %}
-            {{ page.page_head }}
-        {% endautoescape %}
-    {% endif %}
+  <div class="card-header d-flex">
+    <span class="col">
+      <h2>Page #{{ page.id }}</h2>
+    </span>
+    <span class="col-auto">
+      {% if user.is_superuser %} {% sb page %} {% endif %}
+    </span>
+  </div>
 
-    {{ block.super }}
-{% endblock page_head %}
+  <div class="card-body">
+    {% autoescape off %}
+    <span class="card-text">{{ page.content }}</span>
+    {% endautoescape %}
+  </div>
+</div>
 
-{% block main %}
-    {% if not page.withdrawn or user.is_superuser %}
-        <div class="card mb-2">
-            {% if page.withdrawn %}
-                <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
-            {% endif %}
+<article class="card p-2 comments shadow mt-2">
+  <h5 class="text-muted">Comments</h5>
+  {% if page.enable_comments and not comments_disabled_globally_flag or
+  user.is_superuser %} {% get_comment_count for page as comment_count %} {%
+  render_comment_form for page %}
+  <hr />
 
-            <div class="card-header d-flex">
-                <span class="col">
-                    <h2>Page #{{ page.id }}</h2>
-                </span>
-                <span class="col-auto">
-                    {% if user.is_superuser %}
-                        {% sb page %}
-                    {% endif %}
-                </span>
-            </div>
+  <p class="text-muted text-small">
+    This page has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.
+  </p>
 
-            <div class="card-body">
-                {% autoescape off %}
-                    <span class="card-text">{{ page.content }}</span>
-                {% endautoescape %}
-            </div>
-        </div>
-
-        <article class="card p-2 comments shadow mt-2">
-            <h5 class="text-muted">Comments</h5>
-            {% if page.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-                {% get_comment_count for page as comment_count %}
-
-                {% render_comment_form for page %}
-                <hr />
-
-                <p class="text-muted text-small">This page has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
-
-                {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback %}
-            {% elif page.enable_comments and comments_disabled_globally_flag %}
-                <p class="text-muted text-small">Comments were disabled globally.</p>
-            {% else %}
-                <p class="text-muted text-small">This page has comments disabled.</p>
-            {% endif %}
-        </article>
-    {% else %}
-        <h1><a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a></h1>
-    {% endif %}
-{% endblock main %}
+  {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback
+  %} {% elif page.enable_comments and comments_disabled_globally_flag %}
+  <p class="text-muted text-small">Comments were disabled globally.</p>
+  {% else %}
+  <p class="text-muted text-small">This page has comments disabled.</p>
+  {% endif %}
+</article>
+{% else %}
+<h1>
+  <a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a>
+</h1>
+{% endif %} {% endblock main %}

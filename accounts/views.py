@@ -47,8 +47,12 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Profile • " + str(self.model.objects.get(username=kwargs["object"]))
-        context["description"] = str(self.model.objects.get(username=kwargs["object"]).bio)
+        context["title"] = "Profile • " + str(
+            self.model.objects.get(username=kwargs["object"])
+        )
+        context["description"] = str(
+            self.model.objects.get(username=kwargs["object"]).bio
+        )
         context["users"] = CustomUser.objects.all()
         context["comments"] = Comment.objects.filter(author_logged=kwargs["object"])
         context["view_as"] = self.view_as

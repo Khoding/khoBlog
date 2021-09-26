@@ -11,7 +11,9 @@ class URLType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    urls = graphene.List(URLType, url=graphene.String(), first=graphene.Int(), skip=graphene.Int())
+    urls = graphene.List(
+        URLType, url=graphene.String(), first=graphene.Int(), skip=graphene.Int()
+    )
 
     @staticmethod
     def resolve_urls(info, url=None, first=None, skip=None, **kwargs):

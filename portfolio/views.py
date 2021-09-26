@@ -1,5 +1,11 @@
 from django.urls.base import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from khoBlog.utils import superuser_required
 
 from portfolio.forms import ProjectAddForm, ProjectUpdateForm

@@ -1,7 +1,13 @@
 from django.urls import path
 from django.urls.conf import include
 
-from .views import ProjectCreateView, ProjectDeleteView, ProjectDetailView, ProjectListView, ProjectUpdateView
+from .views import (
+    ProjectCreateView,
+    ProjectDeleteView,
+    ProjectDetailView,
+    ProjectListView,
+    ProjectUpdateView,
+)
 
 app_name = "portfolio"
 project_extra_patterns = [

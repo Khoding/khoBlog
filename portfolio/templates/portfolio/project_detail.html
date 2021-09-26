@@ -1,43 +1,57 @@
-{% extends 'sub_base_main.html' %}
-{% load super_buttons %}
+{% extends 'sub_base_main.html' %} {% load super_buttons %} {% block main %}
 
-{% block main %}
+<div class="card mb-2">
+  <div class="card-header d-flex">
+    <span class="col">
+      <h2>Project #{{ project.id }}</h2>
+    </span>
+    <span class="col-auto">
+      {% if user.is_superuser %} {% sb project %} {% endif %}
+    </span>
+  </div>
 
-    <div class="card mb-2">
-        <div class="card-header d-flex">
-            <span class="col">
-                <h2>Project #{{ project.id }}</h2>
-            </span>
-            <span class="col-auto">
-                {% if user.is_superuser %}
-                    {% sb project %}
-                {% endif %}
-            </span>
-        </div>
+  <div class="card-body">
+    <h2 class="card-title">{{ project.title }}</h2>
+    <p class="card-text">{{ project.description }}</p>
+  </div>
 
-        <div class="card-body">
-            <h2 class="card-title">{{ project.title }}</h2>
-            <p class="card-text">{{ project.description }}</p>
-        </div>
-
-        {% if project.website or project.technology %}
-            <div class="card-footer">
-                {% if project.website %}
-                    <p class="card-text">Website: <a target="_blank" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a></p>
-                {% endif %}
-                {% if project.technology %}
-                    <div class="card-text">
-                        Made with:
-                        <a target="_blank" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
-                        <br />
-                        <span>{{ project.technology.description }}</span>
-                    </div>
-                {% endif %}
-                {% if project.repository %}
-                    <p class="card-text">Repository: <a target="_blank" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a></p>
-                {% endif %}
-            </div>
-        {% endif %}
+  {% if project.website or project.technology %}
+  <div class="card-footer">
+    {% if project.website %}
+    <p class="card-text">
+      Website:
+      <a
+        target="_blank"
+        href="{{ project.website.url }}"
+        rel="noopener noreferrer"
+        >{{ project.website }}</a
+      >
+    </p>
+    {% endif %} {% if project.technology %}
+    <div class="card-text">
+      Made with:
+      <a
+        target="_blank"
+        href="{{ project.technology.website }}"
+        rel="noopener noreferrer"
+        >{{ project.technology }}</a
+      >
+      <br />
+      <span>{{ project.technology.description }}</span>
     </div>
+    {% endif %} {% if project.repository %}
+    <p class="card-text">
+      Repository:
+      <a
+        target="_blank"
+        href="{{ project.repository.url }}"
+        rel="noopener noreferrer"
+        >{{ project.repository }}</a
+      >
+    </p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
 
 {% endblock main %}

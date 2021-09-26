@@ -1,53 +1,65 @@
-{% extends 'blog/base_post.html' %}
-{% load static super_buttons %}
-
-{% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for cat in category_list %}
-            <div class="mb-2 pe-0">
-                <div id="category-{{ cat.slug }}" class="card shadow h-100">
-
-                    <div class="card-header">
-                        <div class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted"><a class="text-muted" href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}">Category #{{ cat.id }}</a></strong>
-                                <p class="mb-0 text-muted">Category Post Count: {% if user.is_superuser %}{{ cat.get_superuser_post_count_in_category }} | {% endif %}{{ cat.get_post_count_in_category }}</p>
-                            </span>
-                            {% if user.is_superuser %}
-                                <span class="col-auto">
-                                    {% sb cat %}
-                                </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">{{ cat.title }}</h3>
-                        <p class="mb-auto">{{ cat.description }}</p>
-                        <p class="mb-auto">Category slug: {{ cat.slug }}</p>
-                        {% if cat.category_children.all %}
-                            <div class="mb-0">
-                                Sub categories:
-                                {% for child in cat.category_children.all %}
-                                    <span><a href="{{ child.get_absolute_url }}">{{ child }}</a>{% if not forloop.last %}, {% endif %}</span>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        {% if cat.parent %}
-                            <div class="mb-0">
-                                Parent:
-                                <span><a href="{{ cat.parent.get_absolute_url }}">{{ cat.parent }}</a></span>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ cat.get_absolute_url }}">All posts in {{ cat.title }}</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+{% extends 'blog/base_post.html' %} {% load static super_buttons %} {% block
+content_main %}
+<div class="row row-cols-1 row-cols-lg-3 me-0">
+  {% for cat in category_list %}
+  <div class="mb-2 pe-0">
+    <div id="category-{{ cat.slug }}" class="card shadow h-100">
+      <div class="card-header">
+        <div class="d-flex">
+          <span class="col">
+            <strong class="text-muted"
+              ><a
+                class="text-muted"
+                href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}"
+                >Category #{{ cat.id }}</a
+              ></strong
+            >
+            <p class="mb-0 text-muted">
+              Category Post Count: {% if user.is_superuser %}{{
+              cat.get_superuser_post_count_in_category }} | {% endif %}{{
+              cat.get_post_count_in_category }}
+            </p>
+          </span>
+          {% if user.is_superuser %}
+          <span class="col-auto"> {% sb cat %} </span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">{{ cat.title }}</h3>
+        <p class="mb-auto">{{ cat.description }}</p>
+        <p class="mb-auto">Category slug: {{ cat.slug }}</p>
+        {% if cat.category_children.all %}
+        <div class="mb-0">
+          Sub categories: {% for child in cat.category_children.all %}
+          <span
+            ><a href="{{ child.get_absolute_url }}">{{ child }}</a>{% if not
+            forloop.last %}, {% endif %}</span
+          >
+          {% endfor %}
+        </div>
+        {% endif %} {% if cat.parent %}
+        <div class="mb-0">
+          Parent:
+          <span
+            ><a href="{{ cat.parent.get_absolute_url }}"
+              >{{ cat.parent }}</a
+            ></span
+          >
+        </div>
+        {% endif %}
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a class="card-link" href="{{ cat.get_absolute_url }}"
+              >All posts in {{ cat.title }}</a
+            >
+          </span>
+        </span>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock content_main %}

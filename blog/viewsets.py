@@ -10,7 +10,9 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
-        queryset = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
+        queryset = Post.objects.filter(
+            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
+        )
         return queryset
 
     def get_serializer_class(self):

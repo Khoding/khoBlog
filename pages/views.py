@@ -39,11 +39,15 @@ class PageDetailView(DetailView):
             if self.page.withdrawn:
                 self.title = "Withdrawn"
                 self.description = "This page is Withdrawn"
-                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
+                self.pages = self.model.objects.filter(
+                    withdrawn=False, is_removed=False
+                ).order_by("-pk")
             else:
                 self.title = self.page.title
                 self.description = self.page.description
-                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
+                self.pages = self.model.objects.filter(
+                    withdrawn=False, is_removed=False
+                ).order_by("-pk")
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):

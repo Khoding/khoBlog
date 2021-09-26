@@ -1,33 +1,18 @@
-{% extends 'sub_base.html' %}
+{% extends 'sub_base.html' %} {% block page_head %} {{ block.super }} {%
+endblock page_head %} {% block page_top_title %} {{ block.super }} {% endblock
+page_top_title %} {% block content %} {% if filter_form %} {% load project_tags
+%}
 
-{% block page_head %}
-    {{ block.super }}
-{% endblock page_head %}
+<div class="collapse" id="collapseExample">
+  <div class="card p-4 mb-2 rounded shadow">
+    <form class="card formcard" method="get">
+      <h4 class="fst-italic">Filters</h4>
+      <div class="text-danger">{{ form.non_field_errors }}</div>
 
-{% block page_top_title %}
-    {{ block.super }}
-{% endblock page_top_title %}
+      {% form_get filter_form.form %}
 
-{% block content %}
-    {% if filter_form %}
-        {% load project_tags %}
-
-        <div class="collapse" id="collapseExample">
-            <div class="card p-4 mb-2 rounded shadow">
-                <form class="card formcard" method="get">
-                    <h4 class="fst-italic">Filters</h4>
-                    <div class="text-danger">
-                        {{ form.non_field_errors }}
-                    </div>
-
-                    {% form_get filter_form.form %}
-
-                    <input class="btn btn-primary" type="submit" />
-                </form>
-            </div>
-        </div>
-    {% endif %}
-
-    {% block main %}
-    {% endblock main %}
-{% endblock content %}
+      <input class="btn btn-primary" type="submit" />
+    </form>
+  </div>
+</div>
+{% endif %} {% block main %} {% endblock main %} {% endblock content %}

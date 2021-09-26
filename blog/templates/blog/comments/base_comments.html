@@ -1,10 +1,3 @@
-{% extends 'sub_base_main.html' %}
-
-{% block main %}
-    {% if user.is_authenticated %}
-        {% block comments_main %}
-        {% endblock comments_main %}
-    {% else %}
-        You must be logged in
-    {% endif %}
-{% endblock main %}
+{% extends 'sub_base_main.html' %} {% block main %} {% if user.is_authenticated
+%} {% block comments_main %} {% endblock comments_main %} {% else %} You must be
+logged in {% endif %} {% endblock main %}
