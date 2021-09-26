@@ -351,7 +351,7 @@ details {
             padding-right: 0;
         }
 
-        :not(summary, details) {
+        & > :not(summary, details) {
             padding: 0.5rem;
             margin-bottom: 0;
         }
