@@ -21,9 +21,7 @@ class LatestPostsFeed(Feed):
     description = "Latest posts"
 
     def items(self):
-        return Post.objects.filter(
-            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
-        )
+        return Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def item_title(self, item):
         return item.title
@@ -42,9 +40,6 @@ class LatestPostsFeed(Feed):
 
     def item_author_name(self, item):
         return item.author
-
-    def item_comments(self, item):
-        return item.approved_comments()
 
 
 class LatestPostsFeedByCategory(Feed):
@@ -87,6 +82,3 @@ class LatestPostsFeedByCategory(Feed):
 
     def item_author_name(self, item):
         return item.author
-
-    def item_comments(self, item):
-        return item.approved_comments()
