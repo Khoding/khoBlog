@@ -1,8 +1,11 @@
-version = 1
+version = 2
 
 [[analyzers]]
 name = "javascript"
 enabled = true
+
+  [analyzers.meta]
+  plugins = ["react"]
 
 [[analyzers]]
 name = "python"
@@ -17,4 +20,16 @@ enabled = true
 
 [[analyzers]]
 name = "secrets"
+enabled = true
+
+[[transformers]]
+name = "black"
+enabled = true
+
+[[transformers]]
+name = "prettier"
+enabled = true
+
+[[transformers]]
+name = "standardjs"
 enabled = true
