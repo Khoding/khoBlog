@@ -1,19 +1,14 @@
-{% extends 'sub_base.html' %}
-{% load project_tags %}
+{% extends 'sub_base.html' %} {% load project_tags %} {% block content %}
+<div class="card formcard">
+  <div class="card-body">
+    <form method="post" novalidate>
+      <div class="text-danger">{{ form.non_field_errors }}</div>
 
-{% block content %}
-    <div class="card formcard">
-        <div class="card-body">
-            <form method="post" novalidate>
-                <div class="text-danger">
-                    {{ form.non_field_errors }}
-                </div>
+      {% form form %}
 
-                {% form form %}
-
-                <button type="submit" class="btn btn-primary">{{ title }}</button>
-            </form>
-        </div>
-    </div>
+      <button type="submit" class="btn btn-primary">{{ title }}</button>
+    </form>
+  </div>
+</div>
 
 {% endblock content %}

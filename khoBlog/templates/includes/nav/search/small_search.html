@@ -1,7 +1,20 @@
-<form action="{{ search_url }}" class="d-block d-lg-none search_form mb-2" method="get">
-    <div class="input-group">
-        <span class="input-group-text" id="search_label_small"><a href="{% url 'blog:search' %}">Search</a></span>
-        <input type="text" class="form-control" id="search" placeholder="{{ search_title }}" name="q"
-            aria-label="search" aria-describedby="search">
-    </div>
+<form
+  action="{{ search_url }}"
+  class="d-block d-lg-none search_form mb-2"
+  method="get"
+>
+  <div class="input-group">
+    <span class="input-group-text" id="search_label_small"
+      ><a href="{% url 'blog:search' %}">Search</a></span
+    >
+    <input
+      type="text"
+      class="form-control"
+      id="search"
+      placeholder="{{ search_title }}"
+      name="q"
+      aria-label="search"
+      aria-describedby="search"
+    />
+  </div>
 </form>

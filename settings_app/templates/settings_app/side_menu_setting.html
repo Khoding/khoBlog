@@ -1,99 +1,129 @@
-{% load specific_date_message_set %}
-
-{% for side in sides %}
-    {% if not side.is_post_list_side_menu or side.is_post_list_side_menu and context.posts or context.category_list or context.series_list or context.query or context.pages or context.projects or context.tags %}
-        <div class="card p-4 mb-2 rounded shadow">
-            {% if not side.is_post_list_side_menu %}
-                <h4 class="fst-italic">{{ side.title }}</h4>
-            {% endif %}
-
-            {% if side.sub_title and not side.is_user_side_menu %}
-                <p class="mb-2">
-                    {{ side.sub_title }}
-                </p>
-            {% endif %}
-
-            {% if side.is_user_side_menu %}
-                <p class="mb-2">{% firstof context.user.welcome_message side.sub_title %} <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
-            {% endif %}
-
-            {% specific_date_message_setting messages %}
-
-            {% if not side.is_user_side_menu and not side.is_post_list_side_menu %}
-                {% for group in side.side_menu_links.all %}
-                    <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ group }} Group">
-                        {% for link in group.side_menu_links_group.all %}
-                            {% if link.visibility != 'D' %}
-                                {% if context.user.is_authenticated %}
-                                    {% if link.visibility == 'NP' %}
-                                        {% if context.perms.settings_app.view_linkssidemenu %}
-                                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="
+{% load specific_date_message_set %} {% for side in sides %} {% if not
+side.is_post_list_side_menu or side.is_post_list_side_menu and context.posts or
+context.category_list or context.series_list or context.query or context.pages
+or context.projects or context.tags %}
+<div class="card p-4 mb-2 rounded shadow">
+  {% if not side.is_post_list_side_menu %}
+  <h4 class="fst-italic">{{ side.title }}</h4>
+  {% endif %} {% if side.sub_title and not side.is_user_side_menu %}
+  <p class="mb-2">{{ side.sub_title }}</p>
+  {% endif %} {% if side.is_user_side_menu %}
+  <p class="mb-2">
+    {% firstof context.user.welcome_message side.sub_title %}
+    <span
+      class="
+        {%
+        if
+        context.user.is_superuser
+        %}superuser{%
+        elif
+        context.user.is_staff
+        %}staff{%
+        endif
+        %}
+      "
+      >{{ context.user.username }}</span
+    >
+  </p>
+  {% endif %} {% specific_date_message_setting messages %} {% if not
+  side.is_user_side_menu and not side.is_post_list_side_menu %} {% for group in
+  side.side_menu_links.all %}
+  <div
+    class="btn-group-vertical d-block mb-2"
+    role="group"
+    aria-label="{{ group }} Group"
+  >
+    {% for link in group.side_menu_links_group.all %} {% if link.visibility !=
+    'D' %} {% if context.user.is_authenticated %} {% if link.visibility == 'NP'
+    %} {% if context.perms.settings_app.view_linkssidemenu %}
+    <a
+      class="btn btn-{{ link.get_link_css_classes_display }}"
+      href="
                                                 {% if link.rel_url %}
                                                     {{ link.get_rel_url }}
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
                                                 "
-                                                {% if link.is_target_blank %}
-                                                    target="_blank" rel="noopener noreferrer"
-                                                {% endif %}
-                                                >{{ link.title }}
-                                            </a>
-                                        {% endif %}
-                                    {% elif link.visibility == 'NS' %}
-                                        {% if context.user.is_staff %}
-                                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="
+      {%
+      if
+      link.is_target_blank
+      %}
+      target="_blank"
+      rel="noopener noreferrer"
+      {%
+      endif
+      %}
+      >{{ link.title }}
+    </a>
+    {% endif %} {% elif link.visibility == 'NS' %} {% if context.user.is_staff
+    %}
+    <a
+      class="btn btn-{{ link.get_link_css_classes_display }}"
+      href="
                                                 {% if link.rel_url %}
                                                     {{ link.get_rel_url }}
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
                                                 "
-                                                {% if link.is_target_blank %}
-                                                    target="_blank" rel="noopener noreferrer"
-                                                {% endif %}
-                                                >{{ link.title }}
-                                            </a>
-                                        {% endif %}
-                                    {% else %}
-                                        {% if context.user.is_superuser %}
-                                            <a class="btn btn-{{ link.get_link_css_classes_display }}" href="
+      {%
+      if
+      link.is_target_blank
+      %}
+      target="_blank"
+      rel="noopener noreferrer"
+      {%
+      endif
+      %}
+      >{{ link.title }}
+    </a>
+    {% endif %} {% else %} {% if context.user.is_superuser %}
+    <a
+      class="btn btn-{{ link.get_link_css_classes_display }}"
+      href="
                                                 {% if link.rel_url %}
                                                     {{ link.get_rel_url }}
                                                 {% elif link.url %}
                                                     {{ link.url }}
                                                 {% endif %}
                                                 "
-                                                {% if link.is_target_blank %}
-                                                    target="_blank" rel="noopener noreferrer"
-                                                {% endif %}
-                                                >{{ link.title }}
-                                            </a>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            {% else %}
-                                <a class="btn btn-{{ link.get_link_css_classes_display }}" href="
+      {%
+      if
+      link.is_target_blank
+      %}
+      target="_blank"
+      rel="noopener noreferrer"
+      {%
+      endif
+      %}
+      >{{ link.title }}
+    </a>
+    {% endif %} {% endif %} {% endif %} {% else %}
+    <a
+      class="btn btn-{{ link.get_link_css_classes_display }}"
+      href="
                                     {% if link.rel_url %}
                                         {{ link.get_rel_url }}
                                     {% elif link.url %}
                                         {{ link.url }}
                                     {% endif %}
                                     "
-                                    {% if link.is_target_blank %}
-                                        target="_blank" rel="noopener noreferrer"
-                                    {% endif %}
-                                    >{{ link.title }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            {% elif side.is_user_side_menu %}
-                {% include 'includes/nav/nav_auth.html' %}
-            {% else %}
-                {% include 'includes/nav/nav_list.html' %}
-            {% endif %}
-        </div>
-    {% endif %}
-{% endfor %}
+      {%
+      if
+      link.is_target_blank
+      %}
+      target="_blank"
+      rel="noopener noreferrer"
+      {%
+      endif
+      %}
+      >{{ link.title }}
+    </a>
+    {% endif %} {% endfor %}
+  </div>
+  {% endfor %} {% elif side.is_user_side_menu %} {% include
+  'includes/nav/nav_auth.html' %} {% else %} {% include
+  'includes/nav/nav_list.html' %} {% endif %}
+</div>
+{% endif %} {% endfor %}

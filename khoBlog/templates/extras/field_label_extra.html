@@ -1,7 +1,3 @@
-{% load widget_tweaks %}
-
-{% if field|widget_type != "hiddeninput" %}
-    <small>
-        {{ field.label_tag }}
-    </small>
+{% load widget_tweaks %} {% if field|widget_type != "hiddeninput" %}
+<small> {{ field.label_tag }} </small>
 {% endif %}

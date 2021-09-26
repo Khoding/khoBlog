@@ -1,50 +1,56 @@
 <!-- Off Canvas -->
-<div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="postOffCanvas-{{ post.slug }}" aria-labelledby="postOffCanvas-{{ post.slug }}Label">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="postOffCanvas-{{ post.slug }}Label">{{ post.title }} - #{{ post.id }}</h5>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+<div
+  class="offcanvas offcanvas-end"
+  data-bs-scroll="false"
+  tabindex="-1"
+  id="postOffCanvas-{{ post.slug }}"
+  aria-labelledby="postOffCanvas-{{ post.slug }}Label"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="postOffCanvas-{{ post.slug }}Label">
+      {{ post.title }} - #{{ post.id }}
+    </h5>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    >
+      Close
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <h6>General Information</h6>
+    <p>
+      <a
+        class="card-link"
+        href="{% url 'accounts:profile' slug=post.author.slug %}"
+      >
+        Author: {{ post.author }} - {% if post.author.is_superuser %} {% if
+        post.author.owner %} Website Owner {% else %} Admin {% endif %} {% elif
+        post.author.is_staff %} Staff {% else %} User {% endif %}
+      </a>
+    </p>
+    <div class="mb-2">
+      <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
+      {% if post.pub_date %}
+      <p class="mb-0">Published: {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
+      {% endif %} {% if post.modified_date %}
+      <p class="mb-0">
+        Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}
+      </p>
+      {% endif %} {% if post.featured_title %}
+      <p>Featured Title: {{ post.featured_title }}</p>
+      {% endif %}
     </div>
-    <div class="offcanvas-body">
-        <h6>General Information</h6>
-        <p>
-            <a class="card-link" href="{% url 'accounts:profile' slug=post.author.slug %}">
-                Author:
-                {{ post.author }} -
-                {% if post.author.is_superuser %}
-                    {% if post.author.owner %}
-                        Website Owner
-                    {% else %}
-                        Admin
-                    {% endif %}
-                {% elif post.author.is_staff %}
-                    Staff
-                {% else %}
-                    User
-                {% endif %}
-            </a>
-        </p>
-        <div class="mb-2">
-            <p class="mb-0">Created: {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
-            {% if post.pub_date %}
-                <p class="mb-0">Published: {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
-            {% endif %}
-            {% if post.modified_date %}
-                <p class="mb-0">Updated: {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
-            {% endif %}
-            {% if post.featured_title %}
-                <p>Featured Title: {{ post.featured_title }}</p>
-            {% endif %}
-        </div>
 
-        <p>Description: {{ post.description }}</p>
-        <p>Clicks: {{ post.clicks }}</p>
-        <p>Categories:
-            {% include 'blog/includes/post_categories.html' %}
-        </p>
-        {% if user.is_superuser %}
-            <h6>Admin Information</h6>
-            <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
-            <p>Scheduled: {% if post.pub_date > now %}True{% else %}False{% endif %}</p>
-        {% endif %}
-    </div>
+    <p>Description: {{ post.description }}</p>
+    <p>Clicks: {{ post.clicks }}</p>
+    <p>Categories: {% include 'blog/includes/post_categories.html' %}</p>
+    {% if user.is_superuser %}
+    <h6>Admin Information</h6>
+    <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
+    <p>Scheduled: {% if post.pub_date > now %}True{% else %}False{% endif %}</p>
+    {% endif %}
+  </div>
 </div>

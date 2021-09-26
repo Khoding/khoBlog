@@ -1,105 +1,175 @@
-{% load static markdown_extra read_time super_buttons %}
+{% load static markdown_extra read_time super_buttons %} {% block card_div %}
+<article id="post-{{ post.slug }}" class="card shadow">
+  {% endblock card_div %} {% if post.pub_date %} {% if
+  post.was_published_recently %}
+  <span
+    class="
+      position-absolute
+      top-0
+      start-100
+      translate-middle
+      badge
+      border border-light
+      rounded-circle
+      bg-success
+      p-1
+    "
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="New Post"
+    ><span class="visually-hidden">New Post</span></span
+  >
+  {% endif %} {% if post.pub_date > now %}
+  <span
+    class="
+      position-absolute
+      top-0
+      start-100
+      translate-middle
+      badge
+      border border-light
+      rounded-circle
+      bg-warning
+      p-1
+    "
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="Scheduled"
+    ><span class="visually-hidden">Scheduled</span></span
+  >
+  {% endif %} {% else %}
+  <span
+    class="
+      position-absolute
+      top-0
+      start-100
+      translate-middle
+      badge
+      border border-light
+      rounded-circle
+      bg-info
+      p-1
+    "
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="Draft"
+    ><span class="visually-hidden">Draft</span></span
+  >
+  {% endif %} {% if post.withdrawn %}
+  <span
+    class="
+      position-absolute
+      top-0
+      start-100
+      translate-middle
+      badge
+      border border-light
+      rounded-circle
+      bg-danger
+      p-1
+    "
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="Withdrawn"
+    ><span class="visually-hidden">Withdrawn</span></span
+  >
+  {% endif %}
 
-{% block card_div %}
-    <article id="post-{{ post.slug }}" class="card shadow">
-{% endblock card_div %}
-    {% if post.pub_date %}
-        {% if post.was_published_recently %}
-            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
+  <header class="card-header">
+    {% block card_header %}
+    <section class="d-flex">
+      <span class="col">
+        {% if post.get_featured_cat %}
+        <strong
+          ><a
+            class="cat-link"
+            href="{{ post.get_featured_cat.category.get_absolute_url }}"
+            >{{ post.featured_cat_title|capfirst }}</a
+          ></strong
+        >
+        {% else %}
+        <strong
+          ><a
+            class="cat-link"
+            href="{{ post.categories.first.get_absolute_url }}"
+            >{{ post.categories.first|capfirst }}</a
+          ></strong
+        >
         {% endif %}
+        <p class="mb-0 text-small text-muted">Post #{{ post.id }}</p>
+      </span>
+      <span class="col-auto mx-2">
+        <span
+          class="badge bg-secondary d-flex justify-content-center"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="{{ post.get_language_display }}"
+          >{{ post.language }}</span
+        >
+      </span>
+      <span class="col">
+        {% if user.is_superuser %} {% sb post %} {% endif %}
+      </span>
+    </section>
+    {% endblock card_header %}
+  </header>
 
-        {% if post.pub_date > now %}
-            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-warning p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Scheduled"><span class="visually-hidden">Scheduled</span></span>
-        {% endif %}
-    {% else %}
-        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-info p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Draft"><span class="visually-hidden">Draft</span></span>
+  <section class="card-body">
+    {% block card_body %} {% if series %}
+    <article class="card shadow">
+      <header class="card-header">
+        <strong
+          >Series:
+          <a href="{% url 'blog:post_series_list' slug=post.series.slug %}"
+            >{{ post.series }}</a
+          ></strong
+        >{% if post.series.description %} - {{ post.series.description }}{%
+        endif %}
+      </header>
+      <ul class="list-group list-group-flush">
+        {% for e in series %}
+        <li class="list-group-item">
+          <a href="{% url 'blog:post_detail' slug=e.slug %}"
+            >Part #{{ forloop.counter }}: {{ e }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <hr />
     {% endif %}
 
-    {% if post.withdrawn %}
-        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
-    {% endif %}
-
-    <header class="card-header">
-        {% block card_header %}
-            <section class="d-flex">
-                <span class="col">
-                    {% if post.get_featured_cat %}
-                        <strong><a class="cat-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a></strong>
-                    {% else %}
-                        <strong><a class="cat-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a></strong>
-                    {% endif %}
-                    <p class="mb-0 text-small text-muted">
-                        Post #{{ post.id }}
-                    </p>
-                </span>
-                <span class="col-auto mx-2">
-                    <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
-                </span>
-                <span class="col">
-                    {% if user.is_superuser %}
-                        {% sb post %}
-                    {% endif %}
-                </span>
-            </section>
-        {% endblock card_header %}
-    </header>
-
-    <section class="card-body">
-        {% block card_body %}
-            {% if series %}
-                <article class="card shadow">
-                    <header class="card-header">
-                        <strong>Series: <a href="{% url 'blog:post_series_list' slug=post.series.slug %}">{{ post.series }}</a></strong>{% if post.series.description %} - {{ post.series.description }}{% endif %}
-                    </header>
-                    <ul class="list-group list-group-flush">
-                        {% for e in series %}
-                            <li class="list-group-item"><a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}: {{ e }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </article>
-
-                <hr />
-            {% endif %}
-
-            <h2 class="card-title">{{ title }}</h2>
-            <section>
-                {% include 'blog/includes/post_dates.html' %}
-                <p class="mb-0 text-small text-muted">
-                    {% if post.body %}
-                        {{ post.body|readtime }}
-                    {% else %}
-                        A while
-                    {% endif %}
-                </p>
-            </section>
-
-            {% if post.image %}
-                <img src="{{ post.image.url }}" class="post-image" alt="Post image" />
-            {% endif %}
-
-            <section class="card-text">
-                {% if body %}
-                    {% for content in body %}
-                        {{ content.body|formatted_markdown|safe }}
-                        {% if content.body_image %}
-                            <img src="{{ content.body_image.url }}" alt="{{ content.body_image_alt }}">
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    {{ post.body|formatted_markdown|safe }}
-                {% endif %}
-
-                {% if post.body_custom %}
-                    {% load editorjs_more %}
-                    {{ post.body_custom|editorjs }}
-                {% endif %}
-            </section>
-            {% if post.url_to_article %}
-                <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
-            {% endif %}
-        {% endblock card_body %}
+    <h2 class="card-title">{{ title }}</h2>
+    <section>
+      {% include 'blog/includes/post_dates.html' %}
+      <p class="mb-0 text-small text-muted">
+        {% if post.body %} {{ post.body|readtime }} {% else %} A while {% endif
+        %}
+      </p>
     </section>
 
-    {% block card_footer %}
-    {% endblock card_footer %}
+    {% if post.image %}
+    <img src="{{ post.image.url }}" class="post-image" alt="Post image" />
+    {% endif %}
+
+    <section class="card-text">
+      {% if body %} {% for content in body %} {{
+      content.body|formatted_markdown|safe }} {% if content.body_image %}
+      <img
+        src="{{ content.body_image.url }}"
+        alt="{{ content.body_image_alt }}"
+      />
+      {% endif %} {% endfor %} {% else %} {{ post.body|formatted_markdown|safe
+      }} {% endif %} {% if post.body_custom %} {% load editorjs_more %} {{
+      post.body_custom|editorjs }} {% endif %}
+    </section>
+    {% if post.url_to_article %}
+    <a class="card-link" href="{{ post.url_to_article }}"
+      >{{ post.url_to_article_title }}</a
+    >
+    {% endif %} {% endblock card_body %}
+  </section>
+
+  {% block card_footer %} {% endblock card_footer %}
 </article>

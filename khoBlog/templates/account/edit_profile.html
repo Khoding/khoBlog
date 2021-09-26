@@ -1,195 +1,206 @@
-{% extends 'sub_base.html' %}
-{% load widget_tweaks project_tags %}
+{% extends 'sub_base.html' %} {% load widget_tweaks project_tags %} {% block
+content %} {% if user.id == object.id %}
+<div class="card formcard">
+  <div class="card-body">
+    <form enctype="multipart/form-data" method="post" novalidate>
+      {% csrf_token %}
+      <div class="non-field-errors">{{ form.non_field_errors }}</div>
 
-{% block content %}
-    {% if user.id == object.id %}
-        <div class="card formcard">
-            <div class="card-body">
-                <form enctype="multipart/form-data" method="post" novalidate>
-                    {% csrf_token %}
-                    <div class="non-field-errors">
-                        {{ form.non_field_errors }}
-                    </div>
+      <div class="hidden-fields-errors">
+        {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }}
+        {{ hidden_field }} {% endfor %}
+      </div>
 
-                    <div class="hidden-fields-errors">
-                        {% for hidden_field in form.hidden_fields %}
-                            {{ hidden_field.errors }}
-                            {{ hidden_field }}
-                        {% endfor %}
-                    </div>
+      <div class="text-danger">{{ form.non_field_errors }}</div>
 
-                    <div class="text-danger">
-                        {{ form.non_field_errors }}
-                    </div>
+      <div id="profile-fields">
+        <h4 class="mb-0">Basic profile</h4>
+        <p class="text-small">Some basic profile data</p>
 
-                    <div id="profile-fields">
-                        <h4 class="mb-0">Basic profile</h4>
-                        <p class="text-small">Some basic profile data</p>
+        <div id="visible-profile-fields">
+          <h5>These fields are shown on your Profile page</h5>
 
-                        <div id="visible-profile-fields">
-                            <h5>These fields are shown on your Profile page</h5>
-
-                            <div class="field mb-2">
-                                <div class="form-floating">
-                                    {{ form.username|add_class:"form-control"|attr:"placeholder: Username" }}
-                                    {{ form.username.label_tag }}
-                                </div>
-                                {% if form.username.help_text %}
-                                    <span class="text-small text-muted">{{ form.username.help_text }}</span>
-                                {% endif %}
-                                {% for error in form.username.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-
-                            <div class="field mb-2">
-                                {{ form.profile_pic.label_tag }}
-                                {{ form.profile_pic|add_class:"form-control"|attr:"placeholder:Profile picture" }}
-                                {% if form.profile_pic.help_text %}
-                                    <span class="text-small text-muted">{{ form.profile_pic.help_text }}</span>
-                                {% endif %}
-                                {% for error in form.profile_pic.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-
-                            <div class="field mb-2">
-                                <div class="form-floating">
-                                    {{ form.bio|add_class:"form-control"|attr:"placeholder:Bio" }}
-                                    {{ form.bio.label_tag }}
-                                </div>
-                                {% if form.bio.help_text %}
-                                    <span class="text-small text-muted">{{ form.bio.help_text }}</span>
-                                {% endif %}
-                                {% for error in form.bio.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        <div id="personal-profile-fields">
-                            <h5>These fields are never shown</h5>
-
-                            <div class="field mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">Name</span>
-                                    {{ form.first_name|add_class:"form-control"|attr:"placeholder:First name" }}
-                                    {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
-                                </div>
-                                {% if form.first_name.help_text %}
-                                    <span class="text-small text-muted">{{ form.first_name.help_text }}</span>
-                                {% endif %}
-                                {% if form.last_name.help_text %}
-                                    <span class="text-small text-muted">{{ form.last_name.help_text }}</span>
-                                {% endif %}
-                                {% for error in form.first_name.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                                {% for error in form.last_name.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-
-                            <div class="field mb-2">
-                                <div class="form-floating">
-                                    {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
-                                    {{ form.email.label_tag }}
-                                </div>
-                                {% if form.email.help_text %}
-                                    <span class="text-small text-muted">{{ form.email.help_text }}</span>
-                                {% endif %}
-                                {% for error in form.email.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-
-                            <div class="field mb-2">
-                                <div class="form-floating">
-                                    {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
-                                    {{ form.password.label_tag }}
-                                </div>
-                                {% if form.password.help_text %}
-                                    <span class="text-small text-muted">{{ form.password.help_text|safe }}</span>
-                                {% endif %}
-                                {% for error in form.password.errors %}
-                                    <small class="form-text text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    <div id="advanced-fields">
-                        <h4 class="mb-0">More advanced Profile Fields</h4>
-                        <p class="text-small">These fields aren't meant to be changed at first. You can change them here, and changing them won't break anything, but make sure to know what each field is before changing it</p>
-                        <div class="field row mb-2">
-                            <div class="input-group col-auto">
-                                <span class="input-group-text">https://{{ request.get_host }}/accounts/profile/</span>
-                                {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
-                            </div>
-                            {% if form.slug.help_text %}
-                                <span class="text-small text-muted">{{ form.slug.help_text }}</span>
-                            {% endif %}
-                            {% for error in form.slug.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    <div id="customization-fields">
-                        <h4 class="mb-0">Customization</h4>
-                        <p class="text-small">Some fields that change the design of the website, some of the texts on it, only affects you</p>
-                        <div class="field mb-2">
-                            <div class="form-floating">
-                                {{ form.welcome_message|add_class:"form-control"|attr:"placeholder:Welcome message" }}
-                                {{ form.welcome_message.label_tag }}
-                            </div>
-                            {% if form.welcome_message.help_text %}
-                                <span class="text-small text-muted">{{ form.welcome_message.help_text }}</span>
-                            {% endif %}
-                            {% for error in form.welcome_message.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
-
-                        <div class="field mb-2">
-                            {{ form.show_github.label_tag }}
-                            <div class="form-check">
-                                {{ form.show_github|add_class:"form-check-input" }}
-                            </div>
-                            {% if form.show_github.help_text %}
-                                <span class="text-small text-muted">{{ form.show_github.help_text }}</span>
-                            {% endif %}
-                            {% for error in form.show_github.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
-
-                        <div class="field mb-2">
-                            <div class="form-floating">
-                                {{ form.default_theme|add_class:"form-select"|attr:"placeholder:Choose a theme" }}
-                                {{ form.default_theme.label_tag }}
-                            </div>
-                            {% if form.default_theme.help_text %}
-                                <span class="text-small text-muted">{{ form.default_theme.help_text }}</span>
-                            {% endif %}
-                            {% for error in form.default_theme.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">{{ title }}</button>
-                </form>
+          <div class="field mb-2">
+            <div class="form-floating">
+              {{ form.username|add_class:"form-control"|attr:"placeholder:
+              Username" }} {{ form.username.label_tag }}
             </div>
+            {% if form.username.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.username.help_text }}</span
+            >
+            {% endif %} {% for error in form.username.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="field mb-2">
+            {{ form.profile_pic.label_tag }} {{
+            form.profile_pic|add_class:"form-control"|attr:"placeholder:Profile
+            picture" }} {% if form.profile_pic.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.profile_pic.help_text }}</span
+            >
+            {% endif %} {% for error in form.profile_pic.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="field mb-2">
+            <div class="form-floating">
+              {{ form.bio|add_class:"form-control"|attr:"placeholder:Bio" }} {{
+              form.bio.label_tag }}
+            </div>
+            {% if form.bio.help_text %}
+            <span class="text-small text-muted">{{ form.bio.help_text }}</span>
+            {% endif %} {% for error in form.bio.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
         </div>
 
-    {% else %}
-        <p>It's not your profile.</p>
-    {% endif %}
-{% endblock content %}
+        <hr />
+
+        <div id="personal-profile-fields">
+          <h5>These fields are never shown</h5>
+
+          <div class="field mb-2">
+            <div class="input-group">
+              <span class="input-group-text">Name</span>
+              {{
+              form.first_name|add_class:"form-control"|attr:"placeholder:First
+              name" }} {{
+              form.last_name|add_class:"form-control"|attr:"placeholder:Last
+              name" }}
+            </div>
+            {% if form.first_name.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.first_name.help_text }}</span
+            >
+            {% endif %} {% if form.last_name.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.last_name.help_text }}</span
+            >
+            {% endif %} {% for error in form.first_name.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %} {% for error in form.last_name.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="field mb-2">
+            <div class="form-floating">
+              {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
+              {{ form.email.label_tag }}
+            </div>
+            {% if form.email.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.email.help_text }}</span
+            >
+            {% endif %} {% for error in form.email.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="field mb-2">
+            <div class="form-floating">
+              {{
+              form.password|add_class:"form-control"|attr:"placeholder:Password"
+              }} {{ form.password.label_tag }}
+            </div>
+            {% if form.password.help_text %}
+            <span class="text-small text-muted"
+              >{{ form.password.help_text|safe }}</span
+            >
+            {% endif %} {% for error in form.password.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div id="advanced-fields">
+        <h4 class="mb-0">More advanced Profile Fields</h4>
+        <p class="text-small">
+          These fields aren't meant to be changed at first. You can change them
+          here, and changing them won't break anything, but make sure to know
+          what each field is before changing it
+        </p>
+        <div class="field row mb-2">
+          <div class="input-group col-auto">
+            <span class="input-group-text"
+              >https://{{ request.get_host }}/accounts/profile/</span
+            >
+            {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
+          </div>
+          {% if form.slug.help_text %}
+          <span class="text-small text-muted">{{ form.slug.help_text }}</span>
+          {% endif %} {% for error in form.slug.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+      </div>
+
+      <hr />
+
+      <div id="customization-fields">
+        <h4 class="mb-0">Customization</h4>
+        <p class="text-small">
+          Some fields that change the design of the website, some of the texts
+          on it, only affects you
+        </p>
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{
+            form.welcome_message|add_class:"form-control"|attr:"placeholder:Welcome
+            message" }} {{ form.welcome_message.label_tag }}
+          </div>
+          {% if form.welcome_message.help_text %}
+          <span class="text-small text-muted"
+            >{{ form.welcome_message.help_text }}</span
+          >
+          {% endif %} {% for error in form.welcome_message.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          {{ form.show_github.label_tag }}
+          <div class="form-check">
+            {{ form.show_github|add_class:"form-check-input" }}
+          </div>
+          {% if form.show_github.help_text %}
+          <span class="text-small text-muted"
+            >{{ form.show_github.help_text }}</span
+          >
+          {% endif %} {% for error in form.show_github.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{
+            form.default_theme|add_class:"form-select"|attr:"placeholder:Choose
+            a theme" }} {{ form.default_theme.label_tag }}
+          </div>
+          {% if form.default_theme.help_text %}
+          <span class="text-small text-muted"
+            >{{ form.default_theme.help_text }}</span
+          >
+          {% endif %} {% for error in form.default_theme.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">{{ title }}</button>
+    </form>
+  </div>
+</div>
+
+{% else %}
+<p>It's not your profile.</p>
+{% endif %} {% endblock content %}

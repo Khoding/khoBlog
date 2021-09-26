@@ -1,41 +1,54 @@
-{% extends 'pages/base_page.html' %}
-{% load super_buttons %}
+{% extends 'pages/base_page.html' %} {% load super_buttons %} {% block main %}
+<div class="row row-cols-1 row-cols-lg-3 me-0">
+  {% for page in pages %}
+  <div class="mb-2 pe-0">
+    <div id="page-{{ page.slug }}" class="card shadow h-100">
+      {% if page.withdrawn %}
+      <span
+        class="
+          position-absolute
+          top-0
+          start-100
+          translate-middle
+          badge
+          border border-light
+          rounded-circle
+          bg-danger
+          p-1
+        "
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Withdrawn"
+        ><span class="visually-hidden">Withdrawn</span></span
+      >
+      {% endif %}
 
-{% block main %}
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for page in pages %}
-            <div class="mb-2 pe-0">
-                <div id="page-{{ page.slug }}" class="card shadow h-100">
-                    {% if page.withdrawn %}
-                        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
-                    {% endif %}
-
-                    <div class="card-header">
-                        <span class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted">Page #{{ page.id }}</strong>
-                                <p class="mb-0 text-small text-muted">Page slug: {{ page.slug }}</p>
-                            </span>
-                            <span class="col-auto">
-                                {% if user.is_superuser %}
-                                    {% sb page %}
-                                {% endif %}
-                            </span>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title mb-0">{{ page.title }}</h3>
-                        <p class="mb-auto">{{ page.description }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ page.get_absolute_url }}">See details</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+      <div class="card-header">
+        <span class="d-flex">
+          <span class="col">
+            <strong class="text-muted">Page #{{ page.id }}</strong>
+            <p class="mb-0 text-small text-muted">Page slug: {{ page.slug }}</p>
+          </span>
+          <span class="col-auto">
+            {% if user.is_superuser %} {% sb page %} {% endif %}
+          </span>
+        </span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title mb-0">{{ page.title }}</h3>
+        <p class="mb-auto">{{ page.description }}</p>
+      </div>
+      <div class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            <a class="card-link" href="{{ page.get_absolute_url }}"
+              >See details</a
+            >
+          </span>
+        </span>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock main %}
