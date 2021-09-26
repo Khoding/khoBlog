@@ -40,9 +40,7 @@ class BaseLinkAbstractModel(auto_prefetch.Model):
         """
         Get a URL suitable for redirecting to the content object.
         """
-        return reverse(
-            "links:link-url-redirect", args=(self.content_type_id, self.object_pk)
-        )
+        return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
 
 class Links(BaseLinkAbstractModel):
@@ -71,9 +69,7 @@ class Links(BaseLinkAbstractModel):
         """
         Get a URL suitable for redirecting to the content object.
         """
-        return reverse(
-            "links:link-url-redirect", args=(self.content_type_id, self.object_pk)
-        )
+        return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
     def get_absolute_permalink(self):
         self.permalink = self.permalink + "/"
