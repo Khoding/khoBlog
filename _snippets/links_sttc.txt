@@ -2,3 +2,4 @@
 [mydudes]: /s/my-dudes
 [whathype]: /s/whathype
 [babysip]: /s/babysip
+[bat]: /s/bat
