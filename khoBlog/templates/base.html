@@ -117,10 +117,10 @@
         <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top shadow" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
         <div class="container-fluid">
             <div class="d-inline-block"><a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a> <a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a></div>
-            <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -129,98 +129,54 @@
                     {% block nav %}
                     {% endblock nav %}
                 </div>
+
                 {% activeurl %}
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
-                        {% if user.is_authenticated %}
-                            {% if user.is_superuser %}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#create_dropdown" id="create_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Create</a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="create_dropdown">
-                                        <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#lists_dropdown" id="lists_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Lists</a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="lists_dropdown">
-                                        <li><a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
-                                    </ul>
-                                </li>
-                            {% endif %}
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% provider_login_url 'google' %}">Log in with Google</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% provider_login_url 'discord' %}">Log in with Discord</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% provider_login_url 'github' %}">Log in with Github</a>
-                            </li>
-                        {% endif %}
-
-                        {% if user.is_authenticated %}
-                            {% if user.is_superuser %}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#accounts_dropdown" id="accounts_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="accounts_dropdown">
-                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
-                                    </ul>
-                                </li>
-                            {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}">Your Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-inherit" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-inherit" href="{% url 'accounts:profile' slug=user.slug %}?view_as=guest">View Profile as a Guest</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-inherit" href="{% url 'account_logout' %}">Log out</a>
-                                </li>
-                            {% endif %}
-
-                            {% if user.is_superuser or user.is_staff %}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#settings_dropdown" id="settings_dropdown" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="settings_dropdown">
-                                        <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
-                                        {% if user.is_superuser %}
-                                            <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
-                                        {% endif %}
-                                    </ul>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                    </ul>
+                    <ul class="navbar-nav me-auto d-flex"></ul>
                 {% endactiveurl %}
 
                 {% if user.is_authenticated %}
-                    <div class="me-2">
-                        {% if user.profile_pic %}
-                            <a href="{% url 'accounts:profile' slug=user.slug %}">
-                                <img class="profile-pic" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" loading="lazy" />
+                    <div class="d-none d-md-flex d-none d-md-flex align-items-center">
+                        <div class="flex-shrink-0 dropdown">
+                            <a href="#" class="d-block py-2 px-2 text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if user.profile_pic %}
+                                    <img class="rounded-circle" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" width="20" height="20" loading="lazy" />
+                                {% else %}
+                                    <img class="rounded-circle" src="{% static 'khoBlog/img/default_profile_picture.png' %}"
+                                        alt="Default Profile Pic" width="20" height="20" loading="lazy" />
+                                {% endif %}
                             </a>
-                        {% else %}
-                            <a href="{% url 'accounts:profile' slug=user.slug %}" title="Profil">
-                                <img class="profile-pic" src="{% static 'khoBlog/img/default_profile_picture.png' %}"
-                                    alt="Default Profile Pic" loading="lazy" />
-                            </a>
-                        {% endif %}
+
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a></li>
+
+                                {% if user.is_superuser %}
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a></li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li><a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a></li>
+                                {% endif %}
+
+                                {% if user.is_superuser or user.is_staff %}
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                                    {% if user.is_superuser %}
+                                        <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
+                                    {% endif %}
+                                {% endif %}
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                            </ul>
+                        </div>
                     </div>
                 {% endif %}
             </div>
