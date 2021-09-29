@@ -117,7 +117,7 @@
         <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top shadow" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
         <div class="container-fluid">
             <div class="d-inline-block"><a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a> <a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a></div>
             <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
@@ -210,17 +210,24 @@
                 {% endactiveurl %}
 
                 {% if user.is_authenticated %}
-                    <div class="me-2">
-                        {% if user.profile_pic %}
-                            <a href="{% url 'accounts:profile' slug=user.slug %}">
-                                <img class="profile-pic" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" loading="lazy" />
+                    <div class="d-flex align-items-center my-0">
+                        <div class="flex-shrink-0 dropdown">
+                            <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if user.profile_pic %}
+                                    <img class="rounded-circle" width="20" height="20" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" loading="lazy" />
+                                {% else %}
+                                    <img class="rounded-circle" width="20" height="20" src="{% static 'khoBlog/img/default_profile_picture.png' %}"
+                                        alt="Default Profile Pic" loading="lazy" />
+                                {% endif %}
                             </a>
-                        {% else %}
-                            <a href="{% url 'accounts:profile' slug=user.slug %}" title="Profil">
-                                <img class="profile-pic" src="{% static 'khoBlog/img/default_profile_picture.png' %}"
-                                    alt="Default Profile Pic" loading="lazy" />
-                            </a>
-                        {% endif %}
+
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit your profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                            </ul>
+                        </div>
                     </div>
                 {% endif %}
             </div>
