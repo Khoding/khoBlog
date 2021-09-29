@@ -13,7 +13,7 @@
                 {% endif %}
                 ">
                 {% if link.child_img %}
-                    <img src="{% static link.child_img %}" width="50" alt="{{ link.title }}" />
+                    <img src="{% static link.child_img %}" width="50" alt="{{ link.title }}" loading="lazy" />
                 {% else %}
                     {{ link.title }}
                 {% endif %}

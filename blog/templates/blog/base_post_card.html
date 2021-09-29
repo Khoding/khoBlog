@@ -74,7 +74,7 @@
             </section>
 
             {% if post.image %}
-                <img src="{{ post.image.url }}" class="post-image" alt="Post image" />
+                <img src="{{ post.image.url }}" class="post-image" alt="Post image" loading="lazy" />
             {% endif %}
 
             <section class="card-text">
@@ -82,7 +82,7 @@
                     {% for content in body %}
                         {{ content.body|formatted_markdown|safe }}
                         {% if content.body_image %}
-                            <img src="{{ content.body_image.url }}" alt="{{ content.body_image_alt }}">
+                            <img src="{{ content.body_image.url }}" alt="{{ content.body_image_alt }}" loading="lazy" />
                         {% endif %}
                     {% endfor %}
                 {% else %}
