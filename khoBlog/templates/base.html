@@ -208,6 +208,21 @@
                         {% endif %}
                     </ul>
                 {% endactiveurl %}
+
+                {% if user.is_authenticated %}
+                    <div class="me-2">
+                        {% if user.profile_pic %}
+                            <a href="{% url 'accounts:profile' slug=user.slug %}">
+                                <img class="profile-pic" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" loading="lazy" />
+                            </a>
+                        {% else %}
+                            <a href="{% url 'accounts:profile' slug=user.slug %}" title="Profil">
+                                <img class="profile-pic" src="{% static 'khoBlog/img/default_profile_picture.png' %}"
+                                    alt="Default Profile Pic" loading="lazy" />
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </nav>
