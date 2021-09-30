@@ -147,17 +147,20 @@
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                                <li><h6 class="dropdown-header">Your profile</h6></li>
                                 <li><a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a></li>
                                 <li><a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a></li>
 
                                 {% if user.is_superuser %}
                                     <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">Creation</h6></li>
 
                                     <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a></li>
                                     <li><a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a></li>
                                     <li><a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a></li>
 
                                     <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">Lists</h6></li>
 
                                     <li><a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a></li>
                                     <li><a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a></li>
@@ -166,10 +169,11 @@
 
                                 {% if user.is_superuser or user.is_staff %}
                                     <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">Administration</h6></li>
 
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
                                     {% if user.is_superuser %}
-                                        <li><a class="dropdown-item" href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
+                                        <li><a class="dropdown-item " href="https://eu.pythonanywhere.com">Pythonanywhere</a></li>
                                     {% endif %}
                                 {% endif %}
 
