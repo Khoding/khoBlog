@@ -66,8 +66,8 @@ api_patterns_v2 = [
 
 api_base_patterns = [
     path("read/", include("reading_apis_app.urls")),
-    re_path(r"(?P<version>[old]+)/", include(api_patterns)),
-    re_path(r"(?P<version>[v2|v3]+)/", include(api_patterns_v2)),
+    path("old/", include(api_patterns)),
+    re_path(r"(?P<version>v[2|3]{1})/", include(api_patterns_v2)),
     path("api-auth/", include("rest_framework.urls")),
     path("token/", obtain_auth_token, name="obtain-token"),
 ]
@@ -114,9 +114,7 @@ urlpatterns = (
         ),
         # Misc
         re_path(r"^robots\.txt", include("robots.urls")),
-        re_path(
-            r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")
-        ),
+        re_path(r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
