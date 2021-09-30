@@ -22,6 +22,7 @@ label[for="id_honeypot"],
 }
 
 body {
+    padding-top: 56px !important;
     @include background-color("bg");
     @include color("text");
 
