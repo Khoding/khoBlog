@@ -12,24 +12,34 @@
 
     {% block pagination %}
         <nav class="blog-pagination">
-            <div class="pagination">
-                <span class="step-links">
+            {% if is_paginated %}
+                <ul class="pagination mb-0">
                     {% if page_obj.has_previous %}
-                        <a class="btn btn-secondary" href="?page=1">&laquo; First</a>
-                        <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        <li class="page-item bg-primary"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link">Previous</a></li>
                     {% endif %}
 
-                    <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                    </span>
+                    {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            {% if i == page_obj.paginator.ELLIPSIS %}
+                                <li class="page-item"><span class="page-link">{{ i }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
 
                     {% if page_obj.has_next %}
-                        <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Next</a>
-                        <a class="btn btn-secondary"
-                        href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link">Next</a></li>
                     {% endif %}
-                </span>
-            </div>
+                </ul>
+            {% endif %}
         </nav>
     {% endblock pagination %}
 
