@@ -6,16 +6,18 @@
 {% endblock card_div %}
 
 {% block card_body %}
-    <h3 class="card-title text-word-wrap mb-0">{{ post.title|truncatewords_html:7 }}</h3>
-    <section>{% include 'blog/includes/post_dates.html' %}</section>
-    <p class="mb-0 text-small text-muted">
-        {% if post.body %}
-            {{ post.body|readtime }}
-        {% else %}
-            A while
-        {% endif %}
-    </p>
-    <p class="mb-auto">{{ post.description }}</p>
+    <section class="card-body">
+        <h3 class="card-title text-word-wrap mb-0">{{ post.title|truncatewords_html:7 }}</h3>
+        <section>{% include 'blog/includes/post_dates.html' %}</section>
+        <p class="mb-0 text-small text-muted">
+            {% if post.body %}
+                {{ post.body|readtime }}
+            {% else %}
+                A while
+            {% endif %}
+        </p>
+        <p class="mb-auto">{{ post.description }}</p>
+    </section>
 {% endblock card_body %}
 
 {% block card_footer %}

@@ -44,8 +44,8 @@
         {% endblock card_header %}
     </header>
 
-    <section class="card-body pb-0">
-        {% block card_body %}
+    {% block card_body %}
+        <section class="card-body pb-0">
             {% if series %}
                 <article class="card shadow">
                     <header class="card-header">
@@ -97,8 +97,8 @@
             {% if post.url_to_article %}
                 <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
             {% endif %}
-        {% endblock card_body %}
-    </section>
+        </section>
+    {% endblock card_body %}
 
     {% block card_footer %}
     {% endblock card_footer %}
