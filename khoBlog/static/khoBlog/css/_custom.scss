@@ -47,6 +47,10 @@ $font-family-monospace: $monospace;
             @include color("link");
             @include background-color("lightest-bg");
         }
+
+        &.disabled .page-link {
+            opacity: 0.5;
+        }
     }
 }
 

@@ -44,7 +44,12 @@ $select-color-dropdown-border: $select-color-border !default;
 $select-color-dropdown-border-top: #f0f0f0 !default;
 $select-color-dropdown-item-active: #f5fafd !default;
 $select-color-dropdown-item-active-text: #495c68 !default;
-$select-color-dropdown-item-create-text: rgba(red($select-color-text), green($select-color-text), blue($select-color-text), 0.5) !default;
+$select-color-dropdown-item-create-text: rgba(
+    red($select-color-text),
+    green($select-color-text),
+    blue($select-color-text),
+    0.5
+) !default;
 $select-color-dropdown-item-create-active-text: $select-color-dropdown-item-active-text !default;
 $select-color-optgroup: $select-color-dropdown !default;
 $select-color-optgroup-text: $select-color-text !default;
@@ -128,8 +133,13 @@ $select-spinner-border-color: $select-color-border;
 
     .#{$selectize}-control.multi &.has-items {
         $padding-x: $select-padding-x;
-        $padding-top: calc(#{$select-padding-y} - #{$select-padding-item-y} - #{$select-width-item-border});
-        $padding-bottom: calc(#{$select-padding-y} - #{$select-padding-item-y} - #{$select-margin-item-y} - #{$select-width-item-border});
+        $padding-top: calc(
+            #{$select-padding-y} - #{$select-padding-item-y} - #{$select-width-item-border}
+        );
+        $padding-bottom: calc(
+            #{$select-padding-y} - #{$select-padding-item-y} - #{$select-margin-item-y} -
+                #{$select-width-item-border}
+        );
         padding: $padding-top $padding-x $padding-bottom;
     }
 
@@ -166,7 +176,8 @@ $select-spinner-border-color: $select-color-border;
         &.active {
             background: $select-color-item-active;
             color: $select-color-item-active-text;
-            border: $select-width-item-border solid $select-color-item-active-border;
+            border: $select-width-item-border solid
+                $select-color-item-active-border;
             // @include border-color('border-color');
             // @include color('text');
             // @include background-color('darker-bg');
@@ -175,9 +186,19 @@ $select-spinner-border-color: $select-color-border;
     .#{$selectize}-control.multi &.disabled > div {
         &,
         &.active {
-            color: lighten(desaturate($select-color-item-text, 100%), $select-lighten-disabled-item-text);
-            background: lighten(desaturate($select-color-item, 100%), $select-lighten-disabled-item);
-            border: $select-width-item-border solid lighten(desaturate($select-color-item-border, 100%), $select-lighten-disabled-item-border);
+            color: lighten(
+                desaturate($select-color-item-text, 100%),
+                $select-lighten-disabled-item-text
+            );
+            background: lighten(
+                desaturate($select-color-item, 100%),
+                $select-lighten-disabled-item
+            );
+            border: $select-width-item-border solid
+                lighten(
+                    desaturate($select-color-item-border, 100%),
+                    $select-lighten-disabled-item-border
+                );
         }
     }
     > input {
@@ -307,7 +328,8 @@ $select-spinner-border-color: $select-color-border;
         height: $select-spinner-size * 0.8;
         margin: $select-spinner-size * 0.1;
         border: $select-spinner-border-size solid $select-spinner-border-color;
-        border-color: $select-spinner-border-color transparent $select-spinner-border-color transparent;
+        border-color: $select-spinner-border-color transparent
+            $select-spinner-border-color transparent;
         animation: lds-dual-ring 1.2s linear infinite;
     }
     @keyframes lds-dual-ring {

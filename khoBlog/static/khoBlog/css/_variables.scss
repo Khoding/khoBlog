@@ -12,7 +12,7 @@ $themes: (
         "menu-link": hsl(0, 0%, 64%),
         "border-color": hsl(180, 2%, 56%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "banana": (
         "text": hsl(0, 91%, 70%),
@@ -24,7 +24,7 @@ $themes: (
         "menu-link": hsl(208, 7%, 46%),
         "border-color": hsl(46, 59%, 44%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "uglybanana": (
         "text": hsl(0, 0%, 100%),
@@ -36,7 +36,7 @@ $themes: (
         "menu-link": hsl(208, 7%, 46%),
         "border-color": hsl(249, 65%, 76%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "cherry": (
         "text": hsl(0, 100%, 77%),
@@ -48,7 +48,7 @@ $themes: (
         "menu-link": hsl(342, 74%, 70%),
         "border-color": hsl(6, 78%, 55%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "sop": (
         "text": hsl(271, 100%, 69%),
@@ -60,7 +60,7 @@ $themes: (
         "menu-link": hsl(218, 15%, 71%),
         "border-color": hsl(249, 66%, 76%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "leaf": (
         "text": hsl(0, 0%, 100%),
@@ -72,7 +72,7 @@ $themes: (
         "menu-link": hsl(208, 7%, 46%),
         "border-color": hsl(249, 65%, 76%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
+        "active-color": white,
     ),
     "nightsky": (
         "text": hsl(0, 0%, 100%),
@@ -84,8 +84,8 @@ $themes: (
         "menu-link": hsl(208, 7%, 46%),
         "border-color": hsl(249, 65%, 76%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white
-    )
+        "active-color": white,
+    ),
 );
 
 // // $themes: (
@@ -225,7 +225,10 @@ $drac-default-bg: lighten($drac-bg, 5%);
         --md-default-bg-color: #{$drac-default-bg};
         --md-default-bg-color--light: #{transparentize($drac-default-bg, 0.3)};
         --md-default-bg-color--lighter: #{transparentize($drac-default-bg, 0.7)};
-        --md-default-bg-color--lightest: #{transparentize($drac-default-bg, 0.88)};
+        --md-default-bg-color--lightest: #{transparentize(
+                $drac-default-bg,
+                0.88
+            )};
 
         // Code colors
         --md-code-fg-color: #{$drac-fg};
@@ -292,20 +295,50 @@ $drac-default-bg: lighten($drac-bg, 5%);
         in (
             "red": $drac-red lighten($drac-red, 5%) darken($drac-red, 5%),
             "pink": $drac-pink lighten($drac-pink, 5%) darken($drac-pink, 5%),
-            "purple": $drac-purple lighten($drac-purple, 5%) darken($drac-purple, 5%),
-            "deep-purple": $drac-purple lighten($drac-purple, 5%) darken($drac-purple, 5%),
+            "purple":
+                $drac-purple
+                lighten($drac-purple, 5%)
+                darken($drac-purple, 5%),
+            "deep-purple":
+                $drac-purple
+                lighten($drac-purple, 5%)
+                darken($drac-purple, 5%),
             "blue": $drac-blue lighten($drac-blue, 5%) darken($drac-blue, 5%),
             "indigo": $drac-blue lighten($drac-blue, 5%) darken($drac-blue, 5%),
-            "light-blue": $drac-blue lighten($drac-blue, 5%) darken($drac-blue, 5%),
+            "light-blue":
+                $drac-blue
+                lighten($drac-blue, 5%)
+                darken($drac-blue, 5%),
             "cyan": $drac-cyan lighten($drac-cyan, 5%) darken($drac-cyan, 5%),
             "teal": $drac-cyan lighten($drac-cyan, 5%) darken($drac-cyan, 5%),
-            "green": $drac-green lighten($drac-green, 5%) darken($drac-green, 5%),
-            "light-green": $drac-green lighten($drac-green, 5%) darken($drac-green, 5%),
-            "lime": $drac-green lighten($drac-green, 5%) darken($drac-green, 5%),
-            "yellow": $drac-yellow lighten($drac-yellow, 5%) darken($drac-yellow, 5%),
-            "amber": $drac-yellow lighten($drac-yellow, 5%) darken($drac-yellow, 5%),
-            "orange": $drac-orange lighten($drac-orange, 5%) darken($drac-orange, 5%),
-            "deep-orange": $drac-orange lighten($drac-orange, 5%) darken($drac-orange, 5%)
+            "green":
+                $drac-green
+                lighten($drac-green, 5%)
+                darken($drac-green, 5%),
+            "light-green":
+                $drac-green
+                lighten($drac-green, 5%)
+                darken($drac-green, 5%),
+            "lime":
+                $drac-green
+                lighten($drac-green, 5%)
+                darken($drac-green, 5%),
+            "yellow":
+                $drac-yellow
+                lighten($drac-yellow, 5%)
+                darken($drac-yellow, 5%),
+            "amber":
+                $drac-yellow
+                lighten($drac-yellow, 5%)
+                darken($drac-yellow, 5%),
+            "orange":
+                $drac-orange
+                lighten($drac-orange, 5%)
+                darken($drac-orange, 5%),
+            "deep-orange":
+                $drac-orange
+                lighten($drac-orange, 5%)
+                darken($drac-orange, 5%)
         )
 {
     // Color palette
@@ -313,7 +346,10 @@ $drac-default-bg: lighten($drac-bg, 5%);
     :not([data-md-color-scheme])[data-md-color-primary="#{$name}"] {
         --md-primary-code-bg-color: #{mix($drac-bg, nth($colors, 1), 85%)};
         --md-primary-fg-color: hsla(#{hex2hsl(nth($colors, 1))}, 1);
-        --md-primary-fg-color--transparent: hsla(#{hex2hsl(nth($colors, 1))}, 0.1);
+        --md-primary-fg-color--transparent: hsla(
+            #{hex2hsl(nth($colors, 1))},
+            0.1
+        );
         --md-primary-fg-color--light: hsla(#{hex2hsl(nth($colors, 2))}, 1);
         --md-primary-fg-color--dark: hsla(#{hex2hsl(nth($colors, 3))}, 1);
         --md-primary-bg-color: var(--md-default-bg-color);
@@ -369,7 +405,7 @@ $old-admonitions: (
     danger error: $drac-red,
     bug: $drac-dark-pink,
     example: $drac-purple,
-    quote cite: $drac-grey
+    quote cite: $drac-grey,
 ) !default;
 
 :root > * {
@@ -393,37 +429,37 @@ $colors: (
     success: hsl(130, 89%, 52%),
     warning: hsl(10, 100%, 60%),
     info: hsl(250, 43%, 70%),
-    dark: hsl(0, 0%, 13%)
+    dark: hsl(0, 0%, 13%),
 );
 
 $variations: (
     "d2": (
         function: get-function(darken),
-        parameters: 15%
+        parameters: 15%,
     ),
     "d1": (
         function: get-function(darken),
-        parameters: 10%
+        parameters: 10%,
     ),
     "l1": (
         function: get-function(lighten),
-        parameters: 5%
+        parameters: 5%,
     ),
     "l2": (
         function: get-function(lighten),
-        parameters: 20%
+        parameters: 20%,
     ),
     "fade": (
         function: get-function(rgba),
-        parameters: 0.7
+        parameters: 0.7,
     ),
     "gray": (
-        function: get-function(grayscale)
+        function: get-function(grayscale),
     ),
     "shade": (
         function: get-function(mix),
-        parameters: hsl(0, 0%, 100%) 80%
-    )
+        parameters: hsl(0, 0%, 100%) 80%,
+    ),
 );
 
 @function color-variation($color, $variation: false) {
@@ -467,14 +503,16 @@ $black: hsl(0, 0%, 0%);
 
 $black-white: (
     "white": $white,
-    "black": $black
+    "black": $black,
 );
 
 $enable-grid-classes: true;
 $enable-cssgrid: false;
 
-$sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+$sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $headings: "Merriweather", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 $body: "Roboto", "Helvetica", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-$monospace: "Overpass Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$monospace: "Overpass Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !default;

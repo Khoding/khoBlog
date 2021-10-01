@@ -259,7 +259,8 @@ details {
         .#{$name} {
             border-left: 0.4rem solid !important;
             border-color: var(--md-admonition-icon-color--#{$name}) !important;
-            box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3), 0 0 0.05rem rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3),
+                0 0 0.05rem rgba(0, 0, 0, 0.2);
         }
 
         // Define synonyms for base class
@@ -443,7 +444,8 @@ details {
 
     & .highlighttable {
         display: block;
-        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+            0 4px 20px 0 rgba(0, 0, 0, 0.19);
         margin-bottom: 16px;
         padding: 0.01em 16px;
         overflow-x: auto !important;
@@ -730,7 +732,9 @@ details {
         border-radius: 0.25rem;
     }
 
-    .task-list-control input[type="checkbox"]:checked + .task-list-indicator::before {
+    .task-list-control
+        input[type="checkbox"]:checked
+        + .task-list-indicator::before {
         display: block;
         margin-top: -4px;
         margin-left: 2px;
