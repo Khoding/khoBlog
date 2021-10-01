@@ -108,12 +108,12 @@
         {% endif %}
       </section>
     </section>
-    <footer class="card-footer">
-      {% if post.url_to_article %}
+    {% if post.url_to_article %}
+      <footer class="card-footer">
         Direct link:
         <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
-      {% endif %}
-    </footer>
+      </footer>
+    {% endif %}
   {% endblock card_body %}
 
   {% block card_footer %}{% endblock card_footer %}
