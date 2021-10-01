@@ -22,7 +22,7 @@
 
                     {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
                         {% if page_obj.number == i %}
-                            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                            <li class="active page-item"><span class="page-link">{{ i }} <span class="visually-hidden">(current)</span></span>
                             </li>
                         {% else %}
                             {% if i == page_obj.paginator.ELLIPSIS %}

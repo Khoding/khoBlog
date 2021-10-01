@@ -44,12 +44,8 @@ $font-family-monospace: $monospace;
         }
 
         &.active .page-link {
-            background-color: white !important;
-
-            &:hover {
-                @include color("text");
-                @include background-color("bg");
-            }
+            @include color("link");
+            @include background-color("lightest-bg");
         }
     }
 }
