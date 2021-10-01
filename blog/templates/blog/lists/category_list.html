@@ -34,11 +34,14 @@
               <div class="mb-0">
                 Sub categories:
                 {% for child in cat.category_children.all %}
-                  <span>
-                    <a href="{{ child.get_absolute_url }}">{{ child }}</a>
-                    {% if not forloop.last %},
-                    {% endif %}
-                  </span>
+                  {% spaceless %}
+                    <span>
+                      <a href="{{ child.get_absolute_url }}">{{ child }}</a>
+                      {% if not forloop.last %}
+                        <span>,</span>
+                      {% endif %}
+                    </span>
+                  {% endspaceless %}
                 {% endfor %}
               </div>
             {% endif %}

@@ -37,7 +37,12 @@
       {% for tags in post.tags.all %}
         {% if not tags.withdrawn or user.is_superuser %}
           {% comment %} TODO: Make a list of the public tags, the withdrawn ones, and subtract to get the actual number for both users and supers {% endcomment %}
-          <a href="{% url 'blog:post_tagged_with' slug=tags.slug %}">{{ tags }}</a>{% if not forloop.last %}, {% endif %}
+          {% spaceless %}
+          <a href="{% url 'blog:post_tagged_with' slug=tags.slug %}">{{ tags }}</a>
+            {% if not forloop.last %}
+              <span>,</span>
+            {% endif %}
+          {% endspaceless %}
         {% endif %}
       {% endfor %}
     </p>
