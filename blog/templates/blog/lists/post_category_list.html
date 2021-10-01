@@ -1,9 +1,11 @@
 {% extends 'blog/lists/post_list.html' %}
 
 {% block page_top_title %}
-    {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
-        Posts in <b>{{ cats|capfirst }}</b> Category
-    {% else %}
-        This category is Withdrawn
-    {% endif %}
+  {% if not cats.withdrawn or cats.withdrawn and user.is_superuser %}
+    Posts in
+    <b>{{ cats|capfirst }}</b>
+    Category
+  {% else %}
+    This category is Withdrawn
+  {% endif %}
 {% endblock page_top_title %}

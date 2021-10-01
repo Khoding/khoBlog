@@ -2,37 +2,39 @@
 {% load static super_buttons %}
 
 {% block content_main %}
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for series in series_list %}
-            <div class="mb-2 pe-0">
-                <div id="series-{{ series.slug }}" class="card shadow h-100">
+  <div class="row row-cols-1 row-cols-lg-3 me-0">
+    {% for series in series_list %}
+      <div class="mb-2 pe-0">
+        <div id="series-{{ series.slug }}" class="card shadow h-100">
 
-                    <div class="card-header">
-                        <div class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted">Series #{{ series.id }}</strong>
-                            </span>
-                            {% if user.is_superuser %}
-                                <span class="col-auto">
-                                    {% sb series %}
-                                </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">{{ series.title }}</h3>
-                        <p class="mb-auto">{{ series.description }}</p>
-                        <p class="mb-auto">Series slug: {{ series.slug }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ series.get_absolute_url }}">All posts in {{ series.title }}</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
+          <div class="card-header">
+            <div class="d-flex">
+              <span class="col">
+                <strong class="text-muted">Series #{{ series.id }}</strong>
+              </span>
+              {% if user.is_superuser %}
+                <span class="col-auto">
+                  {% sb series %}
+                </span>
+              {% endif %}
             </div>
-        {% endfor %}
-    </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{ series.title }}</h3>
+            <p class="mb-auto">{{ series.description }}</p>
+            <p class="mb-auto">Series slug:
+              {{ series.slug }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="d-flex">
+              <span class="col">
+                <a class="card-link" href="{{ series.get_absolute_url }}">All posts in
+                  {{ series.title }}</a>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content_main %}

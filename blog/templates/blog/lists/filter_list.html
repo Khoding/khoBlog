@@ -2,16 +2,16 @@
 {% load static %}
 
 {% block content_main %}
-    <section class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for post in filter %}
-            <section class="mb-2 pe-0">
-                {% include 'blog/post_card_in_lists.html' %}
-            </section>
+  <section class="row row-cols-1 row-cols-lg-3 me-0">
+    {% for post in filter %}
+      <section class="mb-2 pe-0">
+        {% include 'blog/post_card_in_lists.html' %}
+      </section>
 
-        {% empty %}
-            <section class="w-100">
-                <p>No content here.</p>
-            </section>
-        {% endfor %}
-    </section>
+      {% empty %}
+      <section class="w-100">
+        <p>No content here.</p>
+      </section>
+    {% endfor %}
+  </section>
 {% endblock content_main %}

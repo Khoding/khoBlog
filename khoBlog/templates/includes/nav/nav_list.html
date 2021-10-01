@@ -1,56 +1,78 @@
 {% load instance %}
 
 <h4 class="fst-italic">
-    {% firstof context.side_title context.title %}
+  {% firstof context.side_title context.title %}
 </h4>
 <ol class="list-unstyled mb-0">
-    {% if context.posts %}
-        {% for post in context.posts %}
-            {% if forloop.counter <= 27 %}
-                <li>{{ post.id }} - <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+  {% if context.posts %}
+    {% for post in context.posts %}
+      {% if forloop.counter <= 27 %}
+        <li>{{ post.id }}
+          -
+          <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
-    {% if context.category_list %}
-        {% for cat in context.category_list %}
-            <li>{{ cat.id }} - <a href="{{ cat.get_absolute_url }}">{{ cat.title }}</a></li>
-        {% endfor %}
-    {% endif %}
+  {% if context.category_list %}
+    {% for cat in context.category_list %}
+      <li>{{ cat.id }}
+        -
+        <a href="{{ cat.get_absolute_url }}">{{ cat.title }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
 
-    {% if context.series_list %}
-        {% for series in context.series_list %}
-            <li>{{ series.id }} - <a href="{{ series.get_absolute_url }}">{{ series.title }}</a></li>
-        {% endfor %}
-    {% endif %}
+  {% if context.series_list %}
+    {% for series in context.series_list %}
+      <li>{{ series.id }}
+        -
+        <a href="{{ series.get_absolute_url }}">{{ series.title }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
 
-    {% if context.query %}
-        {% for element in context.query %}
-            {% if context.query|isinstance:'list' %}
-                {% for e in element %}
-                    <li>{{ e.id }} - <a href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}">{% firstof e.title e %}</a></li>
-                {% endfor %}
-            {% else %}
-                <li>{{ element.id }} - <a href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}">{% firstof element.title element %}</a></li>
-            {% endif %}
+  {% if context.query %}
+    {% for element in context.query %}
+      {% comment %} {% endcomment %}
+      {% if context.query|isinstance:'list' %}
+        {% for e in element %}
+          <li>{{ e.id }}
+            -
+            <a href="{% if e.get_absolute_url %}{{ e.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=e.slug %}{% endif %}">{% firstof e.title e %}</a>
+          </li>
         {% endfor %}
-    {% endif %}
+      {% else %}
+        <li>{{ element.id }}
+          -
+          <a href="{% if element.get_absolute_url %}{{ element.get_absolute_url }}{% else %}{% url 'blog:post_tagged_with' slug=element.slug %}{% endif %}">{% firstof element.title element %}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
-    {% if context.pages %}
-        {% for page in context.pages %}
-            <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
-        {% endfor %}
-    {% endif %}
+  {% if context.pages %}
+    {% for page in context.pages %}
+      <li>
+        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
 
-    {% if context.projects %}
-        {% for project in context.projects %}
-            <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
-        {% endfor %}
-    {% endif %}
+  {% if context.projects %}
+    {% for project in context.projects %}
+      <li>
+        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
 
-    {% if context.tags %}
-        {% for tag in context.tags.all %}
-            <li><a href="{% url 'blog:post_tagged_with' slug=tag.slug %}">{{ tag.name }}</a></li>
-        {% endfor %}
-    {% endif %}
+  {% if context.tags %}
+    {% for tag in context.tags.all %}
+      <li>
+        <a href="{% url 'blog:post_tagged_with' slug=tag.slug %}">{{ tag.name }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
 </ol>

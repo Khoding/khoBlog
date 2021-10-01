@@ -2,24 +2,23 @@
 {% load static %}
 
 {% block title %}
-    Error 403 Permission Denied
+  Error 403 Permission Denied
 {% endblock title %}
 
 {% block page_top_title %}
-    Error 403 Permission Denied
+  Error 403 Permission Denied
 {% endblock page_top_title %}
 
 {% block page_top_end %}
-    <a class="btn btn-primary float-end" href="{% url 'blog:latest' %}">
-        Latest Post
-    </a>
+  <a class="btn btn-primary float-end" href="{% url 'blog:latest' %}">
+    Latest Post
+  </a>
 {% endblock page_top_end %}
 
 {% block content_main %}
-    <br />
+  <br/>
 
-    <a class="btn btn-danger" href="{% url 'pages:kheee' %}">Error 403 Permission Denied</a>
+  <a class="btn btn-danger" href="{% url 'pages:kheee' %}">Error 403 Permission Denied</a>
 {% endblock content_main %}
 
-{% block pagination %}
-{% endblock pagination %}
+{% block pagination %}{% endblock pagination %}

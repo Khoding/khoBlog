@@ -2,19 +2,19 @@
 {% load widget_tweaks project_tags %}
 
 {% block title %}
-    Log out
+  Log out
 {% endblock title %}
 
 {% block page_top_title %}
-    Log out
+  Log out
 {% endblock page_top_title %}
 
 {% block content %}
-    <form method="POST" class="form">
-        {% csrf_token %}
-        <h3>You're About to Log out</h3>
-        {{ form.as_p }}
+  <form method="POST" class="form">
+    {% csrf_token %}
+    <h3>You're About to Log out</h3>
+    {{ form.as_p }}
 
-        <button type="submit" class="btn btn-primary mt-2">Log out</button>
-    </form>
+    <button type="submit" class="btn btn-primary mt-2">Log out</button>
+  </form>
 {% endblock content %}

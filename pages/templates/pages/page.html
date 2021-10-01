@@ -1,17 +1,17 @@
 {% extends 'pages/base_page.html' %}
 
 {% block page_head %}
-    {% if flatpage.page_head %}
-        {% autoescape off %}
-            {{ flatpage.page_head }}
-        {% endautoescape %}
-    {% else %}
-        {{ block.super }}
-    {% endif %}
+  {% if flatpage.page_head %}
+    {% autoescape off %}
+      {{ flatpage.page_head }}
+    {% endautoescape %}
+  {% else %}
+    {{ block.super }}
+  {% endif %}
 {% endblock page_head %}
 
 {% block main %}
-    {% autoescape off %}
-        {{ flatpage.content }}
-    {% endautoescape %}
+  {% autoescape off %}
+    {{ flatpage.content }}
+  {% endautoescape %}
 {% endblock main %}

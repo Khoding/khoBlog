@@ -1,19 +1,23 @@
 {% load static project_tags %}
 
 <div class="card formcard auth-card">
-    <div class="card-body">
-        <form action="{{ form_action }}" method="post" novalidate>
-            <div class="text-danger">
-                {{ form.non_field_errors }}
-            </div>
+  <div class="card-body">
+    <form action="{{ form_action }}" method="post" novalidate="novalidate">
+      <div class="text-danger">
+        {{ form.non_field_errors }}
+      </div>
 
-            {% form form %}
+      {% form form %}
 
-            <button type="submit" class="btn btn-primary">Log in</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
     </div>
     <div class="card-footer">
-        <p class="mb-0">Don't have an account ? <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Sign up</a></p>
-        <p class="mb-0">Forgot your password ? <a href="{% url 'accounts:reset_password' %}">Request a new one</a></p>
+      <p class="mb-0">Don't have an account ?
+        <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Sign up</a>
+      </p>
+      <p class="mb-0">Forgot your password ?
+        <a href="{% url 'accounts:reset_password' %}">Request a new one</a>
+      </p>
     </div>
-</div>
+  </div>

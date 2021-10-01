@@ -2,18 +2,18 @@
 {% load project_tags %}
 
 {% block main %}
-    <div class="card formcard">
-        <div class="card-body">
-            <form method="post" novalidate>
-                <div class="text-danger">
-                    {{ form.non_field_errors }}
-                </div>
-
-                {% form form %}
-
-                <button type="submit" class="btn btn-primary">{{ title }}</button>
-            </form>
+  <div class="card formcard">
+    <div class="card-body">
+      <form method="post" novalidate="novalidate">
+        <div class="text-danger">
+          {{ form.non_field_errors }}
         </div>
+
+        {% form form %}
+
+          <button type="submit" class="btn btn-primary">{{ title }}</button>
+        </form>
+      </div>
     </div>
 
-{% endblock main %}
+  {% endblock main %}

@@ -2,25 +2,25 @@
 {% load static project_tags compress %}
 
 {% block additional_css %}
-    {% compress css %}
-        <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}" />
-    {% endcompress css %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}"/>
+  {% endcompress css %}
 {% endblock additional_css %}
 
 {% block main %}
-    <div class="card formcard">
-        <div class="card-body">
-            <form enctype="multipart/form-data" method="post" novalidate>
-                <div class="text-danger">
-                    {{ form.non_field_errors }}
-                </div>
-
-                {% form form %}
-
-                <button type="submit" class="btn btn-primary">{{ title }}</button>
-            </form>
+  <div class="card formcard">
+    <div class="card-body">
+      <form enctype="multipart/form-data" method="post" novalidate="novalidate">
+        <div class="text-danger">
+          {{ form.non_field_errors }}
         </div>
+
+        {% form form %}
+
+          <button type="submit" class="btn btn-primary">{{ title }}</button>
+        </form>
+      </div>
     </div>
     {{ form.media }}
 
-{% endblock main %}
+  {% endblock main %}

@@ -1,17 +1,21 @@
 {% extends 'polls/base_polls.html' %}
 
 {% block main %}
-    <h4>{{ question.title }}</h4>
-    <a href="{% url 'polls:results' question.id %}">See the results without voting</a>
+  <h4>{{ question.title }}</h4>
+  <a href="{% url 'polls:results' question.id %}">See the results without voting</a>
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}
+    <p>
+      <strong>{{ error_message }}</strong>
+    </p>
+  {% endif %}
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
-        {% csrf_token %}
-        {% for choice in question.related_question.all %}
-            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.title }}</label><br>
-        {% endfor %}
-        <input class="btn btn-primary mt-2" type="submit" value="Vote">
-    </form>
+  <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.related_question.all %}
+      <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+      <label for="choice{{ forloop.counter }}">{{ choice.title }}</label><br>
+    {% endfor %}
+    <input class="btn btn-primary mt-2" type="submit" value="Vote">
+  </form>
 {% endblock main %}

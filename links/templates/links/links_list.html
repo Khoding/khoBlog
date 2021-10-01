@@ -1,5 +1,5 @@
 {% for url in urls %}
-    <li>
-        <a class="nav-link" href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}">{{ url.title }}</a>
-    </li>
+  <li>
+    <a class="nav-link" href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}">{{ url.title }}</a>
+  </li>
 {% endfor %}

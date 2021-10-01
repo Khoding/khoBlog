@@ -6,13 +6,9 @@
     ],
     "settings": {
         "editor.autoIndent": "full",
-        "editor.codeActionsOnSave": {"source.fixAll": false},
-        "[django-html]": {
-            "editor.defaultFormatter": "batisteo.vscode-django"
-        },
+        "editor.codeActionsOnSave": { "source.fixAll": false },
         "python.pythonPath": "venv\\Scripts\\python.exe",
         "git.ignoreLimitWarning": true,
-        "python.formatting.provider": "black",
-        "prettier.tabWidth": 4
+        "python.formatting.provider": "black"
     }
 }

@@ -1,46 +1,52 @@
 <div class="btn-group float-end">
-    <a class="btn btn-secondary" href="{{ object.get_absolute_update_url }}">
-        <i class="bi bi-pencil-square"></i> Edit
+  <a class="btn btn-secondary" href="{{ object.get_absolute_update_url }}">
+    <i class="bi bi-pencil-square"></i>
+    Edit
+  </a>
+
+  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="objectAdminDropdown-{{ object.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="objectAdminDropdown-{{ object.id }}">
+    {% if object.get_absolute_publish_url or object.get_absolute_publish_withdrawn_url %}
+      {% if not object.pub_date %}
+        {% if object.get_absolute_publish_url %}
+          <a class="dropdown-item" href="{{ object.get_absolute_publish_url }}">
+            <i class="bi bi-file-earmark-arrow-up"></i>
+            Publish
+          </a>
+        {% endif %}
+
+        {% if object.get_absolute_publish_withdrawn_url %}
+          <a class="dropdown-item" href="{{ object.get_absolute_publish_withdrawn_url }}">
+            <i class="bi bi-file-earmark-lock"></i>
+            Publish Withdrawn
+          </a>
+        {% endif %}
+
+        <div class="dropdown-divider"></div>
+      {% endif %}
+    {% endif %}
+
+    {% if object.get_absolute_clone_url %}
+      <a class="dropdown-item" href="{{ object.get_absolute_clone_url }}">
+        <i class="bi bi-stickies"></i>
+        Clone
+      </a>
+    {% endif %}
+
+    <a class="dropdown-item" href="{{ object.get_absolute_admin_update_url }}">
+      <i class="bi bi-pencil-square"></i>
+      Edit in Admin
     </a>
 
-    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="objectAdminDropdown-{{ object.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="visually-hidden">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="objectAdminDropdown-{{ object.id }}">
-        {% if object.get_absolute_publish_url or object.get_absolute_publish_withdrawn_url %}
-            {% if not object.pub_date %}
-                {% if object.get_absolute_publish_url %}
-                    <a class="dropdown-item" href="{{ object.get_absolute_publish_url }}">
-                        <i class="bi bi-file-earmark-arrow-up"></i> Publish
-                    </a>
-                {% endif %}
+    {% if object.get_absolute_delete_url %}
+      <div class="dropdown-divider"></div>
 
-                {% if object.get_absolute_publish_withdrawn_url %}
-                    <a class="dropdown-item" href="{{ object.get_absolute_publish_withdrawn_url }}">
-                        <i class="bi bi-file-earmark-lock"></i> Publish Withdrawn
-                    </a>
-                {% endif %}
-
-                <div class="dropdown-divider"></div>
-            {% endif %}
-        {% endif %}
-
-        {% if object.get_absolute_clone_url %}
-            <a class="dropdown-item" href="{{ object.get_absolute_clone_url }}">
-                <i class="bi bi-stickies"></i> Clone
-            </a>
-        {% endif %}
-
-        <a class="dropdown-item" href="{{ object.get_absolute_admin_update_url }}">
-            <i class="bi bi-pencil-square"></i> Edit in Admin
-        </a>
-
-        {% if object.get_absolute_delete_url %}
-            <div class="dropdown-divider"></div>
-
-            <a class="dropdown-item" href="{{ object.get_absolute_delete_url }}">
-                <i class="bi bi-trash"></i> Delete
-            </a>
-        {% endif %}
-    </ul>
+      <a class="dropdown-item" href="{{ object.get_absolute_delete_url }}">
+        <i class="bi bi-trash"></i>
+        Delete
+      </a>
+    {% endif %}
+  </ul>
 </div>

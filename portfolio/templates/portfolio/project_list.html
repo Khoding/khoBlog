@@ -2,56 +2,58 @@
 {% load super_buttons %}
 
 {% block main %}
-    {% for project in projects %}
-        {% if project.featured %}
-            <div class="card p-4 rounded mb-2 shadow">
-                <div class="container">
-                    <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Project</strong>
-                    <h1 class="display-4">{{ project.title }}</h1>
-                    <p class="lead">{{ project.snippet }}</p>
-                    <a class="btn btn-primary" href="{{ project.get_absolute_url }}">Continue reading</a>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-
-    {% block page_top_hr %}
-        <div class='text-then-hr text-small text-muted'>
-            <span class='hr-title'><span class="me-2">{{ projects.count }} Project{{ projects.count|pluralize:'s' }}</span></span>
+  {% for project in projects %}
+    {% if project.featured %}
+      <div class="card p-4 rounded mb-2 shadow">
+        <div class="container">
+          <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Project</strong>
+          <h1 class="display-4">{{ project.title }}</h1>
+          <p class="lead">{{ project.snippet }}</p>
+          <a class="btn btn-primary" href="{{ project.get_absolute_url }}">Continue reading</a>
         </div>
-    {% endblock page_top_hr %}
+      </div>
+    {% endif %}
+  {% endfor %}
 
-    <div class="row row-cols-1 row-cols-lg-3 me-0">
-        {% for project in projects %}
-            <div class="mb-2 pe-0">
-                <div id="project-{{ project.slug }}" class="card shadow h-100">
-
-                    <div class="card-header">
-                        <span class="d-flex">
-                            <span class="col">
-                                <strong class="text-muted">Project #{{ project.id }}</strong>
-                                <p class="mb-0 text-small text-muted">Project slug: {{ project.slug }}</p>
-                            </span>
-                            <span class="col-auto">
-                                {% if user.is_superuser %}
-                                    {% sb project %}
-                                {% endif %}
-                            </span>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title mb-0">{{ project.title }}</h3>
-                        <p class="mb-auto">{{ project.snippet }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="d-flex">
-                            <span class="col">
-                                <a class="card-link" href="{{ project.get_absolute_url }}">See details</a>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+  {% block page_top_hr %}
+    <div class='text-then-hr text-small text-muted'>
+      <span class='hr-title'><span class="me-2">{{ projects.count }}
+          Project{{ projects.count|pluralize:'s' }}</span></span>
     </div>
+  {% endblock page_top_hr %}
+
+  <div class="row row-cols-1 row-cols-lg-3 me-0">
+    {% for project in projects %}
+      <div class="mb-2 pe-0">
+        <div id="project-{{ project.slug }}" class="card shadow h-100">
+
+          <div class="card-header">
+            <span class="d-flex">
+              <span class="col">
+                <strong class="text-muted">Project #{{ project.id }}</strong>
+                <p class="mb-0 text-small text-muted">Project slug:
+                  {{ project.slug }}</p>
+              </span>
+              <span class="col-auto">
+                {% if user.is_superuser %}
+                  {% sb project %}
+                {% endif %}
+              </span>
+            </span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title mb-0">{{ project.title }}</h3>
+            <p class="mb-auto">{{ project.snippet }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="d-flex">
+              <span class="col">
+                <a class="card-link" href="{{ project.get_absolute_url }}">See details</a>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock main %}

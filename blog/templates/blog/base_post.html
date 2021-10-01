@@ -1,13 +1,19 @@
 {% extends 'sub_base_main_block.html' %}
 
 {% block page_top_archives %}
-    <div class="text-small text-muted col">
-        <span>
-            <a href="{% url 'blog:post_archive' %}">Archives</a> by <a href="{% url 'blog:archive_year' year=now|date:'Y' %}">Year</a> -
-            <a href="{% url 'blog:archive_month' year=now|date:'Y' month=now|date:'M' %}">Month</a> -
-            <a href="{% url 'blog:archive_week' year=now|date:'Y' week=now|date:'W' %}">Week</a> -
-            <a href="{% url 'blog:archive_day' year=now|date:'Y' month=now|date:'M' day=now|date:'d' %}">Day</a> -
-            <a href="{% url 'blog:archive_today' %}">Today</a>
-        </span>
-    </div>
+  <div class="text-small text-muted col">
+    <span>
+      <a href="{% url 'blog:post_archive' %}">Archives</a>
+      by
+      <a href="{% url 'blog:archive_year' year=now|date:'Y' %}">Year</a>
+      -
+      <a href="{% url 'blog:archive_month' year=now|date:'Y' month=now|date:'M' %}">Month</a>
+      -
+      <a href="{% url 'blog:archive_week' year=now|date:'Y' week=now|date:'W' %}">Week</a>
+      -
+      <a href="{% url 'blog:archive_day' year=now|date:'Y' month=now|date:'M' day=now|date:'d' %}">Day</a>
+      -
+      <a href="{% url 'blog:archive_today' %}">Today</a>
+    </span>
+  </div>
 {% endblock page_top_archives %}

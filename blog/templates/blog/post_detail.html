@@ -2,53 +2,53 @@
 {% load static comments comments_xtd %}
 
 {% block page_top_end %}
-    <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
-        <a class="btn btn-primary btn-sm" href="{{ prev_post.get_absolute_url }}">
-            <i class="bi bi-chevron-left"></i>
-        </a>
+  <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
+    <a class="btn btn-primary btn-sm" href="{{ prev_post.get_absolute_url }}">
+      <i class="bi bi-chevron-left"></i>
+    </a>
 
-        <a class="btn btn-primary btn-sm" href="{{ next_post.get_absolute_url }}">
-            <i class="bi bi-chevron-right"></i>
-        </a>
-    </nav>
+    <a class="btn btn-primary btn-sm" href="{{ next_post.get_absolute_url }}">
+      <i class="bi bi-chevron-right"></i>
+    </a>
+  </nav>
 {% endblock page_top_end %}
 
 {% block page_top %}
-    {{ block.super }}
+  {{ block.super }}
 
-    {% block page_top_hr %}
-    {% endblock page_top_hr %}
+  {% block page_top_hr %}{% endblock page_top_hr %}
 {% endblock page_top %}
 
 {% block content_main %}
-    {% include 'blog/base_post_card.html' %}
+  {% include 'blog/base_post_card.html' %}
 
-    <article class="card p-2 comments shadow mt-2">
-        <h5 class="text-muted">Comments</h5>
-        {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-            {% get_comment_count for post as comment_count %}
+  <article class="card p-2 comments shadow mt-2">
+    <h5 class="text-muted">Comments</h5>
+    {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+      {% get_comment_count for post as comment_count %}
 
-            {% render_comment_form for post %}
-            <hr />
+      {% render_comment_form for post %}
+      <hr/>
 
-            <p class="text-muted text-small">This post has {{ comment_count }} comment{{ comment_count|pluralize:'s' }}.</p>
+      <p class="text-muted text-small">This post has
+        {{ comment_count }}
+        comment{{ comment_count|pluralize:'s' }}.</p>
 
-            {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
-        {% elif post.enable_comments and comments_disabled_globally_flag %}
-            <p class="text-muted text-small">Comments were disabled globally.</p>
-        {% else %}
-            <p class="text-muted text-small">This post has comments disabled.</p>
-        {% endif %}
-    </article>
+      {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+    {% elif post.enable_comments and comments_disabled_globally_flag %}
+      <p class="text-muted text-small">Comments were disabled globally.</p>
+    {% else %}
+      <p class="text-muted text-small">This post has comments disabled.</p>
+    {% endif %}
+  </article>
 {% endblock content_main %}
 
 {% block inside_aside %}
-    {% include 'blog/includes/aside_nav_post_info.html' %}
+  {% include 'blog/includes/aside_nav_post_info.html' %}
 {% endblock inside_aside %}
 
 {% block inside_nav %}
-    {% include 'blog/includes/aside_nav_post_info.html' %}
+  {% include 'blog/includes/aside_nav_post_info.html' %}
 {% endblock inside_nav %}
 
-{% block pagination %}
-{% endblock pagination %}
+{% block pagination %}{% endblock pagination %}

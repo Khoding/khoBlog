@@ -2,12 +2,15 @@
 {% load widget_tweaks project_tags %}
 
 {% block main %}
-    <h3>Delete: {{ category.id }} - {{ category.title }}</h3>
-    <form method="POST" enctype="multipart/form-data" class="form">
-        {% csrf_token %}
-        {% form form %}
+  <h3>Delete:
+    {{ category.id }}
+    -
+    {{ category.title }}</h3>
+  <form method="POST" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {% form form %}
 
-        <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
+      <button type="submit" class="btn btn-primary mt-2">{{ title }}</button>
     </form>
     {{ form.media }}
-{% endblock main %}
+  {% endblock main %}
