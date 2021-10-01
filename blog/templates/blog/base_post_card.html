@@ -107,10 +107,13 @@
           {{ post.body_custom|editorjs }}
         {% endif %}
       </section>
+    </section>
+    <footer class="card-footer">
       {% if post.url_to_article %}
+        Direct link:
         <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
       {% endif %}
-    </section>
+    </footer>
   {% endblock card_body %}
 
   {% block card_footer %}{% endblock card_footer %}
