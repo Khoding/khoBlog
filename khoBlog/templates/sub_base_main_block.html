@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load static %}
+{% load static paginator_tags %}
 
 {% block main %}
 
@@ -20,6 +20,7 @@
                         <li class="page-item disabled"><a class="page-link">Previous</a></li>
                     {% endif %}
 
+                    {% get_proper_elided_page_range paginator page_obj.number as page_range %}
                     {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
                         {% if page_obj.number == i %}
                             <li class="active page-item"><span class="page-link">{{ i }} <span class="visually-hidden">(current)</span></span>
