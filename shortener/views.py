@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from graphene_django.views import GraphQLView
-from khoBlog.utils import superuser_required
+from khoBlog.utils.superuser_required import superuser_required
 
 from .models import URL
 

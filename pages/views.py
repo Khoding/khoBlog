@@ -2,7 +2,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from khoBlog.utils import superuser_required
+from khoBlog.utils.superuser_required import superuser_required
 
 from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
 
@@ -39,15 +39,11 @@ class PageDetailView(DetailView):
             if self.page.withdrawn:
                 self.title = "Withdrawn"
                 self.description = "This page is Withdrawn"
-                self.pages = self.model.objects.filter(
-                    withdrawn=False, is_removed=False
-                ).order_by("-pk")
+                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
             else:
                 self.title = self.page.title
                 self.description = self.page.description
-                self.pages = self.model.objects.filter(
-                    withdrawn=False, is_removed=False
-                ).order_by("-pk")
+                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):

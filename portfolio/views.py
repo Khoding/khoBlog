@@ -6,7 +6,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from khoBlog.utils import superuser_required
+from khoBlog.utils.superuser_required import superuser_required
 
 from portfolio.forms import ProjectAddForm, ProjectUpdateForm
 

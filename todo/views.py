@@ -1,7 +1,7 @@
 from django.urls.base import reverse_lazy
 from django.views.generic import DeleteView, ListView, UpdateView
 from django.views.generic.edit import CreateView
-from khoBlog.utils import superuser_required
+from khoBlog.utils.superuser_required import superuser_required
 
 from .forms import TaskForm
 from .models import Task

@@ -7,13 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView,
-    TemplateView,
-    UpdateView,
-)
+from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
 from django.views.generic.dates import (
     ArchiveIndexView,
     DateDetailView,
@@ -23,7 +17,7 @@ from django.views.generic.dates import (
     WeekArchiveView,
     YearArchiveView,
 )
-from khoBlog.utils import superuser_required
+from khoBlog.utils.superuser_required import superuser_required
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
