@@ -38,6 +38,10 @@
         </span>
         <span class="col-auto mx-2">
           <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
+
+          {% if post.is_outdated %}
+            <span class="badge bg-warning d-flex float-end">Outdated</span>
+          {% endif %}
         </span>
         <span class="col">
           {% if user.is_superuser %}
