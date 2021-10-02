@@ -24,6 +24,10 @@
         </span>
         {% if user.is_superuser %}
           <span class="float-end">
+            {% if not task.complete %}
+              <a class="text-info" href="{% url 'todo:complete_task' task.id %}">Complete</a>
+              -
+            {% endif %}
             <a class="text-info" href="{% url 'todo:edit_task' task.id %}">Update</a>
             -
             <a class="text-danger" href="{% url 'todo:delete' task.id %}">Delete</a>

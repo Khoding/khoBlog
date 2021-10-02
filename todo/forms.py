@@ -4,13 +4,17 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
-    title = forms.CharField(
-        widget=forms.TextInput(
-            attrs={"placeholder": "Add new task...", "class": "mb-2"}
-        )
-    )
+    title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Add new task...", "class": "mb-2"}))
     description = forms.TextInput(attrs={"class": "mb-2"})
 
     class Meta:
         model = Task
-        fields = ("title", "description", "withdrawn", "complete")
+        fields = ("title", "description", "withdrawn", "complete", "completed_date")
+
+
+class TaskCompleteForm(forms.ModelForm):
+    """TaskCompleteForm"""
+
+    class Meta:
+        model = Task
+        fields = ()
