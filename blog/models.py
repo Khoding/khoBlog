@@ -390,6 +390,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def is_scheduled(self) -> bool:
         now = timezone.now()
+        if not self.pub_date:
+            return False
 
         return self.pub_date >= now
 

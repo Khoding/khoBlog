@@ -165,7 +165,7 @@
             {% if not context.archive %}
               <a class="card-link" href="{{ object.get_absolute_url }}">Continue reading</a>
             {% else %}
-              <a class="card-link" href="{% url 'blog:archive_date_detail' year=g_year month=g_month day=g_day slug=object.slug %}">Continue reading</a>
+              <a class="card-link" href="{% url 'blog:archive_date_detail' year=context.g_year month=context.g_month day=context.g_day slug=object.slug %}">Continue reading</a>
             {% endif %}
           </span>
           {% if object.url_to_article %}
