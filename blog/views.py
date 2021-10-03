@@ -265,7 +265,7 @@ class PostDetailView(DetailView):
             raise PermissionDenied
         if self.request.user.is_superuser:
             self.series = (
-                self.model.objects.get_common_queryset(self.request.user)
+                self.model.objects.get_queryset()
                 .filter(series__isnull=False, series=self.post.series)
                 .order_by("order_in_series")
             )
@@ -298,7 +298,7 @@ class PostDetailView(DetailView):
                 )
         else:
             self.series = (
-                self.model.objects.get_common_queryset(self.request.user)
+                self.model.objects.get_queryset()
                 .filter(series__isnull=False, series=self.post.series)
                 .order_by("order_in_series")
             )

@@ -46,7 +46,7 @@
         {% endif %}
       {% endfor %}
     </p>
-    <p>Similar Posts: {% for e in similar_posts %}{% if not e.withdrawn and e.pub_date <= now or user.is_superuser %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</p>
+    <p>Similar Posts: {% for e in similar_posts %}{% if not e.withdrawn and not e.is_scheduled or user.is_superuser %}<a href="{{ e.get_absolute_url }}">{{ e }}</a>{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}</p>
   {% endif %}
 
   <p>Clicks: {{ post.clicks }}</p>
@@ -56,6 +56,6 @@
   {% if user.is_superuser %}
     <h6>Admin Information</h6>
     <p class="mb-0">Withdrawn: {{ post.withdrawn }}</p>
-    <p>Scheduled: {% if post.pub_date > now %}True{% else %}False{% endif %}</p>
+    <p>Scheduled: {{ post.is_scheduled }}</p>
   {% endif %}
 </div>

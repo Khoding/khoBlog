@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static featured_post offcanvas %}
+{% load static featured_post offcanvas post_cards %}
 
 {% block page_top %}
 
@@ -88,7 +88,8 @@
   <section class="row row-cols-1 row-cols-lg-3 me-0">
     {% for post in posts %}
       <section class="mb-2 pe-0">
-        {% include 'blog/post_card_in_lists.html' %}
+        {% comment %} {% endcomment %}
+        {% render_cards post in_list=True %}
 
         {% offcanvas post %}
       </section>

@@ -1,21 +1,22 @@
 {% load static markdown_extra read_time super_buttons %}
 
 {% block card_div %}
-  <article id="post-{{ post.slug }}" class="card shadow">
+  <article id="object-{{ object.slug }}" class="card shadow{% if in_list %} h-100{% endif %}">
   {% endblock card_div %}
-  {% if post.pub_date %}
-    {% if post.was_published_recently %}
+
+  {% if object.pub_date %}
+    {% if object.was_published_recently %}
       <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="New Post"><span class="visually-hidden">New Post</span></span>
     {% endif %}
 
-    {% if post.pub_date > now %}
+    {% if object.is_scheduled %}
       <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-warning p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Scheduled"><span class="visually-hidden">Scheduled</span></span>
     {% endif %}
   {% else %}
     <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-info p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Draft"><span class="visually-hidden">Draft</span></span>
   {% endif %}
 
-  {% if post.withdrawn %}
+  {% if object.withdrawn %}
     <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
   {% endif %}
 
@@ -23,29 +24,29 @@
     {% block card_header %}
       <section class="d-flex">
         <span class="col">
-          {% if post.get_featured_cat %}
+          {% if object.get_featured_cat %}
             <strong>
-              <a class="cat-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a>
+              <a class="cat-link" href="{{ object.get_featured_cat.category.get_absolute_url }}">{{ object.featured_cat_title|capfirst }}</a>
             </strong>
           {% else %}
             <strong>
-              <a class="cat-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
+              <a class="cat-link" href="{{ object.categories.first.get_absolute_url }}">{{ object.categories.first|capfirst }}</a>
             </strong>
           {% endif %}
           <p class="mb-0 text-small text-muted">
-            Post #{{ post.id }}
+            Post #{{ object.id }}
           </p>
         </span>
         <span class="col-auto mx-2">
-          <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ post.get_language_display }}">{{ post.language }}</span>
+          <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ object.get_language_display }}">{{ object.language }}</span>
 
-          {% if post.is_outdated %}
+          {% if object.is_outdated %}
             <span class="badge bg-warning d-flex float-end">Outdated</span>
           {% endif %}
         </span>
         <span class="col">
-          {% if user.is_superuser %}
-            {% sb post %}
+          {% if context.user.is_superuser %}
+            {% sb object %}
           {% endif %}
         </span>
       </section>
@@ -53,72 +54,134 @@
   </header>
 
   {% block card_body %}
-    <section class="card-body pb-0">
-      {% if series %}
-        <article class="card shadow">
-          <header class="card-header">
-            <strong>Series:
-              <a href="{% url 'blog:post_series_list' slug=post.series.slug %}">{{ post.series }}</a>
-            </strong>
-            {% if post.series.description %}
-              -
-              {{ post.series.description }}
-            {% endif %}
-          </header>
-          <ul class="list-group list-group-flush">
-            {% for e in series %}
-              <li class="list-group-item">
-                <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
-                  {{ e }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </article>
+    <section class="card-body{% if not in_list %} pb-0{% endif %}">
+      {% if not in_list %}
+        {% if object.series %}
+          <article class="card shadow">
+            <header class="card-header">
+              <strong>Series:
+                <a href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series }}</a>
+              </strong>
+              {% if object.series.description %}
+                -
+                {{ object.series.description }}
+              {% endif %}
+            </header>
+            <ul class="list-group list-group-flush">
+              {% for e in context.series %}
+                <li class="list-group-item">
+                  {% if not e.is_scheduled or context.user.is_superuser %}
+                    <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
+                      {{ e }}
+                      {% if e.is_scheduled %}
+                        <span class="text-muted text-small">
+                          Coming:
+                          {{ e.pub_date|date:'l, d F Y H:i:s' }}
+                        </span>
+                      {% endif %}
+                    </a>
+                  {% else %}
+                    <span>Part #{{ forloop.counter }}:
+                      {{ e }}
+                      {% if e.is_scheduled %}
+                        <span class="text-muted text-small">
+                          Coming:
+                          {{ e.pub_date|date:'l, d F Y H:i:s' }}
+                        </span>
+                      {% endif %}
+                    </span>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
 
-        <hr/>
+          <hr/>
+        {% endif %}
+
+        <h2 class="card-title">{{ object.title }}</h2>
+      {% else %}
+        <h3 class="card-title text-word-wrap mb-0">{{ object.title|truncatewords_html:7 }}</h3>
       {% endif %}
 
-      <h2 class="card-title">{{ title }}</h2>
       <section>
-        {% include 'blog/includes/post_dates.html' %}
+        <p class="mb-auto text-small text-muted">
+          {% if not object.pub_date %}
+            {{ object.created_date|date:'l, d F Y H:i:s' }}
+          {% else %}
+            {{ object.pub_date|date:'l, d F Y H:i:s' }}
+          {% endif %}
+          by
+          {{ object.author }}
+        </p>
+
         <p class="mb-0 text-small text-muted">
-          {% if post.body %}
-            {{ post.body|readtime }}
+          {% if object.body %}
+            {{ object.body|readtime }}
           {% else %}
             A while
           {% endif %}
         </p>
       </section>
 
-      {% if post.image %}
-        <img src="{{ post.image.url }}" class="post-image" alt="Post image" loading="lazy"/>
+      {% if not in_list and object.image %}
+        <img src="{{ object.image.url }}" class="post-image" alt="Post image" loading="lazy"/>
       {% endif %}
 
       <section class="card-text">
-        {% if body %}
-          {% for content in body %}
+        {% if context.body and not in_list %}
+          {% for content in context.body %}
             {{ content.body|formatted_markdown|safe }}
             {% if content.body_image %}
               <img src="{{ content.body_image.url }}" alt="{{ content.body_image_alt }}" loading="lazy"/>
             {% endif %}
           {% endfor %}
+        {% elif not in_list %}
+          <p>
+            {{ object.body|formatted_markdown|safe }}
+          </p>
         {% else %}
-          {{ post.body|formatted_markdown|safe }}
+          <p class="mb-auto">{{ object.description }}</p>
         {% endif %}
 
-        {% if post.body_custom %}
+        {% if object.body_custom and not in_list %}
           {% load editorjs_more %}
-          {{ post.body_custom|editorjs }}
+          {{ object.body_custom|editorjs }}
         {% endif %}
       </section>
     </section>
-    {% if post.url_to_article %}
-      <footer class="card-footer">
-        Direct link:
-        <a class="card-link" href="{{ post.url_to_article }}">{{ post.url_to_article_title }}</a>
-      </footer>
-    {% endif %}
   {% endblock card_body %}
 
-  {% block card_footer %}{% endblock card_footer %}
+  {% block card_footer %}
+    {% if object.url_to_article and not in_list %}
+      <footer class="card-footer">
+        Direct link:
+        <a class="card-link" href="{{ object.url_to_article }}">{% firstof object.url_to_article_title object.url_to_article %}</a>
+      </footer>
+    {% elif in_list %}
+      <footer class="card-footer">
+        <span class="d-flex">
+          <span class="col">
+            {% if not context.archive %}
+              <a class="card-link" href="{{ object.get_absolute_url }}">Continue reading</a>
+            {% else %}
+              <a class="card-link" href="{% url 'blog:archive_date_detail' year=g_year month=g_month day=g_day slug=object.slug %}">Continue reading</a>
+            {% endif %}
+          </span>
+          {% if object.url_to_article %}
+            <span class="col">
+              <a class="float-end card-link" href="{{ object.url_to_article }}">
+                <i class="bi bi-link-45deg"></i>
+                External link
+              </a>
+            </span>
+          {% endif %}
+
+          <span class="col">
+            <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ object.slug }}" aria-controls="postOffCanvas-{{ object.slug }}">Post Info</a>
+          </span>
+        </span>
+      </footer>
+    {% endif %}
+  {% endblock card_footer %}
 </article>

@@ -47,7 +47,8 @@
     <p>Clicks:
       {{ object.clicks }}</p>
     <p>Categories:
-      {% include 'blog/includes/post_categories.html' %}
+      {% comment %} {% endcomment %}
+      {% include 'blog/includes/post_categories.html' with post=object %}
     </p>
     {% if user.is_superuser %}
       <h6>Admin Information</h6>

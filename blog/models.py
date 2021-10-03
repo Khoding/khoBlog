@@ -358,14 +358,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_admin_update_url(self):
         return reverse("admin:blog_post_change", kwargs={"object_id": self.pk})
 
-    def is_published(self):
-        """
-        Return True if the event is publicly accessible.
-        """
-        return self.pub_date <= timezone.now() and not self.withdrawn and not self.is_removed
-
-    is_published.boolean = True
-
     def publish(self):
         self.pub_date = timezone.now()
         self.publication_state = "P"
@@ -394,6 +386,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def formatted_markdown(self):
         return markdownify(self.body)
+
+    @property
+    def is_scheduled(self) -> bool:
+        now = timezone.now()
+
+        return self.pub_date >= now
 
     @property
     def author_name(self):

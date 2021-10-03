@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static comments comments_xtd %}
+{% load static comments comments_xtd post_cards %}
 
 {% block page_top_end %}
   <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
@@ -20,7 +20,7 @@
 {% endblock page_top %}
 
 {% block content_main %}
-  {% include 'blog/base_post_card.html' %}
+  {% render_cards post %}
 
   <article class="card p-2 comments shadow mt-2">
     <h5 class="text-muted">Comments</h5>
