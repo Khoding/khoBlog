@@ -38,6 +38,10 @@
             </a>
           </span>
         {% endif %}
+
+        <span class="col">
+          <a role="button" class="float-end card-link" data-bs-toggle="offcanvas" data-bs-target="#postOffCanvas-{{ post.slug }}" aria-controls="postOffCanvas-{{ post.slug }}">Post Info</a>
+        </span>
       </span>
     </footer>
   {% endblock card_footer %}

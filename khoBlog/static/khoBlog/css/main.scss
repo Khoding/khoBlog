@@ -28,6 +28,7 @@ body {
 
 body {
     padding-top: 56px !important;
+    padding-right: 0 !important;
     @include background-color("bg");
     @include color("text");
 

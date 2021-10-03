@@ -145,6 +145,7 @@ $font-family-monospace: $monospace;
 .nav-scroller {
     @include background-color("bg");
     @include border-color("border-color");
+    padding-right: 0 !important;
 
     & .nav-link,
     & .navbar-brand {

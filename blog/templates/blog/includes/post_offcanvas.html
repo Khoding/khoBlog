@@ -1,24 +1,24 @@
 <!-- Off Canvas -->
-<div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="postOffCanvas-{{ post.slug }}" aria-labelledby="postOffCanvas-{{ post.slug }}Label">
+<div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="postOffCanvas-{{ object.slug }}" aria-labelledby="postOffCanvas-{{ object.slug }}Label">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="postOffCanvas-{{ post.slug }}Label">{{ post.title }}
-      - #{{ post.id }}</h5>
+    <h5 class="offcanvas-title" id="postOffCanvas-{{ object.slug }}Label">{{ object.title }}
+      - #{{ object.id }}</h5>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
   </div>
   <div class="offcanvas-body">
     <h6>General Information</h6>
     <p>
-      <a class="card-link" href="{% url 'accounts:profile' slug=post.author.slug %}">
+      <a class="card-link" href="{% url 'accounts:profile' slug=object.author.slug %}">
         Author:
-        {{ post.author }}
+        {{ object.author }}
         -
-        {% if post.author.is_superuser %}
-          {% if post.author.owner %}
+        {% if object.author.is_superuser %}
+          {% if object.author.owner %}
             Website Owner
           {% else %}
             Admin
           {% endif %}
-        {% elif post.author.is_staff %}
+        {% elif object.author.is_staff %}
           Staff
         {% else %}
           User
@@ -27,34 +27,34 @@
     </p>
     <div class="mb-2">
       <p class="mb-0">Created:
-        {{ post.created_date|date:'l, d F Y H:i:s' }}</p>
-      {% if post.pub_date %}
+        {{ object.created_date|date:'l, d F Y H:i:s' }}</p>
+      {% if object.pub_date %}
         <p class="mb-0">Published:
-          {{ post.pub_date|date:'l, d F Y H:i:s' }}</p>
+          {{ object.pub_date|date:'l, d F Y H:i:s' }}</p>
       {% endif %}
-      {% if post.modified_date %}
+      {% if object.modified_date %}
         <p class="mb-0">Updated:
-          {{ post.modified_date|date:'l, d F Y H:i:s' }}</p>
+          {{ object.modified_date|date:'l, d F Y H:i:s' }}</p>
       {% endif %}
-      {% if post.featured_title %}
+      {% if object.featured_title %}
         <p>Featured Title:
-          {{ post.featured_title }}</p>
+          {{ object.featured_title }}</p>
       {% endif %}
     </div>
 
     <p>Description:
-      {{ post.description }}</p>
+      {{ object.description }}</p>
     <p>Clicks:
-      {{ post.clicks }}</p>
+      {{ object.clicks }}</p>
     <p>Categories:
       {% include 'blog/includes/post_categories.html' %}
     </p>
     {% if user.is_superuser %}
       <h6>Admin Information</h6>
       <p class="mb-0">Withdrawn:
-        {{ post.withdrawn }}</p>
+        {{ object.withdrawn }}</p>
       <p>Scheduled:
-        {% if post.pub_date > now %}True{% else %}False{% endif %}
+        {% if object.pub_date > now %}True{% else %}False{% endif %}
       </p>
     {% endif %}
   </div>
