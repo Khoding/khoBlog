@@ -283,6 +283,10 @@ details {
 .card-body .card-text {
     font-variant-ligatures: common-ligatures;
 
+    & > p:first-child {
+        display: none;
+    }
+
     & ol,
     ul {
         padding: 0 32px;
