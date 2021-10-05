@@ -256,7 +256,8 @@ aside p:last-child {
 
 .markdownx-preview,
 .card-body .card-text,
-details {
+details,
+.admonition {
     @each $names, $prop in $old-admonitions {
         $name: nth($names, 1);
 
@@ -283,7 +284,8 @@ details {
 .card-body .card-text {
     font-variant-ligatures: common-ligatures;
 
-    & > p:first-child {
+    & > p:first-child:empty,
+    & > p:first-child:-moz-only-whitespace {
         display: none;
     }
 
@@ -349,7 +351,8 @@ details {
         white-space: nowrap;
     }
 
-    details {
+    details,
+    .admonition {
         width: 75%;
         margin: 0 0;
         margin-bottom: 0.5rem;
@@ -360,14 +363,13 @@ details {
         overflow: hidden;
 
         details,
-        p {
+        p:not(.admonition-title) {
             width: 100%;
             margin-right: 0px !important;
         }
 
         details {
             margin: 0.5rem;
-            padding-right: 0;
         }
 
         & > :not(summary, details) {
@@ -376,7 +378,8 @@ details {
         }
     }
 
-    summary {
+    summary,
+    .admonition-title {
         position: relative;
         display: block;
         @include background-color("lightest-bg");
@@ -385,6 +388,11 @@ details {
         padding-left: 2.2rem;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .admonition-title {
+        border-radius: 0 !important;
+        cursor: default;
     }
 
     summary:before {
