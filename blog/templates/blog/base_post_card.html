@@ -137,9 +137,7 @@
             {% endif %}
           {% endfor %}
         {% elif not in_list %}
-          <p>
-            {{ object.body|formatted_markdown|safe }}
-          </p>
+          {{ object.body|formatted_markdown|safe }}
         {% else %}
           <p class="mb-auto">{{ object.description }}</p>
         {% endif %}

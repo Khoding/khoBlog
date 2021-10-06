@@ -284,11 +284,6 @@ details,
 .card-body .card-text {
     font-variant-ligatures: common-ligatures;
 
-    & > p:first-child:empty,
-    & > p:first-child:-moz-only-whitespace {
-        display: none;
-    }
-
     & ol,
     ul {
         padding: 0 32px;

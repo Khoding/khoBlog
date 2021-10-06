@@ -1,8 +1,7 @@
 <div class="form-floating markdownx">
-  <textarea name="{{ widget.name }}" placeholder="" {% include "django/forms/widgets/attrs.html" %}>
-    {% if widget.value %}{{ widget.value }}
-    {% endif %}
-  </textarea>
-  <label for="id_body">{{ widget.name|capfirst }}</label>
-  <div class="markdownx-preview"></div>
+{% comment %}  {% endcomment %}
+    <textarea name="{{ widget.name }}" placeholder="" {% include "django/forms/widgets/attrs.html" %}>
+{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
+    <label for="id_body">{{ widget.name|capfirst }}</label>
+    <div class="markdownx-preview"></div>
 </div>

@@ -6,8 +6,8 @@ backports.entry-points-selectable==1.1.0
 beautifulsoup4==4.10.0
 black==21.9b0
 bleach==4.1.0
-boto3==1.18.54
-botocore==1.21.54
+boto3==1.18.55
+botocore==1.21.55
 cachetools==4.2.4
 certifi==2021.5.30
 cffi==1.14.6
@@ -27,7 +27,7 @@ django-activeurl==0.2.0
 django-allauth==0.45.0
 django-analytical==3.0.0
 django-appconf==1.0.5
-django-auto-prefetch==0.1.1
+django-auto-prefetch==1.0.0
 django-classy-tags==2.0.0
 django-comments-xtd==2.9.3
 django-compressor==2.4.1
@@ -124,7 +124,7 @@ uritemplate==3.0.1
 urllib3==1.26.7
 virtualenv==20.8.1
 webencodings==0.5.1
-wrapt==1.12.1
+wrapt==1.13.1
 xlrd==2.0.1
 xlwt==1.3.0
 zipp==3.6.0
