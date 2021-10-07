@@ -21,5 +21,5 @@ __version__ = version_name
 APP_VERSION_NAME = __version__
 APP_VERSION_NUMBER = version_code
 
-DJVERSION_GIT_USE_TAG = True
+DJVERSION_GIT_USE_COMMIT = True
 DJVERSION_GIT_REPO_PATH = BASE_DIR + "/.git"

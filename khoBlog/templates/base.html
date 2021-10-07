@@ -269,22 +269,23 @@
         <div class="row align-items-center">
           {% footer_setting footers %}
         </div>
-        <div class="row align-items-center mt-2 text-muted text-small">
+        <div class="row align-items-center text-muted text-small">
           <div class="col">
             Version number:
             {{ APP_VERSION_NAME }}
           </div>
           <div class="col">
-            <div class="row">
+            <div class="row-auto">
               <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
                 <i class="bi bi-github"></i>
                 Github
               </a>
             </div>
 
-            <div class="row">
+            <div class="row-auto">
               {% project_version as VERSION %}
-              <a href="https://github.com/Khoding/khoBlog/releases/tag/{{ VERSION }}">{{ VERSION }}</a>
+
+              <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}"  target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
             </div>
           </div>
           <div class="col">
