@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
@@ -275,10 +275,17 @@
             {{ APP_VERSION_NAME }}
           </div>
           <div class="col">
-            <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-github"></i>
-              Github
-            </a>
+            <div class="row">
+              <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-github"></i>
+                Github
+              </a>
+            </div>
+
+            <div class="row">
+              {% project_version as VERSION %}
+              <a href="https://github.com/Khoding/khoBlog/releases/tag/{{ VERSION }}">{{ VERSION }}</a>
+            </div>
           </div>
           <div class="col">
             Version code:

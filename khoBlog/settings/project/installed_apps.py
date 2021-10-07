@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "analytical",
     "django_markup",
     "django_activeurl",
+    "djversion",
     # Django Packages Apps
     "django_comments_xtd",
     "django_comments",
