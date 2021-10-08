@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.utils.translation import ngettext
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from markdownx.widgets import AdminMarkdownxWidget
 from simple_history.admin import SimpleHistoryAdmin
 
 from .models import Category, Post, PostCatsLink, PostContent, Series
@@ -170,10 +169,6 @@ class PostContentInline(admin.TabularInline):
     model = PostContent
     extra = 0
 
-    formfield_overrides = {
-        PostContent.body: {"widget": AdminMarkdownxWidget},
-    }
-
 
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     resource_class = PostResource
@@ -275,14 +270,14 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         ),
     )
 
-    inlines = [PostContentInline, PostCatsLinkInline]
+    inlines = [PostCatsLinkInline]
 
     actions = [
-        make_published,
-        make_withdrawn,
-        make_featured,
-        make_featured_big,
-        export_as_json,
+        "make_published",
+        "make_withdrawn",
+        "make_featured",
+        "make_featured_big",
+        "export_as_json",
         make_baguette,
         make_english,
         make_other_language,
