@@ -273,11 +273,11 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     inlines = [PostCatsLinkInline]
 
     actions = [
-        "make_published",
-        "make_withdrawn",
-        "make_featured",
-        "make_featured_big",
-        "export_as_json",
+        make_published,
+        make_withdrawn,
+        make_featured,
+        make_featured_big,
+        export_as_json,
         make_baguette,
         make_english,
         make_other_language,
