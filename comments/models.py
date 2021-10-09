@@ -1,5 +1,6 @@
-import auto_prefetch
 from django.db import models
+
+import auto_prefetch
 from django_comments.abstracts import CommentAbstractModel
 from django_comments_xtd.models import XtdComment
 
@@ -33,13 +34,7 @@ class CustomComment(CommentAbstractModel):
     def full_title(self):
         full_t = ""
         if self.content_object:
-            full_t = (
-                full_t
-                + str(self.content_type.model)
-                + " - "
-                + str(self.content_object.title)
-                + " - "
-            )
+            full_t = full_t + str(self.content_type.model) + " - " + str(self.content_object.title) + " - "
         if self.title:
             full_t = full_t + self.title + " - "
         full_t = full_t + self.comment[:25]
@@ -67,13 +62,7 @@ class CustomCommentXTD(XtdComment):
     def full_title(self):
         full_t = ""
         if self.content_object:
-            full_t = (
-                full_t
-                + str(self.content_type.model)
-                + " - "
-                + str(self.content_object.title)
-                + " - "
-            )
+            full_t = full_t + str(self.content_type.model) + " - " + str(self.content_object.title) + " - "
         if self.title:
             full_t = full_t + self.title + " - "
         full_t = full_t + self.comment[:25]

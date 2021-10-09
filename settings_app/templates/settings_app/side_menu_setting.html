@@ -1,4 +1,4 @@
-{% load specific_date_message_set %}
+{% load specific_date_message_set facts %}
 
 {% for side in sides %}
   {% if not side.is_post_list_side_menu or side.is_post_list_side_menu and context.posts or context.category_list or context.series_list or context.query or context.pages or context.projects or context.tags %}
@@ -11,6 +11,8 @@
         <p class="mb-2">
           {{ side.sub_title }}
         </p>
+
+        {% fact %}
       {% endif %}
 
       {% if side.is_user_side_menu %}

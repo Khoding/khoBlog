@@ -1,0 +1,25 @@
+{% load markup_tags %}
+
+<article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
+  <header class="card-header p-2">
+    <strong class="text-muted text-small">{{ object.prefix }}</strong>
+    {{ object }}
+  </header>
+
+  <section class="card-body p-2">
+    {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+  </section>
+
+  <footer class="card-footer p-2">
+    <div class="row-auto">
+      <strong class="text-muted text-small">Read more:</strong>
+      <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
+    </div>
+
+    {% if object.link.permalink %}
+      <div class="row">
+        <strong class="text-muted text-small">({{ object.link.permalink }})</strong>
+      </div>
+    {% endif %}
+  </footer>
+</article>

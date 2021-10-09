@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "shortener",
     "links",
     "reading_apis_app",
+    "facts",
 ]
 
 if DEBUG:
