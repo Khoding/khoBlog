@@ -11,17 +11,19 @@
       {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
     </section>
 
-    <footer class="card-footer p-2">
-      <div class="row-auto">
-        <strong class="text-muted text-small">Read more:</strong>
-        <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
-      </div>
-
-      {% if object.link.permalink %}
-        <div class="row">
-          <strong class="text-muted text-small">({{ object.link.permalink }})</strong>
+    {% if object.link %}
+      <footer class="card-footer p-2">
+        <div class="row-auto">
+          <strong class="text-muted text-small">Read more:</strong>
+          <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
         </div>
-      {% endif %}
-    </footer>
+
+        {% if object.link.permalink %}
+          <div class="row">
+            <strong class="text-muted text-small">({{ object.link.permalink }})</strong>
+          </div>
+        {% endif %}
+      </footer>
+    {% endif %}
   </article>
 {% endif %}
