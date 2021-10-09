@@ -8,5 +8,6 @@ from facts.models import Fact
 def fact():
     """fact inclusion tag"""
     facts = Fact.objects.filter(shown=True)
-    o = facts.order_by("?")[0]
-    return {"object": o}
+    if facts.count() > 0:
+        o = facts.order_by("?")[0]
+        return {"object": o}
