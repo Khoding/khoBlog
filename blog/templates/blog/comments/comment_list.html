@@ -1,0 +1,16 @@
+{% extends 'sub_base_main.html' %}
+{% load comments_xtd %}
+
+{% block main %}
+  {% get_last_xtdcomments 255 as comments for blog.post pages.page %}
+
+  {% for comment in comments %}
+    <div class="row">
+      <a class="col-auto" href="{{ comment.get_absolute_url }}" rel="noopener noreferrer">
+        <strong class="text-muted">{{ comment.user }}
+          | #{{ comment.pk }}</strong>
+        -
+        {{ comment }}</a>
+    </div>
+  {% endfor %}
+{% endblock main %}

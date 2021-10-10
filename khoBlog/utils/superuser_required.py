@@ -5,7 +5,7 @@ def superuser_required():
     """superuser_required Decorator
 
     A utility to test if a user is a superuser before giving access to a view
-    from khoBlog.utils import superuser_required
+    from khoBlog.utils.superuser_required import superuser_required
 
     @superuser_required
     class ExampleView(View):
