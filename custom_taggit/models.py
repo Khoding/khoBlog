@@ -1,7 +1,7 @@
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+
 from taggit.models import GenericTaggedItemBase, TagBase
 
 
@@ -20,9 +20,7 @@ class CustomTag(TagBase):
         return reverse("blog:tag_edit", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
-        return reverse(
-            "admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk}
-        )
+        return reverse("admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
         return reverse("blog:tag_list")
