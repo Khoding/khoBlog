@@ -5,8 +5,12 @@
   <div class="row row-cols-1 row-cols-lg-3 me-0">
     {% for tag in tags %}
       <div class="mb-2 pe-0">
-        <div id="tag-{{ tag.slug }}" class="card shadow h-100">
-          <div class="card-header">
+        <article id="tag-{{ tag.slug }}" class="card shadow h-100">
+          {% if tag.withdrawn %}
+            <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
+          {% endif %}
+
+          <header class="card-header">
             <span class="d-flex">
               <span class="col">
                 <strong class="text-muted">Tag #{{ tag.id }}</strong>
@@ -17,21 +21,21 @@
                 {% endif %}
               </span>
             </span>
-          </div>
-          <div class="card-body">
+          </header>
+          <section class="card-body">
             <h3 class="card-title">{{ tag }}</h3>
             <p class="mb-auto">Tag slug:
               {{ tag.slug }}</p>
-          </div>
-          <div class="card-footer">
+          </section>
+          <footer class="card-footer">
             <span class="d-flex">
               <span class="col">
                 <a class="card-link" href="{{ tag.get_absolute_url }}">All posts tagged with
                   {{ tag.name }}</a>
               </span>
             </span>
-          </div>
-        </div>
+          </footer>
+        </article>
       </div>
     {% endfor %}
   </div>

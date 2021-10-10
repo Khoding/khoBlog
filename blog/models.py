@@ -1,9 +1,6 @@
 import datetime
 import itertools
 
-import auto_prefetch
-import rules
-from custom_taggit.models import CustomTaggedItem
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -11,6 +8,9 @@ from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
+
+import auto_prefetch
+import rules
 from django_editorjs_fields import EditorJsJSONField
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
@@ -19,6 +19,7 @@ from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
+from custom_taggit.models import CustomTag, CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -398,6 +399,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def author_name(self):
         return self.author.username
+
+    @property
+    def get_tags(self):
+        return self.tags.filter(withdrawn=False)
+
+    @property
+    def get_admin_tags(self):
+        return self.tags.all()
 
     @property
     def get_featured_cat(self):

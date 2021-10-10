@@ -7,7 +7,7 @@ from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (
     AllSearchResultsListView,
-    AllTagsListView,
+    AllTagListView,
     ApprovePostCommentUpdateView,
     CategoryCreateView,
     CategoryListView,
@@ -91,7 +91,7 @@ series_extra_patterns = [
 ]
 
 tags_extra_patterns = [
-    path("", AllTagsListView.as_view(), name="tag_list"),
+    path("", AllTagListView.as_view(), name="tag_list"),
     path("<slug:slug>/", include(tags_action_extra_patterns)),
 ]
 
@@ -140,9 +140,7 @@ archive_extra_patterns = [
         name="archive_month_numeric",
     ),
     # Example: /2012/aug/
-    path(
-        "<int:year>/<str:month>/", PostMonthArchiveView.as_view(), name="archive_month"
-    ),
+    path("<int:year>/<str:month>/", PostMonthArchiveView.as_view(), name="archive_month"),
     # Example: /2012/week/23/
     path(
         "<int:year>/week/<int:week>/",

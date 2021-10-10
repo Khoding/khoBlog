@@ -1,4 +1,3 @@
-from custom_taggit.models import CustomTag
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -17,10 +16,12 @@ from django.views.generic.dates import (
     WeekArchiveView,
     YearArchiveView,
 )
-from khoBlog.utils.superuser_required import superuser_required
+
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
+from custom_taggit.models import CustomTag
+from khoBlog.utils.superuser_required import superuser_required
 
 from .forms import (
     ARPostCommentForm,
@@ -446,7 +447,7 @@ class PostWithdrawnListView(ListView):
         return context
 
 
-class AllTagsListView(ListView):
+class AllTagListView(ListView):
     """AllTagsListView ListView
 
     Lists all Tags
@@ -459,7 +460,7 @@ class AllTagsListView(ListView):
     """
 
     model = CustomTag
-    template_name = "blog/lists/tags_list.html"
+    template_name = "blog/lists/tag_list.html"
     context_object_name = "tags"
     paginate_by = 21
     paginate_orphans = 5
