@@ -12,4 +12,4 @@ class ProjectSitemap(Sitemap):
         return Project.objects.filter(is_removed=False)
 
     def lastmod(self, obj):
-        return obj.modified_date
+        return obj.mod_date

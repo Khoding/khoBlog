@@ -12,7 +12,7 @@ class Task(auto_prefetch.Model):
     complete = models.BooleanField(default=False)
     withdrawn = models.BooleanField(default=False)
     created = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(blank=True, null=True, help_text="Last modification")
+    mod_date = models.DateTimeField(blank=True, null=True, help_text="Last modification")
     completed_date = models.DateTimeField(blank=True, null=True, help_text="Completion date")
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Task(auto_prefetch.Model):
 
     def make_completed(self):
         self.complete = True
-        self.modified_date = timezone.now()
+        self.mod_date = timezone.now()
         self.completed_date = timezone.now()
         self.save()
 

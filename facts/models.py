@@ -21,7 +21,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
     fact = models.TextField(default="")
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Fact slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
+    mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
     link = auto_prefetch.ForeignKey(Links, on_delete=models.CASCADE, null=True, blank=True)
     prefix = models.CharField(max_length=25, default="Fun Fact: ")

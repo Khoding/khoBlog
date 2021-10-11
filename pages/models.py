@@ -14,7 +14,7 @@ from taggit_selectize.managers import TaggableManager
 
 class FlatPage(FlatPageOld):
     slug = models.SlugField(unique=True, default="", max_length=200)
-    modified_date = models.DateTimeField("Last Updated", auto_now=True)
+    mod_date = models.DateTimeField("Last Updated", auto_now=True)
     created_date = models.DateTimeField("Creation date", default=timezone.now)
     page_head = models.TextField("Page head", blank=True)
     main_page = models.BooleanField(default=False)
@@ -47,7 +47,7 @@ class Page(auto_prefetch.Model):
     page_head = models.TextField("Page head", blank=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
     created_date = models.DateTimeField("Creation date", default=timezone.now)
-    modified_date = models.DateTimeField("Last Updated", auto_now=True)
+    mod_date = models.DateTimeField("Last Updated", auto_now=True)
     main_page = models.BooleanField(default=False)
     enable_comments = models.BooleanField(_("enable comments"), default=True)
     withdrawn = models.BooleanField(default=False)
@@ -62,16 +62,12 @@ class Page(auto_prefetch.Model):
     )
     registration_required = models.BooleanField(
         _("registration required"),
-        help_text=_(
-            "If this is checked, only logged-in users will be able to view the page."
-        ),
+        help_text=_("If this is checked, only logged-in users will be able to view the page."),
         default=False,
     )
     sites = models.ManyToManyField(Site, verbose_name=_("sites"))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
-    is_removed = models.BooleanField(
-        "is removed", default=False, db_index=True, help_text=("Soft delete")
-    )
+    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
     history = HistoricalRecords()
 
     class Meta:

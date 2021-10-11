@@ -36,7 +36,7 @@ class LatestPostsFeed(Feed):
         return item.pub_date
 
     def item_updateddate(self, item):
-        return item.modified_date
+        return item.mod_date
 
     def item_author_name(self, item):
         return item.author
@@ -78,7 +78,7 @@ class LatestPostsFeedByCategory(Feed):
         return item.pub_date
 
     def item_updateddate(self, item):
-        return item.modified_date
+        return item.mod_date
 
     def item_author_name(self, item):
         return item.author

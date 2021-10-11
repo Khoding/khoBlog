@@ -58,14 +58,14 @@
           {{ object.pub_date|time:'H:i:s' }}
         {% endif %}
       </p>
-      {% if object.modified_date %}
+      {% if object.mod_date %}
         <p class="mb-auto text-small text-muted">
           Last updated by
           <strong>{{ object.author }}</strong>
           on
-          {{ object.modified_date|date:'F j, Y' }}
+          {{ object.mod_date|date:'F j, Y' }}
           at
-          {{ object.modified_date|time:'H:i:s' }}
+          {{ object.mod_date|time:'H:i:s' }}
         </p>
       {% endif %}
     </section>

@@ -13,7 +13,7 @@ class Project(auto_prefetch.Model):
     slug = models.SlugField(unique=True, default="", max_length=200)
     start_date = models.DateTimeField("Project's start date", null=True, blank=True)
     created_date = models.DateTimeField("Creation date", default=timezone.now)
-    modified_date = models.DateTimeField("Last Updated", auto_now=True)
+    mod_date = models.DateTimeField("Last Updated", auto_now=True)
     website = auto_prefetch.ForeignKey(
         "portfolio.Website",
         on_delete=models.CASCADE,
@@ -36,9 +36,7 @@ class Project(auto_prefetch.Model):
         null=True,
         blank=True,
     )
-    is_removed = models.BooleanField(
-        "is removed", default=False, db_index=True, help_text=("Soft delete")
-    )
+    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
 
     class Meta:
         ordering = ["pk"]

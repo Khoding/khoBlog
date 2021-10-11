@@ -39,7 +39,7 @@ class PostSerializerV3(serializers.ModelSerializer):
             "description",
             "slug",
             "created_date",
-            "modified_date",
+            "mod_date",
             "pub_date",
         )
         prepopulated_fields = {"slug": ("title",)}
@@ -60,7 +60,7 @@ class PostSerializerDetailV3(serializers.ModelSerializer):
             "description",
             "slug",
             "created_date",
-            "modified_date",
+            "mod_date",
             "pub_date",
         )
         prepopulated_fields = {"slug": ("title",)}

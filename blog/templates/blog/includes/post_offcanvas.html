@@ -32,9 +32,9 @@
         <p class="mb-0">Published:
           {{ object.pub_date|date:'l, d F Y H:i:s' }}</p>
       {% endif %}
-      {% if object.modified_date %}
+      {% if object.mod_date %}
         <p class="mb-0">Updated:
-          {{ object.modified_date|date:'l, d F Y H:i:s' }}</p>
+          {{ object.mod_date|date:'l, d F Y H:i:s' }}</p>
       {% endif %}
       {% if object.featured_title %}
         <p>Featured Title:

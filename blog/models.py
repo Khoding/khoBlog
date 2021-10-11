@@ -47,7 +47,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     description = models.TextField(blank=True, help_text="Category description")
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Category slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
+    mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
     history = HistoricalRecords()
@@ -121,7 +121,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     description = models.TextField(blank=True, help_text="Series description")
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Series slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
+    mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
     history = HistoricalRecords()
@@ -259,7 +259,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     )
     order_in_series = models.PositiveIntegerField(default=0, help_text="Post order in its series")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
+    mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
     publication_state = models.CharField(
         max_length=25,
@@ -503,7 +503,7 @@ class Comment(auto_prefetch.Model):
     title = models.CharField(max_length=200, default="", blank=True, help_text="Comment title")
     body = models.TextField(verbose_name="Comment", help_text="Comment main content")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
-    modified_date = models.DateTimeField(auto_now=True, help_text="Last modification")
+    mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     approbation_state = models.CharField(
         max_length=25,
         verbose_name="Approbation",
