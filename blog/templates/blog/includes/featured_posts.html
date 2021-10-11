@@ -3,7 +3,7 @@
 {% if featured_big %}
   {% comment %} {% endcomment %}
   {% with featured_big|random as featured_big_post %}
-  <article class="card p-4 rounded shadow">
+  <article class="card p-4 shadow">
     <section class="container">
       <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Post</strong>
       <h1 class="display-4">{{ featured_big_post.title }}</h1>
