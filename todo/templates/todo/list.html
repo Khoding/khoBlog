@@ -3,8 +3,9 @@
 {% block content %}
   {% if user.is_superuser %}
     <a class="btn btn-primary mt-2" href="{% url 'todo:create_task' %}">Add New Task</a>
-    <hr/>
   {% endif %}
+
+  <hr/>
 
   <ul class="list-unstyled">
     {% for task in tasks %}

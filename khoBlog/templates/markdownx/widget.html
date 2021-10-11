@@ -1,5 +1,5 @@
 <div class="form-floating markdownx">
-{% comment %}  {% endcomment %}
+{% comment %} {% endcomment %}
     <textarea name="{{ widget.name }}" placeholder="" {% include "django/forms/widgets/attrs.html" %}>
 {% if widget.value %}{{ widget.value }}{% endif %}</textarea>
     <label for="id_body">{{ widget.name|capfirst }}</label>
