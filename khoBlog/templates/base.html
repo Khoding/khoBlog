@@ -128,188 +128,193 @@
       <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
-      <div class="container-fluid">
-        <span class="d-inline-flex">
-          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
-        </span>
-        <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    {% if not enable_tailwind_flag and not user.enable_tailwind %}
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
+        <div class="container-fluid">
+          <span class="d-inline-flex">
+            <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
+          </span>
+          <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
-          <div class="d-block d-lg-none">
-            {% block nav %}{% endblock nav %}
-          </div>
+          <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
+            <div class="d-block d-lg-none">
+              {% block nav %}{% endblock nav %}
+            </div>
 
-          {% activeurl %}
-          <ul class="navbar-nav me-auto d-flex nav-item invisible">
-            <span class="nav-link">Bar is large</span></ul>
-          {% endactiveurl %}
+            {% activeurl %}
+            <ul class="navbar-nav me-auto d-flex nav-item invisible">
+              <span class="nav-link">Bar is large</span></ul>
+            {% endactiveurl %}
 
-          {% if user.is_authenticated %}
-            <div class="d-none d-md-flex d-none d-md-flex align-items-center">
-              <div class="flex-shrink-0 dropdown">
-                <a href="#" class="d-block px-2 text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                  {% if user.profile_pic %}
-                    <img class="rounded-circle" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" width="20" height="20" loading="lazy"/>
-                  {% else %}
-                    <img class="rounded-circle" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default Profile Pic" width="20" height="20" loading="lazy"/>
-                  {% endif %}
-                </a>
+            {% if user.is_authenticated %}
+              <div class="d-none d-md-flex d-none d-md-flex align-items-center">
+                <div class="flex-shrink-0 dropdown">
+                  <a href="#" class="d-block px-2 text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if user.profile_pic %}
+                      <img class="rounded-circle" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" width="20" height="20" loading="lazy"/>
+                    {% else %}
+                      <img class="rounded-circle" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default Profile Pic" width="20" height="20" loading="lazy"/>
+                    {% endif %}
+                  </a>
 
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
-                  <li>
-                    <h6 class="dropdown-header">Your profile</h6>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a>
-                  </li>
-
-                  {% if user.is_superuser %}
+                  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
                     <li>
-                      <hr class="dropdown-divider">
+                      <h6 class="dropdown-header">Your profile</h6>
                     </li>
                     <li>
-                      <h6 class="dropdown-header">Creation</h6>
+                      <a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a>
                     </li>
 
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a>
-                    </li>
-
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                      <h6 class="dropdown-header">Lists</h6>
-                    </li>
-
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
-                    </li>
-                  {% endif %}
-
-                  {% if user.is_superuser or user.is_staff %}
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                      <h6 class="dropdown-header">Administration</h6>
-                    </li>
-
-                    <li>
-                      <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-                    </li>
                     {% if user.is_superuser %}
                       <li>
-                        <a class="dropdown-item " href="https://eu.pythonanywhere.com">Pythonanywhere</a>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li>
+                        <h6 class="dropdown-header">Creation</h6>
+                      </li>
+
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a>
+                      </li>
+
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li>
+                        <h6 class="dropdown-header">Lists</h6>
+                      </li>
+
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
                       </li>
                     {% endif %}
-                  {% endif %}
 
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
-                  </li>
-                </ul>
+                    {% if user.is_superuser or user.is_staff %}
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li>
+                        <h6 class="dropdown-header">Administration</h6>
+                      </li>
+
+                      <li>
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                      </li>
+                      {% if user.is_superuser %}
+                        <li>
+                          <a class="dropdown-item " href="https://eu.pythonanywhere.com">Pythonanywhere</a>
+                        </li>
+                      {% endif %}
+                    {% endif %}
+
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+
+      {% include 'includes/nav/undernav.html' %}
+
+      <main role="main" class="container-fluid mb-2">
+        <div class="row">
+          <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
+
+            <div class="row clearfix">
+              <div class="col">
+                <h2 class="mb-1">
+                  {% block page_top_title %}
+                    {{ title|truncatewords_html:7 }}
+                  {% endblock page_top_title %}
+                </h2>
+              </div>
+
+              <div class="col-auto mb-1">
+                {% if filter_form %}
+                  <a class="btn btn-primary btn-sm float-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Filters
+                  </a>
+                {% endif %}
+
+                {% block page_top_end %}{% endblock page_top_end %}
               </div>
             </div>
-          {% endif %}
+
+            <hr class="my-0"/>
+
+            {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
+
+            {% block page_top_archives %}{% endblock page_top_archives %}
+
+            {% block content %}{% endblock content %}
+
+          </div>
+
+          <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
+            {% block aside %}{% endblock aside %}
+          </aside>
         </div>
-      </div>
-    </nav>
+      </main>
 
-    {% include 'includes/nav/undernav.html' %}
-
-    <main role="main" class="container-fluid mb-2">
-      <div class="row">
-        <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
-
-          <div class="row clearfix">
+      <footer class="blog-footer">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            {% footer_setting footers %}
+          </div>
+          <div class="row align-items-center text-muted text-small">
             <div class="col">
-              <h2 class="mb-1">
-                {% block page_top_title %}
-                  {{ title|truncatewords_html:7 }}
-                {% endblock page_top_title %}
-              </h2>
+              Version number:
+              {{ APP_VERSION_NAME }}
             </div>
-
-            <div class="col-auto mb-1">
-              {% if filter_form %}
-                <a class="btn btn-primary btn-sm float-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Filters
+            <div class="col">
+              <div class="row-auto">
+                <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
+                  <i class="bi bi-github"></i>
+                  Github
                 </a>
-              {% endif %}
+              </div>
 
-              {% block page_top_end %}{% endblock page_top_end %}
+              <div class="row-auto">
+                {% project_version as VERSION %}
+
+                <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
+              </div>
+            </div>
+            <div class="col">
+              Version code:
+              {{ APP_VERSION_NUMBER }}
             </div>
           </div>
-
-          <hr class="my-0"/>
-
-          {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
-
-          {% block page_top_archives %}{% endblock page_top_archives %}
-
-          {% block content %}{% endblock content %}
-
         </div>
+      </footer>
 
-        <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
-          {% block aside %}{% endblock aside %}
-        </aside>
-      </div>
-    </main>
-
-    <footer class="blog-footer">
-      <div class="container-fluid">
-        <div class="row align-items-center">
-          {% footer_setting footers %}
-        </div>
-        <div class="row align-items-center text-muted text-small">
-          <div class="col">
-            Version number:
-            {{ APP_VERSION_NAME }}
-          </div>
-          <div class="col">
-            <div class="row-auto">
-              <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-github"></i>
-                Github
-              </a>
-            </div>
-
-            <div class="row-auto">
-              {% project_version as VERSION %}
-
-              <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
-            </div>
-          </div>
-          <div class="col">
-            Version code:
-            {{ APP_VERSION_NUMBER }}
-          </div>
-        </div>
-      </div>
-    </footer>
+    {% else %}
+      {% include 'tailwind/base_tailwind.html' %}
+    {% endif %}
 
     {% if not debug_flag %}
       {% analytical_body_bottom %}

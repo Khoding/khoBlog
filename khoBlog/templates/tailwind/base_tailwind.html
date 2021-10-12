@@ -1,0 +1,55 @@
+<main role="main" class="mb-2 px-2">
+  <section class="container mx-auto">
+    <p class="text-purple-500 text-2xl font-medium border-b-2 border-purple-200">Khodok's Blog -
+      {{ title }}</p>
+
+    <section class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+      {% for post in posts %}
+        <!-- card -->
+        <article class="overflow-hidden shadow-lg rounded-lg h-90 w-100 md:w-80 m-auto">
+          <section class="bg-white dark:bg-gray-700 dark:text-gray-100 w-full p-4">
+            <p class="text-purple-500 text-2xl font-medium">
+              {{ post.title|truncatewords_html:7 }}
+            </p>
+            <p class="dark:text-gray-100 text-sm font-medium mb-2">
+              {% if not post.pub_date %}
+                {{ post.created_date|date:'l, d F Y H:i:s' }}
+              {% else %}
+                {{ post.pub_date|date:'l, d F Y H:i:s' }}
+              {% endif %}
+            </p>
+            <p class="text-gray-400 font-light text-md">
+              {{ post.description }}
+              <a class="inline-flex text-purple-500" href="{{ post.get_absolute_url }}">Read More</a>
+            </p>
+            <section class="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium">
+              <span class="m-1 px-2 py-1 rounded bg-purple-500">
+                {% if post.get_featured_cat %}
+                  <strong>
+                    <a class="cat-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a>
+                  </strong>
+                {% else %}
+                  <strong>
+                    <a class="cat-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
+                  </strong>
+                {% endif %}
+              </span>
+            </section>
+            <section class="flex items-center mt-2">
+              <img class='w-10 h-10 object-cover rounded-full' alt='User avatar' src='{{ post.author.profile_pic.url }}' loading="lazy">
+
+              <div class="pl-3">
+                <div class="font-medium">
+                  {{ post.author }}
+                </div>
+                <div class="text-gray-400 text-sm">
+                  {{ post.author.roles.all.last }}
+                </div>
+              </div>
+            </section>
+          </section>
+        </article>
+      {% endfor %}
+    </section>
+  </section>
+</main>
