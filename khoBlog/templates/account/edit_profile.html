@@ -184,6 +184,25 @@
             </div>
           </div>
 
+          <div id="experimental-customization-fields" class="border border-2 border-danger p-2 mb-2">
+            <h5 class="mb-0 text-danger">Experimental stuff</h5>
+            <p class="text-small">Some fields that change the design of the website, some of the texts on it, only affects you</p>
+            <p class="text-danger">Note that these are experimental things !!!</p>
+
+            <div class="field mb-2">
+              {{ form.enable_tailwind.label_tag }}
+              <div class="form-check">
+                {{ form.enable_tailwind|add_class:"form-check-input" }}
+              </div>
+              {% if form.enable_tailwind.help_text %}
+                <span class="text-small text-muted">{{ form.enable_tailwind.help_text }}</span>
+              {% endif %}
+              {% for error in form.enable_tailwind.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary">{{ title }}</button>
         </form>
       </div>

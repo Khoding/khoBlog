@@ -72,13 +72,12 @@ class CustomUser(AbstractUser):
         default="Hello",
         help_text="The message before your name when you are logged, by default 'Hello'",
     )
-    default_theme = models.CharField(
-        max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default"
+    default_theme = models.CharField(max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default")
+    enable_tailwind = models.BooleanField(
+        default=False, help_text="Enable the new experimental Tailwindcss design (WIP, broken af)"
     )
     roles = models.ManyToManyField(Role, blank=True, default="User")
-    show_github = models.BooleanField(
-        default=True, help_text="Show Github link on your profile page"
-    )
+    show_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
 
     def __str__(self):
         return self.username
@@ -93,6 +92,4 @@ class CustomUser(AbstractUser):
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse(
-            "%s:profile" % (content_type.app_label), kwargs={"slug": self.slug}
-        )
+        return reverse("%s:profile" % (content_type.app_label), kwargs={"slug": self.slug})

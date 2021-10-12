@@ -44,6 +44,10 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
         (
+            ("Other"),
+            {"fields": ("enable_tailwind",)},
+        ),
+        (
             ("Important Dates"),
             {
                 "fields": (

@@ -1,5 +1,4 @@
 from captcha.fields import CaptchaField
-from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import CustomUser
@@ -17,13 +16,6 @@ class CustomUserCreationForm(UserCreationForm):
             "last_name",
         )
 
-        widgets = {
-            "username": forms.TextInput(),
-            "first_name": forms.TextInput(),
-            "last_name": forms.TextInput(),
-            "email": forms.EmailInput(),
-        }
-
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
@@ -39,15 +31,5 @@ class CustomUserChangeForm(UserChangeForm):
             "slug",
             "show_github",
             "default_theme",
+            "enable_tailwind",
         )
-
-        widgets = {
-            "username": forms.TextInput(),
-            "first_name": forms.TextInput(),
-            "last_name": forms.TextInput(),
-            "bio": forms.Textarea(),
-            "email": forms.EmailInput(),
-            "slug": forms.TextInput(),
-            "welcome_message": forms.TextInput(),
-            "default_theme": forms.Select(),
-        }
