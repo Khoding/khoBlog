@@ -1,7 +1,10 @@
 {% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags %}
 {% comment %} {% endcomment %}
+{% if enable_tailwind_flag %}
+  {% load tailwind_tags %}
+{% endif %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
   <head>
     <meta charset="UTF-8"/>
@@ -69,30 +72,38 @@
     {% block additional_js %}{% endblock additional_js %}
     {% block additional_css %}{% endblock additional_css %}
 
-    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
+    {% if not enable_tailwind_flag %}
+      <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
 
-    {% compress js %}
-    <script src="{% static 'vendor/node_modules/jquery/dist/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/node_modules/@editorjs/link/dist/bundle.js' %}"></script>
-    <script defer="defer" src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-    <script defer="defer" src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
-    <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
-    <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
-    {% endcompress js %}
+      {% compress js %}
+      <script src="{% static 'vendor/node_modules/jquery/dist/jquery.min.js' %}"></script>
+      <script src="{% static 'vendor/node_modules/@editorjs/link/dist/bundle.js' %}"></script>
+      <script defer="defer" src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+      <script defer="defer" src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
+      <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
+      <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
+      {% endcompress js %}
+    {% endif %}
 
     {% block rel %}
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
 
-      <!-- rel! Fonts / Icons -->
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="screen">
+      {% if not enable_tailwind_flag %}
+        <!-- rel! Fonts / Icons -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="screen">
 
-      {% compress css %}
-      <!-- rel! Themes -->
-      <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
-      <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
-      {% endcompress css %}
+        {% compress css %}
+          <!-- rel! Themes -->
+          <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
+          <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
+        {% endcompress css %}
+      {% endif %}
+
+      {% if enable_tailwind_flag %}
+        {% tailwind_css %}
+      {% endif %}
     {% endblock rel %}
 
     {% if not debug_flag %}
@@ -102,7 +113,11 @@
     {% endif %}
   </head>
 
-  <body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
+  {% if not enable_tailwind_flag %}
+    <body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
+  {% else %}
+    <body class="antialiased text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+  {% endif %}
     {% if not debug_flag %}
       {% analytical_body_top %}
 

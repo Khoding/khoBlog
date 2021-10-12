@@ -6,6 +6,7 @@ from django.utils import timezone
 def context(request):
     debug_flag = settings.DEBUG
     comments_disabled_globally_flag = settings.COMMENTS_DISABLED_GLOBALLY
+    enable_tailwind_flag = settings.ENABLE_TAILWIND
     context = {
         "CANONICAL_PATH": request.build_absolute_uri(request.path_info),
         "debug_flag": debug_flag,
@@ -17,6 +18,7 @@ def context(request):
         "app_direct_link": reverse("blog:post_list"),
         "show_featured": False,
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
+        "enable_tailwind_flag": enable_tailwind_flag,
     }
 
     return context

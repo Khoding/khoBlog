@@ -1,5 +1,6 @@
 # Application definition
 from ..django import DEBUG
+from ..third_party.django_debug_toolbar import ENABLE_DEBUG_TOOLBAR
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     "django_markup",
     "django_activeurl",
     "djversion",
+    "tailwind",
+    "theme",
     # Django Packages Apps
     "django_comments_xtd",
     "django_comments",
@@ -69,7 +72,7 @@ INSTALLED_APPS = [
     "facts",
 ]
 
-if DEBUG:
+if DEBUG and ENABLE_DEBUG_TOOLBAR:
     INSTALLED_APPS += [
         "debug_toolbar",
         "template_profiler_panel",

@@ -1,4 +1,5 @@
 from ..django import DEBUG
+from ..third_party.django_debug_toolbar import ENABLE_DEBUG_TOOLBAR
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -9,7 +10,7 @@ if not DEBUG:
         "django.middleware.cache.UpdateCacheMiddleware",
     ]
 
-if DEBUG:
+if DEBUG and ENABLE_DEBUG_TOOLBAR:
     MIDDLEWARE += [
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
