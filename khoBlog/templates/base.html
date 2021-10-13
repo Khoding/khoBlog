@@ -239,7 +239,9 @@
       </nav>
 
       {% include 'includes/nav/undernav.html' %}
+    {% endif %}
 
+    {% if not enable_tailwind_flag and not user.enable_tailwind %}
       <main role="main" class="container-fluid mb-2">
         <div class="row">
           <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
@@ -279,7 +281,11 @@
           </aside>
         </div>
       </main>
+    {% else %}
+      {% include 'tailwind/base_tailwind.html' %}
+    {% endif %}
 
+    {% if not enable_tailwind_flag and not user.enable_tailwind %}
       <footer class="blog-footer">
         <div class="container-fluid">
           <div class="row align-items-center">
@@ -311,9 +317,6 @@
           </div>
         </div>
       </footer>
-
-    {% else %}
-      {% include 'tailwind/base_tailwind.html' %}
     {% endif %}
 
     {% if not debug_flag %}
