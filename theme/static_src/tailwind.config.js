@@ -5,6 +5,8 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
+const { borderColor } = require("tailwindcss/defaultTheme");
+
 module.exports = {
     /**
      * Stylesheet generation mode.
@@ -51,7 +53,43 @@ module.exports = {
     ],
     darkMode: "media", // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        color: theme("colors.purple.400"),
+
+                        h1: {
+                            color: theme("colors.purple.400"),
+                        },
+                        h2: {
+                            color: theme("colors.purple.400"),
+                        },
+                        h3: {
+                            color: theme("colors.purple.300"),
+                        },
+                        h4: {
+                            color: theme("colors.purple.300"),
+                        },
+                        h5: {
+                            color: theme("colors.purple.300"),
+                        },
+                        h6: {
+                            color: theme("colors.purple.300"),
+                        },
+                        blockquote: {
+                            color: theme("colors.purple.300"),
+                        },
+                        dt: {
+                            fontWeight: "800",
+                        },
+                        strong: {
+                            color: theme("colors.purple.300"),
+                        },
+                    },
+                },
+            }),
+        },
     },
     variants: {
         extend: {},

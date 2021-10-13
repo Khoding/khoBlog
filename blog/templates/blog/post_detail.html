@@ -1,6 +1,10 @@
 {% extends 'blog/base_post.html' %}
 {% load static comments comments_xtd markdown_extra post_cards %}
 
+{% block additional_css %}
+  <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
+{% endblock additional_css %}
+
 {% block page_top_end %}
   <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
     <a class="btn btn-primary btn-sm" href="{{ prev_post.get_absolute_url }}">
@@ -24,11 +28,21 @@
     {% render_cards post %}
   {% else %}
     <section class="text-gray-400 bg-gray-900 body-font">
-      <article class="p-4 md:w-3/4 mx-auto">
+      <article class="p-4 md:w-2/3 mx-auto">
+        <nav class="flex justify-between" role="group" aria-label="Previous / Next">
+          <a href="{{ prev_post.get_absolute_url }}">
+            Previous
+          </a>
+          <a href="{{ next_post.get_absolute_url }}">
+            Next
+          </a>
+        </nav>
         <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-          <section class="p-6 markdown-stuff">
-            <h1 class="title-font text-lg font-medium text-white mb-3">{{ post.title }}</h1>
-            {{ post.body|formatted_markdown|safe }}
+          <section class="p-6">
+            <h1 class="title-font text-5xl font-medium text-purple-200 mb-3 border-b-2 border-purple-200 ">{{ post.title }}</h1>
+            <div class="prose prose-purple">
+              {{ post.body|formatted_markdown|safe }}
+            </div>
           </section>
         </div>
       </article>

@@ -96,7 +96,6 @@
 
         {% compress css %}
           <!-- rel! Themes -->
-          <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
           <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
         {% endcompress css %}
       {% endif %}
@@ -255,6 +254,7 @@
             <nav class="flex flex-wrap items-center text-base justify-left">
               <ul class="items-center inline-block list-none lg:inline-flex">
                 <li>
+                  <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
                   <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Admin</a>
                 </li>
               </ul>
