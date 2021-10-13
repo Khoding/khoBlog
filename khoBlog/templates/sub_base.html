@@ -2,16 +2,17 @@
 {% load side_menu_set %}
 
 {% block nav %}
-  {% sm_setting sides %}
+  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+    {% sm_setting sides %}
 
-  {% block inside_nav %}{% endblock inside_nav %}
-
+    {% block inside_nav %}{% endblock inside_nav %}
+  {% endif %}
 {% endblock nav %}
 
 {% block aside %}
+  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+    {% sm_setting sides %}
 
-  {% sm_setting sides %}
-
-  {% block inside_aside %}{% endblock inside_aside %}
-
+    {% block inside_aside %}{% endblock inside_aside %}
+  {% endif %}
 {% endblock aside %}

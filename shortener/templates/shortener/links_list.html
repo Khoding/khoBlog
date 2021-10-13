@@ -1,7 +1,11 @@
 {% for url in urls %}
   {% if url.featured %}
-    <li>
-      <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
-    </li>
+    {% if not enable_tailwind_flag and not context.user.enable_tailwind %}
+      <li>
+        <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
+      </li>
+    {% else %}
+      <a href="{{ url.get_absolute_url }}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">{{ url.title }}</a>
+    {% endif %}
   {% endif %}
 {% endfor %}

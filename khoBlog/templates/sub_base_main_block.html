@@ -9,52 +9,54 @@
 
   {% block content_main %}{% endblock content_main %}
 
-  {% block pagination %}
-    <nav class="blog-pagination">
-      {% if is_paginated %}
-        <ul class="pagination justify-content-center justify-content-md-start flex-wrap m-0">
-          {% if page_obj.has_previous %}
-            <li class="page-item">
-              <a class="page-link mt-1" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link mt-1">Previous</a>
-            </li>
-          {% endif %}
-
-          {% get_proper_elided_page_range paginator page_obj.number as page_range %}
-          {% comment %} {% endcomment %}
-          {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
-            {% if page_obj.number == i %}
-              <li class="active page-item">
-                <span class="page-link mt-1">{{ i }}
-                  <span class="visually-hidden">(current)</span></span>
+  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+    {% block pagination %}
+      <nav class="blog-pagination">
+        {% if is_paginated %}
+          <ul class="pagination justify-content-center justify-content-md-start flex-wrap m-0">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link mt-1" href="?page={{ page_obj.previous_page_number }}">Previous</a>
               </li>
             {% else %}
-              {% if i == page_obj.paginator.ELLIPSIS %}
-                <li class="page-item">
-                  <span class="page-link mt-1">{{ i }}</span></li>
-              {% else %}
-                <li class="page-item">
-                  <a class="page-link mt-1" href="?page={{ i }}">{{ i }}</a>
-                </li>
-              {% endif %}
+              <li class="page-item disabled">
+                <a class="page-link mt-1">Previous</a>
+              </li>
             {% endif %}
-          {% endfor %}
 
-          {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link mt-1" href="?page={{ page_obj.next_page_number }}">Next</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link mt-1">Next</a>
-            </li>
-          {% endif %}
-        </ul>
-      {% endif %}
-    </nav>
-  {% endblock pagination %}
+            {% get_proper_elided_page_range paginator page_obj.number as page_range %}
+            {% comment %} {% endcomment %}
+            {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+              {% if page_obj.number == i %}
+                <li class="active page-item">
+                  <span class="page-link mt-1">{{ i }}
+                    <span class="visually-hidden">(current)</span></span>
+                </li>
+              {% else %}
+                {% if i == page_obj.paginator.ELLIPSIS %}
+                  <li class="page-item">
+                    <span class="page-link mt-1">{{ i }}</span></li>
+                {% else %}
+                  <li class="page-item">
+                    <a class="page-link mt-1" href="?page={{ i }}">{{ i }}</a>
+                  </li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link mt-1" href="?page={{ page_obj.next_page_number }}">Next</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link mt-1">Next</a>
+              </li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </nav>
+    {% endblock pagination %}
+  {% endif %}
 
 {% endblock main %}
