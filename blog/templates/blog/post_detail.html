@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static comments comments_xtd post_cards %}
+{% load static comments comments_xtd markdown_extra post_cards %}
 
 {% block page_top_end %}
   <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
@@ -20,7 +20,20 @@
 {% endblock page_top %}
 
 {% block content_main %}
-  {% render_cards post %}
+  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+    {% render_cards post %}
+  {% else %}
+    <section class="text-gray-400 bg-gray-900 body-font">
+      <article class="p-4 md:w-3/4 mx-auto">
+        <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
+          <section class="p-6 markdown-stuff">
+            <h1 class="title-font text-lg font-medium text-white mb-3">{{ post.title }}</h1>
+            {{ post.body|formatted_markdown|safe }}
+          </section>
+        </div>
+      </article>
+    </section>
+  {% endif %}
 
   <article class="card p-2 comments shadow mt-2">
     <h5 class="text-muted">Comments</h5>
