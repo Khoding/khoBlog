@@ -1,10 +1,7 @@
 {% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags %}
 {% comment %} {% endcomment %}
-{% if enable_tailwind_flag or user.enable_tailwind %}
-  {% load tailwind_tags %}
-{% endif %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
   <head>
     <meta charset="UTF-8"/>
@@ -72,37 +69,29 @@
     {% block additional_js %}{% endblock additional_js %}
     {% block additional_css %}{% endblock additional_css %}
 
-    {% if not enable_tailwind_flag and not user.enable_tailwind  %}
-      <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'vendor/node_modules/bootstrap-icons/font/bootstrap-icons.css' %}" media="screen">
 
-      {% compress js %}
+    {% compress js %}
       <script src="{% static 'vendor/node_modules/jquery/dist/jquery.min.js' %}"></script>
       <script src="{% static 'vendor/node_modules/@editorjs/link/dist/bundle.js' %}"></script>
       <script defer="defer" src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
       <script defer="defer" src="{% static 'khoBlog/js/scripts/tooltips.js' %}"></script>
       <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/dynamic.js' %}"></script>
       <script async="async" defer="defer" src="{% static 'khoBlog/js/scripts/offcanvas.js' %}"></script>
-      {% endcompress js %}
-    {% endif %}
+    {% endcompress js %}
 
     {% block rel %}
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
 
-      {% if not enable_tailwind_flag and not user.enable_tailwind  %}
-        <!-- rel! Fonts / Icons -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="screen">
+      <!-- rel! Fonts / Icons -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="screen">
 
-        {% compress css %}
-          <!-- rel! Themes -->
-          <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
-        {% endcompress css %}
-      {% endif %}
-
-      {% if enable_tailwind_flag or user.enable_tailwind  %}
-        {% tailwind_css %}
-      {% endif %}
+      {% compress css %}
+        <!-- rel! Themes -->
+        <link rel="stylesheet" href="{% static 'khoBlog/css/main.css' %}" media="screen">
+      {% endcompress css %}
     {% endblock rel %}
 
     {% if not debug_flag %}
@@ -112,11 +101,7 @@
     {% endif %}
   </head>
 
-  {% if not enable_tailwind_flag and not user.enable_tailwind %}
-    <body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
-  {% else %}
-    <body class="antialiased text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
-  {% endif %}
+  <body class="wrapper {% if user.is_authenticated %}{{ user.default_theme }}{% else %}{% spaceless %}{% dt_setting themes %}{% endspaceless %}{% endif %}">
     {% if not debug_flag %}
       {% analytical_body_top %}
 
@@ -127,254 +112,186 @@
       <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    {% if not enable_tailwind_flag and not user.enable_tailwind %}
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
-        <div class="container-fluid">
-          <span class="d-inline-flex">
-            <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
-          </span>
-          <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
+      <div class="container-fluid">
+        <span class="d-inline-flex">
+          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
+        </span>
+        <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
-            <div class="d-block d-lg-none">
-              {% block nav %}{% endblock nav %}
-            </div>
+        <div class="navbar-collapse offcanvas-collapse" data-bs-scroll="false" id="top-navbar">
+          <div class="d-block d-lg-none">
+            {% block nav %}{% endblock nav %}
+          </div>
 
-            {% activeurl %}
-            <ul class="navbar-nav me-auto d-flex nav-item invisible">
-              <span class="nav-link">Bar is large</span></ul>
-            {% endactiveurl %}
+          {% activeurl %}
+          <ul class="navbar-nav me-auto d-flex nav-item invisible">
+            <span class="nav-link">Bar is large</span></ul>
+          {% endactiveurl %}
 
-            {% if user.is_authenticated %}
-              <div class="d-none d-md-flex d-none d-md-flex align-items-center">
-                <div class="flex-shrink-0 dropdown">
-                  <a href="#" class="d-block px-2 text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    {% if user.profile_pic %}
-                      <img class="rounded-circle" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" width="20" height="20" loading="lazy"/>
-                    {% else %}
-                      <img class="rounded-circle" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default Profile Pic" width="20" height="20" loading="lazy"/>
-                    {% endif %}
-                  </a>
+          {% if user.is_authenticated %}
+            <div class="d-none d-md-flex d-none d-md-flex align-items-center">
+              <div class="flex-shrink-0 dropdown">
+                <a href="#" class="d-block px-2 text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                  {% if user.profile_pic %}
+                    <img class="rounded-circle" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" width="20" height="20" loading="lazy"/>
+                  {% else %}
+                    <img class="rounded-circle" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default Profile Pic" width="20" height="20" loading="lazy"/>
+                  {% endif %}
+                </a>
 
-                  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                  <li>
+                    <h6 class="dropdown-header">Your profile</h6>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a>
+                  </li>
+
+                  {% if user.is_superuser %}
                     <li>
-                      <h6 class="dropdown-header">Your profile</h6>
+                      <hr class="dropdown-divider">
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'accounts:profile' slug=user.slug %}">Profile</a>
+                      <h6 class="dropdown-header">Creation</h6>
+                    </li>
+
+                    <li>
+                      <a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'accounts:edit_profile' slug=user.slug %}">Edit profile</a>
+                      <a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a>
                     </li>
-
-                    {% if user.is_superuser %}
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li>
-                        <h6 class="dropdown-header">Creation</h6>
-                      </li>
-
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:create_post' %}">New Post</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:create_series' %}">New Series</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a>
-                      </li>
-
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li>
-                        <h6 class="dropdown-header">Lists</h6>
-                      </li>
-
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
-                      </li>
-                    {% endif %}
-
-                    {% if user.is_superuser or user.is_staff %}
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li>
-                        <h6 class="dropdown-header">Administration</h6>
-                      </li>
-
-                      <li>
-                        <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-                      </li>
-                      {% if user.is_superuser %}
-                        <li>
-                          <a class="dropdown-item " href="https://eu.pythonanywhere.com">Pythonanywhere</a>
-                        </li>
-                      {% endif %}
-                    {% endif %}
+                    <li>
+                      <a class="dropdown-item" href="{% url 'blog:create_category' %}">New Category</a>
+                    </li>
 
                     <li>
                       <hr class="dropdown-divider">
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                      <h6 class="dropdown-header">Lists</h6>
                     </li>
-                  </ul>
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      </nav>
 
-      {% include 'includes/nav/undernav.html' %}
-    {% else %}
-      <div class="items-center mx-auto">
-        <div class="text-gray-400 bg-gray-900 body-font transition duration-500 ease-in-out transform shadow-lg">
-          <div class="flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row">
-            <a href="{% url 'blog:post_list' %}" class="pr-2 lg:pr-8 lg:px-6 focus:outline-none">
-              <div class="inline-flex items-center">
-                <img class='w-8 h-8 object-cover rounded-full' alt='RuthinkkTooBig' src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" loading="lazy">
-                <h2 class="block p-2 text-xl font-medium tracking-tighter transition duration-500 ease-in-out transform cursor-pointer hover:text-purple-500 lg:text-x lg:mr-8">
-                  Khodok's
-                  {{ app_title }}
-                </h2>
-              </div>
-            </a>
-            <nav class="flex flex-wrap items-center text-base justify-left">
-              <ul class="items-center inline-block list-none lg:inline-flex">
-                <li>
-                  <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
-                  <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Admin</a>
-                </li>
-              </ul>
-            </nav>
-            <button class="block p-2 mr-4 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-full focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 lg:ml-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto icon icon-tabler icon-tabler-logout" width="24" height="24" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
-                <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
-              </svg>
-            </button>
-            <div class="relative ml-3">
-              <div>
-                <button class="flex text-sm bg-purple-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-800 focus:ring-white" id="user-menu" aria-haspopup="true">
-                  <span class="sr-only">Open user menu</span>
-                  {% if user.profile_pic %}
-                    <img class="w-8 h-8 rounded-full" src="{{ user.profile_pic.url }}" alt="Profile Pic of {{ user.username }}" loading="lazy"/>
-                  {% else %}
-                    <img class="w-8 h-8 rounded-full" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default Profile Pic" loading="lazy"/>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+                    </li>
                   {% endif %}
-                </button>
-              </div>
-              <div class="absolute right-0 hidden w-48 px-4 py-2 mt-2 transition duration-500 ease-in-out origin-top-right transform bg-white border rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 e" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                <a href="#" class="block px-4 py-1 my-1 text-sm text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-purple-100 " role="menuitem">Your Profile</a>
-                <a href="#" class="block px-4 py-1 my-1 text-sm text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-purple-100 " role="menuitem">Settings</a>
-                <a href="#" class="block px-4 py-1 my-1 text-sm text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-purple-100 " role="menuitem">Sign out</a>
+
+                  {% if user.is_superuser or user.is_staff %}
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                      <h6 class="dropdown-header">Administration</h6>
+                    </li>
+
+                    <li>
+                      <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    {% if user.is_superuser %}
+                      <li>
+                        <a class="dropdown-item " href="https://eu.pythonanywhere.com">Pythonanywhere</a>
+                      </li>
+                    {% endif %}
+                  {% endif %}
+
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-          <div class="p-5 overflow-y-auto border-t whitespace-nowrap scroll-hidden">
-            {% load render_urls links_menu featured_post activeurl %}
-
-            <ul class="inline-flex items-center list-none">
-                {% links_menu urls %}
-                {% featured_big_post_list urls %}
-                {% featured_post_list urls %}
-                {% links urls %}
-            </ul>
-          </div>
+          {% endif %}
         </div>
       </div>
-    {% endif %}
+    </nav>
 
-    {% if not enable_tailwind_flag and not user.enable_tailwind %}
-      <main role="main" class="container-fluid mb-2">
-        <div class="row">
-          <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
+    {% include 'includes/nav/undernav.html' %}
 
-            <div class="row clearfix">
-              <div class="col">
-                <h2 class="mb-1">
-                  {% block page_top_title %}
-                    {{ title|truncatewords_html:7 }}
-                  {% endblock page_top_title %}
-                </h2>
-              </div>
+    <main role="main" class="container-fluid mb-2">
+      <div class="row">
+        <div class="col-xl-9 col-lg-9 col-lg-auto pe-lg-0">
 
-              <div class="col-auto mb-1">
-                {% if filter_form %}
-                  <a class="btn btn-primary btn-sm float-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Filters
-                  </a>
-                {% endif %}
-                {% block page_top_end %}{% endblock page_top_end %}
-              </div>
+          <div class="row clearfix">
+            <div class="col">
+              <h2 class="mb-1">
+                {% block page_top_title %}
+                  {{ title|truncatewords_html:7 }}
+                {% endblock page_top_title %}
+              </h2>
             </div>
 
-            <hr class="my-0"/>
+            <div class="col-auto mb-1">
+              {% if filter_form %}
+                <a class="btn btn-primary btn-sm float-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Filters
+                </a>
+              {% endif %}
+              {% block page_top_end %}{% endblock page_top_end %}
+            </div>
+          </div>
 
-            {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
+          <hr class="my-0"/>
 
-            {% block page_top_archives %}{% endblock page_top_archives %}
-          {% else %}
-            <main role="main">
-          {% endif %}
+          {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
+
+          {% block page_top_archives %}{% endblock page_top_archives %}
 
           {% block content %}{% endblock content %}
         </div>
 
-        {% if not enable_tailwind_flag and not user.enable_tailwind %}
-          <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
-            {% block aside %}{% endblock aside %}
-          </aside>
-        {% endif %}
+        <aside class="col-xl-3 col-lg-3 d-none d-lg-block">
+          {% block aside %}{% endblock aside %}
+        </aside>
       </div>
     </main>
 
-    {% if not enable_tailwind_flag and not user.enable_tailwind %}
-      <footer class="blog-footer">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            {% footer_setting footers %}
+    <footer class="blog-footer">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          {% footer_setting footers %}
+        </div>
+        <div class="row align-items-center text-muted text-small">
+          <div class="col">
+            Version number:
+            {{ APP_VERSION_NAME }}
           </div>
-          <div class="row align-items-center text-muted text-small">
-            <div class="col">
-              Version number:
-              {{ APP_VERSION_NAME }}
+          <div class="col">
+            <div class="row-auto">
+              <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-github"></i>
+                Github
+              </a>
             </div>
-            <div class="col">
-              <div class="row-auto">
-                <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" target="_blank" rel="noopener noreferrer">
-                  <i class="bi bi-github"></i>
-                  Github
-                </a>
-              </div>
 
-              <div class="row-auto">
-                {% project_version as VERSION %}
+            <div class="row-auto">
+              {% project_version as VERSION %}
 
-                <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
-              </div>
+              <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
             </div>
-            <div class="col">
-              Version code:
-              {{ APP_VERSION_NUMBER }}
-            </div>
+          </div>
+          <div class="col">
+            Version code:
+            {{ APP_VERSION_NUMBER }}
           </div>
         </div>
-      </footer>
-    {% endif %}
+      </div>
+    </footer>
 
     {% if not debug_flag %}
       {% analytical_body_bottom %}

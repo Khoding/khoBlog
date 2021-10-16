@@ -13,6 +13,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "khoBlog.context_processors.context",
                 "khoBlog.context_processors.selected_settings",
+                "khoBlog.context_processors.base_site_template",
             ],
             "libraries": {
                 "project_tags": "khoBlog.templatetags.forms",

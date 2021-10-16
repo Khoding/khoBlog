@@ -1,0 +1,148 @@
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags tailwind_tags %}
+{% comment %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+  <head>
+    <meta charset="UTF-8"/>
+    {% if not debug_flag %}
+      {% analytical_head_top %}
+
+      <!-- Google Tag Manager -->
+      <script>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer'
+              ? '&l=' + l
+              : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f
+            .parentNode
+            .insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-ND43ZGJ');
+      </script>
+      <!-- End Google Tag Manager -->
+    {% endif %}
+
+    <title>
+      Khodok's Blog -
+      {% if title %}
+        {{ title }}
+      {% else %}
+        {% block title %}{% endblock title %}
+      {% endif %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <link rel="canonical" href="{{ CANONICAL_PATH }}">
+    <link rel="shortlink" href="{{ CANONICAL_PATH }}">
+
+    <meta property="og:site_name" content="Hello There !"/>
+    <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
+    <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
+
+    {% block page_head %}
+      <!-- Primary Meta Tags -->
+      <meta name="title" content="{{ title }}">
+      <meta name="description" content="{{ description }}">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:title" content="{{ title }}">
+      <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+      <meta property="og:description" content="{{ description }}">
+
+      <!-- Twitter -->
+      <meta property="twitter:title" content="{{ title }}">
+      <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
+      <meta property="twitter:description" content="{{ description }}">
+    {% endblock page_head %}
+
+    <meta name="theme-color" content="#B362FF">
+    <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
+
+    {% block additional_js %}{% endblock additional_js %}
+    {% block additional_css %}{% endblock additional_css %}
+
+    {% block rel %}
+      <!-- base! favicon -->
+      <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
+
+      {% tailwind_css %}
+    {% endblock rel %}
+
+    {% if not debug_flag %}
+      <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+
+      {% analytical_head_bottom %}
+    {% endif %}
+  </head>
+
+  <body class="antialiased text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+    {% if not debug_flag %}
+      {% analytical_body_top %}
+
+      <!-- Google Tag Manager (noscript) -->
+      <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND43ZGJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
+    {% endif %}
+
+    <div class="items-center mx-auto">
+      <div class="text-gray-400 bg-gray-900 body-font transition duration-500 ease-in-out transform shadow-lg">
+        <div class="flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row">
+          <a href="{% url 'blog:post_list' %}" class="focus:outline-none">
+            <div class="inline-flex items-center">
+              <img class='w-8 h-8 object-cover rounded-full' alt='RuthinkkTooBig' src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" loading="lazy">
+              <h2 class="block p-2 text-xl font-medium tracking-tighter transition duration-500 ease-in-out transform cursor-pointer hover:text-purple-500 lg:text-x">
+                Khodok's
+                {{ app_title }}
+              </h2>
+            </div>
+          </a>
+          <nav class="flex flex-wrap items-center text-base ml-2 justify-left">
+            <ul class="items-center inline-block list-none lg:inline-flex">
+              <li>
+                <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
+                <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Admin</a>
+              </li>
+            </ul>
+          </nav>
+          <a href="{% url 'account_logout' %}" class="block p-2 mr-4 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-full focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 lg:ml-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto icon icon-tabler icon-tabler-logout" width="24" height="24" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+              <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="p-5 overflow-y-auto border-t whitespace-nowrap scroll-hidden">
+          {% load render_urls links_menu featured_post activeurl %}
+
+          <ul class="inline-flex items-center list-none">
+              {% links_menu urls %}
+              {% featured_big_post_list urls %}
+              {% featured_post_list urls %}
+              {% links urls %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <main role="main">
+      {% block content %}{% endblock content %}
+    </main>
+
+    {% if not debug_flag %}
+      {% analytical_body_bottom %}
+    {% endif %}
+  </body>
+
+</html>
