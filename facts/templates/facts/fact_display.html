@@ -6,6 +6,12 @@
       <header class="card-header p-2 py-0">
         <strong class="text-muted text-small">{{ object.prefix }}
           <strong class="fw-bold">{{ object }}</strong>
+
+          {% if context.context.user.is_superuser %}
+            <div class="vr"></div>
+
+            <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
+          {% endif %}
         </strong>
       </header>
     {% endif %}
@@ -27,14 +33,6 @@
         {% if object.link.permalink %}
           <div class="row">
             <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
-          </div>
-        {% endif %}
-
-        {% if context.context.user.is_superuser %}
-          <div class="row">
-            <strong class="text-small">
-              <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
-            </strong>
           </div>
         {% endif %}
       </footer>
