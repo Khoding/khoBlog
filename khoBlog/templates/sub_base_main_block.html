@@ -9,7 +9,7 @@
 
   {% block content_main %}{% endblock content_main %}
 
-  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+  {% if not enable_tailwind_flag %}
     {% block pagination %}
       <nav class="blog-pagination">
         {% if is_paginated %}

@@ -9,7 +9,7 @@
 {% endblock page_top_title %}
 
 {% block content %}
-  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+  {% if not enable_tailwind_flag %}
     {% if filter_form %}
       {% load project_tags %}
 

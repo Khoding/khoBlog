@@ -24,9 +24,9 @@
 {% endblock page_top %}
 
 {% block content_main %}
-  {% if not enable_tailwind_flag and not user.enable_tailwind %}
+  {% if not enable_tailwind_flag %}
     {% render_cards post %}
-  {% else %}
+  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
     <section class="text-gray-400 bg-gray-900 body-font">
       <article class="p-4 md:w-2/3 mx-auto">
         <nav class="flex justify-between" role="group" aria-label="Previous / Next">

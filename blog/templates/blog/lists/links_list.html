@@ -1,9 +1,9 @@
 {% for url in urls %}
-  {% if not enable_tailwind_flag and not context.user.enable_tailwind %}
+  {% if not context.enable_tailwind_flag %}
     <li>
       <a class="nav-link" href="{{ url.get_absolute_url }}">{% firstof url.featured_title url.title %}</a>
     </li>
-  {% else %}
+  {% elif context.enable_tailwind_flag or context.user.is_authenticated and context.user.enable_tailwind %}
     <li>
       <a href="{{ url.get_absolute_url }}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">{% firstof url.featured_title url.title %}</a>
     </li>

@@ -109,8 +109,15 @@
           <nav class="flex flex-wrap items-center text-base ml-2 justify-left">
             <ul class="items-center inline-block list-none lg:inline-flex">
               <li>
-                <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
-                <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Admin</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
+
+                  {% if user.is_superuser %}
+                    <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Admin</a>
+                  {% endif %}
+                {% else %}
+                  <a class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500" href="{% url 'account_login' %}">Log in</a>
+                {% endif %}
               </li>
             </ul>
           </nav>
