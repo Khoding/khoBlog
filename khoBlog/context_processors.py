@@ -20,7 +20,6 @@ def context(request):
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
         "enable_tailwind_flag": enable_tailwind_flag,
     }
-
     return context
 
 

@@ -29,6 +29,14 @@
             <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
           </div>
         {% endif %}
+
+        {% if context.context.user.is_superuser %}
+          <div class="row">
+            <strong class="text-small">
+              <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
+            </strong>
+          </div>
+        {% endif %}
       </footer>
     {% endif %}
   </article>

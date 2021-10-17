@@ -1,6 +1,7 @@
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from django.utils import timezone
 
 import auto_prefetch
@@ -61,3 +62,6 @@ class Fact(BaseFactAbstractModel):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+    def get_absolute_admin_update_url(self):
+        return reverse("admin:facts_fact_change", kwargs={"object_id": self.pk})
