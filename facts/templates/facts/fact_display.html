@@ -2,25 +2,31 @@
 
 {% if object %}
   <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
-    <header class="card-header p-2">
-      <strong class="text-muted text-small">{{ object.prefix }}</strong>
-      {{ object }}
-    </header>
+    {% if not hide_header %}
+      <header class="card-header p-2 py-0">
+        <strong class="text-muted text-small">{{ object.prefix }}
+          <strong class="fw-bold">{{ object }}</strong>
+        </strong>
+      </header>
+    {% endif %}
 
     <section class="card-body p-2">
       {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
     </section>
 
-    {% if object.link %}
-      <footer class="card-footer p-2">
+    {% if not hide_readmore and object.link %}
+      <footer class="card-footer px-2 py-0">
         <div class="row-auto">
-          <strong class="text-muted text-small">Read more:</strong>
-          <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
+          <strong class="text-muted text-small">Read more:
+            <strong class="fw-bold">
+              <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
+            </strong>
+          </strong>
         </div>
 
         {% if object.link.permalink %}
           <div class="row">
-            <strong class="text-muted text-small">({{ object.link.permalink }})</strong>
+            <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
           </div>
         {% endif %}
       </footer>

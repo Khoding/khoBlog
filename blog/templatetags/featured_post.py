@@ -19,7 +19,8 @@ def featured_post_list(context, urls):
 @register.inclusion_tag("blog/includes/featured_posts.html")
 def featured_big_posts():
     featured_big = Post.objects.defer("body", "image").filter(featuring_state="FB")
-    return {"featured_big": featured_big}
+    o = featured_big.order_by("?")[0]
+    return {"featured_big": o}
 
 
 @register.inclusion_tag("blog/includes/featured_posts.html")

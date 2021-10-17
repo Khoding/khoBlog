@@ -2,16 +2,14 @@
 
 {% if featured_big %}
   {% comment %} {% endcomment %}
-  {% with featured_big|random as featured_big_post %}
   <article class="card p-4 shadow">
     <section class="container">
       <strong class="d-inline-block mb-2 text-uppercase fst-italic">Featured Post</strong>
-      <h1 class="display-4">{{ featured_big_post.title }}</h1>
-      <p class="lead">{{ featured_big_post.description }}</p>
-      <a class="btn btn-primary" href="{{ featured_big_post.get_absolute_url }}">Continue reading</a>
+      <h1 class="display-4">{{ featured_big.title }}</h1>
+      <p class="lead">{{ featured_big.description }}</p>
+      <a class="btn btn-primary" href="{{ featured_big.get_absolute_url }}">Continue reading</a>
     </section>
   </article>
-  {% endwith %}
 {% endif %}
 
 <section class="row row-cols-1 row-cols-lg-2 me-0">

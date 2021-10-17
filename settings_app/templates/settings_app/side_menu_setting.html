@@ -12,7 +12,8 @@
           {{ side.sub_title }}
         </p>
 
-        {% fact %}
+        {% comment %} {% endcomment %}
+        {% fact hide_header=False hide_readmore=False %}
       {% endif %}
 
       {% if side.is_user_side_menu %}
