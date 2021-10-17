@@ -2,7 +2,7 @@
 {% load static featured_post offcanvas post_cards comments %}
 
 {% block page_top %}
-  {% if not enable_tailwind_flag %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
     {% if show_featured %}
       {% block page_top_featured %}
         {% featured_big_posts %}
@@ -85,7 +85,7 @@
 
 {% block content_main %}
 
-  {% if not enable_tailwind_flag %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
     <section class="row row-cols-1 row-cols-lg-3 me-0">
       {% for post in posts %}
         <section class="mb-2 pe-0">

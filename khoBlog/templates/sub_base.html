@@ -2,7 +2,7 @@
 {% load side_menu_set %}
 
 {% block nav %}
-  {% if not enable_tailwind_flag %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
     {% sm_setting sides %}
 
     {% block inside_nav %}{% endblock inside_nav %}
@@ -10,7 +10,7 @@
 {% endblock nav %}
 
 {% block aside %}
-  {% if not enable_tailwind_flag %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
     {% sm_setting sides %}
 
     {% block inside_aside %}{% endblock inside_aside %}

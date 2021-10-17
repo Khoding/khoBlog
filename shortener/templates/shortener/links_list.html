@@ -1,6 +1,6 @@
 {% for url in urls %}
   {% if url.featured %}
-    {% if not context.enable_tailwind_flag %}
+    {% if not context.enable_tailwind_flag and context.user.is_authenticated and not context.user.enable_tailwind or not context.enable_tailwind_flag and not context.user.is_authenticated %}
       <li>
         <a class="nav-link" href="{{ url.get_absolute_url }}">{{ url.title }}</a>
       </li>

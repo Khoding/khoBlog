@@ -24,7 +24,7 @@
 {% endblock page_top %}
 
 {% block content_main %}
-  {% if not enable_tailwind_flag %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
     {% render_cards post %}
   {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
     <section class="text-gray-400 bg-gray-900 body-font">
@@ -40,6 +40,10 @@
         <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
           <section class="p-6">
             <h1 class="title-font text-5xl font-medium text-purple-200 mb-3 border-b-2 border-purple-200 ">{{ post.title }}</h1>
+            {% if post.image %}
+              <img src="{{ post.image.url }}" class="post-image" alt="Post image" loading="lazy"/>
+            {% endif %}
+
             <div class="prose lg:prose-lg xl:prose-xl prose-purple">
               {{ post.body|formatted_markdown|safe }}
             </div>
