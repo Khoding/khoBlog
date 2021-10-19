@@ -20,5 +20,6 @@ If you want to use it for yourself:
     to use Django and Python before using this for yourself, I will not debug your issues, so feel free to not ask me
     for help unless you're absolutely certain the problem comes from me (which would probably mean that my website is
     down while you're trying).
-13. Also please Idc if you use it fully in production but gimme credits and don't just copy my content, and I'm not
-    responsible of any problems you encounter.
+13. Run `python manage.py tailwind start` before running `python manage.py runserver` (That's for Tailwind).
+14. Also please Idc if you use it fully in production but gimme credits and don't just copy my content, and I'm not
+    responsible for any problems you encounter.
