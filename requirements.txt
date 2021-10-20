@@ -8,8 +8,8 @@ beautifulsoup4==4.10.0
 binaryornot==0.4.4
 black==21.9b0
 bleach==4.1.0
-boto3==1.18.63
-botocore==1.21.63
+boto3==1.18.65
+botocore==1.21.65
 cachetools==4.2.4
 certifi==2021.5.30
 cffi==1.15.0
@@ -37,8 +37,8 @@ django-compressor==2.4.1
 django-contrib-comments==2.1.0
 django-debug-toolbar==3.2.2
 django-debug-toolbar-template-profiler==2.0.2
-django-editorjs-fields==0.2.4
-django-environ==0.8.0
+django-editorjs-fields==0.2.5
+django-environ==0.8.1
 django-filter==21.1
 django-import-export==2.6.1
 django-jsonview==2.0.0
