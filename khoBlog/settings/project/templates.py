@@ -17,6 +17,7 @@ TEMPLATES = [
             ],
             "libraries": {
                 "project_tags": "khoBlog.templatetags.forms",
+                "cards": "khoBlog.templatetags.cards",
             },
             "loaders": [
                 (

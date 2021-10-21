@@ -246,6 +246,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     "publication_state",
                     "featuring_state",
                     "language",
+                    "enable_comments",
                 )
             },
         ),

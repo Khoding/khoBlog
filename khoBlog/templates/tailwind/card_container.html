@@ -1,0 +1,11 @@
+{% load cards %}
+
+<section class="text-gray-400 bg-gray-900 body-font">
+  <section class="container p-5 mx-auto">
+    <section class="flex flex-wrap -m-4">
+      {% for object in object_list %}
+        {% cards object %}
+      {% endfor %}
+    </section>
+  </section>
+</section>
