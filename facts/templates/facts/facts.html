@@ -1,8 +1,94 @@
-{% load facts %}
+{% if simple_fact %}
+  {% load markup_tags %}
 
-{% if rnd == 0 %}
-  {% comment %} {% endcomment %}
-  {% fact hide_header=False hide_readmore=False %}
+  {% if object %}
+    <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
+      {% if not hide_header %}
+        <header class="card-header p-2 py-0">
+          <strong class="text-muted text-small">{{ object.prefix }}
+            <strong class="fw-bold">{{ object }}</strong>
+
+            {% if context.context.context.user.is_superuser %}
+              <div class="vr"></div>
+
+              <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
+            {% endif %}
+          </strong>
+        </header>
+      {% endif %}
+
+      <section class="card-body p-2">
+        {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+      </section>
+
+      {% if not hide_readmore and object.link %}
+        <footer class="card-footer px-2 py-0">
+          <div class="row-auto">
+            <strong class="text-muted text-small">Read more:
+              <strong class="fw-bold">
+                <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
+              </strong>
+            </strong>
+          </div>
+
+          {% if object.link.permalink %}
+            <div class="row">
+              <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
+            </div>
+          {% endif %}
+        </footer>
+      {% endif %}
+    </article>
+  {% endif %}
+
 {% else %}
-  {% specific_date_fact hide_header=False hide_readmore=False %}
+  {% load markup_tags %}
+
+  {% if object %}
+    <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
+      {% if not hide_header %}
+        <header class="card-header p-2 py-0">
+          <strong class="text-muted text-small">
+            {% if object.showing_rule == 'D' %}
+              Today:
+            {% elif object.showing_rule == 'T' %}
+              This Hour:
+            {% else %}
+              Today at This Hour:
+            {% endif %}
+            <strong class="fw-bold">{{ object }}</strong>
+
+            {% if context.context.context.user.is_superuser %}
+              <div class="vr"></div>
+
+              <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
+            {% endif %}
+          </strong>
+        </header>
+      {% endif %}
+
+      <section class="card-body p-2">
+        {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+      </section>
+
+      {% if not hide_readmore and object.link %}
+        <footer class="card-footer px-2 py-0">
+          <div class="row-auto">
+            <strong class="text-muted text-small">Read more:
+              <strong class="fw-bold">
+                <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
+              </strong>
+            </strong>
+          </div>
+
+          {% if object.link.permalink %}
+            <div class="row">
+              <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
+            </div>
+          {% endif %}
+        </footer>
+      {% endif %}
+    </article>
+  {% endif %}
+
 {% endif %}
