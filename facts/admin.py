@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Fact
+from .models import Fact, SpecificDateFact
 
 
 class FactAdmin(SimpleHistoryAdmin):
@@ -13,4 +13,15 @@ class FactAdmin(SimpleHistoryAdmin):
     }
 
 
+class SpecificDateFactAdmin(SimpleHistoryAdmin):
+    """SpecificDateFactAdmin
+    Admin for SpecificDateFacts
+    """
+
+    prepopulated_fields = {
+        "slug": ("title",),
+    }
+
+
 admin.site.register(Fact, FactAdmin)
+admin.site.register(SpecificDateFact, SpecificDateFactAdmin)

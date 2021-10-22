@@ -4,7 +4,14 @@
   <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
     {% if not hide_header %}
       <header class="card-header p-2 py-0">
-        <strong class="text-muted text-small">{{ object.prefix }}
+        <strong class="text-muted text-small">
+          {% if object.showing_rule == 'D' %}
+            Today:
+          {% elif object.showing_rule == 'T' %}
+            This Hour:
+          {% else %}
+            Today at This Hour:
+          {% endif %}
           <strong class="fw-bold">{{ object }}</strong>
 
           {% if context.context.context.user.is_superuser %}

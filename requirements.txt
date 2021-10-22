@@ -8,8 +8,8 @@ beautifulsoup4==4.10.0
 binaryornot==0.4.4
 black==21.9b0
 bleach==4.1.0
-boto3==1.19.0
-botocore==1.22.0
+boto3==1.19.1
+botocore==1.22.1
 cachetools==4.2.4
 certifi==2021.5.30
 cffi==1.15.0
@@ -53,7 +53,7 @@ django-sitetree==1.17.0
 django-storages==1.12.2
 django-taggit==1.5.1
 django-tailwind==2.2.2
-django-widget-tweaks==1.4.8
+django-widget-tweaks==1.4.9
 djangorestframework==3.12.4
 docutils==0.17.1
 drf-yasg==1.20.0

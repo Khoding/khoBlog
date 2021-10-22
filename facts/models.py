@@ -25,7 +25,8 @@ class BaseFactAbstractModel(auto_prefetch.Model):
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
     link = auto_prefetch.ForeignKey(Links, on_delete=models.CASCADE, null=True, blank=True)
-    prefix = models.CharField(max_length=25, default="Fun Fact: ")
+    shown = models.BooleanField(default=True, help_text="Is it shown")
+    priority = models.PositiveIntegerField(default=0)
 
     # Metadata about the fact
     site = auto_prefetch.ForeignKey(Site, default=1, on_delete=models.CASCADE)
@@ -48,8 +49,7 @@ class Fact(BaseFactAbstractModel):
     A Model for Facts
     """
 
-    shown = models.BooleanField(default=True, help_text="Is it shown")
-    priority = models.PositiveIntegerField(default=0)
+    prefix = models.CharField(max_length=25, default="Fun Fact: ")
     history = HistoricalRecords()
 
     class Meta(BaseFactAbstractModel.Meta):
@@ -65,3 +65,40 @@ class Fact(BaseFactAbstractModel):
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:facts_fact_change", kwargs={"object_id": self.pk})
+
+
+class SpecificDateFact(BaseFactAbstractModel):
+    """SpecificDateFact Model
+
+    A model for a Fact that should only be shown on specific dates
+    """
+
+    SHOWING_RULE_CHOICES = [
+        ("D", "date"),
+        ("T", "time"),
+        ("DT", "date_time"),
+    ]
+
+    showing_date = models.DateTimeField(blank=True, null=True)
+    showing_rule = models.CharField(
+        max_length=25,
+        verbose_name="Showing Rules",
+        choices=SHOWING_RULE_CHOICES,
+        default="D",
+    )
+    is_recurrent = models.BooleanField(default=True)
+    history = HistoricalRecords()
+
+    class Meta(BaseFactAbstractModel.Meta):
+        verbose_name_plural = "Specific Date Facts"
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
+    def get_absolute_admin_update_url(self):
+        return reverse("admin:facts_specificdatefact_change", kwargs={"object_id": self.pk})

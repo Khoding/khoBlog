@@ -1,0 +1,8 @@
+{% load facts %}
+
+{% if rnd == 0 %}
+  {% comment %} {% endcomment %}
+  {% fact hide_header=False hide_readmore=False %}
+{% else %}
+  {% specific_date_fact hide_header=False hide_readmore=False %}
+{% endif %}
