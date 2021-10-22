@@ -21,8 +21,6 @@
           <span class="{% if context.user.is_superuser %}superuser{% elif context.user.is_staff %}staff{% endif %}">{{ context.user.username }}</span></p>
       {% endif %}
 
-      {% specific_date_message_setting messages %}
-
       {% if not side.is_user_side_menu and not side.is_post_list_side_menu %}
         {% for group in side.side_menu_links.all %}
           <div class="btn-group-vertical d-block mb-2" role="group" aria-label="{{ group }} Group">
