@@ -8,7 +8,7 @@
           <strong class="text-muted text-small">{{ object.prefix }}
             <strong class="fw-bold">{{ object }}</strong>
 
-            {% if context.context.context.user.is_superuser %}
+            {% if context.context.user.is_superuser %}
               <div class="vr"></div>
 
               <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
@@ -58,7 +58,7 @@
             {% endif %}
             <strong class="fw-bold">{{ object }}</strong>
 
-            {% if context.context.context.user.is_superuser %}
+            {% if context.context.user.is_superuser %}
               <div class="vr"></div>
 
               <a href="{{ object.get_absolute_admin_update_url }}">Edit in Admin</a>
