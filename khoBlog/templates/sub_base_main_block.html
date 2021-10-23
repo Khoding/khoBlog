@@ -9,8 +9,8 @@
 
   {% block content_main %}{% endblock content_main %}
 
-  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-    {% block pagination %}
+  {% block pagination %}
+    {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
       <nav class="blog-pagination">
         {% if is_paginated %}
           <ul class="pagination justify-content-center justify-content-md-start flex-wrap m-0">
@@ -56,7 +56,53 @@
           </ul>
         {% endif %}
       </nav>
-    {% endblock pagination %}
-  {% endif %}
+    {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
+      <nav class="mt-1 bg-gray-800">
+        {% if is_paginated %}
+          <div class="flex py-1 bg-gray-900">
+            {% if page_obj.has_previous %}
+              <a class="flex items-center px-4 py-2 ml-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.previous_page_number }}">
+                Previous
+              </a>
+            {% else %}
+              <a class="flex items-center px-4 py-2 ml-1 rounded-md cursor-not-allowed bg-gray-900 text-gray-400 disabled:opacity-50" disabled>
+                Previous
+              </a>
+            {% endif %}
+
+            {% get_proper_elided_page_range paginator page_obj.number as page_range %}
+            {% comment %} {% endcomment %}
+            {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+              {% if page_obj.number == i %}
+                <span class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-indigo-500 text-gray-200">{{ i }}
+                  <span class="sr-only">(current)</span>
+                </span>
+              {% else %}
+                {% if i == page_obj.paginator.ELLIPSIS %}
+                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200">
+                    {{ i }}
+                  </a>
+                {% else %}
+                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ i }}">
+                    {{ i }}
+                  </a>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <a class="flex items-center px-4 py-2 ms-1 transition-colors duration-200 transform rounded-md bg-gray-800 text-gray-200 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.next_page_number }}">
+                Next
+              </a>
+            {% else %}
+              <span class="flex items-center px-4 py-2 ms-1 rounded-md cursor-not-allowed bg-gray-800 text-gray-600 disabled:opacity-50" disabled>
+                Next
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endblock pagination %}
 
 {% endblock main %}
