@@ -86,6 +86,7 @@ class SpecificDateFact(BaseFactAbstractModel):
         choices=SHOWING_RULE_CHOICES,
         default="D",
     )
+    show_timesince = models.BooleanField(default=True)
     is_recurrent = models.BooleanField(default=True)
     history = HistoricalRecords()
 
