@@ -1,6 +1,6 @@
-{% if simple_fact %}
-  {% load markup_tags %}
+{% load markup_tags %}
 
+{% if simple_fact %}
   {% if object %}
     <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
       {% if not hide_header %}
@@ -18,7 +18,9 @@
       {% endif %}
 
       <section class="card-body p-2">
-        {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+        <section class="card-text mb-0">
+          {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+        </section>
       </section>
 
       {% if not hide_readmore and object.link %}
@@ -40,10 +42,7 @@
       {% endif %}
     </article>
   {% endif %}
-
 {% else %}
-  {% load markup_tags %}
-
   {% if object %}
     <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
       {% if not hide_header %}
@@ -68,7 +67,18 @@
       {% endif %}
 
       <section class="card-body p-2">
-        {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+        <section class="card-text mb-0">
+          {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+        </section>
+
+        {% comment %} {% endcomment %}
+        {% if is_old_enough and object.show_timesince %}
+          <section class="card-text my-0">
+            It has been
+            {{ timesince }} year{{ timesince|pluralize:'s' }}
+            since.
+          </section>
+        {% endif %}
       </section>
 
       {% if not hide_readmore and object.link %}
