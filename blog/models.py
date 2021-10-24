@@ -19,7 +19,7 @@ from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
-from custom_taggit.models import CustomTag, CustomTaggedItem
+from custom_taggit.models import CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
