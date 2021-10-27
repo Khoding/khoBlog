@@ -16,7 +16,7 @@
           <ul class="pagination justify-content-center justify-content-md-start flex-wrap m-0">
             {% if page_obj.has_previous %}
               <li class="page-item">
-                <a class="page-link mt-1" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                <a class="page-link mt-1" href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
               </li>
             {% else %}
               <li class="page-item disabled">
@@ -38,7 +38,7 @@
                     <span class="page-link mt-1">{{ i }}</span></li>
                 {% else %}
                   <li class="page-item">
-                    <a class="page-link mt-1" href="?page={{ i }}">{{ i }}</a>
+                    <a class="page-link mt-1" href="{% relative_url i 'page' request.GET.urlencode %}">{{ i }}</a>
                   </li>
                 {% endif %}
               {% endif %}
@@ -46,7 +46,7 @@
 
             {% if page_obj.has_next %}
               <li class="page-item">
-                <a class="page-link mt-1" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="page-link mt-1" href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}">Next</a>
               </li>
             {% else %}
               <li class="page-item disabled">
@@ -61,7 +61,7 @@
         {% if is_paginated %}
           <div class="flex py-1 bg-gray-900">
             {% if page_obj.has_previous %}
-              <a class="flex items-center px-4 py-2 ml-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.previous_page_number }}">
+              <a class="flex items-center px-4 py-2 ml-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}">
                 Previous
               </a>
             {% else %}
@@ -83,7 +83,7 @@
                     {{ i }}
                   </a>
                 {% else %}
-                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ i }}">
+                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="{% relative_url i 'page' request.GET.urlencode %}">
                     {{ i }}
                   </a>
                 {% endif %}
@@ -91,7 +91,7 @@
             {% endfor %}
 
             {% if page_obj.has_next %}
-              <a class="flex items-center px-4 py-2 ms-1 transition-colors duration-200 transform rounded-md bg-gray-800 text-gray-200 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.next_page_number }}">
+              <a class="flex items-center px-4 py-2 ms-1 transition-colors duration-200 transform rounded-md bg-gray-800 text-gray-200 hover:bg-indigo-500 hover:text-gray-200" href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}">
                 Next
               </a>
             {% else %}
