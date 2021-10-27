@@ -9,6 +9,15 @@
       <script src="https://cdn.lr-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
       <script>window.LogRocket && window.LogRocket.init('dplxvm/khoblog');</script>
 
+      {% if user.is_authenticated %}
+        <script>
+          LogRocket.identify({{ user.pk }}, {
+            name: {{ user }},
+            email: {{ user.email }},
+          });
+        </script>
+      {% endif %}
+
       {% analytical_head_top %}
 
       <!-- Google Tag Manager -->
