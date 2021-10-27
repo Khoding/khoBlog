@@ -11,9 +11,9 @@
 
       {% if user.is_authenticated %}
         <script>
-          LogRocket.identify({{ user.pk }}, {
-            name: {{ user }},
-            email: {{ user.email }},
+          LogRocket.identify("{{ user.pk }}", {
+            name: "{{ user }}",
+            email: "{{ user.email }}",
           });
         </script>
       {% endif %}
