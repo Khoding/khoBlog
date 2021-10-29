@@ -28,6 +28,17 @@
       {% endif %}
     {% endif %}
 
+    {% if object.get_absolute_needs_review_url %}
+      <a class="dropdown-item{% if object.needs_reviewing %} disabled{% endif %}" href="{{ object.get_absolute_needs_review_url }}">
+        <i class="bi bi-patch-exclamation"></i>
+        {% if not object.needs_reviewing %}
+          Mark as Needs Reviewing
+        {% else %}
+          Needs Reviewing
+        {% endif %}
+      </a>
+    {% endif %}
+
     {% if object.get_absolute_clone_url %}
       <a class="dropdown-item" href="{{ object.get_absolute_clone_url }}">
         <i class="bi bi-stickies"></i>

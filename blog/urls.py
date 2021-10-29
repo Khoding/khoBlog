@@ -57,12 +57,14 @@ post_action_extra_patterns = [
         views.post_publish_withdrawn,
         name="post_publish_withdrawn",
     ),
+    path("needs_review/", views.post_needs_review, name="post_needs_review"),
     path("delete/", PostDeleteView.as_view(), name="post_remove"),
 ]
 
 category_action_extra_patterns = [
     path("", PostInCategoryListView.as_view(), name="post_category_list"),
     path("edit/", CategoryUpdateView.as_view(), name="category_edit"),
+    path("needs_review/", views.category_needs_review, name="category_needs_review"),
     path("delete/", CategoryDeleteView.as_view(), name="category_remove"),
     path("rss/", LatestPostsFeedByCategory(), name="latest_category_post_feed"),
 ]
@@ -70,6 +72,7 @@ category_action_extra_patterns = [
 series_action_extra_patterns = [
     path("", PostInSeriesListView.as_view(), name="post_series_list"),
     path("edit/", SeriesUpdateView.as_view(), name="series_edit"),
+    path("needs_review/", views.series_needs_review, name="series_needs_review"),
     path("delete/", SeriesDeleteView.as_view(), name="series_remove"),
 ]
 
