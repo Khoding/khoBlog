@@ -1,7 +1,7 @@
 {% load static markdown_extra read_time super_buttons %}
 
 {% block card_div %}
-  <article id="object-{{ object.slug }}" class="card shadow{% if in_list %} h-100{% endif %}">
+  <article id="object-{{ object.slug }}" class="card shadow{% if in_list %} h-100{% endif %}{% if context.user.is_authenticated and context.user.is_superuser and object.needs_reviewing %} border-warning{% endif %}">
   {% endblock card_div %}
 
   {% if object.pub_date %}

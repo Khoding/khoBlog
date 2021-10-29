@@ -50,6 +50,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
     objects: CategoryManager = CategoryManager()
@@ -76,11 +77,18 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:category_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:category_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:category_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:blog_category_change", kwargs={"object_id": self.pk})
+
+    def needs_review(self):
+        self.needs_reviewing = True
+        self.save()
 
     def remove(self):
         self.is_removed = True
@@ -124,6 +132,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
     objects: SeriesManager = SeriesManager()
@@ -150,11 +159,18 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:series_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:series_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:series_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:blog_series_change", kwargs={"object_id": self.pk})
+
+    def needs_review(self):
+        self.needs_reviewing = True
+        self.save()
 
     def remove(self):
         self.is_removed = True
@@ -294,6 +310,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     history = HistoricalRecords()
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
     objects: PostManager = PostManager()
@@ -344,6 +361,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:post_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:post_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:post_remove", kwargs={"slug": self.slug})
 
@@ -369,6 +389,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.pub_date = timezone.now()
         self.publication_state = "W"
         self.withdrawn = True
+        self.save()
+
+    def needs_review(self):
+        self.needs_reviewing = True
         self.save()
 
     def clicked(self):

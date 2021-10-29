@@ -210,16 +210,16 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "slug": ("title",),
     }
     list_filter = (
-        "categories",
         "is_removed",
+        "needs_reviewing",
         "publication_state",
         "featuring_state",
         "pub_date",
         "withdrawn",
         "featuring_state",
+        "categories",
         "language",
         "tags",
-        "content",
     )
 
     fieldsets = (
@@ -246,6 +246,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     "publication_state",
                     "featuring_state",
                     "language",
+                    "needs_reviewing",
                     "enable_comments",
                 )
             },

@@ -1141,6 +1141,27 @@ def post_publish_withdrawn(request, slug):
     return redirect("blog:post_detail", slug=slug)
 
 
+@user_passes_test(lambda u: u.is_superuser)
+def post_needs_review(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.needs_review()
+    return redirect("blog:post_detail", slug=slug)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def category_needs_review(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    category.needs_review()
+    return redirect("blog:post_category_list", slug=slug)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def series_needs_review(request, slug):
+    series = get_object_or_404(Series, slug=slug)
+    series.needs_review()
+    return redirect("blog:post_series_list", slug=slug)
+
+
 @superuser_required()
 class PostCommentCreateView(LoginRequiredMixin, CreateView):
     """PostCommentCreateView
