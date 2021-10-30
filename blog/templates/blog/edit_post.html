@@ -165,6 +165,19 @@
         </div>
 
         <div class="field mb-2">
+          {{ form.needs_reviewing.label_tag }}
+          <div class="form-check">
+            {{ form.needs_reviewing|add_class:"form-check-input" }}
+          </div>
+          {% if form.needs_reviewing.help_text %}
+            <span class="text-small text-muted">{{ form.needs_reviewing.help_text }}</span>
+          {% endif %}
+          {% for error in form.needs_reviewing.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
           <div class="form-floating">
             {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post featuring state" }}
             {{ form.featuring_state.label_tag }}

@@ -85,6 +85,7 @@ class PostEditForm(forms.ModelForm):
             "image",
             "slug",
             "withdrawn",
+            "needs_reviewing",
             "featuring_state",
             "publication_state",
             "pub_date",
@@ -253,6 +254,7 @@ class CategoryEditForm(forms.ModelForm):
             "parent",
             "slug",
             "withdrawn",
+            "needs_reviewing",
         )
 
         widgets = {
@@ -261,6 +263,7 @@ class CategoryEditForm(forms.ModelForm):
             "parent": forms.Select(),
             "slug": forms.TextInput(),
             "withdrawn": forms.CheckboxInput(),
+            "needs_reviewing": forms.CheckboxInput(),
         }
 
 
@@ -295,13 +298,20 @@ class SeriesEditForm(forms.ModelForm):
 
     class Meta:
         model = Series
-        fields = ("title", "description", "slug", "withdrawn")
+        fields = (
+            "title",
+            "description",
+            "slug",
+            "withdrawn",
+            "needs_reviewing",
+        )
 
         widgets = {
             "title": forms.TextInput(),
             "description": forms.Textarea(),
             "slug": forms.TextInput(),
             "withdrawn": forms.CheckboxInput(),
+            "needs_reviewing": forms.CheckboxInput(),
         }
 
 
