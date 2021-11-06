@@ -69,7 +69,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title + self.suffix)
+            self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
