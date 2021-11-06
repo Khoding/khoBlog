@@ -224,6 +224,7 @@ class CategoryCreateForm(forms.ModelForm):
         model = Category
         fields = (
             "title",
+            "suffix",
             "description",
             "parent",
             "withdrawn",
@@ -231,6 +232,7 @@ class CategoryCreateForm(forms.ModelForm):
 
         widgets = {
             "title": forms.TextInput(),
+            "suffix": forms.TextInput(),
             "description": forms.Textarea(),
             "parent": forms.Select(),
             "withdrawn": forms.CheckboxInput(),
@@ -250,6 +252,7 @@ class CategoryEditForm(forms.ModelForm):
         model = Category
         fields = (
             "title",
+            "suffix",
             "description",
             "parent",
             "slug",
@@ -259,6 +262,7 @@ class CategoryEditForm(forms.ModelForm):
 
         widgets = {
             "title": forms.TextInput(),
+            "suffix": forms.TextInput(),
             "description": forms.Textarea(),
             "parent": forms.Select(),
             "slug": forms.TextInput(),
