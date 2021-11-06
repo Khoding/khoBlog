@@ -315,7 +315,7 @@ class CommentAdmin(SimpleHistoryAdmin):
 
 
 class CategoryAdmin(SimpleHistoryAdmin):
-    list_display = ("title", "description", "slug", "withdrawn", "is_removed")
+    list_display = ("title", "suffix", "description", "slug", "withdrawn", "is_removed")
     list_editable = ("is_removed",)
     ordering = (
         "-pk",
@@ -323,7 +323,12 @@ class CategoryAdmin(SimpleHistoryAdmin):
         "-is_removed",
     )
     search_fields = ("title", "slug", "pk", "withdrawn")
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {
+        "slug": (
+            "title",
+            "suffix",
+        )
+    }
     list_filter = (
         "withdrawn",
         "is_removed",

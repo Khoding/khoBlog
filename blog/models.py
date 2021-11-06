@@ -44,6 +44,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         blank=True,
     )
     title = models.CharField(max_length=200, help_text="Category title")
+    suffix = models.CharField(max_length=200, help_text="Category suffix", blank=True, default="")
     description = models.TextField(blank=True, help_text="Category description")
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Category slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
@@ -64,11 +65,11 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         }
 
     def __str__(self):
-        return self.title
+        return self.full_title
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title + self.suffix)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -105,6 +106,19 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def get_superuser_post_count_in_category(self):
         return self.postcatslink_set.filter(post__is_removed=False).count()
+
+    @property
+    def full_title(self) -> str:
+        fulltitle = ""
+        if self.suffix:
+            fulltitle = self.title + " " + self.suffix
+        elif not self.suffix and not self.parent:
+            fulltitle = self.title
+        elif not self.suffix and self.parent and self.parent.suffix:
+            fulltitle = self.title + " " + self.parent.suffix
+        else:
+            fulltitle = self.title
+        return fulltitle
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
@@ -444,7 +458,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         for post_cat in PostCatsLink.objects.filter(
             post_id=self.pk, category__is_removed=False, featured_cat=True
         ).select_related("post", "category"):
-            return post_cat.category
+            return post_cat.category.full_title
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

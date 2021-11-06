@@ -66,6 +66,8 @@
                 -
                 {{ object.series.description }}
               {% endif %}
+              ({{ context.series.all.count }}
+              Part series)
             </header>
             <ul class="list-group list-group-flush">
               {% for e in context.series %}
