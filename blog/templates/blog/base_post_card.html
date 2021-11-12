@@ -66,8 +66,10 @@
                 -
                 {{ object.series.description }}
               {% endif %}
-              ({{ context.series.all.count }}
-              Part series)
+              <span class="text-small text-muted">
+                ({{ context.series.all.count }}
+                Part series)
+              </span>
             </header>
             <ul class="list-group list-group-flush">
               {% for e in context.series %}
@@ -75,20 +77,26 @@
                   {% if not e.is_scheduled or context.user.is_superuser %}
                     <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
                       {{ e }}
+                      {% if e == object %}
+                        <span class="text-muted">(You are here)</span>
+                      {% endif %}
                       {% if e.is_scheduled %}
-                        <span class="text-muted text-small">
-                          Coming:
-                          {{ e.pub_date|date:'l, d F Y H:i:s' }}
+                        <span class="text-muted fst-italic">
+                          (Coming:
+                          {{ e.pub_date|date:'l, d F Y H:i:s' }})
                         </span>
                       {% endif %}
                     </a>
                   {% else %}
                     <span>Part #{{ forloop.counter }}:
                       {{ e }}
+                      {% if e == object %}
+                        <span class="text-muted">(You are here)</span>
+                      {% endif %}
                       {% if e.is_scheduled %}
-                        <span class="text-muted text-small">
-                          Coming:
-                          {{ e.pub_date|date:'l, d F Y H:i:s' }}
+                        <span class="text-muted fst-italic">
+                          (Coming:
+                          {{ e.pub_date|date:'l, d F Y H:i:s' }})
                         </span>
                       {% endif %}
                     </span>
