@@ -1,3 +1,5 @@
+from random import randrange
+
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -352,6 +354,14 @@ def redirect_to_latest(request):
     else:
         latest = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).latest()
     return redirect(reverse("blog:post_detail", args=(latest.slug,)))
+
+
+def redirect_to_random(request):
+    if request.user.is_superuser:
+        post = Post.objects.filter(is_removed=False).order_by("?")[0]
+    else:
+        post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).order_by("?")[0]
+    return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
 
 def post_detail_through_id(request, pk):
