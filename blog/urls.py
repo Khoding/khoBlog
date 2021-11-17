@@ -169,6 +169,7 @@ urlpatterns = [
     # Lists
     path("", PostListView.as_view(), name="post_list"),
     path("latest/", views.redirect_to_latest, name="latest"),
+    path("random/", views.redirect_to_random, name="random"),
     path("weblog/", WeblogTemplateView.as_view(), name="weblog"),
     path("drafts/", PostDraftListView.as_view(), name="post_draft_list"),
     path("scheduled/", PostScheduledListView.as_view(), name="post_scheduled_list"),
