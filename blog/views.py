@@ -64,13 +64,10 @@ class PostListView(ListView):
     def get_queryset(self):
         query = PostFilter(
             self.request.GET,
-            queryset=Post.objects.all(),
+            queryset=Post.objects.filter(Q(pub_date__lte=timezone.now(), withdrawn=False)),
         )
         if query is not None and query != "":
-            if not self.request.user.is_superuser:
-                return query.qs.filter(Q(pub_date__lte=timezone.now(), withdrawn=False))
-            else:
-                return query.qs
+            return query.qs
         return Post.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
