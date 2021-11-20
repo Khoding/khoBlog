@@ -16,10 +16,10 @@ class PostFilter(django_filters.FilterSet):
         [type]: [description]
     """
 
-    title = django_filters.CharFilter(lookup_expr="contains")
-    description = django_filters.CharFilter(lookup_expr="contains")
-    body = django_filters.CharFilter(lookup_expr="contains")
-    slug = django_filters.CharFilter(lookup_expr="contains")
+    title = django_filters.CharFilter(lookup_expr="icontains")
+    description = django_filters.CharFilter(lookup_expr="icontains")
+    body = django_filters.CharFilter(lookup_expr="icontains")
+    slug = django_filters.CharFilter(lookup_expr="icontains")
     categories = django_filters.ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
     tags = django_filters.ModelChoiceFilter(queryset=CustomTag.objects.filter(withdrawn=False))
     is_outdated = django_filters.BooleanFilter()
