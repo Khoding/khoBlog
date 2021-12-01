@@ -182,8 +182,8 @@ urlpatterns = [
     path("series/", include(series_extra_patterns)),
     # Tags Related Patterns
     path("tags/", include(tags_extra_patterns)),
-    # Archives Related Patterns
-    path("archives/", include(archive_extra_patterns)),
+    # Archive Related Patterns
+    path("archive/", include(archive_extra_patterns)),
     # RSS Related Patterns
     path("latest/rss/", LatestPostsFeed(), name="latest_post_feed"),
     # Search Related Patterns

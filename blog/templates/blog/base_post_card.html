@@ -60,7 +60,7 @@
           <article class="card shadow">
             <header class="card-header">
               <strong>Series:
-                <a href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series }}</a>
+                <a class="card-link" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series }}</a>
               </strong>
               {% if object.series.description %}
                 -
@@ -75,10 +75,10 @@
               {% for e in context.series %}
                 <li class="list-group-item">
                   {% if not e.is_scheduled or context.user.is_superuser %}
-                    <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
+                    <a {% if e == object %} class="card-link" {% endif %} href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
                       {{ e }}
                       {% if e == object %}
-                        <span class="text-muted">(You are here)</span>
+                        <span class="fst-italic text-small">(You are here)</span>
                       {% endif %}
                       {% if e.is_scheduled %}
                         <span class="text-muted fst-italic">

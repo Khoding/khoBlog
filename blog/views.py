@@ -1352,7 +1352,7 @@ class PostArchiveIndexView(ArchiveIndexView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "[Archive] Post archives"
+        context["title"] = "[Archive] Post archive"
         return context
 
 

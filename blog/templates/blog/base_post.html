@@ -1,9 +1,9 @@
 {% extends 'sub_base_main_block.html' %}
 
-{% block page_top_archives %}
+{% block page_top_archive %}
   <div class="text-small text-muted col">
     <span>
-      <a href="{% url 'blog:post_archive' %}">Archives</a>
+      <a href="{% url 'blog:post_archive' %}">Archive</a>
       by
       <a href="{% url 'blog:archive_year' year=now|date:'Y' %}">Year</a>
       -
@@ -16,4 +16,4 @@
       <a href="{% url 'blog:archive_today' %}">Today</a>
     </span>
   </div>
-{% endblock page_top_archives %}
+{% endblock page_top_archive %}
