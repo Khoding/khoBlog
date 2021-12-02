@@ -11,10 +11,10 @@
             <div class="card-header">
               <div class="d-flex">
                 <span class="col">
-                  <strong class="text-muted">
-                    <a class="text-muted" href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}">Category #{{ cat.id }}</a>
+                  <strong class="text-white-50">
+                    <a class="text-white-50" href="{% url 'blog:latest_category_post_feed' slug=cat.slug %}">Category #{{ cat.id }}</a>
                   </strong>
-                  <p class="mb-0 text-muted">Category Post Count:
+                  <p class="mb-0 text-white-50">Category Post Count:
                     {% if user.is_superuser %}{{ cat.get_superuser_post_count_in_category }}
                       |
                     {% endif %}{{ cat.get_post_count_in_category }}</p>

@@ -49,7 +49,7 @@
             {{ form.alias_user|add_class:"form-control"|attr:"placeholder:" }}
             {{ form.alias_user.label_tag }}
           </div>
-          <span class="text-small text-muted">{{ form.alias_user.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.alias_user.help_text }}</span>
         </div>
         {% for error in form.alias_user.errors %}
           <small class="form-text text-danger">{{ error }}</small>

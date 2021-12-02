@@ -127,7 +127,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
       <div class="container-fluid">
         <span class="d-inline-flex">
-          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
+          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-white-50" href="{{ app_direct_link }}">{{ app_title }}</a>
         </span>
         <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -278,7 +278,7 @@
         <div class="row align-items-center">
           {% footer_setting footers %}
         </div>
-        <div class="row align-items-center text-muted text-small">
+        <div class="row align-items-center text-white-50 text-small">
           <div class="col">
             Version number:
             {{ APP_VERSION_NAME }}

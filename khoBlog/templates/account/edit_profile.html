@@ -35,7 +35,7 @@
                   {{ form.username.label_tag }}
                 </div>
                 {% if form.username.help_text %}
-                  <span class="text-small text-muted">{{ form.username.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.username.help_text }}</span>
                 {% endif %}
                 {% for error in form.username.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -46,7 +46,7 @@
                 {{ form.profile_pic.label_tag }}
                 {{ form.profile_pic|add_class:"form-control"|attr:"placeholder:Profile picture" }}
                 {% if form.profile_pic.help_text %}
-                  <span class="text-small text-muted">{{ form.profile_pic.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.profile_pic.help_text }}</span>
                 {% endif %}
                 {% for error in form.profile_pic.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -59,7 +59,7 @@
                   {{ form.bio.label_tag }}
                 </div>
                 {% if form.bio.help_text %}
-                  <span class="text-small text-muted">{{ form.bio.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.bio.help_text }}</span>
                 {% endif %}
                 {% for error in form.bio.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -79,10 +79,10 @@
                   {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
                 </div>
                 {% if form.first_name.help_text %}
-                  <span class="text-small text-muted">{{ form.first_name.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.first_name.help_text }}</span>
                 {% endif %}
                 {% if form.last_name.help_text %}
-                  <span class="text-small text-muted">{{ form.last_name.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
                 {% endif %}
                 {% for error in form.first_name.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -98,7 +98,7 @@
                   {{ form.email.label_tag }}
                 </div>
                 {% if form.email.help_text %}
-                  <span class="text-small text-muted">{{ form.email.help_text }}</span>
+                  <span class="text-small text-white-50">{{ form.email.help_text }}</span>
                 {% endif %}
                 {% for error in form.email.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -111,7 +111,7 @@
                   {{ form.password.label_tag }}
                 </div>
                 {% if form.password.help_text %}
-                  <span class="text-small text-muted">{{ form.password.help_text|safe }}</span>
+                  <span class="text-small text-white-50">{{ form.password.help_text|safe }}</span>
                 {% endif %}
                 {% for error in form.password.errors %}
                   <small class="form-text text-danger">{{ error }}</small>
@@ -131,7 +131,7 @@
                 {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
               </div>
               {% if form.slug.help_text %}
-                <span class="text-small text-muted">{{ form.slug.help_text }}</span>
+                <span class="text-small text-white-50">{{ form.slug.help_text }}</span>
               {% endif %}
               {% for error in form.slug.errors %}
                 <small class="form-text text-danger">{{ error }}</small>
@@ -150,7 +150,7 @@
                 {{ form.welcome_message.label_tag }}
               </div>
               {% if form.welcome_message.help_text %}
-                <span class="text-small text-muted">{{ form.welcome_message.help_text }}</span>
+                <span class="text-small text-white-50">{{ form.welcome_message.help_text }}</span>
               {% endif %}
               {% for error in form.welcome_message.errors %}
                 <small class="form-text text-danger">{{ error }}</small>
@@ -163,7 +163,7 @@
                 {{ form.show_github|add_class:"form-check-input" }}
               </div>
               {% if form.show_github.help_text %}
-                <span class="text-small text-muted">{{ form.show_github.help_text }}</span>
+                <span class="text-small text-white-50">{{ form.show_github.help_text }}</span>
               {% endif %}
               {% for error in form.show_github.errors %}
                 <small class="form-text text-danger">{{ error }}</small>
@@ -176,7 +176,7 @@
                 {{ form.default_theme.label_tag }}
               </div>
               {% if form.default_theme.help_text %}
-                <span class="text-small text-muted">{{ form.default_theme.help_text }}</span>
+                <span class="text-small text-white-50">{{ form.default_theme.help_text }}</span>
               {% endif %}
               {% for error in form.default_theme.errors %}
                 <small class="form-text text-danger">{{ error }}</small>
@@ -195,7 +195,7 @@
                 {{ form.enable_tailwind|add_class:"form-check-input" }}
               </div>
               {% if form.enable_tailwind.help_text %}
-                <span class="text-small text-muted">{{ form.enable_tailwind.help_text }}</span>
+                <span class="text-small text-white-50">{{ form.enable_tailwind.help_text }}</span>
               {% endif %}
               {% for error in form.enable_tailwind.errors %}
                 <small class="form-text text-danger">{{ error }}</small>

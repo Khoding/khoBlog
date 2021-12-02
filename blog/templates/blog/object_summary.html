@@ -17,7 +17,7 @@
           {% if object.is_outdated %}
             <span class="badge bg-warning d-flex float-end">Outdated</span>
           {% endif %}
-          <p class="mb-0 text-small text-muted">
+          <p class="mb-0 text-small text-white-50">
             Post #{{ object.id }}
           </p>
         </section>
@@ -39,7 +39,7 @@
     {% endif %}
 
     <section>
-      <p class="mb-auto text-small text-muted">
+      <p class="mb-auto text-small text-white-50">
         {% if not object.pub_date %}
           Created
         {% else %}
@@ -59,7 +59,7 @@
         {% endif %}
       </p>
       {% if object.mod_date %}
-        <p class="mb-auto text-small text-muted">
+        <p class="mb-auto text-small text-white-50">
           Last updated by
           <strong>{{ object.author }}</strong>
           on
@@ -71,7 +71,7 @@
     </section>
 
     <section>
-      <p class="mb-0 text-small text-muted">
+      <p class="mb-0 text-small text-white-50">
         {% if object.body %}
           {{ object.body|readtime }}
         {% else %}

@@ -25,7 +25,7 @@
           {{ form.username.label_tag }}
         </div>
         {% if form.username.help_text %}
-          <span class="text-small text-muted">{{ form.username.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.username.help_text }}</span>
         {% endif %}
         {% for error in form.username.errors %}
           <small class="form-text text-danger">{{ error }}</small>
@@ -38,7 +38,7 @@
           {{ form.email.label_tag }}
         </div>
         {% if form.email.help_text %}
-          <span class="text-small text-muted">{{ form.email.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.email.help_text }}</span>
         {% endif %}
         {% for error in form.email.errors %}
           <small class="form-text text-danger">{{ error }}</small>
@@ -52,10 +52,10 @@
           {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
         </div>
         {% if form.first_name.help_text %}
-          <span class="text-small text-muted">{{ form.first_name.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.first_name.help_text }}</span>
         {% endif %}
         {% if form.last_name.help_text %}
-          <span class="text-small text-muted">{{ form.last_name.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
         {% endif %}
         {% for error in form.first_name.errors %}
           <small class="form-text text-danger">{{ error }}</small>
@@ -71,7 +71,7 @@
           {{ form.password1.label_tag }}
         </div>
         {% if form.password1.help_text %}
-          <span class="text-small text-muted">{{ form.password1.help_text|safe }}</span>
+          <span class="text-small text-white-50">{{ form.password1.help_text|safe }}</span>
         {% endif %}
         {% for error in form.password1.errors %}
           <small class="form-text text-danger">{{ error }}</small>
@@ -84,7 +84,7 @@
           {{ form.password2.label_tag }}
         </div>
         {% if form.password2.help_text %}
-          <span class="text-small text-muted">{{ form.password2.help_text|safe }}</span>
+          <span class="text-small text-white-50">{{ form.password2.help_text|safe }}</span>
         {% endif %}
         {% for error in form.password2.errors %}
           <small class="form-text text-danger">{{ error }}</small>
@@ -95,7 +95,7 @@
         {{ form.captcha.label_tag }}
         {{ form.captcha|add_class:"form-control"|attr:"placeholder:Captcha" }}
         {% if form.captcha.help_text %}
-          <span class="text-small text-muted">{{ form.captcha.help_text }}</span>
+          <span class="text-small text-white-50">{{ form.captcha.help_text }}</span>
         {% endif %}
         {% for error in form.captcha.errors %}
           <small class="form-text text-danger">{{ error }}</small>

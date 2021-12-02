@@ -8,7 +8,7 @@
     <a href="{% url 'comments-xtd-like' item.comment.pk %}" class="{% if not item.likedit %}mutedlink{% endif %}">
       <i class="bi bi-hand-thumbs-up"></i>
     </a>
-    <span class="text-muted">|</span>
+    <span class="text-white-50">|</span>
 
     {% if show_feedback and item.dislikedit_users %}
       <a class="badge badge-primary text-white cfb-counter" data-toggle="tooltip" title="{{ item.dislikedit_users|join:'<br/>' }}">

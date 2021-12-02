@@ -34,10 +34,10 @@
             {{ form.featured_title|add_class:"form-control"|attr:"placeholder:Post featured title" }}
           </div>
           {% if form.title.help_text %}
-            <span class="text-small text-muted">{{ form.title.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.title.help_text }}</span>
           {% endif %}
           {% if form.featured_title.help_text %}
-            <span class="text-small text-muted">{{ form.featured_title.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.featured_title.help_text }}</span>
           {% endif %}
           {% for error in form.title.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -53,7 +53,7 @@
             {{ form.categories|add_class:"form-select"|attr:"multiple" }}
           </div>
           {% if form.categories.help_text %}
-            <span class="text-small text-muted">{{ form.categories.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.categories.help_text }}</span>
           {% endif %}
           {% for error in form.categories.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -64,7 +64,7 @@
           {{ form.tags.label_tag }}
           {{ form.tags }}
           {% if form.tags.help_text %}
-            <span class="text-small text-muted">{{ form.tags.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.tags.help_text }}</span>
           {% endif %}
           {% for error in form.tags.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -80,7 +80,7 @@
             {{ form.order_in_series|add_class:"form-control col-auto"|attr:"placeholder:Post order in series" }}
           </div>
           {% if form.series.help_text %}
-            <span class="text-small text-muted">{{ form.series.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.series.help_text }}</span>
           {% endif %}
           {% for error in form.series.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -93,7 +93,7 @@
             {{ form.description.label_tag }}
           </div>
           {% if form.description.help_text %}
-            <span class="text-small text-muted">{{ form.description.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.description.help_text }}</span>
           {% endif %}
           {% for error in form.description.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -105,7 +105,7 @@
             {{ form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
           </div>
           {% if form.body.help_text %}
-            <span class="text-small text-muted">{{ form.body.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.body.help_text }}</span>
           {% endif %}
           {% for error in form.body.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -118,7 +118,7 @@
           {{ form.image.label_tag }}
           {{ form.image|add_class:"form-control"|attr:"placeholder:Post image" }}
           {% if form.image.help_text %}
-            <span class="text-small text-muted">{{ form.image.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.image.help_text }}</span>
           {% endif %}
           {% for error in form.image.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -131,7 +131,7 @@
             {{ form.withdrawn|add_class:"form-check-input" }}
           </div>
           {% if form.withdrawn.help_text %}
-            <span class="text-small text-muted">{{ form.withdrawn.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.withdrawn.help_text }}</span>
           {% endif %}
           {% for error in form.withdrawn.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -144,7 +144,7 @@
             {{ form.is_outdated|add_class:"form-check-input" }}
           </div>
           {% if form.is_outdated.help_text %}
-            <span class="text-small text-muted">{{ form.is_outdated.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.is_outdated.help_text }}</span>
           {% endif %}
           {% for error in form.is_outdated.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -157,7 +157,7 @@
             {{ form.featuring_state.label_tag }}
           </div>
           {% if form.featuring_state.help_text %}
-            <span class="text-small text-muted">{{ form.featuring_state.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.featuring_state.help_text }}</span>
           {% endif %}
           {% for error in form.featuring_state.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -170,7 +170,7 @@
             {{ form.publication_state.label_tag }}
           </div>
           {% if form.publication_state.help_text %}
-            <span class="text-small text-muted">{{ form.publication_state.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.publication_state.help_text }}</span>
           {% endif %}
           {% for error in form.publication_state.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -181,7 +181,7 @@
           {{ form.pub_date.label_tag }}
           {{ form.pub_date|add_class:"form-control picker" }}
           {% if form.pub_date.help_text %}
-            <span class="text-small text-muted">{{ form.pub_date.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.pub_date.help_text }}</span>
           {% endif %}
           {% for error in form.pub_date.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -195,10 +195,10 @@
             {{ form.url_to_article_title|add_class:"form-control"|attr:"placeholder:Linked article's title" }}
           </div>
           {% if form.url_to_article.help_text %}
-            <span class="text-small text-muted">{{ form.url_to_article.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.url_to_article.help_text }}</span>
           {% endif %}
           {% if form.url_to_article_title.help_text %}
-            <span class="text-small text-muted">{{ form.url_to_article_title.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.url_to_article_title.help_text }}</span>
           {% endif %}
           {% for error in form.url_to_article.errors %}
             <small class="form-text text-danger">{{ error }}</small>
@@ -214,7 +214,7 @@
             {{ form.language.label_tag }}
           </div>
           {% if form.language.help_text %}
-            <span class="text-small text-muted">{{ form.language.help_text }}</span>
+            <span class="text-small text-white-50">{{ form.language.help_text }}</span>
           {% endif %}
           {% for error in form.language.errors %}
             <small class="form-text text-danger">{{ error }}</small>

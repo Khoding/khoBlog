@@ -23,7 +23,7 @@
             {% else %}
               <a class="card-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
             {% endif %}
-            <span class="d-inline-block text-muted">
+            <span class="d-inline-block text-white-50">
               •
               <span class="fst-italic">Featured Post</span>
             </span>
@@ -32,7 +32,7 @@
         <section class="card-body">
           <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
           <div class="mb-0">{% include 'blog/includes/post_dates.html' %}</div>
-          <p class="mb-2 text-small text-muted">
+          <p class="mb-2 text-small text-white-50">
             {% if post.body %}
               {{ post.body|readtime }}
             {% else %}

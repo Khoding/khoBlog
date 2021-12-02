@@ -37,22 +37,22 @@
     </div>
 
     <article class="card p-2 comments shadow mt-2">
-      <h5 class="text-muted">Comments</h5>
+      <h5 class="text-white-50">Comments</h5>
       {% if page.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
         {% get_comment_count for page as comment_count %}
 
         {% render_comment_form for page %}
         <hr/>
 
-        <p class="text-muted text-small">This page has
+        <p class="text-white-50 text-small">This page has
           {{ comment_count }}
           comment{{ comment_count|pluralize:'s' }}.</p>
 
         {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback %}
       {% elif page.enable_comments and comments_disabled_globally_flag %}
-        <p class="text-muted text-small">Comments were disabled globally.</p>
+        <p class="text-white-50 text-small">Comments were disabled globally.</p>
       {% else %}
-        <p class="text-muted text-small">This page has comments disabled.</p>
+        <p class="text-white-50 text-small">This page has comments disabled.</p>
       {% endif %}
     </article>
   {% else %}

@@ -54,32 +54,24 @@
   {% endif %}
 
   <article class="card p-2 comments shadow mt-2">
-    <h5 class="text-muted">Comments</h5>
+    <h5 class="text-white-50">Comments</h5>
     {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
       {% get_comment_count for post as comment_count %}
 
       {% render_comment_form for post %}
       <hr/>
 
-      <p class="text-muted text-small">This post has
+      <p class="text-white-50 text-small">This post has
         {{ comment_count }}
         comment{{ comment_count|pluralize:'s' }}.</p>
 
       {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
     {% elif post.enable_comments and comments_disabled_globally_flag %}
-      <p class="text-muted text-small">Comments were disabled globally.</p>
+      <p class="text-white-50 text-small">Comments were disabled globally.</p>
     {% else %}
-      <p class="text-muted text-small">This post has comments disabled.</p>
+      <p class="text-white-50 text-small">This post has comments disabled.</p>
     {% endif %}
   </article>
 {% endblock content_main %}
-
-{% block inside_aside %}
-  {% include 'blog/includes/aside_nav_post_info.html' %}
-{% endblock inside_aside %}
-
-{% block inside_nav %}
-  {% include 'blog/includes/aside_nav_post_info.html' %}
-{% endblock inside_nav %}
 
 {% block pagination %}{% endblock pagination %}
