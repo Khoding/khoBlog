@@ -53,25 +53,48 @@
     </section>
   {% endif %}
 
-  <article class="card p-2 comments shadow mt-2">
-    <h5 class="text-muted">Comments</h5>
-    {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-      {% get_comment_count for post as comment_count %}
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
+    <article class="card p-2 comments shadow mt-2">
+      <h5 class="text-muted">Comments</h5>
+      {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+        {% get_comment_count for post as comment_count %}
 
-      {% render_comment_form for post %}
-      <hr/>
+        {% render_comment_form for post %}
+        <hr/>
 
-      <p class="text-muted text-small">This post has
-        {{ comment_count }}
-        comment{{ comment_count|pluralize:'s' }}.</p>
+        <p class="text-muted text-small">This post has
+          {{ comment_count }}
+          comment{{ comment_count|pluralize:'s' }}.</p>
 
-      {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
-    {% elif post.enable_comments and comments_disabled_globally_flag %}
-      <p class="text-muted text-small">Comments were disabled globally.</p>
-    {% else %}
-      <p class="text-muted text-small">This post has comments disabled.</p>
-    {% endif %}
-  </article>
+        {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+      {% elif post.enable_comments and comments_disabled_globally_flag %}
+        <p class="text-muted text-small">Comments were disabled globally.</p>
+      {% else %}
+        <p class="text-muted text-small">This post has comments disabled.</p>
+      {% endif %}
+    </article>
+  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
+    <hr/>
+    <article class="text-gray-400 bg-gray-900 body-font">
+      <h5 class="text-muted">Comments</h5>
+      {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+        {% get_comment_count for post as comment_count %}
+
+        {% render_comment_form for post %}
+        <hr/>
+
+        <p class="text-muted text-sm">This post has
+          {{ comment_count }}
+          comment{{ comment_count|pluralize:'s' }}.</p>
+
+        {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
+      {% elif post.enable_comments and comments_disabled_globally_flag %}
+        <p class="text-muted text-sm">Comments were disabled globally.</p>
+      {% else %}
+        <p class="text-muted text-sm">This post has comments disabled.</p>
+      {% endif %}
+    </article>
+  {% endif %}
 {% endblock content_main %}
 
 {% block inside_aside %}
