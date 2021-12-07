@@ -10,7 +10,7 @@ from facts.models import Fact, SpecificDateFact
 
 @register.inclusion_tag("facts/facts.html", takes_context=True)
 def facts(context, hide_header=False, hide_readmore=False):
-    """fax bruh"""
+    """Facts tag"""
     rnd = randrange(2)
     specific_date_fact_count = SpecificDateFact.objects.filter(
         (

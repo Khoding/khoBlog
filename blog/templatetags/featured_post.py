@@ -6,18 +6,21 @@ register = template.Library()
 
 @register.inclusion_tag("blog/lists/links_list.html", takes_context=True)
 def featured_big_post_list(context, urls):
+    """featured_big_post_list Every Featured Big Posts for links lists"""
     urls = Post.objects.defer("body", "image").filter(featuring_state="FB")
     return {"urls": urls, "context": context}
 
 
 @register.inclusion_tag("blog/lists/links_list.html", takes_context=True)
 def featured_post_list(context, urls):
+    """featured_post_list Every Featured Posts for links lists"""
     urls = Post.objects.defer("body", "image").filter(featuring_state="F")
     return {"urls": urls, "context": context}
 
 
 @register.inclusion_tag("blog/includes/featured_posts.html")
 def featured_big_posts():
+    """featured_big_posts Every Featured Big Posts"""
     featured_big = Post.objects.defer("body", "image").filter(featuring_state="FB")
     print(featured_big)
     if not featured_big:
@@ -28,5 +31,6 @@ def featured_big_posts():
 
 @register.inclusion_tag("blog/includes/featured_posts.html")
 def featured_posts():
+    """featured_posts Every Featured Posts"""
     featured = Post.objects.defer("body", "image").filter(featuring_state="F")
     return {"featured": featured}
