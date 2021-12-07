@@ -40,6 +40,8 @@ class Role(auto_prefetch.Model):
 
 
 class CustomUser(AbstractUser):
+    """CustomUser Model Class"""
+
     THEME_CHOICES = [
         ("default", "Default"),
         ("uglybanana", "Funny Banana"),

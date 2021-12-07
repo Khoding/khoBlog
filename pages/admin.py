@@ -1,9 +1,8 @@
 from django.contrib import admin
-from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from import_export.admin import ImportExportModelAdmin
 from simple_history.admin import SimpleHistoryAdmin
 
-from .models import FlatPage, Page
+from .models import Page
 
 
 class FlatPageAdmin(admin.ModelAdmin):
@@ -78,7 +77,3 @@ class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
             },
         ),
     )
-
-
-admin.site.unregister(FlatPageOld)
-admin.site.register(FlatPage, FlatPageAdmin)

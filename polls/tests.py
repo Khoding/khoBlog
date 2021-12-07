@@ -8,6 +8,8 @@ from .models import Question
 
 
 class QuestionModelTests(TestCase):
+    """QuestionModelTests Class"""
+
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for questions whose pub_date
@@ -47,6 +49,8 @@ def create_question(title, days):
 
 
 class QuestionIndexViewTests(TestCase):
+    """QuestionIndexViewTests Class"""
+
     def test_no_questions(self):
         """If no questions exist, an appropriate message is displayed."""
         response = self.client.get(reverse("polls:index"))
@@ -95,6 +99,8 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionDetailViewTests(TestCase):
+    """QuestionDetailViewTests Class"""
+
     def test_future_question(self):
         """
         The detail view of a question with a pub_date in the future

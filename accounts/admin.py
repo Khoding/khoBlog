@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from comments.models import CustomComment
 from .models import CustomUser, Role
 
 
 class CustomUserAdmin(UserAdmin):
+    """Admin class for CustomUserAdmin"""
+
     model = CustomUser
 
     fieldsets = (
@@ -61,9 +62,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
+    """Admin class for RoleAdmin"""
+
     model = Role
 
-
-admin.site.register(CustomComment)
 
 admin.site.register(CustomUser, CustomUserAdmin)

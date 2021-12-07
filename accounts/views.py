@@ -19,6 +19,8 @@ from .models import CustomUser
 
 
 class SignUpView(SignupView):
+    """SignUpView Class"""
+
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("account_login")
     template_name = "account/signup.html"
@@ -30,6 +32,8 @@ class SignUpView(SignupView):
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
+    """ProfileView Class"""
+
     model = CustomUser
     template_name = "account/profile.html"
     view_as = "self"
@@ -47,12 +51,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Profile • " + str(
-            self.model.objects.get(username=kwargs["object"])
-        )
-        context["description"] = str(
-            self.model.objects.get(username=kwargs["object"]).bio
-        )
+        context["title"] = "Profile • " + str(self.model.objects.get(username=kwargs["object"]))
+        context["description"] = str(self.model.objects.get(username=kwargs["object"]).bio)
         context["users"] = CustomUser.objects.all()
         context["comments"] = Comment.objects.filter(author_logged=kwargs["object"])
         context["view_as"] = self.view_as
@@ -60,6 +60,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 
 class UserEditView(LoginRequiredMixin, UpdateView):
+    """UserEditView Class"""
+
     form_class = CustomUserChangeForm
     template_name = "account/edit_profile.html"
     model = CustomUser
@@ -71,6 +73,8 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
 
 class CustomPasswordSetView(LoginRequiredMixin, PasswordSetView):
+    """CustomPasswordSetView Class"""
+
     template_name = "account/password_set.html"
     success_url = reverse_lazy("account_login")
     model = CustomUser
@@ -82,6 +86,8 @@ class CustomPasswordSetView(LoginRequiredMixin, PasswordSetView):
 
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """CustomPasswordChangeView Class"""
+
     template_name = "account/password_change.html"
     success_url = reverse_lazy("account_login")
     model = CustomUser
@@ -93,6 +99,8 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 
 class CustomPasswordResetView(PasswordResetView):
+    """CustomPasswordResetView Class"""
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Reset Password"
@@ -100,6 +108,8 @@ class CustomPasswordResetView(PasswordResetView):
 
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
+    """CustomPasswordResetDoneView Class"""
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Password requested"
@@ -107,6 +117,8 @@ class CustomPasswordResetDoneView(PasswordResetDoneView):
 
 
 class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
+    """CustomPasswordResetFromKeyView Class"""
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Set a new password"
@@ -114,6 +126,8 @@ class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
 
 
 class CustomPasswordResetFromKeyDoneView(PasswordResetFromKeyDoneView):
+    """CustomPasswordResetFromKeyDoneView Class"""
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "New password set"
@@ -121,6 +135,8 @@ class CustomPasswordResetFromKeyDoneView(PasswordResetFromKeyDoneView):
 
 
 class ConnectionsEditView(LoginRequiredMixin, ConnectionsView):
+    """ConnectionsEditView Class"""
+
     form_class = DisconnectForm
     template_name = "account/connections.html"
     model = CustomUser
@@ -132,6 +148,8 @@ class ConnectionsEditView(LoginRequiredMixin, ConnectionsView):
 
 
 class EmailEditView(LoginRequiredMixin, EmailView):
+    """EmailEditView Class"""
+
     model = CustomUser
 
     def get_context_data(self, **kwargs):

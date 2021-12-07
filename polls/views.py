@@ -11,6 +11,8 @@ from .models import Choice, Question
 
 
 class IndexView(PermissionRequiredMixin, ListView):
+    """IndexView Class"""
+
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
     permission_required = "polls.view_question"
@@ -32,6 +34,8 @@ class IndexView(PermissionRequiredMixin, ListView):
 
 
 class PollsDetailView(PermissionRequiredMixin, DetailView):
+    """PollsDetailView Class"""
+
     model = Question
     template_name = "polls/detail.html"
     permission_required = "polls.view_question"
@@ -50,6 +54,8 @@ class PollsDetailView(PermissionRequiredMixin, DetailView):
 
 
 class ResultsView(PermissionRequiredMixin, DetailView):
+    """ResultsView Class"""
+
     model = Question
     template_name = "polls/results.html"
     permission_required = "polls.view_question"

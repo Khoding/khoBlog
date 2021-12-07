@@ -5,9 +5,13 @@ from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
+    """CustomUserCreationForm Form Class"""
+
     captcha = CaptchaField()
 
     class Meta:
+        """Meta class for CustomUserCreationForm Form"""
+
         model = CustomUser
         fields = (
             "username",
@@ -18,7 +22,11 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """CustomUserChangeForm Form Class"""
+
     class Meta:
+        """Meta class for CustomUserChangeForm Form"""
+
         model = CustomUser
         fields = (
             "username",

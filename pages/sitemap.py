@@ -4,6 +4,8 @@ from .models import Page
 
 
 class PageSitemap(Sitemap):
+    """ProjectSitemap Sitemap"""
+
     changefreq = "monthly"
     priority = 0.6
     protocol = "https"

@@ -10,7 +10,11 @@ from .models import Category, Post, PostCatsLink, PostContent, Series
 
 
 class PostResource(resources.ModelResource):
+    """Admin class for PostResource"""
+
     class Meta:
+        """Meta class for PostResource"""
+
         model = Post
 
 
@@ -161,16 +165,22 @@ def make_multi_lingui(modeladmin, request, queryset):
 
 
 class PostCatsLinkInline(admin.TabularInline):
+    """PostCatsLinkInline Class"""
+
     model = PostCatsLink
     extra = 0
 
 
 class PostContentInline(admin.TabularInline):
+    """PostContentInline Class"""
+
     model = PostContent
     extra = 0
 
 
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
+    """PostAdmin Class"""
+
     resource_class = PostResource
     list_display = (
         "pk",
@@ -287,34 +297,9 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     ]
 
 
-class CommentAdmin(SimpleHistoryAdmin):
-    list_display = (
-        "id",
-        "full_title",
-        "author_logged",
-        "author",
-        "created_date",
-        "approbation_state",
-        "comment_answer",
-    )
-    list_display_links = ("full_title",)
-    ordering = ("created_date",)
-    search_fields = (
-        "author",
-        "body",
-    )
-    list_filter = (
-        "author_logged",
-        "approbation_state",
-    )
-
-    actions = [
-        make_approved,
-        make_removed,
-    ]
-
-
 class CategoryAdmin(SimpleHistoryAdmin):
+    """CategoryAdmin Class"""
+
     list_display = ("title", "suffix", "description", "slug", "withdrawn", "is_removed")
     list_editable = ("is_removed",)
     ordering = (
@@ -338,6 +323,8 @@ class CategoryAdmin(SimpleHistoryAdmin):
 
 @admin.register(Series)
 class SeriesAdmin(SimpleHistoryAdmin):
+    """SeriesAdmin Class"""
+
     list_display = ("title", "description", "slug", "withdrawn", "is_removed")
     list_editable = ("is_removed",)
     ordering = (
