@@ -98,26 +98,12 @@ tags_extra_patterns = [
     path("<slug:slug>/", include(tags_action_extra_patterns)),
 ]
 
-post_comment_action_extra_patterns = [
-    path("edit/", PostCommentUpdateView.as_view(), name="edit_post_comment"),
-    path("reply/", ReplyToCommentCreateView.as_view(), name="add_reply_to_comment"),
-    path("approve/", ApprovePostCommentUpdateView.as_view(), name="comment_approve"),
-    path("remove/", RemovePostCommentUpdateView.as_view(), name="comment_remove"),
-]
-
-comment_extra_patterns = [
-    path("", PostCommentCreateView.as_view(), name="add_comment_to_post"),
-    path("<int:pk>/", include(post_comment_action_extra_patterns)),
-]
-
 post_extra_patterns = [
     path("add/", PostCreateView.as_view(), name="create_post"),
     # Goes to Post by redirecting through its ID or directly by slug respectively
     path("<int:pk>/", views.post_detail_through_id, name="post_detail_through_id"),
     path("<int:pk>/", include(post_action_extra_patterns)),
     path("<slug:slug>/", include(post_action_extra_patterns)),
-    # Post Comments Related Patterns
-    path("<int:pk_post>/comment/", include(comment_extra_patterns)),
 ]
 
 search_extra_patterns = [

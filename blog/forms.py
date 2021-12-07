@@ -17,6 +17,8 @@ class PostCreateForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for PostCreateForm ModelForm"""
+
         model = Post
         fields = (
             "title",
@@ -71,6 +73,8 @@ class PostEditForm(forms.ModelForm):
     )
 
     class Meta:
+        """Meta class for PostEditForm ModelForm"""
+
         model = Post
         fields = (
             "title",
@@ -133,6 +137,8 @@ class PostCloneForm(forms.ModelForm):
     )
 
     class Meta:
+        """Meta class for PostCloneForm ModelForm"""
+
         model = Post
         fields = (
             "title",
@@ -179,6 +185,8 @@ class PostDeleteForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for PostDeleteForm ModelForm"""
+
         model = Post
         fields = ()
 
@@ -193,6 +201,8 @@ class CategoryDeleteForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for CategoryDeleteForm ModelForm"""
+
         model = Category
         fields = ()
 
@@ -207,6 +217,8 @@ class SeriesDeleteForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for SeriesDeleteForm ModelForm"""
+
         model = Series
         fields = ()
 
@@ -221,6 +233,8 @@ class CategoryCreateForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for CategoryCreateForm ModelForm"""
+
         model = Category
         fields = (
             "title",
@@ -249,6 +263,8 @@ class CategoryEditForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for CategoryEditForm ModelForm"""
+
         model = Category
         fields = (
             "title",
@@ -281,6 +297,8 @@ class SeriesCreateForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for SeriesCreateForm ModelForm"""
+
         model = Series
         fields = ("title", "description", "withdrawn")
 
@@ -301,6 +319,8 @@ class SeriesEditForm(forms.ModelForm):
     """
 
     class Meta:
+        """Meta class for SeriesEditForm ModelForm"""
+
         model = Series
         fields = (
             "title",
@@ -317,81 +337,3 @@ class SeriesEditForm(forms.ModelForm):
             "withdrawn": forms.CheckboxInput(),
             "needs_reviewing": forms.CheckboxInput(),
         }
-
-
-class CommentForm(forms.ModelForm):
-    """CommentForm Deprecated
-
-    A form to create Comments
-
-    Args:
-        forms ([type]): [description]
-    """
-
-    captcha = CaptchaField()
-
-    class Meta:
-        model = Comment
-        fields = (
-            "title",
-            "body",
-        )
-
-        widgets = {
-            "title": forms.TextInput(),
-            "body": forms.Textarea(),
-        }
-
-
-class EditPostCommentForm(forms.ModelForm):
-    """EditPostCommentForm Deprecated
-
-    A form to edit old Comments
-
-    Args:
-        forms ([type]): [description]
-    """
-
-    captcha = CaptchaField()
-
-    class Meta:
-        model = Comment
-        fields = (
-            "author",
-            "title",
-            "body",
-        )
-
-        widgets = {
-            "author": forms.TextInput(),
-            "title": forms.TextInput(),
-            "body": forms.Textarea(),
-        }
-
-
-class ARPostCommentForm(forms.ModelForm):
-    """ARPostCommentForm Deprecated
-
-    A form to reply to old comments
-
-    Args:
-        forms ([type]): [description]
-    """
-
-    captcha = CaptchaField()
-
-    class Meta:
-        model = Comment
-        fields = ()
-
-
-PostContentFormSet = inlineformset_factory(
-    Post,
-    PostContent,
-    extra=1,
-    fields=(
-        "body",
-        "body_image",
-        "body_image_alt",
-    ),
-)

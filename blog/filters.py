@@ -25,6 +25,8 @@ class PostFilter(django_filters.FilterSet):
     is_outdated = django_filters.BooleanFilter()
 
     class Meta:
+        """Meta class for Post Filters"""
+
         model = Post
         fields = [
             "id",

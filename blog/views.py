@@ -1,7 +1,4 @@
-from random import randrange
-
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import JsonResponse
@@ -26,12 +23,9 @@ from custom_taggit.models import CustomTag
 from khoBlog.utils.superuser_required import superuser_required
 
 from .forms import (
-    ARPostCommentForm,
     CategoryCreateForm,
     CategoryDeleteForm,
     CategoryEditForm,
-    CommentForm,
-    EditPostCommentForm,
     PostCloneForm,
     PostCreateForm,
     PostDeleteForm,
@@ -40,7 +34,7 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
-from .models import Category, Comment, Post, PostContent, Series
+from .models import Category, Post, PostContent, Series
 
 
 class PostListView(ListView):
@@ -1172,160 +1166,6 @@ def series_needs_review(request, slug):
     return redirect("blog:post_series_list", slug=slug)
 
 
-@superuser_required()
-class PostCommentCreateView(LoginRequiredMixin, CreateView):
-    """PostCommentCreateView
-
-    Create a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        CreateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = CommentForm
-    template_name = "blog/comments/add_comment_to_post.html"
-
-    def form_valid(self, form):
-        form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Add Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
-    """ReplyToCommentCreateView
-
-    Reply to a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        CreateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = CommentForm
-    template_name = "blog/comments/add_comment_to_post.html"
-
-    def form_valid(self, form):
-        form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        form.instance.comment_answer_id = self.kwargs["pk"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Reply to Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
-    """PostCommentUpdateView
-
-    Update a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = EditPostCommentForm
-    template_name = "blog/comments/edit_comment.html"
-
-    def form_valid(self, form):
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        form.instance.comment_id = self.kwargs["pk"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Edit Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class ApprovePostCommentUpdateView(UpdateView):
-    """ApprovePostCommentUpdateView
-
-    Approve a comment
-
-    Args:
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = ARPostCommentForm
-    template_name = "blog/comments/approve_post_comment.html"
-
-    def get_queryset(self):
-        self.comment = get_object_or_404(Comment, pk=self.kwargs["pk"])
-        self.comment.approve()
-        return super().get_queryset()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.get_without_removed().order_by("-pk")
-        context["title"] = "Approve Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class RemovePostCommentUpdateView(UpdateView):
-    """RemovePostCommentUpdateView
-
-    Remove a comment
-
-    Args:
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = ARPostCommentForm
-    template_name = "blog/comments/remove_post_comment.html"
-
-    def get_queryset(self):
-        self.comment = get_object_or_404(Comment, pk=self.kwargs["pk"])
-        self.comment.remove()
-        return super().get_queryset()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Remove Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
 class PostArchiveIndexView(ArchiveIndexView):
     """PostArchiveIndexView
 
@@ -1619,7 +1459,7 @@ class PostTodayArchiveView(TodayArchiveView):
 
 
 def link_fetching(request):
-    """EditorJS linkfetching"""
+    """Link Fetching for EditorJS"""
     import requests
     from bs4 import BeautifulSoup
 

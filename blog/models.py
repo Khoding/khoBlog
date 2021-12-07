@@ -57,6 +57,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     objects: CategoryManager = CategoryManager()
 
     class Meta:
+        """Meta class for Category Model"""
+
         ordering = ["pk"]
         verbose_name_plural = "Categories"
         rules_permissions = {
@@ -152,6 +154,8 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     objects: SeriesManager = SeriesManager()
 
     class Meta:
+        """Meta class for Series Model"""
+
         rules_permissions = {
             "add": rules.is_superuser,
             "update": rules.is_superuser,
@@ -212,6 +216,8 @@ class PostCatsLink(auto_prefetch.Model):
     featured_cat = models.BooleanField(default=False)
 
     class Meta:
+        """Meta class for PostCatsLink Through Table"""
+
         verbose_name_plural = "Post to Category Link"
 
     def __str__(self):
@@ -330,6 +336,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     objects: PostManager = PostManager()
 
     class Meta:
+        """Meta class for Post Model"""
+
         ordering = ["-pub_date"]
         get_latest_by = ["id"]
         rules_permissions = {
