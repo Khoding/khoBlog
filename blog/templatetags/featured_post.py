@@ -22,7 +22,6 @@ def featured_post_list(context, urls):
 def featured_big_posts():
     """featured_big_posts Every Featured Big Posts"""
     featured_big = Post.objects.defer("body", "image").filter(featuring_state="FB")
-    print(featured_big)
     if not featured_big:
         return None
     o = featured_big.order_by("?")[0]
