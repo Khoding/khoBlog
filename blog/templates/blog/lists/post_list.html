@@ -1,5 +1,5 @@
 {% extends 'blog/base_post.html' %}
-{% load static featured_post offcanvas post_cards cards comments %}
+{% load static featured_post post_cards cards comments %}
 
 {% block page_top %}
   {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
@@ -91,8 +91,6 @@
         <section class="mb-2 pe-0">
           {% comment %} {% endcomment %}
           {% render_cards post in_list=True %}
-
-          {% offcanvas post %}
         </section>
         {% empty %}
         <section class="w-100">
