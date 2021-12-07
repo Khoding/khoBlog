@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Link
+from .models import Links
 
 
 class LinksAdmin(admin.ModelAdmin):
@@ -9,4 +9,4 @@ class LinksAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 
-admin.site.register(Link, LinksAdmin)
+admin.site.register(Links, LinksAdmin)

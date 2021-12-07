@@ -7,7 +7,7 @@ from django.utils import timezone
 import auto_prefetch
 from simple_history.models import HistoricalRecords
 
-from links.models import Link
+from links.models import Links
 
 
 class BaseFactAbstractModel(auto_prefetch.Model):
@@ -21,7 +21,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
-    link = auto_prefetch.ForeignKey(Link, on_delete=models.CASCADE, null=True, blank=True)
+    link = auto_prefetch.ForeignKey(Links, on_delete=models.CASCADE, null=True, blank=True)
     shown = models.BooleanField(default=True, help_text="Is it shown")
     priority = models.PositiveIntegerField(default=0)
 

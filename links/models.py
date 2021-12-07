@@ -41,10 +41,8 @@ class BaseLinkAbstractModel(auto_prefetch.Model):
         return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
 
-class Link(BaseLinkAbstractModel):
-    """
-    Links model Class
-    """
+class Links(BaseLinkAbstractModel):
+    """Links model Class"""
 
     title = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=50)
