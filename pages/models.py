@@ -71,6 +71,8 @@ class Page(auto_prefetch.Model):
     history = HistoricalRecords()
 
     class Meta:
+        """Meta class for Page Model"""
+
         ordering = ["pk"]
 
     def __str__(self):

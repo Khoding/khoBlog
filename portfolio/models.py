@@ -7,6 +7,8 @@ from django.utils import timezone
 
 
 class Project(auto_prefetch.Model):
+    """Model for Project"""
+
     title = models.CharField(max_length=100)
     snippet = models.TextField()
     description = models.TextField()
@@ -39,6 +41,8 @@ class Project(auto_prefetch.Model):
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
 
     class Meta:
+        """Meta class for Project Model Class"""
+
         ordering = ["pk"]
 
     def __str__(self):
@@ -67,6 +71,8 @@ class Project(auto_prefetch.Model):
 
 
 class Website(auto_prefetch.Model):
+    """Model for Website"""
+
     title = models.CharField(max_length=100)
     url = models.URLField()
 
@@ -75,11 +81,15 @@ class Website(auto_prefetch.Model):
 
 
 class Technology(auto_prefetch.Model):
+    """Model for Technology"""
+
     title = models.CharField(max_length=100)
     description = models.TextField(default="", blank=True)
     website = models.URLField(default="", blank=True)
 
     class Meta:
+        """Meta class for Technology Model Class"""
+
         verbose_name_plural = "Technologies"
 
     def __str__(self):
@@ -87,10 +97,14 @@ class Technology(auto_prefetch.Model):
 
 
 class Repository(auto_prefetch.Model):
+    """Model for Repository"""
+
     title = models.CharField(max_length=100)
     url = models.URLField()
 
     class Meta:
+        """Meta class for Repository Model Class"""
+
         verbose_name_plural = "Repositories"
 
     def __str__(self):
