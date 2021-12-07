@@ -6,7 +6,7 @@ from django_comments_xtd.admin import XtdCommentsAdmin
 
 from comments.forms import AdminForm
 
-from .models import CustomComment, CustomCommentXTD
+from .models import CustomCommentXTD
 
 
 def make_site_khoblog(modeladmin, request, queryset):
@@ -167,6 +167,6 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
     ]
 
 
-admin.site.unregister(CustomComment)
+# admin.site.unregister(CustomComment)
 # admin.site.register(CustomComment, CustomCommentsAdmin)
 admin.site.register(CustomCommentXTD, CommentsXTDAdmin)
