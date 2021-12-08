@@ -32,10 +32,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from . import dev_urls
 
-admin.site.site_header = "Khodok's Blog Admin"
-admin.site.site_title = "Khodok's Blog Admin"
-admin.site.index_title = "Khodok's Blog Admin"
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",

@@ -3,6 +3,8 @@ from ..django import DEBUG
 from ..third_party.django_debug_toolbar import ENABLE_DEBUG_TOOLBAR
 
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
