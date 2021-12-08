@@ -13,7 +13,7 @@
       "logo_max_height": 30,
       "logo_visible": true,
       "favicon": "admin-interface/favicon/favicon.ico",
-      "env_name": "Khodok's Blog",
+      "env_name": "khoBlog",
       "env_color": "#B362FF",
       "env_visible_in_header": true,
       "env_visible_in_favicon": true,
