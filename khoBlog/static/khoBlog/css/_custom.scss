@@ -168,31 +168,6 @@ $font-family-monospace: $monospace;
     }
 }
 
-#main_search form.search_form,
-.search_form {
-    & *,
-    & .form-control {
-        @include color("text");
-        @include background-color("bg");
-    }
-
-    & .input-group-text {
-        border: 1px solid;
-        @include border-color("border-color");
-    }
-
-    & .form-control {
-        border: 1px solid;
-        @include border-color("border-color");
-
-        &:hover,
-        &:active {
-            @include color("text");
-            @include background-color("bg");
-        }
-    }
-}
-
 .breadcrumb {
     margin-bottom: 0px !important;
 }

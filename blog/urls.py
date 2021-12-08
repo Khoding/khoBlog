@@ -6,11 +6,9 @@ from blog.views import CategoryDeleteView, SeriesDeleteView
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (
-    AllSearchResultsListView,
     AllTagListView,
     CategoryCreateView,
     CategoryListView,
-    CategorySearchResultsListView,
     CategoryUpdateView,
     PostArchiveIndexView,
     PostCloneView,
@@ -25,19 +23,15 @@ from .views import (
     PostListView,
     PostMonthArchiveView,
     PostScheduledListView,
-    PostSearchResultsListView,
     PostTodayArchiveView,
     PostUpdateView,
     PostWeekArchiveView,
     PostWithdrawnListView,
     PostWithTagListView,
     PostYearArchiveView,
-    RandomSearchResultsListView,
-    SearchListView,
     SeriesCreateView,
     SeriesListView,
     SeriesUpdateView,
-    TagsSearchResultsListView,
     TagUpdateView,
     WeblogTemplateView,
 )
@@ -101,18 +95,6 @@ post_extra_patterns = [
     path("<slug:slug>/", include(post_action_extra_patterns)),
 ]
 
-search_extra_patterns = [
-    path("", SearchListView.as_view(), name="search"),
-    path("post/", PostSearchResultsListView.as_view(), name="post_search_results"),
-    path(
-        "category/",
-        CategorySearchResultsListView.as_view(),
-        name="category_search_results",
-    ),
-    path("tag/", TagsSearchResultsListView.as_view(), name="tag_search_results"),
-    path("rnd/", RandomSearchResultsListView.as_view(), name="rnd_search_results"),
-    path("all/", AllSearchResultsListView.as_view(), name="search_results"),
-]
 
 archive_extra_patterns = [
     path("", PostArchiveIndexView.as_view(), name="post_archive"),
@@ -167,6 +149,4 @@ urlpatterns = [
     path("archive/", include(archive_extra_patterns)),
     # RSS Related Patterns
     path("latest/rss/", LatestPostsFeed(), name="latest_post_feed"),
-    # Search Related Patterns
-    path("search/", include(search_extra_patterns)),
 ]
