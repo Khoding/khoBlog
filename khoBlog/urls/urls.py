@@ -110,7 +110,6 @@ urlpatterns = (
         ),
         # Misc
         re_path(r"^robots\.txt", include("robots.urls")),
-        re_path(r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

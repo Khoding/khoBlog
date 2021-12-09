@@ -8,8 +8,8 @@ beautifulsoup4==4.10.0
 binaryornot==0.4.4
 black==21.9b0
 bleach==4.1.0
-boto3==1.20.21
-botocore==1.23.21
+boto3==1.20.22
+botocore==1.23.22
 cachetools==4.2.4
 certifi==2021.10.8
 cffi==1.15.0
@@ -39,12 +39,10 @@ django-colorfield==0.5.0
 django-comments-xtd==2.9.4
 django-compressor==2.4.1
 django-contrib-comments==2.1.0
-django-debug-toolbar==3.2.2
-django-debug-toolbar-template-profiler==2.0.2
 django-editorjs-fields==0.2.6
 django-environ==0.8.1
 django-filter==21.1
-django-import-export==2.6.1
+django-import-export==2.7.0
 django-jsonview==2.0.0
 django-markdown2==0.3.1
 django-markdownx==3.0.1
@@ -93,7 +91,6 @@ openpyxl==3.0.9
 packaging==21.3
 pathspec==0.9.0
 Pillow==8.4.0
-pinax-referrals==4.0.1
 platformdirs==2.4.0
 poyo==0.5.0
 promise==2.3

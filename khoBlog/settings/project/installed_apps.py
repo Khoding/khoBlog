@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "import_export",
     "compressor",
     "django_filters",
-    "pinax.referrals",
     "analytical",
     "django_markup",
     "django_activeurl",
