@@ -154,8 +154,12 @@ class SubProjectUpdateView(UpdateView):
 @superuser_required()
 class SubProjectDeleteView(DeleteView):
     model = SubProject
-    template_name = "portfolio/project_confirm_delete.html"
+    template_name = "portfolio/sub_project_confirm_delete.html"
     success_url = reverse_lazy("portfolio:project_list")
+
+    def get_object(self):
+        sub = get_object_or_404(SubProject, slug=self.kwargs["subproject_slug"])
+        return sub
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
