@@ -50,8 +50,8 @@
   </div>
 
   <div class='text-then-hr text-small text-white-50'>
-    <span class='hr-title'><span class="me-2">{{ project.sub_project.all.count }}
-        Sub Project{{ project.sub_project.all.count|pluralize:'s' }}</span></span>
+    <span class='hr-title'><span class="me-2">{{ project.get_sub_projects.count }}
+        Sub Project{{ project.get_sub_projects.count|pluralize:'s' }}</span></span>
   </div>
 
   <section class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 me-0">

@@ -33,6 +33,22 @@ class ProjectUpdateForm(forms.ModelForm):
         )
 
 
+class ProjectDeleteForm(forms.ModelForm):
+    """ProjectDeleteForm
+
+    A form to delete a Project
+
+    Args:
+        forms ([type]): [description]
+    """
+
+    class Meta:
+        """Meta class for ProjectDeleteForm ModelForm"""
+
+        model = Project
+        fields = ()
+
+
 class SubProjectAddForm(forms.ModelForm):
     class Meta:
         model = SubProject

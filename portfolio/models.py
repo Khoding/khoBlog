@@ -77,6 +77,15 @@ class Project(BasePortfolioAbstractModel):
     def get_absolute_admin_update_url(self):
         return reverse("admin:portfolio_project_change", kwargs={"object_id": self.pk})
 
+    @property
+    def get_sub_projects(self):
+        sub_projects = self.sub_project.filter(is_removed=False)
+        return sub_projects
+
+    def remove(self):
+        self.is_removed = True
+        self.save()
+
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
@@ -131,6 +140,10 @@ class SubProject(BasePortfolioAbstractModel):
         fulltitle = ""
         fulltitle = self.parent_project.title + " " + self.title
         return fulltitle
+
+    def remove(self):
+        self.is_removed = True
+        self.save()
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

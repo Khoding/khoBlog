@@ -1,9 +1,7 @@
-from captcha.fields import CaptchaField
 from django import forms
-from django.forms.models import inlineformset_factory
 from taggit_selectize.widgets import TagSelectize
 
-from .models import Category, Comment, Post, PostContent, Series
+from .models import Category, Post, Series
 from django_editorjs_fields import EditorJsWidget
 
 
