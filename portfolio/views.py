@@ -39,8 +39,8 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["projects"] = self.model.objects.filter(is_removed=False)
-        context["title"] = "Project Detail"
-        context["description"] = "Details of a Project"
+        context["title"] = f"Portfolio | {self.get_object().title}"
+        context["description"] = self.get_object().description
         context["app_title"] = "Portfolio"
         context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         context["side_title"] = "Projects"
@@ -123,8 +123,8 @@ class SubProjectDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Project Detail"
-        context["description"] = "Details of a Project"
+        context["title"] = f"Portfolio | {self.get_object().title}"
+        context["description"] = self.get_object().description
         context["app_title"] = "Portfolio"
         context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         context["side_title"] = "Projects"
