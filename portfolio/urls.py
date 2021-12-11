@@ -11,7 +11,6 @@ from .views import (
     SubProjectCreateView,
     SubProjectDeleteView,
     SubProjectDetailView,
-    SubProjectListView,
     SubProjectUpdateView,
 )
 
@@ -23,7 +22,6 @@ sub_project_extra_actions_patterns = [
 ]
 
 sub_project_extra_patterns = [
-    path("", SubProjectListView.as_view(), name="sub_project_list"),
     path("add/", SubProjectCreateView.as_view(), name="sub_project_add"),
     path("<slug:subproject_slug>/", include(sub_project_extra_actions_patterns)),
 ]

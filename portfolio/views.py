@@ -85,24 +85,6 @@ class ProjectDeleteView(DeleteView):
         return context
 
 
-class SubProjectListView(ListView):
-    model = SubProject
-    template_name = "portfolio/project_list.html"
-    context_object_name = "subprojects"
-
-    def get_queryset(self):
-        parent_project = get_object_or_404(Project, slug=self.kwargs["slug"])
-        return SubProject.objects.filter(parent_project=parent_project)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Projects"
-        context["description"] = "List of Projects"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
-        return context
-
-
 class SubProjectDetailView(DetailView):
     model = SubProject
     template_name = "portfolio/sub_project_detail.html"
