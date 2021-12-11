@@ -1,0 +1,40 @@
+{% extends 'sub_base_main.html' %}
+{% load super_buttons markup_tags %}
+
+{% block main %}
+  <div class="card mb-2">
+    <div class="card-header d-flex">
+      <span class="col">
+        <h2>Sub Project #{{ subproject.id }}</h2>
+      </span>
+      <span class="col-auto">
+        {% if user.is_superuser %}
+          {% sb subproject %}
+        {% endif %}
+      </span>
+    </div>
+
+    <div class="card-body">
+      <h2 class="card-title">{{ subproject.title }}</h2>
+      <p class="card-text">{{ subproject.description }}</p>
+      {% if subproject.learned %}
+        <div class="card-text">
+          <span class="text-white-50 d-block">Had to learn:</span>
+          {{ subproject.learned|apply_markup:"markdown"|apply_markup:"widont" }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="card-footer">
+      <p class="card-text">Parent Project
+        <a href="{{ subproject.parent_project.get_absolute_url }}">{{ subproject.parent_project }}</a>
+      </p>
+      {% if subproject.link_in_repo %}
+        <p class="card-text">Folder in Repository:
+          <a target="_blank" href="{{ subproject.parent_project.repository.url }}/{{ subproject.link_in_repo }}" rel="noopener noreferrer">{{ subproject.parent_project.repository.url }}/{{ subproject.link_in_repo }}</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock main %}

@@ -1,8 +1,7 @@
 {% extends 'sub_base_main.html' %}
-{% load super_buttons %}
+{% load super_buttons markup_tags %}
 
 {% block main %}
-
   <div class="card mb-2">
     <div class="card-header d-flex">
       <span class="col">
@@ -18,6 +17,12 @@
     <div class="card-body">
       <h2 class="card-title">{{ project.title }}</h2>
       <p class="card-text">{{ project.description }}</p>
+      {% if project.learned %}
+        <div class="card-text">
+          <span class="text-white-50 d-block">Had to learn:</span>
+          {{ project.learned|apply_markup:"markdown"|apply_markup:"widont" }}
+        </div>
+      {% endif %}
     </div>
 
     {% if project.website or project.technology %}
@@ -43,5 +48,45 @@
       </div>
     {% endif %}
   </div>
+
+  <div class='text-then-hr text-small text-white-50'>
+    <span class='hr-title'><span class="me-2">{{ project.sub_project.all.count }}
+        Sub Project{{ project.sub_project.all.count|pluralize:'s' }}</span></span>
+  </div>
+
+  <section class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 me-0">
+    {% for subproject in project.sub_project.all %}
+      <div class="mb-2 pe-0">
+        <div id="subproject-{{ subproject.slug }}" class="card shadow h-100">
+
+          <div class="card-header">
+            <span class="d-flex">
+              <span class="col">
+                <strong class="text-white-50">Sub Project #{{ subproject.id }}</strong>
+                <p class="mb-0 text-small text-white-50">Sub Project slug:
+                  {{ subproject.slug }}</p>
+              </span>
+              <span class="col-auto">
+                {% if user.is_superuser %}
+                  {% sb subproject %}
+                {% endif %}
+              </span>
+            </span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title mb-0">{{ subproject.title }}</h3>
+            <p class="mb-auto">{{ subproject.snippet }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="d-flex">
+              <span class="col">
+                <a class="card-link" href="{{ subproject.get_absolute_url }}">See details</a>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
 
 {% endblock main %}

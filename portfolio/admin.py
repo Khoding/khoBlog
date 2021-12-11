@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .forms import ProjectAddForm
-from .models import Project, Repository, Technology, Website
+from .models import Project, SubProject, Repository, Technology, Website
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -33,6 +33,7 @@ class RepositoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(SubProject)
 admin.site.register(Website, WebsiteAdmin)
 admin.site.register(Technology, TechnologyAdmin)
 admin.site.register(Repository, RepositoryAdmin)
