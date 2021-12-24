@@ -353,6 +353,7 @@ def redirect_to_random(request):
         post = Post.objects.filter(is_removed=False).order_by("?")[0]
     else:
         post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).order_by("?")[0]
+    post.rnd_chosen()
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
 

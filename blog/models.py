@@ -328,6 +328,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         help_text="What will be shown as url name",
     )
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
+    rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
@@ -420,6 +421,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def clicked(self):
         self.clicks += 1
         self.save_without_historical_record(update_fields=["clicks"])
+
+    def rnd_chosen(self):
+        self.rnd_choice += 1
+        self.save_without_historical_record(update_fields=["rnd_choice"])
 
     def was_published_recently(self):
         now = timezone.now()

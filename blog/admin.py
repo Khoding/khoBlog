@@ -192,6 +192,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "featuring_state",
         "featured_cat_title",
         "clicks",
+        "rnd_choice",
         "language",
         "is_removed",
     )

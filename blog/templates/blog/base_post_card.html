@@ -205,6 +205,14 @@
           time{{ object.clicks|pluralize:'s' }}
         </p>
 
+        <p class="col-12 col-lg-6">
+          <span class="text-white-50">
+            Randomly chosen:
+          </span>
+          {{ object.rnd_choice }}
+          time{{ object.rnd_choice|pluralize:'s' }}
+        </p>
+
         {% if object.get_tags and not user.is_superuser or object.get_admin_tags and user.is_superuser %}
           <p class="col-12 col-lg-6">
             <span class="text-white-50">
