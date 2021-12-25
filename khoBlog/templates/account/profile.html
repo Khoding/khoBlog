@@ -4,7 +4,7 @@
 {% block page_top_end %}
   {% if user.is_superuser %}
     <a class="btn btn-danger btn-sm float-end" href="{% url 'admin:accounts_customuser_change' object_id=object.id %}">
-      <i class="bi bi-trash"></i>
+      <i class="bi bi-pencil-square"></i>
       Edit in Admin
     </a>
   {% endif %}
