@@ -110,6 +110,20 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return self.postcatslink_set.filter(post__is_removed=False).count()
 
     @property
+    def get_superuser_percent_of_posts(self) -> str:
+        percentage = self.get_superuser_post_count_in_category / Post.objects.filter(is_removed=False).count() * 100
+        return f"{round(percentage, 2)}%"
+
+    @property
+    def get_percent_of_posts(self) -> str:
+        percentage = (
+            self.get_post_count_in_category
+            / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).count()
+            * 100
+        )
+        return f"{round(percentage, 2)}%"
+
+    @property
     def full_title(self) -> str:
         fulltitle = ""
         if self.suffix:
