@@ -11,6 +11,12 @@ def links_menu(context, urls):
     return {"urls": urls, "context": context}
 
 
+@register.inclusion_tag("tailwind/links_list_n.html", takes_context=True)
+def links_menu_n(context, urls):
+    urls = Links.objects.filter(shown=True).order_by("priority")
+    return {"urls": urls, "context": context}
+
+
 @register.filter
 def add_slash_to_slug(slug):
     return "/" + slug

@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags tailwind_tags %}
+{% load static socialaccount links_menu render_urls default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags tailwind_tags weblog %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -81,6 +81,8 @@
     {% block additional_js %}{% endblock additional_js %}
     {% block additional_css %}{% endblock additional_css %}
 
+    <script defer src="{% static 'vendor/node_modules/alpinejs/dist/cdn.min.js' %}"></script>
+
     {% block rel %}
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
@@ -95,7 +97,7 @@
     {% endif %}
   </head>
 
-  <body class="antialiased text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+  <body class="antialiased">
     {% if not debug_flag %}
       {% analytical_body_top %}
 
@@ -106,61 +108,289 @@
       <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <div class="items-center mx-auto">
-      <div class="text-gray-400 bg-gray-900 body-font transition duration-500 ease-in-out transform shadow-lg">
-        <div class="flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row">
-          <a href="{% url 'blog:post_list' %}" class="focus:outline-none">
-            <div class="inline-flex items-center">
-              <img class='w-8 h-8 object-cover rounded-full' alt='RuthinkkTooBig' src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" loading="lazy">
-              <h2 class="block p-2 text-xl font-medium tracking-tighter transition duration-500 ease-in-out transform cursor-pointer hover:text-purple-500 lg:text-x">
-                Khodok's
-                {{ app_title }}
-              </h2>
-            </div>
-          </a>
-          <nav class="flex flex-wrap items-center text-base ml-2 justify-left">
-            <ul class="items-center inline-block list-none lg:inline-flex">
-              <li>
-                {% if user.is_authenticated %}
-                  <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div x-data="{ menu_open: false }" class="z-0 relative">
+      <div class="relative z-10 bg-white shadow">
+        <div class="max-w-7xl mx-auto flex px-4 py-6 sm:px-6 lg:px-8">
+          <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+          <button @click="menu_open = !menu_open" type="button" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
+            <span>Solutions</span>
+            <!--
+              Heroicon name: solid/chevron-down
 
-                  {% if user.is_superuser %}
-                    <a href="{% url 'blog:post_draft_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Draft</a>
-                    <a href="{% url 'blog:post_withdrawn_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Withdrawn</a>
-                    <a href="{% url 'blog:post_scheduled_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Scheduled</a>
-                    <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-red-500">Admin</a>
-                  {% endif %}
-                {% else %}
-                  <a class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500" href="{% url 'account_login' %}">Log in</a>
-                {% endif %}
-              </li>
-            </ul>
-          </nav>
-          <a href="{% url 'account_logout' %}" class="block p-2 mr-4 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-full focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 lg:ml-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto icon icon-tabler icon-tabler-logout" width="24" height="24" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
-              <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+              Item active: "text-gray-600", Item inactive: "text-gray-400"
+            -->
+            <svg class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
-          </a>
+          </button>
         </div>
+      </div>
 
-        <div class="p-5 overflow-y-auto border-t whitespace-nowrap scroll-hidden">
-          {% load render_urls links_menu featured_post activeurl %}
+      <!--
+        Flyout menu, show/hide based on flyout menu state.
 
-          <ul class="inline-flex items-center list-none">
-              {% links_menu urls %}
-              {% featured_big_post_list urls %}
-              {% featured_post_list urls %}
-              {% links urls %}
-          </ul>
+        Entering: "transition ease-out duration-200"
+          From: "opacity-0 -translate-y-1"
+          To: "opacity-100 translate-y-0"
+        Leaving: "transition ease-in duration-150"
+          From: "opacity-100 translate-y-0"
+          To: "opacity-0 -translate-y-1"
+      -->
+      <div x-show="menu_open" x-transition class="absolute z-10 inset-x-0 transform shadow-lg">
+        <div class="absolute inset-0 flex" aria-hidden="true">
+          <div class="bg-white w-1/2"></div>
+          <div class="bg-gray-50 w-1/2"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2">
+          <nav class="grid gap-y-10 px-4 py-8 bg-white sm:grid-cols-2 sm:gap-x-8 sm:py-12 sm:px-6 lg:px-8 xl:pr-12" aria-labelledby="solutions-heading">
+            <h2 id="solutions-heading" class="sr-only">Solutions menu</h2>
+            <div>
+              <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">
+                Company
+              </h3>
+              <ul role="list" class="mt-5 space-y-6">
+                {% links_menu_n urls %}
+                {% links_n urls %}
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/information-circle -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="ml-4">About</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/office-building -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span class="ml-4">Customers</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/newspaper -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                    <span class="ml-4">Press</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/briefcase -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span class="ml-4">Careers</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/shield-check -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span class="ml-4">Privacy</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">
+                Resources
+              </h3>
+              <ul role="list" class="mt-5 space-y-6">
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/user-group -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="ml-4">Community</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/globe-alt -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    <span class="ml-4">Partners</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/bookmark-alt -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="ml-4">Guides</span>
+                  </a>
+                </li>
+
+                <li class="flow-root">
+                  <a href="#" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+                    <!-- Heroicon name: outline/desktop-computer -->
+                    <svg class="flex-shrink-0 h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span class="ml-4">Webinars</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="bg-gray-50 px-4 py-8 sm:py-12 sm:px-6 lg:px-8 xl:pl-12">
+            <div>
+              <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">
+                From the blog
+              </h3>
+              <ul role="list" class="mt-6 space-y-6">
+                {% menu_posts 2 %}
+              </ul>
+            </div>
+            <div class="mt-6 text-sm font-medium">
+              <a href="{% url 'blog:post_archive' %}" class="text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">View all posts <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <main role="main">
-      {% block content %}{% endblock content %}
-    </main>
+    {% comment %} <!-- Background color split screen for large screens -->
+    <div class="relative min-h-screen flex flex-col">
+      <!-- Navbar -->
+      <nav x-data="{ menu_open: false }" class="flex-shrink-0 bg-indigo-600">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div class="relative flex items-center justify-between h-16">
+            <!-- Logo section -->
+            <div class="flex items-center px-2 lg:px-0 xl:w-64">
+              <div class="flex-shrink-0">
+                <img class="h-8 w-auto" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Workflow">
+              </div>
+            </div>
+
+            <!-- Search section -->
+            <div class="flex-1 flex justify-center lg:justify-end">
+              <div class="w-full px-2 lg:px-6">
+                <label for="search" class="sr-only">Search projects</label>
+                <div class="relative text-indigo-200 focus-within:text-gray-400">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <!-- Heroicon name: solid/search -->
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <input id="search" name="search" class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-indigo-400 bg-opacity-25 text-indigo-100 placeholder-indigo-200 focus:outline-none focus:bg-white focus:ring-0 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search projects" type="search">
+                </div>
+              </div>
+            </div>
+            <div class="flex lg:hidden">
+              <!-- Mobile menu button -->
+              <button @click="menu_open = !menu_open" type="button" class="bg-indigo-600 inline-flex items-center justify-center p-2 rounded-md text-indigo-400 hover:text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+
+                <svg x-bind:class="menu_open ? 'hidden' : 'block'" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+
+                <svg x-bind:class="menu_open ? 'block' : 'hidden'" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <!-- Links section -->
+            <div class="hidden lg:block lg:w-80">
+              <div class="flex items-center justify-end">
+                <div class="flex">
+                  {% if user.is_superuser %}
+                    <a href="{% url 'admin:index' %}" class="px-3 py-2 rounded-md text-sm font-medium text-indigo-200 hover:text-white">Admin</a>
+                  {% endif %}
+                  {% if not user.is_authenticated %}
+                    <a href="{% url 'account_login' %}" class="px-3 py-2 rounded-md text-sm font-medium text-indigo-200 hover:text-white">Log in</a>
+                  {% endif %}
+                </div>
+                {% if user.is_authenticated %}
+                  <!-- Profile dropdown -->
+                  <div x-data="{ profile_open: false }" class="ml-4 relative flex-shrink-0">
+                    <div>
+                      <button @click="profile_open = !profile_open" type="button" class="bg-indigo-700 flex text-sm rounded-full text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="h-8 w-8 rounded-full" src="{{ user.profile_pic.url }}" alt="">
+                      </button>
+                    </div>
+
+                    <div x-show="profile_open" x-transition class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                      <!-- Active: "bg-gray-100", Not Active: "" -->
+                      <a href="{% url 'accounts:profile' user.slug %}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">View Profile</a>
+                      <a href="{% url 'accounts:edit_profile' user.slug %}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Edit Profile</a>
+                      <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</a>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div x-show="menu_open" x-transition class="lg:hidden" id="mobile-menu">
+          <div class="px-2 pt-2 pb-3">
+            {% if user.is_superuser %}
+              <a href="{% url 'admin:index' %}" class="menu_mobile_buttons">Admin</a>
+            {% endif %}
+            <a href="{% url 'pages:index' %}" class="menu_mobile_buttons">Pages</a>
+          </div>
+          <div class="pt-4 pb-3 border-t border-indigo-800">
+            <div class="px-2">
+              {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' user.slug %}" class="block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600">Your Profile</a>
+                <a href="{% url 'accounts:edit_profile' user.slug %}" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600">Edit Profile</a>
+                <a href="{% url 'account_logout' %}" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600">Log out</a>
+              {% else %}
+                <a href="{% url 'account_login' %}" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600">Log in</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 3 column wrapper -->
+      <div class="flex-grow w-full mx-auto xl:px-8 lg:flex">
+        <!-- Left sidebar & main wrapper -->
+        <div class="flex-1 min-w-0 bg-white xl:flex">
+          <div class="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+            <div class="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+              <!-- Start left column area -->
+              <div class="h-full relative" style="min-height: 12rem;">
+                <div class="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg"></div>
+              </div>
+              <!-- End left column area -->
+            </div>
+          </div>
+
+          <div class="bg-white lg:min-w-0 lg:flex-1">
+            <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+              <!-- Start main area-->
+              <div class="relative h-full" style="min-height: 36rem;">
+                <div class="absolute inset-0">{% block content %}{% endblock content %}</div>
+              </div>
+              <!-- End main area -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> {% endcomment %}
 
     {% if not debug_flag %}
       {% analytical_body_bottom %}

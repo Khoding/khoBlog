@@ -9,3 +9,9 @@ register = template.Library()
 def links(urls):
     urls = URL.objects.filter(featured=True)
     return {"urls": urls}
+
+
+@register.inclusion_tag("tailwind/links_list_n.html")
+def links_n(urls):
+    urls = URL.objects.filter(featured=True)
+    return {"urls": urls}
