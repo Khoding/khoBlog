@@ -32,5 +32,8 @@
     "postcss-simple-vars": "^6.0.3",
     "rimraf": "^3.0.2",
     "tailwindcss": "~2.2.15"
+  },
+  "dependencies": {
+    "follow-redirects": "^1.14.7"
   }
 }
