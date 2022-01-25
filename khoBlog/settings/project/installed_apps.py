@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "djversion",
     "tailwind",
     "theme",
+    "django_browser_reload",
     # Django Packages Apps
     "django_comments_xtd",
     "django_comments",

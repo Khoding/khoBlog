@@ -108,6 +108,8 @@ urlpatterns = (
             {"sitemaps": sitemaps},
             name="django.contrib.sitemaps.views.sitemap",
         ),
+        # Tailwind
+        path("__reload__/", include("django_browser_reload.urls")),
         # Misc
         re_path(r"^robots\.txt", include("robots.urls")),
     ]
