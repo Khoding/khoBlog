@@ -18,6 +18,13 @@ def featured_post_list(context, urls):
     return {"urls": urls, "context": context}
 
 
+@register.inclusion_tag("tailwind/featured_posts_n.html", takes_context=True)
+def featured_post_list_n(context, urls):
+    """featured_post_list Every Featured Posts for links lists"""
+    urls = Post.objects.defer("body", "image").filter(featuring_state="F")
+    return {"urls": urls, "context": context}
+
+
 @register.inclusion_tag("blog/includes/featured_posts.html")
 def featured_big_posts():
     """featured_big_posts Every Featured Big Posts"""
