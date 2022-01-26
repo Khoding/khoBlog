@@ -57,9 +57,9 @@
         {% endif %}
       </nav>
     {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-      <section class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+      <section class="bg-white max-w-2xl mx-auto lg:max-w-7xl py-3 flex items-center justify-between">
         {% if is_paginated %}
-          <section class="flex-1 flex justify-between sm:hidden">
+          <section class="flex-1 flex justify-between md:hidden">
             {% if page_obj.has_previous %}
               <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                 Previous
@@ -80,7 +80,7 @@
             {% endif %}
           </section>
 
-          <section class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <section class="hidden md:flex-1 md:flex md:items-center md:justify-between">
             <section>
               <p class="text-sm text-gray-700">
                 Showing
