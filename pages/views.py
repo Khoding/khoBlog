@@ -178,8 +178,8 @@ class PageDeleteView(UpdateView):
         return context
 
 
-def kheee_special_case():
-    """kheee_special_case
+def kheee_page():
+    """kheee_page
 
     A direct link to kheee Page
 
@@ -187,4 +187,16 @@ def kheee_special_case():
         [type]: [description]
     """
     url = get_object_or_404(Page, slug="kheee")
+    return redirect(url)
+
+
+def about_page():
+    """about_page
+
+    A direct link to about Page
+
+    Returns:
+        [type]: [description]
+    """
+    url = get_object_or_404(Page, slug="about")
     return redirect(url)

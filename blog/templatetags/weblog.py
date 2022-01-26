@@ -6,9 +6,7 @@ register = template.Library()
 
 
 @register.inclusion_tag("blog/object_snippet.html")
-def render_latest_blog_entries(
-    num, summary_first=False, hide_readmore=False, hide_header=False, header_tag=""
-):
+def render_latest_blog_entries(num, summary_first=False, hide_readmore=False, hide_header=False, header_tag=""):
     if str(num) != "*":
         entries = Post.objects.get_base_common_queryset()[:num]
     else:
@@ -19,4 +17,12 @@ def render_latest_blog_entries(
         "header_tag": header_tag,
         "hide_header": hide_header,
         "hide_readmore": hide_readmore,
+    }
+
+
+@register.inclusion_tag("tailwind/menu_posts.html")
+def menu_posts(num):
+    entries = Post.objects.get_base_common_queryset()[:num]
+    return {
+        "entries": entries,
     }

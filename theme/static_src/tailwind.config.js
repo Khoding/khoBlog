@@ -44,43 +44,7 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {
-            typography: (theme) => ({
-                DEFAULT: {
-                    css: {
-                        color: theme("colors.purple.400"),
-
-                        h1: {
-                            color: theme("colors.purple.400"),
-                        },
-                        h2: {
-                            color: theme("colors.purple.400"),
-                        },
-                        h3: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h4: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h5: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h6: {
-                            color: theme("colors.purple.300"),
-                        },
-                        blockquote: {
-                            color: theme("colors.purple.300"),
-                        },
-                        dt: {
-                            fontWeight: "800",
-                        },
-                        strong: {
-                            color: theme("colors.purple.300"),
-                        },
-                    },
-                },
-            }),
-        },
+        extend: {},
     },
     variants: {
         extend: {},
