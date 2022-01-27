@@ -33,6 +33,7 @@ def facts(context, hide_header=False, hide_readmore=False):
         facts = Fact.objects.filter(shown=True)
         if facts.count() > 0:
             o = facts.order_by("?")[0]
+            o.rnd_chosen()
             return {
                 "object": o,
                 "hide_header": hide_header,
@@ -60,6 +61,7 @@ def facts(context, hide_header=False, hide_readmore=False):
         )
         if facts.count() > 0:
             o = facts.order_by("?")[0]
+            o.rnd_chosen()
             is_old_enough = False
             timesince = datetime.now().year - o.showing_date.year
             if timesince > 0:
