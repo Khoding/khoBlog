@@ -20,8 +20,7 @@ class LatestPostsFeed(Feed):
     link = ""
     description = "Latest posts"
 
-    @staticmethod
-    def items():
+    def items(self):
         return Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False)
 
     def item_title(self, item):
@@ -33,16 +32,13 @@ class LatestPostsFeed(Feed):
     def item_link(self, item):
         return item.get_absolute_url()
 
-    @staticmethod
-    def item_pubdate(item):
+    def item_pubdate(self, item):
         return item.pub_date
 
-    @staticmethod
-    def item_updateddate(item):
+    def item_updateddate(self, item):
         return item.mod_date
 
-    @staticmethod
-    def item_author_name(item):
+    def item_author_name(self, item):
         return item.author
 
 
@@ -58,20 +54,16 @@ class LatestPostsFeedByCategory(Feed):
     def get_object(self, request, slug):
         return Category.objects.get(slug=slug)
 
-    @staticmethod
-    def title(obj):
+    def title(self, obj):
         return "Latest posts in %s" % obj.title
 
-    @staticmethod
-    def link(obj):
+    def link(self, obj):
         return obj.get_absolute_url()
 
-    @staticmethod
-    def description(obj):
+    def description(self, obj):
         return obj.description
 
-    @staticmethod
-    def items(obj):
+    def items(self, obj):
         return Post.objects.filter(
             categories=obj,
             pub_date__lte=timezone.now(),
@@ -82,14 +74,11 @@ class LatestPostsFeedByCategory(Feed):
     def item_description(self, item):
         return item.description
 
-    @staticmethod
-    def item_pubdate(item):
+    def item_pubdate(self, item):
         return item.pub_date
 
-    @staticmethod
-    def item_updateddate(item):
+    def item_updateddate(self, item):
         return item.mod_date
 
-    @staticmethod
-    def item_author_name(item):
+    def item_author_name(self, item):
         return item.author

@@ -24,8 +24,7 @@ class CustomTag(TagBase):
     def get_absolute_admin_update_url(self):
         return reverse("admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk})
 
-    @staticmethod
-    def get_index_view_url():
+    def get_index_view_url(self):
         return reverse("blog:tag_list")
 
 
