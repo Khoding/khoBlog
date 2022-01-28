@@ -13,5 +13,6 @@ class PageSitemap(Sitemap):
     def items(self):
         return Page.objects.filter(withdrawn=False, is_removed=False)
 
-    def lastmod(self, obj):
+    @staticmethod
+    def lastmod(obj):
         return obj.mod_date

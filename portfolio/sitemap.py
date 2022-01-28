@@ -13,5 +13,6 @@ class ProjectSitemap(Sitemap):
     def items(self):
         return Project.objects.filter(is_removed=False)
 
-    def lastmod(self, obj):
+    @staticmethod
+    def lastmod(obj):
         return obj.mod_date
