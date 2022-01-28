@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     "django_markup",
     "django_activeurl",
     "djversion",
+    # Tailwind
+    "django_browser_reload",
     "tailwind",
     "theme",
-    "django_browser_reload",
     # Django Packages Apps
     "django_comments_xtd",
     "django_comments",

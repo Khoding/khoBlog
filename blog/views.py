@@ -19,6 +19,7 @@ from django.views.generic.dates import (
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
+from custom_taggit.forms import TagForm
 from custom_taggit.models import CustomTag
 from khoBlog.utils.superuser_required import superuser_required
 
@@ -528,8 +529,9 @@ class TagUpdateView(UpdateView):
     """
 
     model = CustomTag
+    form = TagForm
     fields = "__all__"
-    template_name = "blog/edit_category.html"
+    template_name = "blog/edit_tag.html"
     success_url = reverse_lazy("blog:tag_list")
 
     def get_context_data(self, **kwargs):
