@@ -13,7 +13,8 @@ class PostSitemap(Sitemap):
     def items(self):
         return Post.objects.get_base_common_queryset()
 
-    def lastmod(self, obj):
+    @staticmethod
+    def lastmod(obj):
         return obj.pub_date
 
 
@@ -27,7 +28,8 @@ class CategorySitemap(Sitemap):
     def items(self):
         return Category.objects.get_base_common_queryset()
 
-    def lastmod(self, obj):
+    @staticmethod
+    def lastmod(obj):
         return obj.mod_date
 
 
@@ -41,5 +43,6 @@ class SeriesSitemap(Sitemap):
     def items(self):
         return Series.objects.get_base_common_queryset()
 
-    def lastmod(self, obj):
+    @staticmethod
+    def lastmod(obj):
         return obj.mod_date
