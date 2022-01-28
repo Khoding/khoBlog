@@ -21,7 +21,7 @@ class PostFilter(django_filters.FilterSet):
     body = django_filters.CharFilter(lookup_expr="icontains")
     slug = django_filters.CharFilter(lookup_expr="icontains")
     categories = django_filters.ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
-    tags = django_filters.ModelChoiceFilter(queryset=CustomTag.objects.filter(withdrawn=False))
+    tags = django_filters.ModelMultipleChoiceFilter(queryset=CustomTag.objects.filter(withdrawn=False), conjoined=True)
     is_outdated = django_filters.BooleanFilter()
 
     class Meta:
