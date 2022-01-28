@@ -7,6 +7,8 @@
       {% for tag in tags %}
         <div class="mb-2 pe-0">
           <article id="tag-{{ tag.slug }}" class="card shadow h-100">
+            <span class="position-absolute top-0 start-0 translate-middle badge border border-light rounded-circle p-1" style="background-color: {{ tag.color }};"><span class="visually-hidden">Tag color</span></span>
+
             {% if tag.withdrawn %}
               <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
             {% endif %}
