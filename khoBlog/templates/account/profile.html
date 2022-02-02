@@ -216,154 +216,154 @@
         </div>
       </div>
 
-      <!-- Tabs -->
-      <div class="mt-6 sm:mt-2 2xl:mt-5">
-        <div class="border-b border-gray-200">
-          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-              <!-- Current: "border-pink-500 text-gray-900", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-              <a href="#" class="border-pink-500 text-gray-900 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
-                Profile
-              </a>
+      <div x-data="{ tab: 'description' }">
+        <!-- Tabs -->
+        <div class="mt-6 sm:mt-2 2xl:mt-5">
+          <div class="border-b border-gray-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <!-- Current: "border-pink-500 text-gray-900", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                <button :class="{ 'profile-active-tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                  Profile
+                </button>
 
-              <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                Calendar
-              </a>
-
-              <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                Recognition
-              </a>
-            </nav>
+                <button :class="{ 'profile-active-tab': tab === 'comments' }" x-on:click.prevent="tab = 'comments'" class="text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                  Comments
+                </button>
+              </nav>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Description list -->
-      <div class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-          {% if object.pk == user.pk or user.is_superuser %}
+        <!-- Description list -->
+        <div x-show="tab === 'description'" class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+            {% if object.pk == user.pk or user.is_superuser %}
+              <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500">
+                  Email
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900">
+                  {% for emailaddress in user.emailaddress_set.all %}
+                    <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
+                      -
+                      {% if emailaddress.verified %}
+                        <span>Verified</span>
+                      {% else %}
+                        <span>Unverified</span>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                </dd>
+              </div>
+            {% endif %}
+
             <div class="sm:col-span-1">
               <dt class="text-sm font-medium text-gray-500">
-                Email
+                Title
               </dt>
               <dd class="mt-1 text-sm text-gray-900">
-                {% for emailaddress in user.emailaddress_set.all %}
-                  <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
-                    -
-                    {% if emailaddress.verified %}
-                      <span>Verified</span>
+                {% if object.roles.last %}
+                  {{ object.roles.last }}
+                {% else %}
+                  {% if object.is_superuser %}
+                    {% if object.owner %}
+                      Website Owner
                     {% else %}
-                      <span>Unverified</span>
+                      Admin
                     {% endif %}
-                  </a>
-                {% endfor %}
+                  {% elif object.is_staff %}
+                    Staff
+                  {% else %}
+                    User
+                  {% endif %}
+                {% endif %}
               </dd>
             </div>
-          {% endif %}
 
-          <div class="sm:col-span-1">
-            <dt class="text-sm font-medium text-gray-500">
-              Title
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900">
-              {% if object.roles.last %}
-                {{ object.roles.last }}
-              {% else %}
-                {% if object.is_superuser %}
-                  {% if object.owner %}
-                    Website Owner
-                  {% else %}
-                    Admin
-                  {% endif %}
-                {% elif object.is_staff %}
-                  Staff
-                {% else %}
-                  User
-                {% endif %}
-              {% endif %}
-            </dd>
-          </div>
+            <div class="sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500">
+                Bio
+              </dt>
+              <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5">
+                <p>{{ object.bio }}</p>
+              </dd>
+            </div>
+          </dl>
+        </div>
 
-          <div class="sm:col-span-2">
-            <dt class="text-sm font-medium text-gray-500">
-              Bio
-            </dt>
-            <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5">
-              <p>{{ object.bio }}</p>
-            </dd>
-          </div>
-        </dl>
-      </div>
+        <div x-show="tab === 'comments'">
+          <!-- Comments list -->
+          <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
+            <h2 class="text-sm font-medium text-gray-500">Comments</h2>
+            <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="flex-shrink-0">
+                  <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <a href="#" class="focus:outline-none">
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <p class="text-sm font-medium text-gray-900">
+                      Leslie Alexander
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      Co-Founder / CEO
+                    </p>
+                  </a>
+                </div>
+              </div>
 
-      <!-- Comments list -->
-      <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
-        <h2 class="text-sm font-medium text-gray-500">Comments</h2>
-        <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </div>
-            <div class="flex-1 min-w-0">
-              <a href="#" class="focus:outline-none">
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900">
-                  Leslie Alexander
-                </p>
-                <p class="text-sm text-gray-500 truncate">
-                  Co-Founder / CEO
-                </p>
-              </a>
-            </div>
-          </div>
+              <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="flex-shrink-0">
+                  <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <a href="#" class="focus:outline-none">
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <p class="text-sm font-medium text-gray-900">
+                      Michael Foster
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      Co-Founder / CTO
+                    </p>
+                  </a>
+                </div>
+              </div>
 
-          <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </div>
-            <div class="flex-1 min-w-0">
-              <a href="#" class="focus:outline-none">
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900">
-                  Michael Foster
-                </p>
-                <p class="text-sm text-gray-500 truncate">
-                  Co-Founder / CTO
-                </p>
-              </a>
-            </div>
-          </div>
+              <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="flex-shrink-0">
+                  <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <a href="#" class="focus:outline-none">
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <p class="text-sm font-medium text-gray-900">
+                      Dries Vincent
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      Manager, Business Relations
+                    </p>
+                  </a>
+                </div>
+              </div>
 
-          <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </div>
-            <div class="flex-1 min-w-0">
-              <a href="#" class="focus:outline-none">
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900">
-                  Dries Vincent
-                </p>
-                <p class="text-sm text-gray-500 truncate">
-                  Manager, Business Relations
-                </p>
-              </a>
-            </div>
-          </div>
-
-          <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </div>
-            <div class="flex-1 min-w-0">
-              <a href="#" class="focus:outline-none">
-                <span class="absolute inset-0" aria-hidden="true"></span>
-                <p class="text-sm font-medium text-gray-900">
-                  Lindsay Walton
-                </p>
-                <p class="text-sm text-gray-500 truncate">
-                  Front-end Developer
-                </p>
-              </a>
+              <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="flex-shrink-0">
+                  <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <a href="#" class="focus:outline-none">
+                    <span class="absolute inset-0" aria-hidden="true"></span>
+                    <p class="text-sm font-medium text-gray-900">
+                      Lindsay Walton
+                    </p>
+                    <p class="text-sm text-gray-500 truncate">
+                      Front-end Developer
+                    </p>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
