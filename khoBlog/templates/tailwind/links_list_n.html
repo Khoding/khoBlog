@@ -1,10 +1,7 @@
 {% for url in urls %}
   <li class="flow-root">
     <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
-      <svg class="flex-shrink-0 h-6 w-6 text-gray-400" x-description="Heroicon name: outline/information-circle" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      <span class="ml-4">{% firstof url.featured_title url.title %}</span>
+      <span>{% firstof url.featured_title url.title %}</span>
     </a>
   </li>
 {% endfor %}
