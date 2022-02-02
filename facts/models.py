@@ -21,12 +21,16 @@ class BaseFactAbstractModel(auto_prefetch.Model):
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
+    rnd_choice = models.IntegerField(default=0, help_text="How many times the Fact has been randomly selected")
     link = auto_prefetch.ForeignKey(Links, on_delete=models.CASCADE, null=True, blank=True)
     shown = models.BooleanField(default=True, help_text="Is it shown")
     priority = models.PositiveIntegerField(default=0)
 
     # Metadata about the fact
     site = auto_prefetch.ForeignKey(Site, default=1, on_delete=models.CASCADE)
+
+    class Meta(auto_prefetch.Model.Meta):
+        abstract = True
 
     def __str__(self):
         return self.title
@@ -36,8 +40,17 @@ class BaseFactAbstractModel(auto_prefetch.Model):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
-    class Meta(auto_prefetch.Model.Meta):
-        abstract = True
+    def save_without_historical_record(self, *args, **kwargs):
+        self.skip_history_when_saving = True
+        try:
+            ret = self.save(*args, **kwargs)
+        finally:
+            del self.skip_history_when_saving
+        return ret
+
+    def rnd_chosen(self):
+        self.rnd_choice += 1
+        self.save_without_historical_record(update_fields=["rnd_choice"])
 
 
 class Fact(BaseFactAbstractModel):

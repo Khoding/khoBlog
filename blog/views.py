@@ -19,6 +19,7 @@ from django.views.generic.dates import (
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
+from custom_taggit.forms import TagForm
 from custom_taggit.models import CustomTag
 from khoBlog.utils.superuser_required import superuser_required
 
@@ -52,7 +53,7 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -111,7 +112,7 @@ class PostInCategoryListView(ListView):
     model = Post
     template_name = "blog/lists/post_category_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -150,7 +151,7 @@ class PostInSeriesListView(ListView):
     model = Post
     template_name = "blog/lists/post_series_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -189,7 +190,7 @@ class CategoryListView(ListView):
     model = Category
     template_name = "blog/lists/category_list.html"
     context_object_name = "category_list"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     ordering = "pk"
 
@@ -220,7 +221,7 @@ class SeriesListView(ListView):
     model = Series
     template_name = "blog/lists/series_list.html"
     context_object_name = "series_list"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -378,7 +379,7 @@ class PostDraftListView(ListView):
     model = Post
     template_name = "blog/lists/post_draft_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -406,7 +407,7 @@ class PostScheduledListView(ListView):
     model = Post
     template_name = "blog/lists/post_scheduled_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -438,7 +439,7 @@ class PostWithdrawnListView(ListView):
     model = Post
     template_name = "blog/lists/post_withdrawn_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -465,7 +466,7 @@ class AllTagListView(ListView):
     model = CustomTag
     template_name = "blog/lists/tag_list.html"
     context_object_name = "tags"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -496,7 +497,7 @@ class PostWithTagListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -528,8 +529,9 @@ class TagUpdateView(UpdateView):
     """
 
     model = CustomTag
+    form = TagForm
     fields = "__all__"
-    template_name = "blog/edit_category.html"
+    template_name = "blog/edit_tag.html"
     success_url = reverse_lazy("blog:tag_list")
 
     def get_context_data(self, **kwargs):
@@ -894,7 +896,7 @@ class PostArchiveIndexView(ArchiveIndexView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
@@ -924,7 +926,7 @@ class PostYearArchiveView(YearArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
@@ -954,7 +956,7 @@ class PostMonthArchiveView(MonthArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
@@ -983,7 +985,7 @@ class PostWeekArchiveView(WeekArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     date_field = "pub_date"
     week_format = "%W"
@@ -1013,7 +1015,7 @@ class PostDayArchiveView(DayArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
@@ -1157,7 +1159,7 @@ class PostTodayArchiveView(TodayArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
+    paginate_by = 21
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
