@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load static paginator_tags %}
+{% load static paginator_tags post_count %}
 
 {% block main %}
 
@@ -85,6 +85,8 @@
               <p class="text-sm text-gray-700">
                 Showing
                 <span class="font-medium">{{ posts.count }}</span>
+                of
+                <span class="font-medium">{% o_count posts %}</span>
                 results
               </p>
             </section>
