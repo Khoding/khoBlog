@@ -11,7 +11,7 @@ def context(request):
         "CANONICAL_PATH": request.build_absolute_uri(request.path_info),
         "debug_flag": debug_flag,
         "now": timezone.now(),
-        "description": "Khodok's Blog is Khodok's Main Website, you can find a lot of useless stuff that you'll never care about here. Enjoy your stay :D",
+        "description": "Welcome on my website, it's a blog, a portfolio, a personal playground, and a lot more.",
         "app_title": "Blog",
         "app_direct_link": reverse("blog:post_list"),
         "show_featured": False,
