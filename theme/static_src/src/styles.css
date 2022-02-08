@@ -26,4 +26,119 @@
     :not(profile-active-tab) {
         @apply border-transparent;
     }
+
+    .prose .tabbed-set {
+        @apply relative flex flex-wrap;
+    }
+
+    .prose .tabbed-set .tabbed-content {
+        @apply order-last hidden pl-4;
+    }
+
+    .prose .tabbed-set label {
+        @apply mx-2 w-auto cursor-pointer p-1;
+    }
+
+    .prose .tabbed-set input {
+        @apply absolute opacity-0;
+    }
+
+    .prose .tabbed-set input:nth-child(n + 1) {
+        @apply text-[#333333];
+    }
+
+    .prose .tabbed-set input:nth-child(n + 1):checked + label {
+        @apply text-[#ff5252];
+    }
+
+    .prose
+        .tabbed-set
+        input:nth-child(n + 1):checked
+        + label
+        + .tabbed-content {
+        @apply block;
+    }
+
+    .prose details,
+    .prose .admonition {
+        @apply m-0 mb-2 w-3/4 overflow-hidden rounded-md pr-4;
+        /* width: 75%;
+        margin: 0 0;
+        margin-bottom: 0.5rem;
+        padding-right: 1rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        border-radius: 5px;
+        overflow: hidden; */
+
+        /* details,
+        p:not(.admonition-title) {
+            width: 100%;
+            margin-right: 0px !important;
+        } */
+
+        /* details {
+            margin: 0.5rem;
+        } */
+
+        /* & > :not(summary, details) {
+            padding: 0.5rem;
+            margin-bottom: 0;
+        } */
+    }
+
+    .prose summary,
+    .prose .admonition-title {
+        @apply relative -mr-4 block cursor-pointer rounded-md p-4 pl-9;
+        /* position: relative;
+        display: block;
+        margin-right: -1rem;
+        padding: 1rem;
+        padding-left: 2.2rem;
+        border-radius: 5px;
+        cursor: pointer; */
+    }
+
+    .prose .admonition-title {
+        @apply cursor-default rounded-none;
+        /* border-radius: 0 !important;
+        cursor: default; */
+    }
+
+    .prose summary:before {
+        @apply absolute top-5 left-4 rotate-0 border-l-2 border-solid border-white;
+        /* content: "";
+        border-width: 0.4rem;
+        border-style: solid;
+        border-color: transparent transparent transparent #fff;
+        position: absolute;
+        top: 1.3rem;
+        left: 1rem;
+        transform: rotate(0);
+        transform-origin: 0.2rem 50%;
+        transition: 0.25s transform ease; */
+    }
+
+    /* THE MAGIC 🧙‍♀️ */
+    .prose details[open] > summary {
+        border-radius: 5px 5px 0 0;
+
+        /* &:before {
+            transform: rotate(90deg);
+        } */
+    }
+
+    .prose details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .prose details > ul {
+        padding-bottom: 1rem;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 991.98px) {
+        .prose details {
+            width: 100%;
+        }
+    }
 }
