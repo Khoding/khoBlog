@@ -141,4 +141,12 @@
             width: 100%;
         }
     }
+
+    .flyout_bottom_items {
+        @apply -m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100;
+    }
+
+    .mobile_menu_grid_items {
+        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700;
+    }
 }
