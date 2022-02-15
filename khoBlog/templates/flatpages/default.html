@@ -13,51 +13,78 @@
 
 {% block main %}
   {% if not page.withdrawn or user.is_superuser %}
-    <div class="card mb-2">
-      {% if page.withdrawn %}
-        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
-      {% endif %}
+    {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
+      <div class="card mb-2">
+        {% if page.withdrawn %}
+          <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
+        {% endif %}
 
-      <div class="card-header d-flex">
-        <span class="col">
-          <h2>Page #{{ page.id }}</h2>
-        </span>
-        <span class="col-auto">
-          {% if user.is_superuser %}
-            {% sb page %}
-          {% endif %}
-        </span>
+        <div class="card-header d-flex">
+          <span class="col">
+            <h2>Page #{{ page.id }}</h2>
+          </span>
+          <span class="col-auto">
+            {% if user.is_superuser %}
+              {% sb page %}
+            {% endif %}
+          </span>
+        </div>
+
+        <div class="card-body">
+          {% autoescape off %}
+            <span class="card-text">{{ page.content }}</span>
+          {% endautoescape %}
+        </div>
       </div>
 
-      <div class="card-body">
-        {% autoescape off %}
-          <span class="card-text">{{ page.content }}</span>
-        {% endautoescape %}
-      </div>
-    </div>
+      <article class="card p-2 comments shadow mt-2">
+        <h5 class="text-white-50">Comments</h5>
+        {% if page.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
+          {% get_comment_count for page as comment_count %}
 
-    <article class="card p-2 comments shadow mt-2">
-      <h5 class="text-white-50">Comments</h5>
-      {% if page.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-        {% get_comment_count for page as comment_count %}
+          {% render_comment_form for page %}
+          <hr/>
 
-        {% render_comment_form for page %}
-        <hr/>
+          <p class="text-white-50 text-small">This page has
+            {{ comment_count }}
+            comment{{ comment_count|pluralize:'s' }}.</p>
 
-        <p class="text-white-50 text-small">This page has
-          {{ comment_count }}
-          comment{{ comment_count|pluralize:'s' }}.</p>
-
-        {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback %}
-      {% elif page.enable_comments and comments_disabled_globally_flag %}
-        <p class="text-white-50 text-small">Comments were disabled globally.</p>
-      {% else %}
-        <p class="text-white-50 text-small">This page has comments disabled.</p>
+          {% render_xtdcomment_tree for page allow_flagging allow_feedback show_feedback %}
+        {% elif page.enable_comments and comments_disabled_globally_flag %}
+          <p class="text-white-50 text-small">Comments were disabled globally.</p>
+        {% else %}
+          <p class="text-white-50 text-small">This page has comments disabled.</p>
+        {% endif %}
+      </article>
+    {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
+      <div class="py-8 xl:py-10">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-5xl xl:grid xl:grid-cols-3">
+          <div class="xl:col-span-2 xl:pr-8">
+            <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
+              <div>
+                <h1 class="text-2xl font-bold text-gray-900">{{ page.title }}</h1>
+                <p class="mt-2 text-sm text-gray-500">
+                  Page #{{ page.pk }}
+                </p>
+              </div>
+              {% if user.is_superuser %}
+                {% twsb page %}
+              {% endif %}
+            </div>
+            <div class="py-3 xl:pt-6 xl:pb-0">
+              <h2 class="sr-only">Content</h2>
+              <div class="prose lg:prose-lg xl:prose-xl">
+                {% autoescape off %}
+                  {{ page.content }}
+                {% endautoescape %}
+              </div>
+            </div>
+          </div>
+        </div>
       {% endif %}
-    </article>
-  {% else %}
-    <h1>
-      <a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a>
-    </h1>
-  {% endif %}
-{% endblock main %}
+    {% else %}
+      <h1>
+        <a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a>
+      </h1>
+    {% endif %}
+  {% endblock main %}

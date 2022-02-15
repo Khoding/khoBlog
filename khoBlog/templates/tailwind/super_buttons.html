@@ -16,7 +16,6 @@
           {% if object.get_absolute_publish_url or object.get_absolute_publish_withdrawn_url %}
             {% if not object.pub_date %}
               <div class="py-1" role="none">
-
                 {% if object.get_absolute_publish_url %}
                   <a class="dropdown_item" href="{{ object.get_absolute_publish_url }}">
                     Publish
@@ -32,20 +31,24 @@
             {% endif %}
           {% endif %}
 
-          <div class="py-1" role="none">
-            {% if object.get_absolute_needs_review_url %}
+          {% if object.get_absolute_needs_review_url %}
+            <div class="py-1" role="none">
               {% if not object.needs_reviewing %}
                 <a class="dropdown_item" href="{{ object.get_absolute_needs_review_url }}">
                   Mark as Needs Reviewing
                 </a>
               {% else %}
-                <button class="dropdown_item w-full text-left" disabled="disabled" href="{{ object.get_absolute_needs_review_url }}">
+                <button class="dropdown_item w-full text-left" disabled="disabled">
                   Needs Reviewing
                 </button>
               {% endif %}
-            {% endif %}
-            <a href="{{ object.get_absolute_clone_url }}" class="dropdown_item">Duplicate</a>
-          </div>
+            </div>
+          {% endif %}
+          {% if object.get_absolute_clone_url %}
+            <div class="py-1" role="none">
+              <a href="{{ object.get_absolute_clone_url }}" class="dropdown_item">Duplicate</a>
+            </div>
+          {% endif %}
           <div class="py-1" role="none">
             <a class="dropdown_item" href="{{ object.get_absolute_admin_update_url }}">
               Edit in Admin
