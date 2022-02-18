@@ -115,7 +115,8 @@ class ProjectDeleteView(UpdateView):
 
 class SubProjectDetailView(DetailView):
     model = SubProject
-    template_name = "portfolio/sub_project_detail.html"
+    context_object_name = "project"
+    template_name = "portfolio/project_detail.html"
 
     def get_object(self):
         sub = get_object_or_404(SubProject, slug=self.kwargs["subproject_slug"])
