@@ -244,7 +244,7 @@
                   Email
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900">
-                  {% for emailaddress in user.emailaddress_set.all %}
+                  {% for emailaddress in object.emailaddress_set.all %}
                     <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
                       -
                       {% if emailaddress.verified %}

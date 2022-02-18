@@ -81,10 +81,11 @@
             </div>
           </div>
         </div>
-      {% endif %}
-    {% else %}
-      <h1>
-        <a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a>
-      </h1>
+      </div>
     {% endif %}
-  {% endblock main %}
+  {% else %}
+    <h1>
+      <a class="btn btn-danger" href="{% url 'pages:kheee' %}">{{ description }}</a>
+    </h1>
+  {% endif %}
+{% endblock main %}
