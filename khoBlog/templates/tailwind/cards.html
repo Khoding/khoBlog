@@ -1,8 +1,8 @@
 {% load featured_post comments %}
 
 <article>
-  <section>
-    {% if object.categories %}
+  {% if object.categories %}
+    <section>
       {% if object.get_featured_cat %}
         <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
           <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -16,12 +16,12 @@
           </span>
         </a>
       {% endif %}
-    {% endif %}
-  </section>
+    </section>
+  {% endif %}
   <section>
     <a href="{{ object.get_absolute_url }}" class="mt-2 block">
       <p class="text-xl font-semibold text-gray-900">
-        {{ object.title }}
+        {{ object }}
       </p>
     </a>
     <p class="text-sm text-gray-500">
