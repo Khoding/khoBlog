@@ -95,4 +95,98 @@
       {% endif %}
     </ul>
   </div>
+
+  <div>
+    <h2 class="text-sm font-medium text-gray-500">Related content</h2>
+    {% for e in similar_posts %}
+      {% if not e.withdrawn and not e.is_scheduled or user.is_superuser %}
+        {% spaceless %}
+          <a class="font-semibold" href="{{ e.get_absolute_url }}">{{ e }}</a>
+          {% if not forloop.last %}
+            <span>,</span>{% endif %}
+        {% endspaceless %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if object.series %}
+    <div>
+      <h2 class="text-sm font-medium text-gray-500">Series</h2>
+      <dl class="mt-5 grid grid-cols-1 gap-5">
+        <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+          <dt class="text-sm font-medium text-gray-500 truncate">
+            <a class="text-base" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series }}</a>
+          </dt>
+          <dd class="mt-1 text-3xl font-semibold text-gray-900">
+            {% if object.series.description %}
+              {{ object.series.description }}
+              -
+            {% endif %}
+            ({{ object.series.post_series.all.count }}
+            Part series)
+          </dd>
+        </div>
+        {% for e in object.series.post_series.all %}
+          <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+            <dt class="text-sm font-medium text-gray-500 truncate">
+              {% if not e.is_scheduled or context.user.is_superuser %}
+                <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
+                  {{ e }}
+                  {% if e == object %}
+                    <span class="italic text-sm">(You are here)</span>
+                  {% endif %}
+                  {% if e.is_scheduled %}
+                    <span class="italic">
+                      (Coming:
+                      {{ e.pub_date|date:'l, d F Y H:i:s' }})
+                    </span>
+                  {% endif %}
+                </a>
+              {% else %}
+                <span>Part #{{ forloop.counter }}:
+                  {{ e }}
+                  {% if e == object %}
+                    <span>(You are here)</span>
+                  {% endif %}
+                  {% if e.is_scheduled %}
+                    <span class="italic">
+                      (Coming:
+                      {{ e.pub_date|date:'l, d F Y H:i:s' }})
+                    </span>
+                  {% endif %}
+                </span>
+              {% endif %}
+            </dt>
+            <dd class="mt-1 font-semibold text-gray-900">
+              {{ e.description }}
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
+  {% endif %}
+
+  <div>
+    <h2 class="text-sm font-medium text-gray-500">Stats</h2>
+    <dl class="mt-5 grid grid-cols-1 gap-5">
+      <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          Seen
+        </dt>
+        <dd class="mt-1 text-3xl font-semibold text-gray-900">
+          {{ object.clicks }}
+          time{{ object.clicks|pluralize:'s' }}
+        </dd>
+      </div>
+      <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+        <dt class="text-sm font-medium text-gray-500 truncate">
+          Randomly chosen
+        </dt>
+        <dd class="mt-1 text-3xl font-semibold text-gray-900">
+          {{ object.rnd_choice }}
+          time{{ object.rnd_choice|pluralize:'s' }}
+        </dd>
+      </div>
+    </dl>
+  </div>
 </div>
