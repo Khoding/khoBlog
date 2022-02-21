@@ -53,15 +53,15 @@
               {% twsb object %}
             {% endif %}
           </div>
-          <aside class="mt-8 xl:hidden">
-            {% include 'tailwind/post_aside.html' %}
-          </aside>
           <div class="py-3 xl:pt-6 xl:pb-0">
             <h2 class="sr-only">Content</h2>
             <div class="prose lg:prose-lg xl:prose-xl">
               {{ post.body|formatted_markdown|safe }}
             </div>
           </div>
+          <aside class="mt-8 xl:hidden">
+            {% include 'tailwind/post_aside.html' %}
+          </aside>
           <!-- #region -->
           {% comment %} <section aria-labelledby="activity-title" class="mt-8 xl:mt-10">
             <div>
