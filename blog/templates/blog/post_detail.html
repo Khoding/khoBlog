@@ -30,6 +30,22 @@
     <div class="py-8 xl:py-10">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-5xl xl:grid xl:grid-cols-3">
         <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
+          <nav class="flex justify-between" role="group" aria-label="Previous / Next">
+            <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              <!-- space -->
+              Previous
+            </a>
+            <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
+              Next
+              <!-- space -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </nav>
           <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
             <div>
               <h1 class="text-2xl font-bold text-gray-900">{{ object.title }}</h1>
@@ -266,30 +282,9 @@
       </div>
     </div>
 
-    {% comment %} <section class="text-gray-400 bg-gray-900 body-font">
-      <article class="p-4 md:w-2/3 mx-auto">
-        <nav class="flex justify-between" role="group" aria-label="Previous / Next">
-          <a href="{{ prev_post.get_absolute_url }}">
-            Previous
-          </a>
-          <a href="{{ next_post.get_absolute_url }}">
-            Next
-          </a>
-        </nav>
-        <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-          <section class="p-6">
-            <h1 class="title-font text-5xl font-medium text-purple-200 mb-3 border-b-2 border-purple-200 ">{{ post.title }}</h1>
             {% if post.image %}
               <img src="{{ post.image.url }}" class="post-image" alt="Post image" loading="lazy"/>
             {% endif %}
-
-            <div class="prose lg:prose-lg xl:prose-xl prose-purple">
-              {{ post.body|formatted_markdown|safe }}
-            </div>
-          </section>
-        </div>
-      </article>
-    </section> {% endcomment %}
   {% endif %}
 
   {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
