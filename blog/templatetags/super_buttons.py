@@ -11,3 +11,8 @@ def sb(o):
 @register.inclusion_tag("tailwind/super_buttons.html")
 def twsb(o):
     return {"object": o}
+
+
+@register.inclusion_tag("tailwind/user_super_buttons.html")
+def twusb(o):
+    return {"object": o}
