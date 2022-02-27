@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
@@ -126,10 +126,8 @@
             {% block nav %}{% endblock nav %}
           </div>
 
-          {% activeurl %}
           <ul class="navbar-nav me-auto d-flex nav-item invisible">
             <span class="nav-link">Bar is large</span></ul>
-          {% endactiveurl %}
 
           {% if user.is_authenticated %}
             <div class="d-none d-md-flex d-none d-md-flex align-items-center">
@@ -277,12 +275,6 @@
                 <i class="bi bi-github"></i>
                 Github
               </a>
-            </div>
-
-            <div class="row-auto">
-              {% project_version as VERSION %}
-
-              <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
             </div>
           </div>
           <div class="col">

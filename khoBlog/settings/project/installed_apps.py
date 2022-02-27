@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     "django_filters",
     "analytical",
     "django_markup",
-    "django_activeurl",
-    "djversion",
     # Tailwind
     "django_browser_reload",
     "tailwind",
