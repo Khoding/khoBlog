@@ -1,7 +1,7 @@
 {% load static socialaccount analytical google_analytics_gtag tailwind_tags %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="">
 
   <head>
     <meta charset="UTF-8"/>
@@ -127,21 +127,25 @@
 
     {% include 'tailwind/menu.html' %}
 
-    <main class="bg-white pt-8 pb-12 px-4 sm:px-6 lg:pt-16 lg:pb-20 lg:px-8">
+    <main class="bg-white dark:bg-zinc-800 pt-8 pb-12 px-4 sm:px-6 lg:pt-16 lg:pb-20 lg:px-8">
+      <button onclick="toggleDarkMode()" type="button" class="flex ml-auto -mr-2 lg:-mr-4 -mt-6 lg:-mt-14 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" x-data="{ dark: false }" role="switch" @click="dark = !dark" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': dark, 'bg-gray-200': !(dark) }">
+        <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': dark, 'translate-x-0': !(dark) }"></span>
+      </button>
+
       {% block content %}
       {% endblock content %}
     </main>
 
-    <footer class="bg-white">
+    <footer class="bg-white/75 dark:bg-zinc-800/95">
       <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
           <div class="px-5 py-2">
-            <a href="{% url 'pages:about' %}" class="text-base text-gray-500 hover:text-gray-900">
+            <a href="{% url 'pages:about' %}" class="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-100">
               About
             </a>
           </div>
           <div class="px-5 py-2">
-            <a href="{% url 'blog:post_archive' %}" class="text-base text-gray-500 hover:text-gray-900">
+            <a href="{% url 'blog:post_archive' %}" class="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-100">
               Blog
             </a>
           </div>
@@ -159,6 +163,17 @@
         </p>
       </div>
     </footer>
+
+    <script>
+      const html = document.getElementsByTagName('html')[0];
+      function toggleDarkMode() {
+        if(html.classList.contains('dark')) {
+          html.classList.remove('dark');
+        } else {
+          html.classList.add('dark');
+        }
+      }
+    </script>
 
     {% if not debug_flag %}
       {% analytical_body_bottom %}
