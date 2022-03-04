@@ -45,7 +45,16 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {},
+                },
+                dark: {
+                    css: {},
+                },
+            }),
+        },
     },
     variants: {
         extend: {},

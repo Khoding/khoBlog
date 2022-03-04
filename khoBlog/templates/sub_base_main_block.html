@@ -57,7 +57,7 @@
         {% endif %}
       </nav>
     {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-      <section class="bg-white max-w-2xl mx-auto lg:max-w-7xl py-3 flex items-center justify-between">
+      <section class="max-w-2xl mx-auto lg:max-w-7xl py-3 flex items-center justify-between">
         {% if is_paginated %}
           <section class="flex-1 flex justify-between md:hidden">
             {% if page_obj.has_previous %}
@@ -82,7 +82,7 @@
 
           <section class="hidden md:flex-1 md:flex md:items-center md:justify-between">
             <section>
-              <p class="text-sm text-gray-700">
+              <p class="text-sm text-gray-700 dark:text-gray-200">
                 Showing
                 <span class="font-medium">{{ posts.count }}</span>
                 {% if posts %}

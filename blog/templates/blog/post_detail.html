@@ -75,7 +75,7 @@
               <img src="{{ post.image.url }}" class="w-full" alt="Post image" loading="lazy"/>
             {% endif %}
 
-            <div class="prose lg:prose-lg xl:prose-xl">
+            <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
               {{ post.body|formatted_markdown|safe }}
             </div>
           </div>
