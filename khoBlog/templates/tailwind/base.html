@@ -1,7 +1,18 @@
 {% load static socialaccount analytical google_analytics_gtag tailwind_tags %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
+  <script>
+    const isDarkThemeSet = localStorage.theme === 'dark';
+    const isThemeStored = 'theme' in localStorage;
+    const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
 
   <head>
     <meta charset="UTF-8"/>
@@ -98,11 +109,6 @@
 
     <script>
       window.Components = window.Components ?? {}
-      window.Components['popover'] = function anonymous() {
-        return function({open:e=!1,focus:t=!1}={}){const i=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");return{__type:"popover",open:e,init(){t&&this.$watch("open",(e=>{e&&this.$nextTick((()=>{!function(e){const t=Array.from(e.querySelectorAll(i));!function e(i){void 0!==i&&(i.focus({preventScroll:!0}),document.activeElement!==i&&e(t[t.indexOf(i)+1]))}(t[0])}(this.$refs.panel)}))}));let e=i=>{if(!document.body.contains(this.$el))return void window.removeEventListener("focus",e,!0);let n=t?this.$refs.panel:this.$el;if(this.open&&i.target instanceof Element&&!n.contains(i.target)){let e=this.$el;for(;e.parentNode;)if(e=e.parentNode,e.__x instanceof this.constructor){if("popoverGroup"===e.__x.$data.__type)return;if("popover"===e.__x.$data.__type)break}this.open=!1}};window.addEventListener("focus",e,!0)},onEscape(){this.open=!1,this.restoreEl&&this.restoreEl.focus()},onClosePopoverGroup(e){e.detail.contains(this.$el)&&(this.open=!1)},toggle(e){this.open=!this.open,this.open?this.restoreEl=e.currentTarget:this.restoreEl&&this.restoreEl.focus()}}};
-      }();
-
-      window.Components = window.Components ?? {}
       window.Components['popoverGroup'] = function anonymous() {
         return function(){return{__type:"popoverGroup",init(){let e=t=>{document.body.contains(this.$el)?t.target instanceof Element&&!this.$el.contains(t.target)&&window.dispatchEvent(new CustomEvent("close-popover-group",{detail:this.$el})):window.removeEventListener("focus",e,!0)};window.addEventListener("focus",e,!0)}}};
       }();
@@ -110,15 +116,8 @@
       window.Components = window.Components ?? {}
       window.Components['popover'] = function anonymous() {
         return function({open:e=!1,focus:t=!1}={}){const i=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");return{__type:"popover",open:e,init(){t&&this.$watch("open",(e=>{e&&this.$nextTick((()=>{!function(e){const t=Array.from(e.querySelectorAll(i));!function e(i){void 0!==i&&(i.focus({preventScroll:!0}),document.activeElement!==i&&e(t[t.indexOf(i)+1]))}(t[0])}(this.$refs.panel)}))}));let e=i=>{if(!document.body.contains(this.$el))return void window.removeEventListener("focus",e,!0);let n=t?this.$refs.panel:this.$el;if(this.open&&i.target instanceof Element&&!n.contains(i.target)){let e=this.$el;for(;e.parentNode;)if(e=e.parentNode,e.__x instanceof this.constructor){if("popoverGroup"===e.__x.$data.__type)return;if("popover"===e.__x.$data.__type)break}this.open=!1}};window.addEventListener("focus",e,!0)},onEscape(){this.open=!1,this.restoreEl&&this.restoreEl.focus()},onClosePopoverGroup(e){e.detail.contains(this.$el)&&(this.open=!1)},toggle(e){this.open=!this.open,this.open?this.restoreEl=e.currentTarget:this.restoreEl&&this.restoreEl.focus()}}};
-      }();
-
-      window.Components = window.Components ?? {}
-      window.Components['popover'] = function anonymous() {
-        return function({open:e=!1,focus:t=!1}={}){const i=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");return{__type:"popover",open:e,init(){t&&this.$watch("open",(e=>{e&&this.$nextTick((()=>{!function(e){const t=Array.from(e.querySelectorAll(i));!function e(i){void 0!==i&&(i.focus({preventScroll:!0}),document.activeElement!==i&&e(t[t.indexOf(i)+1]))}(t[0])}(this.$refs.panel)}))}));let e=i=>{if(!document.body.contains(this.$el))return void window.removeEventListener("focus",e,!0);let n=t?this.$refs.panel:this.$el;if(this.open&&i.target instanceof Element&&!n.contains(i.target)){let e=this.$el;for(;e.parentNode;)if(e=e.parentNode,e.__x instanceof this.constructor){if("popoverGroup"===e.__x.$data.__type)return;if("popover"===e.__x.$data.__type)break}this.open=!1}};window.addEventListener("focus",e,!0)},onEscape(){this.open=!1,this.restoreEl&&this.restoreEl.focus()},onClosePopoverGroup(e){e.detail.contains(this.$el)&&(this.open=!1)},toggle(e){this.open=!this.open,this.open?this.restoreEl=e.currentTarget:this.restoreEl&&this.restoreEl.focus()}}};
       }()
-    </script>
 
-    <script>
       window.Components = window.Components ?? {}
       window.Components['menu'] = function anonymous() {
         return function(e={open:!1}){return{init(){this.items=Array.from(this.$el.querySelectorAll('[role="menuitem"]')),this.$watch("open",(()=>{this.open&&(this.activeIndex=-1)}))},activeDescendant:null,activeIndex:null,items:null,open:e.open,focusButton(){this.$refs.button.focus()},onButtonClick(){this.open=!this.open,this.open&&this.$nextTick((()=>{this.$refs["menu-items"].focus()}))},onButtonEnter(){this.open=!this.open,this.open&&(this.activeIndex=0,this.activeDescendant=this.items[this.activeIndex].id,this.$nextTick((()=>{this.$refs["menu-items"].focus()})))},onArrowUp(){if(!this.open)return this.open=!0,this.activeIndex=this.items.length-1,void(this.activeDescendant=this.items[this.activeIndex].id);0!==this.activeIndex&&(this.activeIndex=-1===this.activeIndex?this.items.length-1:this.activeIndex-1,this.activeDescendant=this.items[this.activeIndex].id)},onArrowDown(){if(!this.open)return this.open=!0,this.activeIndex=0,void(this.activeDescendant=this.items[this.activeIndex].id);this.activeIndex!==this.items.length-1&&(this.activeIndex=this.activeIndex+1,this.activeDescendant=this.items[this.activeIndex].id)},onClickAway(e){if(this.open){const t=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");this.open=!1,e.target.closest(t)||this.focusButton()}}}};
@@ -128,9 +127,12 @@
     {% include 'tailwind/menu.html' %}
 
     <main class="bg-white dark:bg-zinc-800 pt-8 pb-12 px-4 sm:px-6 lg:pt-16 lg:pb-20 lg:px-8">
-      <button onclick="toggleDarkMode()" type="button" class="flex ml-auto -mr-2 lg:-mr-4 -mt-6 lg:-mt-14 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" x-data="{ dark: true }" role="switch" @click="dark = !dark" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-indigo-600': dark, 'bg-gray-200': !(dark) }">
-        <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': dark, 'translate-x-0': !(dark) }"></span>
-      </button>
+      <div class="flex justify-end items-center space-x-2 mx-auto relative">
+        <div>
+          <input type="checkbox" name="" id="darkLight" class="switch flex ml-auto -mr-2 lg:-mr-4 -mt-6 lg:-mt-14 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" />
+          <label for="darkLight" class="cursor-pointer"></label>
+        </div>
+      </div>
 
       {% block content %}
       {% endblock content %}
@@ -165,14 +167,16 @@
     </footer>
 
     <script>
-      const html = document.getElementsByTagName('html')[0];
-      function toggleDarkMode() {
-        if(html.classList.contains('dark')) {
-          html.classList.remove('dark');
-        } else {
-          html.classList.add('dark');
-        }
-      }
+      const themeSwitch = document.querySelector('.switch')
+
+      themeSwitch.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark')
+        localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
+      })
+
+    if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+      document.querySelector('#darkLight').checked = true
+    }
     </script>
 
     {% if not debug_flag %}
