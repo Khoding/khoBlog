@@ -127,7 +127,7 @@
     {% include 'tailwind/menu.html' %}
 
     <main class="bg-white dark:bg-zinc-800 pt-8 pb-12 px-4 sm:px-6 lg:pt-16 lg:pb-20 lg:px-8">
-      <input type="checkbox" name="" id="darkLight" class="switch flex ml-auto -mr-2 lg:-mr-4 -mt-6 lg:-mt-14 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" />
+      <input type="checkbox" name="" id="darkLight" class="switch hidden md:flex ml-auto -mr-2 lg:-mr-4 -mt-6 lg:-mt-14 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" />
       <label for="darkLight" class="cursor-pointer"></label>
 
       {% block content %}
@@ -163,16 +163,20 @@
     </footer>
 
     <script>
-      const themeSwitch = document.querySelector('.switch')
+      var themeSwitch = document.getElementsByClassName('switch')
 
-      themeSwitch.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark')
-        localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
-      })
+      for(var i = 0; i < themeSwitch.length; i++) {
+          themeSwitch[i].addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark')
+          localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
+        })
+      }
 
-    if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
-      document.querySelector('#darkLight').checked = true
-    }
+      if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+        for(var j = 0; j < themeSwitch.length; j++) {
+          themeSwitch[j].checked = true
+        }
+      }
     </script>
 
     {% if not debug_flag %}
