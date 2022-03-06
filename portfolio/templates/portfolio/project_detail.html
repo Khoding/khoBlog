@@ -95,7 +95,7 @@
         <section class="xl:col-span-2 xl:pr-8">
           <section class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
             <section>
-              <h1 class="text-2xl font-bold text-gray-900">{{ project.title }}</h1>
+              <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-300">{{ project.title }}</h1>
               <p class="mt-2 text-sm text-gray-500">
                 Project <span class="font-bold">#{{ project.pk }}</span>
               </p>
@@ -105,7 +105,7 @@
             {% endif %}
           </section>
           <section class="py-3 xl:pt-6 xl:pb-0">
-            <section class="prose dark:prose-invert  lg:prose-lg xl:prose-xl">
+            <section class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
               <h1>{{ project.title }}</h1>
               {% if project.learned %}
                 <div>
@@ -136,14 +136,14 @@
             </section>
           </section>
           {% if project.sub_project %}
-            <article class="bg-white pb-8 pt-16">
+            <article class="pb-8 pt-16">
               <section class="max-w-2xl mx-auto">
                 <section class="relative">
                   <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-gray-300"></div>
+                    <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
                   </div>
                   <div class="relative flex justify-center">
-                    <span class="px-3 bg-white text-lg font-medium text-gray-900">
+                    <span class="px-3 bg-white dark:bg-gray-600 text-lg font-medium text-gray-900 dark:text-gray-200">
                       {{ project.get_sub_projects.count }}
                       Sub Project{{ project.get_sub_projects.count|pluralize:'s' }}
                     </span>
