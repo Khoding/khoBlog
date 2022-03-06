@@ -145,7 +145,7 @@
     }
 
     .dropdown_item {
-        @apply block px-4 py-2 text-sm text-gray-700 hover:dropdown_item_active disabled:hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400;
+        @apply block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:dropdown_item_active disabled:hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 dark:disabled:bg-gray-900;
     }
 
     .dropdown_item_active {
