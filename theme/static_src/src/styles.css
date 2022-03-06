@@ -24,7 +24,7 @@
     }
 
     .flyout_bottom_items {
-        @apply -m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 hover:bg-gray-100;
+        @apply p-3 rounded-md text-base font-medium text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 hover:bg-gray-100;
     }
 
     .mobile_menu_grid_items {
