@@ -28,7 +28,7 @@
     }
 
     .mobile_menu_grid_items {
-        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700;
+        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200;
     }
 
     .profile-active-tab {
@@ -138,14 +138,6 @@
 
     .prose :is(.admonition, summary, details) .icon svg {
         @apply stroke-current fill-current;
-    }
-
-    .flyout_bottom_items {
-        @apply -m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100;
-    }
-
-    .prose .mobile_menu_grid_items {
-        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700;
     }
 
     .prose h1 img {
