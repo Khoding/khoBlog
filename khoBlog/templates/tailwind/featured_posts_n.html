@@ -1,6 +1,6 @@
 {% for url in urls %}
   <li class="flow-root">
-    <a href="{{ url.get_absolute_url }}" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150">
+    <a href="{{ url.get_absolute_url }}" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 hover:bg-gray-50 transition ease-in-out duration-150">
       <span>{% firstof url.featured_title url.title %}</span>
     </a>
   </li>
