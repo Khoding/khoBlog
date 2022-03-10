@@ -1,13 +1,13 @@
 {% load cards %}
 
 {% comment %} If the template is a list, show this, else hide it {% endcomment %}
-<section class="relative max-w-2xl mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
+<section class="relative max-w-2xl mx-auto divide-y-2 divide-gray-300 dark:divide-martinique-200 lg:max-w-7xl">
   <section>
-    <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-300 sm:text-4xl">
+    <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-martinique-300 sm:text-4xl">
       {{ title }}
     </h2>
     <div class="mt-3 sm:mt-4 lg:grid lg:grid-cols-2 lg:gap-5 lg:items-center">
-      <p class="text-xl text-gray-500">
+      <p class="text-xl dark:text-martinique-100/75">
         {{ description }}
       </p>
       {% comment %} Add top page superbuttons (edit if it's a list of posts in a category or tag, maybe user buttons as well) {% endcomment %}

@@ -29,7 +29,7 @@
   {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
     <div class="py-8 xl:py-10">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-5xl xl:grid xl:grid-cols-3">
-        <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
+        <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-martinique-200">
           <nav class="flex justify-between" role="group" aria-label="Previous / Next">
             <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,19 +48,19 @@
           </nav>
           <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
             <div>
-              <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-300">{{ object.title }}</h1>
-              <p class="mt-2 text-sm text-gray-500">
+              <h1 class="text-2xl font-bold text-martinique-900 dark:text-martinique-300">{{ object.title }}</h1>
+              <p class="mt-2 text-sm text-martinique-500">
                 Post <span class="font-bold">#{{ object.pk }}</span> written by
                 <!-- space -->
-                <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-900 dark:text-gray-300">{{ object.author }}</a>
+                <a href="{{ object.author.get_absolute_url }}" class="font-medium text-martinique-900 dark:text-martinique-300">{{ object.author }}</a>
                 <!-- space -->
                 in
                 <!-- space -->
                 {% if object.categories %}
                   {% if object.get_featured_cat %}
-                    <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-gray-900 dark:text-gray-300">{{ object.featured_cat_title }}</a>
+                    <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-martinique-900 dark:text-martinique-300">{{ object.featured_cat_title }}</a>
                   {% else %}
-                    <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-gray-900 dark:text-gray-300">{{ object.categories.first }}</a>
+                    <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-martinique-900 dark:text-martinique-300">{{ object.categories.first }}</a>
                   {% endif %}
                 {% endif %}
               </p>

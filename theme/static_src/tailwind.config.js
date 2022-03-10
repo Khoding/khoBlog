@@ -46,14 +46,21 @@ module.exports = {
     ],
     theme: {
         extend: {
-            typography: (theme) => ({
-                DEFAULT: {
-                    css: {},
+            colors: {
+                martinique: {
+                    DEFAULT: "#39344B",
+                    50: "#8A8CAD",
+                    100: "#7E7FA5",
+                    200: "#676693",
+                    300: "#59567B",
+                    400: "#4A4563",
+                    500: "#39344B",
+                    600: "#312C3F",
+                    700: "#292433",
+                    800: "#201B27",
+                    900: "#17131B",
                 },
-                dark: {
-                    css: {},
-                },
-            }),
+            },
         },
     },
     variants: {

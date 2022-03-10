@@ -20,23 +20,23 @@
     }
 
     .flyout_button {
-        @apply bg-white dark:bg-zinc-800 rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-gray-500;
+        @apply bg-white dark:bg-martinique-800 rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 dark:hover:text-martinique-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-gray-500;
     }
 
     .flyout_bottom_items {
-        @apply p-3 rounded-md text-base font-medium text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 hover:bg-gray-100;
+        @apply p-3 rounded-md text-base font-medium text-gray-900 dark:text-martinique-200 dark:hover:bg-martinique-700 hover:bg-gray-100;
     }
 
     .mobile_menu_grid_items {
-        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-200;
+        @apply rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-martinique-200;
     }
 
     .profile_tab {
-        @apply text-gray-500 hover:text-gray-700 dark:text-gray-100 hover:border-gray-300 dark:hover:border-gray-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm;
+        @apply text-gray-500 hover:text-gray-700 dark:text-martinique-100 hover:border-gray-300 dark:hover:border-martinique-500 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm;
     }
 
     .profile_active_tab {
-        @apply border-pink-500 text-gray-900 dark:text-gray-300;
+        @apply border-pink-500 text-gray-900 dark:text-martinique-300;
     }
 
     :not(profile_active_tab) {
@@ -44,7 +44,7 @@
     }
 
     .superbutton_base {
-        @apply relative inline-flex items-center py-2 border border-gray-300 bg-white dark:bg-gray-700 dark:border-gray-600 text-sm font-medium text-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500;
+        @apply relative inline-flex items-center py-2 border border-gray-300 bg-white dark:bg-martinique-700 dark:border-martinique-600 text-sm font-medium text-gray-700 dark:text-martinique-200 dark:hover:bg-martinique-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500;
     }
 
     .superbutton_main_action {
@@ -56,7 +56,7 @@
     }
 
     .superbutton_dropdown_items {
-        @apply origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 dark:divide-gray-600 focus:outline-none;
+        @apply origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-martinique-700 dark:border-martinique-600 dark:text-martinique-200 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 dark:divide-martinique-600 focus:outline-none;
     }
 
     .prose .tabbed-set {
@@ -165,7 +165,7 @@
     }
 
     .dropdown_item {
-        @apply block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:dropdown_item_active disabled:hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 dark:disabled:bg-gray-900;
+        @apply block px-4 py-2 text-sm text-gray-700 dark:text-martinique-200 dark:hover:bg-martinique-800 hover:dropdown_item_active disabled:hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 dark:disabled:bg-martinique-900;
     }
 
     .dropdown_item_active {
