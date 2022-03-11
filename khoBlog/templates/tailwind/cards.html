@@ -5,13 +5,13 @@
     <section>
       {% if object.get_featured_cat %}
         <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
             {{ object.featured_cat_title }}
           </span>
         </a>
       {% else %}
         <a href="{{ object.categories.first.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
             {{ object.categories.first }}
           </span>
         </a>
@@ -20,22 +20,22 @@
   {% endif %}
   <section>
     <a href="{{ object.get_absolute_url }}" class="mt-2 block">
-      <p class="text-lg font-bold text-martinique-900 dark:text-martinique-200">
+      <p class="text-lg font-bold text-gray-900 dark:text-martinique-50">
         {{ object }}
       </p>
     </a>
-    <p class="text-sm dark:text-martinique-500">
+    <p class="text-sm dark:text-martinique-50">
       {% comment %} {% endcomment %}
       <time datetime="{{ object.pub_date|date:"c" }}">
         {{ object.pub_date|date:"Y\-m\-d" }}
       </time>
     </p>
-    <p class="mt-3 text-base dark:text-martinique-500">
+    <p class="mt-3 text-base dark:text-martinique-50">
       {{ object.description }}
     </p>
   </section>
   <section class="mt-3">
-    <a href="{{ object.get_absolute_url }}" class="text-base font-semibold text-indigo-600 hover:text-indigo-500 dark:text-martinique-200 dark:hover:text-martinique-300">
+    <a href="{{ object.get_absolute_url }}" class="text-base font-semibold text-indigo-600 hover:text-indigo-500 dark:text-flamingo-200 dark:hover:text-flamingo-400">
       Read the post
     </a>
   </section>

@@ -23,8 +23,6 @@
           <h3 class="text-sm font-medium tracking-wide text-gray-500 dark:text-martinique-300 uppercase">
             Featured Posts
           </h3>
-          {% comment %} Either have featured posts here, or latest ones {% endcomment %}
-          {% comment %} Make the From the blog part bigger, but with two columns, one for new posts, one for featured {% endcomment %}
           <ul role="list" class="mt-5 space-y-6">
             {% featured_post_list_n urls %}
           </ul>
@@ -34,14 +32,11 @@
       <div class="bg-white dark:bg-martinique-800 px-4 py-8 sm:py-12 sm:px-6 lg:px-8 xl:pl-12">
         <div>
           <h3 class="text-sm font-medium tracking-wide text-gray-500 dark:text-martinique-300 uppercase">
-            From the blog
+            The best content!
           </h3>
           <ul role="list" class="mt-6 space-y-6">
-            {% menu_posts 4 %}
+            {% featured_big_post_list_n objects %}
           </ul>
-        </div>
-        <div class="mt-6 text-sm font-medium">
-          <a href="{% url 'blog:post_archive' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-martinique-200 dark:hover:text-martinique-300"> View all posts <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>

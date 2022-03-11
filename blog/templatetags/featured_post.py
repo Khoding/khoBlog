@@ -18,11 +18,18 @@ def featured_post_list(context, urls):
     return {"urls": urls, "context": context}
 
 
-@register.inclusion_tag("tailwind/featured_posts_n.html", takes_context=True)
-def featured_post_list_n(context, urls):
-    """featured_post_list Every Featured Posts for links lists"""
+@register.inclusion_tag("tailwind/featured_posts_n.html")
+def featured_post_list_n(urls):
+    """featured_post_list_n Every Featured Posts for links lists"""
     urls = Post.objects.defer("body", "image").filter(featuring_state="F")
-    return {"urls": urls, "context": context}
+    return {"urls": urls}
+
+
+@register.inclusion_tag("tailwind/featured_big_posts_n.html")
+def featured_big_post_list_n(objects):
+    """featured_big_post_list_n Every Featured Big Posts for links lists"""
+    objects = Post.objects.defer("body", "image").filter(featuring_state="FB")
+    return {"objects": objects}
 
 
 @register.inclusion_tag("blog/includes/featured_posts.html")
