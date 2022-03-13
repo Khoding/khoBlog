@@ -61,20 +61,20 @@
         {% if is_paginated %}
           <section class="flex-1 flex justify-between md:hidden">
             {% if page_obj.has_previous %}
-              <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="relative inline-flex items-center px-4 py-2 border border-martinique-300 text-sm font-medium rounded-md text-martinique-700 bg-white hover:bg-martinique-50">
+              <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="relative inline-flex items-center px-4 py-2 border border-jumbo-300 text-sm font-medium rounded-md text-jumbo-700 bg-white hover:bg-jumbo-50">
                 Previous
               </a>
             {% else %}
-              <span class="relative inline-flex items-center px-4 py-2 border border-martinique-300 text-sm font-medium rounded-md text-martinique-700 bg-white hover:bg-martinique-50 disabled:opacity-50" disabled>
+              <span class="relative inline-flex items-center px-4 py-2 border border-jumbo-300 text-sm font-medium rounded-md text-jumbo-700 bg-white hover:bg-jumbo-50 disabled:opacity-50" disabled>
                 Previous
               </span>
             {% endif %}
             {% if page_obj.has_next %}
-              <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-martinique-300 text-sm font-medium rounded-md text-martinique-700 bg-white hover:bg-martinique-50">
+              <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-jumbo-300 text-sm font-medium rounded-md text-jumbo-700 bg-white hover:bg-jumbo-50">
                 Next
               </a>
             {% else %}
-              <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-martinique-300 text-sm font-medium rounded-md text-martinique-700 bg-white hover:bg-martinique-50 disabled:opacity-50" disabled>
+              <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-jumbo-300 text-sm font-medium rounded-md text-jumbo-700 bg-white hover:bg-jumbo-50 disabled:opacity-50" disabled>
                 Next
               </span>
             {% endif %}
@@ -82,7 +82,7 @@
 
           <section class="hidden md:flex-1 md:flex md:items-center md:justify-between">
             <section>
-              <p class="text-sm text-martinique-700 dark:text-martinique-200">
+              <p class="text-sm text-jumbo-700 dark:text-jumbo-200">
                 Showing
                 <span class="font-medium">{{ posts.count }}</span>
                 {% if posts %}

@@ -1,6 +1,6 @@
 {% load static links_menu %}
 
-<div class="relative bg-white dark:bg-martinique-900" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
+<div class="relative bg-white dark:bg-jumbo-900" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
   <div class="relative z-20">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 2xl:px-0 py-5 sm:py-4 md:justify-start md:space-x-10">
@@ -13,7 +13,7 @@
       <input type="checkbox" name="" id="darkLightm" class="switch md:hidden flex ml-auto mr-2 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-gray-200" />
       <label for="darkLightm" class="cursor-pointer sr-only"></label>
       <div class="-mr-2 -my-2 md:hidden">
-        <button type="button" class="bg-white dark:bg-martinique-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-martinique-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
+        <button type="button" class="bg-white dark:bg-jumbo-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
           <span class="sr-only">Open menu</span>
           <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -27,25 +27,25 @@
           {% include 'tailwind/facts_flyout.html' %}
 
           {% if user.is_superuser %}
-            <a href="{% url 'admin:index' %}" class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-martinique-100">
+            <a href="{% url 'admin:index' %}" class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
               Admin
             </a>
 
-            <a href="https://eu.pythonanywhere.com" class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-martinique-100">
+            <a href="https://eu.pythonanywhere.com" class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
               Host
             </a>
           {% endif %}
         </nav>
         <div class="flex items-center md:ml-12">
           {% if not user.is_authenticated %}
-            <a href="{% url 'account_login' %}" class="text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-martinique-100">
+            <a href="{% url 'account_login' %}" class="text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
               Log in
             </a>
             <a href="{% url 'accounts:signup' %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 lg:px-4 lg:py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
               Sign up
             </a>
           {% else %}
-            <a href="{% url 'account_logout' %}" class="text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-martinique-100">
+            <a href="{% url 'account_logout' %}" class="text-xs lg:text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
               Log out
             </a>
             <a href="{% url 'accounts:profile' slug=user.slug %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
@@ -58,14 +58,14 @@
   </div>
 
   <div x-show="open" x-transition:enter="duration-200 ease-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-description="Mobile menu, show/hide based on mobile menu state." class="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden" x-ref="panel" @click.away="open = false">
-    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-martinique-800 divide-y-2 divide-gray-50 dark:divide-martinique-50">
+    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-jumbo-800 divide-y-2 divide-gray-50 dark:divide-jumbo-50">
       <div class="pt-5 pb-6 px-5 sm:pb-8">
         <div class="flex items-center justify-between">
           <div>
             <img class="h-8 w-auto" width="2rem" height="2rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
           </div>
           <div class="-mr-2">
-            <button type="button" class="bg-white dark:bg-martinique-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-martinique-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="toggle">
+            <button type="button" class="bg-white dark:bg-jumbo-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="toggle">
               <span class="sr-only">Close menu</span>
               <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -104,7 +104,7 @@
               Sign up
             </a>
             <p class="mt-6 text-center text-base font-medium text-gray-500">
-              <a href="{% url 'account_login' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-martinique-200 dark:hover:text-martinique-300">
+              <a href="{% url 'account_login' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
                 Log in
               </a>
             </p>
@@ -113,7 +113,7 @@
               Your Profile
             </a>
             <p class="mt-6 text-center text-base font-medium text-gray-500">
-              <a href="{% url 'account_logout' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-martinique-200 dark:hover:text-martinique-300">
+              <a href="{% url 'account_logout' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
                 Log out
               </a>
             </p>

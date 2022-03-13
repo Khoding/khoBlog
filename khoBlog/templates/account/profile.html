@@ -189,7 +189,7 @@
             </div>
             <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
               <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-martinique-500 truncate">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
                   {{ object }}
                 </h1>
               </div>
@@ -205,7 +205,7 @@
             </div>
           </div>
           <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-martinique-500 truncate">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
               {{ object }}
             </h1>
           </div>
@@ -215,7 +215,7 @@
       <section x-data="{ tab: 'description' }">
         <!-- Tabs -->
         <div class="mt-6 sm:mt-2 2xl:mt-5">
-          <div class="border-b border-gray-200 dark:border-martinique-600">
+          <div class="border-b border-gray-200 dark:border-jumbo-600">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                 <button :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
@@ -238,10 +238,10 @@
           <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
             {% if object.pk == user.pk or user.is_superuser %}
               <div class="sm:col-span-1">
-                <dt class="text-sm font-medium text-gray-500 dark:text-martinique-100">
+                <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
                   Email
                 </dt>
-                <dd class="mt-1 text-sm text-gray-900 dark:text-martinique-300">
+                <dd class="mt-1 text-sm text-gray-900 dark:text-jumbo-300">
                   {% for emailaddress in object.emailaddress_set.all %}
                     <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
                       -
@@ -257,10 +257,10 @@
             {% endif %}
 
             <div class="sm:col-span-1">
-              <dt class="text-sm font-medium text-gray-500 dark:text-martinique-100">
+              <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
                 Title
               </dt>
-              <dd class="mt-1 text-sm text-gray-900 dark:text-martinique-300">
+              <dd class="mt-1 text-sm text-gray-900 dark:text-jumbo-300">
                 {% if object.roles.last %}
                   {{ object.roles.last }}
                 {% else %}
@@ -280,10 +280,10 @@
             </div>
 
             <div class="sm:col-span-2">
-              <dt class="text-sm font-medium text-gray-500 dark:text-martinique-100">
+              <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
                 Bio
               </dt>
-              <dd class="mt-1 max-w-prose text-sm text-gray-900 dark:text-martinique-300 space-y-5">
+              <dd class="mt-1 max-w-prose text-sm text-gray-900 dark:text-jumbo-300 space-y-5">
                 <p>{{ object.bio }}</p>
               </dd>
             </div>
@@ -293,19 +293,19 @@
         {% if accounts.github and object.show_github %}
           <section x-show="tab === 'github'">
             <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
-              <h2 class="text-sm font-medium text-gray-500 dark:text-martinique-300">Github account</h2>
+              <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</h2>
               {% for github in accounts.github %}
-                <div class="relative rounded-lg border border-gray-300 dark:border-martinique-500 bg-white dark:bg-martinique-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-martinique-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="relative rounded-lg border border-gray-300 dark:border-jumbo-500 bg-white dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
                   <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full" src="{{ github.extra_data.avatar_url }}" loading="lazy" alt="User's Github account's profile picture">
                   </div>
                   <div class="flex-1 min-w-0">
                     <a href="{{ github.extra_data.html_url }}" class="focus:outline-none" target="_blank">
                       <span class="absolute inset-0" aria-hidden="true"></span>
-                      <p class="text-sm font-medium text-gray-900 dark:text-martinique-300">
+                      <p class="text-sm font-medium text-gray-900 dark:text-jumbo-300">
                         {{ github.extra_data.login }}
                       </p>
-                      <p class="text-sm text-gray-500 dark:text-martinique-200 truncate">
+                      <p class="text-sm text-gray-500 dark:text-jumbo-200 truncate">
                         {{ github.extra_data.bio }}
                       </p>
                     </a>
