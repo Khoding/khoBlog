@@ -2,19 +2,19 @@
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
-  <script>
-    const isDarkThemeSet = localStorage.theme === 'dark';
-    const isThemeStored = 'theme' in localStorage;
-    const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  </script>
-
   <head>
+    <script>
+      const isDarkThemeSet = localStorage.theme === 'dark';
+      const isThemeStored = 'theme' in localStorage;
+      const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+
     <meta charset="UTF-8"/>
     {% if not debug_flag %}
       {% analytical_head_top %}
