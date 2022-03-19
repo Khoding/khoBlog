@@ -57,26 +57,24 @@
         {% endif %}
       </article>
     {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-      <div class="py-8 xl:py-10">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-5xl xl:grid xl:grid-cols-3">
-          <div class="xl:col-span-2 xl:pr-8">
-            <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
-              <div>
-                <h1 class="text-2xl font-bold text-jumbo-900 dark:text-jumbo-300">{{ page.title }}</h1>
-                <p class="mt-2 text-sm text-jumbo-500">
-                  Page <span class="font-bold">#{{ page.pk }}</span>
-                </p>
-              </div>
-              {% if user.is_superuser %}
-                {% twsb page %}
-              {% endif %}
+      <div class="xl:grid xl:grid-cols-3">
+        <div class="xl:col-span-2 xl:pr-8">
+          <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
+            <div>
+              <h1 class="text-2xl font-bold text-jumbo-900 dark:text-jumbo-300">{{ page.title }}</h1>
+              <p class="mt-2 text-sm text-jumbo-500">
+                Page <span class="font-bold">#{{ page.pk }}</span>
+              </p>
             </div>
-            <div class="py-3 xl:pt-6 xl:pb-0">
-              <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-                {% autoescape off %}
-                  {{ page.content }}
-                {% endautoescape %}
-              </div>
+            {% if user.is_superuser %}
+              {% twsb page %}
+            {% endif %}
+          </div>
+          <div class="py-3 xl:pt-6 xl:pb-0">
+            <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+              {% autoescape off %}
+                {{ page.content }}
+              {% endautoescape %}
             </div>
           </div>
         </div>

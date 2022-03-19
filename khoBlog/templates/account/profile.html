@@ -174,43 +174,36 @@
   {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
     <article>
       <!-- Profile header -->
-      <section>
-        <div>
-          <img class="h-32 w-full object-cover lg:h-48" src="{% static 'khoBlog/img/khoBlog-gradient.png' %}" alt="">
+      <div class="sm:flex sm:items-end sm:space-x-5">
+        <div class="flex">
+          {% if object.profile_pic %}
+            <img class="object-contain h-24 w-auto sm:h-32 sm:w-auto" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ object }}">
+          {% else %}
+            <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture">
+          {% endif %}
         </div>
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-            <div class="flex">
-              {% if object.profile_pic %}
-                <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ objec }}">
-              {% else %}
-                <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture">
-              {% endif %}
-            </div>
-            <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-              <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
-                  {{ object }}
-                </h1>
-              </div>
-              {% if object == user %}
-                <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                  {% twusb object %}
-                </div>
-              {% else %}
-                <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-                  Edit in admin
-                </a>
-              {% endif %}
-            </div>
-          </div>
-          <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
+        <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+          <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
             <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
               {{ object }}
             </h1>
           </div>
+          {% if object == user %}
+            <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+              {% twusb object %}
+            </div>
+          {% else %}
+            <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-md px-4">
+              Edit in admin
+            </a>
+          {% endif %}
         </div>
-      </section>
+      </div>
+      <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
+          {{ object }}
+        </h1>
+      </div>
 
       <section x-data="{ tab: 'description' }">
         <!-- Tabs -->
@@ -295,7 +288,7 @@
             <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
               <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</h2>
               {% for github in accounts.github %}
-                <div class="relative rounded-lg border border-gray-300 dark:border-jumbo-500 bg-white dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500">
+                <div class="relative rounded-lg border border-gray-300 dark:border-jumbo-500 bg-white dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500 dark:focus-within:ring-flamingo-500">
                   <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full" src="{{ github.extra_data.avatar_url }}" loading="lazy" alt="User's Github account's profile picture">
                   </div>

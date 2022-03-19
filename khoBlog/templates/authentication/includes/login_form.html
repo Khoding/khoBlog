@@ -1,5 +1,5 @@
 {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-  {% load static project_tags %}
+  {% load project_tags %}
 
   <div class="card formcard auth-card">
     <div class="card-body">
@@ -24,7 +24,7 @@
     </div>
   </div>
 {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-  {% load static project_tags widget_tweaks socialaccount %}
+  {% load static widget_tweaks socialaccount %}
 
   <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">

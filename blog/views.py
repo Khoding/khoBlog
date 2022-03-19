@@ -171,6 +171,7 @@ class PostInSeriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["series"] = self.series
         context["title"] = self.series.title
+        context["description"] = self.description
         context["side_title"] = "Post List"
         return context
 
@@ -232,6 +233,7 @@ class SeriesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Series List"
+        context["description"] = "List of series"
         return context
 
 
@@ -388,6 +390,7 @@ class PostDraftListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Drafts"
+        context["description"] = "List of draft posts"
         return context
 
 
@@ -420,6 +423,7 @@ class PostScheduledListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Scheduled"
+        context["description"] = "List of scheduled posts"
         return context
 
 
@@ -448,6 +452,7 @@ class PostWithdrawnListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Withdrawn"
+        context["description"] = "List of withdrawn posts"
         return context
 
 
