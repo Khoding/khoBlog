@@ -8,13 +8,14 @@
       const isThemeStored = 'theme' in localStorage;
       const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
+      try {
+        if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      } catch (_) {}
     </script>
-
     <meta charset="UTF-8"/>
     {% if not debug_flag %}
       {% analytical_head_top %}
