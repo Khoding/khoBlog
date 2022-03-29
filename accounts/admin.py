@@ -49,9 +49,10 @@ class CustomUserAdmin(UserAdmin):
             {"fields": ("enable_tailwind",)},
         ),
         (
-            ("Important Dates"),
+            ("Metadata"),
             {
                 "fields": (
+                    "is_active",
                     "last_login",
                     "date_joined",
                 )

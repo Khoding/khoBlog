@@ -5,8 +5,6 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
-const { borderColor } = require("tailwindcss/defaultTheme");
-
 module.exports = {
     darkMode: "class",
     content: [
