@@ -30,6 +30,7 @@
     <div class="xl:grid xl:grid-cols-3">
       <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
         <nav class="flex justify-between" role="group" aria-label="Previous / Next">
+          {% if prev_post %}
           <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -37,6 +38,16 @@
             <!-- space -->
             Previous
           </a>
+          {% else %}
+          <button disabled class="next_prev_buttons disabled:opacity-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <!-- space -->
+            Previous
+          </button>
+          {% endif %}
+          {% if next_post %}
           <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
             Next
             <!-- space -->
@@ -44,6 +55,15 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
+          {% else %}
+          <button disabled class="next_prev_buttons disabled:opacity-50">
+            Next
+            <!-- space -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          {% endif %}
         </nav>
         <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
           <div>

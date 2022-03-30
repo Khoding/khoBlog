@@ -294,6 +294,10 @@ class PostDetailView(DetailView):
                     .exclude(pk=self.post.pk)
                     .order_by("created_date")
                 )
+            if self.next_post == self.post:
+                self.next_post = ""
+            if self.prev_post == self.post:
+                self.prev_post = ""
         else:
             self.series = (
                 self.model.objects.get_queryset()
