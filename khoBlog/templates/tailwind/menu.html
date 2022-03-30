@@ -1,4 +1,4 @@
-{% load static links_menu %}
+{% load static links_menu theme_buttons %}
 
 <div class="relative" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
@@ -10,11 +10,7 @@
           <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
         </a>
       </div>
-      <button id="darkLightm" class="switch md:hidden flex ml-auto mr-2 h-9 w-9 rounded-full cursor-pointer border-2 border-transparent dark:border-transparent hover:border-transparent dark:hover:border-transparent dark:border-x-white border-y-jumbo-900 rotate-12 ease-in-out duration-150 hover:scale-125">
-        <span class="rounded-l-full inline-flex h-6 w-3 translate-x-1 translate-y-1 bg-white dark:bg-jumbo-900"></span>
-        <span class="rounded-r-full inline-flex h-6 w-3 translate-x-1 translate-y-1 dark:bg-white bg-jumbo-900"></span>
-      </button>
-      <label for="darkLightm" class="cursor-pointer sr-only"></label>
+      {% theme_button "darkLightm" %}
       <div class="-mr-2 -my-2 md:hidden">
         <button type="button" class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-flamingo-600/75" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
           <span class="sr-only">Open menu</span>

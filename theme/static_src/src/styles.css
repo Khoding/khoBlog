@@ -179,4 +179,12 @@
     .pagination_next_prev_buttons {
         @apply relative inline-flex items-center px-4 py-2 border border-jumbo-300 text-sm font-medium rounded-md text-jumbo-700 bg-white hover:bg-jumbo-50 dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50;
     }
+
+    #darkLightm {
+        @apply md:hidden flex ml-auto mr-2 h-9 w-9 rounded-full cursor-pointer border-2 border-transparent dark:border-transparent hover:border-transparent dark:hover:border-transparent dark:border-x-white border-y-jumbo-900 rotate-12 ease-in-out duration-150 hover:scale-125;
+    }
+
+    #darkLightd {
+        @apply hidden md:flex -mt-6 lg:-mt-14 h-9 w-9 rounded-full cursor-pointer border-2 border-transparent dark:border-transparent hover:border-transparent dark:hover:border-transparent dark:border-x-white border-y-jumbo-900 rotate-12 ease-in-out duration-150 hover:scale-125;
+    }
 }
