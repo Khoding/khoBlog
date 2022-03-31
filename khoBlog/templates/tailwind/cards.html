@@ -24,6 +24,22 @@
         {{ object }}
       </p>
     </a>
+    {% if object.get_superuser_post_count_in_category or object.get_post_count_in_category %}
+      <p class="text-sm dark:text-jumbo-100">Post count:
+        {% if context.user.is_superuser %}
+        <strong>{{ object.get_superuser_post_count_in_category }}</strong>
+        |
+        {% endif %}
+        {{ object.get_post_count_in_category }}
+      </p>
+      <p class="text-sm dark:text-jumbo-100">Percentage:
+        {% if context.user.is_superuser %}
+        <strong>{{ object.get_superuser_percent_of_posts }}</strong>
+        |
+        {% endif %}
+        {{ object.get_percent_of_posts }}
+      </p>
+    {% endif %}
     <p class="text-sm dark:text-jumbo-100">
       {% comment %} {% endcomment %}
       <time datetime="{{ object.pub_date|date:"c" }}">
