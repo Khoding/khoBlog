@@ -1,4 +1,4 @@
-{% load static links_menu theme_buttons %}
+{% load static links_menu theme_buttons menu_footer_set %}
 
 <div class="relative" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
@@ -82,20 +82,10 @@
       </div>
       <div class="py-6 px-5">
         <div class="grid grid-cols-2 gap-4">
-          <a href="{% url 'blog:post_archive' %}" class="mobile_menu_grid_items">
-            Blog
-          </a>
-          {% if user.is_superuser %}
-            <a href="{% url 'blog:post_draft_list' %}" class="mobile_menu_grid_items">
-              Drafts
-            </a>
-            <a href="{% url 'blog:post_scheduled_list' %}" class="mobile_menu_grid_items">
-              Scheduled
-            </a>
-            <a href="{% url 'blog:post_withdrawn_list' %}" class="mobile_menu_grid_items">
-              Withdrawn
-            </a>
-          {% endif %}
+          {% mfl_setting default "mobile" "D" %}
+          {% mfl_setting default "mobile" "NP" %}
+          {% mfl_setting default "mobile" "NS" %}
+          {% mfl_setting default "mobile" "NA" %}
         </div>
         <div class="mt-6">
           {% if not user.is_authenticated %}

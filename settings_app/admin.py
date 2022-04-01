@@ -5,6 +5,8 @@ from .models import (
     LinksFooter,
     LinksGroupSideMenu,
     LinksSideMenu,
+    MenuFooter,
+    MenuFooterLink,
     Settings,
     SideMenu,
     SpecificDateMessage,
@@ -60,7 +62,19 @@ class FooterAdmin(admin.ModelAdmin):
     ]
 
 
+class MenuFooterLinksInline(admin.TabularInline):
+    model = MenuFooterLink
+    extra = 0
+
+
+class MenuFooterAdmin(admin.ModelAdmin):
+    inlines = [
+        MenuFooterLinksInline,
+    ]
+
+
 admin.site.register(SideMenu, SideMenuAdmin)
 admin.site.register(Footer, FooterAdmin)
+admin.site.register(MenuFooter, MenuFooterAdmin)
 admin.site.register(LinksGroupSideMenu, LinksGroupSideMenuAdmin)
 admin.site.register(Settings, PresetsSettingsAdmin)
