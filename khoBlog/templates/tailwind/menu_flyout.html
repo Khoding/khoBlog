@@ -1,4 +1,4 @@
-{% load links_menu featured_post weblog %}
+{% load links_menu featured_post weblog menu_footer_set %}
 
 <div x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button" :class="{ 'text-gray-900 dark:text-jumbo-300': open, 'text-gray-500': !(open) }" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
@@ -42,38 +42,10 @@
     </div>
     <div class="bg-gray-50 dark:bg-jumbo-900">
       <div class="max-w-7xl mx-auto flex flex-wrap justify-around px-4 py-5">
-        <a href="{% url 'blog:latest' %}" class="flyout_bottom_items">
-          <span>Latest Post</span>
-        </a>
-        <a href="{% url 'blog:random' %}" class="flyout_bottom_items">
-          <span>Random Post</span>
-        </a>
-        <a href="{% url 'blog:weblog' %}" class="flyout_bottom_items">
-          <span>Weblog</span>
-        </a>
-        {% if user.is_superuser %}
-          <a href="{% url 'blog:create_post' %}" class="flyout_bottom_items">
-            <span>New Post</span>
-          </a>
-          <a href="{% url 'blog:create_series' %}" class="flyout_bottom_items">
-            <span>New Series</span>
-          </a>
-          <a href="{% url 'blog:create_category' %}" class="flyout_bottom_items">
-            <span>New Category</span>
-          </a>
-          <a href="{% url 'blog:post_draft_list' %}" class="flyout_bottom_items">
-            <span>Drafts</span>
-          </a>
-          <a href="{% url 'blog:post_scheduled_list' %}" class="flyout_bottom_items">
-            <span>Scheduled</span>
-          </a>
-          <a href="{% url 'blog:post_withdrawn_list' %}" class="flyout_bottom_items">
-            <span>Withdrawn</span>
-          </a>
-          <a href="{% url 'todo:task_list' %}" class="flyout_bottom_items">
-            <span>Todo</span>
-          </a>
-        {% endif %}
+        {% mfl_setting default "desktop" "D" %}
+        {% mfl_setting default "desktop" "NP" %}
+        {% mfl_setting default "desktop" "NS" %}
+        {% mfl_setting default "desktop" "NA" %}
       </div>
     </div>
   </div>
