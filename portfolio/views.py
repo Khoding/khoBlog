@@ -29,6 +29,7 @@ class ProjectListView(ListView):
         context["description"] = "List of Projects"
         context["app_title"] = "Portfolio"
         context["app_direct_link"] = reverse_lazy("portfolio:project_list")
+        context["content_type"] = "project"
         return context
 
 

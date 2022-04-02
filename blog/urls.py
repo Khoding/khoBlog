@@ -6,7 +6,7 @@ from blog.views import CategoryDeleteView, SeriesDeleteView
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (
-    AllTagListView,
+    TagListView,
     CategoryCreateView,
     CategoryListView,
     CategoryUpdateView,
@@ -83,7 +83,7 @@ series_extra_patterns = [
 ]
 
 tags_extra_patterns = [
-    path("", AllTagListView.as_view(), name="tag_list"),
+    path("", TagListView.as_view(), name="tag_list"),
     path("<slug:slug>/", include(tags_action_extra_patterns)),
 ]
 

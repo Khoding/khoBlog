@@ -17,6 +17,7 @@ def context(request):
         "show_featured": False,
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
         "enable_tailwind_flag": enable_tailwind_flag,
+        "content_type": "post",
     }
     return context
 

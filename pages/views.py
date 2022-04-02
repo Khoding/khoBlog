@@ -87,6 +87,7 @@ class PageListView(ListView):
         context["description"] = "List of all Pages"
         context["app_title"] = "Pages"
         context["app_direct_link"] = reverse_lazy("pages:index")
+        context["content_type"] = "page"
         return context
 
 
