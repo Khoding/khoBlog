@@ -11,7 +11,7 @@ def context(request):
         "CANONICAL_PATH": request.build_absolute_uri(request.path_info),
         "debug_flag": debug_flag,
         "now": timezone.now(),
-        "description": "Welcome on my website, it's a blog, a portfolio, a personal playground, and a lot more.",
+        "description": "Welcome to my website, it's a blog, a portfolio, a personal playground, and too much time is dedicated to it.",
         "app_title": "Blog",
         "app_direct_link": reverse("blog:post_list"),
         "show_featured": False,
