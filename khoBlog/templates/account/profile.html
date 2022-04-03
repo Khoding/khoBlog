@@ -183,26 +183,34 @@
           {% endif %}
         </div>
         <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-          <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
+          <div class="sm:hidden md:block mt-6 min-w-0 flex-1">
             <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
               {{ object }}
             </h1>
+            {% if not object.is_active %}
+              <span class="text-red-500 dark:text-flamingo-600">(Banned)</span>
+            {% endif %}
           </div>
           {% if object == user %}
             <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
               {% twusb object %}
             </div>
           {% else %}
-            <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-md px-4">
-              Edit in admin
-            </a>
+            <div class="mx-auto text-right">
+              <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-md px-4">
+                Edit in admin
+              </a>
+            </div>
           {% endif %}
         </div>
       </div>
-      <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
+      <div class="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
           {{ object }}
         </h1>
+        {% if not object.is_active %}
+          <span class="text-red-500 dark:text-flamingo-600">(Banned)</span>
+        {% endif %}
       </div>
 
       <section x-data="{ tab: 'description' }">

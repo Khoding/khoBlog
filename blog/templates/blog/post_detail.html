@@ -128,6 +128,12 @@
         <p class="text-white-50 text-small">This post has comments disabled.</p>
       {% endif %}
     </article>
+  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
+    <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-100 dark:border-jumbo-200">Comments</h3>
+
+    <section class="space-y-4">
+      {% render_xtdcomment_tree for post %}
+    </section>
   {% endif %}
 {% endblock content_main %}
 
