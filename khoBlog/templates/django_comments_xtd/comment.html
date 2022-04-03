@@ -13,12 +13,12 @@
         {% elif comment.alias_user or comment.user and comment.alias_user %}
           {% if user.is_superuser %}
             <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
-            <span class="text-small text-muted">{{ comment.alias_user }}</span>
+            <span class="text-small text-white-50">{{ comment.alias_user }}</span>
           {% else %}
             {% if not comment.is_removed %}
               {{ comment.alias_user }}
             {% else %}
-              <span class="text-muted">This comment has been removed.</span>
+              <span class="text-white-50">This comment has been removed.</span>
             {% endif %}
           {% endif %}
         {% else %}
@@ -35,11 +35,11 @@
       </h4>
       {% if comment.is_removed %}
         {% if not user.is_superuser %}
-          <p class="text-muted">
+          <p class="text-white-50">
             <em>This comment has been removed.</em>
           </p>
         {% else %}
-          <div class="content text-muted">
+          <div class="content text-white-50">
             <em>
               {% if comment.title %}
                 <h4>{{ comment.title }}</h4>

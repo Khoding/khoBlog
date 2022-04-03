@@ -18,6 +18,8 @@ TEMPLATES = [
             "libraries": {
                 "project_tags": "khoBlog.templatetags.forms",
                 "cards": "khoBlog.templatetags.cards",
+                "display": "khoBlog.templatetags.display",
+                "theme_buttons": "khoBlog.templatetags.theme_buttons",
             },
             "loaders": [
                 (

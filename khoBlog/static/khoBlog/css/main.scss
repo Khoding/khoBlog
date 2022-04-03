@@ -254,6 +254,24 @@ aside p:last-child {
     @include background-color("bg");
 }
 
+input.picker[type="date"],
+input.picker[type="time"] {
+    position: relative;
+    @include background-color("bg");
+    @include color("text");
+
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        color: transparent;
+        background: transparent;
+    }
+}
+
 .markdownx-preview,
 .card-body .card-text,
 details,

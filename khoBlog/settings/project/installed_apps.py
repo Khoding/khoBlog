@@ -3,6 +3,8 @@ from ..django import DEBUG
 from ..third_party.django_debug_toolbar import ENABLE_DEBUG_TOOLBAR
 
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
@@ -41,11 +43,10 @@ INSTALLED_APPS = [
     "import_export",
     "compressor",
     "django_filters",
-    "pinax.referrals",
     "analytical",
     "django_markup",
-    "django_activeurl",
-    "djversion",
+    # Tailwind
+    "django_browser_reload",
     "tailwind",
     "theme",
     # Django Packages Apps

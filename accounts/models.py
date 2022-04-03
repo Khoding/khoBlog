@@ -40,6 +40,8 @@ class Role(auto_prefetch.Model):
 
 
 class CustomUser(AbstractUser):
+    """CustomUser Model Class"""
+
     THEME_CHOICES = [
         ("default", "Default"),
         ("uglybanana", "Funny Banana"),
@@ -89,6 +91,12 @@ class CustomUser(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("accounts:profile", kwargs={"slug": self.slug})
+
+    def get_absolute_update_url(self):
+        return reverse("accounts:edit_profile", kwargs={"slug": self.slug})
+
+    def get_absolute_admin_update_url(self):
+        return reverse("admin:accounts_customuser_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

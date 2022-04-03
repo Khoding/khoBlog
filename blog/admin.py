@@ -10,7 +10,11 @@ from .models import Category, Post, PostCatsLink, PostContent, Series
 
 
 class PostResource(resources.ModelResource):
+    """Admin class for PostResource"""
+
     class Meta:
+        """Meta class for PostResource"""
+
         model = Post
 
 
@@ -161,16 +165,22 @@ def make_multi_lingui(modeladmin, request, queryset):
 
 
 class PostCatsLinkInline(admin.TabularInline):
+    """PostCatsLinkInline Class"""
+
     model = PostCatsLink
     extra = 0
 
 
 class PostContentInline(admin.TabularInline):
+    """PostContentInline Class"""
+
     model = PostContent
     extra = 0
 
 
 class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
+    """PostAdmin Class"""
+
     resource_class = PostResource
     list_display = (
         "pk",
@@ -182,6 +192,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "featuring_state",
         "featured_cat_title",
         "clicks",
+        "rnd_choice",
         "language",
         "is_removed",
     )
@@ -210,16 +221,16 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "slug": ("title",),
     }
     list_filter = (
-        "categories",
         "is_removed",
+        "needs_reviewing",
         "publication_state",
         "featuring_state",
         "pub_date",
         "withdrawn",
         "featuring_state",
+        "categories",
         "language",
         "tags",
-        "content",
     )
 
     fieldsets = (
@@ -246,6 +257,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     "publication_state",
                     "featuring_state",
                     "language",
+                    "needs_reviewing",
                     "enable_comments",
                 )
             },
@@ -286,35 +298,10 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     ]
 
 
-class CommentAdmin(SimpleHistoryAdmin):
-    list_display = (
-        "id",
-        "full_title",
-        "author_logged",
-        "author",
-        "created_date",
-        "approbation_state",
-        "comment_answer",
-    )
-    list_display_links = ("full_title",)
-    ordering = ("created_date",)
-    search_fields = (
-        "author",
-        "body",
-    )
-    list_filter = (
-        "author_logged",
-        "approbation_state",
-    )
-
-    actions = [
-        make_approved,
-        make_removed,
-    ]
-
-
 class CategoryAdmin(SimpleHistoryAdmin):
-    list_display = ("title", "description", "slug", "withdrawn", "is_removed")
+    """CategoryAdmin Class"""
+
+    list_display = ("title", "suffix", "description", "slug", "withdrawn", "is_removed")
     list_editable = ("is_removed",)
     ordering = (
         "-pk",
@@ -322,7 +309,12 @@ class CategoryAdmin(SimpleHistoryAdmin):
         "-is_removed",
     )
     search_fields = ("title", "slug", "pk", "withdrawn")
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {
+        "slug": (
+            "title",
+            "suffix",
+        )
+    }
     list_filter = (
         "withdrawn",
         "is_removed",
@@ -332,6 +324,8 @@ class CategoryAdmin(SimpleHistoryAdmin):
 
 @admin.register(Series)
 class SeriesAdmin(SimpleHistoryAdmin):
+    """SeriesAdmin Class"""
+
     list_display = ("title", "description", "slug", "withdrawn", "is_removed")
     list_editable = ("is_removed",)
     ordering = (

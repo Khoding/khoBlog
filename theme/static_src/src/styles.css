@@ -1,3 +1,190 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .menu_mobile_buttons {
+        @apply mt-1 block rounded-md bg-indigo-800 px-3 py-2 text-base font-medium text-white first:mt-0;
+    }
+
+    .pagination_buttons {
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:hover:bg-jumbo-800 disabled:dark:hover:bg-jumbo-700 relative inline-flex items-center border border-gray-300 px-2 py-2 text-sm font-medium text-gray-500 disabled:cursor-not-allowed disabled:bg-slate-600;
+    }
+
+    .next_pagination_button {
+        @apply pagination_buttons rounded-r-md;
+    }
+
+    .previous_pagination_button {
+        @apply pagination_buttons rounded-l-md;
+    }
+
+    .flyout_button {
+        @apply dark:bg-jumbo-900 dark:hover:text-jumbo-50 dark:focus:ring-flamingo-600/75 inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+    }
+
+    .flyout_bottom_items {
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100;
+    }
+
+    .mobile_menu_grid_items {
+        @apply dark:text-jumbo-50 rounded-md text-base font-medium text-gray-900 hover:text-gray-700;
+    }
+
+    .profile_tab {
+        @apply dark:text-jumbo-50 dark:hover:border-jumbo-500 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700;
+    }
+
+    .profile_tab.profile_active_tab {
+        @apply dark:border-flamingo-500 dark:text-jumbo-300 border-pink-500 text-gray-900;
+    }
+
+    .profile_tab:not(.profile_active_tab) {
+        @apply border-transparent;
+    }
+
+    .superbutton_base {
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:hover:bg-jumbo-800 dark:focus:ring-flamingo-600/75 dark:focus:border-flamingo-600/75 relative inline-flex items-center border border-gray-300 bg-white py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500;
+    }
+
+    .superbutton_main_action {
+        @apply superbutton_base rounded-l-md px-4;
+    }
+
+    .superbutton_dropdown_button {
+        @apply superbutton_base rounded-r-md px-2;
+    }
+
+    .superbutton_dropdown_items {
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+    }
+
+    .prose .tabbed-set {
+        @apply relative flex flex-wrap;
+    }
+
+    .prose .tabbed-set .tabbed-content {
+        @apply order-last hidden pl-4;
+    }
+
+    .prose .tabbed-set label {
+        @apply mx-2 w-auto cursor-pointer p-1;
+    }
+
+    .prose .tabbed-set input {
+        @apply absolute opacity-0;
+    }
+
+    .prose .tabbed-set input:nth-child(n + 1) {
+        @apply text-[#333333];
+    }
+
+    .prose .tabbed-set input:nth-child(n + 1):checked + label {
+        @apply text-[#ff5252];
+    }
+
+    .prose
+        .tabbed-set
+        input:nth-child(n + 1):checked
+        + label
+        + .tabbed-content {
+        @apply block;
+    }
+
+    .prose :is(.admonition, summary, details) {
+        @apply mb-2 p-4;
+    }
+
+    .prose .icon {
+        @apply mr-1 inline-block align-middle;
+    }
+
+    .prose .icon svg {
+        @apply mb-1 inline-block h-5 w-5 stroke-0;
+    }
+
+    .prose summary > :last-child {
+        @apply mb-0;
+    }
+
+    /* default for custom types */
+    .prose :is(.admonition, summary, details) {
+        @apply border-l-8 border-purple-600 bg-purple-100;
+    }
+
+    /** native types */
+    .prose :is(.caution, .warning, .attention) {
+        @apply border-l-8 border-orange-600 bg-orange-100;
+    }
+
+    .prose :is(.success, .check, .done) {
+        @apply border-l-8 border-green-600 bg-green-100;
+    }
+
+    .prose :is(.question, .help, .faq) {
+        @apply border-l-8 border-green-400 bg-green-100;
+    }
+
+    .prose :is(.failure, .fail, .missing) {
+        @apply border-l-8 border-red-600 bg-red-100;
+    }
+
+    .prose :is(.danger, .error) {
+        @apply border-l-8 border-red-500 bg-red-100;
+    }
+    .prose .bug {
+        @apply border-l-8 border-pink-500 bg-pink-100;
+    }
+
+    .prose :is(.tip, .hint, .important) {
+        @apply border-l-8 border-teal-500 bg-teal-100;
+    }
+
+    .prose :is(.info, .todo) {
+        @apply border-l-8 border-blue-500 bg-blue-100;
+    }
+
+    .prose :is(.abstract, .summary, .tldr) {
+        @apply border-l-8 border-cyan-400 bg-cyan-100;
+    }
+
+    .prose .note {
+        @apply border-l-8 border-yellow-500 bg-yellow-100;
+    }
+
+    .prose :is(.quote, .cite) {
+        @apply border-l-8 border-gray-500 bg-gray-100;
+    }
+
+    .prose :is(.admonition, summary, details) .icon svg {
+        @apply fill-current stroke-current;
+    }
+
+    .prose h1 img {
+        @apply my-0 inline;
+    }
+
+    .dropdown_item {
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
+    }
+
+    .dropdown_item_active {
+        @apply bg-gray-100 text-gray-900;
+    }
+
+    .next_prev_buttons {
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:hover:bg-jumbo-800 disabled:dark:hover:bg-jumbo-700 inline-flex items-center rounded-md border border-transparent px-2.5 py-1.5 text-xs font-medium leading-4 text-gray-500 disabled:cursor-not-allowed disabled:bg-slate-600 sm:px-3 sm:py-2 sm:text-sm;
+    }
+
+    .pagination_next_prev_buttons {
+        @apply border-jumbo-300 text-jumbo-700 hover:bg-jumbo-50 dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 relative inline-flex items-center rounded-md border bg-white px-4 py-2 text-sm font-medium;
+    }
+
+    #darkLightm {
+        @apply border-y-jumbo-900 ml-auto mr-2 flex h-9 w-9 rotate-12 cursor-pointer rounded-full border-2 border-transparent duration-150 ease-in-out hover:scale-125 hover:border-transparent dark:border-transparent dark:border-x-white dark:hover:border-transparent md:hidden;
+    }
+
+    #darkLightd {
+        @apply border-y-jumbo-900 -mt-6 hidden h-9 w-9 rotate-12 cursor-pointer rounded-full border-2 border-transparent duration-150 ease-in-out hover:scale-125 hover:border-transparent dark:border-transparent dark:border-x-white dark:hover:border-transparent md:flex lg:-mt-14;
+    }
+}

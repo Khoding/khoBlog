@@ -5,7 +5,7 @@
     </li>
   {% elif context.enable_tailwind_flag or context.user.is_authenticated and context.user.enable_tailwind %}
     <li>
-      <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">{% firstof url.featured_title url.title %}</a>
+      <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="px-4 py-1 mr-1 text-base text-jumbo-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">{% firstof url.featured_title url.title %}</a>
     </li>
   {% endif %}
 {% endfor %}

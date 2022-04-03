@@ -7,7 +7,8 @@ from .views import (
     PageDetailView,
     PageListView,
     PageUpdateView,
-    kheee_special_case,
+    kheee_page,
+    about_page,
 )
 
 page_extra_patterns = [
@@ -21,5 +22,6 @@ urlpatterns = [
     path("", PageListView.as_view(), name="index"),
     path("add/", PageCreateView.as_view(), name="page_add"),
     path("<slug:slug>/", include(page_extra_patterns)),
-    path("kheee/", kheee_special_case, name="kheee"),
+    path("kheee/", kheee_page, name="kheee"),
+    path("about/", about_page, name="about"),
 ]

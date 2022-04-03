@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import JsonResponse
@@ -20,16 +19,14 @@ from django.views.generic.dates import (
 from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
+from custom_taggit.forms import TagForm
 from custom_taggit.models import CustomTag
 from khoBlog.utils.superuser_required import superuser_required
 
 from .forms import (
-    ARPostCommentForm,
     CategoryCreateForm,
     CategoryDeleteForm,
     CategoryEditForm,
-    CommentForm,
-    EditPostCommentForm,
     PostCloneForm,
     PostCreateForm,
     PostDeleteForm,
@@ -38,7 +35,7 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
-from .models import Category, Comment, Post, PostContent, Series
+from .models import Category, Post, PostContent, Series
 
 
 class PostListView(ListView):
@@ -56,7 +53,7 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -115,7 +112,7 @@ class PostInCategoryListView(ListView):
     model = Post
     template_name = "blog/lists/post_category_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -154,7 +151,7 @@ class PostInSeriesListView(ListView):
     model = Post
     template_name = "blog/lists/post_series_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -174,6 +171,7 @@ class PostInSeriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["series"] = self.series
         context["title"] = self.series.title
+        context["description"] = self.description
         context["side_title"] = "Post List"
         return context
 
@@ -193,7 +191,7 @@ class CategoryListView(ListView):
     model = Category
     template_name = "blog/lists/category_list.html"
     context_object_name = "category_list"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     ordering = "pk"
 
@@ -205,9 +203,8 @@ class CategoryListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Category List"
-        context["search_url"] = reverse("blog:category_search_results")
-        context["search_title"] = "Search in Categories"
         context["description"] = "List of categories"
+        context["content_type"] = "category"
         return context
 
 
@@ -226,7 +223,7 @@ class SeriesListView(ListView):
     model = Series
     template_name = "blog/lists/series_list.html"
     context_object_name = "series_list"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -237,6 +234,8 @@ class SeriesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Series List"
+        context["description"] = "List of series"
+        context["content_type"] = "series"
         return context
 
 
@@ -297,6 +296,10 @@ class PostDetailView(DetailView):
                     .exclude(pk=self.post.pk)
                     .order_by("created_date")
                 )
+            if self.next_post == self.post:
+                self.next_post = ""
+            if self.prev_post == self.post:
+                self.prev_post = ""
         else:
             self.series = (
                 self.model.objects.get_queryset()
@@ -354,6 +357,15 @@ def redirect_to_latest(request):
     return redirect(reverse("blog:post_detail", args=(latest.slug,)))
 
 
+def redirect_to_random(request):
+    if request.user.is_superuser:
+        post = Post.objects.filter(is_removed=False).order_by("?")[0]
+    else:
+        post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).order_by("?")[0]
+    post.rnd_chosen()
+    return redirect(reverse("blog:post_detail", args=(post.slug,)))
+
+
 def post_detail_through_id(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
@@ -375,7 +387,7 @@ class PostDraftListView(ListView):
     model = Post
     template_name = "blog/lists/post_draft_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -384,6 +396,7 @@ class PostDraftListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Drafts"
+        context["description"] = "List of draft posts"
         return context
 
 
@@ -403,7 +416,7 @@ class PostScheduledListView(ListView):
     model = Post
     template_name = "blog/lists/post_scheduled_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -416,6 +429,7 @@ class PostScheduledListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Scheduled"
+        context["description"] = "List of scheduled posts"
         return context
 
 
@@ -435,7 +449,7 @@ class PostWithdrawnListView(ListView):
     model = Post
     template_name = "blog/lists/post_withdrawn_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -444,13 +458,14 @@ class PostWithdrawnListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Withdrawn"
+        context["description"] = "List of withdrawn posts"
         return context
 
 
-class AllTagListView(ListView):
-    """AllTagsListView ListView
+class TagListView(ListView):
+    """TagListView ListView
 
-    Lists all Tags
+    List of Tags
 
     Args:
         ListView ([type]): [description]
@@ -462,7 +477,7 @@ class AllTagListView(ListView):
     model = CustomTag
     template_name = "blog/lists/tag_list.html"
     context_object_name = "tags"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -475,8 +490,7 @@ class AllTagListView(ListView):
         context["title"] = "Tag List"
         context["description"] = "List of all tags"
         context["side_title"] = "Tag List"
-        context["search_url"] = reverse("blog:tag_search_results")
-        context["search_title"] = "Search in Tags"
+        context["content_type"] = "tag"
         return context
 
 
@@ -495,7 +509,7 @@ class PostWithTagListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
 
     def get_queryset(self):
@@ -510,8 +524,6 @@ class PostWithTagListView(ListView):
         context["title"] = self.title
         context["description"] = self.description
         context["side_title"] = "Post List"
-        context["search_url"] = reverse("blog:tag_search_results")
-        context["search_title"] = "Search in Tags"
         return context
 
 
@@ -529,8 +541,9 @@ class TagUpdateView(UpdateView):
     """
 
     model = CustomTag
+    form = TagForm
     fields = "__all__"
-    template_name = "blog/edit_category.html"
+    template_name = "blog/edit_tag.html"
     success_url = reverse_lazy("blog:tag_list")
 
     def get_context_data(self, **kwargs):
@@ -844,288 +857,6 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
         return context
 
 
-class SearchListView(ListView):
-    """SearchListView
-
-    Search View
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    template_name = "blog/search.html"
-    context_object_name = "query"
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        query = [
-            [
-                {
-                    "id": 1,
-                    "title": "Search in Posts",
-                    "get_absolute_url": "post/?q=",
-                },
-                {
-                    "id": 2,
-                    "title": "Search in Categories",
-                    "get_absolute_url": "category/?q=",
-                },
-                {
-                    "id": 3,
-                    "title": "Search in Tags",
-                    "get_absolute_url": "tag/?q=",
-                },
-                {
-                    "id": 4,
-                    "title": "Search in Everything",
-                    "get_absolute_url": "all/?q=",
-                },
-            ]
-        ]
-        return query
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Search"
-        context["search_url"] = reverse("blog:search_results")
-        context["search_title"] = "Search in Everything"
-        return context
-
-
-class PostSearchResultsListView(ListView):
-    """PostSearchResultsListView
-
-    Search result list view
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Post
-    template_name = "blog/lists/filter_list.html"
-    context_object_name = "filter"
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            query = PostFilter(self.request.GET, queryset=self.model.objects.all())
-        else:
-            query = PostFilter(
-                self.request.GET,
-                queryset=self.model.objects.filter(Q(pub_date__lte=timezone.now(), withdrawn=False)),
-            )
-        return query.qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Search in Posts"
-        context["search_url"] = reverse("blog:post_search_results")
-        context["search_title"] = "Search in Posts"
-        context["filter_form"] = PostFilter()
-        return context
-
-
-class CategorySearchResultsListView(ListView):
-    """CategorySearchResultsListView
-
-    Category results listing view
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Category
-    template_name = "blog/search.html"
-    context_object_name = "query"
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        if query is not None:
-            if self.request.user.is_superuser:
-                return self.model.objects.filter(
-                    Q(title__contains=query) | Q(description__contains=query),
-                ).get_without_removed()
-            return (
-                self.model.objects.filter(
-                    Q(title__contains=query) | Q(description__contains=query),
-                )
-                .filter(
-                    ~Q(withdrawn=True),
-                )
-                .get_without_removed()
-            )
-        if self.request.user.is_superuser:
-            category = self.model.objects.get_without_removed()
-            return category
-        category = self.model.objects.filter(
-            ~Q(withdrawn=True),
-        ).get_without_removed()
-        return category
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Search in Categories"
-        context["search_url"] = reverse("blog:category_search_results")
-        context["search_title"] = "Search in Categories"
-        return context
-
-
-class TagsSearchResultsListView(ListView):
-    """TagsSearchResultsListView
-
-    Tags search result listing view
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    template_name = "blog/search.html"
-    context_object_name = "query"
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        if query is not None:
-            if not self.request.user.is_superuser:
-                return CustomTag.objects.filter(Q(name__contains=query, withdrawn=False))
-            return CustomTag.objects.filter(Q(name__contains=query))
-        if not self.request.user.is_superuser:
-            tag = CustomTag.objects.filter(withdrawn=False)
-        else:
-            tag = CustomTag.objects.all()
-        return tag
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Search in Tags"
-        context["search_url"] = reverse("blog:tag_search_results")
-        context["search_title"] = "Search in Tags"
-        return context
-
-
-class RandomSearchResultsListView(ListView):
-    """RandomSearchResultsListView
-
-    Random search view
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    template_name = "blog/search.html"
-    context_object_name = "query"
-
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        return query
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Random Search"
-        context["search_url"] = reverse("blog:rnd_search_results")
-        context["search_title"] = "Have fun"
-        return context
-
-
-class AllSearchResultsListView(ListView):
-    """AllSearchResultsListView
-
-    Search everywhere results list view
-
-    Args:
-        ListView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    template_name = "blog/search.html"
-    context_object_name = "query"
-    paginate_by = 21
-    paginate_orphans = 5
-
-    def get_queryset(self):
-        query = self.request.GET.get("q")
-        if query is not None:
-            if self.request.user.is_superuser:
-                post = Post.objects.filter(
-                    Q(title__contains=query) | Q(body__contains=query) | Q(description__contains=query),
-                ).get_without_removed()
-                category = Category.objects.filter(
-                    Q(title__contains=query) | Q(description__contains=query),
-                ).get_without_removed()
-                tag = CustomTag.objects.filter(Q(name__contains=query))
-                return [post, category, tag]
-            post = (
-                Post.objects.filter(
-                    Q(title__contains=query) | Q(body__contains=query) | Q(description__contains=query),
-                )
-                .filter(
-                    ~Q(pub_date__gt=timezone.now()),
-                    ~Q(pub_date__isnull=True),
-                    ~Q(withdrawn=True),
-                )
-                .get_without_removed()
-            )
-            category = (
-                Category.objects.filter(
-                    Q(title__contains=query) | Q(description__contains=query),
-                )
-                .filter(
-                    ~Q(withdrawn=True),
-                )
-                .get_without_removed()
-            )
-            tag = CustomTag.objects.filter(Q(name__contains=query)).filter(
-                ~Q(withdrawn=True),
-            )
-            return [post, category, tag]
-        if self.request.user.is_superuser:
-            post = Post.objects.get_without_removed()
-            category = Category.objects.get_without_removed()
-            tag = CustomTag.objects.all()
-            return [post, category, tag]
-        post = Post.objects.filter(
-            ~Q(pub_date__gt=timezone.now()),
-            ~Q(pub_date__isnull=True),
-            ~Q(withdrawn=True),
-        ).get_without_removed()
-        category = Category.objects.filter(
-            ~Q(withdrawn=True),
-        ).get_without_removed()
-        tag = CustomTag.objects.filter(
-            ~Q(withdrawn=True),
-        )
-        return [post, category, tag]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Search in Everything"
-        context["search_url"] = reverse("blog:search_results")
-        context["search_title"] = "Search in Everything"
-        return context
-
-
 @user_passes_test(lambda u: u.is_superuser)
 def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -1141,158 +872,25 @@ def post_publish_withdrawn(request, slug):
     return redirect("blog:post_detail", slug=slug)
 
 
-@superuser_required()
-class PostCommentCreateView(LoginRequiredMixin, CreateView):
-    """PostCommentCreateView
-
-    Create a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        CreateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = CommentForm
-    template_name = "blog/comments/add_comment_to_post.html"
-
-    def form_valid(self, form):
-        form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Add Comment"
-        context["side_title"] = "Post List"
-        return context
+@user_passes_test(lambda u: u.is_superuser)
+def post_needs_review(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.needs_review()
+    return redirect("blog:post_detail", slug=slug)
 
 
-@superuser_required()
-class ReplyToCommentCreateView(LoginRequiredMixin, CreateView):
-    """ReplyToCommentCreateView
-
-    Reply to a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        CreateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = CommentForm
-    template_name = "blog/comments/add_comment_to_post.html"
-
-    def form_valid(self, form):
-        form.instance.author_logged = self.request.user
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        form.instance.comment_answer_id = self.kwargs["pk"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Reply to Comment"
-        context["side_title"] = "Post List"
-        return context
+@user_passes_test(lambda u: u.is_superuser)
+def category_needs_review(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    category.needs_review()
+    return redirect("blog:post_category_list", slug=slug)
 
 
-@superuser_required()
-class PostCommentUpdateView(LoginRequiredMixin, UpdateView):
-    """PostCommentUpdateView
-
-    Update a comment
-
-    Args:
-        LoginRequiredMixin ([type]): [description]
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = EditPostCommentForm
-    template_name = "blog/comments/edit_comment.html"
-
-    def form_valid(self, form):
-        form.instance.related_post_id = self.kwargs["pk_post"]
-        form.instance.comment_id = self.kwargs["pk"]
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Edit Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class ApprovePostCommentUpdateView(UpdateView):
-    """ApprovePostCommentUpdateView
-
-    Approve a comment
-
-    Args:
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = ARPostCommentForm
-    template_name = "blog/comments/approve_post_comment.html"
-
-    def get_queryset(self):
-        self.comment = get_object_or_404(Comment, pk=self.kwargs["pk"])
-        self.comment.approve()
-        return super().get_queryset()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.get_without_removed().order_by("-pk")
-        context["title"] = "Approve Comment"
-        context["side_title"] = "Post List"
-        return context
-
-
-@superuser_required()
-class RemovePostCommentUpdateView(UpdateView):
-    """RemovePostCommentUpdateView
-
-    Remove a comment
-
-    Args:
-        UpdateView ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
-    model = Comment
-    form_class = ARPostCommentForm
-    template_name = "blog/comments/remove_post_comment.html"
-
-    def get_queryset(self):
-        self.comment = get_object_or_404(Comment, pk=self.kwargs["pk"])
-        self.comment.remove()
-        return super().get_queryset()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False)
-        context["title"] = "Remove Comment"
-        context["side_title"] = "Post List"
-        return context
+@user_passes_test(lambda u: u.is_superuser)
+def series_needs_review(request, slug):
+    series = get_object_or_404(Series, slug=slug)
+    series.needs_review()
+    return redirect("blog:post_series_list", slug=slug)
 
 
 class PostArchiveIndexView(ArchiveIndexView):
@@ -1310,7 +908,7 @@ class PostArchiveIndexView(ArchiveIndexView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
@@ -1321,7 +919,7 @@ class PostArchiveIndexView(ArchiveIndexView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "[Archive] Post archives"
+        context["title"] = "[Archive] Post archive"
         return context
 
 
@@ -1340,7 +938,7 @@ class PostYearArchiveView(YearArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
@@ -1370,7 +968,7 @@ class PostMonthArchiveView(MonthArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
@@ -1399,7 +997,7 @@ class PostWeekArchiveView(WeekArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     date_field = "pub_date"
     week_format = "%W"
@@ -1429,7 +1027,7 @@ class PostDayArchiveView(DayArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
@@ -1573,7 +1171,7 @@ class PostTodayArchiveView(TodayArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 21
+    paginate_by = 20
     paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
@@ -1588,7 +1186,7 @@ class PostTodayArchiveView(TodayArchiveView):
 
 
 def link_fetching(request):
-    """EditorJS linkfetching"""
+    """Link Fetching for EditorJS"""
     import requests
     from bs4 import BeautifulSoup
 

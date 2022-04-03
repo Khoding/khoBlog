@@ -1,172 +1,315 @@
 {% extends "sub_base.html" %}
-{% load account socialaccount %}
+{% load static account socialaccount super_buttons %}
 
 {% block page_top_end %}
-  {% if user.is_superuser %}
-    <a class="btn btn-danger btn-sm float-end" href="{% url 'admin:accounts_customuser_change' object_id=object.id %}">
-      <i class="bi bi-trash"></i>
-      Edit in Admin
-    </a>
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
+    {% if user.is_superuser %}
+      <a class="btn btn-danger btn-sm float-end" href="{% url 'admin:accounts_customuser_change' object_id=object.id %}">
+        <i class="bi bi-pencil-square"></i>
+        Edit in Admin
+      </a>
+    {% endif %}
   {% endif %}
 {% endblock page_top_end %}
 
 {% block content %}
-  <div class="card mb-2 shadow">
-    <div class="row g-0">
-      <div class="col-md-4">
-        {% if object.profile_pic %}
-          <img class="w-50 p-2" src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" loading="lazy"/>
-        {% endif %}
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h3 class="card-title mb-0">
-            {% user_display object %}
-            {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
-              {% if object.first_name or object.last_name %}
-                -
-                <span>
-                  {% if object.first_name %}{{ object.first_name }}
-                  {% endif %}
-                  {% if object.last_name %}
-                    {{ object.last_name }}
-                  {% endif %}
-                </span>
-              {% endif %}
-            {% endif %}
-            <span class="badge border p-2 py-1">
-              {% if object.roles.last %}
-                {{ object.roles.last }}
-              {% else %}
-                {% if object.is_superuser %}
-                  {% if object.owner %}
-                    Website Owner
-                  {% else %}
-                    Admin
-                  {% endif %}
-                {% elif object.is_staff %}
-                  Staff
-                {% else %}
-                  User
+  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
+    <div class="card mb-2 shadow">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if object.profile_pic %}
+            <img class="w-50 p-2" src="{{ object.profile_pic.url }}" alt="Profile Pic of {{ object.username }}" loading="lazy"/>
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title mb-0">
+              {% user_display object %}
+              {% if object.id == user.id and view_as == "self" or view_as == "self" and user.is_superuser %}
+                {% if object.first_name or object.last_name %}
+                  -
+                  <span>
+                    {% if object.first_name %}{{ object.first_name }}
+                    {% endif %}
+                    {% if object.last_name %}
+                      {{ object.last_name }}
+                    {% endif %}
+                  </span>
                 {% endif %}
               {% endif %}
-            </span>
-          </h3>
-          <div class="card-text">
-            <p class="mb-0">{{ object.bio }}</p>
-            {% get_social_accounts object as accounts %}
+              <span class="badge border p-2 py-1">
+                {% if object.roles.last %}
+                  {{ object.roles.last }}
+                {% else %}
+                  {% if object.is_superuser %}
+                    {% if object.owner %}
+                      Website Owner
+                    {% else %}
+                      Admin
+                    {% endif %}
+                  {% elif object.is_staff %}
+                    Staff
+                  {% else %}
+                    User
+                  {% endif %}
+                {% endif %}
+              </span>
+            </h3>
+            <div class="card-text">
+              <p class="mb-0">{{ object.bio }}</p>
+              {% get_social_accounts object as accounts %}
 
-            {% if accounts.github and object.show_github %}
-              {% for github in accounts.github %}
-                <div class="card shadow">
-                  <div class="card-header">
-                    Github •
-                    <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a>
-                  </div>
-                  <div class="card-body">
-                    <p class="mb-0">Profile:
-                      <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.html_url }}</a>
-                    </p>
-                    {% if github.extra_data.blog %}
-                      <p class="mb-0">Blog:
-                        <a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a>
+              {% if accounts.github and object.show_github %}
+                {% for github in accounts.github %}
+                  <div class="card shadow">
+                    <div class="card-header">
+                      Github •
+                      <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.login }}</a>
+                    </div>
+                    <div class="card-body">
+                      <p class="mb-0">Profile:
+                        <a href="{{ github.extra_data.html_url }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.html_url }}</a>
                       </p>
-                    {% endif %}
-                    {% if github.extra_data.bio %}
-                      <p class="mb-0">Bio:
-                        {{ github.extra_data.bio }}</p>
-                    {% endif %}
+                      {% if github.extra_data.blog %}
+                        <p class="mb-0">Blog:
+                          <a href="{{ github.extra_data.blog }}" target="_blank" rel="noopener noreferrer">{{ github.extra_data.blog }}</a>
+                        </p>
+                      {% endif %}
+                      {% if github.extra_data.bio %}
+                        <p class="mb-0">Bio:
+                          {{ github.extra_data.bio }}</p>
+                      {% endif %}
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
-            {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  {% if user.is_superuser %}
-    {% if view_as == "self" %}
-      <div class="table-responsive mt-2">
-        <table class="table table-dark table-striped shadow mb-2">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">
-                <a href="{% url 'admin:accounts_customuser_changelist' %}">Username</a>
-              </th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Last Log in</th>
-              <th scope="col">
-                <a href="{% url 'admin:account_emailaddress_changelist' %}">Verified Email</a>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for user in users %}
-              {% if user.id != object.id %}
-                <tr>
-                  <th scope="row">{{ user.id }}</th>
-                  <td>
-                    <a href="{{ user.get_absolute_url }}">{{ user.username }}</a>
-                  </td>
-                  <td>{{ user.first_name }}</td>
-                  <td>{{ user.last_name }}</td>
-                  <td>{{ user.last_login}}</td>
-                  <td>
-                    {% for emailaddress in user.emailaddress_set.all %}
-                      <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
-                        -
-                        {% if emailaddress.verified %}
-                          <span>Verified</span>
-                        {% else %}
-                          <span>Unverified</span>
-                        {% endif %}
-                      </a>
-                    {% endfor %}
-                  </td>
-                </tr>
-              {% endif %}
-            {% endfor %}
-          </tbody>
-        </table>
+    {% if user.is_superuser %}
+      {% if view_as == "self" %}
+        <div class="table-responsive mt-2">
+          <table class="table table-dark table-striped shadow mb-2">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">
+                  <a href="{% url 'admin:accounts_customuser_changelist' %}">Username</a>
+                </th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Last Log in</th>
+                <th scope="col">
+                  <a href="{% url 'admin:account_emailaddress_changelist' %}">Verified Email</a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+                {% if user.id != object.id %}
+                  <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>
+                      <a href="{{ user.get_absolute_url }}">{{ user.username }}</a>
+                    </td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.last_login}}</td>
+                    <td>
+                      {% for emailaddress in user.emailaddress_set.all %}
+                        <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
+                          -
+                          {% if emailaddress.verified %}
+                            <span>Verified</span>
+                          {% else %}
+                            <span>Unverified</span>
+                          {% endif %}
+                        </a>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if object.id == user.id and view_as == "self" %}
+      <hr/>
+
+      <p class="mb-2">
+        <a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a>
+      </p>
+      <p class="mb-2">
+        <a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a>
+      </p>
+      <p class="mb-2">
+        <a class="btn btn-primary" href="{% url 'accounts:connections' %}">Edit Connections</a>
+      </p>
+      <p class="mb-2">
+        <a class="btn btn-primary" href="{% url 'accounts:email' %}">Edit Email</a>
+      </p>
+    {% endif %}
+
+    {% if object.id == user.id and view_as == "self" %}
+      <hr/>
+
+      <p class="mb-auto">
+        <a class="btn btn-primary" href="?view_as=guest">View as Guest</a>
+      </p>
+    {% elif object.id == user.id and view_as == "guest" %}
+      <hr/>
+
+      <div>
+        <a class="btn btn-outline-light p-2" href="{% url 'accounts:profile' slug=object.slug %}">
+          Leave Guest View
+        </a>
       </div>
     {% endif %}
-  {% endif %}
+  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
+    <article>
+      <!-- Profile header -->
+      <div class="sm:flex sm:items-end sm:space-x-5">
+        <div class="flex">
+          {% if object.profile_pic %}
+            <img class="object-contain h-24 w-auto sm:h-32 sm:w-auto" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ object }}">
+          {% else %}
+            <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture">
+          {% endif %}
+        </div>
+        <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+          <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
+              {{ object }}
+            </h1>
+          </div>
+          {% if object == user %}
+            <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+              {% twusb object %}
+            </div>
+          {% else %}
+            <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-md px-4">
+              Edit in admin
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
+          {{ object }}
+        </h1>
+      </div>
 
-  {% if object.id == user.id and view_as == "self" %}
-    <hr/>
+      <section x-data="{ tab: 'description' }">
+        <!-- Tabs -->
+        <div class="mt-6 sm:mt-2 2xl:mt-5">
+          <div class="border-b border-gray-200 dark:border-jumbo-600">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <button :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
+                  Profile
+                </button>
 
-    <p class="mb-2">
-      <a class="btn btn-primary" href="{% url 'accounts:edit_profile' slug=object.slug %}">Edit Profile</a>
-    </p>
-    <p class="mb-2">
-      <a class="btn btn-primary" href="{% url 'accounts:edit_password' %}">Modify Password</a>
-    </p>
-    <p class="mb-2">
-      <a class="btn btn-primary" href="{% url 'accounts:connections' %}">Edit Connections</a>
-    </p>
-    <p class="mb-2">
-      <a class="btn btn-primary" href="{% url 'accounts:email' %}">Edit Email</a>
-    </p>
-  {% endif %}
+                {% get_social_accounts object as accounts %}
+                {% if accounts.github and object.show_github %}
+                  <button :class="{ 'profile_active_tab': tab === 'github' }" x-on:click.prevent="tab = 'github'" class="profile_tab">
+                    Github
+                  </button>
+                {% endif %}
+              </nav>
+            </div>
+          </div>
+        </div>
 
-  {% if object.id == user.id and view_as == "self" %}
-    <hr/>
+        <!-- Description list -->
+        <section x-show="tab === 'description'" class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+            {% if object.pk == user.pk or user.is_superuser %}
+              <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
+                  Email
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 dark:text-jumbo-300">
+                  {% for emailaddress in object.emailaddress_set.all %}
+                    <a href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">{{ emailaddress }}
+                      -
+                      {% if emailaddress.verified %}
+                        <span>Verified</span>
+                      {% else %}
+                        <span>Unverified</span>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                </dd>
+              </div>
+            {% endif %}
 
-    <p class="mb-auto">
-      <a class="btn btn-primary" href="?view_as=guest">View as Guest</a>
-    </p>
-  {% elif object.id == user.id and view_as == "guest" %}
-    <hr/>
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
+                Title
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 dark:text-jumbo-300">
+                {% if object.roles.last %}
+                  {{ object.roles.last }}
+                {% else %}
+                  {% if object.is_superuser %}
+                    {% if object.owner %}
+                      Website Owner
+                    {% else %}
+                      Admin
+                    {% endif %}
+                  {% elif object.is_staff %}
+                    Staff
+                  {% else %}
+                    User
+                  {% endif %}
+                {% endif %}
+              </dd>
+            </div>
 
-    <div>
-      <a class="btn btn-outline-light p-2" href="{% url 'accounts:profile' slug=object.slug %}">
-        Leave Guest View
-      </a>
-    </div>
+            <div class="sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
+                Bio
+              </dt>
+              <dd class="mt-1 max-w-prose text-sm text-gray-900 dark:text-jumbo-300 space-y-5">
+                <p>{{ object.bio }}</p>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        {% if accounts.github and object.show_github %}
+          <section x-show="tab === 'github'">
+            <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
+              <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</h2>
+              {% for github in accounts.github %}
+                <div class="relative rounded-lg border border-gray-300 dark:border-jumbo-500 bg-white dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500 dark:focus-within:ring-flamingo-500">
+                  <div class="flex-shrink-0">
+                    <img class="h-10 w-10 rounded-full" src="{{ github.extra_data.avatar_url }}" loading="lazy" alt="User's Github account's profile picture">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <a href="{{ github.extra_data.html_url }}" class="focus:outline-none" target="_blank">
+                      <span class="absolute inset-0" aria-hidden="true"></span>
+                      <p class="text-sm font-medium text-gray-900 dark:text-jumbo-300">
+                        {{ github.extra_data.login }}
+                      </p>
+                      <p class="text-sm text-gray-500 dark:text-jumbo-200 truncate">
+                        {{ github.extra_data.bio }}
+                      </p>
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </article>
   {% endif %}
 
 {% endblock content %}

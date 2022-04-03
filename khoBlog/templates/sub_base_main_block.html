@@ -1,5 +1,5 @@
 {% extends 'sub_base_main.html' %}
-{% load static paginator_tags %}
+{% load static paginator_tags post_count %}
 
 {% block main %}
 
@@ -16,7 +16,7 @@
           <ul class="pagination justify-content-center justify-content-md-start flex-wrap m-0">
             {% if page_obj.has_previous %}
               <li class="page-item">
-                <a class="page-link mt-1" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                <a class="page-link mt-1" href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
               </li>
             {% else %}
               <li class="page-item disabled">
@@ -38,7 +38,7 @@
                     <span class="page-link mt-1">{{ i }}</span></li>
                 {% else %}
                   <li class="page-item">
-                    <a class="page-link mt-1" href="?page={{ i }}">{{ i }}</a>
+                    <a class="page-link mt-1" href="{% relative_url i 'page' request.GET.urlencode %}">{{ i }}</a>
                   </li>
                 {% endif %}
               {% endif %}
@@ -46,7 +46,7 @@
 
             {% if page_obj.has_next %}
               <li class="page-item">
-                <a class="page-link mt-1" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="page-link mt-1" href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}">Next</a>
               </li>
             {% else %}
               <li class="page-item disabled">
@@ -57,51 +57,109 @@
         {% endif %}
       </nav>
     {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-      <nav class="mt-1 bg-gray-800">
+      <section class="max-w-2xl mx-auto lg:max-w-7xl py-3 flex items-center justify-between">
         {% if is_paginated %}
-          <div class="flex py-1 bg-gray-900">
+          <section class="flex-1 flex justify-between md:hidden">
             {% if page_obj.has_previous %}
-              <a class="flex items-center px-4 py-2 ml-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.previous_page_number }}">
+              <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons dark:hover:bg-jumbo-800">
                 Previous
               </a>
             {% else %}
-              <a class="flex items-center px-4 py-2 ml-1 rounded-md cursor-not-allowed bg-gray-900 text-gray-400 disabled:opacity-50" disabled>
+              <button class="pagination_next_prev_buttons disabled:opacity-50" disabled>
                 Previous
-              </a>
+              </button>
             {% endif %}
+            {% if page_obj.has_next %}
+              <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons ml-3 dark:hover:bg-jumbo-800">
+                Next
+              </a>
+            {% else %}
+              <button class="pagination_next_prev_buttons ml-3 disabled:opacity-50" disabled>
+                Next
+              </button>
+            {% endif %}
+          </section>
 
-            {% get_proper_elided_page_range paginator page_obj.number as page_range %}
-            {% comment %} {% endcomment %}
-            {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
-              {% if page_obj.number == i %}
-                <span class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-indigo-500 text-gray-200">{{ i }}
-                  <span class="sr-only">(current)</span>
-                </span>
-              {% else %}
-                {% if i == page_obj.paginator.ELLIPSIS %}
-                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200">
-                    {{ i }}
+          <section class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+            <section>
+              <p class="text-sm text-jumbo-700 dark:text-jumbo-200">
+                Showing
+                <span class="font-medium">{{ posts.count }}</span>
+                {% if posts %}
+                  of
+                  <span class="font-medium">
+                    {% if not cats.get_superuser_post_count_in_category or not cats.get_post_count_in_category %}
+                      {% o_count posts %}
+                    {% else %}
+                      {% if user.is_superuser %}
+                        {{ cats.get_superuser_post_count_in_category }}
+                      {% else %}
+                        {{ cats.get_post_count_in_category }}
+                      {% endif %}
+                    {% endif %}
+                    </span>
+                {% endif %}
+                results
+              </p>
+            </section>
+
+            <section>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                {% if page_obj.has_previous %}
+                  <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button">
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
                   </a>
                 {% else %}
-                  <a class="flex items-center px-4 py-2 mx-1 transition-colors duration-200 transform rounded-md bg-gray-900 text-gray-400 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ i }}">
-                    {{ i }}
-                  </a>
+                  <button disabled class="previous_pagination_button disabled:opacity-50">
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
                 {% endif %}
-              {% endif %}
-            {% endfor %}
 
-            {% if page_obj.has_next %}
-              <a class="flex items-center px-4 py-2 ms-1 transition-colors duration-200 transform rounded-md bg-gray-800 text-gray-200 hover:bg-indigo-500 hover:text-gray-200" href="?page={{ page_obj.next_page_number }}">
-                Next
-              </a>
-            {% else %}
-              <span class="flex items-center px-4 py-2 ms-1 rounded-md cursor-not-allowed bg-gray-800 text-gray-600 disabled:opacity-50" disabled>
-                Next
-              </span>
-            {% endif %}
-          </div>
+                {% get_proper_elided_page_range paginator page_obj.number as page_range %}
+                {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+                  {% if page_obj.number == i %}
+                    <span aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium dark:bg-jumbo-700 dark:border-flamingo-100/50 dark:text-jumbo-50">
+                      {{ i }}
+                    </span>
+                  {% else %}
+                    {% if i == page_obj.paginator.ELLIPSIS %}
+                      <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50">
+                        {{ i }}
+                      </span>
+                    {% else %}
+                      <a href="{% relative_url i 'page' request.GET.urlencode %}" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:hover:bg-jumbo-800">
+                        {{ i }}
+                      </a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                  <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button">
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                {% else %}
+                  <button disabled class="next_pagination_button disabled:opacity-50">
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                {% endif %}
+              </nav>
+            </section>
+          </section>
         {% endif %}
-      </nav>
+      </section>
     {% endif %}
   {% endblock pagination %}
 

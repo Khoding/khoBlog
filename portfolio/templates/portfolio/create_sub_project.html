@@ -1,0 +1,96 @@
+{% extends 'sub_base_main.html' %}
+{% load widget_tweaks project_tags %}
+
+{% block main %}
+  <div class="card formcard">
+    <div class="card-body">
+      <form enctype="multipart/form-data" method="post" novalidate="novalidate">
+        {% csrf_token %}
+        <div class="non-field-errors">
+          {{ form.non_field_errors }}
+        </div>
+
+        <div class="hidden-fields-errors">
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+        </div>
+
+        <div class="text-danger">
+          {{ form.non_field_errors }}
+        </div>
+
+        <div class="field mb-2">
+          <div class="input-group">
+            <span class="input-group-text">Title</span>
+            {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Project's title" }}
+          </div>
+          {% if form.title.help_text %}
+            <span class="text-small text-white-50">{{ form.title.help_text }}</span>
+          {% endif %}
+          {% for error in form.title.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.snippet|add_class:"form-control"|attr:"placeholder:snippet" }}
+            {{ form.snippet.label_tag }}
+          </div>
+          {% if form.snippet.help_text %}
+            <span class="text-small text-white-50">{{ form.snippet.help_text }}</span>
+          {% endif %}
+          {% for error in form.snippet.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
+            {{ form.description.label_tag }}
+          </div>
+          {% if form.description.help_text %}
+            <span class="text-small text-white-50">{{ form.description.help_text }}</span>
+          {% endif %}
+          {% for error in form.description.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
+            {{ form.learned.label_tag }}
+          </div>
+          {% if form.learned.help_text %}
+            <span class="text-small text-white-50">{{ form.learned.help_text }}</span>
+          {% endif %}
+          {% for error in form.learned.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field row mb-2">
+          <div class="input-group col-auto">
+            <span class="input-group-text">
+              <a href="{{ parent.repository.url }}" target="_blank" rel="noopener noreferrer">{{ parent.repository.url }}/</a>
+            </span>
+            {{ form.link_in_repo|add_class:"form-control"|attr:"placeholder:Link in repo" }}
+          </div>
+          {% if form.link_in_repo.help_text %}
+            <span class="text-small text-white-50">{{ form.link_in_repo.help_text }}</span>
+          {% endif %}
+          {% for error in form.link_in_repo.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ title }}</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock main %}

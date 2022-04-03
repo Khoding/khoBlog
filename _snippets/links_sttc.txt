@@ -3,3 +3,4 @@
 [whathype]: /s/whathype
 [babysip]: /s/babysip
 [bat]: /s/bat
+[grinning-face-with-big-eyes]: /s/grinning-face-with-big-eyes

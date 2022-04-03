@@ -1,0 +1,5 @@
+{% for link in menu_footer_links %}
+    <a href="{{ link.get_rel_url }}" class="{% if dev_class %}mobile_menu_grid_items{% else %}flyout_bottom_items{% endif %}">
+        {{ link }}
+    </a>
+{% endfor %}

@@ -1,0 +1,139 @@
+{% extends 'sub_base_main.html' %}
+{% load widget_tweaks project_tags %}
+
+{% block main %}
+  <div class="card formcard">
+    <div class="card-body">
+      <form enctype="multipart/form-data" method="post" novalidate="novalidate">
+        {% csrf_token %}
+        <div class="non-field-errors">
+          {{ form.non_field_errors }}
+        </div>
+
+        <div class="hidden-fields-errors">
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+        </div>
+
+        <div class="text-danger">
+          {{ form.non_field_errors }}
+        </div>
+
+        <div class="field mb-2">
+          <div class="input-group">
+            <span class="input-group-text">Title</span>
+            {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Project's title" }}
+          </div>
+          {% if form.title.help_text %}
+            <span class="text-small text-white-50">{{ form.title.help_text }}</span>
+          {% endif %}
+          {% for error in form.title.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.snippet|add_class:"form-control"|attr:"placeholder:snippet" }}
+            {{ form.snippet.label_tag }}
+          </div>
+          {% if form.snippet.help_text %}
+            <span class="text-small text-white-50">{{ form.snippet.help_text }}</span>
+          {% endif %}
+          {% for error in form.snippet.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
+            {{ form.description.label_tag }}
+          </div>
+          {% if form.description.help_text %}
+            <span class="text-small text-white-50">{{ form.description.help_text }}</span>
+          {% endif %}
+          {% for error in form.description.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="form-floating">
+            {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
+            {{ form.learned.label_tag }}
+          </div>
+          {% if form.learned.help_text %}
+            <span class="text-small text-white-50">{{ form.learned.help_text }}</span>
+          {% endif %}
+          {% for error in form.learned.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="input-group">
+            <div class="form-floating col-10">
+              {{ form.technology|add_class:"form-select"|attr:"placeholder:Post technology" }}
+              {{ form.technology.label_tag }}
+            </div>
+          </div>
+          {% if form.technology.help_text %}
+            <span class="text-small text-white-50">{{ form.technology.help_text }}</span>
+          {% endif %}
+          {% for error in form.technology.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="input-group">
+            <div class="form-floating col-10">
+              {{ form.website|add_class:"form-select"|attr:"placeholder:Post website" }}
+              {{ form.website.label_tag }}
+            </div>
+          </div>
+          {% if form.website.help_text %}
+            <span class="text-small text-white-50">{{ form.website.help_text }}</span>
+          {% endif %}
+          {% for error in form.website.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field mb-2">
+          <div class="input-group">
+            <div class="form-floating col-10">
+              {{ form.repository|add_class:"form-select"|attr:"placeholder:Post repository" }}
+              {{ form.repository.label_tag }}
+            </div>
+          </div>
+          {% if form.repository.help_text %}
+            <span class="text-small text-white-50">{{ form.repository.help_text }}</span>
+          {% endif %}
+          {% for error in form.repository.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <div class="field row mb-2">
+          <div class="input-group col-auto">
+            {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
+          </div>
+          {% if form.slug.help_text %}
+            <span class="text-small text-white-50">{{ form.slug.help_text }}</span>
+          {% endif %}
+          {% for error in form.slug.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ title }}</button>
+      </form>
+    </div>
+  </div>
+  {{ form.media }}
+
+{% endblock main %}

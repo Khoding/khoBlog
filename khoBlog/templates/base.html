@@ -1,4 +1,4 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags %}
+{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +44,8 @@
     <link rel="shortlink" href="{{ CANONICAL_PATH }}">
 
     <meta property="og:site_name" content="Hello There !"/>
-    <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
-    <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
+    <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
+    <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
 
     {% block page_head %}
       <!-- Primary Meta Tags -->
@@ -115,7 +115,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow" aria-label="Main navigation">
       <div class="container-fluid">
         <span class="d-inline-flex">
-          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-muted" href="{{ app_direct_link }}">{{ app_title }}</a>
+          <a class="navbar-brand me-0" href="{% url 'blog:post_list' %}">Khodok's</a>&nbsp;<a class="navbar-brand text-white-50" href="{{ app_direct_link }}">{{ app_title }}</a>
         </span>
         <button class="navbar-toggler p-0 border-0" type="button" id="top-navbar-collapse" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -126,10 +126,8 @@
             {% block nav %}{% endblock nav %}
           </div>
 
-          {% activeurl %}
           <ul class="navbar-nav me-auto d-flex nav-item invisible">
             <span class="nav-link">Bar is large</span></ul>
-          {% endactiveurl %}
 
           {% if user.is_authenticated %}
             <div class="d-none d-md-flex d-none d-md-flex align-items-center">
@@ -250,7 +248,7 @@
 
           {% sitetree_breadcrumbs from "maintree" template "sitetree/breadcrumbs_bootstrap4.html" %}
 
-          {% block page_top_archives %}{% endblock page_top_archives %}
+          {% block page_top_archive %}{% endblock page_top_archive %}
 
           {% block content %}{% endblock content %}
         </div>
@@ -266,7 +264,7 @@
         <div class="row align-items-center">
           {% footer_setting footers %}
         </div>
-        <div class="row align-items-center text-muted text-small">
+        <div class="row align-items-center text-white-50 text-small">
           <div class="col">
             Version number:
             {{ APP_VERSION_NAME }}
@@ -277,12 +275,6 @@
                 <i class="bi bi-github"></i>
                 Github
               </a>
-            </div>
-
-            <div class="row-auto">
-              {% project_version as VERSION %}
-
-              <a href="https://github.com/Khoding/khoBlog/commit/{{ VERSION }}" target="_blank" rel="noopener noreferrer">Latest commit: {{ VERSION|slice:":7" }}</a>
             </div>
           </div>
           <div class="col">

@@ -1,65 +1,58 @@
-{% load featured_post offcanvas comments %}
+{% load featured_post comments %}
 
-<article class="p-2 w-full md:w-1/3">
-  <div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-    <section class="p-6">
-      {% if object.categories %}
-        <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
-          {% if object.get_featured_cat %}
-            <strong>
-              <a class="cat-link" href="{{ object.get_featured_cat.category.get_absolute_url }}">{{ object.featured_cat_title|upper }}</a>
-            </strong>
-          {% else %}
-            <strong>
-              <a class="cat-link" href="{{ object.categories.first.get_absolute_url }}">{{ object.categories.first|upper }}</a>
-            </strong>
-          {% endif %}
-        </h2>
-      {% endif %}
-      <h1 class="title-font text-lg font-medium text-white mb-3">{{ object }}</h1>
-      <p class="leading-relaxed mb-3">{{ object.description }}</p>
-      <section class="flex items-center flex-wrap ">
-        <a class="text-purple-400 inline-flex items-center md:mb-2 lg:mb-0" href="{{ object.get_absolute_url }}">Learn More
-          <svg class="w-4 h-4 ml-2" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"></path>
-            <path d="M12 5l7 7-7 7"></path>
-          </svg>
+<article>
+  {% if object.categories %}
+    <section>
+      {% if object.get_featured_cat %}
+        <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
+            {{ object.featured_cat_title }}
+          </span>
         </a>
-        {% if object.clicks or object.enable_comments or object.get_post_count_in_category or object.get_superuser_post_count_in_category %}
-          <section class="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm py-1">
-            {% if object.clicks %}
-              <span class="inline-flex items-center{% if object.enable_comments %} mr-3 pr-3 border-r-2 border-gray-800{% endif %}">
-                <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>{{ object.clicks }}
-              </span>
-            {% endif %}
-
-            {% if object.enable_comments %}
-              {% get_comment_count for object as comment_count %}
-              <span class="inline-flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                </svg>{{ comment_count }}
-              </span>
-            {% endif %}
-
-            {% if object.get_post_count_in_category or object.get_superuser_post_count_in_category %}
-              <p class="inline-flex items-center{% if context.user.is_superuser %} mr-3 pr-3 border-r-2 border-gray-800{% endif %}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
-                </svg>
-                {{ object.get_superuser_post_count_in_category }}
-              </p>
-
-              <p class="inline-flex items-center">
-                {{ object.get_post_count_in_category }}
-              </p>
-            {% endif %}
-          </section>
-        {% endif %}
-      </section>
+      {% else %}
+        <a href="{{ object.categories.first.get_absolute_url }}" class="inline-block">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
+            {{ object.categories.first }}
+          </span>
+        </a>
+      {% endif %}
     </section>
-  </div>
+  {% endif %}
+  <section>
+    <a href="{{ object.get_absolute_url }}" class="mt-2 block">
+      <p class="text-lg font-bold text-gray-900 dark:text-jumbo-100">
+        {{ object }}
+      </p>
+    </a>
+    {% if object.get_superuser_post_count_in_category or object.get_post_count_in_category %}
+      <p class="text-sm dark:text-jumbo-100">Post count:
+        {% if context.user.is_superuser %}
+        <strong>{{ object.get_superuser_post_count_in_category }}</strong>
+        |
+        {% endif %}
+        {{ object.get_post_count_in_category }}
+      </p>
+      <p class="text-sm dark:text-jumbo-100">Percentage:
+        {% if context.user.is_superuser %}
+        <strong>{{ object.get_superuser_percent_of_posts }}</strong>
+        |
+        {% endif %}
+        {{ object.get_percent_of_posts }}
+      </p>
+    {% endif %}
+    <p class="text-sm dark:text-jumbo-100">
+      {% comment %} {% endcomment %}
+      <time datetime="{{ object.pub_date|date:"c" }}">
+        {{ object.pub_date|date:"Y\-m\-d" }}
+      </time>
+    </p>
+    <p class="mt-3 text-base dark:text-jumbo-100">
+      {{ object.description }}
+    </p>
+  </section>
+  <section class="mt-3">
+    <a href="{{ object.get_absolute_url }}" class="text-base font-semibold text-indigo-600 hover:text-indigo-500 dark:text-flamingo-200 dark:hover:text-flamingo-400">
+      Read more about this {{ context.content_type }}
+    </a>
+  </section>
 </article>

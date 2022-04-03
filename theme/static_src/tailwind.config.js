@@ -5,18 +5,9 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
-const { borderColor } = require("tailwindcss/defaultTheme");
-
 module.exports = {
-    /**
-     * Stylesheet generation mode.
-     *
-     * Set mode to "jit" if you want to generate your styles on-demand as you author your templates;
-     * Set mode to "aot" if you want to generate the stylesheet in advance and purge later (aka legacy mode).
-     */
-    mode: "jit",
-
-    purge: [
+    darkMode: "class",
+    content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
          */
@@ -51,44 +42,36 @@ module.exports = {
          */
         // '../../**/*.py'
     ],
-    darkMode: "media", // or 'media' or 'class'
     theme: {
         extend: {
-            typography: (theme) => ({
-                DEFAULT: {
-                    css: {
-                        color: theme("colors.purple.400"),
-
-                        h1: {
-                            color: theme("colors.purple.400"),
-                        },
-                        h2: {
-                            color: theme("colors.purple.400"),
-                        },
-                        h3: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h4: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h5: {
-                            color: theme("colors.purple.300"),
-                        },
-                        h6: {
-                            color: theme("colors.purple.300"),
-                        },
-                        blockquote: {
-                            color: theme("colors.purple.300"),
-                        },
-                        dt: {
-                            fontWeight: "800",
-                        },
-                        strong: {
-                            color: theme("colors.purple.300"),
-                        },
-                    },
+            colors: {
+                jumbo: {
+                    DEFAULT: "#78767F",
+                    50: "#D5D5D8",
+                    100: "#CBCACE",
+                    200: "#B6B5BA",
+                    300: "#A1A0A7",
+                    400: "#8C8A93",
+                    500: "#78767F",
+                    600: "#615F67",
+                    700: "#4B4950",
+                    800: "#343338",
+                    900: "#1E1D20",
                 },
-            }),
+                flamingo: {
+                    DEFAULT: "#EF4444",
+                    50: "#FDEDED",
+                    100: "#FCDADA",
+                    200: "#F9B5B5",
+                    300: "#F58F8F",
+                    400: "#F26A6A",
+                    500: "#EF4444",
+                    600: "#E71414",
+                    700: "#B30F0F",
+                    800: "#800B0B",
+                    900: "#4C0707",
+                },
+            },
         },
     },
     variants: {

@@ -19,7 +19,7 @@ from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
 
 from blog.managers import CategoryManager, PostManager, SeriesManager
-from custom_taggit.models import CustomTag, CustomTaggedItem
+from custom_taggit.models import CustomTaggedItem
 
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -44,17 +44,21 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         blank=True,
     )
     title = models.CharField(max_length=200, help_text="Category title")
+    suffix = models.CharField(max_length=200, help_text="Category suffix", blank=True, default="")
     description = models.TextField(blank=True, help_text="Category description")
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Category slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
     objects: CategoryManager = CategoryManager()
 
     class Meta:
+        """Meta class for Category Model"""
+
         ordering = ["pk"]
         verbose_name_plural = "Categories"
         rules_permissions = {
@@ -63,11 +67,11 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         }
 
     def __str__(self):
-        return self.title
+        return self.full_title
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -76,11 +80,18 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:category_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:category_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:category_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:blog_category_change", kwargs={"object_id": self.pk})
+
+    def needs_review(self):
+        self.needs_reviewing = True
+        self.save()
 
     def remove(self):
         self.is_removed = True
@@ -97,6 +108,33 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def get_superuser_post_count_in_category(self):
         return self.postcatslink_set.filter(post__is_removed=False).count()
+
+    @property
+    def get_superuser_percent_of_posts(self) -> str:
+        percentage = self.get_superuser_post_count_in_category / Post.objects.filter(is_removed=False).count() * 100
+        return f"{round(percentage, 2)}%"
+
+    @property
+    def get_percent_of_posts(self) -> str:
+        percentage = (
+            self.get_post_count_in_category
+            / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).count()
+            * 100
+        )
+        return f"{round(percentage, 2)}%"
+
+    @property
+    def full_title(self) -> str:
+        fulltitle = ""
+        if self.suffix:
+            fulltitle = self.title + " " + self.suffix
+        elif not self.suffix and not self.parent:
+            fulltitle = self.title
+        elif not self.suffix and self.parent and self.parent.suffix:
+            fulltitle = self.title + " " + self.parent.suffix
+        else:
+            fulltitle = self.title
+        return fulltitle
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
@@ -124,11 +162,14 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
     objects: SeriesManager = SeriesManager()
 
     class Meta:
+        """Meta class for Series Model"""
+
         rules_permissions = {
             "add": rules.is_superuser,
             "update": rules.is_superuser,
@@ -150,11 +191,18 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:series_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:series_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:series_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:blog_series_change", kwargs={"object_id": self.pk})
+
+    def needs_review(self):
+        self.needs_reviewing = True
+        self.save()
 
     def remove(self):
         self.is_removed = True
@@ -182,6 +230,8 @@ class PostCatsLink(auto_prefetch.Model):
     featured_cat = models.BooleanField(default=False)
 
     class Meta:
+        """Meta class for PostCatsLink Through Table"""
+
         verbose_name_plural = "Post to Category Link"
 
     def __str__(self):
@@ -292,13 +342,17 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         help_text="What will be shown as url name",
     )
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
+    rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
     objects: PostManager = PostManager()
 
     class Meta:
+        """Meta class for Post Model"""
+
         ordering = ["-pub_date"]
         get_latest_by = ["id"]
         rules_permissions = {
@@ -344,6 +398,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_update_url(self):
         return reverse("blog:post_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_needs_review_url(self):
+        return reverse("blog:post_needs_review", kwargs={"slug": self.slug})
+
     def get_absolute_delete_url(self):
         return reverse("blog:post_remove", kwargs={"slug": self.slug})
 
@@ -371,9 +428,17 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.withdrawn = True
         self.save()
 
+    def needs_review(self):
+        self.needs_reviewing = True
+        self.save()
+
     def clicked(self):
         self.clicks += 1
         self.save_without_historical_record(update_fields=["clicks"])
+
+    def rnd_chosen(self):
+        self.rnd_choice += 1
+        self.save_without_historical_record(update_fields=["rnd_choice"])
 
     def was_published_recently(self):
         now = timezone.now()
@@ -420,7 +485,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         for post_cat in PostCatsLink.objects.filter(
             post_id=self.pk, category__is_removed=False, featured_cat=True
         ).select_related("post", "category"):
-            return post_cat.category
+            return post_cat.category.full_title
 
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)

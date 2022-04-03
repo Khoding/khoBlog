@@ -4,6 +4,8 @@ from .models import Category, Post, Series
 
 
 class PostSitemap(Sitemap):
+    """PostSitemap Sitemap"""
+
     changefreq = "weekly"
     priority = 0.7
     protocol = "https"
@@ -16,8 +18,10 @@ class PostSitemap(Sitemap):
 
 
 class CategorySitemap(Sitemap):
+    """CategorySitemap Sitemap"""
+
     changefreq = "monthly"
-    priority = 0.4
+    priority = 0.5
     protocol = "https"
 
     def items(self):
@@ -28,6 +32,8 @@ class CategorySitemap(Sitemap):
 
 
 class SeriesSitemap(Sitemap):
+    """SeriesSitemap Sitemap"""
+
     changefreq = "monthly"
     priority = 0.4
     protocol = "https"

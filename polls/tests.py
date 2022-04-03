@@ -8,6 +8,8 @@ from .models import Question
 
 
 class QuestionModelTests(TestCase):
+    """QuestionModelTests Class"""
+
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for questions whose pub_date
@@ -47,10 +49,10 @@ def create_question(title, days):
 
 
 class QuestionIndexViewTests(TestCase):
+    """QuestionIndexViewTests Class"""
+
     def test_no_questions(self):
-        """
-        If no questions exist, an appropriate message is displayed.
-        """
+        """If no questions exist, an appropriate message is displayed."""
         response = self.client.get(reverse("polls:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are available.")
@@ -63,9 +65,7 @@ class QuestionIndexViewTests(TestCase):
         """
         create_question(title="Past question.", days=-30)
         response = self.client.get(reverse("polls:index"))
-        self.assertQuerysetEqual(
-            response.context["latest_question_list"], ["<Question: Past question.>"]
-        )
+        self.assertQuerysetEqual(response.context["latest_question_list"], ["<Question: Past question.>"])
 
     def test_future_question(self):
         """
@@ -85,14 +85,10 @@ class QuestionIndexViewTests(TestCase):
         create_question(title="Past question.", days=-30)
         create_question(title="Future question.", days=30)
         response = self.client.get(reverse("polls:index"))
-        self.assertQuerysetEqual(
-            response.context["latest_question_list"], ["<Question: Past question.>"]
-        )
+        self.assertQuerysetEqual(response.context["latest_question_list"], ["<Question: Past question.>"])
 
     def test_two_past_questions(self):
-        """
-        The questions index page may display multiple questions.
-        """
+        """The questions index page may display multiple questions."""
         create_question(title="Past question 1.", days=-30)
         create_question(title="Past question 2.", days=-5)
         response = self.client.get(reverse("polls:index"))
@@ -103,6 +99,8 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionDetailViewTests(TestCase):
+    """QuestionDetailViewTests Class"""
+
     def test_future_question(self):
         """
         The detail view of a question with a pub_date in the future

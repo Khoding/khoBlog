@@ -1,4 +1,4 @@
-{% load read_time %}
+{% load post_cards %}
 
 {% if featured_big %}
   {% comment %} {% endcomment %}
@@ -15,36 +15,7 @@
 <section class="row row-cols-1 row-cols-lg-2 me-0">
   {% for post in featured %}
     <section class="mt-2 pe-0">
-      <article class="card shadow h-100">
-        <header class="card-header">
-          <strong>
-            {% if post.get_featured_cat %}
-              <a class="card-link" href="{{ post.get_featured_cat.category.get_absolute_url }}">{{ post.featured_cat_title|capfirst }}</a>
-            {% else %}
-              <a class="card-link" href="{{ post.categories.first.get_absolute_url }}">{{ post.categories.first|capfirst }}</a>
-            {% endif %}
-            <span class="d-inline-block text-muted">
-              •
-              <span class="fst-italic">Featured Post</span>
-            </span>
-          </strong>
-        </header>
-        <section class="card-body">
-          <h3 class="card-title text-word-wrap mb-0">{{ post.title }}</h3>
-          <div class="mb-0">{% include 'blog/includes/post_dates.html' %}</div>
-          <p class="mb-2 text-small text-muted">
-            {% if post.body %}
-              {{ post.body|readtime }}
-            {% else %}
-              A while
-            {% endif %}
-          </p>
-          <p class="mb-auto">{{ post.description }}</p>
-        </section>
-        <section class="card-footer">
-          <a class="card-link" href="{{ post.get_absolute_url }}">Continue reading</a>
-        </section>
-      </article>
+      {% render_cards post is_featured=True in_list=True %}
     </section>
   {% endfor %}
 </section>

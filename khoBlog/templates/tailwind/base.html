@@ -1,9 +1,21 @@
-{% load static socialaccount default_app_theme_set footer_set sitetree compress analytical google_analytics_gtag activeurl djversion_tags tailwind_tags %}
+{% load static socialaccount analytical google_analytics_gtag tailwind_tags theme_buttons %}
 {% comment %} {% endcomment %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en">
   <head>
+    <script>
+      const isDarkThemeSet = localStorage.theme === 'dark';
+      const isThemeStored = 'theme' in localStorage;
+      const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      try {
+        if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      } catch (_) {}
+    </script>
     <meta charset="UTF-8"/>
     {% if not debug_flag %}
       {% analytical_head_top %}
@@ -44,8 +56,8 @@
     <link rel="shortlink" href="{{ CANONICAL_PATH }}">
 
     <meta property="og:site_name" content="Hello There !"/>
-    <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
-    <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.png' %}">
+    <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
+    <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
 
     {% block page_head %}
       <!-- Primary Meta Tags -->
@@ -69,6 +81,8 @@
     {% block additional_js %}{% endblock additional_js %}
     {% block additional_css %}{% endblock additional_css %}
 
+    <script defer src="{% static 'vendor/node_modules/alpinejs/dist/cdn.min.js' %}"></script>
+
     {% block rel %}
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
@@ -83,7 +97,7 @@
     {% endif %}
   </head>
 
-  <body class="antialiased text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+  <body class="antialiased min-h-screen bg-white dark:bg-jumbo-900">
     {% if not debug_flag %}
       {% analytical_body_top %}
 
@@ -94,65 +108,83 @@
       <!-- End Google Tag Manager (noscript) -->
     {% endif %}
 
-    <div class="items-center mx-auto">
-      <div class="text-gray-400 bg-gray-900 body-font transition duration-500 ease-in-out transform shadow-lg">
-        <div class="flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row">
-          <a href="{% url 'blog:post_list' %}" class="focus:outline-none">
-            <div class="inline-flex items-center">
-              <img class='w-8 h-8 object-cover rounded-full' alt='RuthinkkTooBig' src="{% static 'khoBlog/img/RuthinkkTooBig.png' %}" loading="lazy">
-              <h2 class="block p-2 text-xl font-medium tracking-tighter transition duration-500 ease-in-out transform cursor-pointer hover:text-purple-500 lg:text-x">
-                Khodok's
-                {{ app_title }}
-              </h2>
-            </div>
-          </a>
-          <nav class="flex flex-wrap items-center text-base ml-2 justify-left">
-            <ul class="items-center inline-block list-none lg:inline-flex">
-              <li>
-                {% if user.is_authenticated %}
-                  <a href="{% url 'accounts:profile' user.slug %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500">Profile</a>
+    <script>
+      window.Components = window.Components ?? {}
+      window.Components['popoverGroup'] = function anonymous() {
+        return function(){return{__type:"popoverGroup",init(){let e=t=>{document.body.contains(this.$el)?t.target instanceof Element&&!this.$el.contains(t.target)&&window.dispatchEvent(new CustomEvent("close-popover-group",{detail:this.$el})):window.removeEventListener("focus",e,!0)};window.addEventListener("focus",e,!0)}}};
+      }();
 
-                  {% if user.is_superuser %}
-                    <a href="{% url 'blog:post_draft_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Draft</a>
-                    <a href="{% url 'blog:post_withdrawn_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Withdrawn</a>
-                    <a href="{% url 'blog:post_scheduled_list' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-yellow-500">Scheduled</a>
-                    <a href="{% url 'admin:index' %}" class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-red-500">Admin</a>
-                  {% endif %}
-                {% else %}
-                  <a class="px-4 py-1 mr-1 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-blue-500" href="{% url 'account_login' %}">Log in</a>
-                {% endif %}
-              </li>
-            </ul>
-          </nav>
-          <a href="{% url 'account_logout' %}" class="block p-2 mr-4 text-base text-purple-500 transition duration-500 ease-in-out transform rounded-full focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 lg:ml-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto icon icon-tabler icon-tabler-logout" width="24" height="24" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
-              <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+      window.Components = window.Components ?? {}
+      window.Components['popover'] = function anonymous() {
+        return function({open:e=!1,focus:t=!1}={}){const i=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");return{__type:"popover",open:e,init(){t&&this.$watch("open",(e=>{e&&this.$nextTick((()=>{!function(e){const t=Array.from(e.querySelectorAll(i));!function e(i){void 0!==i&&(i.focus({preventScroll:!0}),document.activeElement!==i&&e(t[t.indexOf(i)+1]))}(t[0])}(this.$refs.panel)}))}));let e=i=>{if(!document.body.contains(this.$el))return void window.removeEventListener("focus",e,!0);let n=t?this.$refs.panel:this.$el;if(this.open&&i.target instanceof Element&&!n.contains(i.target)){let e=this.$el;for(;e.parentNode;)if(e=e.parentNode,e.__x instanceof this.constructor){if("popoverGroup"===e.__x.$data.__type)return;if("popover"===e.__x.$data.__type)break}this.open=!1}};window.addEventListener("focus",e,!0)},onEscape(){this.open=!1,this.restoreEl&&this.restoreEl.focus()},onClosePopoverGroup(e){e.detail.contains(this.$el)&&(this.open=!1)},toggle(e){this.open=!this.open,this.open?this.restoreEl=e.currentTarget:this.restoreEl&&this.restoreEl.focus()}}};
+      }()
+
+      window.Components = window.Components ?? {}
+      window.Components['menu'] = function anonymous() {
+        return function(e={open:!1}){return{init(){this.items=Array.from(this.$el.querySelectorAll('[role="menuitem"]')),this.$watch("open",(()=>{this.open&&(this.activeIndex=-1)}))},activeDescendant:null,activeIndex:null,items:null,open:e.open,focusButton(){this.$refs.button.focus()},onButtonClick(){this.open=!this.open,this.open&&this.$nextTick((()=>{this.$refs["menu-items"].focus()}))},onButtonEnter(){this.open=!this.open,this.open&&(this.activeIndex=0,this.activeDescendant=this.items[this.activeIndex].id,this.$nextTick((()=>{this.$refs["menu-items"].focus()})))},onArrowUp(){if(!this.open)return this.open=!0,this.activeIndex=this.items.length-1,void(this.activeDescendant=this.items[this.activeIndex].id);0!==this.activeIndex&&(this.activeIndex=-1===this.activeIndex?this.items.length-1:this.activeIndex-1,this.activeDescendant=this.items[this.activeIndex].id)},onArrowDown(){if(!this.open)return this.open=!0,this.activeIndex=0,void(this.activeDescendant=this.items[this.activeIndex].id);this.activeIndex!==this.items.length-1&&(this.activeIndex=this.activeIndex+1,this.activeDescendant=this.items[this.activeIndex].id)},onClickAway(e){if(this.open){const t=["[contentEditable=true]","[tabindex]","a[href]","area[href]","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].map((e=>`${e}:not([tabindex='-1'])`)).join(",");this.open=!1,e.target.closest(t)||this.focusButton()}}}};
+      }()
+    </script>
+
+    {% include 'tailwind/menu.html' %}
+
+    <main class="pt-8 pb-12 lg:pt-16 lg:pb-20">
+      {% theme_button "darkLightd" %}
+
+      <section class="px-4 sm:px-6 lg:px-8">
+        <section class="max-w-2xl xl:max-w-7xl mx-auto">
+          {% block content %}
+          {% endblock content %}
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+          <div class="px-5 py-2">
+            <a href="{% url 'pages:about' %}" class="text-base text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
+              About
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="{% url 'blog:post_archive' %}" class="text-base text-gray-500 hover:text-gray-900 dark:hover:text-jumbo-100">
+              Blog
+            </a>
+          </div>
+        </nav>
+        <div class="mt-8 flex justify-center space-x-6">
+          <a href="{% url 'shortener:url_redirect' slug='khoblog-github-repo' %}" class="text-gray-400 hover:text-gray-500" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">GitHub</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
             </svg>
           </a>
         </div>
-
-        <div class="p-5 overflow-y-auto border-t whitespace-nowrap scroll-hidden">
-          {% load render_urls links_menu featured_post activeurl %}
-
-          <ul class="inline-flex items-center list-none">
-              {% links_menu urls %}
-              {% featured_big_post_list urls %}
-              {% featured_post_list urls %}
-              {% links urls %}
-          </ul>
-        </div>
+        <p class="mt-8 text-center text-base text-gray-400">
+          2020 - {{ now.year }} Khodok
+        </p>
       </div>
-    </div>
+    </footer>
 
-    <main role="main">
-      {% block content %}{% endblock content %}
-    </main>
+    <script>
+      var themeSwitch = document.getElementsByClassName('switch')
+
+      for(var i = 0; i < themeSwitch.length; i++) {
+          themeSwitch[i].addEventListener('click', () => {
+          document.documentElement.classList.toggle('dark')
+          localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
+        })
+      }
+
+      if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+        for(var j = 0; j < themeSwitch.length; j++) {
+          themeSwitch[j].checked = true
+        }
+      }
+    </script>
 
     {% if not debug_flag %}
       {% analytical_body_bottom %}
     {% endif %}
   </body>
-
 </html>

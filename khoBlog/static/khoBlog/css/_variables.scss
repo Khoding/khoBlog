@@ -51,7 +51,7 @@ $themes: (
         "active-color": white,
     ),
     "sop": (
-        "text": hsl(271, 100%, 69%),
+        "text": hsl(249, 65%, 76%),
         "bg": hsl(240, 35%, 18%),
         "darker-bg": darken(hsl(240, 35%, 18%), 1%),
         "lighter-bg": lighten(hsl(240, 35%, 18%), 3%),
@@ -60,7 +60,7 @@ $themes: (
         "menu-link": hsl(218, 15%, 71%),
         "border-color": hsl(249, 66%, 76%),
         "side-link": hsl(250, 42%, 66%),
-        "active-color": white,
+        "active-color": hsl(50, 100%, 49%),
     ),
     "leaf": (
         "text": hsl(0, 0%, 100%),

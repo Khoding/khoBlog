@@ -32,10 +32,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from . import dev_urls
 
-admin.site.site_header = "Khodok's Blog Admin"
-admin.site.site_title = "Khodok's Blog Admin"
-admin.site.index_title = "Khodok's Blog Admin"
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",
@@ -112,9 +108,10 @@ urlpatterns = (
             {"sitemaps": sitemaps},
             name="django.contrib.sitemaps.views.sitemap",
         ),
+        # Tailwind
+        path("__reload__/", include("django_browser_reload.urls")),
         # Misc
         re_path(r"^robots\.txt", include("robots.urls")),
-        re_path(r"^referrals/", include("pinax.referrals.urls", namespace="pinax_referrals")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

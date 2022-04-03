@@ -5,7 +5,7 @@
     <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
       {% if not hide_header %}
         <header class="card-header p-2 py-0">
-          <strong class="text-muted text-small">{{ object.prefix }}
+          <strong class="text-white-50 text-small">{{ object.prefix }}
             <strong class="fw-bold">{{ object }}</strong>
 
             {% if context.context.user.is_superuser %}
@@ -26,7 +26,7 @@
       {% if not hide_readmore and object.link %}
         <footer class="card-footer px-2 py-0">
           <div class="row-auto">
-            <strong class="text-muted text-small">Read more:
+            <strong class="text-white-50 text-small">Read more:
               <strong class="fw-bold">
                 <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
               </strong>
@@ -35,7 +35,7 @@
 
           {% if object.link.permalink %}
             <div class="row">
-              <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
+              <strong class="text-white-50 text-small fw-bold">({{ object.link.permalink }})</strong>
             </div>
           {% endif %}
         </footer>
@@ -47,7 +47,7 @@
     <article id="object-{{ object.slug }}" class="card shadow mb-2 m-75">
       {% if not hide_header %}
         <header class="card-header p-2 py-0">
-          <strong class="text-muted text-small">
+          <strong class="text-white-50 text-small">
             {% if object.showing_rule == 'D' %}
               Today:
             {% elif object.showing_rule == 'T' %}
@@ -84,7 +84,7 @@
       {% if not hide_readmore and object.link %}
         <footer class="card-footer px-2 py-0">
           <div class="row-auto">
-            <strong class="text-muted text-small">Read more:
+            <strong class="text-white-50 text-small">Read more:
               <strong class="fw-bold">
                 <a href="{{ object.link.content_object.get_absolute_url }}" target="_blank" rel="noopener noreferrer">{{ object.link.content_object.title }}</a>
               </strong>
@@ -93,7 +93,7 @@
 
           {% if object.link.permalink %}
             <div class="row">
-              <strong class="text-muted text-small fw-bold">({{ object.link.permalink }})</strong>
+              <strong class="text-white-50 text-small fw-bold">({{ object.link.permalink }})</strong>
             </div>
           {% endif %}
         </footer>

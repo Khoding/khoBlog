@@ -1,11 +1,19 @@
-{% load cards %}
+{% load cards super_buttons %}
 
-<section class="text-gray-400 bg-gray-900 body-font">
-  <section class="container p-5 mx-auto">
-    <section class="flex flex-wrap -m-4">
-      {% for object in object_list %}
-        {% cards object %}
-      {% endfor %}
-    </section>
+{% comment %} If the template is a list, show this, else hide it {% endcomment %}
+<section class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-100">
+  <section>
+    <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
+      {{ title }}
+    </h2>
+    <p class="text-lg font-bold lg:col-span-2 dark:text-jumbo-50 mt-3 sm:mt-4">
+      {{ description }}
+    </p>
+    {% comment %} https://tailwindui.com/components/marketing/sections/blog-sections Add top page superbuttons (edit if it's a list of posts in a category or tag, maybe user buttons as well) {% endcomment %}
+  </section>
+  <section class="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
+    {% for object in object_list %}
+      {% cards object %}
+    {% endfor %}
   </section>
 </section>

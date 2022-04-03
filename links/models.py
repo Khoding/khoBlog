@@ -32,16 +32,18 @@ class BaseLinkAbstractModel(auto_prefetch.Model):
     site = auto_prefetch.ForeignKey(Site, on_delete=models.CASCADE)
 
     class Meta(auto_prefetch.Model.Meta):
+        """Meta Class for BaseLinkAbstractModel Model"""
+
         abstract = True
 
     def get_content_object_url(self):
-        """
-        Get a URL suitable for redirecting to the content object.
-        """
+        """Get a URL suitable for redirecting to the content object."""
         return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
 
 class Links(BaseLinkAbstractModel):
+    """Links model Class"""
+
     title = models.CharField(max_length=200, unique=True)
     description = models.CharField(max_length=50)
     permalink = models.CharField(max_length=200, blank=True, null=True)
@@ -50,6 +52,8 @@ class Links(BaseLinkAbstractModel):
     priority = models.PositiveIntegerField(default=0)
 
     class Meta(BaseLinkAbstractModel.Meta):
+        """Meta Class for Link Model"""
+
         verbose_name_plural = "Links"
 
     def __str__(self):
@@ -64,9 +68,7 @@ class Links(BaseLinkAbstractModel):
         return reverse("links:url_redirect", kwargs={"slug": self.slug})
 
     def get_content_object_url(self):
-        """
-        Get a URL suitable for redirecting to the content object.
-        """
+        """Get a URL suitable for redirecting to the content object."""
         return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
     def get_absolute_permalink(self):
