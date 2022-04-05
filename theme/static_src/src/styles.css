@@ -64,7 +64,7 @@
     }
 
     .superbutton_base {
-        @apply kho-button-border kho-button-bg kho-button-text relative inline-flex items-center border py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1;
+        @apply kho-button-border kho-button-bg kho-button-text kho-button-border-focus relative inline-flex items-center border py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1;
     }
 
     .superbutton_main_action {
