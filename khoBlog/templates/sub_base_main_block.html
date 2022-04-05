@@ -124,7 +124,7 @@
                 {% get_proper_elided_page_range paginator page_obj.number as page_range %}
                 {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
                   {% if page_obj.number == i %}
-                    <span aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium dark:bg-jumbo-700 dark:border-flamingo-100/50 dark:text-jumbo-50">
+                    <span aria-current="page" class="kho-button-bg kho-button-text kho-button-border kho-button-active z-10 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
                       {{ i }}
                     </span>
                   {% else %}
@@ -133,7 +133,7 @@
                         {{ i }}
                       </span>
                     {% else %}
-                      <a href="{% relative_url i 'page' request.GET.urlencode %}" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:hover:bg-jumbo-800">
+                      <a href="{% relative_url i 'page' request.GET.urlencode %}" class="kho-button-bg kho-button-text kho-button-border relative inline-flex items-center px-4 py-2 border text-sm font-medium">
                         {{ i }}
                       </a>
                     {% endif %}
