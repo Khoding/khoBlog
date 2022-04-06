@@ -16,6 +16,21 @@
           </span>
         </a>
       {% endif %}
+      {% if context.content_type == "post" %}
+        <div class="inline-flex">
+          {% if object.pub_date and not object.withdrawn %}
+            {% if object.was_published_recently %}
+              <span class="h-1.5 w-1.5 rounded-full bg-green-400" aria-hidden="true"></span>
+            {% elif object.is_scheduled %}
+              <span class="h-1.5 w-1.5 rounded-full bg-orange-400" aria-hidden="true"></span>
+            {% endif %}
+          {% elif not object.pub_date %}
+            <span class="h-1.5 w-1.5 rounded-full bg-slate-500 dark:bg-slate-300" aria-hidden="true"></span>
+          {% else %}
+            <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
+          {% endif %}
+        </div>
+      {% endif %}
     </section>
   {% endif %}
   <section>
