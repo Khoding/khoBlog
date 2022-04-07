@@ -180,6 +180,14 @@
         @apply fill-current stroke-current;
     }
 
+    .prose a {
+        @apply break-words;
+    }
+
+    .prose :is(video, iframe, img) {
+        @apply max-w-full;
+    }
+
     .prose h1 img {
         @apply my-0 inline;
     }
