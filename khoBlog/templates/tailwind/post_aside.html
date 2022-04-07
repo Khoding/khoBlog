@@ -129,24 +129,24 @@
     </ul>
   </section>
 
-  {% if object.series %}
-    <div>
+  {% if series %}
+    <section>
       <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Series</h2>
       <dl class="mt-5 grid grid-cols-1 gap-5">
         <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
           <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
-            <a class="text-base" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series }}</a>
+            <a class="text-base" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series.title }}</a>
           </dt>
           <dd class="mt-1 text-3xl font-semibold text-jumbo-900 dark:text-jumbo-50">
-            {% if object.series.description %}
-              {{ object.series.description }}
+            {% if series.description %}
+              {{ series.description }}
               -
             {% endif %}
-            ({{ object.series.post_series.all.count }}
+            ({{ series.all.count }}
             Part series)
           </dd>
         </div>
-        {% for e in object.series.post_series.all %}
+        {% for e in series.all %}
           <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
               {% if not e.is_scheduled or user.is_superuser %}
@@ -183,7 +183,7 @@
           </div>
         {% endfor %}
       </dl>
-    </div>
+    </section>
   {% endif %}
 
   <div>
