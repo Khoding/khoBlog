@@ -1,0 +1,44 @@
+{% load markup_tags %}
+
+<article id="{{ object.slug }}">
+  {% if object.link %}
+    {% if object.link.permalink %}
+      <a href="{{ object.link.permalink }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
+      {% comment %} {% endcomment %}
+    {% else %}
+      <a href="{{ object.link.content_object.get_absolute_url }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
+      {% comment %} {% endcomment %}
+    {% endif %}
+  {% endif %}
+  <div class="flex md:h-full lg:flex-col">
+    <div class="ml-4 md:flex-1 md:flex md:flex-col md:justify-between lg:ml-0">
+      <div>
+        <p class="font-medium">
+          <span class="text-indigo-600 dark:text-flamingo-600">
+            {% if object.showing_rule == 'D' %}
+              Today:
+            {% elif object.showing_rule == 'T' %}
+              This Hour:
+            {% else %}
+              Today at This Hour:
+            {% endif %}
+          </span>
+          <span class="text-gray-900 dark:text-jumbo-200">
+            {{ object }}
+          </span>
+        </p>
+        <div class="prose prose-gray dark:prose-jumbo dark:prose-invert">
+          {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+        </div>
+      </div>
+      {% if object.link %}
+        <p class="mt-2 text-sm font-medium text-indigo-600 dark:text-flamingo-300 lg:mt-4">Learn more
+        <span aria-hidden="true">→</span>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  {% if object.link %}
+  </a>
+  {% endif %}
+</article>
