@@ -2,15 +2,15 @@
 fullscreen=true
 
 [gource]
-auto-skip-seconds=1
+auto-skip-seconds=0.3
 caption-file=caption-file.txt
 caption-size=42
+multi-sampling=true
 hide=progress,mouse
 key=true
 loop=true
 max-file-lag=3
-path=combined2.txt
-seconds-per-day=2
+path=combined-two-years
+seconds-per-day=1.232876712328767
 title=Khodok's Blog Project Git graphical visualization
 user-image-dir=img
-

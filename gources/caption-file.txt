@@ -3,5 +3,8 @@
 1586970049|Some commits were removed from this because they showed private information
 1594398140|All the commits with a different name but done by Khoding were attributed to him for this
 1597585809|Repo khoBlogOld was first named khoBlog before the change to the current one
-1598548222|Changed to Repo: khoBlog 812 Commits
+1598548222|Changed to Repo: khoBlog 1218 Commits
 1600069815|The 777th commit to this repository was the 1000th in total
+1634049471|Started the new design with Tailwind on October 12 2021
+1634900000|since it wasn't 100% done, so it was decided to finish it first
+1634900000|The new Tailwind design was supposed to be released on Khodok's Blog's second anniversary
