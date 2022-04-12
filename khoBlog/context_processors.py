@@ -34,7 +34,5 @@ def selected_settings(request):
 def base_site_template(request):
     # Here goes your conditions to select proper base template, for example
     # by checking request.user permissions or some other logic.
-    BASE_SITE_TEMPLATE = "base.html"
-    if settings.ENABLE_TAILWIND or request.user.is_authenticated and request.user.enable_tailwind:
-        BASE_SITE_TEMPLATE = "tailwind/base.html"
+    BASE_SITE_TEMPLATE = "tailwind/base.html"
     return {"BASE_SITE_TEMPLATE": BASE_SITE_TEMPLATE}

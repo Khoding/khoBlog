@@ -3,175 +3,73 @@
 {% load comments_xtd %}
 
 {% for item in comments %}
-  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-    <div id="comment-{{ item.comment.id }}" class="card shadow mb-2 pb-0 pe-0">
-      <div class="card-body">
-        <div class="comment pb-2">
-          <h4>
-            {% if not item.comment.user and not item.comment.alias_user and item.comment.user_name %}
-              {% if not item.comment.is_removed or user.is_superuser %}
-                <span>{{ item.comment.user_name }}</span>
-              {% endif %}
-            {% elif item.comment.alias_user or item.comment.user and item.comment.alias_user %}
-              {% if user.is_superuser %}
-                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-                <span class="text-small text-muted">{{ item.comment.alias_user }}</span>
-              {% else %}
-                {% if not item.comment.is_removed %}
-                  {{ item.comment.alias_user }}
-                {% else %}
-                  <span class="text-muted">This comment has been removed.</span>
-                {% endif %}
-              {% endif %}
-            {% else %}
-              {% if user.is_superuser or user.id == item.comment.user.id %}
-                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-              {% elif item.comment.user.owner and user.is_authenticated %}
-                <a href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-              {% else %}
-                <span class="text-white-50">This comment has been removed.</span>
-              {% endif %}
-            {% endif %}
-
-            {% if item.comment.user and item.comment.user|has_permission:"django_comments.can_moderate" %}&nbsp;<span class="badge bg-secondary p-1">Moderator</span>{% endif %}
-          </h4>
-          <h6 class="text-small d-flex">
-            {% spaceless %}
-              <div class="me-auto">{{ item.comment.submit_date|date:'l, d F Y' }}&nbsp;<a href="{% get_comment_permalink item.comment %}">
-                  <i class="bi bi-link-45deg"></i>
-                  Permalink</a>
-              </div>
-            {% endspaceless %}
-            <span>
-              {% if not item.comment.is_removed %}
-                {% if perms.comments.can_moderate %}
-                  {% if item.flagged_count %}
-                    <span class="badge bg-danger" title="{% blocktrans count counter=item.flagged_count %}A user has flagged this comment as inappropriate.{% plural %}{{ counter }} users have flagged this comment as inappropriate.{% endblocktrans %}">{{ item.flagged_count }}</span>
-                  {% endif %}
-                {% endif %}
-                {% if allow_flagging and item.flagged %}
-                  <i class="bi bi-flag-fill text-danger" title="{% trans 'comment flagged' %}"></i>
-                {% elif allow_flagging %}
-                  <a class="mutedlink" href="{% url 'comments-flag' item.comment.pk %}">
-                    <i class="bi bi-flag-fill"></i>
-                  </a>
-                {% endif %}
-                {% if perms.comments.can_moderate %}
-                  <a class="mutedlink" href="{% url 'comments-delete' item.comment.pk %}">
-                    <i class="bi bi-trash"></i>
-                  </a>
-                {% endif %}
-              {% endif %}
-            </span>
-          </h6>
-          {% if item.comment.is_removed %}
-            {% if not user.is_superuser %}
-              <p class="text-muted{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-                <em>This comment has been removed.</em>
-              </p>
-            {% else %}
-              <div class="content text-muted{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-                <em>
-                  {% if item.comment.title %}
-                    <h4>{{ item.comment.title }}</h4>
-                  {% endif %}
-
-                  {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
-                </em>
-              </div>
-            {% endif %}
-          {% else %}
-            <div class="content{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-              {% if item.comment.title %}
-                <h4>{{ item.comment.title }}</h4>
-              {% endif %}
-
-              {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
-            </div>
-            {% if allow_feedback %}
-              {% include "includes/django_comments_xtd/user_feedback.html" %}
-            {% endif %}
-            {% if item.comment.allow_thread and not item.comment.is_removed %}
-              {% if allow_feedback %}&nbsp;&nbsp;<span class="text-muted">&bull;</span>&nbsp;&nbsp;{% endif %}
-              <a class="small mutedlink" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
-            {% endif %}
-          {% endif %}
-        </div>
-        {% if not item.comment.is_removed and item.children %}
-
-          {% render_xtdcomment_tree with comments=item.children %}
-        {% endif %}
-      </div>
-    </div>
-  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-    <article id="comment-{{ item.comment.id }}" class="flex">
-      <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-        <section class="font-bold">
-          {% if item.comment.user %}
-            {% if user.is_authenticated %}
-              {% if user == item.comment.user or user.is_superuser %}
-                <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-              {% elif item.comment.user.owner %}
-                <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
-              {% elif not item.comment.is_removed %}
-                <span class="dark:text-jumbo-100">{{ item.comment.user }}</span>
-              {% endif %}
+  <article id="comment-{{ item.comment.id }}" class="flex">
+    <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+      <section class="font-bold">
+        {% if item.comment.user %}
+          {% if user.is_authenticated %}
+            {% if user == item.comment.user or user.is_superuser %}
+              <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+            {% elif item.comment.user.owner %}
+              <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
             {% elif not item.comment.is_removed %}
               <span class="dark:text-jumbo-100">{{ item.comment.user }}</span>
             {% endif %}
-          {% else %}
-            {% if item.comment.user_name and not item.comment.is_removed %}
-              <span class="dark:text-jumbo-100">{{ item.comment.user_name }}</span>
-            {% endif %}
+          {% elif not item.comment.is_removed %}
+            <span class="dark:text-jumbo-100">{{ item.comment.user }}</span>
           {% endif %}
-
-          {% if item.comment.user and not item.comment.user.is_active %}
-            <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This user was banned.</span>
-          {% elif item.comment.is_removed %}
-            <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This comment has been removed.</span>
+        {% else %}
+          {% if item.comment.user_name and not item.comment.is_removed %}
+            <span class="dark:text-jumbo-100">{{ item.comment.user_name }}</span>
           {% endif %}
+        {% endif %}
 
-          <span class="text-sm font-normal text-gray-900 dark:text-jumbo-50">{{ item.comment.submit_date|date:'l, d F Y' }}</span>
-        </section>
-          {% if item.comment.is_removed %}
-            {% if not user.is_superuser %}
-              <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-                This comment has been removed.
-              </p>
-            {% else %}
-              <div class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-                {% if item.comment.title %}
-                  <div class="text-xl">{{ item.comment.title }}</div>
-                {% endif %}
+        {% if item.comment.user and not item.comment.user.is_active %}
+          <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This user was banned.</span>
+        {% elif item.comment.is_removed %}
+          <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This comment has been removed.</span>
+        {% endif %}
 
-                {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
-              </div>
-            {% endif %}
+        <span class="text-sm font-normal text-gray-900 dark:text-jumbo-50">{{ item.comment.submit_date|date:'l, d F Y' }}</span>
+      </section>
+        {% if item.comment.is_removed %}
+          {% if not user.is_superuser %}
+            <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
+              This comment has been removed.
+            </p>
           {% else %}
-            <div class="prose dark:prose-invert">
+            <div class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
               {% if item.comment.title %}
                 <div class="text-xl">{{ item.comment.title }}</div>
               {% endif %}
 
               {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
             </div>
-            {% if allow_feedback %}
-              {% include "includes/django_comments_xtd/user_feedback.html" %}
-            {% endif %}
-            {% if item.comment.allow_thread and not item.comment.is_removed and allow_feedback %}
-              {% if allow_feedback %}&nbsp;&nbsp;<span class="text-muted">&bull;</span>&nbsp;&nbsp;{% endif %}
-              <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
-            {% endif %}
           {% endif %}
+        {% else %}
+          <div class="prose dark:prose-invert">
+            {% if item.comment.title %}
+              <div class="text-xl">{{ item.comment.title }}</div>
+            {% endif %}
 
-        {% if not item.comment.is_removed and item.children %}
-          <h4 class="mt-5 mb-2 uppercase tracking-wide text-gray-400 dark:text-jumbo-200 font-bold text-xs">Replies</h4>
-
-          {% render_xtdcomment_tree with comments=item.children %}
+            {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
+          </div>
+          {% if allow_feedback %}
+            {% include "includes/django_comments_xtd/user_feedback.html" %}
+          {% endif %}
+          {% if item.comment.allow_thread and not item.comment.is_removed and allow_feedback %}
+            {% if allow_feedback %}&nbsp;&nbsp;<span class="text-muted">&bull;</span>&nbsp;&nbsp;{% endif %}
+            <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
+          {% endif %}
         {% endif %}
-      </div>
-    </article>
-  {% endif %}
+
+      {% if not item.comment.is_removed and item.children %}
+        <h4 class="mt-5 mb-2 uppercase tracking-wide text-gray-400 dark:text-jumbo-200 font-bold text-xs">Replies</h4>
+
+        {% render_xtdcomment_tree with comments=item.children %}
+      {% endif %}
+    </div>
+  </article>
 {% empty %}
   <p>No comments yet.</p>
 {% endfor %}

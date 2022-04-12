@@ -1,36 +1,15 @@
 {% extends 'blog/base_post.html' %}
-{% load static comments comments_xtd markdown_extra post_cards super_buttons %}
+{% load static comments comments_xtd super_buttons markdown_extra %}
 
 {% block additional_css %}
   <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
 {% endblock additional_css %}
 
-{% block page_top_end %}
-  <nav class="btn-group float-end" role="group" aria-label="Previous / Next">
-    <a class="btn btn-primary btn-sm" href="{{ prev_post.get_absolute_url }}">
-      <i class="bi bi-chevron-left"></i>
-    </a>
-
-    <a class="btn btn-primary btn-sm" href="{{ next_post.get_absolute_url }}">
-      <i class="bi bi-chevron-right"></i>
-    </a>
-  </nav>
-{% endblock page_top_end %}
-
-{% block page_top %}
-  {{ block.super }}
-
-  {% block page_top_hr %}{% endblock page_top_hr %}
-{% endblock page_top %}
-
 {% block content_main %}
-  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-    {% render_cards post %}
-  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-    <div class="xl:grid xl:grid-cols-3">
-      <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
-        <nav class="flex justify-between" role="group" aria-label="Previous / Next">
-          {% if prev_post %}
+  <div class="xl:grid xl:grid-cols-3">
+    <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200">
+      <nav class="flex justify-between" role="group" aria-label="Previous / Next">
+        {% if prev_post %}
           <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -38,7 +17,7 @@
             <!-- space -->
             Previous
           </a>
-          {% else %}
+        {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -46,8 +25,8 @@
             <!-- space -->
             Previous
           </button>
-          {% endif %}
-          {% if next_post %}
+        {% endif %}
+        {% if next_post %}
           <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
             Next
             <!-- space -->
@@ -55,7 +34,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
-          {% else %}
+        {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
             Next
             <!-- space -->
@@ -63,84 +42,63 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
-          {% endif %}
-        </nav>
-        <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
-          <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ object.title }}</h1>
-            <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
-              Post <span class="font-bold">#{{ object.pk }}</span> written by
-              <!-- space -->
-              <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.author }}</a>
-              <!-- space -->
-              in
-              <!-- space -->
-              {% if object.categories %}
-                {% if object.get_featured_cat %}
-                  <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.featured_cat_title }}</a>
-                {% else %}
-                  <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.categories.first }}</a>
-                {% endif %}
+        {% endif %}
+      </nav>
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:pb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ object.title }}</h1>
+          <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
+            Post <span class="font-bold">#{{ object.pk }}</span> written by
+            <!-- space -->
+            <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.author }}</a>
+            <!-- space -->
+            in
+            <!-- space -->
+            {% if object.categories %}
+              {% if object.get_featured_cat %}
+                <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.featured_cat_title }}</a>
+              {% else %}
+                <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50">{{ object.categories.first }}</a>
               {% endif %}
-            </p>
-          </div>
-          {% if user.is_superuser %}
-            {% twsb object %}
-          {% endif %}
+            {% endif %}
+          </p>
         </div>
-        <div class="py-3 xl:pt-6 xl:pb-0">
-          <h2 class="sr-only">Content</h2>
-          {% if post.image %}
-            <img src="{{ post.image.url }}" class="w-full" alt="Post image" loading="lazy"/>
-          {% endif %}
-
-          <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-            {{ post.body|formatted_markdown|safe }}
-          </div>
-        </div>
-        <aside class="mt-8 xl:hidden">
-          {% include 'tailwind/post_aside.html' %}
-        </aside>
+        {% if user.is_superuser %}
+          {% twsb object %}
+        {% endif %}
       </div>
-      <aside class="hidden xl:block xl:pl-8">
+      <div class="py-3 xl:pt-6 xl:pb-0">
+        <h2 class="sr-only">Content</h2>
+        {% if post.image %}
+          <img src="{{ post.image.url }}" class="w-full" alt="Post image" loading="lazy"/>
+        {% endif %}
+
+        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+          {{ post.body|formatted_markdown|safe }}
+        </div>
+      </div>
+      <aside class="mt-8 xl:hidden">
         {% include 'tailwind/post_aside.html' %}
       </aside>
     </div>
-  {% endif %}
+    <aside class="hidden xl:block xl:pl-8">
+      {% include 'tailwind/post_aside.html' %}
+    </aside>
+  </div>
 
-  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-    <article class="card p-2 comments shadow mt-2">
-      <h5 class="text-white-50">Comments</h5>
-      {% if post.enable_comments and not comments_disabled_globally_flag or user.is_superuser %}
-        {% get_comment_count for post as comment_count %}
-        <hr/>
+  <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-100 dark:border-jumbo-200">Comments</h3>
 
-        <p class="text-white-50 text-small">This post has
-          {{ comment_count }}
-          comment{{ comment_count|pluralize:'s' }}.</p>
+  {% render_comment_form for post %}
 
-        {% render_xtdcomment_tree for post allow_flagging allow_feedback show_feedback %}
-      {% elif post.enable_comments and comments_disabled_globally_flag %}
-        <p class="text-white-50 text-small">Comments were disabled globally.</p>
-      {% else %}
-        <p class="text-white-50 text-small">This post has comments disabled.</p>
-      {% endif %}
-    </article>
-  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-    <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-100 dark:border-jumbo-200">Comments</h3>
-
-    {% render_comment_form for post %}
-
-    <div class="relative">
-      <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
-        <div class="w-full border-t border-gray-300"></div>
-      </div>
+  <div class="relative">
+    <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
+      <div class="w-full border-t border-gray-300"></div>
     </div>
+  </div>
 
-    <section class="mt-4 space-y-4">
-      {% render_xtdcomment_tree for post %}
-    </section>
-  {% endif %}
+  <section class="mt-4 space-y-4">
+    {% render_xtdcomment_tree for post %}
+  </section>
 {% endblock content_main %}
 
 {% block pagination %}{% endblock pagination %}

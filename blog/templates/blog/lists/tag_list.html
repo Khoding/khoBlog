@@ -2,48 +2,5 @@
 {% load super_buttons cards %}
 
 {% block content_main %}
-  {% if not enable_tailwind_flag and user.is_authenticated and not user.enable_tailwind or not enable_tailwind_flag and not user.is_authenticated %}
-    <section class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 me-0">
-      {% for tag in tags %}
-        <div class="mb-2 pe-0">
-          <article id="tag-{{ tag.slug }}" class="card shadow h-100">
-            <span class="position-absolute top-0 start-0 translate-middle badge border border-light rounded-circle p-1" style="background-color: {{ tag.color }};"><span class="visually-hidden">Tag color</span></span>
-
-            {% if tag.withdrawn %}
-              <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdrawn"><span class="visually-hidden">Withdrawn</span></span>
-            {% endif %}
-
-            <header class="card-header">
-              <span class="d-flex">
-                <span class="col">
-                  <strong class="text-white-50">Tag #{{ tag.id }}</strong>
-                </span>
-                <span class="col-auto">
-                  {% if user.is_superuser %}
-                    {% sb tag %}
-                  {% endif %}
-                </span>
-              </span>
-            </header>
-            <section class="card-body">
-              <h3 class="card-title">{{ tag }}</h3>
-              <p class="mb-auto">Tag slug:
-                {{ tag.slug }}</p>
-            </section>
-            <footer class="card-footer">
-              <span class="d-flex">
-                <span class="col">
-                  <a class="card-link" href="{{ tag.get_absolute_url }}">All posts tagged with
-                    {{ tag.name }}</a>
-                </span>
-              </span>
-            </footer>
-          </article>
-        </div>
-      {% endfor %}
-    </section>
-  {% elif enable_tailwind_flag or user.is_authenticated and user.enable_tailwind %}
-    {% comment %} {% endcomment %}
-    {% include 'tailwind/card_container.html' with object_list=tags %}
-  {% endif %}
+  {% include 'tailwind/card_container.html' with object_list=tags %}
 {% endblock content_main %}
