@@ -77,6 +77,27 @@
   </section>
 
   <section>
+    <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Categories</h2>
+    <ul role="list" class="mt-2 leading-8">
+      {% for category in object.categories.all %}
+        {% if not category.withdrawn or user.is_superuser %}
+          {% spaceless %}
+            <li class="inline">
+              <a href="{% url 'blog:post_category_list' slug=category.slug %}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
+                <div class="absolute flex-shrink-0 flex items-center justify-center">
+                  <span class="h-1.5 w-1.5 rounded-full" style="background-color: {{ category.color }}" aria-hidden="true"></span>
+                </div>
+                <div class="ml-3.5 text-sm font-medium text-gray-900 dark:text-jumbo-50">{{ category }}</div>
+              </a>
+              <!-- space -->
+            </li>
+          {% endspaceless %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Tags</h2>
     <ul role="list" class="mt-2 leading-8">
       {% if not user.is_superuser %}

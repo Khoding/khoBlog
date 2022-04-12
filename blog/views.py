@@ -339,7 +339,6 @@ class PostDetailView(DetailView):
         context["posts"] = self.model.objects.get_base_common_queryset()
         context["series"] = self.series
         context["title"] = self.title
-        context["body"] = PostContent.objects.filter(post_id=self.post.pk)
         context["description"] = self.description
         context["side_title"] = "Post List"
         context["similar_posts"] = self.tags = self.post.tags.similar_objects()[:5]
