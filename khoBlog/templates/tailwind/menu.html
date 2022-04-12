@@ -48,7 +48,7 @@
               Log out
             </a>
             <a href="{% url 'accounts:profile' slug=user.slug %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-              Your Profile
+              Your profile
             </a>
           {% endif %}
         </div>
@@ -99,7 +99,7 @@
             </p>
           {% else %}
             <a href="{% url 'accounts:profile' slug=user.slug %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-              Your Profile
+              Your profile
             </a>
             <p class="mt-6 text-center text-base font-medium text-gray-500">
               <a href="{% url 'account_logout' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">

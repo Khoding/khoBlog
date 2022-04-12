@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    form :is(label, span) {
+        @apply dark:text-jumbo-100;
+    }
+}
+
 @layer components {
     .kho-button-border {
         @apply dark:border-jumbo-600  border-gray-300;
@@ -12,7 +18,15 @@
     }
 
     .kho-button-bg {
-        @apply dark:bg-jumbo-700 dark:hover:bg-jumbo-800 disabled:dark:hover:bg-jumbo-700 bg-white hover:bg-gray-50 disabled:bg-slate-700;
+        @apply dark:bg-jumbo-700 bg-white;
+    }
+
+    .kho-button-bg-hover {
+        @apply dark:hover:bg-jumbo-800 hover:bg-gray-50;
+    }
+
+    .kho-button-bg-disabled {
+        @apply disabled:dark:bg-jumbo-700 disabled:bg-slate-700;
     }
 
     .kho-button-text {
@@ -28,7 +42,7 @@
     }
 
     .pagination_buttons {
-        @apply kho-button-bg kho-button-text kho-button-border kho-button-border-focus relative inline-flex items-center border px-2 py-2 text-sm font-medium disabled:cursor-not-allowed;
+        @apply kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border kho-button-border-focus relative inline-flex items-center border px-2 py-2 text-sm font-medium disabled:cursor-not-allowed;
     }
 
     .next_pagination_button {
@@ -64,7 +78,7 @@
     }
 
     .superbutton_base {
-        @apply kho-button-border kho-button-bg kho-button-text kho-button-border-focus relative inline-flex items-center border py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center border py-2 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1;
     }
 
     .superbutton_main_action {
@@ -201,11 +215,11 @@
     }
 
     .next_prev_buttons {
-        @apply kho-button-border kho-button-bg kho-button-text kho-button-border-focus inline-flex items-center rounded-md border px-2.5 py-1.5 text-xs font-medium leading-4 disabled:cursor-not-allowed sm:px-3 sm:py-2 sm:text-sm;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus inline-flex items-center rounded-md border px-2.5 py-1.5 text-xs font-medium leading-4 disabled:cursor-not-allowed sm:px-3 sm:py-2 sm:text-sm;
     }
 
     .pagination_next_prev_buttons {
-        @apply kho-button-border kho-button-bg kho-button-text kho-button-border-focus relative inline-flex items-center rounded-md border bg-white px-4 py-2 text-sm font-medium;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-md border bg-white px-4 py-2 text-sm font-medium;
     }
 
     #darkLightm {
@@ -214,5 +228,17 @@
 
     #darkLightd {
         @apply border-y-jumbo-900 -mt-6 hidden h-9 w-9 rotate-12 cursor-pointer rounded-full border-2 border-transparent duration-150 ease-in-out hover:scale-125 hover:border-transparent dark:border-transparent dark:border-x-white dark:hover:border-transparent md:flex lg:-mt-14;
+    }
+
+    .form-control {
+        @apply kho-button-text kho-button-bg kho-button-border flex-1 block w-full min-w-0 rounded-md sm:text-sm;
+    }
+
+    #id_honeypot {
+        @apply hidden;
+    }
+
+    .markdownx-preview {
+        @apply prose dark:prose-invert lg:prose-lg xl:prose-xl;
     }
 }

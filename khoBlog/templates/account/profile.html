@@ -195,7 +195,7 @@
             <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
               {% twusb object %}
             </div>
-          {% else %}
+          {% elif user.is_superuser %}
             <div class="mx-auto text-right">
               <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-md px-4">
                 Edit in admin
@@ -314,10 +314,9 @@
                 </div>
               {% endfor %}
             </div>
-          </div>
-        </section>
-      {% endif %}
+          </section>
+        {% endif %}
+      </section>
     </article>
   {% endif %}
-
 {% endblock content %}

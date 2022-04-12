@@ -1,11 +1,10 @@
 {% load widget_tweaks %}
 
-{% comment %} {% endcomment %}
 {% if field|widget_type == "clearablefileinput" %}
   {{ field|add_class:"form-control" }}
 {% elif field|widget_type == "hiddeninput" %}
-  <div class="d-none input-group">
-    {{ field|add_class:"form-control" }}
+  <div class="hidden">
+    {{ field }}
   </div>
 {% elif field|widget_type == "checkboxinput" %}
   {{ field.label_tag }}
@@ -18,12 +17,10 @@
     {{ field|add_class:"form-control"|attr:"multiple" }}
   </div>
 {% elif field|widget_type == "markdownxwidget" %}
-  {{ field|add_class:"form-control"|attr:"placeholder:" }}
+  {{ field|add_class:"form-control" }}
 {% else %}
-  <div class="form-floating">
-    {{ field|add_class:"form-control"|attr:"placeholder:" }}
     {{ field.label_tag }}
-  </div>
+    {{ field|add_class:"form-control" }}
 {% endif %}
 
 {% if field.help_text %}

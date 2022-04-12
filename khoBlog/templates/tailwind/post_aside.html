@@ -113,12 +113,12 @@
 
   <section>
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Related content</h2>
-    {% for e in similar_posts %}
-      <ul role="list" class="mt-2 leading-8">
+    <ul role="list" class="mt-2 leading-8">
+      {% for e in similar_posts %}
         {% if not e.withdrawn and not e.is_scheduled or user.is_superuser %}
           {% spaceless %}
             <li class="inline">
-              <a href="{{ e.get_absolute_url }}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
+              <a href="{{ e.get_absolute_url }}" class="relative inline-flex items-center rounded-full border border-jumbo-300 dark:border-jumbo-200 px-3 py-0.5">
                 <div class="text-sm font-medium text-gray-900 dark:text-jumbo-50">{{ e }}</div>
               </a>
               <!-- space -->

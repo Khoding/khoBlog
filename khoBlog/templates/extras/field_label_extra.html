@@ -1,8 +1,5 @@
 {% load widget_tweaks %}
-{% comment %} {% endcomment %}
 
 {% if field|widget_type!="hiddeninput" %}
-  <small>
-    {{ field.label_tag }}
-  </small>
+  {{ field.label_tag }}
 {% endif %}

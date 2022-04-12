@@ -30,7 +30,7 @@
             <span>{{ comment.user }}</span>
           {% endif %}
         {% endif %}
-        {% comment %} {% endcomment %}
+
         {% if comment.user and comment.user|has_permission:"django_comments.can_moderate" %}&nbsp;<span class="badge bg-secondary p-1">Moderator</span>{% endif %}
       </h4>
       {% if comment.is_removed %}
@@ -45,7 +45,6 @@
                 <h4>{{ comment.title }}</h4>
               {% endif %}
 
-              {% comment %} {% endcomment %}
               {% include "includes/django_comments_xtd/comment_content.html" with content=comment.comment %}
             </em>
           </div>
@@ -56,7 +55,6 @@
             <h4>{{ comment.title }}</h4>
           {% endif %}
 
-          {% comment %} {% endcomment %}
           {% include "includes/django_comments_xtd/comment_content.html" with content=comment.comment %}
         </div>
       {% endif %}
