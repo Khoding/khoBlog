@@ -10,16 +10,6 @@
   {% endif %}
 {% endblock title %}
 
-{% block page_top_title %}
-  {% if process == "connect" %}
-    Connect
-    {{ provider.name }}
-  {% else %}
-    Sign In Via
-    {{ provider.name }}
-  {% endif %}
-{% endblock page_top_title %}
-
 {% block content %}
   {% if process == "connect" %}
     <p>You are about to connect a new third party account from

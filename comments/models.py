@@ -46,14 +46,6 @@ class CustomComment(CommentAbstractModel):
 
 class CustomCommentXTD(XtdComment):
     title = models.CharField(max_length=200, blank=True, default="")
-    alias_user = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True,
-        help_text="You can add an Alias Name to your comment if you wish to be "
-        "incognito (note that Moderators can still know it's you)",
-        verbose_name="alias_name",
-    )
 
     def __str__(self):
         return self.full_title

@@ -22,7 +22,6 @@
       <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
         <nav class="flex space-x-10" x-data="Components.popoverGroup()" x-init="init()">
           {% include 'tailwind/menu_flyout.html' %}
-          {% include 'tailwind/more_flyout.html' %}
           {% include 'tailwind/facts_flyout.html' %}
 
           {% if user.is_superuser %}

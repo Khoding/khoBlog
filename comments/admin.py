@@ -127,7 +127,6 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
                 "fields": (
                     "title",
                     "user",
-                    "alias_user",
                     "user_name",
                     "user_email",
                     "user_url",
@@ -167,6 +166,4 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
     ]
 
 
-# admin.site.unregister(CustomComment)
-# admin.site.register(CustomComment, CustomCommentsAdmin)
 admin.site.register(CustomCommentXTD, CommentsXTDAdmin)
