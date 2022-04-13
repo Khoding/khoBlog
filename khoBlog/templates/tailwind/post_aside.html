@@ -84,10 +84,7 @@
           {% spaceless %}
             <li class="inline">
               <a href="{% url 'blog:post_category_list' slug=category.slug %}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
-                <div class="absolute flex-shrink-0 flex items-center justify-center">
-                  <span class="h-1.5 w-1.5 rounded-full" style="background-color: {{ category.color }}" aria-hidden="true"></span>
-                </div>
-                <div class="ml-3.5 text-sm font-medium text-gray-900 dark:text-jumbo-50">{{ category }}</div>
+                <div class="text-sm font-medium text-gray-900 dark:text-jumbo-50">{{ category }}</div>
               </a>
               <!-- space -->
             </li>
