@@ -92,12 +92,12 @@
 
   <div class="relative">
     <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-gray-300"></div>
+      <div class="w-full border-t border-gray-200 dark:border-jumbo-200"></div>
     </div>
   </div>
 
   <section class="mt-4 space-y-4">
-    {% render_xtdcomment_tree for post %}
+    {% render_xtdcomment_tree for post allow_thread %}
   </section>
 {% endblock content_main %}
 

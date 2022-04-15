@@ -4,7 +4,7 @@
 
 {% for item in comments %}
   <article id="comment-{{ item.comment.id }}" class="flex">
-    <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+    <div class="flex-1 border-l border-gray-200 dark:border-jumbo-200 px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
       <section class="font-bold">
         {% if item.comment.user %}
           {% if user.is_authenticated %}
@@ -57,8 +57,7 @@
           {% if allow_feedback %}
             {% include "includes/django_comments_xtd/user_feedback.html" %}
           {% endif %}
-          {% if item.comment.allow_thread and not item.comment.is_removed and allow_feedback %}
-            {% if allow_feedback %}&nbsp;&nbsp;<span class="text-muted">&bull;</span>&nbsp;&nbsp;{% endif %}
+          {% if item.comment.allow_thread and not item.comment.is_removed %}
             <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
           {% endif %}
         {% endif %}
