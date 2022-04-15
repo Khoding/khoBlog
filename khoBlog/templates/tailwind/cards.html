@@ -5,13 +5,13 @@
     <section>
       {% if object.get_featured_cat %}
         <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo dark:text-flamingo-50">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
             {{ object.featured_cat_title }}
           </span>
         </a>
       {% else %}
         <a href="{{ object.categories.first.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo dark:text-flamingo-50">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 dark:bg-flamingo-100 dark:text-flamingo-700">
             {{ object.categories.first }}
           </span>
         </a>
