@@ -15,7 +15,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
             <!-- space -->
-            Previous
+            Previous Post
           </a>
         {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
@@ -23,12 +23,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
             <!-- space -->
-            Previous
+            Previous Post
           </button>
         {% endif %}
         {% if next_post %}
           <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
-            Next
+            Next Post
             <!-- space -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -36,7 +36,7 @@
           </a>
         {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
-            Next
+            Next Post
             <!-- space -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
