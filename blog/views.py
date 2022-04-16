@@ -68,7 +68,6 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Latest Posts"
-        context["side_title"] = "Post List"
         context["show_featured"] = True
         context["filter_form"] = PostFilter()
         return context
@@ -129,7 +128,6 @@ class PostInCategoryListView(ListView):
         context["cats"] = self.category
         context["title"] = self.title
         context["description"] = self.description
-        context["side_title"] = "Post List"
         return context
 
 
@@ -172,7 +170,6 @@ class PostInSeriesListView(ListView):
         context["series"] = self.series
         context["title"] = self.series.title
         context["description"] = self.description
-        context["side_title"] = "Post List"
         return context
 
 
@@ -340,7 +337,6 @@ class PostDetailView(DetailView):
         context["series"] = self.series
         context["title"] = self.title
         context["description"] = self.description
-        context["side_title"] = "Post List"
         context["similar_posts"] = self.tags = self.post.tags.similar_objects()[:5]
         context["comment_next"] = self.post.get_absolute_url()
         context["next_post"] = self.next_post
@@ -488,7 +484,6 @@ class TagListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Tag List"
         context["description"] = "List of all tags"
-        context["side_title"] = "Tag List"
         context["content_type"] = "tag"
         return context
 
@@ -522,7 +517,6 @@ class PostWithTagListView(ListView):
         context["tags"] = self.tags
         context["title"] = self.title
         context["description"] = self.description
-        context["side_title"] = "Post List"
         return context
 
 
@@ -549,7 +543,6 @@ class TagUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all().order_by("-pk")[:21]
         context["title"] = "Edit Tag"
-        context["side_title"] = "Post List"
         return context
 
 
@@ -578,7 +571,6 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Post"
-        context["side_title"] = "Post List"
         return context
 
 
@@ -607,7 +599,6 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Category"
-        context["side_title"] = "Category List"
         return context
 
 
@@ -632,7 +623,6 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Series"
-        context["side_title"] = "Series List"
         return context
 
 
@@ -657,7 +647,6 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Category"
-        context["side_title"] = "Category List"
         return context
 
 
@@ -695,7 +684,6 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Category"
-        context["side_title"] = "Category List"
         return context
 
 
@@ -720,7 +708,6 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Series"
-        context["side_title"] = "Series List"
         return context
 
 
@@ -758,7 +745,6 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Series"
-        context["side_title"] = "Series List"
         return context
 
 
@@ -783,7 +769,6 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Post"
-        context["side_title"] = "Post List"
         return context
 
 
@@ -813,7 +798,6 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
 
         context = super().get_context_data(**kwargs)
         context["title"] = "Clone Post"
-        context["side_title"] = "Post List"
         context["form"] = PostCloneForm(instance=post)
         return context
 
@@ -852,7 +836,6 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Post"
-        context["side_title"] = "Post List"
         return context
 
 

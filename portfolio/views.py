@@ -25,10 +25,8 @@ class ProjectListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Projects"
+        context["title"] = "Portfolio"
         context["description"] = "List of Projects"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         context["content_type"] = "project"
         return context
 
@@ -42,9 +40,6 @@ class ProjectDetailView(DetailView):
         context["projects"] = self.model.objects.filter(is_removed=False)
         context["title"] = f"Portfolio | {self.get_object().title}"
         context["description"] = self.get_object().description
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
-        context["side_title"] = "Projects"
         return context
 
 
@@ -58,8 +53,6 @@ class ProjectCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Create Project"
         context["description"] = "Create a Project"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context
 
 
@@ -73,8 +66,6 @@ class ProjectUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Project"
         context["description"] = "Update a Project"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context
 
 
@@ -109,8 +100,6 @@ class ProjectDeleteView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Project"
         context["description"] = "Delete a Project"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context
 
 
@@ -127,9 +116,6 @@ class SubProjectDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = f"Portfolio | {self.get_object().title}"
         context["description"] = self.get_object().description
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
-        context["side_title"] = "Projects"
         return context
 
 
@@ -152,8 +138,6 @@ class SubProjectCreateView(CreateView):
         context["title"] = "Create Project"
         context["description"] = "Create a Project"
         context["parent"] = self.get_parent()
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context
 
 
@@ -176,8 +160,6 @@ class SubProjectUpdateView(UpdateView):
         context["title"] = "Update Project"
         context["description"] = "Update a Project"
         context["parent"] = self.get_parent()
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context
 
 
@@ -216,6 +198,4 @@ class SubProjectDeleteView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Project"
         context["description"] = "Delete a Project"
-        context["app_title"] = "Portfolio"
-        context["app_direct_link"] = reverse_lazy("portfolio:project_list")
         return context

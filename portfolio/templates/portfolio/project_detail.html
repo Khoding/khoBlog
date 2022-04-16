@@ -33,20 +33,20 @@
         {% if project.website or project.technology %}
           {% if project.website %}
             <p>Website:
-              <a target="_blank" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a>
+              <a target="_blank" class="no-underline hover:underline" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a>
             </p>
           {% endif %}
           {% if project.technology %}
             <div>
               Made with:
-              <a target="_blank" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
+              <a target="_blank" class="no-underline hover:underline" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
               <br/>
               <span>{{ project.technology.description }}</span>
             </div>
           {% endif %}
           {% if project.repository %}
             <p>Repository:
-              <a target="_blank" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
+              <a target="_blank" class="no-underline hover:underline" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
             </p>
           {% endif %}
         {% endif %}
@@ -55,10 +55,10 @@
         <article class="pb-8 pt-16">
           <section class="relative">
             <div class="absolute inset-0 flex items-center" aria-hidden="true">
-              <div class="w-full border-t border-jumbo-300 dark:border-jumbo-600"></div>
+              <div class="w-full border-t border-gray-300 dark:border-jumbo-600"></div>
             </div>
             <div class="relative flex justify-center">
-              <span class="px-3 bg-white dark:bg-jumbo-600 text-lg font-medium text-jumbo-900 dark:text-jumbo-200">
+              <span class="px-3 bg-white dark:bg-jumbo-900 text-lg font-medium text-gray-900 dark:text-jumbo-300">
                 {{ project.get_sub_projects.count }}
                 Sub Project{{ project.get_sub_projects.count|pluralize:'s' }}
               </span>

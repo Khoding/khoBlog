@@ -24,8 +24,6 @@ class TaskListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Task List"
         context["description"] = "List of Tasks"
-        context["app_title"] = "Todo"
-        context["app_direct_link"] = reverse_lazy("todo:task_list")
         return context
 
 
@@ -40,8 +38,6 @@ class TaskCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Create Task"
         context["description"] = "Create a Task"
-        context["app_title"] = "Todo"
-        context["app_direct_link"] = reverse_lazy("todo:task_list")
         return context
 
 
@@ -62,8 +58,6 @@ class TaskCompleteView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Complete Task"
         context["description"] = "Complete a Task"
-        context["app_title"] = "Todo"
-        context["app_direct_link"] = reverse_lazy("todo:task_list")
         return context
 
 
@@ -78,8 +72,6 @@ class TaskUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Task"
         context["description"] = "Update a Task"
-        context["app_title"] = "Todo"
-        context["app_direct_link"] = reverse_lazy("todo:task_list")
         return context
 
 
@@ -93,6 +85,4 @@ class TaskDeleteView(DeleteView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Task"
         context["description"] = "Delete a Task"
-        context["app_title"] = "Todo"
-        context["app_direct_link"] = reverse_lazy("todo:task_list")
         return context

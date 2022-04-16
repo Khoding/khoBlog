@@ -50,10 +50,7 @@ class PageDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["pages"] = self.pages
         context["title"] = self.title
-        context["app_title"] = "Pages"
-        context["app_direct_link"] = reverse_lazy("pages:index")
         context["description"] = self.description
-        context["side_title"] = "Page List"
         context["comment_next"] = self.page.get_absolute_url()
         return context
 
@@ -85,8 +82,6 @@ class PageListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Page List"
         context["description"] = "List of all Pages"
-        context["app_title"] = "Pages"
-        context["app_direct_link"] = reverse_lazy("pages:index")
         context["content_type"] = "page"
         return context
 
@@ -112,8 +107,6 @@ class PageCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Create Page"
         context["description"] = "Create a Page"
-        context["app_title"] = "Pages"
-        context["app_direct_link"] = reverse_lazy("pages:index")
         return context
 
 
@@ -138,8 +131,6 @@ class PageUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Page"
         context["description"] = "Update a Page"
-        context["app_title"] = "Pages"
-        context["app_direct_link"] = reverse_lazy("pages:index")
         return context
 
 
@@ -174,8 +165,6 @@ class PageDeleteView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Page"
         context["description"] = "Delete a Page"
-        context["app_title"] = "Pages"
-        context["app_direct_link"] = reverse_lazy("pages:index")
         return context
 
 

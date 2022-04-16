@@ -11,8 +11,6 @@ def context(request):
         "debug_flag": debug_flag,
         "now": timezone.now(),
         "description": "Welcome to my website, it's a blog, a portfolio, a personal playground, and too much time is dedicated to it.",
-        "app_title": "Blog",
-        "app_direct_link": reverse("blog:post_list"),
         "show_featured": False,
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
         "content_type": "post",

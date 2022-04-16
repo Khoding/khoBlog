@@ -13,5 +13,5 @@ class CommentListView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Comment List"
-        context["side_title"] = "Comment List"
+        context["description"] = "List of all comments"
         return context

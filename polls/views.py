@@ -28,8 +28,6 @@ class IndexView(PermissionRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Polls List"
         context["description"] = "Polls List"
-        context["app_title"] = "Polls"
-        context["app_direct_link"] = reverse_lazy("polls:index")
         return context
 
 
@@ -48,8 +46,6 @@ class PollsDetailView(PermissionRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Poll Detail"
         context["description"] = "Polls Details"
-        context["app_title"] = "Polls"
-        context["app_direct_link"] = reverse_lazy("polls:index")
         return context
 
 
@@ -64,8 +60,6 @@ class ResultsView(PermissionRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Poll Results"
         context["description"] = "Polls Results"
-        context["app_title"] = "Polls"
-        context["app_direct_link"] = reverse_lazy("polls:index")
         return context
 
 
