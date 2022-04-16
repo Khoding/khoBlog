@@ -5,16 +5,12 @@ from links.models import Links
 register = template.Library()
 
 
-@register.inclusion_tag("links/links_list.html", takes_context=True)
-def links_menu(context, urls):
+@register.inclusion_tag("tailwind/links_list.html")
+def links_menu(urls, mobile=False):
+    if mobile == True:
+        mobile = True
     urls = Links.objects.filter(shown=True).order_by("priority")
-    return {"urls": urls, "context": context}
-
-
-@register.inclusion_tag("tailwind/links_list_n.html", takes_context=True)
-def links_menu_n(context, urls):
-    urls = Links.objects.filter(shown=True).order_by("priority")
-    return {"urls": urls, "context": context}
+    return {"urls": urls, "mobile": mobile}
 
 
 @register.filter

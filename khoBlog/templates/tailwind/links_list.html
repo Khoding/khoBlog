@@ -1,0 +1,11 @@
+{% for url in urls %}
+  {% if not mobile %}
+    <li class="flow-root">
+  {% endif %}
+    <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 dark:text-jumbo-50 hover:bg-gray-50 dark:hover:bg-jumbo-700 transition ease-in-out duration-150">
+      <span>{% firstof url.featured_title url.title %}</span>
+    </a>
+  {% if not mobile %}
+    </li>
+  {% endif %}
+{% endfor %}

@@ -1,10 +1,6 @@
 {% extends "sub_base.html" %}
 {% load i18n widget_tweaks project_tags %}
 
-{% block page_top_title %}
-  {% trans "E-mail Addresses" %}
-{% endblock page_top_title %}
-
 {% block content %}
   {% if user.emailaddress_set.all %}
     <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
