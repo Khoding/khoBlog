@@ -75,9 +75,6 @@ class CustomUser(AbstractUser):
         help_text="The message before your name when you are logged, by default 'Hello'",
     )
     default_theme = models.CharField(max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default")
-    enable_tailwind = models.BooleanField(
-        default=False, help_text="Enable the new experimental Tailwindcss design (WIP, broken af)"
-    )
     roles = models.ManyToManyField(Role, blank=True, default="User")
     show_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
 

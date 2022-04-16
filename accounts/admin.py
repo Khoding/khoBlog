@@ -45,10 +45,6 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
         (
-            ("Other"),
-            {"fields": ("enable_tailwind",)},
-        ),
-        (
             ("Metadata"),
             {
                 "fields": (

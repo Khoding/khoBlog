@@ -39,5 +39,4 @@ class CustomUserChangeForm(UserChangeForm):
             "slug",
             "show_github",
             "default_theme",
-            "enable_tailwind",
         )

@@ -1,6 +1,5 @@
 from ..django import env
 
-ENABLE_TAILWIND = env.bool("ENABLE_TAILWIND")
 TAILWIND_APP_NAME = "theme"
 NPM_BIN_PATH_WINDOWS = env.bool("NPM_BIN_PATH_WINDOWS")
 
