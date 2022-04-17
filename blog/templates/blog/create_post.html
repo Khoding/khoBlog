@@ -130,10 +130,10 @@
         <span class="text-small text-white-50">{{ form.url_to_article_title.help_text }}</span>
       {% endif %}
       {% for error in form.url_to_article.errors %}
-        <small class="form-text text-danger">{{ error }}</small>
+        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
       {% for error in form.url_to_article_title.errors %}
-        <small class="form-text text-danger">{{ error }}</small>
+        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 

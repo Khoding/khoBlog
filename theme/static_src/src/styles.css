@@ -207,7 +207,7 @@
     }
 
     .dropdown_item {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700 disabled:dark:hover:text-jumbo-50;
     }
 
     .dropdown_item_active {

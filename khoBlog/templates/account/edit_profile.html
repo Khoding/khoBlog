@@ -17,7 +17,7 @@
         {% endfor %}
       </div>
 
-      <div class="text-danger">
+      <div class="text-red-600 dark:text-flamingo-600">
         {{ form.non_field_errors }}
       </div>
 
@@ -37,7 +37,7 @@
               <span class="text-small text-white-50">{{ form.username.help_text }}</span>
             {% endif %}
             {% for error in form.username.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -48,7 +48,7 @@
               <span class="text-small text-white-50">{{ form.profile_pic.help_text }}</span>
             {% endif %}
             {% for error in form.profile_pic.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -61,7 +61,7 @@
               <span class="text-small text-white-50">{{ form.bio.help_text }}</span>
             {% endif %}
             {% for error in form.bio.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -84,10 +84,10 @@
               <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
             {% endif %}
             {% for error in form.first_name.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
             {% for error in form.last_name.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -100,7 +100,7 @@
               <span class="text-small text-white-50">{{ form.email.help_text }}</span>
             {% endif %}
             {% for error in form.email.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -113,7 +113,7 @@
               <span class="text-small text-white-50">{{ form.password.help_text|safe }}</span>
             {% endif %}
             {% for error in form.password.errors %}
-              <small class="form-text text-danger">{{ error }}</small>
+              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -133,7 +133,7 @@
             <span class="text-small text-white-50">{{ form.slug.help_text }}</span>
           {% endif %}
           {% for error in form.slug.errors %}
-            <small class="form-text text-danger">{{ error }}</small>
+            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>
@@ -152,7 +152,7 @@
             <span class="text-small text-white-50">{{ form.welcome_message.help_text }}</span>
           {% endif %}
           {% for error in form.welcome_message.errors %}
-            <small class="form-text text-danger">{{ error }}</small>
+            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -165,7 +165,7 @@
             <span class="text-small text-white-50">{{ form.show_github.help_text }}</span>
           {% endif %}
           {% for error in form.show_github.errors %}
-            <small class="form-text text-danger">{{ error }}</small>
+            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -178,7 +178,7 @@
             <span class="text-small text-white-50">{{ form.default_theme.help_text }}</span>
           {% endif %}
           {% for error in form.default_theme.errors %}
-            <small class="form-text text-danger">{{ error }}</small>
+            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>

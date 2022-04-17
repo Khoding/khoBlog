@@ -69,7 +69,6 @@ class ProjectUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
 class ProjectDeleteView(UpdateView):
     """ProjectDeleteView
 
@@ -163,7 +162,6 @@ class SubProjectUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
 class SubProjectDeleteView(UpdateView):
     """SubProjectDeleteView
 

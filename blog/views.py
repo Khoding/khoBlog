@@ -6,15 +6,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
-from django.views.generic.dates import (
-    ArchiveIndexView,
-    DateDetailView,
-    DayArchiveView,
-    MonthArchiveView,
-    TodayArchiveView,
-    WeekArchiveView,
-    YearArchiveView,
-)
+from django.views.generic.dates import DayArchiveView
 
 from rules.contrib.views import AutoPermissionRequiredMixin
 
@@ -35,7 +27,7 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
-from .models import Category, Post, PostContent, Series
+from .models import Category, Post, Series
 
 
 class PostListView(ListView):
@@ -338,7 +330,6 @@ class PostDetailView(DetailView):
         context["title"] = self.title
         context["description"] = self.description
         context["similar_posts"] = self.tags = self.post.tags.similar_objects()[:5]
-        context["comment_next"] = self.post.get_absolute_url()
         context["next_post"] = self.next_post
         context["prev_post"] = self.prev_post
         return context

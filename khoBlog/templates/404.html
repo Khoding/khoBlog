@@ -1,4 +1,8 @@
-{% extends 'blog/base_post.html' %}
+{% extends 'sub_base_main_block.html' %}
+
+{% block title %}
+  Error 404 Not Found
+{% endblock title %}
 
 {% block content_main %}
   <a class="btn btn-danger" href="{% url 'pages:kheee' %}">Error 404 Not Found</a>

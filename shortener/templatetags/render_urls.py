@@ -6,6 +6,6 @@ register = template.Library()
 
 
 @register.inclusion_tag("tailwind/links_list.html")
-def links_n(urls):
+def links(urls):
     urls = URL.objects.filter(featured=True)
     return {"urls": urls}

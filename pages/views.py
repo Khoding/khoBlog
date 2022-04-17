@@ -2,7 +2,6 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from khoBlog.utils.superuser_required import superuser_required
 
 from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
 
@@ -51,7 +50,6 @@ class PageDetailView(DetailView):
         context["pages"] = self.pages
         context["title"] = self.title
         context["description"] = self.description
-        context["comment_next"] = self.page.get_absolute_url()
         return context
 
 
@@ -86,7 +84,6 @@ class PageListView(ListView):
         return context
 
 
-@superuser_required()
 class PageCreateView(CreateView):
     """PageCreateView
 
@@ -110,7 +107,6 @@ class PageCreateView(CreateView):
         return context
 
 
-@superuser_required()
 class PageUpdateView(UpdateView):
     """PageUpdateView
 
@@ -134,7 +130,6 @@ class PageUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
 class PageDeleteView(UpdateView):
     """PageDeleteView
 

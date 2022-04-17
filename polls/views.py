@@ -2,9 +2,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.urls.base import reverse_lazy
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
+
 from rules.contrib.views import permission_required
 
 from .models import Choice, Question
