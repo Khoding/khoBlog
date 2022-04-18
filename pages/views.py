@@ -97,7 +97,7 @@ class PageCreateView(CreateView):
     """
 
     model = Page
-    template_name = "pages/page_add.html"
+    template_name = "pages/create_page.html"
     form_class = PageAddForm
 
     def get_context_data(self, **kwargs):
