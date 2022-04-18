@@ -34,10 +34,8 @@
     </section>
   {% endif %}
   <section>
-    <a href="{{ object.get_absolute_url }}" class="mt-2 block">
-      <p class="text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline">
-        {{ object }}
-      </p>
+    <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline">
+      {{ object }}
     </a>
     {% if object.get_superuser_post_count_in_category or object.get_post_count_in_category %}
       <p class="text-sm dark:text-jumbo-100">Post count:
