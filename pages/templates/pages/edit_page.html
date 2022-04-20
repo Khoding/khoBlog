@@ -1,11 +1,5 @@
 {% extends 'pages/base_page.html' %}
-{% load static project_tags compress %}
-
-{% block additional_css %}
-  {% compress css %}
-  <link rel="stylesheet" href="{% static 'khoBlog/css/selectize/selectize.css' %}"/>
-  {% endcompress css %}
-{% endblock additional_css %}
+{% load project_tags compress %}
 
 {% block main %}
   <form enctype="multipart/form-data" method="post" novalidate="novalidate">

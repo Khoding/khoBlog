@@ -1,10 +1,8 @@
 from django import template
-from django.contrib.auth import get_user_model
 
 from settings_app.models import MenuFooterLink
 
 register = template.Library()
-User = get_user_model()
 
 
 @register.inclusion_tag("tailwind/menu_footer_links.html", takes_context=True)
