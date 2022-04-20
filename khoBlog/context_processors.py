@@ -25,10 +25,3 @@ def selected_settings(request):
         "APP_VERSION_NUMBER": settings.APP_VERSION_NUMBER,
         "APP_VERSION_NAME": settings.APP_VERSION_NAME,
     }
-
-
-def base_site_template(request):
-    # Here goes your conditions to select proper base template, for example
-    # by checking request.user permissions or some other logic.
-    BASE_SITE_TEMPLATE = "tailwind/base.html"
-    return {"BASE_SITE_TEMPLATE": BASE_SITE_TEMPLATE}
