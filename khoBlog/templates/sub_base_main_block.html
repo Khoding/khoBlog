@@ -32,21 +32,11 @@
           <section>
             <p class="text-sm text-jumbo-700 dark:text-jumbo-200">
               Showing
-              <span class="font-medium">{{ posts.count }}</span>
-              {% if posts %}
-                of
-                <span class="font-medium">
-                  {% if not cats.get_superuser_post_count_in_category or not cats.get_post_count_in_category %}
-                    {% o_count posts %}
-                  {% else %}
-                    {% if user.is_superuser %}
-                      {{ cats.get_superuser_post_count_in_category }}
-                    {% else %}
-                      {{ cats.get_post_count_in_category }}
-                    {% endif %}
-                  {% endif %}
-                  </span>
-              {% endif %}
+              <span class="font-medium">{{ object_list.count }}</span>
+              of
+              <span class="font-medium">
+                {{ paginator.count }}
+              </span>
               results
             </p>
           </section>

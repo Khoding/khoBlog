@@ -16,16 +16,16 @@ class CustomTag(TagBase):
         verbose_name_plural = _("Tags")
 
     def get_absolute_url(self):
-        return reverse("blog:post_tagged_with", kwargs={"slug": self.slug})
+        return reverse("custom_taggit:post_tagged_with", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
-        return reverse("blog:tag_edit", kwargs={"slug": self.slug})
+        return reverse("custom_taggit:tag_edit", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         return reverse("admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
-        return reverse("blog:tag_list")
+        return reverse("custom_taggit:tag_list")
 
 
 class CustomTaggedItem(GenericTaggedItemBase):

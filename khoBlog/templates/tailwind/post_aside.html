@@ -101,7 +101,7 @@
         {% for tag in object.get_tags %}
           {% spaceless %}
             <li class="inline">
-              <a href="{% url 'blog:post_tagged_with' slug=tag.slug %}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
+              <a href="{% url 'custom_taggit:post_tagged_with' slug=tag.slug %}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
                 <div class="absolute flex-shrink-0 flex items-center justify-center">
                   <span class="h-1.5 w-1.5 rounded-full" style="background-color: {{ tag.color }}" aria-hidden="true"></span>
                 </div>
@@ -115,7 +115,7 @@
         {% for tag in object.get_admin_tags %}
           {% spaceless %}
             <li class="inline">
-              <a href="{% url 'blog:post_tagged_with' slug=tag.slug %}" class="relative inline-flex items-center rounded-full border border-gray-200 dark:border-jumbo-200 px-3 py-0.5">
+              <a href="{% url 'custom_taggit:post_tagged_with' slug=tag.slug %}" class="relative inline-flex items-center rounded-full border border-gray-200 dark:border-jumbo-200 px-3 py-0.5">
                 <div class="absolute flex-shrink-0 flex items-center justify-center">
                   <span class="h-1.5 w-1.5 rounded-full" style="background-color: {{ tag.color }}" aria-hidden="true"></span>
                 </div>

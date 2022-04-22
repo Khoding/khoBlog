@@ -78,6 +78,7 @@ urlpatterns = (
         path("pages/", include("pages.urls")),
         path("polls/", include("polls.urls")),
         path("todo/", include("todo.urls")),
+        path("tags/", include("custom_taggit.urls")),
         path("s/", include("shortener.urls")),
         path("l/", include("links.urls")),
         # Rest API

@@ -6,7 +6,6 @@ from blog.views import CategoryDeleteView, SeriesDeleteView
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (
-    TagListView,
     CategoryCreateView,
     CategoryListView,
     CategoryUpdateView,
@@ -22,11 +21,9 @@ from .views import (
     PostScheduledListView,
     PostUpdateView,
     PostWithdrawnListView,
-    PostWithTagListView,
     SeriesCreateView,
     SeriesListView,
     SeriesUpdateView,
-    TagUpdateView,
     WeblogTemplateView,
 )
 
@@ -59,11 +56,6 @@ series_action_extra_patterns = [
     path("delete/", SeriesDeleteView.as_view(), name="series_remove"),
 ]
 
-tags_action_extra_patterns = [
-    path("", PostWithTagListView.as_view(), name="post_tagged_with"),
-    path("edit/", TagUpdateView.as_view(), name="tag_edit"),
-]
-
 category_extra_patterns = [
     path("", CategoryListView.as_view(), name="category_list"),
     path("add/", CategoryCreateView.as_view(), name="create_category"),
@@ -76,10 +68,6 @@ series_extra_patterns = [
     path("<slug:slug>/", include(series_action_extra_patterns)),
 ]
 
-tags_extra_patterns = [
-    path("", TagListView.as_view(), name="tag_list"),
-    path("<slug:slug>/", include(tags_action_extra_patterns)),
-]
 
 post_extra_patterns = [
     path("add/", PostCreateView.as_view(), name="create_post"),
@@ -115,8 +103,6 @@ urlpatterns = [
     path("category/", include(category_extra_patterns)),
     # Series Related Patterns
     path("series/", include(series_extra_patterns)),
-    # Tags Related Patterns
-    path("tags/", include(tags_extra_patterns)),
     # Archive Related Patterns
     path("archive/", include(archive_extra_patterns)),
     # RSS Related Patterns

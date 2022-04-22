@@ -21,7 +21,7 @@
           <h2 id="filter-heading" class="sr-only">Filters</h2>
         </section>
       {% endif %}
-      {% if user.is_superuser and not object_list.model|to_class_name == "post" %}
+      {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
         <section class="w-auto">
           {% csb object_list.model %}
         </section>
