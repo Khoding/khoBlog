@@ -1,6 +1,14 @@
 {% extends 'sub_base_main.html' %}
 {% load static widget_tweaks project_tags markdown_extra compress %}
 
+{% block additional_css %}
+  {% compress css %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="{% static 'khoBlog/css/selectize.min.css' %}">
+  {% endcompress css %}
+{% endblock additional_css %}
+
+
 {% block main %}
   <form enctype="multipart/form-data" method="post" novalidate="novalidate">
     {% csrf_token %}
