@@ -80,7 +80,6 @@ class PageListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Page List"
         context["description"] = "List of all Pages"
-        context["content_type"] = "page"
         return context
 
 

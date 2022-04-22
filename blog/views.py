@@ -193,7 +193,6 @@ class CategoryListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Category List"
         context["description"] = "List of categories"
-        context["content_type"] = "category"
         return context
 
 
@@ -224,7 +223,6 @@ class SeriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Series List"
         context["description"] = "List of series"
-        context["content_type"] = "series"
         return context
 
 
@@ -475,7 +473,6 @@ class TagListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Tag List"
         context["description"] = "List of all tags"
-        context["content_type"] = "tag"
         return context
 
 

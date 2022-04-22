@@ -1,4 +1,4 @@
-{% load cards %}
+{% load cards content_type super_buttons %}
 
 <section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>
@@ -20,6 +20,9 @@
           </button>
           <h2 id="filter-heading" class="sr-only">Filters</h2>
         </section>
+      {% endif %}
+      {% if not object_list.model|to_class_name == "post" %}
+        {% csb object_list.model %}
       {% endif %}
     </div>
   </section>

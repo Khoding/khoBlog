@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.urls.base import reverse
 from django.utils import timezone
 
 
@@ -13,7 +12,6 @@ def context(request):
         "description": "Welcome to my website, it's a blog, a portfolio, a personal playground, and too much time is dedicated to it.",
         "show_featured": False,
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
-        "content_type": "post",
     }
     return context
 

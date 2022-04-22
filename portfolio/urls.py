@@ -22,7 +22,7 @@ sub_project_extra_actions_patterns = [
 ]
 
 sub_project_extra_patterns = [
-    path("add/", SubProjectCreateView.as_view(), name="sub_project_add"),
+    path("add/", SubProjectCreateView.as_view(), name="create_sub_project"),
     path("<slug:subproject_slug>/", include(sub_project_extra_actions_patterns)),
 ]
 
@@ -35,6 +35,6 @@ project_extra_patterns = [
 
 urlpatterns = [
     path("", ProjectListView.as_view(), name="project_list"),
-    path("add/", ProjectCreateView.as_view(), name="project_add"),
+    path("add/", ProjectCreateView.as_view(), name="create_project"),
     path("<slug:slug>/", include(project_extra_patterns)),
 ]

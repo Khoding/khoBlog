@@ -27,7 +27,6 @@ class ProjectListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Portfolio"
         context["description"] = "List of Projects"
-        context["content_type"] = "project"
         return context
 
 

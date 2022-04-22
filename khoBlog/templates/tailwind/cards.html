@@ -1,4 +1,4 @@
-{% load featured_post comments %}
+{% load featured_post comments content_type %}
 
 <article>
   {% if object.categories %}
@@ -16,7 +16,7 @@
           </span>
         </a>
       {% endif %}
-      {% if context.content_type == "post" %}
+      {% if object|to_class_name == "post" %}
         {% if object.pub_date and not object.withdrawn %}
           {% if object.was_published_recently %}
             <div class="inline-flex">
