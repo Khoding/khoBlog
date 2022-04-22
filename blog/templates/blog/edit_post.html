@@ -6,7 +6,9 @@
 {% endblock additional_js %}
 
 {% block additional_css %}
+  {% compress css %}
   <link rel="stylesheet" href="{% static 'khoBlog/css/selectize.default.css' %}">
+  {% endcompress css %}
 {% endblock additional_css %}
 
 {% block main %}
