@@ -1,8 +1,11 @@
 {% extends 'pages/base_page.html' %}
 {% load static project_tags compress %}
 
+{% block additional_js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock additional_js %}
+
 {% block additional_css %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   {% compress css %}
   <link rel="stylesheet" href="{% static 'khoBlog/css/selectize.min.css' %}">
   {% endcompress css %}
