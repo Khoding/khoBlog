@@ -59,7 +59,42 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Latest Posts"
-        context["show_featured"] = True
+        context["filter_form"] = PostFilter()
+        return context
+
+
+class AllPostListView(ListView):
+    """AllPostListView List View
+
+    The List View for Posts that shows all posts
+
+    Args:
+        ListView (ListView): Lists elements
+
+    Returns:
+        posts: A list of posts
+    """
+
+    model = Post
+    template_name = "blog/lists/post_list.html"
+    context_object_name = "posts"
+    paginate_by = 20
+    paginate_orphans = 5
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied
+        query = PostFilter(
+            self.request.GET,
+            queryset=Post.objects.get_without_removed(),
+        )
+        if query is not None and query != "":
+            return query.qs
+        return Post.objects.get_base_common_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Latest Posts"
         context["filter_form"] = PostFilter()
         return context
 

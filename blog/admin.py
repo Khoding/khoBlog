@@ -6,7 +6,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from simple_history.admin import SimpleHistoryAdmin
 
-from .models import Category, Post, PostCatsLink, PostContent, Series
+from .models import Category, Post, PostCatsLink, Series
 
 
 class PostResource(resources.ModelResource):
@@ -168,13 +168,6 @@ class PostCatsLinkInline(admin.TabularInline):
     """PostCatsLinkInline Class"""
 
     model = PostCatsLink
-    extra = 0
-
-
-class PostContentInline(admin.TabularInline):
-    """PostContentInline Class"""
-
-    model = PostContent
     extra = 0
 
 

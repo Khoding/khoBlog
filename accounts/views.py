@@ -9,7 +9,6 @@ from allauth.account.views import (
     SignupView,
 )
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
-from blog.models import Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
@@ -53,8 +52,6 @@ class ProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Profile • " + str(self.model.objects.get(username=kwargs["object"]))
         context["description"] = str(self.model.objects.get(username=kwargs["object"]).bio)
-        context["users"] = CustomUser.objects.all()
-        context["comments"] = Comment.objects.filter(author_logged=kwargs["object"])
         context["view_as"] = self.view_as
         return context
 

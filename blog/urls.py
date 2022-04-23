@@ -6,6 +6,7 @@ from blog.views import CategoryDeleteView, SeriesDeleteView
 from . import views
 from .feeds import LatestPostsFeed, LatestPostsFeedByCategory
 from .views import (
+    AllPostListView,
     CategoryCreateView,
     CategoryListView,
     CategoryUpdateView,
@@ -91,6 +92,7 @@ app_name = "blog"
 urlpatterns = [
     # Lists
     path("", PostListView.as_view(), name="post_list"),
+    path("all/", AllPostListView.as_view(), name="all_post_list"),
     path("latest/", views.redirect_to_latest, name="latest"),
     path("random/", views.redirect_to_random, name="random"),
     path("weblog/", WeblogTemplateView.as_view(), name="weblog"),

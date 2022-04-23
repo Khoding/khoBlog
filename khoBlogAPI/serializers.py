@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from blog.models import Category, Comment, Post, PostCatsLink
+from blog.models import Category, Post, PostCatsLink
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -29,9 +29,3 @@ class PostSerializer(serializers.ModelSerializer):
             "postcatslink_set",
         )
         prepopulated_fields = {"slug": ("title",)}
-
-
-class CommentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = "__all__"
