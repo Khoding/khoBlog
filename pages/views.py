@@ -1,56 +1,65 @@
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import PermissionDenied
+from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404, redirect
+from django.template import loader
 from django.urls.base import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.utils.safestring import mark_safe
+from django.views.decorators.csrf import csrf_protect
+from django.views.generic import CreateView, ListView, UpdateView
 
 from pages.forms import PageAddForm, PageDeleteForm, PageEditForm
 
 from .models import Page
 
+DEFAULT_TEMPLATE = "pages/default.html"
 
-class PageDetailView(DetailView):
-    """PageDetailView
 
-    Details of a Page
-
-    Args:
-        DetailView ([type]): [description]
-
-    Raises:
-        PermissionDenied: [description]
-
-    Returns:
-        [type]: [description]
+def page(request, slug):
     """
+    Public interface to the flat page view.
 
-    model = Page
-    template_name = "flatpages/default.html"
+    Models: `pages.pages`
+    Templates: Uses the template defined by the ``template_name`` field,
+        or :template:`pages/default.html` if template_name is not defined.
+    Context:
+        page
+            `pages.pages` object
+    """
+    site_id = get_current_site(request).id
+    try:
+        f = get_object_or_404(Page, slug=slug, sites=site_id)
+    except Http404:
+        f = get_object_or_404(Page, slug=slug, sites=site_id)
+        return HttpResponsePermanentRedirect("%s/" % request.path)
+    return render_page(request, f)
 
-    def get_queryset(self):
-        self.page = get_object_or_404(Page, slug=self.kwargs["slug"])
-        if self.page.is_removed:
-            raise PermissionDenied
-        if self.request.user.is_superuser:
-            self.title = self.page.title
-            self.description = self.page.description
-            self.pages = self.model.objects.filter(is_removed=False).order_by("-pk")
-        else:
-            if self.page.withdrawn:
-                self.title = "Withdrawn"
-                self.description = "This page is Withdrawn"
-                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
-            else:
-                self.title = self.page.title
-                self.description = self.page.description
-                self.pages = self.model.objects.filter(withdrawn=False, is_removed=False).order_by("-pk")
-        return super().get_queryset()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["pages"] = self.pages
-        context["title"] = self.title
-        context["description"] = self.description
-        return context
+@csrf_protect
+def render_page(request, f):
+    """
+    Internal interface to the flat page view.
+    """
+    # If registration is required for accessing this page, and the user isn't
+    # logged in, redirect to the login page.
+    if f.registration_required and not request.user.is_authenticated:
+        from django.contrib.auth.views import redirect_to_login
+
+        return redirect_to_login(request.path)
+    if f.is_removed:
+        raise Http404
+    if f.template_name:
+        template = loader.select_template((f.template_name, DEFAULT_TEMPLATE))
+    else:
+        template = loader.get_template(DEFAULT_TEMPLATE)
+
+    # To avoid having to always use the "|safe" filter in page templates,
+    # mark the title and content as already safe (since they are raw HTML
+    # content in the first place).
+    f.title = mark_safe(f.title)
+    f.content = mark_safe(f.content)
+
+    return HttpResponse(template.render({"page": f, "title": f.title, "description": f.description}, request))
 
 
 class PageListView(ListView):

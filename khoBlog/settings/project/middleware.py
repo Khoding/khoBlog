@@ -32,7 +32,6 @@ if not DEBUG:
     ]
 
 MIDDLEWARE += [
-    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
 ]

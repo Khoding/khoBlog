@@ -4,7 +4,7 @@ from django.urls.conf import include
 from .views import (
     PageCreateView,
     PageDeleteView,
-    PageDetailView,
+    page,
     PageListView,
     PageUpdateView,
     kheee_page,
@@ -12,7 +12,7 @@ from .views import (
 )
 
 page_extra_patterns = [
-    path("", PageDetailView.as_view(), name="page_detail"),
+    path("", page, name="page_detail"),
     path("edit/", PageUpdateView.as_view(), name="page_edit"),
     path("delete/", PageDeleteView.as_view(), name="page_delete"),
 ]
