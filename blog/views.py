@@ -357,7 +357,6 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_base_common_queryset()
         context["series"] = self.series
         context["title"] = self.title
         context["description"] = self.description
@@ -535,7 +534,6 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Post"
         return context
 
@@ -563,7 +561,6 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Category"
         return context
 
@@ -587,7 +584,6 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "New Series"
         return context
 
@@ -611,7 +607,6 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Category"
         return context
 
@@ -648,7 +643,6 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Category"
         return context
 
@@ -672,7 +666,6 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Series"
         return context
 
@@ -709,7 +702,6 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Series"
         return context
 
@@ -733,7 +725,6 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Edit Post"
         return context
 
@@ -800,7 +791,6 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts"] = self.model.objects.get_without_removed().order_by("-pk")
         context["title"] = "Delete Post"
         return context
 
