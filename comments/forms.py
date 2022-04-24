@@ -1,36 +1,5 @@
 from django import forms
-from django.forms.models import ModelForm
-from django_comments.forms import CommentForm
 from django_comments_xtd.forms import XtdCommentForm
-
-from .models import CustomComment
-
-
-class CustomCommentChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        full_t = ""
-        if obj.content_object:
-            full_t = full_t + str(obj.content_type.model) + " - " + str(obj.content_object.title) + " - "
-        elif obj.title:
-            full_t = obj.title + " - "
-        full_t = full_t + str(obj.comment)[:50]
-        return full_t
-
-
-class CustomCommentForm(CommentForm):
-    title = forms.CharField(max_length=200)
-
-    class Meta:
-        field = ("title",)
-
-    def check_for_duplicate_comment(self, new):
-        return new
-
-    def get_comment_create_data(self, **kwargs):
-        # Use the data of the superclass, and add in the title field
-        data = super().get_comment_create_data(**kwargs)
-        data["title"] = self.cleaned_data["title"]
-        return data
 
 
 class CustomCommentXTDForm(XtdCommentForm):
@@ -47,7 +16,3 @@ class CustomCommentXTDForm(XtdCommentForm):
         data = super().get_comment_create_data(**kwargs)
         data["title"] = self.cleaned_data["title"]
         return data
-
-
-class AdminForm(ModelForm):
-    parent = CustomCommentChoiceField(queryset=CustomComment.objects.all())

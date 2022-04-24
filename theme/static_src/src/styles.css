@@ -126,7 +126,7 @@
     }
 
     .prose :is(.admonition, summary, details) {
-        @apply mb-2 p-4;
+        @apply mb-2 p-4 dark:text-jumbo-700;
     }
 
     .prose .icon {

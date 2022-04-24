@@ -1,10 +1,7 @@
 from django.contrib import admin, messages
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
-from django_comments.admin import CommentsAdmin
 from django_comments_xtd.admin import XtdCommentsAdmin
-
-from comments.forms import AdminForm
 
 from .models import CustomCommentXTD
 
@@ -35,72 +32,6 @@ def make_site_localhost(modeladmin, request, queryset):
         % updated,
         messages.SUCCESS,
     )
-
-
-class CustomCommentsAdmin(CommentsAdmin):
-    form = AdminForm
-
-    list_display = (
-        "pk",
-        "full_title",
-        "name",
-        "content_type",
-        "object_pk",
-        "ip_address",
-        "submit_date",
-        "is_public",
-        "is_removed",
-        "parent",
-    )
-    list_display_links = ("full_title",)
-    ordering = ("pk",)
-
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "content_type",
-                    "object_pk",
-                    "site",
-                    "parent",
-                )
-            },
-        ),
-        (
-            _("Content"),
-            {
-                "fields": (
-                    "title",
-                    "user",
-                    "alias_user",
-                    "user_name",
-                    "user_email",
-                    "user_url",
-                    "comment",
-                )
-            },
-        ),
-        (
-            _("Metadata"),
-            {"fields": ("submit_date", "ip_address", "is_public", "is_removed")},
-        ),
-    )
-
-    list_filter = (
-        "submit_date",
-        "site",
-        "is_public",
-        "is_removed",
-    )
-
-    actions = [
-        "flag_comments",
-        "approve_comments",
-        "remove_comments",
-        make_site_khoblog,
-        make_site_localhost,
-    ]
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
