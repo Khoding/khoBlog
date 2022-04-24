@@ -1,45 +1,8 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from simple_history.admin import SimpleHistoryAdmin
 
 from .models import Page
-
-
-class FlatPageAdmin(admin.ModelAdmin):
-    list_display = ("title", "created_date", "slug")
-    ordering = ("title",)
-    search_fields = ("title",)
-    prepopulated_fields = {"slug": ("title",)}
-    list_filter = ("sites", "registration_required")
-
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    "title",
-                    "page_head",
-                    "content",
-                    "description",
-                    "sites",
-                    "created_date",
-                    "slug",
-                )
-            },
-        ),
-        (
-            ("Advanced options"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "registration_required",
-                    "template_name",
-                    "is_removed",
-                ),
-            },
-        ),
-    )
 
 
 @admin.register(Page)
@@ -78,6 +41,3 @@ class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
             },
         ),
     )
-
-
-admin.site.unregister(FlatPageOld)

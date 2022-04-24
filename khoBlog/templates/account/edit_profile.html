@@ -168,19 +168,6 @@
             <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
-
-        <div class="field mb-2">
-          <div class="form-floating">
-            {{ form.default_theme|add_class:"form-select"|attr:"placeholder:Choose a theme" }}
-            {{ form.default_theme.label_tag }}
-          </div>
-          {% if form.default_theme.help_text %}
-            <span class="text-small text-white-50">{{ form.default_theme.help_text }}</span>
-          {% endif %}
-          {% for error in form.default_theme.errors %}
-            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-          {% endfor %}
-        </div>
       </div>
 
       <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>

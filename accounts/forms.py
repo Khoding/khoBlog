@@ -38,5 +38,4 @@ class CustomUserChangeForm(UserChangeForm):
             "profile_pic",
             "slug",
             "show_github",
-            "default_theme",
         )

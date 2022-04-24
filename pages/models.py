@@ -1,7 +1,6 @@
 import auto_prefetch
 from custom_taggit.models import CustomTaggedItem
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.flatpages.models import FlatPage as FlatPageOld
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -10,34 +9,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
-
-
-class FlatPage(FlatPageOld):
-    slug = models.SlugField(unique=True, default="", max_length=200)
-    mod_date = models.DateTimeField("Last Updated", auto_now=True)
-    created_date = models.DateTimeField("Creation date", default=timezone.now)
-    page_head = models.TextField("Page head", blank=True)
-    main_page = models.BooleanField(default=False)
-    description = models.TextField(blank=True, default="")
-    withdrawn = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ["-pk"]
-
-    def __str__(self):
-        return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse("pages:page_detail", kwargs={"slug": self.slug})
-
-    def get_index_view_url(self):
-        content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:index" % (content_type.app_label))
 
 
 class Page(auto_prefetch.Model):

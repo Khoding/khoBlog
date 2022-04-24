@@ -42,16 +42,6 @@ class Role(auto_prefetch.Model):
 class CustomUser(AbstractUser):
     """CustomUser Model Class"""
 
-    THEME_CHOICES = [
-        ("default", "Default"),
-        ("uglybanana", "Funny Banana"),
-        ("banana", "Pretty Banana"),
-        ("cherry", "Hot Cherry"),
-        ("sop", "Shades Of Purple"),
-        ("leaf", "Smooth Leaf"),
-        ("nightsky", "Night Sky"),
-    ]
-
     email = models.EmailField()
     profile_pic = models.ImageField(
         null=True,
@@ -74,7 +64,6 @@ class CustomUser(AbstractUser):
         default="Hello",
         help_text="The message before your name when you are logged, by default 'Hello'",
     )
-    default_theme = models.CharField(max_length=25, verbose_name="Theme", choices=THEME_CHOICES, default="default")
     roles = models.ManyToManyField(Role, blank=True, default="User")
     show_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
 
