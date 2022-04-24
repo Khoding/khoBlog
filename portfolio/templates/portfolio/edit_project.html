@@ -1,7 +1,7 @@
-{% extends 'sub_base_main.html' %}
+{% extends 'tailwind/base.html' %}
 {% load static project_tags %}
 
-{% block main %}
+{% block content %}
   <div class="card formcard">
     <div class="card-body">
       <form enctype="multipart/form-data" method="post" novalidate="novalidate">
@@ -17,4 +17,4 @@
     </div>
     {{ form.media }}
 
-  {% endblock main %}
+  {% endblock content %}

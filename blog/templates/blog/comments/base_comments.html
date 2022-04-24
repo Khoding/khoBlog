@@ -1,9 +1,9 @@
-{% extends 'sub_base_main.html' %}
+{% extends 'tailwind/base.html' %}
 
-{% block main %}
+{% block content %}
   {% if user.is_authenticated %}
     {% block comments_main %}{% endblock comments_main %}
   {% else %}
     You must be logged in
   {% endif %}
-{% endblock main %}
+{% endblock content %}

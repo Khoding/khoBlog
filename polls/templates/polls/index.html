@@ -1,6 +1,6 @@
-{% extends 'polls/base_polls.html' %}
+{% extends 'tailwind/base.html' %}
 
-{% block main %}
+{% block content %}
   <ol class="list-unstyled mb-0">
     {% for question in latest_question_list %}
       <li>
@@ -12,4 +12,4 @@
       <p>No polls are available.</p>
     {% endfor %}
   </ol>
-{% endblock main %}
+{% endblock content %}

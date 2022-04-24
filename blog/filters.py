@@ -2,8 +2,6 @@ from django import forms
 
 import django_filters
 
-from custom_taggit.models import CustomTag
-
 from .models import Category, Post
 
 
@@ -24,7 +22,6 @@ class PostFilter(django_filters.FilterSet):
     body = django_filters.CharFilter(lookup_expr="icontains", widget=forms.Textarea)
     slug = django_filters.CharFilter(lookup_expr="icontains")
     categories = django_filters.ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
-    tags = django_filters.ModelChoiceFilter(queryset=CustomTag.objects.filter(withdrawn=False))
 
     class Meta:
         """Meta class for Post Filters"""
@@ -37,7 +34,6 @@ class PostFilter(django_filters.FilterSet):
             "slug",
             "language",
             "categories",
-            "tags",
         ]
 
     @property

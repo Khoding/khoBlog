@@ -1,7 +1,7 @@
-{% extends 'sub_base_main.html' %}
-{% load static paginator_tags post_count %}
+{% extends 'tailwind/base.html' %}
+{% load paginator_tags %}
 
-{% block main %}
+{% block content %}
   {% block content_main %}{% endblock content_main %}
 
   {% block pagination %}
@@ -99,4 +99,4 @@
       {% endif %}
     </section>
   {% endblock pagination %}
-{% endblock main %}
+{% endblock content %}
