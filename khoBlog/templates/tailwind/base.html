@@ -55,9 +55,11 @@
     <link rel="canonical" href="{{ CANONICAL_PATH }}">
     <link rel="shortlink" href="{{ CANONICAL_PATH }}">
 
+    {% cache 500 meta %}
     <meta property="og:site_name" content="Hello There!"/>
     <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
     <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
+    {% endcache %}
 
     {% block page_head %}
       <!-- Primary Meta Tags -->
@@ -86,8 +88,9 @@
     {% block rel %}
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
-
+    {% cache 500 tailwind %}
       {% tailwind_css %}
+    {% endcache %}
     {% endblock rel %}
 
     {% if not debug_flag %}

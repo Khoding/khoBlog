@@ -1,4 +1,4 @@
-{% load static links_menu theme_buttons menu_footer_set %}
+{% load static cache links_menu theme_buttons menu_footer_set %}
 
 <div class="relative" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
@@ -7,7 +7,10 @@
       <div>
         <a href="{% url 'blog:post_list' %}" class="flex">
           <span class="sr-only">Home page</span>
+          
+          {% cache 500 ruthinkk %}
           <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
+          {% endcache %}
         </a>
       </div>
       {% theme_button "darkLightm" %}
