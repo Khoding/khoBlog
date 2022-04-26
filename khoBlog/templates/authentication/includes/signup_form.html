@@ -1,113 +1,109 @@
-{% load static widget_tweaks project_tags %}
+{% load widget_tweaks project_tags %}
 
-<div class="card formcard auth-card">
-  <div class="card-body">
-    <form enctype="multipart/form-data" method="post" novalidate="novalidate">
-      {% csrf_token %}
-      <div class="non-field-errors">
-        {{ form.non_field_errors }}
-      </div>
+<form enctype="multipart/form-data" method="post" novalidate="novalidate">
+  {% csrf_token %}
 
-      <div class="hidden-fields-errors">
-        {% for hidden_field in form.hidden_fields %}
-          {{ hidden_field.errors }}
-          {{ hidden_field }}
-        {% endfor %}
-      </div>
-
-      <div class="text-red-600 dark:text-flamingo-600">
-        {{ form.non_field_errors }}
-      </div>
-
-      <div class="field mb-2">
-        <div class="form-floating">
-          {{ form.username|add_class:"form-control"|attr:"placeholder: Username" }}
-          {{ form.username.label_tag }}
-        </div>
-        {% if form.username.help_text %}
-          <span class="text-small text-white-50">{{ form.username.help_text }}</span>
-        {% endif %}
-        {% for error in form.username.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <div class="field mb-2">
-        <div class="form-floating">
-          {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
-          {{ form.email.label_tag }}
-        </div>
-        {% if form.email.help_text %}
-          <span class="text-small text-white-50">{{ form.email.help_text }}</span>
-        {% endif %}
-        {% for error in form.email.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <div class="field mb-2">
-        <div class="input-group">
-          <span class="input-group-text">Name</span>
-          {{ form.first_name|add_class:"form-control"|attr:"placeholder:First name" }}
-          {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
-        </div>
-        {% if form.first_name.help_text %}
-          <span class="text-small text-white-50">{{ form.first_name.help_text }}</span>
-        {% endif %}
-        {% if form.last_name.help_text %}
-          <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
-        {% endif %}
-        {% for error in form.first_name.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-        {% for error in form.last_name.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <div class="field mb-2">
-        <div class="form-floating">
-          {{ form.password1|add_class:"form-control"|attr:"placeholder:Password" }}
-          {{ form.password1.label_tag }}
-        </div>
-        {% if form.password1.help_text %}
-          <span class="text-small text-white-50">{{ form.password1.help_text|safe }}</span>
-        {% endif %}
-        {% for error in form.password1.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <div class="field mb-2">
-        <div class="form-floating">
-          {{ form.password2|add_class:"form-control"|attr:"placeholder:Password" }}
-          {{ form.password2.label_tag }}
-        </div>
-        {% if form.password2.help_text %}
-          <span class="text-small text-white-50">{{ form.password2.help_text|safe }}</span>
-        {% endif %}
-        {% for error in form.password2.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <div class="field mb-2">
-        {{ form.captcha.label_tag }}
-        {{ form.captcha|add_class:"form-control"|attr:"placeholder:Captcha" }}
-        {% if form.captcha.help_text %}
-          <span class="text-small text-white-50">{{ form.captcha.help_text }}</span>
-        {% endif %}
-        {% for error in form.captcha.errors %}
-          <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
-        {% endfor %}
-      </div>
-
-      <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>
-    </form>
+  <div class="non-field-errors">
+    {{ form.non_field_errors }}
   </div>
-  <div class="card-footer">
-    <p>Already have an account?
-      <a href="{% url 'account_login' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Log in</a>
-    </p>
+
+  <div class="hidden-fields-errors">
+    {% for hidden_field in form.hidden_fields %}
+      {{ hidden_field.errors }}
+      {{ hidden_field }}
+    {% endfor %}
   </div>
-</div>
+
+  <div class="text-red-600 dark:text-flamingo-600">
+    {{ form.non_field_errors }}
+  </div>
+
+  <div class="field mb-2">
+    <div class="form-floating">
+      {{ form.username|add_class:"form-control"|attr:"placeholder: Username" }}
+      {{ form.username.label_tag }}
+    </div>
+    {% if form.username.help_text %}
+      <span class="text-small text-white-50">{{ form.username.help_text }}</span>
+    {% endif %}
+    {% for error in form.username.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <div class="field mb-2">
+    <div class="form-floating">
+      {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
+      {{ form.email.label_tag }}
+    </div>
+    {% if form.email.help_text %}
+      <span class="text-small text-white-50">{{ form.email.help_text }}</span>
+    {% endif %}
+    {% for error in form.email.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <div class="field mb-2">
+    <div class="input-group">
+      <span class="input-group-text">Name</span>
+      {{ form.first_name|add_class:"form-control"|attr:"placeholder:First name" }}
+      {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
+    </div>
+    {% if form.first_name.help_text %}
+      <span class="text-small text-white-50">{{ form.first_name.help_text }}</span>
+    {% endif %}
+    {% if form.last_name.help_text %}
+      <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
+    {% endif %}
+    {% for error in form.first_name.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+    {% for error in form.last_name.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <div class="field mb-2">
+    <div class="form-floating">
+      {{ form.password1|add_class:"form-control"|attr:"placeholder:Password" }}
+      {{ form.password1.label_tag }}
+    </div>
+    {% if form.password1.help_text %}
+      <span class="text-small text-white-50">{{ form.password1.help_text|safe }}</span>
+    {% endif %}
+    {% for error in form.password1.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <div class="field mb-2">
+    <div class="form-floating">
+      {{ form.password2|add_class:"form-control"|attr:"placeholder:Password" }}
+      {{ form.password2.label_tag }}
+    </div>
+    {% if form.password2.help_text %}
+      <span class="text-small text-white-50">{{ form.password2.help_text|safe }}</span>
+    {% endif %}
+    {% for error in form.password2.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <div class="field mb-2">
+    {{ form.captcha.label_tag }}
+    {{ form.captcha|add_class:"form-control"|attr:"placeholder:Captcha" }}
+    {% if form.captcha.help_text %}
+      <span class="text-small text-white-50">{{ form.captcha.help_text }}</span>
+    {% endif %}
+    {% for error in form.captcha.errors %}
+      <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+    {% endfor %}
+  </div>
+
+  <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>
+</form>
+
+<p>Already have an account?
+  <a href="{% url 'account_login' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow">Log in</a>
+</p>

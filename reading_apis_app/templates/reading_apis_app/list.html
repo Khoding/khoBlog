@@ -2,24 +2,17 @@
 
 {% block content %}
   {% for thing in things %}
-    <div class="card mb-2">
-      <div class="card-body">
-        <div class="card-text">
-          {% for item in thing.items %}
-            <p class="mb-0">
-              {% for data in item %}
-                {% comment %} {% endcomment %}
-                {% if not forloop.counter|divisibleby:"2" %}
-                  {{ data }}:
-                {% endif %}
-                {% if forloop.counter|divisibleby:"2" %}
-                  {% firstof data "" %}
-                {% endif %}
-              {% endfor %}
-            </p>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
+    {% for item in thing.items %}
+      <p class="mb-0">
+        {% for data in item %}
+          {% if not forloop.counter|divisibleby:"2" %}
+            {{ data }}:
+          {% endif %}
+          {% if forloop.counter|divisibleby:"2" %}
+            {% firstof data "" %}
+          {% endif %}
+        {% endfor %}
+      </p>
+    {% endfor %}
   {% endfor %}
 {% endblock content %}

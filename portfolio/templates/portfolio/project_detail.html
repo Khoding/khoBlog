@@ -8,7 +8,7 @@
         <div>
           <span class="text-2xl font-bold text-jumbo-900 dark:text-jumbo-300">{{ project.title }}</span>
           <p class="mt-2 text-sm text-jumbo-500">
-            Project <span class="font-bold">#{{ project.pk }}</span>
+            {% if project.parent_project %}Sub {% endif %}Project <span class="font-bold">#{{ project.pk }}</span>
           </p>
         </div>
         {% if user.is_superuser %}
@@ -47,6 +47,16 @@
           {% if project.repository %}
             <p>Repository:
               <a target="_blank" class="no-underline hover:underline" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
+            </p>
+          {% endif %}
+        {% endif %}
+        {% if project.parent_project %}
+          <p>Parent Project
+            <a href="{{ project.parent_project.get_absolute_url }}">{{ project.parent_project }}</a>
+          </p>
+          {% if project.link_in_repo %}
+            <p>Folder in Repository:
+              <a target="_blank" href="{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}" rel="noopener noreferrer">{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}</a>
             </p>
           {% endif %}
         {% endif %}
