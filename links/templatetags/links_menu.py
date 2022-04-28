@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag("tailwind/links_list.html")
 def links_menu(urls, mobile=False):
-    if mobile == True:
+    if mobile is True:
         mobile = True
     urls = Links.objects.filter(shown=True).order_by("priority")
     return {"urls": urls, "mobile": mobile}
