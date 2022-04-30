@@ -8,6 +8,7 @@
 {% block additional_css %}
   {% compress css %}
   <link rel="stylesheet" href="{% static 'khoBlog/css/selectize.default.css' %}">
+  <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
   {% endcompress css %}
 {% endblock additional_css %}
 
@@ -245,6 +246,9 @@
 
     <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>
   </form>
-  {{ form.media }}
+
+  <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+    {{ form.media }}
+  </div>
 
 {% endblock content %}

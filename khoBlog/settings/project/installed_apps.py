@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "simple_history",
     "rules",
     "widget_tweaks",
-    "sitetree",
     "import_export",
     "compressor",
     "django_filters",

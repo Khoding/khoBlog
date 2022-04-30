@@ -42,7 +42,6 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     "pymdownx.highlight": {
         "guess_lang": True,
         "linenums": True,
-        "linenums_style": "table",
         "auto_title": True,
     },
     "pymdownx.snippets": {"base_path": BASE_DIR + "/_snippets/"},
