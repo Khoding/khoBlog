@@ -1,11 +1,11 @@
 from django import forms
 
-import django_filters
+from django_filters import FilterSet, CharFilter, ModelChoiceFilter, OrderingFilter
 
 from .models import Category, Post
 
 
-class PostFilter(django_filters.FilterSet):
+class PostFilter(FilterSet):
     """PostFilter
 
     A filter for Posts
@@ -17,11 +17,29 @@ class PostFilter(django_filters.FilterSet):
         [type]: [description]
     """
 
-    title = django_filters.CharFilter(lookup_expr="icontains")
-    description = django_filters.CharFilter(lookup_expr="icontains")
-    body = django_filters.CharFilter(lookup_expr="icontains", widget=forms.Textarea)
-    slug = django_filters.CharFilter(lookup_expr="icontains")
-    categories = django_filters.ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
+    title = CharFilter(lookup_expr="icontains")
+    description = CharFilter(lookup_expr="icontains")
+    body = CharFilter(lookup_expr="icontains", widget=forms.Textarea)
+    slug = CharFilter(lookup_expr="icontains")
+    categories = ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
+
+    ordering = OrderingFilter(
+        # tuple-mapping retains order
+        fields=(
+            ("pk", "pk"),
+            ("pub_date", "pub_date"),
+            ("mod_date", "mod_date"),
+            ("creation_date", "creation_date"),
+        ),
+        # labels do not need to retain order
+        field_labels={
+            "pk": "ID",
+            "pub_date": "Publication Date",
+            "-pub_date": "Publication Date (descending, default behaviour)",
+            "mod_date": "Modification Date",
+            "creation_date": "Creation Date",
+        },
+    )
 
     class Meta:
         """Meta class for Post Filters"""

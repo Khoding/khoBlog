@@ -57,6 +57,11 @@
           {{ filter_form.form.language|add_class:"form-control" }}
         </div>
 
+        <div class="h-fit">
+          {{ filter_form.form.ordering.label_tag }}
+          {{ filter_form.form.ordering|add_class:"form-control" }}
+        </div>
+
         <div class="row-start-4 md:col-start-1 md:col-span-2 xl:col-start-3 xl:row-span-full h-fit">
           {{ filter_form.form.body.label_tag }}
           {{ filter_form.form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
