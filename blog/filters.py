@@ -23,13 +23,13 @@ class PostFilter(FilterSet):
     slug = CharFilter(lookup_expr="icontains")
     categories = ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
 
-    ordering = OrderingFilter(
+    order_by = OrderingFilter(
         # tuple-mapping retains order
         fields=(
             ("pk", "pk"),
             ("pub_date", "pub_date"),
             ("mod_date", "mod_date"),
-            ("creation_date", "creation_date"),
+            ("created_date", "creation_date"),
         ),
         # labels do not need to retain order
         field_labels={
@@ -37,7 +37,7 @@ class PostFilter(FilterSet):
             "pub_date": "Publication Date",
             "-pub_date": "Publication Date (descending, default behaviour)",
             "mod_date": "Modification Date",
-            "creation_date": "Creation Date",
+            "created_date": "Creation Date",
         },
     )
 
