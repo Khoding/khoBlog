@@ -39,6 +39,7 @@ class PostFilter(FilterSet):
             "mod_date": "Modification Date",
             "created_date": "Created Date",
         },
+        label="Order by",
     )
 
     class Meta:
