@@ -1,3 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, UpdateView
+
 from allauth.account.views import (
     EmailView,
     PasswordChangeView,
@@ -9,9 +13,8 @@ from allauth.account.views import (
     SignupView,
 )
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic import DetailView, UpdateView
+
+from khoBlog.utils.superuser_required import superuser_required
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
@@ -152,4 +155,21 @@ class EmailEditView(LoginRequiredMixin, EmailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Email"
+        return context
+
+
+@superuser_required()
+class UserListView(ListView):
+    """UserListView Class"""
+
+    model = CustomUser
+    template_name = "account/user_list.html"
+    context_object_name = "users"
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "User list"
         return context

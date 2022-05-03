@@ -14,6 +14,7 @@ from .views import (
     ProfileView,
     SignUpView,
     UserEditView,
+    UserListView,
 )
 
 app_name = "accounts"
@@ -54,4 +55,5 @@ urlpatterns = [
     path("password/", include(password_extra_patterns)),
     path("connections/", ConnectionsEditView.as_view(), name="connections"),
     path("email/", EmailEditView.as_view(), name="email"),
+    path("users/", UserListView.as_view(), name="user_list"),
 ]
