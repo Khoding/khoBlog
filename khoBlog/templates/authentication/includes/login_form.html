@@ -8,7 +8,7 @@
     </h2>
     <p class="mt-2 text-center text-sm text-gray-600 dark:text-jumbo-200">
       Don't have an account?
-      <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">Sign up</a>
+      <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-cornflower-600 dark:text-jumbo-200 hover:underline">Sign up</a>
     </p>
   </div>
 
@@ -70,7 +70,7 @@
             Login
           </label>
           <div class="mt-1">
-            {{ form.login|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm" }}
+            {{ form.login|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none sm:text-sm" }}
           </div>
           {% for error in form.login.errors %}
             <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
@@ -82,16 +82,16 @@
             Password
           </label>
           <div class="mt-1">
-            {{ form.password|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm" }}
+            {{ form.password|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm" }}
           </div>
           {% for error in form.password.errors %}
             <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between mt-2">
           <div class="flex items-center">
-            {{ form.remember|add_class:"kho-button-text kho-button-bg kho-button-border h-4 w-4 border rounded" }}
+            {{ form.remember|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus h-4 w-4 border rounded" }}
             <label for="id_remember" class="ml-2 block text-sm text-gray-900 dark:text-jumbo-200">
               Remember me
             </label>
@@ -105,7 +105,7 @@
         </div>
 
         <div>
-          <button type="submit" class="kho-button-text kho-button-bg kho-button-bg-hover w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 mt-2">
+          <button type="submit" class="kho-button-forms kho-button-submit mt-2">
             Log in
           </button>
         </div>
