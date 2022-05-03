@@ -28,9 +28,9 @@
         {% endfor %}
 
         <div class="mt-2 buttonHolder">
-          <button class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500 secondaryAction" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
-          <button class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500 secondaryAction" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
-          <button class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500 primaryAction" type="submit" name="action_remove">{% trans 'Remove' %}</button>
+          <button class="kho-button-forms kho-button-submit secondaryAction" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
+          <button class="kho-button-forms kho-button-submit secondaryAction" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+          <button class="kho-button-forms kho-button-submit primaryAction" type="submit" name="action_remove">{% trans 'Remove' %}</button>
         </div>
 
       </fieldset>
@@ -50,7 +50,7 @@
       {% csrf_token %}
       {% form form %}
 
-      <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500">{% trans "Add E-mail" %}</button>
+      <button type="submit" class="kho-button-forms kho-button-submit">{% trans "Add E-mail" %}</button>
     </form>
   {% endif %}
 
