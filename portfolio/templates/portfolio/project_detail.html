@@ -26,7 +26,7 @@
         <h1>{{ project.title }}</h1>
         {% if project.learned %}
           <div>
-            <span class="text-white-50 d-block">Had to learn:</span>
+            <span class="d-block">Had to learn:</span>
             {{ project.learned|apply_markup:"markdown"|apply_markup:"widont" }}
           </div>
         {% endif %}

@@ -15,14 +15,14 @@
             </strong>
           {% endif %}
           {% if object.is_outdated %}
-            <span class="badge bg-warning d-flex float-end">Outdated</span>
+            <span class="d-flex float-end">Outdated</span>
           {% endif %}
-          <p class="mb-0 text-small text-white-50">
+          <p class="mb-0 text-sm">
             Post #{{ object.id }}
           </p>
         </section>
         <section class="col-auto mx-2">
-          <span class="badge bg-secondary d-flex justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ object.get_language_display }}">{{ object.language }}</span>
+          <span class="bg-secondary d-flex justify-content-center" title="{{ object.get_language_display }}">{{ object.language }}</span>
         </section>
         <section class="col"></section>
       </section>
@@ -39,7 +39,7 @@
     {% endif %}
 
     <section>
-      <p class="mb-auto text-small text-white-50">
+      <p class="mb-auto text-sm">
         {% if not object.pub_date %}
           Created
         {% else %}
@@ -59,7 +59,7 @@
         {% endif %}
       </p>
       {% if object.mod_date %}
-        <p class="mb-auto text-small text-white-50">
+        <p class="mb-auto text-sm">
           Last updated by
           <strong>{{ object.author }}</strong>
           on
@@ -71,7 +71,7 @@
     </section>
 
     <section>
-      <p class="mb-0 text-small text-white-50">
+      <p class="mb-0 text-sm">
         {% if object.body %}
           {{ object.body|readtime }}
         {% else %}

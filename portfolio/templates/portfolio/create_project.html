@@ -26,10 +26,10 @@
         {{ form.title|add_class:"form-control w-50"|attr:"placeholder:Project's title" }}
       </div>
       {% if form.title.help_text %}
-        <span class="text-small text-white-50">{{ form.title.help_text }}</span>
+        <span class="text-sm">{{ form.title.help_text }}</span>
       {% endif %}
       {% for error in form.title.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -39,10 +39,10 @@
         {{ form.snippet.label_tag }}
       </div>
       {% if form.snippet.help_text %}
-        <span class="text-small text-white-50">{{ form.snippet.help_text }}</span>
+        <span class="text-sm">{{ form.snippet.help_text }}</span>
       {% endif %}
       {% for error in form.snippet.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -52,10 +52,10 @@
         {{ form.description.label_tag }}
       </div>
       {% if form.description.help_text %}
-        <span class="text-small text-white-50">{{ form.description.help_text }}</span>
+        <span class="text-sm">{{ form.description.help_text }}</span>
       {% endif %}
       {% for error in form.description.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -65,10 +65,10 @@
         {{ form.learned.label_tag }}
       </div>
       {% if form.learned.help_text %}
-        <span class="text-small text-white-50">{{ form.learned.help_text }}</span>
+        <span class="text-sm">{{ form.learned.help_text }}</span>
       {% endif %}
       {% for error in form.learned.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -80,10 +80,10 @@
         </div>
       </div>
       {% if form.technology.help_text %}
-        <span class="text-small text-white-50">{{ form.technology.help_text }}</span>
+        <span class="text-sm">{{ form.technology.help_text }}</span>
       {% endif %}
       {% for error in form.technology.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -95,10 +95,10 @@
         </div>
       </div>
       {% if form.website.help_text %}
-        <span class="text-small text-white-50">{{ form.website.help_text }}</span>
+        <span class="text-sm">{{ form.website.help_text }}</span>
       {% endif %}
       {% for error in form.website.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -110,10 +110,10 @@
         </div>
       </div>
       {% if form.repository.help_text %}
-        <span class="text-small text-white-50">{{ form.repository.help_text }}</span>
+        <span class="text-sm">{{ form.repository.help_text }}</span>
       {% endif %}
       {% for error in form.repository.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -122,13 +122,13 @@
         {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
       </div>
       {% if form.slug.help_text %}
-        <span class="text-small text-white-50">{{ form.slug.help_text }}</span>
+        <span class="text-sm">{{ form.slug.help_text }}</span>
       {% endif %}
       {% for error in form.slug.errors %}
-        <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
-    <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>
+    <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500">{{ title }}</button>
   </form>
 {% endblock content %}

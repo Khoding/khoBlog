@@ -7,7 +7,7 @@
   {% for comment in comments %}
     <div class="row">
       <a class="col-auto" href="{{ comment.get_absolute_url }}" rel="noopener noreferrer">
-        <strong class="text-white-50">{{ comment.user }}
+        <strong>{{ comment.user }}
           | #{{ comment.pk }}</strong>
         -
         {{ comment }}</a>

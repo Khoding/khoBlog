@@ -12,7 +12,7 @@
       </div>
       {% theme_button "darkLightm" %}
       <div class="-mr-2 -my-2 md:hidden">
-        <button type="button" class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-flamingo-600/75" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
+        <button type="button" class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
           <span class="sr-only">Open menu</span>
           <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -39,14 +39,14 @@
             <a href="{% url 'account_login' %}" class="text-xs lg:text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
               Log in
             </a>
-            <a href="{% url 'accounts:signup' %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 lg:px-4 lg:py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            <a href="{% url 'accounts:signup' %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 lg:px-4 lg:py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
               Sign up
             </a>
           {% else %}
             <a href="{% url 'account_logout' %}" class="text-xs lg:text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
               Log out
             </a>
-            <a href="{% url 'accounts:profile' slug=user.slug %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            <a href="{% url 'accounts:profile' slug=user.slug %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-md shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
               Your profile
             </a>
           {% endif %}
@@ -63,7 +63,7 @@
             <img class="h-8 w-auto" width="2rem" height="2rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
           </div>
           <div class="-mr-2">
-            <button type="button" class="bg-white dark:bg-jumbo-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-flamingo-600/75" @click="toggle">
+            <button type="button" class="bg-white dark:bg-jumbo-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="toggle">
               <span class="sr-only">Close menu</span>
               <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -88,20 +88,20 @@
         </div>
         <div class="mt-6">
           {% if not user.is_authenticated %}
-            <a href="{% url 'accounts:signup' %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            <a href="{% url 'accounts:signup' %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
               Sign up
             </a>
             <p class="mt-6 text-center text-base font-medium text-gray-500">
-              <a href="{% url 'account_login' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
+              <a href="{% url 'account_login' %}" class="text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
                 Log in
               </a>
             </p>
           {% else %}
-            <a href="{% url 'accounts:profile' slug=user.slug %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            <a href="{% url 'accounts:profile' slug=user.slug %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
               Your profile
             </a>
             <p class="mt-6 text-center text-base font-medium text-gray-500">
-              <a href="{% url 'account_logout' %}" class="text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
+              <a href="{% url 'account_logout' %}" class="text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
                 Log out
               </a>
             </p>

@@ -24,9 +24,9 @@
 {% endif %}
 
 {% if field.help_text %}
-  <span class="text-small text-white-50">{{ field.help_text }}</span>
+  <span class="text-sm">{{ field.help_text }}</span>
 {% endif %}
 
 {% for error in field.errors %}
-  <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+  <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
 {% endfor %}

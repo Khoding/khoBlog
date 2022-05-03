@@ -23,7 +23,7 @@
 
       <div id="profile-fields">
         <h4 class="mb-0">Basic profile</h4>
-        <p class="text-small">Some basic profile data</p>
+        <p class="text-sm">Some basic profile data</p>
 
         <div id="visible-profile-fields">
           <h5>These fields are shown on your Profile page</h5>
@@ -34,10 +34,10 @@
               {{ form.username.label_tag }}
             </div>
             {% if form.username.help_text %}
-              <span class="text-small text-white-50">{{ form.username.help_text }}</span>
+              <span class="text-sm">{{ form.username.help_text }}</span>
             {% endif %}
             {% for error in form.username.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -45,10 +45,10 @@
             {{ form.profile_pic.label_tag }}
             {{ form.profile_pic|add_class:"form-control"|attr:"placeholder:Profile picture" }}
             {% if form.profile_pic.help_text %}
-              <span class="text-small text-white-50">{{ form.profile_pic.help_text }}</span>
+              <span class="text-sm">{{ form.profile_pic.help_text }}</span>
             {% endif %}
             {% for error in form.profile_pic.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -58,10 +58,10 @@
               {{ form.bio.label_tag }}
             </div>
             {% if form.bio.help_text %}
-              <span class="text-small text-white-50">{{ form.bio.help_text }}</span>
+              <span class="text-sm">{{ form.bio.help_text }}</span>
             {% endif %}
             {% for error in form.bio.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -78,16 +78,16 @@
               {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
             </div>
             {% if form.first_name.help_text %}
-              <span class="text-small text-white-50">{{ form.first_name.help_text }}</span>
+              <span class="text-sm">{{ form.first_name.help_text }}</span>
             {% endif %}
             {% if form.last_name.help_text %}
-              <span class="text-small text-white-50">{{ form.last_name.help_text }}</span>
+              <span class="text-sm">{{ form.last_name.help_text }}</span>
             {% endif %}
             {% for error in form.first_name.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
             {% for error in form.last_name.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -97,10 +97,10 @@
               {{ form.email.label_tag }}
             </div>
             {% if form.email.help_text %}
-              <span class="text-small text-white-50">{{ form.email.help_text }}</span>
+              <span class="text-sm">{{ form.email.help_text }}</span>
             {% endif %}
             {% for error in form.email.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -110,10 +110,10 @@
               {{ form.password.label_tag }}
             </div>
             {% if form.password.help_text %}
-              <span class="text-small text-white-50">{{ form.password.help_text|safe }}</span>
+              <span class="text-sm">{{ form.password.help_text|safe }}</span>
             {% endif %}
             {% for error in form.password.errors %}
-              <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -123,17 +123,17 @@
 
       <div id="advanced-fields">
         <h4 class="mb-0">More advanced Profile Fields</h4>
-        <p class="text-small">These fields aren't meant to be changed at first. You can change them here, and changing them won't break anything, but make sure to know what each field is before changing it</p>
+        <p class="text-sm">These fields aren't meant to be changed at first. You can change them here, and changing them won't break anything, but make sure to know what each field is before changing it</p>
         <div class="field row mb-2">
           <div class="input-group col-auto">
             <span class="input-group-text">https://{{ request.get_host }}/accounts/profile/</span>
             {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
           </div>
           {% if form.slug.help_text %}
-            <span class="text-small text-white-50">{{ form.slug.help_text }}</span>
+            <span class="text-sm">{{ form.slug.help_text }}</span>
           {% endif %}
           {% for error in form.slug.errors %}
-            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>
@@ -142,17 +142,17 @@
 
       <div id="customization-fields">
         <h4 class="mb-0">Customization</h4>
-        <p class="text-small">Some fields that change the design of the website, some of the texts on it, only affects you</p>
+        <p class="text-sm">Some fields that change the design of the website, some of the texts on it, only affects you</p>
         <div class="field mb-2">
           <div class="form-floating">
             {{ form.welcome_message|add_class:"form-control"|attr:"placeholder:Welcome message" }}
             {{ form.welcome_message.label_tag }}
           </div>
           {% if form.welcome_message.help_text %}
-            <span class="text-small text-white-50">{{ form.welcome_message.help_text }}</span>
+            <span class="text-sm">{{ form.welcome_message.help_text }}</span>
           {% endif %}
           {% for error in form.welcome_message.errors %}
-            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -162,15 +162,15 @@
             {{ form.show_github|add_class:"form-check-input" }}
           </div>
           {% if form.show_github.help_text %}
-            <span class="text-small text-white-50">{{ form.show_github.help_text }}</span>
+            <span class="text-sm">{{ form.show_github.help_text }}</span>
           {% endif %}
           {% for error in form.show_github.errors %}
-            <small class="form-text text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>
 
-      <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ title }}</button>
+      <button type="submit" class="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cornflower-500">{{ title }}</button>
     </form>
   {% else %}
     <p>This isn't your profile. <a href="{{ user.get_absolute_update_url }}">Edit your profile</a></p>

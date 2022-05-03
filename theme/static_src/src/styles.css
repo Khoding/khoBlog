@@ -14,7 +14,7 @@
     }
 
     .kho-button-border-focus {
-        @apply dark:focus:ring-flamingo-600/75 dark:focus:border-flamingo-600/75 focus:border-indigo-500 focus:ring-indigo-500;
+        @apply dark:focus:ring-cornflower-400 dark:focus:border-cornflower-400 focus:border-cornflower-400 focus:ring-cornflower-500;
     }
 
     .kho-button-bg {
@@ -34,11 +34,11 @@
     }
 
     .kho-button-active {
-        @apply dark:bg-jumbo-700 dark:border-flamingo-100/50 dark:text-jumbo-50 border-indigo-500 bg-indigo-50 text-indigo-600;
+        @apply dark:bg-jumbo-700 dark:border-cornflower-100/50 dark:text-jumbo-50 border-cornflower-400 bg-cornflower-50 text-cornflower-600;
     }
 
     .menu_mobile_buttons {
-        @apply mt-1 block rounded-md bg-indigo-800 px-3 py-2 text-base font-medium text-white first:mt-0;
+        @apply bg-cornflower-800 mt-1 block rounded-md px-3 py-2 text-base font-medium text-white first:mt-0;
     }
 
     .pagination_buttons {
@@ -54,7 +54,7 @@
     }
 
     .flyout_button {
-        @apply dark:hover:text-jumbo-50 dark:focus:ring-flamingo-600/75 inline-flex items-center rounded-md text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+        @apply dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-md text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
     .flyout_bottom_items {
@@ -70,7 +70,7 @@
     }
 
     .profile_tab.profile_active_tab {
-        @apply dark:border-flamingo-500 dark:text-jumbo-300 border-pink-500 text-gray-900;
+        @apply dark:border-cornflower-400 dark:text-jumbo-300 border-pink-500 text-gray-900;
     }
 
     .profile_tab:not(.profile_active_tab) {
@@ -126,7 +126,7 @@
     }
 
     .prose :is(.admonition, summary, details) {
-        @apply mb-2 p-4 dark:text-jumbo-700;
+        @apply dark:text-jumbo-700 mb-2 p-4;
     }
 
     .prose .icon {
@@ -211,11 +211,11 @@
     }
 
     .prose .highlighttable {
-        @apply block overflow-x-auto resize-x;
+        @apply block resize-x overflow-x-auto;
     }
 
     .prose .highlighttable * {
-        @apply p-0 rounded-none;
+        @apply rounded-none p-0;
     }
 
     .prose .highlighttable pre {
@@ -231,7 +231,7 @@
     }
 
     .dropdown_item {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700 disabled:dark:hover:text-jumbo-50;
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 disabled:dark:hover:text-jumbo-50 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
     }
 
     .dropdown_item_active {
@@ -255,7 +255,7 @@
     }
 
     .form-control {
-        @apply kho-button-text kho-button-bg kho-button-border flex-1 block w-full min-w-0 rounded-md sm:text-sm;
+        @apply kho-button-text kho-button-bg kho-button-border block w-full min-w-0 flex-1 rounded-md sm:text-sm;
     }
 
     #id_honeypot {

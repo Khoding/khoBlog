@@ -8,7 +8,7 @@
     </h2>
     <p class="mt-2 text-center text-sm text-gray-600 dark:text-jumbo-200">
       Don't have an account?
-      <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">Sign up</a>
+      <a href="{% url 'accounts:signup' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">Sign up</a>
     </p>
   </div>
 
@@ -61,7 +61,7 @@
       <form action="{{ form_action }}" method="post" novalidate="novalidate">
         {% csrf_token %}
 
-        <div class="text-red-700 dark:text-flamingo-400">
+        <div class="text-red-600 dark:text-flamingo-400">
           {{ form.non_field_errors }}
         </div>
 
@@ -70,10 +70,10 @@
             Login
           </label>
           <div class="mt-1">
-            {{ form.login|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" }}
+            {{ form.login|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm" }}
           </div>
           {% for error in form.login.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -85,7 +85,7 @@
             {{ form.password|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm" }}
           </div>
           {% for error in form.password.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -98,7 +98,7 @@
           </div>
 
           <div class="text-sm">
-            <a href="{% url 'accounts:reset_password' %}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-flamingo-300 dark:hover:text-flamingo-400">
+            <a href="{% url 'accounts:reset_password' %}" class="font-medium text-cornflower-600 hover:text-cornflower-500 dark:text-cornflower-300 dark:hover:text-cornflower-400">
               Forgot your password?
             </a>
           </div>

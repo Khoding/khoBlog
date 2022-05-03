@@ -8,7 +8,7 @@
     </h2>
     <p class="mt-2 text-center text-sm text-gray-600 dark:text-jumbo-200">
       Already have an account?
-      <a href="{% url 'account_login' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">Log in</a>
+      <a href="{% url 'account_login' %}{% if next %}?next={{ next }}{% endif %}" rel="nofollow" class="font-medium text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">Log in</a>
     </p>
   </div>
 
@@ -61,7 +61,7 @@
       <form action="{{ form_action }}" method="post" novalidate="novalidate">
         {% csrf_token %}
 
-        <div class="text-red-700 dark:text-flamingo-400">
+        <div class="text-red-700 dark:text-cornflower-400">
           {{ form.non_field_errors }}
         </div>
 
@@ -77,10 +77,10 @@
             Username
           </label>
           {% for error in form.username.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
-            {{ form.username|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"|attr:"placeholder:Username" }}
+            {{ form.username|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm"|attr:"placeholder:Username" }}
           </div>
           {% if form.username.help_text %}
             <span class="text-sm text-gray-700 dark:text-jumbo-200">{{ form.username.help_text }}</span>
@@ -92,10 +92,10 @@
             Email
           </label>
           {% for error in form.email.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
-            {{ form.email|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"|attr:"placeholder:Emain" }}
+            {{ form.email|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm"|attr:"placeholder:Emain" }}
           </div>
           {% if form.email.help_text %}
             <span class="text-sm text-gray-700 dark:text-jumbo-200">{{ form.email.help_text }}</span>
@@ -110,10 +110,10 @@
             Last name
           </label>
           <div class="mt-1">
-            {{ form.first_name|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"|attr:"placeholder:First name" }}
+            {{ form.first_name|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm"|attr:"placeholder:First name" }}
           </div>
           <div class="mt-1">
-            {{ form.last_name|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"|attr:"placeholder:Last name" }}
+            {{ form.last_name|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm"|attr:"placeholder:Last name" }}
           </div>
         </div>
 
@@ -122,7 +122,7 @@
             Password
           </label>
           {% for error in form.password1.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.password1|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Password" }}
@@ -137,7 +137,7 @@
             Confirm password
           </label>
           {% for error in form.password2.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.password2|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Confirm password" }}
@@ -152,7 +152,7 @@
             Captcha
           </label>
           {% for error in form.captcha.errors %}
-            <small class="text-red-600 dark:text-flamingo-400">{{ error }}</small>
+            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.captcha|add_class:"kho-button-text kho-button-bg kho-button-border appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Captcha" }}
