@@ -20,7 +20,7 @@
             {% if o_fact.link.permalink %}
               <a href="{{ o_fact.link.permalink }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
             {% else %}
-              <a href="{{ o_fact.link.content_object.get_absolute_url }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
+              <a href="{{ o_fact.link.content_object.get_absolute_url }}"{% if o_fact.link.content_type.model == 'url' %} target="_blank" rel="noopener noreferrer"{% endif %} class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
             {% endif %}
           {% endif %}
             <div class="flex md:h-full lg:flex-col">

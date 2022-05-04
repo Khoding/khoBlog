@@ -6,7 +6,7 @@
       {% if object.link.permalink %}
         <a href="{{ object.link.permalink }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
       {% else %}
-        <a href="{{ object.link.content_object.get_absolute_url }}" class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
+        <a href="{{ object.link.content_object.get_absolute_url }}"{% if object.link.content_type.model == 'url' %} target="_blank" rel="noopener noreferrer"{% endif %} class="-m-3 p-3 flex flex-col justify-between rounded-lg hover:bg-gray-50 dark:hover:bg-jumbo-700">
       {% endif %}
     {% endif %}
     <div class="flex md:h-full lg:flex-col">
@@ -23,7 +23,7 @@
               {% endif %}
             </span>
             <span class="text-gray-900 dark:text-jumbo-200">
-              {{ object }} - {{ timesince }} year{{ timesince|pluralize }} ago
+              {{ object }} - {{ timesince }} year{{ timesince|pluralize }}
             </span>
           </p>
           <div class="prose prose-gray dark:prose-jumbo dark:prose-invert">
