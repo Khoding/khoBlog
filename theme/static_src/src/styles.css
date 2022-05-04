@@ -223,7 +223,7 @@
     }
 
     .prose .highlighttable {
-        @apply block resize-x rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
+        @apply block resize-x max-w-full rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
     }
 
     .prose .highlighttable .filename {
