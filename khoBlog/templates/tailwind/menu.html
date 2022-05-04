@@ -1,6 +1,6 @@
 {% load static links_menu theme_buttons menu_footer_set %}
 
-<div class="relative" x-data="Components.popover({ open: false, focus: false })" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
+<div class="relative" x-data="{ open: false, focus: false }" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
   <div class="relative z-20">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 2xl:px-0 py-5 sm:py-4 md:justify-start md:space-x-10">
@@ -12,7 +12,7 @@
       </div>
       {% theme_button "darkLightm" %}
       <div class="-mr-2 -my-2 md:hidden">
-        <button type="button" class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
+        <button type="button" class="rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
           <span class="sr-only">Open menu</span>
           <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -20,7 +20,7 @@
         </button>
       </div>
       <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-        <nav class="flex space-x-10" x-data="Components.popoverGroup()" x-init="init()">
+        <nav class="flex space-x-10" x-data="menu" x-init="init()">
           {% include 'tailwind/menu_flyout.html' %}
           {% include 'tailwind/facts_flyout.html' %}
 
@@ -63,7 +63,7 @@
             <img class="h-8 w-auto" width="2rem" height="2rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
           </div>
           <div class="-mr-2">
-            <button type="button" class="bg-white dark:bg-jumbo-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="toggle">
+            <button type="button" class="bg-white dark:bg-jumbo-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=false">
               <span class="sr-only">Close menu</span>
               <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>

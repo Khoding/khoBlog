@@ -4,7 +4,7 @@
       <a href="{{ object.get_absolute_update_url }}" type="button" class="superbutton_main_action">
         Edit
       </a>
-      <span x-data="Components.menu({ open: false })" x-init="init()" @keydown.escape.stop="open = false; focusButton()" @click.away="onClickAway($event)" class="-ml-px relative block">
+      <span x-data="{ open: false }" x-init="init()" @click="open=!open" @keydown.escape.stop="open = false; focusButton()" @click.away="open=false" class="-ml-px relative block">
         <button type="button" class="superbutton_dropdown_button" id="option-menu-button" x-ref="button" @click="onButtonClick()" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="false" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
           <span class="sr-only">Open options</span>
           <svg class="h-5 w-5" x-description="Heroicon name: solid/chevron-down" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
