@@ -13,18 +13,14 @@
         </button>
 
         <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." x-bind:aria-activedescendant="activeDescendant" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false; focusButton()" @keyup.space.prevent="open = false; focusButton()">
-          <div class="py-1" role="none">
-            <a class="dropdown_item" href="{% url 'accounts:edit_password' %}">Modify Password</a>
-            <a class="dropdown_item" href="{% url 'accounts:connections' %}">Edit Connections</a>
-            <a class="dropdown_item" href="{% url 'accounts:email' %}">Edit Email</a>
-          </div>
+          <a class="dropdown_item" href="{% url 'accounts:edit_password' %}">Modify Password</a>
+          <a class="dropdown_item" href="{% url 'accounts:connections' %}">Edit Connections</a>
+          <a class="dropdown_item" href="{% url 'accounts:email' %}">Edit Email</a>
 
           {% if object.is_superuser %}
-            <div class="py-1" role="none">
-              <a class="dropdown_item" href="{{ object.get_absolute_admin_update_url }}">
-                Edit in Admin
-              </a>
-            </div>
+            <a class="dropdown_item" href="{{ object.get_absolute_admin_update_url }}">
+              Edit in Admin
+            </a>
           {% endif %}
         </div>
       </span>
