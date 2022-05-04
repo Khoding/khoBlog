@@ -148,7 +148,7 @@
     <section>
       <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Series</h2>
       <dl class="mt-5 grid grid-cols-1 gap-5">
-        <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
+        <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-2xl overflow-hidden sm:p-6">
           <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
             <a class="text-base" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series.title }}</a>
           </dt>
@@ -162,7 +162,7 @@
           </dd>
         </div>
         {% for e in series.all %}
-          <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
+          <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-2xl overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
               {% if not e.is_scheduled or user.is_superuser %}
                 <a href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
@@ -204,7 +204,7 @@
   <div>
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Stats</h2>
     <dl class="mt-5 grid grid-cols-1 gap-5">
-      <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
+      <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-2xl overflow-hidden sm:p-6">
         <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
           Seen
         </dt>
@@ -213,7 +213,7 @@
           time{{ object.clicks|pluralize:'s' }}
         </dd>
       </div>
-      <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-lg overflow-hidden sm:p-6">
+      <div class="px-4 py-5 bg-white dark:bg-jumbo-700 shadow rounded-2xl overflow-hidden sm:p-6">
         <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100 truncate">
           Randomly chosen
         </dt>

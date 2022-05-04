@@ -38,7 +38,7 @@
     }
 
     .kho-button-forms {
-        @apply flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
     .kho-button-submit {
@@ -50,7 +50,7 @@
     }
 
     .menu_mobile_buttons {
-        @apply bg-cornflower-800 mt-1 block rounded-md px-3 py-2 text-base font-medium text-white first:mt-0;
+        @apply bg-cornflower-800 mt-1 block rounded-xl px-3 py-2 text-base font-medium text-white first:mt-0;
     }
 
     .pagination_buttons {
@@ -58,23 +58,23 @@
     }
 
     .next_pagination_button {
-        @apply pagination_buttons rounded-r-md;
+        @apply pagination_buttons rounded-r-lg;
     }
 
     .previous_pagination_button {
-        @apply pagination_buttons rounded-l-md;
+        @apply pagination_buttons rounded-l-lg;
     }
 
     .flyout_button {
-        @apply dark:text-jumbo-100 dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-md text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply dark:text-jumbo-100 dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-xl text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
     }
 
     .flyout_bottom_items {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100;
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-xl p-3 text-base font-medium text-gray-900 hover:bg-gray-100;
     }
 
     .mobile_menu_grid_items {
-        @apply dark:text-jumbo-50 dark:hover:text-jumbo-100 rounded-md text-base font-medium text-gray-900 hover:text-gray-700;
+        @apply dark:text-jumbo-50 dark:hover:text-jumbo-100 rounded-xl text-base font-medium text-gray-900 hover:text-gray-700;
     }
 
     .profile_tab {
@@ -94,15 +94,15 @@
     }
 
     .superbutton_main_action {
-        @apply superbutton_base rounded-l-md px-4;
+        @apply superbutton_base rounded-l-lg px-4;
     }
 
     .superbutton_dropdown_button {
-        @apply superbutton_base rounded-r-md px-2;
+        @apply superbutton_base rounded-r-lg px-2;
     }
 
     .superbutton_dropdown_items {
-        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
     }
 
     .prose .tabbed-set {
@@ -227,7 +227,7 @@
     }
 
     .prose .highlighttable * {
-        @apply rounded-none p-0;
+        @apply rounded-xl p-0;
     }
 
     .prose .highlighttable pre {
@@ -251,11 +251,11 @@
     }
 
     .next_prev_buttons {
-        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus inline-flex items-center rounded-md border px-2.5 py-1.5 text-xs font-medium leading-4 disabled:cursor-not-allowed sm:px-3 sm:py-2 sm:text-sm;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus inline-flex items-center rounded-xl border px-2.5 py-1.5 text-xs font-medium leading-4 disabled:cursor-not-allowed sm:px-3 sm:py-2 sm:text-sm;
     }
 
     .pagination_next_prev_buttons {
-        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-md border bg-white px-4 py-2 text-sm font-medium;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border bg-white px-4 py-2 text-sm font-medium;
     }
 
     #darkLightm {
@@ -267,7 +267,7 @@
     }
 
     .form-control {
-        @apply kho-button-text kho-button-bg kho-button-border block w-full min-w-0 flex-1 rounded-md sm:text-sm;
+        @apply kho-button-text kho-button-bg kho-button-border block w-full min-w-0 flex-1 rounded-xl sm:text-sm;
     }
 
     #id_honeypot {

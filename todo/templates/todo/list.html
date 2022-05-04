@@ -9,14 +9,14 @@
       </div>
       {% if user.is_superuser %}
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <a href="{% url 'todo:create_task' %}" type="button" role="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-cornflower-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-cornflower-500 dark:focus:ring-cornflower-500 focus:ring-offset-2 sm:w-auto">Add new task</a>
+          <a href="{% url 'todo:create_task' %}" type="button" role="button" class="inline-flex items-center justify-center rounded-xl border border-transparent bg-cornflower-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-cornflower-500 dark:focus:ring-cornflower-500 focus:ring-offset-2 sm:w-auto">Add new task</a>
         </div>
       {% endif %}
     </div>
     <div class="mt-8 flex flex-col">
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-2xl">
             <table class="min-w-full divide-y divide-gray-300 dark:divide-jumbo-300">
               <thead class="bg-gray-50 dark:bg-jumbo-800">
                 <tr>
