@@ -5,7 +5,6 @@ from .django_debug_toolbar import *
 from .django_rest_framework import *
 from .editorjs import *
 from .google_analytics import *
-from .graphene_django import *
 from .markdownx import *
 from .taggit import *
 from .tailwindcss import *
