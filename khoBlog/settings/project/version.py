@@ -17,7 +17,7 @@ version = ver[3:8]
 
 ver_code = (
     f"{int(version[1]) * 10000 + int(version[2]) * 1000 + int(version[3]) * 100}"
-    + ("", f"-{version[4]}")[version[4] != None]
+    + ("", f"-{version[4]}")[version[4] is not None]
 )
 
 version_name = APP_VERSION_NUMBER
