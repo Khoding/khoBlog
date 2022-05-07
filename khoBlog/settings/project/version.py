@@ -1,16 +1,24 @@
+import re
+
 from ..django import BASE_DIR
 
 with open(BASE_DIR + "/version.txt") as v_file:
     APP_VERSION_NUMBER = v_file.read()
 
-major = APP_VERSION_NUMBER.split(".")[0]
-minor = APP_VERSION_NUMBER.split(".")[1]
-patch, build = APP_VERSION_NUMBER.split(".")[2].split("-")
 
-ver_code = f"{int(major) * 10000 + int(minor) * 1000 + int(patch) * 100}-{build}"
+ver = re.split(
+    r"^(((v)([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$",
+    APP_VERSION_NUMBER,
+)
 
+
+version = ver[3:8]
+
+
+ver_code = f"{int(version[1]) * 10000 + int(version[2]) * 1000 + int(version[3]) * 100}-{version[4]}"
+
+version_name = APP_VERSION_NUMBER
 version_code = ver_code
-version_name = f"v{major}.{minor}.{patch}-{build}"
 
 __version__ = version_name
 
