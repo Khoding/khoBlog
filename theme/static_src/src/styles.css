@@ -49,10 +49,6 @@
         @apply bg-flamingo-600 hover:bg-flamingo-700 focus:ring-flamingo-500;
     }
 
-    .menu_mobile_buttons {
-        @apply bg-cornflower-800 mt-1 block rounded-xl px-3 py-2 text-base font-medium text-white first:mt-0;
-    }
-
     .pagination_buttons {
         @apply kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border kho-button-border-focus relative inline-flex items-center border px-2 py-2 text-sm font-medium disabled:cursor-not-allowed;
     }
