@@ -33,20 +33,20 @@
         {% if project.website or project.technology %}
           {% if project.website %}
             <p>Website:
-              <a target="_blank" class="no-underline hover:underline" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a>
+              <a target="_blank" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a>
             </p>
           {% endif %}
           {% if project.technology %}
             <div>
               Made with:
-              <a target="_blank" class="no-underline hover:underline" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
+              <a target="_blank" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
               <br/>
               <span>{{ project.technology.description }}</span>
             </div>
           {% endif %}
           {% if project.repository %}
             <p>Repository:
-              <a target="_blank" class="no-underline hover:underline" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
+              <a target="_blank" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
             </p>
           {% endif %}
         {% endif %}
