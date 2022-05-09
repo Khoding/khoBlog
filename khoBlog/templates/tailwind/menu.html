@@ -1,6 +1,6 @@
 {% load static links_menu theme_buttons menu_footer_set %}
 
-<div class="relative" x-data="{ open: false, focus: false }" x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
+<div class="relative" x-data="{ open: false, focus: false }" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
   <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
   <div class="relative z-20">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-4 2xl:px-0 py-5 sm:py-4 md:justify-start md:space-x-10">
@@ -20,7 +20,7 @@
         </button>
       </div>
       <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-        <nav class="flex space-x-10" x-data="menu" x-init="init()">
+        <nav class="flex space-x-10">
           {% include 'tailwind/menu_flyout.html' %}
           {% include 'tailwind/facts_flyout.html' %}
 
