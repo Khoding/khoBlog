@@ -5,9 +5,7 @@
     {% for entry in entries %}
       <li>
         <div class="relative pb-4">
-          {% if not forloop.last %}
-            <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200 dark:bg-jumbo-700" aria-hidden="true"></span>
-          {% endif %}
+          <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200 dark:bg-jumbo-700" aria-hidden="true"></span>
           <div class="relative flex items-start space-x-3">
             <div>
               <div class="relative px-1">
@@ -22,11 +20,21 @@
               <div class="text-sm">
                 <div class="whitespace-nowrap">{{ entry.pub_date|naturaltime }}</div>
                 <div>
-                  <a href="#" class="font-medium hover:underline">{{ entry.title }}</a>
+                  <a href="{{ entry.get_absolute_url }}" class="font-medium hover:underline">{{ entry.title }}</a>
                 </div>
                 <div>
                   {{ entry.description }}
                 </div>
+                {% if forloop.last %}
+                  <div class="relative">
+                    <a class="absolute top-6 text-xs text-cornflower-300 hover:text-cornflower-200" href="{% url 'blog:post_category_list' slug='updates' %}">
+                      Read changelog
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>
