@@ -19,7 +19,7 @@
             <div class="min-w-0 flex-1 py-1.5">
               <div class="text-sm">
                 <div class="whitespace-nowrap">{{ entry.pub_date|naturaltime }}</div>
-                <div>
+                <div class="truncate">
                   <a href="{{ entry.get_absolute_url }}" class="font-medium hover:underline">{{ entry.title }}</a>
                 </div>
                 <div>
