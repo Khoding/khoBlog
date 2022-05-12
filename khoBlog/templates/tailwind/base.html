@@ -82,6 +82,9 @@
     {% block additional_css %}{% endblock additional_css %}
 
     <script defer src="{% static 'vendor/node_modules/alpinejs/dist/cdn.min.js' %}"></script>
+    <style>
+      [x-cloak] { display: none !important; }
+    </style>
 
     {% block rel %}
       <!-- base! favicon -->

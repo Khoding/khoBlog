@@ -23,6 +23,11 @@ def render_latest_blog_entries(num, summary_first=False, hide_readmore=False, hi
 @register.inclusion_tag("tailwind/menu_posts.html")
 def menu_posts(num):
     entries = Post.objects.get_base_common_queryset()[:num]
-    return {
-        "entries": entries,
-    }
+    return {"entries": entries}
+
+
+@register.inclusion_tag("tailwind/changelog.html")
+def changelog():
+    """A changelog of latest changes."""
+    entries = Post.objects.filter(postcatslink__category__slug="updates").get_base_common_queryset()[:7]
+    return {"entries": entries}

@@ -1,0 +1,37 @@
+{% load humanize %}
+
+<section class="flow-root mt-2">
+  <ul role="list">
+    {% for entry in entries %}
+      <li>
+        <div class="relative pb-4">
+          {% if not forloop.last %}
+            <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200 dark:bg-jumbo-700" aria-hidden="true"></span>
+          {% endif %}
+          <div class="relative flex items-start space-x-3">
+            <div>
+              <div class="relative px-1">
+                <div class="h-8 w-8 bg-gray-100 dark:bg-jumbo-700 rounded-full ring-8 ring-white dark:ring-jumbo-800 flex items-center justify-center">
+                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="min-w-0 flex-1 py-1.5">
+              <div class="text-sm">
+                <div class="whitespace-nowrap">{{ entry.pub_date|naturaltime }}</div>
+                <div>
+                  <a href="#" class="font-medium hover:underline">{{ entry.title }}</a>
+                </div>
+                <div>
+                  {{ entry.description }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
