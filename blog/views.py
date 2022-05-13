@@ -151,7 +151,7 @@ class PostInCategoryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cats"] = self.category
+        context["parent_object"] = self.category
         context["title"] = self.title
         context["description"] = self.description
         return context
@@ -193,7 +193,7 @@ class PostInSeriesListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["series"] = self.series
+        context["parent_object"] = self.series
         context["title"] = self.series.title
         context["description"] = self.description
         return context
@@ -505,7 +505,7 @@ class PostWithTagListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["tags"] = self.tags
+        context["parent_object"] = self.tags
         context["title"] = self.title
         context["description"] = self.description
         return context

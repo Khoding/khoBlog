@@ -24,6 +24,9 @@
       {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
         {% csb object_list.model %}
       {% endif %}
+      {% if user.is_superuser and parent_object %}
+        {% sb parent_object %}
+      {% endif %}
     </div>
   </section>
 
