@@ -23,6 +23,8 @@
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300 sm:pl-6">ID</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Title</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Description</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Status</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Completion date</th>
                   {% if user.is_superuser %}
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Withdrawn</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -37,6 +39,8 @@
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-jumbo-300 sm:pl-6">{{ task.pk }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.title }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.description }}</td>
+                    <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.complete|yesno:'Complete, Uncomplete' }}</td>
+                    <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.completed_date|default:'' }}</td>
                     {% if user.is_superuser %}
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.withdrawn }}</td>
                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
