@@ -1,20 +1,24 @@
-{% load static analytical google_analytics_gtag tailwind_tags theme_buttons %}
+{% load static analytical google_analytics_gtag tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <script>
-      const isDarkThemeSet = localStorage.theme === 'dark';
-      const isThemeStored = 'theme' in localStorage;
-      const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function colorScheme() {
+        const isDarkThemeSet = localStorage.theme === 'dark';
+        const isThemeStored = 'theme' in localStorage;
+        const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      try {
-        if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
-          document.documentElement.classList.add('dark')
-        } else {
-          document.documentElement.classList.remove('dark')
-        }
-      } catch (_) {}
+        try {
+          if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        } catch (_) {}
+      }
+
+      colorScheme()
     </script>
     <meta charset="UTF-8"/>
     {% if not debug_flag %}
@@ -114,7 +118,6 @@
     {% include 'tailwind/menu.html' %}
 
     <main class="pt-8 pb-12 lg:pt-16 lg:pb-20">
-      {% theme_button "darkLightd" %}
 
       <section class="px-4 sm:px-6 lg:px-8">
         <section class="max-w-2xl xl:max-w-7xl mx-auto">
@@ -156,19 +159,21 @@
     </footer>
 
     <script>
-      var themeSwitch = document.getElementsByClassName('switch')
+      function themeOption(e) {
+        let optionValue = e.target.id
+        let localStorageValue = localStorage.getItem('theme')
 
-      for(var i = 0; i < themeSwitch.length; i++) {
-          themeSwitch[i].addEventListener('click', () => {
-          document.documentElement.classList.toggle('dark')
-          localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
-        })
-      }
-
-      if (isDarkThemeSet || (!isThemeStored && isDarkPrefered)) {
-        for(var j = 0; j < themeSwitch.length; j++) {
-          themeSwitch[j].checked = true
+        if (optionValue === 'system') {
+          if (localStorageValue) {
+            localStorage.removeItem('theme')
+          }
+        } else if (optionValue === 'dark') {
+          localStorage.setItem('theme', 'dark')
+        } else if (optionValue === 'light') {
+          localStorage.setItem('theme', 'light')
         }
+
+        colorScheme()
       }
     </script>
 

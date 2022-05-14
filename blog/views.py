@@ -135,7 +135,7 @@ class PostInCategoryListView(ListView):
     """
 
     model = Post
-    template_name = "blog/lists/post_category_list.html"
+    template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
     paginate_by = 20
     paginate_orphans = 5
@@ -173,7 +173,7 @@ class PostInSeriesListView(ListView):
     """
 
     model = Post
-    template_name = "blog/lists/post_series_list.html"
+    template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
     paginate_by = 20
     paginate_orphans = 5
@@ -402,7 +402,7 @@ class PostDraftListView(ListView):
     """
 
     model = Post
-    template_name = "blog/lists/post_draft_list.html"
+    template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
     paginate_by = 20
     paginate_orphans = 5
@@ -431,7 +431,7 @@ class PostScheduledListView(ListView):
     """
 
     model = Post
-    template_name = "blog/lists/post_scheduled_list.html"
+    template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
     paginate_by = 20
     paginate_orphans = 5
@@ -464,7 +464,7 @@ class PostWithdrawnListView(ListView):
     """
 
     model = Post
-    template_name = "blog/lists/post_withdrawn_list.html"
+    template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
     paginate_by = 20
     paginate_orphans = 5

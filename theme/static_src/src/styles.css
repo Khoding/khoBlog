@@ -38,7 +38,7 @@
     }
 
     .kho-button-forms {
-        @apply flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900;
     }
 
     .kho-button-submit {
@@ -62,7 +62,7 @@
     }
 
     .flyout_button {
-        @apply dark:text-jumbo-100 dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-xl text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply dark:text-jumbo-100 dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-xl text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900;
     }
 
     .flyout_bottom_items {
@@ -272,14 +272,6 @@
 
     .pagination_next_prev_buttons {
         @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border bg-white px-4 py-2 text-sm font-medium;
-    }
-
-    #darkLightm {
-        @apply border-y-jumbo-900 ml-auto mr-2 flex h-9 w-9 rotate-12 cursor-pointer rounded-full border-2 border-transparent duration-150 ease-in-out hover:scale-125 hover:border-transparent dark:border-transparent dark:border-x-white dark:hover:border-transparent md:hidden;
-    }
-
-    #darkLightd {
-        @apply border-y-jumbo-900 -mt-6 hidden h-9 w-9 rotate-12 cursor-pointer rounded-full border-2 border-transparent duration-150 ease-in-out hover:scale-125 hover:border-transparent dark:border-transparent dark:border-x-white dark:hover:border-transparent md:flex lg:-mt-14;
     }
 
     .form-control {

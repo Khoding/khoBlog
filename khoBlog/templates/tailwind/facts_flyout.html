@@ -1,6 +1,6 @@
 {% load display markup_tags facts %}
 
-<div x-data="{ open: false, focus: false }" @keydown.escape.stop="open = false; focusButton()" @close-popover-group.window="onClosePopoverGroup">
+<div x-data="{ open: false, focus: false }" @keydown.escape.stop="open = false" @close-popover-group.window="onClosePopoverGroup">
   <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
     <span>Facts</span>
     <svg x-state:on="Item active" x-state:off="Item inactive" class="ml-2 h-5 w-5 group-hover:text-gray-500 dark:group-hover:text-jumbo-300" x-description="Heroicon name: solid/chevron-down" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
