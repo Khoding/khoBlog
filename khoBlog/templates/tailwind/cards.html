@@ -1,6 +1,28 @@
 {% load featured_post comments content_type %}
 
-<article>
+<article class="min-w-full px-8 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-jumbo-800" style="cursor: auto;">
+  <div class="flex items-center justify-between">
+    <span class="text-sm font-light text-gray-600 dark:text-jumbo-300">
+      <time datetime="{{ object.pub_date|date:"c" }}">
+        {{ object.pub_date|date:"Y\-m\-d" }}
+      </time>
+    </span>
+    {% if object.get_featured_cat %}
+      <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">{{ object.featured_cat_title }}</a>
+    {% else %}
+      <a href="{{ object.categories.first.get_absolute_url }}" class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">{{ object.categories.first }}</a>
+    {% endif %}
+  </div>
+  <div class="mt-2">
+    <a href="{{ object.get_absolute_url }}" class="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">{{ object }}</a>
+    <p class="mt-2 text-gray-600 dark:text-jumbo-200">{{ object.description }}</p>
+  </div>
+  <div class="flex items-center">
+    <a href="{{ object.get_absolute_url }}" class="text-cornflower-600 dark:text-cornflower-400 hover:underline">Read more ⟶</a>
+  </div>
+</article>
+
+{% comment %} <article>
   {% if object.categories %}
     <section>
       {% if object.get_featured_cat %}
@@ -73,4 +95,4 @@
       Read more about this {{ object|to_class_name }}
     </a>
   </section>
-</article>
+</article> {% endcomment %}
