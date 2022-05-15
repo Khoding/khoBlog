@@ -17,7 +17,7 @@
         {% endfor %}
       </div>
 
-      <div class="text-red-600 dark:text-flamingo-600">
+      <div class="text-flamingo-600">
         {{ form.non_field_errors }}
       </div>
 
@@ -37,7 +37,7 @@
               <span class="text-sm">{{ form.username.help_text }}</span>
             {% endif %}
             {% for error in form.username.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -48,7 +48,7 @@
               <span class="text-sm">{{ form.profile_pic.help_text }}</span>
             {% endif %}
             {% for error in form.profile_pic.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -61,7 +61,7 @@
               <span class="text-sm">{{ form.bio.help_text }}</span>
             {% endif %}
             {% for error in form.bio.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -84,10 +84,10 @@
               <span class="text-sm">{{ form.last_name.help_text }}</span>
             {% endif %}
             {% for error in form.first_name.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
             {% for error in form.last_name.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -100,7 +100,7 @@
               <span class="text-sm">{{ form.email.help_text }}</span>
             {% endif %}
             {% for error in form.email.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
 
@@ -113,7 +113,7 @@
               <span class="text-sm">{{ form.password.help_text|safe }}</span>
             {% endif %}
             {% for error in form.password.errors %}
-              <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+              <small class="text-flamingo-600">{{ error }}</small>
             {% endfor %}
           </div>
         </div>
@@ -133,7 +133,7 @@
             <span class="text-sm">{{ form.slug.help_text }}</span>
           {% endif %}
           {% for error in form.slug.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>
@@ -152,7 +152,7 @@
             <span class="text-sm">{{ form.welcome_message.help_text }}</span>
           {% endif %}
           {% for error in form.welcome_message.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -165,7 +165,7 @@
             <span class="text-sm">{{ form.show_github.help_text }}</span>
           {% endif %}
           {% for error in form.show_github.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
       </div>

@@ -18,7 +18,7 @@
     {% elif not object.pub_date %}
       <a class="text-slate-500 dark:text-slate-300 text-sm font-medium hover:underline" href="{% url 'blog:post_draft_list' %}">Draft</a>
     {% else %}
-      <a class="text-red-500 dark:text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+      <a class="text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
     {% endif %}
   </section>
   <section class="flex items-center space-x-2">

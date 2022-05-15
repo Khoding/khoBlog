@@ -25,9 +25,9 @@
         {% endif %}
 
         {% if item.comment.user and not item.comment.user.is_active %}
-          <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This user was banned.</span>
+          <span class="text-sm font-normal text-flamingo-600">This user was banned.</span>
         {% elif item.comment.is_removed %}
-          <span class="text-sm font-normal text-red-500 dark:text-flamingo-600">This comment has been removed.</span>
+          <span class="text-sm font-normal text-flamingo-600">This comment has been removed.</span>
         {% endif %}
 
         <span class="text-sm font-normal text-gray-900 dark:text-jumbo-50">{{ item.comment.submit_date|date:'l, d F Y' }}</span>

@@ -18,7 +18,7 @@
             {{ object }}
           </h1>
           {% if not object.is_active %}
-            <span class="text-red-500 dark:text-flamingo-600">(Banned)</span>
+            <span class="text-flamingo-600">(Banned)</span>
           {% endif %}
         </div>
         {% if object == user %}
@@ -39,7 +39,7 @@
         {{ object }}
       </h1>
       {% if not object.is_active %}
-        <span class="text-red-500 dark:text-flamingo-600">(Banned)</span>
+        <span class="text-flamingo-600">(Banned)</span>
       {% endif %}
     </div>
 

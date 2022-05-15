@@ -61,7 +61,7 @@
       <form action="{{ form_action }}" method="post" novalidate="novalidate">
         {% csrf_token %}
 
-        <div class="text-red-600 dark:text-flamingo-400">
+        <div class="text-flamingo-400">
           {{ form.non_field_errors }}
         </div>
 
@@ -73,7 +73,7 @@
             {{ form.login|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none sm:text-sm" }}
           </div>
           {% for error in form.login.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 
@@ -85,7 +85,7 @@
             {{ form.password|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm" }}
           </div>
           {% for error in form.password.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
         </div>
 

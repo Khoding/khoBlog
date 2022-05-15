@@ -26,7 +26,7 @@
       {% endfor %}
     </div>
 
-    <div class="text-red-600 dark:text-flamingo-600">
+    <div class="text-flamingo-600">
       {{ form.non_field_errors }}
     </div>
 
@@ -37,10 +37,10 @@
         {{ form.featured_title|add_class:"form-control col"|attr:"placeholder:Post featured title" }}
       </div>
       {% for error in form.title.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
       {% for error in form.featured_title.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -53,7 +53,7 @@
         <span class="text-sm">{{ form.categories.help_text }}</span>
       {% endif %}
       {% for error in form.categories.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -64,7 +64,7 @@
         <span class="text-sm">{{ form.tags.help_text }}</span>
       {% endif %}
       {% for error in form.tags.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -80,7 +80,7 @@
         <span class="text-sm">{{ form.series.help_text }}</span>
       {% endif %}
       {% for error in form.series.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -93,7 +93,7 @@
         <span class="text-sm">{{ form.description.help_text }}</span>
       {% endif %}
       {% for error in form.description.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -105,7 +105,7 @@
         <span class="text-sm">{{ form.body.help_text }}</span>
       {% endif %}
       {% for error in form.body.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -118,7 +118,7 @@
         <span class="text-sm">{{ form.image.help_text }}</span>
       {% endif %}
       {% for error in form.image.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -131,7 +131,7 @@
         <span class="text-sm">{{ form.slug.help_text }}</span>
       {% endif %}
       {% for error in form.slug.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -144,7 +144,7 @@
         <span class="text-sm">{{ form.withdrawn.help_text }}</span>
       {% endif %}
       {% for error in form.withdrawn.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -157,7 +157,7 @@
         <span class="text-sm">{{ form.is_outdated.help_text }}</span>
       {% endif %}
       {% for error in form.is_outdated.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -170,7 +170,7 @@
         <span class="text-sm">{{ form.needs_reviewing.help_text }}</span>
       {% endif %}
       {% for error in form.needs_reviewing.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -183,7 +183,7 @@
         <span class="text-sm">{{ form.featuring_state.help_text }}</span>
       {% endif %}
       {% for error in form.featuring_state.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -196,7 +196,7 @@
         <span class="text-sm">{{ form.publication_state.help_text }}</span>
       {% endif %}
       {% for error in form.publication_state.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -207,7 +207,7 @@
         <span class="text-sm">{{ form.pub_date.help_text }}</span>
       {% endif %}
       {% for error in form.pub_date.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -224,10 +224,10 @@
         <span class="text-sm">{{ form.url_to_article_title.help_text }}</span>
       {% endif %}
       {% for error in form.url_to_article.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
       {% for error in form.url_to_article_title.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 
@@ -240,7 +240,7 @@
         <span class="text-sm">{{ form.language.help_text }}</span>
       {% endif %}
       {% for error in form.language.errors %}
-        <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+        <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>
 

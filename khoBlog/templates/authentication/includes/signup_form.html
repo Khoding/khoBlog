@@ -61,7 +61,7 @@
       <form action="{{ form_action }}" method="post" novalidate="novalidate">
         {% csrf_token %}
 
-        <div class="text-red-700 dark:text-cornflower-400">
+        <div class="text-flamingo-600">
           {{ form.non_field_errors }}
         </div>
 
@@ -77,7 +77,7 @@
             Username
           </label>
           {% for error in form.username.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.username|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none sm:text-sm"|attr:"placeholder:Username" }}
@@ -92,7 +92,7 @@
             Email
           </label>
           {% for error in form.email.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.email|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 focus:outline-none sm:text-sm"|attr:"placeholder:Emain" }}
@@ -122,7 +122,7 @@
             Password
           </label>
           {% for error in form.password1.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.password1|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Password" }}
@@ -137,7 +137,7 @@
             Confirm password
           </label>
           {% for error in form.password2.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.password2|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Confirm password" }}
@@ -152,7 +152,7 @@
             Captcha
           </label>
           {% for error in form.captcha.errors %}
-            <small class="text-red-600 dark:text-flamingo-600">{{ error }}</small>
+            <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
           <div class="mt-1">
             {{ form.captcha|add_class:"kho-button-text kho-button-bg kho-button-border kho-button-border-focus appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-jumbo-700 rounded-xl shadow-sm placeholder-gray-400 dark:placeholder-jumbo-400 sm:text-sm"|attr:"placeholder:Captcha" }}
