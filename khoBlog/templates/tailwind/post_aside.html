@@ -25,24 +25,36 @@
     <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
     </svg>
-    <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">Created on
-      {{ object.created_date|date:'D, d M Y H:i' }}</a>
+    <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+      Created:
+      <time datetime="{{ object.created_date|date:"c" }}">
+        {{ object.created_date|date:"Y\-m\-d \a\t H:i:s" }}
+      </time>
+    </a>
   </section>
   {% if object.pub_date %}
     <section class="flex items-center space-x-2">
       <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
       </svg>
-      <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">Published on
-        {{ object.pub_date|date:'D, d M Y H:i' }}</a>
+      <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+        Published:
+        <time datetime="{{ object.pub_date|date:"c" }}">
+          {{ object.pub_date|date:"Y\-m\-d \a\t H:i:s" }}
+        </time>
+      </a>
     </section>
   {% endif %}
   <section class="flex items-center space-x-2">
     <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
     </svg>
-    <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">Updated on
-      {{ object.mod_date|date:'D, d M Y H:i' }}</a>
+    <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+      Updated:
+      <time datetime="{{ object.mod_date|date:"c" }}">
+        {{ object.mod_date|date:"Y\-m\-d \a\t H:i:s" }}
+      </time>
+    </a>
   </section>
   <section class="flex items-center space-x-2">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-jumbo-100" viewbox="0 0 20 20" fill="currentColor">
