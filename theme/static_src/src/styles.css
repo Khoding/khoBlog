@@ -78,7 +78,7 @@
     }
 
     .profile_tab.profile_active_tab {
-        @apply dark:border-cornflower-400 dark:text-jumbo-300 border-pink-500 text-gray-900;
+        @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
     }
 
     .profile_tab:not(.profile_active_tab) {
