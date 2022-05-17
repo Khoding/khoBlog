@@ -2,7 +2,6 @@ from django import forms
 from taggit_selectize.widgets import TagSelectize
 
 from .models import Category, Post, Series
-from django_editorjs_fields import EditorJsWidget
 
 
 class PostCreateForm(forms.ModelForm):
@@ -27,7 +26,6 @@ class PostCreateForm(forms.ModelForm):
             "order_in_series",
             "description",
             "body",
-            "body_custom",
             "image",
             "url_to_article",
             "url_to_article_title",
@@ -45,7 +43,6 @@ class PostCreateForm(forms.ModelForm):
             "url_to_article_title": forms.TextInput(),
             "series": forms.Select(),
             "language": forms.Select(),
-            "body_custom": EditorJsWidget(config={"minHeight": 100}),
         }
 
 
@@ -83,7 +80,6 @@ class PostEditForm(forms.ModelForm):
             "order_in_series",
             "description",
             "body",
-            "body_custom",
             "image",
             "slug",
             "withdrawn",
@@ -109,7 +105,6 @@ class PostEditForm(forms.ModelForm):
             "url_to_article_title": forms.TextInput(),
             "series": forms.Select(),
             "language": forms.Select(),
-            "body_custom": EditorJsWidget(config={"minHeight": 100}),
         }
 
 

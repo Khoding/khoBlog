@@ -11,7 +11,6 @@ from django.utils import timezone
 
 import auto_prefetch
 import rules
-from django_editorjs_fields import EditorJsJSONField
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from rules.contrib.models import RulesModelBase, RulesModelMixin
@@ -281,18 +280,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     title = models.CharField(max_length=200, help_text="Post title")
     featured_title = models.CharField(max_length=27, default="", blank=True, help_text="Featured post title")
     body = MarkdownxField(help_text="Post main content", blank=True)
-    body_default = models.TextField(default="")
-    body_custom = EditorJsJSONField(
-        tools={
-            "LinkTool": {
-                "class": "LinkTool",
-                "inlineToolbar": True,
-                "config": {"endpoint": "/editorjs/link_fetching/"},
-            },
-        },
-        null=True,
-        blank=True,
-    )
 
     image = models.ImageField(null=True, blank=True, upload_to="images/post/", help_text="Post image")
     description = models.TextField(help_text="Post description")

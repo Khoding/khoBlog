@@ -15,14 +15,12 @@ Including another URLconf
 """
 import debug_toolbar
 from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
-from blog.views import link_fetching
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import index, sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
-from django.views.decorators.csrf import csrf_exempt
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from pages.sitemap import PageSitemap
@@ -68,8 +66,6 @@ api_base_patterns = [
     path("token/", obtain_auth_token, name="obtain-token"),
 ]
 
-more_editorjs = [path("link_fetching/", csrf_exempt(link_fetching))]
-
 urlpatterns = (
     [
         # My Apps
@@ -92,11 +88,9 @@ urlpatterns = (
         path("captcha/", include("captcha.urls")),
         # Dev Urls
         path("dev/", include(dev_urls, namespace="dev")),
-        # Markdownx, taggit and editorjs
+        # Markdownx, taggit
         path("markdownx/", include("markdownx.urls")),
         re_path(r"^taggit/", include("taggit_selectize.urls")),
-        path("editorjs/", include("django_editorjs_fields.urls")),
-        path("editorjs/", include(more_editorjs)),
         # Comments
         re_path(r"^comments/", include("comments.urls")),
         re_path(r"^comments/", include("django_comments.urls")),

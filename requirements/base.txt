@@ -31,7 +31,6 @@ django-colorfield==0.7.0
 django-comments-xtd==2.9.6
 django-compressor==4.0
 django-contrib-comments==2.2.0
-django-editorjs-fields==0.2.6
 django-environ==0.8.1
 django-filter==21.1
 django-flat-responsive==2.0

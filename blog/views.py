@@ -864,37 +864,3 @@ class PostDayArchiveView(DayArchiveView):
         context["g_month"] = f"{self.get_month()}"
         context["g_year"] = f"{self.get_year()}"
         return context
-
-
-def link_fetching(request):
-    """Link Fetching for EditorJS"""
-    import requests
-    from bs4 import BeautifulSoup
-
-    url = request.GET["url"]
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, features="html.parser")
-    metas = soup.find_all("meta")
-    title = ""
-    description = ""
-    image = ""
-    for meta in metas:
-        if "property" in meta.attrs:
-            if meta.attrs["property"] == "og:image":
-                image = meta.attrs["content"]
-        elif "name" in meta.attrs:
-            if meta.attrs["name"] == "description":
-                description = meta.attrs["content"]
-            if meta.attrs["name"] == "title":
-                title = meta.attrs["content"]
-
-    return JsonResponse(
-        {
-            "success": 1,
-            "meta": {
-                "description": description,
-                "title": title,
-                "image": {"url": image},
-            },
-        }
-    )
