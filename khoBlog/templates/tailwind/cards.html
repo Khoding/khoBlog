@@ -70,7 +70,7 @@
   </section>
   <section class="mt-3">
     <a href="{{ object.get_absolute_url }}" class="text-base font-semibold text-cornflower-600 hover:text-cornflower-400 dark:text-cornflower-200 dark:hover:text-cornflower-400">
-      Read more about this {{ object|to_class_name }}
+      Read more about this {% if object|to_class_name != "customtag" %}{{ object|to_class_name }}{% else %}tag{% endif %}
     </a>
   </section>
 </article>
