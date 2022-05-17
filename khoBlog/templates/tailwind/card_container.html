@@ -2,11 +2,16 @@
 
 <section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>
-    <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
-      {{ title }}
-    </h2>
+    <div class="flex justify-between">
+      <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
+        {{ title }}
+      </h2>
+      {% if user.is_superuser and parent_object %}
+        {% sb parent_object %}
+      {% endif %}
+    </div>
     <div class="block sm:flex gap-2 mt-3 sm:mt-4">
-      <p class="text-lg font-bold sm:flex-grow dark:text-jumbo-50">
+      <p class="text-lg font-bold sm:grow dark:text-jumbo-50">
         {{ description }}
       </p>
       {% if filter_form %}
@@ -23,9 +28,6 @@
       {% endif %}
       {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
         {% csb object_list.model %}
-      {% endif %}
-      {% if user.is_superuser and parent_object %}
-        {% sb parent_object %}
       {% endif %}
     </div>
   </section>
