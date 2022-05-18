@@ -4,7 +4,7 @@
   <div class="mx-auto w-full text-right">
     <span class="relative z-0 inline-flex shadow-sm rounded-xl text-left">
       <a href="{{ object.get_absolute_update_url }}" type="button" class="superbutton_main_action">
-        Edit {{ object|to_class_name }}
+        Edit {% if object|to_class_name != "customtag" %}{{ object|to_class_name }}{% else %}tag{% endif %}
       </a>
       <span x-data="{ open: false }" @click="open=!open" @keydown.escape.stop="open = false" @click.away="open=false" class="-ml-px relative block">
         <button type="button" class="superbutton_dropdown_button" id="option-menu-button" x-ref="button" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="false" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
