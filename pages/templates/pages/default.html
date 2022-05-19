@@ -1,5 +1,5 @@
 {% extends 'tailwind/base.html' %}
-{% load comments comments_xtd super_buttons %}
+{% load comments comments_xtd super_buttons evaluate %}
 
 {% block page_head %}
   {% if page.page_head %}
@@ -29,7 +29,7 @@
         <div class="py-3 xl:pt-6 xl:pb-0">
           <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
             {% autoescape off %}
-              {{ page.content }}
+              {% evaluate page.content %}
             {% endautoescape %}
           </div>
         </div>
