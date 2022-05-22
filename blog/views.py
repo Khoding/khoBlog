@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
@@ -810,8 +811,6 @@ def post_next(request, slug):
                 .exclude(pk=post.pk)
                 .order_by("created_date")
             )
-        if next_post == post:
-            next_post = ""
     else:
         next_post = (
             Post.objects.filter(
@@ -824,7 +823,11 @@ def post_next(request, slug):
             .order_by("pub_date")
             .first()
         )
-    return redirect("blog:post_detail", slug=next_post.slug)
+    if next_post != None:
+        next_post = next_post.get_absolute_url()
+    else:
+        next_post = post.get_absolute_url()
+    return HttpResponseRedirect(next_post)
 
 
 def post_previous(request, slug):
@@ -844,8 +847,6 @@ def post_previous(request, slug):
                 .order_by("-created_date")
                 .first()
             )
-        if prev_post == post:
-            prev_post = ""
     else:
         prev_post = (
             Post.objects.filter(
@@ -858,7 +859,11 @@ def post_previous(request, slug):
             .order_by("-pub_date")
             .first()
         )
-    return redirect("blog:post_detail", slug=prev_post.slug)
+    if prev_post != None:
+        prev_post = prev_post.get_absolute_url()
+    else:
+        prev_post = post.get_absolute_url()
+    return HttpResponseRedirect(prev_post)
 
 
 @user_passes_test(lambda u: u.is_superuser)
