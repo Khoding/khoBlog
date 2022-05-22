@@ -37,9 +37,7 @@ def page(request, slug):
 
 @csrf_protect
 def render_page(request, f):
-    """
-    Internal interface to the flat page view.
-    """
+    """Internal interface to the flat page view."""
     # If registration is required for accessing this page, and the user isn't
     # logged in, redirect to the login page.
     if f.registration_required and not request.user.is_authenticated:

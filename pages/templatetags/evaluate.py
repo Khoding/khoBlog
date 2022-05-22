@@ -5,9 +5,7 @@ register = template.Library()
 
 @register.tag(name="evaluate")
 def do_evaluate(parser, token):
-    """
-    tag usage {% evaluate object.textfield %}
-    """
+    """tag usage {% evaluate object.textfield %}"""
     try:
         tag_name, variable = token.split_contents()
     except ValueError:
