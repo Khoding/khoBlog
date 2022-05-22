@@ -20,8 +20,8 @@ class PostFilter(FilterSet):
     title = CharFilter(lookup_expr="icontains")
     description = CharFilter(lookup_expr="icontains")
     body = CharFilter(lookup_expr="icontains", widget=forms.Textarea)
-    slug = CharFilter(lookup_expr="icontains")
     categories = ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
+    featuring_state = forms.ChoiceField()
 
     order_by = OrderingFilter(
         # tuple-mapping retains order
@@ -50,9 +50,9 @@ class PostFilter(FilterSet):
             "title",
             "description",
             "body",
-            "slug",
             "language",
             "categories",
+            "featuring_state",
         ]
 
     @property

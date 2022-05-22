@@ -43,18 +43,18 @@
         </div>
 
         <div class="h-fit">
-          {{ filter_form.form.slug.label_tag }}
-          {{ filter_form.form.slug|add_class:"form-control"|attr:"placeholder:Post slug" }}
-        </div>
-
-        <div class="h-fit">
           {{ filter_form.form.description.label_tag }}
           {{ filter_form.form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
         </div>
 
-        <div class="h-fit md:row-start-1">
+        <div class="h-fit">
           {{ filter_form.form.categories.label_tag }}
           {{ filter_form.form.categories|add_class:"form-control" }}
+        </div>
+
+        <div class="h-fit md:row-start-1">
+          {{ filter_form.form.featuring_state.label_tag }}
+          {{ filter_form.form.featuring_state|add_class:"form-control" }}
         </div>
 
         <div class="h-fit">
@@ -67,7 +67,7 @@
           {{ filter_form.form.order_by|add_class:"form-control" }}
         </div>
 
-        <div class="row-start-4 md:col-start-1 md:col-span-2 xl:col-start-3 xl:row-span-full h-fit">
+        <div class="row-start-3 md:row-start-4 md:col-start-1 md:col-span-2 xl:col-start-3 xl:row-span-full h-fit">
           {{ filter_form.form.body.label_tag }}
           {{ filter_form.form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
         </div>
