@@ -9,7 +9,6 @@ COMMENTS_XTD_MODEL = "comments.models.CustomCommentXTD"
 COMMENTS_XTD_FORM_CLASS = "comments.forms.CustomCommentXTDForm"
 COMMENTS_XTD_MAX_THREAD_LEVEL = 6
 
-
 COMMENTS_XTD_APP_MODEL_OPTIONS = {
     "default": {
         "allow_flagging": True,

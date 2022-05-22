@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "drf_yasg",
-    "khoBlogAPI",
     "learning_resources",
     # Website Settings App
     "settings_app",

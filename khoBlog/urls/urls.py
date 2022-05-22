@@ -49,20 +49,14 @@ sitemaps = {
 }
 
 api_patterns = [
-    path("", include("khoBlogAPI.urls")),
-    path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-]
-
-api_patterns_v2 = [
     path("", include("blog.blogAPIurls")),
     path("docs/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
 
 api_base_patterns = [
     path("read/", include("reading_apis_app.urls")),
-    path("old/", include(api_patterns)),
-    re_path(r"(?P<version>v[2|3]{1})/", include(api_patterns_v2)),
-    path("api-auth/", include("rest_framework.urls")),
+    re_path(r"(?P<version>v[3]{1})/", include(api_patterns)),
+    re_path(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("token/", obtain_auth_token, name="obtain-token"),
 ]
 
