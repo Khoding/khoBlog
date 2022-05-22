@@ -32,6 +32,8 @@ post_action_extra_patterns = [
     path("", PostDetailView.as_view(), name="post_detail"),
     path("edit/", PostUpdateView.as_view(), name="post_edit"),
     path("clone/", PostCloneView.as_view(), name="clone_post"),
+    path("next/", views.post_next, name="post_next"),
+    path("previous/", views.post_previous, name="post_previous"),
     path("publish/", views.post_publish, name="post_publish"),
     path(
         "publish_withdrawn/",

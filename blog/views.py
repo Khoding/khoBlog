@@ -794,6 +794,73 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
         return context
 
 
+def post_next(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.user.is_superuser:
+        if post.pub_date:
+            next_post = (
+                Post.objects.filter(pub_date__gt=post.pub_date, is_removed=False)
+                .exclude(pk=post.pk)
+                .order_by("pub_date")
+                .first()
+            )
+        else:
+            next_post = (
+                Post.objects.filter(created_date__gt=post.created_date, is_removed=False)
+                .exclude(pk=post.pk)
+                .order_by("created_date")
+            )
+        if next_post == post:
+            next_post = ""
+    else:
+        next_post = (
+            Post.objects.filter(
+                pub_date__gt=post.pub_date,
+                pub_date__lte=timezone.now(),
+                withdrawn=False,
+                is_removed=False,
+            )
+            .exclude(pk=post.pk)
+            .order_by("pub_date")
+            .first()
+        )
+    return redirect("blog:post_detail", slug=next_post.slug)
+
+
+def post_previous(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.user.is_superuser:
+        if post.pub_date:
+            prev_post = (
+                Post.objects.filter(pub_date__lt=post.pub_date, is_removed=False)
+                .exclude(pk=post.pk)
+                .order_by("-pub_date")
+                .first()
+            )
+        else:
+            prev_post = (
+                Post.objects.filter(created_date__lt=post.created_date, is_removed=False)
+                .exclude(pk=post.pk)
+                .order_by("-created_date")
+                .first()
+            )
+        if prev_post == post:
+            prev_post = ""
+    else:
+        prev_post = (
+            Post.objects.filter(
+                pub_date__lt=post.pub_date,
+                pub_date__lte=timezone.now(),
+                withdrawn=False,
+                is_removed=False,
+            )
+            .exclude(pk=post.pk)
+            .order_by("-pub_date")
+            .first()
+        )
+    return redirect("blog:post_detail", slug=prev_post.slug)
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def post_publish(request, slug):
     post = get_object_or_404(Post, slug=slug)
