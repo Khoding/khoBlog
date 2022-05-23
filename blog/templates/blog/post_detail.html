@@ -87,20 +87,21 @@
       {% include 'tailwind/post_aside.html' %}
     </aside>
   </div>
+  {% if not comments_disabled_globally_flag and post.enable_comments %}
+    <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-100 dark:border-jumbo-200">Comments</div>
 
-  <h3 id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-100 dark:border-jumbo-200">Comments</h3>
+    {% render_comment_form for post %}
 
-  {% render_comment_form for post %}
-
-  <div class="relative">
-    <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-gray-200 dark:border-jumbo-200"></div>
+    <div class="relative">
+      <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
+        <div class="w-full border-t border-gray-200 dark:border-jumbo-200"></div>
+      </div>
     </div>
-  </div>
 
-  <section class="mt-4 space-y-4">
-    {% render_xtdcomment_tree for post allow_thread %}
-  </section>
+    <section class="mt-4 space-y-4">
+      {% render_xtdcomment_tree for post allow_thread allow_flagging allow_feedback show_feedback %}
+    </section>
+  {% endif %}
 {% endblock content_main %}
 
 {% block pagination %}{% endblock pagination %}

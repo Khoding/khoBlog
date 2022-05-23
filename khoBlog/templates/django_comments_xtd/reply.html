@@ -6,10 +6,6 @@
 {% block comments_main %}
   {% include 'django_comments_xtd/comment.html' %}
 
-  <div class="card mt-2">
-    <div class="card-body">
-      <h4 class="card-title">Post your reply</h4>
-      {% include "comments/form.html" %}
-    </div>
-  </div>
+  <div class="text-lg">Post your reply</div>
+  {% include "comments/form.html" %}
 {% endblock comments_main %}

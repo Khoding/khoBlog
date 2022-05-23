@@ -26,7 +26,7 @@
       {{ form.title|add_class:"form-control" }}
     </div>
     {% for error in form.title.errors %}
-      <small class="text-flamingo-600">{{ error }}</small>
+      <span class="text-sm text-flamingo-600">{{ error }}</span>
     {% endfor %}
 
     <div class="field mb-2">
@@ -34,14 +34,12 @@
       {{ form.comment|add_class:"form-control" }}
     </div>
     {% for error in form.comment.errors %}
-      <small class="text-flamingo-600">{{ error }}</small>
+      <span class="text-sm text-flamingo-600">{{ error }}</span>
     {% endfor %}
 
-    <input type="hidden" name="next" value="{% url 'comments-xtd-sent' %}"/>
-    <input class="inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-xl shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 cursor-pointer" type="submit" value="Add comment" id="id_submit"/>
+    <input type="hidden" name="next" value="{% url 'comments-xtd-sent' %}" />
+    <input class="inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-xl shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700 cursor-pointer" type="submit" value="Add comment" id="id_submit" />
   </form>
 {% else %}
-  <p>Please
-    <a href="{% url 'account_login' %}">Log in</a>
-    to leave a comment.</p>
+  <p>Please <a href="{% url 'account_login' %}">Log in</a> to leave a comment.</p>
 {% endif %}

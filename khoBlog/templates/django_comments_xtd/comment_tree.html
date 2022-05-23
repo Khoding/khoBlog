@@ -9,9 +9,9 @@
         {% if item.comment.user %}
           {% if user.is_authenticated %}
             {% if user == item.comment.user or user.is_superuser %}
-              <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+              <a class="dark:text-jumbo-100 hover:underline" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
             {% elif item.comment.user.owner %}
-              <a class="dark:text-jumbo-100" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
+              <a class="dark:text-jumbo-100 hover:underline" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
             {% elif not item.comment.is_removed %}
               <span class="dark:text-jumbo-100">{{ item.comment.user }}</span>
             {% endif %}
@@ -58,8 +58,31 @@
             {% include "includes/django_comments_xtd/user_feedback.html" %}
           {% endif %}
           {% if item.comment.allow_thread and not item.comment.is_removed %}
+            {% if allow_feedback %}|{% endif %}
+
             <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
           {% endif %}
+          <span>
+            {% if perms.comments.can_moderate %}
+              |
+              {% if item.flagged_count %}
+                <span class="bg-flamingo-600" title="{% blocktrans count counter=item.flagged_count %}A user has flagged this comment as inappropriate.{% plural %}{{ counter }} users have flagged this comment as inappropriate.{% endblocktrans %}">{{ item.flagged_count }}</span>
+              {% endif %}
+            {% endif %}
+            {% if allow_flagging and item.flagged %}
+              <span class="text-flamingo-600" title="{% trans 'comment flagged' %}"></span>
+            {% elif allow_flagging %}
+              <a class="text-sm underline hover:no-underline" href="{% url 'comments-flag' item.comment.pk %}">
+                Flag
+              </a>
+            {% endif %}
+            {% if perms.comments.can_moderate %}
+              |
+              <a class="text-sm underline hover:no-underline" href="{% url 'comments-delete' item.comment.pk %}">
+                Delete
+              </a>
+            {% endif %}
+          </span>
         {% endif %}
 
       {% if not item.comment.is_removed and item.children %}

@@ -45,7 +45,7 @@
         @apply bg-cornflower-600 hover:bg-cornflower-700 focus:ring-cornflower-500;
     }
 
-    .kho-button-submit-delete{
+    .kho-button-submit-delete {
         @apply bg-flamingo-600 hover:bg-flamingo-700 focus:ring-flamingo-500;
     }
 

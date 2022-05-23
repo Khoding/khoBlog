@@ -1,12 +1,12 @@
 {% extends 'blog/comments/base_comments.html' %}
 {% load comments comments_xtd %}
 
-{% block title %}Flag Comment{% endblock title %}
+{% block title %}Delete Comment{% endblock title %}
 
 {% block comments_main %}
   <section>
     <div class="text-lg">
-        Flag this comment?
+        Delete this comment?
     </div>
     {% include 'django_comments_xtd/comment.html' %}
 
@@ -20,7 +20,7 @@
   </section>
 
   <span>
-    Click on the "Flag" button to mark the following comment as inappropriate.
+    Click on the "Delete" button to mark the following comment as inappropriate.
   </span>
 
   <form method="POST" action="." class="flex">
@@ -28,7 +28,7 @@
 
     <input type="hidden" name="next" value="{{ comment.get_absolute_url }}" />
     <div class="flex mt-2 gap-2">
-      <button type="submit" class="kho-button-forms kho-button-submit-delete">Flag</button>
+      <button type="submit" class="kho-button-forms kho-button-submit-delete">Delete</button>
 
       <a role="button" class="flex-0 kho-button-forms kho-button-submit" href="{{ comment.get_absolute_url }}">Cancel</a>
     </div>

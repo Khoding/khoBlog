@@ -1,22 +1,18 @@
 {% if allow_feedback %}
-  <span class="small">
+  <span class="text-sm">
     {% if show_feedback and item.likedit_users %}
       <a data-toggle="tooltip" title="{{ item.likedit_users|join:'<br/>' }}">
         {{ item.likedit_users|length }}</a>
     {% endif %}
 
-    <a href="{% url 'comments-xtd-like' item.comment.pk %}" class="{% if not item.likedit %}mutedlink{% endif %}">
-      <i class="bi bi-hand-thumbs-up"></i>
-    </a>
-    <span>|</span>
+    <a href="{% url 'comments-xtd-like' item.comment.pk %}" class="underline hover:no-underline">Like</a>
+    |
 
     {% if show_feedback and item.dislikedit_users %}
       <a data-toggle="tooltip" title="{{ item.dislikedit_users|join:'<br/>' }}">
         {{ item.dislikedit_users|length }}</a>
     {% endif %}
 
-    <a href="{% url 'comments-xtd-dislike' item.comment.pk %}" class="{% if not item.dislikedit %}mutedlink{% endif %}">
-      <i class="bi bi-hand-thumbs-down"></i>
-    </a>
+    <a href="{% url 'comments-xtd-dislike' item.comment.pk %}" class="underline hover:no-underline">Dislike</a>
   </span>
 {% endif %}
