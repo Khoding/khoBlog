@@ -1,5 +1,5 @@
 from django import template
-from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from markdownx.utils import markdownify
 
 register = template.Library()
@@ -7,4 +7,4 @@ register = template.Library()
 
 @register.filter
 def formatted_markdown(text):
-    return format_html(markdownify(text))
+    return mark_safe(markdownify(text))
