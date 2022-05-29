@@ -47,8 +47,9 @@ def display_quotes(category_slug, show_category_title=False):
                     content.append(" and in ")
                 else:
                     content.append(" in ")
+
                 if source.url:
-                    content.append(f"<a href='{source.url}'>")
+                    content.append(f'<a href="{source.url}" target="_blank" rel="noopener noreferrer">')
                 content.append(f"{escape(source.title)}")
                 if source.url:
                     content.append("</a>")
@@ -57,6 +58,7 @@ def display_quotes(category_slug, show_category_title=False):
                     content.append(f" ({escape(format(source.date, source.date_type))}")
                     if not source.media:
                         content.append(")")
+
                 if source.media:
                     if source.date:
                         content.append(", ")
