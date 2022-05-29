@@ -1,12 +1,14 @@
 from django.contrib import admin
 
+from simple_history.admin import SimpleHistoryAdmin
+
 # register quotes models
 from quotes.models import Category, MediaType, Person, Quote, Source
 
 
 # quote admin
 @admin.register(Quote)
-class QuoteAdmin(admin.ModelAdmin):
+class QuoteAdmin(SimpleHistoryAdmin):
     """Quote Admin Class"""
 
     list_display = (
