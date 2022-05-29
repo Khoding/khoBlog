@@ -43,9 +43,9 @@ def display_quotes(category_slug, show_category_title=False):
         if quote.source:
             for i, source in enumerate(quote.source.all()):
                 if i > 0:
-                    content.append(f" and {escape(quote.source.linking_text)} ")
+                    content.append(f" and {escape(source.linking_text)} ")
                 else:
-                    content.append(f" {escape(quote.source.linking_text)} ")
+                    content.append(f" {escape(source.linking_text)} ")
 
                 if source.url:
                     content.append(f'<a href="{source.url}" target="_blank" rel="noopener noreferrer">')
