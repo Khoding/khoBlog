@@ -26,7 +26,7 @@ def display_quotes(category_slug, show_category_title=False):
         content.append("<blockquote>")
         content.append("<dl>")
         body = formatter(quote.body, filter_name="markdown")
-        content.append(f'<dt><a href="{quote.get_absolute_url()}">{body}</a></dt>')
+        content.append(f"<dt>{body[0:75]}</dt>")
         content.append("<dd>")
         if quote.author:
             content.append(f"{escape(quote.author.name)}")
@@ -66,6 +66,7 @@ def display_quotes(category_slug, show_category_title=False):
                     content.append(f"{escape(source.media.title)}")
                     content.append(")")
         content.append("</dd>")
+        content.append(f'<dd><a href="{quote.get_absolute_url()}">Details for this quote</a></dd>')
         content.append("</dl>")
         content.append("</blockquote>")
 
