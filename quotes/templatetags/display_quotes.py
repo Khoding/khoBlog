@@ -26,7 +26,6 @@ def display_quotes(category_slug, show_category_title=False):
         content.append("<blockquote>")
         content.append("<dl>")
         body = formatter(item.body, filter_name="markdown")
-        body = formatter(body, filter_name="widont")
         content.append(f"<dt>{body}</dt>")
         content.append("<dd>")
         if item.author:

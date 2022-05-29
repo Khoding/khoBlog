@@ -27,7 +27,7 @@
         {% if project.learned %}
           <div>
             <span class="d-block">Had to learn:</span>
-            {{ project.learned|apply_markup:"markdown"|apply_markup:"widont" }}
+            {{ project.learned|apply_markup:"markdown" }}
           </div>
         {% endif %}
         {% if project.website or project.technology %}
