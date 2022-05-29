@@ -47,7 +47,11 @@ def display_quotes(category_slug, show_category_title=False):
                     content.append(" and in ")
                 else:
                     content.append(" in ")
+                if source.url:
+                    content.append(f"<a href='{source.url}'>")
                 content.append(f"{escape(source.title)}")
+                if source.url:
+                    content.append("</a>")
 
                 if source.date:
                     content.append(f" ({escape(format(source.date, source.date_type))}")
