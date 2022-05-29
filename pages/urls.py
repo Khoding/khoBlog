@@ -9,6 +9,7 @@ from .views import (
     PageUpdateView,
     kheee_page,
     about_page,
+    quotes_page,
 )
 
 page_extra_patterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     path("<slug:slug>/", include(page_extra_patterns)),
     path("kheee/", kheee_page, name="kheee"),
     path("about/", about_page, name="about"),
+    path("quotes/", quotes_page, name="quotes"),
 ]
