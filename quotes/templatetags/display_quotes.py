@@ -23,10 +23,10 @@ def display_quotes(category_slug, show_category_title=False):
         if i > 0:
             content.append("<hr>")
 
-        content.append("<blockquote>")
+        content.append('<blockquote class="quotes">')
         content.append("<dl>")
         body = formatter(quote.body, filter_name="markdown")
-        content.append(f"<dt>{body[0:75]}</dt>")
+        content.append(f"<dt>{body}</dt>")
         content.append("<dd>")
         if quote.author:
             content.append(f"{escape(quote.author.name)}")

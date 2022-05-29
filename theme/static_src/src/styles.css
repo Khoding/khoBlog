@@ -305,6 +305,10 @@
     .markdownx-preview {
         @apply prose dark:prose-invert lg:prose-lg xl:prose-xl;
     }
+
+    .quotes p:not(:first-of-type) {
+        @apply hidden;
+    }
 }
 
 @layer utilities {
