@@ -19,33 +19,33 @@ def display_quotes(category_slug, show_category_title=False):
     if show_category_title:
         content.append(f'<h2 id="{category.slug}">{category.title}</h2>')
 
-    for i, item in enumerate(quotes):
+    for i, quote in enumerate(quotes):
         if i > 0:
             content.append("<hr>")
 
         content.append("<blockquote>")
         content.append("<dl>")
-        body = formatter(item.body, filter_name="markdown")
+        body = formatter(quote.body, filter_name="markdown")
         content.append(f"<dt>{body}</dt>")
         content.append("<dd>")
-        if item.author:
-            content.append(f"{escape(item.author.name)}")
-        if item.person:
-            for person in item.person.all():
+        if quote.author:
+            content.append(f"{escape(quote.author.name)}")
+        if quote.person:
+            for person in quote.person.all():
                 content.append(" and ")
                 content.append(f"{escape(person.name)}")
-        if item.addressing:
-            for i, person in enumerate(item.addressing.all()):
+        if quote.addressing:
+            for i, person in enumerate(quote.addressing.all()):
                 if i > 0:
                     content.append(" and ")
-                content.append(f" {escape(item.get_to_or_about_display())} ")
+                content.append(f" {escape(quote.get_to_or_about_display())} ")
                 content.append(f"{escape(person.name)}")
-        if item.source:
-            for i, source in enumerate(item.source.all()):
+        if quote.source:
+            for i, source in enumerate(quote.source.all()):
                 if i > 0:
-                    content.append(" and in ")
+                    content.append(f" and {escape(quote.source.linking_text)} ")
                 else:
-                    content.append(" in ")
+                    content.append(f" {escape(quote.source.linking_text)} ")
 
                 if source.url:
                     content.append(f'<a href="{source.url}" target="_blank" rel="noopener noreferrer">')

@@ -91,21 +91,15 @@ class Source(BaseQuoteAbstractModel):
         (DATE_TYPE_FORMAT_FULL, "Full Date"),
     ]
 
-    IN_OR_ON = [
-        ("in", "in"),
-        ("on", "on"),
-    ]
-
     # source has a title, an url, and an history of changes with an HistoricalRecords field
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=255, blank=True, default="")
     date = models.DateField(null=True, blank=True)
     date_type = models.CharField(choices=DATE_TYPE, max_length=8, default="Y")
-    in_or_on = models.CharField(
-        max_length=2,
-        choices=IN_OR_ON,
+    linking_text = models.CharField(
+        max_length=20,
         default="in",
-        help_text="Whether the source was in (a show, a game, etc.) or on (a website, a blog, a physical object, etc.)",
+        help_text="Defaults to in, but can be changed to on, on the, etc.",
     )
     media = models.ForeignKey("quotes.MediaType", on_delete=models.CASCADE, null=True, blank=True)
 
