@@ -1,0 +1,12 @@
+{% extends 'sub_base_main_block.html' %}
+{% load display_quotes %}
+
+{% block title %}
+  {{ quote.title }}
+{% endblock title %}
+
+{% block content_main %}
+  <div class="prose dark:prose-invert lg:prose-lg xl:prose-2xl lg:tracking-wider xl:leading-11 lg:text-3xl xl:text-5xl max-w-7xl">
+    {% display_single_quote quote.slug %}
+  </div>
+{% endblock content_main %}

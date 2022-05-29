@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 import auto_prefetch
+from django.urls import reverse
 from simple_history.models import HistoricalRecords
 
 
@@ -48,6 +49,9 @@ class Quote(BaseQuoteAbstractModel):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("quotes:quote_detail", kwargs={"slug": self.slug})
 
     # create a title property that returns the title of the quote
     # the title is the name of the author and the body of the quote

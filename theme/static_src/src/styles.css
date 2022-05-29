@@ -105,11 +105,15 @@
         @apply first:!pt-0 last:!pb-0;
     }
 
-    .superbutton_dropdown_items .dropdown_item_container:first-of-type .dropdown_item:first-of-type {
+    .superbutton_dropdown_items
+        .dropdown_item_container:first-of-type
+        .dropdown_item:first-of-type {
         @apply rounded-t-xl;
     }
 
-    .superbutton_dropdown_items .dropdown_item_container:last-of-type .dropdown_item:last-of-type {
+    .superbutton_dropdown_items
+        .dropdown_item_container:last-of-type
+        .dropdown_item:last-of-type {
         @apply rounded-b-xl;
     }
 
@@ -254,6 +258,22 @@
         @apply select-none;
     }
 
+    .prose
+        :where(blockquote p:first-of-type):not(:where([class~="not-prose"]
+                *))::before {
+        content: "";
+    }
+
+    .prose
+        :where(blockquote p:last-of-type):not(:where([class~="not-prose"]
+                *))::after {
+        content: "";
+    }
+
+    .prose blockquote dd {
+        @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
+    }
+
     .dropdown_item {
         @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 disabled:dark:hover:text-jumbo-50 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
     }
@@ -284,5 +304,11 @@
 
     .markdownx-preview {
         @apply prose dark:prose-invert lg:prose-lg xl:prose-xl;
+    }
+}
+
+@layer utilities {
+    .leading-11 {
+        line-height: 3.5rem;
     }
 }
