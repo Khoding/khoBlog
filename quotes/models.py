@@ -23,10 +23,17 @@ class BaseQuoteAbstractModel(auto_prefetch.Model):
 class Quote(BaseQuoteAbstractModel):
     """Quotes Model Class"""
 
+    TO_OR_ABOUT = [
+        ("to", "to"),
+        ("ab", "about"),
+    ]
     # Quote has a title, a body, a source, and a date, and an history of changes with an HistoricalRecords field
     author = models.ForeignKey("quotes.Person", on_delete=models.CASCADE, null=True, blank=False)
     person = models.ManyToManyField("quotes.Person", blank=True, related_name="person")
     addressing = models.ManyToManyField("quotes.Person", blank=True, related_name="addressing")
+    to_or_about = models.CharField(
+        max_length=2, choices=TO_OR_ABOUT, default="to", help_text="Whether the quote is addressed to or about someone"
+    )
     body = models.TextField()
     source = models.ManyToManyField("quotes.Source", blank=True)
     category = models.ForeignKey("quotes.Category", on_delete=models.CASCADE, null=False, blank=False)

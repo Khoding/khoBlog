@@ -39,13 +39,14 @@ def display_quotes(category_slug, show_category_title=False):
             for i, person in enumerate(item.addressing.all()):
                 if i > 0:
                     content.append(" and ")
-                content.append(" to ")
+                content.append(f" {escape(item.get_to_or_about_display())} ")
                 content.append(f"{escape(person.name)}")
         if item.source:
             for i, source in enumerate(item.source.all()):
                 if i > 0:
                     content.append(" and in ")
-                content.append(" in ")
+                else:
+                    content.append(" in ")
                 content.append(f"{escape(source.title)}")
 
                 if source.date:
