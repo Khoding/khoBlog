@@ -12,11 +12,11 @@ class CustomTag(TagBase):
         ("#F1C40F", "yellow"),
         ("#2ECC71", "emerald"),
         ("#3498DB", "carolina"),
-        ("#B6AAAA", "shadows"),
+        ("#9B8383", "cinereous"),
         ("#DF4232", "cinnabar"),
     ]
 
-    color = ColorField(samples=COLOR_PALETTE, default="#B6AAAA")
+    color = ColorField(samples=COLOR_PALETTE, default="#9B8383")
     withdrawn = models.BooleanField(default=False)
 
     class Meta:

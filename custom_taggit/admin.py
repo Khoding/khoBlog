@@ -7,7 +7,7 @@ from custom_taggit.models import CustomTag, CustomTaggedItem
 
 
 def make_default_color(modeladmin, request, queryset):
-    updated = queryset.update(color="#B6AAAA")
+    updated = queryset.update(color="#9B8383")
     modeladmin.message_user(
         request,
         ngettext(
