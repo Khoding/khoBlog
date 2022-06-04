@@ -7,7 +7,16 @@ from taggit.models import GenericTaggedItemBase, TagBase
 
 
 class CustomTag(TagBase):
-    color = ColorField(default="#000000")
+    COLOR_PALETTE = [
+        ("#444F99", "liberty"),
+        ("#F1C40F", "yellow"),
+        ("#2ECC71", "emerald"),
+        ("#3498DB", "carolina"),
+        ("#9B59B6", "purple"),
+        ("#DF4232", "cinnabar"),
+    ]
+
+    color = ColorField(samples=COLOR_PALETTE, default="#9B59B6")
     withdrawn = models.BooleanField(default=False)
 
     class Meta:
