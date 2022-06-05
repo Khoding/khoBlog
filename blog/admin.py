@@ -66,13 +66,13 @@ def make_featured(modeladmin, request, queryset):
     )
 
 
-def make_featured_big(modeladmin, request, queryset):
-    updated = queryset.update(featuring_state="FB")
+def make_super_featured(modeladmin, request, queryset):
+    updated = queryset.update(featuring_state="SF")
     modeladmin.message_user(
         request,
         ngettext(
-            "%d post was successfully marked as featured big.",
-            "%d posts were successfully marked as featured big.",
+            "%d post was successfully marked as super featured.",
+            "%d posts were successfully marked as super featured.",
             updated,
         )
         % updated,
@@ -282,7 +282,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         make_published,
         make_withdrawn,
         make_featured,
-        make_featured_big,
+        make_super_featured,
         export_as_json,
         make_baguette,
         make_english,

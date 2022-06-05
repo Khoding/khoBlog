@@ -33,10 +33,11 @@ class PageEditForm(forms.ModelForm):
             "content",
             "tags",
             "description",
+            "slug",
+            "featuring_state",
             "withdrawn",
             "enable_comments",
             "main_page",
-            "slug",
             "sites",
         )
 

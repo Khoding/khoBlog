@@ -12,6 +12,12 @@ from taggit_selectize.managers import TaggableManager
 
 
 class Page(auto_prefetch.Model):
+    FEATURING_CHOICES = [
+        ("F", "Featured"),
+        ("SF", "Super Featured"),
+        ("N", "Not Featured"),
+    ]
+
     title = models.CharField(_("title"), max_length=200)
     content = models.TextField(_("content"), blank=True)
     description = models.TextField(blank=True, default="")
@@ -20,6 +26,13 @@ class Page(auto_prefetch.Model):
     created_date = models.DateTimeField("Creation date", default=timezone.now)
     mod_date = models.DateTimeField("Last Updated", auto_now=True)
     main_page = models.BooleanField(default=False)
+    featuring_state = models.CharField(
+        max_length=25,
+        verbose_name="Featuring",
+        choices=FEATURING_CHOICES,
+        default="N",
+        help_text="Featuring state",
+    )
     enable_comments = models.BooleanField(_("enable comments"), default=True)
     withdrawn = models.BooleanField(default=False)
     template_name = models.CharField(
@@ -27,7 +40,7 @@ class Page(auto_prefetch.Model):
         max_length=70,
         blank=True,
         help_text=_(
-            "Example: pages/contact_page.html”. If this isn’t provided, " "the system will use pages/default.html”."
+            "Example: pages/contact_page.html”. If this isn't provided, " "the system will use pages/default.html”."
         ),
     )
     registration_required = models.BooleanField(
@@ -38,6 +51,7 @@ class Page(auto_prefetch.Model):
     sites = models.ManyToManyField(Site, verbose_name=_("sites"))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
     is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+
     history = HistoricalRecords()
 
     class Meta:

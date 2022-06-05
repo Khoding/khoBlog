@@ -259,7 +259,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     FEATURING_CHOICES = [
         ("F", "Featured"),
-        ("FB", "Featured Big"),
+        ("SF", "Super Featured"),
         ("N", "Not Featured"),
     ]
 
