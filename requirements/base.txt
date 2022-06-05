@@ -20,6 +20,7 @@ cssselect==1.1.0
 defusedxml==0.7.1
 diff-match-patch==20200713
 Django==4.0.5
+django-admin-index==2.0.0
 django-admin-interface==0.19.1
 django-allauth==0.50.0
 django-analytical==3.1.0
@@ -39,6 +40,7 @@ django-jsonview==2.0.0
 django-markdown2==0.3.1
 django-markdownx==4.0.0b1
 django-markup==1.5
+django-ordered-model==3.6
 django-ranged-response==0.2.0
 django-robots==5.0
 django-simple-captcha==0.5.17
