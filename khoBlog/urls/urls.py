@@ -17,7 +17,7 @@ from django.conf import settings
 
 try:
     if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
-        import debug_toolbar
+        import debug_toolbar  # noqa
 except ImportError:
     pass
 
