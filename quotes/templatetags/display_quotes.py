@@ -80,10 +80,7 @@ def display_single_quote(o):
     quote = Quote.objects.get(slug=o)
     print(quote)
 
-    content = [""]
-
-    content.append("<blockquote>")
-    content.append("<dl>")
+    content = ["<blockquote>", "<dl>"]
     body = formatter(quote.body, filter_name="markdown")
     content.append(f"<dt>{body}</dt>")
     content.append("<dd>")
