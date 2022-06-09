@@ -823,7 +823,7 @@ def post_next(request, slug):
             .order_by("pub_date")
             .first()
         )
-    if next_post != None:
+    if next_post is not None:
         next_post = next_post.get_absolute_url()
     else:
         next_post = post.get_absolute_url()
@@ -859,7 +859,7 @@ def post_previous(request, slug):
             .order_by("-pub_date")
             .first()
         )
-    if prev_post != None:
+    if prev_post is not None:
         prev_post = prev_post.get_absolute_url()
     else:
         prev_post = post.get_absolute_url()
