@@ -14,18 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.contrib.sitemaps.views import index, sitemap
+from django.urls import include, path
+from django.urls.conf import re_path
 
 try:
     if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
         import debug_toolbar  # noqa
 except ImportError:
     pass
-
-from django.conf.urls.static import static
-from django.contrib import admin
-from django.contrib.sitemaps.views import index, sitemap
-from django.urls import include, path
-from django.urls.conf import re_path
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
