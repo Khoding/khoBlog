@@ -13,20 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import debug_toolbar
-from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
 from django.conf import settings
+
+try:
+    if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
+        import debug_toolbar
+except ImportError:
+    pass
+
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import index, sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
+
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from pages.sitemap import PageSitemap
-from portfolio.sitemap import ProjectSitemap
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
+
+from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
+from pages.sitemap import PageSitemap
+from portfolio.sitemap import ProjectSitemap
 
 from . import dev_urls
 
