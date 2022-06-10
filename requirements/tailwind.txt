@@ -1,4 +1,4 @@
 -r base.txt
 
-cookiecutter==1.7.3
+cookiecutter==2.1.1
 django-tailwind==3.1.1
