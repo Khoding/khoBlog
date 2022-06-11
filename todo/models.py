@@ -28,6 +28,10 @@ class Task(auto_prefetch.Model):
     def __str__(self):
         return self.title
 
+    def status_changed(self):
+        self.completed_date = timezone.now()
+        self.save()
+
     def get_index_view_url(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))

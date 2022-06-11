@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import DeleteView, ListView, UpdateView
 from django.views.generic.edit import CreateView
@@ -30,7 +32,6 @@ class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
     template_name = "todo/create_task.html"
-    success_url = reverse_lazy("todo:task_list")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -39,12 +40,21 @@ class TaskCreateView(CreateView):
         return context
 
 
+@user_passes_test(lambda u: u.is_superuser)
+def task_completed(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.status_changed()
+    return redirect(reverse_lazy("todo:task_list"))
+
+
 @superuser_required()
 class TaskChangeStatusView(UpdateView):
     model = Task
     form_class = TaskChangeStatusForm
     template_name = "todo/task_change_status.html"
-    success_url = reverse_lazy("todo:task_list")
+
+    def get_success_url(self):
+        return reverse_lazy("todo:task_change_status_confirmed", kwargs={"pk": self.object.pk})
 
     def form_valid(self, form):
         self.status = form.cleaned_data["status"]

@@ -24,6 +24,7 @@
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Title</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Description</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Status</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Status</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Completion date</th>
                   {% if user.is_superuser %}
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300">Withdrawn</th>
@@ -39,12 +40,13 @@
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-jumbo-300 sm:pl-6">{{ task.pk }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.title }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.description }}</td>
+                    <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.complete }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.get_status_display }}</td>
                     <td class="whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.completed_date|default:'' }}</td>
                     {% if user.is_superuser %}
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-jumbo-50">{{ task.withdrawn }}</td>
                       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        {% if task.status == "incomplete" %}
+                        {% if not task.complete %}
                         <a class="text-cyan-500 hover:text-cyan-600 dark:text-cyan-400 dark:hover:text-cyan-600" href="{% url 'todo:task_change_status' task.id %}">Complete</a>
                         {% endif %}
                         <a class="text-cornflower-600 hover:text-cornflower-900 dark:text-cornflower-200 dark:hover:text-cornflower-500" href="{% url 'todo:edit_task' task.id %}">Edit</a>
