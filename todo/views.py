@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 
 from khoBlog.utils.superuser_required import superuser_required
 
-from .forms import TaskChangeStatusForm, TaskForm
+from .forms import TaskChangeStatusForm, TaskAddForm, TaskEditForm
 from .models import Task
 
 
@@ -30,8 +30,9 @@ class TaskListView(ListView):
 @superuser_required()
 class TaskCreateView(CreateView):
     model = Task
-    form_class = TaskForm
+    form_class = TaskAddForm
     template_name = "todo/create_task.html"
+    success_url = reverse_lazy("todo:task_list")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,8 +54,11 @@ class TaskChangeStatusView(UpdateView):
     form_class = TaskChangeStatusForm
     template_name = "todo/task_change_status.html"
 
-    def get_success_url(self):
-        return reverse_lazy("todo:task_change_status_confirmed", kwargs={"pk": self.object.pk})
+    def form_valid(self, form):
+        task = get_object_or_404(Task, pk=form.instance.pk)
+        if form.cleaned_data["status"] != "incomplete":
+            task.status = form.cleaned_data["status"]
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,7 +70,7 @@ class TaskChangeStatusView(UpdateView):
 @superuser_required()
 class TaskUpdateView(UpdateView):
     model = Task
-    form_class = TaskForm
+    form_class = TaskEditForm
     template_name = "todo/edit_task.html"
     success_url = reverse_lazy("todo:task_list")
 

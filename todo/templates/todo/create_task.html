@@ -9,7 +9,6 @@
       <div>
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-jumbo-400">{{ title }}</h3>
-          <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-jumbo-100">This information will be displayed publicly so be careful what you share.</p>
         </div>
         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -40,14 +39,6 @@
                     <label for="id_withdrawn" class="font-medium text-gray-700 dark:text-jumbo-400">{{ form.withdrawn.label }}</label>
                   </div>
                 </div>
-                <div class="relative flex items-start">
-                  <div class="flex items-center h-5">
-                    {{ form.complete|add_class:"h-4 w-4 text-cornflower-600 focus:ring-cornflower-500 border border-gray-300 dark:border-jumbo-300 rounded" }}
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="id_complete" class="font-medium text-gray-700 dark:text-jumbo-400">{{ form.complete.label }}</label>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -56,8 +47,7 @@
     </div>
     <div class="pt-5">
       <div class="flex justify-end">
-        <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900 focus:ring-cornflower-500">Cancel</button>
-        <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-cornflower-600 hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900 focus:ring-cornflower-500">Save</button>
+        <button type="submit" class="kho-button-forms kho-button-submit">Save</button>
       </div>
     </div>
   </form>
