@@ -309,6 +309,14 @@
     .quotes p:not(:first-of-type) {
         @apply hidden;
     }
+
+    .todo_header_element {
+        @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300;
+    }
+
+    .todo_element {
+        @apply whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm;
+    }
 }
 
 @layer utilities {
