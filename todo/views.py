@@ -47,9 +47,7 @@ class TaskChangeStatusView(UpdateView):
     success_url = reverse_lazy("todo:task_list")
 
     def form_valid(self, form):
-        print(form.cleaned_data["status"])
         self.status = form.cleaned_data["status"]
-        print(form.cleaned_data["status"])
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
