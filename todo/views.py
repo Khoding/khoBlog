@@ -56,10 +56,6 @@ class TaskChangeStatusView(UpdateView):
     def get_success_url(self):
         return reverse_lazy("todo:task_change_status_confirmed", kwargs={"pk": self.object.pk})
 
-    def form_valid(self, form):
-        self.status = form.cleaned_data["status"]
-        return super().form_valid(form)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Task Change status"
