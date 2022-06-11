@@ -20,10 +20,10 @@ class Task(auto_prefetch.Model):
     created = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, blank=True, null=True, help_text="Last modification")
     completed_date = models.DateTimeField(
-        blank=True, null=True, help_text="Completion date, completion can also mean marked as x"
+        blank=True, null=True, help_text="Completion date, completion can also mean marked as X"
     )
     status = models.CharField(choices=STATUS, max_length=10, default="incomplete")
-    reason_of_status = models.TextField(blank=True, default="", help_text="Reason for status")
+    note = models.TextField(blank=True, default="", help_text="Note about the status, or something else")
 
     def __str__(self):
         return self.title
