@@ -1,12 +1,10 @@
-from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import get_object_or_404, redirect
 from django.urls.base import reverse_lazy
 from django.views.generic import DeleteView, ListView, UpdateView
 from django.views.generic.edit import CreateView
 
 from khoBlog.utils.superuser_required import superuser_required
 
-from .forms import TaskCompleteForm, TaskForm
+from .forms import TaskChangeStatusForm, TaskForm
 from .models import Task
 
 
@@ -41,23 +39,23 @@ class TaskCreateView(CreateView):
         return context
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def task_completed(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.make_completed()
-    return redirect(reverse_lazy("todo:task_list"))
-
-
 @superuser_required()
-class TaskCompleteView(UpdateView):
+class TaskChangeStatusView(UpdateView):
     model = Task
-    form_class = TaskCompleteForm
-    template_name = "todo/complete_task.html"
+    form_class = TaskChangeStatusForm
+    template_name = "todo/task_change_status.html"
+    success_url = reverse_lazy("todo:task_list")
+
+    def form_valid(self, form):
+        print(form.cleaned_data["status"])
+        self.status = form.cleaned_data["status"]
+        print(form.cleaned_data["status"])
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Complete Task"
-        context["description"] = "Complete a Task"
+        context["title"] = "Task Change status"
+        context["description"] = "Change the status of a Task"
         return context
 
 

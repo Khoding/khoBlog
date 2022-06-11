@@ -9,12 +9,12 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ("title", "description", "withdrawn", "complete", "completed_date")
+        fields = ("title", "description", "withdrawn", "status", "completed_date")
 
 
-class TaskCompleteForm(forms.ModelForm):
-    """TaskCompleteForm"""
+class TaskChangeStatusForm(forms.ModelForm):
+    """TaskChangeStatusForm"""
 
     class Meta:
         model = Task
-        fields = ()
+        fields = ("status",)
