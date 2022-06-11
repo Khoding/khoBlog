@@ -28,5 +28,5 @@ class TaskChangeStatusForm(forms.ModelForm):
         model = Task
         fields = (
             "status",
-            "reason_of_status",
+            "note",
         )
