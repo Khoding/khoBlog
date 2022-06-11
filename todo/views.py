@@ -56,8 +56,7 @@ class TaskChangeStatusView(UpdateView):
 
     def form_valid(self, form):
         task = get_object_or_404(Task, pk=form.instance.pk)
-        if form.cleaned_data["status"] != "incomplete":
-            task.status = form.cleaned_data["status"]
+        task.status = form.cleaned_data["status"]
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
