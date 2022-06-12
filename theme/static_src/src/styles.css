@@ -303,8 +303,16 @@
         @apply kho-button-text kho-button-bg kho-button-border kho-button-border-focus block w-full min-w-0 flex-1 rounded-xl sm:text-sm;
     }
 
+    .form-check {
+        @apply kho-button-bg kho-button-border kho-button-border-focus;
+    }
+
     .form-select {
         @apply resize-y;
+    }
+
+    .picker {
+        @apply inline-flex;
     }
 
     .input-group {
