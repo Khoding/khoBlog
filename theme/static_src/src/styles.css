@@ -344,7 +344,7 @@
     }
 
     .todo_element {
-        @apply whitespace-nowrap md:whitespace-normal px-3 py-4 text-sm;
+        @apply whitespace-nowrap lg:whitespace-normal px-3 py-4 text-sm;
     }
 }
 
