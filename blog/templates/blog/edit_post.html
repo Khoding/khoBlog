@@ -15,22 +15,22 @@
 {% block content %}
   <form enctype="multipart/form-data" method="post" novalidate="novalidate">
     {% csrf_token %}
-    <div class="non-field-errors">
+    <section class="non-field-errors">
       {{ form.non_field_errors }}
-    </div>
+    </section>
 
-    <div class="hidden-fields-errors">
+    <section class="hidden-fields-errors">
       {% for hidden_field in form.hidden_fields %}
         {{ hidden_field.errors }}
         {{ hidden_field }}
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="text-flamingo-600">
+    <section class="text-flamingo-600">
       {{ form.non_field_errors }}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.title.label_tag }}
       <div class="flex gap-2">
         {{ form.title|add_class:"form-control col"|attr:"placeholder:Post title" }}
@@ -42,9 +42,9 @@
       {% for error in form.featured_title.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.categories.label_tag }}
       <div class="input-group">
         {{ form.categories|add_class:"form-select"|attr:"multiple" }}
@@ -55,9 +55,9 @@
       {% for error in form.categories.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.tags.label_tag }}
       {{ form.tags }}
       {% if form.tags.help_text %}
@@ -66,15 +66,18 @@
       {% for error in form.tags.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
-      <div class="input-group">
-        <div class="form-floating col-10">
+    <section class="mb-2">
+      <div class="input-group gap-2">
+        <div class="form-floating w-full">
           {{ form.series.label_tag }}
           {{ form.series|add_class:"form-select"|attr:"placeholder:Post series" }}
         </div>
-        {{ form.order_in_series|add_class:"form-control col-auto"|attr:"placeholder:Post order in series" }}
+        <div class="form-floating">
+          {{ form.order_in_series.label_tag }}
+          {{ form.order_in_series|add_class:"form-control"|attr:"placeholder:Post order in series" }}
+        </div>
       </div>
       {% if form.series.help_text %}
         <span class="text-sm">{{ form.series.help_text }}</span>
@@ -82,9 +85,9 @@
       {% for error in form.series.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       <div class="form-floating">
         {{ form.description.label_tag }}
         {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
@@ -95,10 +98,11 @@
       {% for error in form.description.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       <div class="form-floating">
+        {{ form.body.label_tag }}
         {{ form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
       </div>
       {% if form.body.help_text %}
@@ -107,9 +111,9 @@
       {% for error in form.body.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.image.label_tag }}
       {{ form.image|add_class:"form-control"|attr:"placeholder:Post image" }}
       {% if form.image.help_text %}
@@ -118,9 +122,9 @@
       {% for error in form.image.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field row mb-2">
+    <section class="row mb-2">
       <div class="input-group col-auto">
         <span class="input-group-text">https://{{ request.get_host }}/post/</span>
         {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
@@ -131,9 +135,9 @@
       {% for error in form.slug.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.withdrawn.label_tag }}
       <div class="form-check">
         {{ form.withdrawn|add_class:"form-check-input" }}
@@ -144,9 +148,9 @@
       {% for error in form.withdrawn.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.is_outdated.label_tag }}
       <div class="form-check">
         {{ form.is_outdated|add_class:"form-check-input" }}
@@ -157,9 +161,9 @@
       {% for error in form.is_outdated.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.needs_reviewing.label_tag }}
       <div class="form-check">
         {{ form.needs_reviewing|add_class:"form-check-input" }}
@@ -170,9 +174,9 @@
       {% for error in form.needs_reviewing.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       <div class="form-floating">
         {{ form.featuring_state.label_tag }}
         {{ form.featuring_state|add_class:"form-select"|attr:"placeholder:Post featuring state" }}
@@ -183,9 +187,9 @@
       {% for error in form.featuring_state.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       <div class="form-floating">
         {{ form.publication_state.label_tag }}
         {{ form.publication_state|add_class:"form-select"|attr:"placeholder:Post publication state" }}
@@ -196,9 +200,9 @@
       {% for error in form.publication_state.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       {{ form.pub_date.label_tag }}
       {{ form.pub_date|add_class:"form-control picker" }}
       {% if form.pub_date.help_text %}
@@ -207,29 +211,28 @@
       {% for error in form.pub_date.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
-      <div class="input-group">
-        <span class="input-group-text">Linked article</span>
-        {{ form.url_to_article|add_class:"form-control w-50"|attr:"placeholder:Linked article's URL" }}
-        {{ form.url_to_article_title|add_class:"form-control"|attr:"placeholder:Linked article's title" }}
+    <section class="mb-2">
+      <div class="input-group gap-2">
+        <div class="form-floating w-1/2">
+          {{ form.url_to_article.label_tag }}
+          {{ form.url_to_article|add_class:"form-select"|attr:"placeholder:Post article" }}
+        </div>
+        <div class="form-floating w-1/2">
+          {{ form.url_to_article_title.label_tag }}
+          {{ form.url_to_article_title|add_class:"form-control"|attr:"placeholder:Post article title" }}
+        </div>
       </div>
       {% if form.url_to_article.help_text %}
         <span class="text-sm">{{ form.url_to_article.help_text }}</span>
       {% endif %}
-      {% if form.url_to_article_title.help_text %}
-        <span class="text-sm">{{ form.url_to_article_title.help_text }}</span>
-      {% endif %}
       {% for error in form.url_to_article.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-      {% for error in form.url_to_article_title.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </div>
+    </section>
 
-    <div class="field mb-2">
+    <section class="mb-2">
       <div class="form-floating">
         {{ form.language.label_tag }}
         {{ form.language|add_class:"form-select"|attr:"placeholder:Post language" }}
@@ -240,7 +243,7 @@
       {% for error in form.language.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
     <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
   </form>

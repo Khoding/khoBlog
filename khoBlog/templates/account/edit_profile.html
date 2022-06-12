@@ -30,8 +30,8 @@
 
           <div class="field mb-2">
             <div class="form-floating">
-              {{ form.username|add_class:"form-control"|attr:"placeholder: Username" }}
               {{ form.username.label_tag }}
+              {{ form.username|add_class:"form-control"|attr:"placeholder: Username" }}
             </div>
             {% if form.username.help_text %}
               <span class="text-sm">{{ form.username.help_text }}</span>
@@ -54,8 +54,8 @@
 
           <div class="field mb-2">
             <div class="form-floating">
-              {{ form.bio|add_class:"form-control"|attr:"placeholder:Bio" }}
               {{ form.bio.label_tag }}
+              {{ form.bio|add_class:"form-control"|attr:"placeholder:Bio" }}
             </div>
             {% if form.bio.help_text %}
               <span class="text-sm">{{ form.bio.help_text }}</span>
@@ -66,14 +66,12 @@
           </div>
         </div>
 
-        <hr/>
-
         <div id="personal-profile-fields">
           <h5>These fields are never shown</h5>
 
           <div class="field mb-2">
-            <div class="input-group">
-              <span class="input-group-text">Name</span>
+            <span>Name:</span>
+            <div class="input-group gap-2">
               {{ form.first_name|add_class:"form-control"|attr:"placeholder:First name" }}
               {{ form.last_name|add_class:"form-control"|attr:"placeholder:Last name" }}
             </div>
@@ -93,8 +91,8 @@
 
           <div class="field mb-2">
             <div class="form-floating">
-              {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
               {{ form.email.label_tag }}
+              {{ form.email|add_class:"form-control"|attr:"placeholder:Email" }}
             </div>
             {% if form.email.help_text %}
               <span class="text-sm">{{ form.email.help_text }}</span>
@@ -106,8 +104,8 @@
 
           <div class="field mb-2">
             <div class="form-floating">
-              {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
               {{ form.password.label_tag }}
+              {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
             </div>
             {% if form.password.help_text %}
               <span class="text-sm">{{ form.password.help_text|safe }}</span>
@@ -119,14 +117,12 @@
         </div>
       </div>
 
-      <hr/>
-
       <div id="advanced-fields">
         <h4 class="mb-0">More advanced Profile Fields</h4>
         <p class="text-sm">These fields aren't meant to be changed at first. You can change them here, and changing them won't break anything, but make sure to know what each field is before changing it</p>
-        <div class="field row mb-2">
+        <section class="row mb-2 gap-2">
           <div class="input-group col-auto">
-            <span class="input-group-text">https://{{ request.get_host }}/accounts/profile/</span>
+            <span class="input-group-text">https://{{ request.get_host }}/post/</span>
             {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
           </div>
           {% if form.slug.help_text %}
@@ -135,10 +131,8 @@
           {% for error in form.slug.errors %}
             <small class="text-flamingo-600">{{ error }}</small>
           {% endfor %}
-        </div>
+        </section>
       </div>
-
-      <hr/>
 
       <div id="customization-fields">
         <h4 class="mb-0">Customization</h4>
