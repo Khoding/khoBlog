@@ -7,10 +7,9 @@
     {{ field }}
   </div>
 {% elif field|widget_type == "checkboxinput" %}
-  {{ field.label_tag }}
-  <div class="form-check">
-    {{ field|add_class:"form-check-input" }}
-  </div>
+  <div class="form-floating">
+    {{ field.label_tag }}
+    {{ field|add_class:"form-check" }}
 {% elif field|widget_type == "selectmultiple" %}
   {{ field.label_tag }}
   <div class="input-group">
@@ -24,7 +23,7 @@
 {% endif %}
 
 {% if field.help_text %}
-  <span class="text-sm">{{ field.help_text }}</span>
+  <div class="text-sm">{{ field.help_text }}</div>
 {% endif %}
 
 {% for error in field.errors %}
