@@ -21,6 +21,10 @@
         @apply dark:bg-jumbo-700 bg-white;
     }
 
+    .kho-button-bg-darker {
+        @apply dark:bg-jumbo-800 bg-gray-50;
+    }
+
     .kho-button-bg-hover {
         @apply dark:hover:bg-jumbo-800 hover:bg-gray-50;
     }
@@ -294,8 +298,25 @@
         @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border bg-white px-4 py-2 text-sm font-medium;
     }
 
-    .form-control {
-        @apply kho-button-text kho-button-bg kho-button-border block w-full min-w-0 flex-1 rounded-xl sm:text-sm;
+    .form-control,
+    .form-select {
+        @apply kho-button-text kho-button-bg kho-button-border kho-button-border-focus block w-full min-w-0 flex-1 rounded-xl sm:text-sm;
+    }
+
+    .form-select {
+        @apply resize-y;
+    }
+
+    .input-group {
+        @apply flex;
+    }
+
+    .input-group-text {
+        @apply inline-flex items-center sm:text-sm px-3 rounded-l-md border border-r-0 kho-button-border kho-button-bg-darker;
+    }
+
+    .input-group-text + .form-control {
+        @apply flex-1 block w-full min-w-0 rounded-none rounded-r-md kho-button-border kho-button-bg;
     }
 
     #id_honeypot {

@@ -6,7 +6,7 @@
     {{ task.title }}</h3>
   <form method="POST">
     {% csrf_token %}
-    <h4>Are you sure ?</h4>
+    <h4>Are you sure?</h4>
     {{ form.as_p }}
 
     <button type="submit" class="kho-button-forms kho-button-submit-delete mt-2">{{ title }}</button>
