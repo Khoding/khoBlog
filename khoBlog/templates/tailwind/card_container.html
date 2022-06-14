@@ -17,7 +17,7 @@
       {% if filter_form %}
         <!-- Filters -->
         <section class="w-auto">
-          <button type="button" class="group text-gray-900 dark:text-jumbo-100 font-medium flex items-center" aria-controls="disclosure-1" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
+          <button type="button" class="group text-gray-900 dark:text-jumbo-100 font-medium flex items-center" aria-controls="filters" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
             <svg class="flex-none w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500" aria-hidden="true" x-description="Heroicon name: solid/filter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"></path>
             </svg>
@@ -35,7 +35,7 @@
   {% if filter_form %}
     {% load project_tags widget_tweaks %}
 
-    <section id="disclosure-1" x-show="open" style="display: none;" class="mt-6 pt-10">
+    <section id="filters" x-show="open" style="display: none;" class="mt-6 pt-10" x-transition:enter="transition ease-out duration-250" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
       <form method="get" class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 md:grid-flow-col gap-2 h-fit">
         <div class="h-fit">
           {{ filter_form.form.title.label_tag }}

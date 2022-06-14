@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
@@ -283,7 +283,7 @@ class PostDetailView(DetailView):
         self.post = get_object_or_404(Post, slug=self.kwargs["slug"])
         self.post.clicked()
         if self.post.deleted_at:
-            raise PermissionDenied
+            raise Http404
         if self.request.user.is_superuser:
             self.series = (
                 self.model.objects.get_queryset()

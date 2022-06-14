@@ -45,7 +45,7 @@ def render_page(request, f):
 
         return redirect_to_login(request.path)
     if f.deleted_at:
-        raise PermissionDenied
+        raise Http404
     if f.template_name:
         template = loader.select_template((f.template_name, DEFAULT_TEMPLATE))
     else:
@@ -159,7 +159,7 @@ class PageDeleteView(UpdateView):
             if self.get_form().is_valid():
                 self.removing_page.soft_delete()
         else:
-            raise PermissionDenied()
+            raise PermissionDenied
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):

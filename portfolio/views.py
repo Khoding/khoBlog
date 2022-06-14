@@ -1,4 +1,5 @@
 from django.core.exceptions import PermissionDenied
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
@@ -37,7 +38,7 @@ class ProjectDetailView(DetailView):
     def get_object(self, queryset=None):
         obj = super(ProjectDetailView, self).get_object(queryset=queryset)
         if obj.deleted_at:
-            raise PermissionDenied
+            raise Http404
         return super().get_object()
 
     def get_context_data(self, **kwargs):
@@ -96,7 +97,7 @@ class ProjectDeleteView(UpdateView):
             if self.get_form().is_valid():
                 self.removing_project.soft_delete()
         else:
-            raise PermissionDenied()
+            raise PermissionDenied
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
@@ -193,7 +194,7 @@ class SubProjectDeleteView(UpdateView):
             if self.get_form().is_valid():
                 self.removing_project.soft_delete()
         else:
-            raise PermissionDenied()
+            raise PermissionDenied
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
