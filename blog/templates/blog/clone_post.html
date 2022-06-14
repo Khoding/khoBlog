@@ -129,14 +129,14 @@
       <div class="input-group gap-2">
         <div class="form-floating">
           {{ form.withdrawn.label_tag }}
-          {{ form.withdrawn|add_class:"form-check"|attr:"placeholder:Post publication state" }}
+          {{ form.withdrawn|add_class:"form-check" }}
           {% if form.withdrawn.help_text %}
             <div class="text-sm">{{ form.withdrawn.help_text }}</div>
           {% endif %}
         </div>
         <div class="form-floating">
           {{ form.is_outdated.label_tag }}
-          {{ form.is_outdated|add_class:"form-check"|attr:"placeholder:Post featuring state" }}
+          {{ form.is_outdated|add_class:"form-check" }}
           {% if form.is_outdated.help_text %}
             <div class="text-sm">{{ form.is_outdated.help_text }}</div>
           {% endif %}
@@ -165,7 +165,7 @@
 
     <section class="mb-2">
       {{ form.pub_date.label_tag }}
-      <div class="flex gap-2 w-1/4">
+      <div class="flex gap-2 w-full md:w-1/4">
         {{ form.pub_date|add_class:"form-control picker" }}
       </div>
       {% if form.pub_date.help_text %}

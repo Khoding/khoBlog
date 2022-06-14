@@ -7,15 +7,14 @@ from .models import Page
 
 @admin.register(Page)
 class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
-    list_display = ("title", "created_date", "slug", "is_removed")
-    list_editable = ("is_removed",)
+    list_display = ("title", "created_date", "slug", "deleted_at")
     ordering = ("title",)
     search_fields = ("title",)
     prepopulated_fields = {"slug": ("title",)}
     list_filter = (
         "sites",
         "registration_required",
-        "is_removed",
+        "deleted_at",
     )
 
     fieldsets = (

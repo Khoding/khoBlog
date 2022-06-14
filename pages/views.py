@@ -44,8 +44,8 @@ def render_page(request, f):
         from django.contrib.auth.views import redirect_to_login
 
         return redirect_to_login(request.path)
-    if f.is_removed:
-        raise Http404
+    if f.deleted_at:
+        raise PermissionDenied
     if f.template_name:
         template = loader.select_template((f.template_name, DEFAULT_TEMPLATE))
     else:
@@ -80,8 +80,8 @@ class PageListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return self.model.objects.filter(is_removed=False)
-        return self.model.objects.filter(withdrawn=False, is_removed=False)
+            return self.model.objects.filter(deleted_at=None)
+        return self.model.objects.filter(withdrawn=False, deleted_at=None)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -157,7 +157,7 @@ class PageDeleteView(UpdateView):
         if self.request.user.is_superuser:
             self.removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_page.remove()
+                self.removing_page.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()

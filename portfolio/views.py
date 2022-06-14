@@ -21,7 +21,7 @@ class ProjectListView(ListView):
     context_object_name = "projects"
 
     def get_queryset(self):
-        return Project.objects.filter(is_removed=False)
+        return Project.objects.filter(deleted_at=None)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,6 +33,12 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
     template_name = "portfolio/project_detail.html"
+
+    def get_object(self, queryset=None):
+        obj = super(ProjectDetailView, self).get_object(queryset=queryset)
+        if obj.deleted_at:
+            raise PermissionDenied
+        return super().get_object()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -88,7 +94,7 @@ class ProjectDeleteView(UpdateView):
         if self.request.user.is_superuser:
             self.removing_project = get_object_or_404(Project, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_project.remove()
+                self.removing_project.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()
@@ -185,7 +191,7 @@ class SubProjectDeleteView(UpdateView):
         if self.request.user.is_superuser:
             self.removing_project = self.get_object()
             if self.get_form().is_valid():
-                self.removing_project.remove()
+                self.removing_project.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()

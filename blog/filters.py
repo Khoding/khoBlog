@@ -20,7 +20,7 @@ class PostFilter(FilterSet):
     title = CharFilter(lookup_expr="icontains")
     description = CharFilter(lookup_expr="icontains")
     body = CharFilter(lookup_expr="icontains", widget=forms.Textarea)
-    categories = ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, is_removed=False))
+    categories = ModelChoiceFilter(queryset=Category.objects.filter(withdrawn=False, deleted_at=None))
     featuring_state = forms.ChoiceField()
 
     order_by = OrderingFilter(
@@ -58,4 +58,4 @@ class PostFilter(FilterSet):
     @property
     def qs(self):
         parent = super().qs
-        return parent.filter(is_removed=False)
+        return parent.filter(deleted_at=None)

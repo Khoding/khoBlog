@@ -12,19 +12,17 @@ class PostQuerySet(auto_prefetch.QuerySet):
     """
 
     def get_without_removed(self):
-        return self.filter(is_removed=False)
+        return self.filter(deleted_at=None)
 
     def get_base_common_queryset(self):
-        return self.defer("body", "image").filter(
-            pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
-        )
+        return self.defer("body", "image").filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None)
 
     def get_common_queryset(self, user):
         if user.is_superuser:
-            queryset = self.defer("body", "image").filter(is_removed=False)
+            queryset = self.defer("body", "image").filter(deleted_at=None)
         else:
             queryset = self.defer("body", "image").filter(
-                pub_date__lte=timezone.now(), withdrawn=False, is_removed=False
+                pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None
             )
         return queryset
 
@@ -79,16 +77,16 @@ class CategoryQuerySet(auto_prefetch.QuerySet):
     """
 
     def get_without_removed(self):
-        return self.filter(is_removed=False)
+        return self.filter(deleted_at=None)
 
     def get_base_common_queryset(self):
-        return self.filter(withdrawn=False, is_removed=False)
+        return self.filter(withdrawn=False, deleted_at=None)
 
     def get_common_queryset(self, user):
         if user.is_superuser:
-            queryset = self.filter(is_removed=False)
+            queryset = self.filter(deleted_at=None)
         else:
-            queryset = self.filter(withdrawn=False, is_removed=False)
+            queryset = self.filter(withdrawn=False, deleted_at=None)
         return queryset
 
 
@@ -124,10 +122,10 @@ class SeriesQuerySet(auto_prefetch.QuerySet):
     """
 
     def get_without_removed(self):
-        return self.filter(is_removed=False)
+        return self.filter(deleted_at=None)
 
     def get_base_common_queryset(self):
-        return self.filter(withdrawn=False, is_removed=False)
+        return self.filter(withdrawn=False, deleted_at=None)
 
 
 class SeriesManager(auto_prefetch.Manager):

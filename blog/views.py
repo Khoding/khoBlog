@@ -282,7 +282,7 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         self.post = get_object_or_404(Post, slug=self.kwargs["slug"])
         self.post.clicked()
-        if self.post.is_removed:
+        if self.post.deleted_at:
             raise PermissionDenied
         if self.request.user.is_superuser:
             self.series = (
@@ -294,26 +294,26 @@ class PostDetailView(DetailView):
             self.description = self.post.description
             if self.post.pub_date:
                 self.prev_post = (
-                    Post.objects.filter(pub_date__lt=self.post.pub_date, is_removed=False)
+                    Post.objects.filter(pub_date__lt=self.post.pub_date, deleted_at=None)
                     .exclude(pk=self.post.pk)
                     .order_by("-pub_date")
                     .first()
                 )
                 self.next_post = (
-                    Post.objects.filter(pub_date__gt=self.post.pub_date, is_removed=False)
+                    Post.objects.filter(pub_date__gt=self.post.pub_date, deleted_at=None)
                     .exclude(pk=self.post.pk)
                     .order_by("pub_date")
                     .first()
                 )
             else:
                 self.prev_post = (
-                    Post.objects.filter(created_date__lt=self.post.created_date, is_removed=False)
+                    Post.objects.filter(created_date__lt=self.post.created_date, deleted_at=None)
                     .exclude(pk=self.post.pk)
                     .order_by("-created_date")
                     .first()
                 )
                 self.next_post = (
-                    Post.objects.filter(created_date__gt=self.post.created_date, is_removed=False)
+                    Post.objects.filter(created_date__gt=self.post.created_date, deleted_at=None)
                     .exclude(pk=self.post.pk)
                     .order_by("created_date")
                 )
@@ -336,7 +336,7 @@ class PostDetailView(DetailView):
                     pub_date__lt=self.post.pub_date,
                     pub_date__lte=timezone.now(),
                     withdrawn=False,
-                    is_removed=False,
+                    deleted_at=None,
                 )
                 .exclude(pk=self.post.pk)
                 .order_by("-pub_date")
@@ -347,7 +347,7 @@ class PostDetailView(DetailView):
                     pub_date__gt=self.post.pub_date,
                     pub_date__lte=timezone.now(),
                     withdrawn=False,
-                    is_removed=False,
+                    deleted_at=None,
                 )
                 .exclude(pk=self.post.pk)
                 .order_by("pub_date")
@@ -370,15 +370,15 @@ def redirect_to_latest(request):
     if request.user.is_superuser:
         latest = Post.objects.latest()
     else:
-        latest = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).latest()
+        latest = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).latest()
     return redirect(reverse("blog:post_detail", args=(latest.slug,)))
 
 
 def redirect_to_random(request):
     if request.user.is_superuser:
-        post = Post.objects.filter(is_removed=False).order_by("?")[0]
+        post = Post.objects.filter(deleted_at=None).order_by("?")[0]
     else:
-        post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).order_by("?")[0]
+        post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).order_by("?")[0]
     post.rnd_chosen()
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
@@ -636,7 +636,7 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
         if self.request.user.is_superuser:
             self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.category.remove()
+                self.category.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()
@@ -695,7 +695,7 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
         if self.request.user.is_superuser:
             self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.series.remove()
+                self.series.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()
@@ -784,7 +784,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
         if self.request.user.is_superuser:
             self.removing_post = get_object_or_404(Post, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_post.remove()
+                self.removing_post.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()
@@ -800,14 +800,14 @@ def post_next(request, slug):
     if request.user.is_superuser:
         if post.pub_date:
             next_post = (
-                Post.objects.filter(pub_date__gt=post.pub_date, is_removed=False)
+                Post.objects.filter(pub_date__gt=post.pub_date, deleted_at=None)
                 .exclude(pk=post.pk)
                 .order_by("pub_date")
                 .first()
             )
         else:
             next_post = (
-                Post.objects.filter(created_date__gt=post.created_date, is_removed=False)
+                Post.objects.filter(created_date__gt=post.created_date, deleted_at=None)
                 .exclude(pk=post.pk)
                 .order_by("created_date")
             )
@@ -817,7 +817,7 @@ def post_next(request, slug):
                 pub_date__gt=post.pub_date,
                 pub_date__lte=timezone.now(),
                 withdrawn=False,
-                is_removed=False,
+                deleted_at=None,
             )
             .exclude(pk=post.pk)
             .order_by("pub_date")
@@ -835,14 +835,14 @@ def post_previous(request, slug):
     if request.user.is_superuser:
         if post.pub_date:
             prev_post = (
-                Post.objects.filter(pub_date__lt=post.pub_date, is_removed=False)
+                Post.objects.filter(pub_date__lt=post.pub_date, deleted_at=None)
                 .exclude(pk=post.pk)
                 .order_by("-pub_date")
                 .first()
             )
         else:
             prev_post = (
-                Post.objects.filter(created_date__lt=post.created_date, is_removed=False)
+                Post.objects.filter(created_date__lt=post.created_date, deleted_at=None)
                 .exclude(pk=post.pk)
                 .order_by("-created_date")
                 .first()
@@ -853,7 +853,7 @@ def post_previous(request, slug):
                 pub_date__lt=post.pub_date,
                 pub_date__lte=timezone.now(),
                 withdrawn=False,
-                is_removed=False,
+                deleted_at=None,
             )
             .exclude(pk=post.pk)
             .order_by("-pub_date")

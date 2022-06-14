@@ -22,7 +22,7 @@ class BasePortfolioAbstractModel(auto_prefetch.Model):
     start_date = models.DateTimeField("Project's start date", null=True, blank=True)
     created_date = models.DateTimeField("Creation date", default=timezone.now)
     mod_date = models.DateTimeField("Last Updated", auto_now=True)
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
 
 
 class Project(BasePortfolioAbstractModel):
@@ -79,11 +79,11 @@ class Project(BasePortfolioAbstractModel):
 
     @property
     def get_sub_projects(self):
-        sub_projects = self.sub_project.filter(is_removed=False)
+        sub_projects = self.sub_project.filter(deleted_at=None)
         return sub_projects
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
@@ -141,8 +141,8 @@ class SubProject(BasePortfolioAbstractModel):
         fulltitle = self.parent_project.title + " " + self.title
         return fulltitle
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):

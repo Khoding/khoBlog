@@ -50,7 +50,7 @@ class Page(auto_prefetch.Model):
     )
     sites = models.ManyToManyField(Site, verbose_name=_("sites"))
     tags = TaggableManager(blank=True, through=CustomTaggedItem)
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
 
     history = HistoricalRecords()
 
@@ -79,8 +79,8 @@ class Page(auto_prefetch.Model):
     def get_absolute_admin_update_url(self):
         return reverse("admin:pages_page_change", kwargs={"object_id": self.pk})
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):

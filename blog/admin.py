@@ -187,18 +187,17 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "clicks",
         "rnd_choice",
         "language",
-        "is_removed",
+        "deleted_at",
     )
     list_display_links = (
         "pk",
         "title",
     )
-    list_editable = ("is_removed",)
     ordering = (
         "-pk",
         "title",
         "-pub_date",
-        "-is_removed",
+        "-deleted_at",
     )
     search_fields = (
         "title",
@@ -214,7 +213,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "slug": ("title",),
     }
     list_filter = (
-        "is_removed",
+        "deleted_at",
         "needs_reviewing",
         "publication_state",
         "featuring_state",
@@ -246,7 +245,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
             {
                 "fields": (
                     "withdrawn",
-                    "is_removed",
+                    "deleted_at",
                     "publication_state",
                     "featuring_state",
                     "language",
@@ -294,12 +293,11 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
 class CategoryAdmin(SimpleHistoryAdmin):
     """CategoryAdmin Class"""
 
-    list_display = ("title", "suffix", "description", "slug", "withdrawn", "is_removed")
-    list_editable = ("is_removed",)
+    list_display = ("title", "suffix", "description", "slug", "withdrawn", "deleted_at")
     ordering = (
         "-pk",
         "title",
-        "-is_removed",
+        "-deleted_at",
     )
     search_fields = ("title", "slug", "pk", "withdrawn")
     prepopulated_fields = {
@@ -310,7 +308,7 @@ class CategoryAdmin(SimpleHistoryAdmin):
     }
     list_filter = (
         "withdrawn",
-        "is_removed",
+        "deleted_at",
         "parent",
     )
 
@@ -319,18 +317,17 @@ class CategoryAdmin(SimpleHistoryAdmin):
 class SeriesAdmin(SimpleHistoryAdmin):
     """SeriesAdmin Class"""
 
-    list_display = ("title", "description", "slug", "withdrawn", "is_removed")
-    list_editable = ("is_removed",)
+    list_display = ("title", "description", "slug", "withdrawn", "deleted_at")
     ordering = (
         "-pk",
         "title",
-        "-is_removed",
+        "-deleted_at",
     )
     search_fields = ("title", "slug", "pk", "withdrawn")
     prepopulated_fields = {"slug": ("title",)}
     list_filter = (
         "withdrawn",
-        "is_removed",
+        "deleted_at",
     )
 
 

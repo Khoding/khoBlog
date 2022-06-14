@@ -49,7 +49,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
@@ -92,8 +92,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.needs_reviewing = True
         self.save()
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     @property
@@ -101,23 +101,23 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return self.postcatslink_set.filter(
             post__pub_date__lte=timezone.now(),
             post__withdrawn=False,
-            post__is_removed=False,
+            post__deleted_at=None,
         ).count()
 
     @property
     def get_superuser_post_count_in_category(self):
-        return self.postcatslink_set.filter(post__is_removed=False).count()
+        return self.postcatslink_set.filter(post__deleted_at=None).count()
 
     @property
     def get_superuser_percent_of_posts(self) -> str:
-        percentage = self.get_superuser_post_count_in_category / Post.objects.filter(is_removed=False).count() * 100
+        percentage = self.get_superuser_post_count_in_category / Post.objects.filter(deleted_at=None).count() * 100
         return f"{round(percentage, 2)}%"
 
     @property
     def get_percent_of_posts(self) -> str:
         percentage = (
             self.get_post_count_in_category
-            / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, is_removed=False).count()
+            / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).count()
             * 100
         )
         return f"{round(percentage, 2)}%"
@@ -160,7 +160,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
@@ -203,8 +203,8 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.needs_reviewing = True
         self.save()
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
@@ -331,7 +331,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
-    is_removed = models.BooleanField("is removed", default=False, db_index=True, help_text=("Soft delete"))
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
@@ -431,8 +431,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-    def remove(self):
-        self.is_removed = True
+    def soft_delete(self):
+        self.deleted_at = timezone.now()
         self.save()
 
     # Create a property that returns the markdown instead
@@ -463,14 +463,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def get_featured_cat(self):
         for post_cat in PostCatsLink.objects.filter(
-            post_id=self.pk, category__is_removed=False, featured_cat=True
+            post_id=self.pk, category__deleted_at=None, featured_cat=True
         ).select_related("post", "category"):
             return post_cat
 
     @property
     def featured_cat_title(self):
         for post_cat in PostCatsLink.objects.filter(
-            post_id=self.pk, category__is_removed=False, featured_cat=True
+            post_id=self.pk, category__deleted_at=None, featured_cat=True
         ).select_related("post", "category"):
             return post_cat.category.full_title
 
