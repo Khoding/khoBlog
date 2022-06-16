@@ -289,7 +289,7 @@
     }
 
     .pagination_next_prev_buttons {
-        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border bg-white px-4 py-2 text-sm font-medium;
+        @apply kho-button-border kho-button-bg kho-button-bg-hover kho-button-bg-disabled kho-button-text kho-button-border-focus relative inline-flex items-center rounded-xl border px-4 py-2 text-sm font-medium;
     }
 
     .form-control,
