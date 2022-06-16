@@ -84,7 +84,7 @@
             @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
         }
 
-        &:not(.profile_active_tab) {
+        & :not(.profile_active_tab) {
             @apply border-transparent;
         }
     }
@@ -107,11 +107,11 @@
         .dropdown_item_container {
             @apply first:!pt-0 last:!pb-0;
 
-            &:first-of-type .dropdown_item:first-of-type {
+            & :first-of-type .dropdown_item:first-of-type {
                 @apply rounded-t-xl;
             }
 
-            &:last-of-type .dropdown_item:last-of-type {
+            & :last-of-type .dropdown_item:last-of-type {
                 @apply rounded-b-xl;
             }
         }
@@ -120,33 +120,32 @@
     .prose {
         .tabbed-set {
             @apply relative flex flex-wrap;
+
+            .tabbed-content {
+                @apply order-last hidden pl-4;
+            }
+
+            label {
+                @apply mx-2 w-auto cursor-pointer p-1;
+            }
+
+            input {
+                @apply absolute opacity-0;
+
+                & :nth-child(n + 1) {
+                    @apply text-[#333333];
+                    & :checked + label {
+                        @apply text-[#ff5252];
+
+                        & + .tabbed-content {
+                            @apply block w-full;
+                        }
+                    }
+                }
+            }
         }
 
-        .tabbed-set .tabbed-content {
-            @apply order-last hidden pl-4;
-        }
-
-        .tabbed-set label {
-            @apply mx-2 w-auto cursor-pointer p-1;
-        }
-
-        .tabbed-set input {
-            @apply absolute opacity-0;
-        }
-
-        .tabbed-set input:nth-child(n + 1) {
-            @apply text-[#333333];
-        }
-
-        .tabbed-set input:nth-child(n + 1):checked + label {
-            @apply text-[#ff5252];
-        }
-
-        .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
-            @apply block;
-        }
-
-        &:is(.admonition, summary, details) {
+        & :is(.admonition, summary, details) {
             @apply dark:text-jumbo-700 mb-2 p-4;
         }
 
@@ -163,28 +162,28 @@
         }
 
         /* default for custom types */
-        &:is(.admonition, summary, details) {
+        & :is(.admonition, summary, details) {
             @apply border-l-8 border-purple-600 bg-purple-100;
         }
 
         /** native types */
-        &:is(.caution, .warning, .attention) {
+        & :is(.caution, .warning, .attention) {
             @apply border-l-8 border-orange-600 bg-orange-100;
         }
 
-        &:is(.success, .check, .done) {
+        & :is(.success, .check, .done) {
             @apply border-l-8 border-green-600 bg-green-100;
         }
 
-        &:is(.question, .help, .faq) {
+        & :is(.question, .help, .faq) {
             @apply border-l-8 border-green-400 bg-green-100;
         }
 
-        &:is(.failure, .fail, .missing) {
+        & :is(.failure, .fail, .missing) {
             @apply border-l-8 border-red-600 bg-red-100;
         }
 
-        &:is(.danger, .error) {
+        & :is(.danger, .error) {
             @apply border-l-8 border-red-500 bg-red-100;
         }
 
@@ -192,15 +191,15 @@
             @apply border-l-8 border-pink-500 bg-pink-100;
         }
 
-        &:is(.tip, .hint, .important) {
+        & :is(.tip, .hint, .important) {
             @apply border-l-8 border-teal-500 bg-teal-100;
         }
 
-        &:is(.info, .todo) {
+        & :is(.info, .todo) {
             @apply border-l-8 border-blue-500 bg-blue-100;
         }
 
-        &:is(.abstract, .summary, .tldr) {
+        & :is(.abstract, .summary, .tldr) {
             @apply border-l-8 border-cyan-400 bg-cyan-100;
         }
 
@@ -208,15 +207,15 @@
             @apply border-l-8 border-yellow-500 bg-yellow-100;
         }
 
-        &:is(.quote, .cite) {
+        & :is(.quote, .cite) {
             @apply border-l-8 border-gray-500 bg-gray-100;
         }
 
-        &:is(.admonition, summary, details) .icon svg {
+        & :is(.admonition, summary, details) .icon svg {
             @apply fill-current stroke-current;
         }
 
-        &:is(a, p) {
+        & :is(a, p) {
             @apply break-words;
         }
 
@@ -224,7 +223,7 @@
             @apply hover:no-underline;
         }
 
-        &:is(video, iframe, img) {
+        & :is(video, iframe, img) {
             @apply max-w-full;
         }
 
@@ -256,12 +255,14 @@
             }
         }
 
-        &:where(blockquote p:first-of-type):not(:where([class~="not-prose"]
+        &
+            :where(blockquote p:first-of-type):not(:where([class~="not-prose"]
                     *))::before {
             content: "";
         }
 
-        &:where(blockquote p:last-of-type):not(:where([class~="not-prose"]
+        &
+            :where(blockquote p:last-of-type):not(:where([class~="not-prose"]
                     *))::after {
             content: "";
         }
