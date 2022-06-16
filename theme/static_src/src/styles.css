@@ -103,179 +103,172 @@
 
     .superbutton_dropdown_items {
         @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+
+        .dropdown_item_container {
+            @apply first:!pt-0 last:!pb-0;
+
+            &:first-of-type .dropdown_item:first-of-type {
+                @apply rounded-t-xl;
+            }
+
+            &:last-of-type .dropdown_item:last-of-type {
+                @apply rounded-b-xl;
+            }
+        }
     }
 
-    .superbutton_dropdown_items .dropdown_item_container {
-        @apply first:!pt-0 last:!pb-0;
-    }
+    .prose {
+        .tabbed-set {
+            @apply relative flex flex-wrap;
+        }
 
-    .superbutton_dropdown_items
-        .dropdown_item_container:first-of-type
-        .dropdown_item:first-of-type {
-        @apply rounded-t-xl;
-    }
+        .tabbed-set .tabbed-content {
+            @apply order-last hidden pl-4;
+        }
 
-    .superbutton_dropdown_items
-        .dropdown_item_container:last-of-type
-        .dropdown_item:last-of-type {
-        @apply rounded-b-xl;
-    }
+        .tabbed-set label {
+            @apply mx-2 w-auto cursor-pointer p-1;
+        }
 
-    .prose .tabbed-set {
-        @apply relative flex flex-wrap;
-    }
+        .tabbed-set input {
+            @apply absolute opacity-0;
+        }
 
-    .prose .tabbed-set .tabbed-content {
-        @apply order-last hidden pl-4;
-    }
+        .tabbed-set input:nth-child(n + 1) {
+            @apply text-[#333333];
+        }
 
-    .prose .tabbed-set label {
-        @apply mx-2 w-auto cursor-pointer p-1;
-    }
+        .tabbed-set input:nth-child(n + 1):checked + label {
+            @apply text-[#ff5252];
+        }
 
-    .prose .tabbed-set input {
-        @apply absolute opacity-0;
-    }
+        .tabbed-set input:nth-child(n + 1):checked + label + .tabbed-content {
+            @apply block;
+        }
 
-    .prose .tabbed-set input:nth-child(n + 1) {
-        @apply text-[#333333];
-    }
+        &:is(.admonition, summary, details) {
+            @apply dark:text-jumbo-700 mb-2 p-4;
+        }
 
-    .prose .tabbed-set input:nth-child(n + 1):checked + label {
-        @apply text-[#ff5252];
-    }
+        .icon {
+            @apply mr-1 inline-block align-middle;
+        }
 
-    .prose
-        .tabbed-set
-        input:nth-child(n + 1):checked
-        + label
-        + .tabbed-content {
-        @apply block;
-    }
+        .icon svg {
+            @apply mb-1 inline-block h-5 w-5 stroke-0;
+        }
 
-    .prose :is(.admonition, summary, details) {
-        @apply dark:text-jumbo-700 mb-2 p-4;
-    }
+        summary > :last-child {
+            @apply mb-0;
+        }
 
-    .prose .icon {
-        @apply mr-1 inline-block align-middle;
-    }
+        /* default for custom types */
+        &:is(.admonition, summary, details) {
+            @apply border-l-8 border-purple-600 bg-purple-100;
+        }
 
-    .prose .icon svg {
-        @apply mb-1 inline-block h-5 w-5 stroke-0;
-    }
+        /** native types */
+        &:is(.caution, .warning, .attention) {
+            @apply border-l-8 border-orange-600 bg-orange-100;
+        }
 
-    .prose summary > :last-child {
-        @apply mb-0;
-    }
+        &:is(.success, .check, .done) {
+            @apply border-l-8 border-green-600 bg-green-100;
+        }
 
-    /* default for custom types */
-    .prose :is(.admonition, summary, details) {
-        @apply border-l-8 border-purple-600 bg-purple-100;
-    }
+        &:is(.question, .help, .faq) {
+            @apply border-l-8 border-green-400 bg-green-100;
+        }
 
-    /** native types */
-    .prose :is(.caution, .warning, .attention) {
-        @apply border-l-8 border-orange-600 bg-orange-100;
-    }
+        &:is(.failure, .fail, .missing) {
+            @apply border-l-8 border-red-600 bg-red-100;
+        }
 
-    .prose :is(.success, .check, .done) {
-        @apply border-l-8 border-green-600 bg-green-100;
-    }
+        &:is(.danger, .error) {
+            @apply border-l-8 border-red-500 bg-red-100;
+        }
 
-    .prose :is(.question, .help, .faq) {
-        @apply border-l-8 border-green-400 bg-green-100;
-    }
+        .bug {
+            @apply border-l-8 border-pink-500 bg-pink-100;
+        }
 
-    .prose :is(.failure, .fail, .missing) {
-        @apply border-l-8 border-red-600 bg-red-100;
-    }
+        &:is(.tip, .hint, .important) {
+            @apply border-l-8 border-teal-500 bg-teal-100;
+        }
 
-    .prose :is(.danger, .error) {
-        @apply border-l-8 border-red-500 bg-red-100;
-    }
-    .prose .bug {
-        @apply border-l-8 border-pink-500 bg-pink-100;
-    }
+        &:is(.info, .todo) {
+            @apply border-l-8 border-blue-500 bg-blue-100;
+        }
 
-    .prose :is(.tip, .hint, .important) {
-        @apply border-l-8 border-teal-500 bg-teal-100;
-    }
+        &:is(.abstract, .summary, .tldr) {
+            @apply border-l-8 border-cyan-400 bg-cyan-100;
+        }
 
-    .prose :is(.info, .todo) {
-        @apply border-l-8 border-blue-500 bg-blue-100;
-    }
+        .note {
+            @apply border-l-8 border-yellow-500 bg-yellow-100;
+        }
 
-    .prose :is(.abstract, .summary, .tldr) {
-        @apply border-l-8 border-cyan-400 bg-cyan-100;
-    }
+        &:is(.quote, .cite) {
+            @apply border-l-8 border-gray-500 bg-gray-100;
+        }
 
-    .prose .note {
-        @apply border-l-8 border-yellow-500 bg-yellow-100;
-    }
+        &:is(.admonition, summary, details) .icon svg {
+            @apply fill-current stroke-current;
+        }
 
-    .prose :is(.quote, .cite) {
-        @apply border-l-8 border-gray-500 bg-gray-100;
-    }
+        &:is(a, p) {
+            @apply break-words;
+        }
 
-    .prose :is(.admonition, summary, details) .icon svg {
-        @apply fill-current stroke-current;
-    }
+        a {
+            @apply hover:no-underline;
+        }
 
-    .prose :is(a, p) {
-        @apply break-words;
-    }
+        &:is(video, iframe, img) {
+            @apply max-w-full;
+        }
 
-    .prose a {
-        @apply hover:no-underline;
-    }
+        img {
+            @apply my-0 inline-block;
+        }
 
-    .prose :is(video, iframe, img) {
-        @apply max-w-full;
-    }
+        .highlighttable {
+            @apply block resize-x max-w-full rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
+        }
 
-    .prose img {
-        @apply my-0 inline-block;
-    }
+        .highlighttable .filename {
+            @apply ml-2;
+        }
 
-    .prose .highlighttable {
-        @apply block resize-x max-w-full rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
-    }
+        .highlighttable * {
+            @apply rounded-none p-0;
+        }
 
-    .prose .highlighttable .filename {
-        @apply ml-2;
-    }
+        .highlighttable pre {
+            @apply m-0 p-4;
+        }
 
-    .prose .highlighttable * {
-        @apply rounded-none p-0;
-    }
+        .highlighttable .code pre {
+            @apply bg-[#002b36] text-[#839496];
+        }
 
-    .prose .highlighttable pre {
-        @apply m-0 p-4;
-    }
+        .highlighttable .linenos {
+            @apply select-none;
+        }
 
-    .prose .highlighttable .code pre {
-        @apply bg-[#002b36] text-[#839496];
-    }
+        &:where(blockquote p:first-of-type):not(:where([class~="not-prose"]
+                    *))::before {
+            content: "";
+        }
 
-    .prose .highlighttable .linenos {
-        @apply select-none;
-    }
+        &:where(blockquote p:last-of-type):not(:where([class~="not-prose"]
+                    *))::after {
+            content: "";
+        }
 
-    .prose
-        :where(blockquote p:first-of-type):not(:where([class~="not-prose"]
-                *))::before {
-        content: "";
-    }
-
-    .prose
-        :where(blockquote p:last-of-type):not(:where([class~="not-prose"]
-                *))::after {
-        content: "";
-    }
-
-    .prose blockquote dd {
-        @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
+        blockquote dd {
+            @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
+        }
     }
 
     .dropdown_item {
