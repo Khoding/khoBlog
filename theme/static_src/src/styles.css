@@ -79,14 +79,14 @@
 
     .profile_tab {
         @apply dark:text-jumbo-50 dark:hover:border-jumbo-500 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700;
-    }
 
-    .profile_tab.profile_active_tab {
-        @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
-    }
+        &.profile_active_tab {
+            @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
+        }
 
-    .profile_tab:not(.profile_active_tab) {
-        @apply border-transparent;
+        &:not(.profile_active_tab) {
+            @apply border-transparent;
+        }
     }
 
     .superbutton_base {
@@ -152,10 +152,10 @@
 
         .icon {
             @apply mr-1 inline-block align-middle;
-        }
 
-        .icon svg {
-            @apply mb-1 inline-block h-5 w-5 stroke-0;
+            svg {
+                @apply mb-1 inline-block h-5 w-5 stroke-0;
+            }
         }
 
         summary > :last-child {
@@ -234,26 +234,26 @@
 
         .highlighttable {
             @apply block resize-x max-w-full rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
-        }
 
-        .highlighttable .filename {
-            @apply ml-2;
-        }
+            .filename {
+                @apply ml-2;
+            }
 
-        .highlighttable * {
-            @apply rounded-none p-0;
-        }
+            * {
+                @apply rounded-none p-0;
+            }
 
-        .highlighttable pre {
-            @apply m-0 p-4;
-        }
+            pre {
+                @apply m-0 p-4;
+            }
 
-        .highlighttable .code pre {
-            @apply bg-[#002b36] text-[#839496];
-        }
+            .code pre {
+                @apply bg-[#002b36] text-[#839496];
+            }
 
-        .highlighttable .linenos {
-            @apply select-none;
+            .lineos {
+                @apply select-none;
+            }
         }
 
         &:where(blockquote p:first-of-type):not(:where([class~="not-prose"]
@@ -314,10 +314,10 @@
 
     .input-group-text {
         @apply inline-flex items-center sm:text-sm px-3 rounded-l-md border border-r-0 kho-button-border kho-button-bg-darker;
-    }
 
-    .input-group-text + .form-control {
-        @apply flex-1 block w-full min-w-0 rounded-none rounded-r-md kho-button-border kho-button-bg;
+        & + .form-control {
+            @apply flex-1 block w-full min-w-0 rounded-none rounded-r-md kho-button-border kho-button-bg;
+        }
     }
 
     #id_honeypot {
