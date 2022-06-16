@@ -107,11 +107,11 @@
         .dropdown_item_container {
             @apply first:!pt-0 last:!pb-0;
 
-            & :first-of-type .dropdown_item:first-of-type {
+            &:first-of-type .dropdown_item:first-of-type {
                 @apply rounded-t-xl;
             }
 
-            & :last-of-type .dropdown_item:last-of-type {
+            &:last-of-type .dropdown_item:last-of-type {
                 @apply rounded-b-xl;
             }
         }
