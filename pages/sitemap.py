@@ -11,7 +11,9 @@ class PageSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
+        """Items"""
         return Page.objects.filter(withdrawn=False, deleted_at=None)
 
     def lastmod(self, obj):
+        """Lastmod"""
         return obj.mod_date

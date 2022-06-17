@@ -40,6 +40,7 @@ class GetLastElementsNode(BaseLastElementsNode):
         self.as_varname = as_varname
 
     def render(self, context):
+        """Render"""
         if not isinstance(self.count, int):
             self.count = int(self.count.resolve(context))
         q_object = self.content_types.model_class()

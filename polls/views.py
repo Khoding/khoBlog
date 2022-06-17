@@ -25,6 +25,7 @@ class IndexView(PermissionRequiredMixin, ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Polls List"
         context["description"] = "Polls List"
@@ -43,6 +44,7 @@ class PollsDetailView(PermissionRequiredMixin, DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Poll Detail"
         context["description"] = "Polls Details"
@@ -57,6 +59,7 @@ class ResultsView(PermissionRequiredMixin, DetailView):
     permission_required = "polls.view_question"
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Poll Results"
         context["description"] = "Polls Results"
