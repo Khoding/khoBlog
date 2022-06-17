@@ -26,5 +26,5 @@ class EvaluateNode(template.Node):
             content = self.variable.resolve(context)
             t = template.Template(content)
             return t.render(context)
-        except template.VariableDoesNotExist or template.TemplateSyntaxError:
+        except (template.VariableDoesNotExist, template.TemplateSyntaxError):
             return "Error rendering", self.variable
