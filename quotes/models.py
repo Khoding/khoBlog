@@ -48,8 +48,6 @@ class Quote(BaseQuoteAbstractModel):
     class Meta(BaseQuoteAbstractModel.Meta):
         """Meta"""
 
-        pass
-
     def save(self, *args, **kwargs):
         """Save"""
         if not self.slug:
@@ -123,8 +121,6 @@ class Source(BaseQuoteAbstractModel):
 
     class Meta(BaseQuoteAbstractModel.Meta):
         """Meta"""
-
-        pass
 
     # override the __str__ method to return the title of the source
     def __str__(self):
