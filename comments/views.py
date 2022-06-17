@@ -11,6 +11,7 @@ class CommentListView(LoginRequiredMixin, TemplateView):
     template_name = "blog/comments/comment_list.html"
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Comment List"
         context["description"] = "List of all comments"

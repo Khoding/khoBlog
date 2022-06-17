@@ -28,6 +28,7 @@ class SignUpView(SignupView):
     template_name = "account/signup.html"
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Sign up"
         return context
@@ -41,6 +42,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     view_as = "self"
 
     def get(self, request, *args, **kwargs):
+        """Get"""
         if (
             request.GET.get("view_as") is None
             or request.GET.get("view_as") == ""
@@ -52,6 +54,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return super(ProfileView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Profile • " + str(self.model.objects.get(username=kwargs["object"]))
         context["description"] = str(self.model.objects.get(username=kwargs["object"]).bio)
@@ -67,6 +70,7 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     model = CustomUser
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Profile"
         return context
@@ -80,6 +84,7 @@ class CustomPasswordSetView(LoginRequiredMixin, PasswordSetView):
     model = CustomUser
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Set Password"
         return context
@@ -93,6 +98,7 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     model = CustomUser
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Password"
         return context
@@ -102,6 +108,7 @@ class CustomPasswordResetView(PasswordResetView):
     """CustomPasswordResetView Class"""
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Reset Password"
         return context
@@ -111,6 +118,7 @@ class CustomPasswordResetDoneView(PasswordResetDoneView):
     """CustomPasswordResetDoneView Class"""
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Password requested"
         return context
@@ -120,6 +128,7 @@ class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
     """CustomPasswordResetFromKeyView Class"""
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Set a new password"
         return context
@@ -129,6 +138,7 @@ class CustomPasswordResetFromKeyDoneView(PasswordResetFromKeyDoneView):
     """CustomPasswordResetFromKeyDoneView Class"""
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "New password set"
         return context
@@ -142,6 +152,7 @@ class ConnectionsEditView(LoginRequiredMixin, ConnectionsView):
     model = CustomUser
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Connections"
         return context
@@ -153,6 +164,7 @@ class EmailEditView(LoginRequiredMixin, EmailView):
     model = CustomUser
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Email"
         return context
@@ -167,9 +179,11 @@ class UserListView(ListView):
     context_object_name = "users"
 
     def get_queryset(self):
+        """Get queryset"""
         return self.model.objects.all()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "User list"
         return context

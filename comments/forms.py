@@ -13,9 +13,11 @@ class CustomCommentXTDForm(XtdCommentForm):
         field = "__all__"
 
     def check_for_duplicate_comment(self, new):
+        """Check for duplicate comment"""
         return new
 
     def get_comment_create_data(self, **kwargs):
+        """Get comment create data"""
         # Use the data of the superclass, and add in the title field
         data = super().get_comment_create_data(**kwargs)
         data["title"] = self.cleaned_data["title"]

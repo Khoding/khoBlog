@@ -13,10 +13,13 @@ def superuser_required():
     """
 
     def wrapper(wrapped):
+        """Wrapper"""
+
         class WrappedClass(UserPassesTestMixin, wrapped):
             """WrappedClass"""
 
             def test_func(self):
+                """test_func"""
                 return self.request.user.is_superuser
 
         return WrappedClass

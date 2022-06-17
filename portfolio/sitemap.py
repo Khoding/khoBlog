@@ -11,7 +11,9 @@ class ProjectSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
+        """Items"""
         return Project.objects.filter(deleted_at=None)
 
     def lastmod(self, obj):
+        """Lastmod"""
         return obj.mod_date

@@ -14,12 +14,14 @@ class TestView(APIView):
     permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
+        """Get all resources"""
         qs = Resource.objects.all()
         post = qs.first()
         serializer = ResourceSerializer(post)
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
+        """Create a new resource"""
         serializer = ResourceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -33,6 +35,7 @@ class ResourceViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             queryset = Resource.objects.all()
         else:
@@ -40,6 +43,7 @@ class ResourceViewSet(viewsets.ModelViewSet):
         return queryset
 
     def get_serializer_class(self):
+        """Get serializer class"""
         return ResourceSerializer
 
 
@@ -49,10 +53,12 @@ class ResourceCreateView(generics.CreateAPIView):
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
+        """Get queryset"""
         queryset = Resource.objects.all()
         return queryset
 
     def get_serializer_class(self):
+        """Get serializer class"""
         return ResourceSerializer
 
 
@@ -62,6 +68,7 @@ class ResourceDetailView(generics.RetrieveAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             queryset = Resource.objects.all()
         else:
@@ -69,6 +76,7 @@ class ResourceDetailView(generics.RetrieveAPIView):
         return queryset
 
     def get_serializer_class(self):
+        """Get serializer class"""
         return ResourceSerializer
 
 
@@ -78,10 +86,12 @@ class ResourceUpdateView(generics.UpdateAPIView):
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
+        """Get queryset"""
         queryset = Resource.objects.all()
         return queryset
 
     def get_serializer_class(self):
+        """Get serializer class"""
         return ResourceSerializer
 
 
@@ -91,8 +101,10 @@ class ResourceDeleteView(generics.DestroyAPIView):
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
+        """Get queryset"""
         queryset = Resource.objects.all()
         return queryset
 
     def get_serializer_class(self):
+        """Get serializer class"""
         return ResourceSerializer

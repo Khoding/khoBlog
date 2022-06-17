@@ -14,9 +14,11 @@ class Question(auto_prefetch.Model):
     pub_date = models.DateTimeField("date published")
 
     def __str__(self):
+        """Return the title"""
         return self.title
 
     def was_published_recently(self):
+        """Check if the question was published recently"""
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
@@ -25,6 +27,7 @@ class Question(auto_prefetch.Model):
     was_published_recently.short_description = "Published recently?"
 
     def get_index_view_url(self):
+        """Get the url for the index view"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:index" % (content_type.app_label))
 
@@ -37,4 +40,5 @@ class Choice(auto_prefetch.Model):
     votes = models.IntegerField(default=0)
 
     def __str__(self):
+        """Return the title"""
         return self.title

@@ -26,11 +26,13 @@ class TagListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             return self.model.objects.all()
         return self.model.objects.filter(withdrawn=False)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Tag List"
         context["description"] = "List of all tags"
@@ -57,6 +59,7 @@ class TagUpdateView(UpdateView):
     success_url = reverse_lazy("custom_taggit:tag_list")
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Tag"
         return context

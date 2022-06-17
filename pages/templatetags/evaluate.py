@@ -17,9 +17,11 @@ class EvaluateNode(template.Node):
     """Evaluates a node"""
 
     def __init__(self, variable):
+        """Initialize"""
         self.variable = template.Variable(variable)
 
     def render(self, context):
+        """Render"""
         try:
             content = self.variable.resolve(context)
             t = template.Template(content)

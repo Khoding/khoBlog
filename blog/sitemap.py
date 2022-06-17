@@ -11,9 +11,11 @@ class PostSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
+        """Items"""
         return Post.objects.get_base_common_queryset()
 
     def lastmod(self, obj):
+        """Lastmod"""
         return obj.pub_date
 
 
@@ -25,9 +27,11 @@ class CategorySitemap(Sitemap):
     protocol = "https"
 
     def items(self):
+        """Items"""
         return Category.objects.get_base_common_queryset()
 
     def lastmod(self, obj):
+        """Lastmod"""
         return obj.mod_date
 
 
@@ -39,7 +43,9 @@ class SeriesSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
+        """Items"""
         return Series.objects.get_base_common_queryset()
 
     def lastmod(self, obj):
+        """Lastmod"""
         return obj.mod_date
