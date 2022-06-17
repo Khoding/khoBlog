@@ -174,7 +174,6 @@ def kheee_page():
 
     A direct link to kheee Page
     """
-
     url = get_object_or_404(Page, slug="kheee")
     return redirect(url)
 
@@ -184,7 +183,6 @@ def about_page():
 
     A direct link to about Page
     """
-
     url = get_object_or_404(Page, slug="about")
     return redirect(url)
 
@@ -194,6 +192,5 @@ def quotes_page():
 
     A direct link to quotes Page
     """
-
     url = get_object_or_404(Page, slug="quotes")
     return redirect(url)
