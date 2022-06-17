@@ -8,6 +8,8 @@ class PageAddForm(forms.ModelForm):
     """Form for adding a new page"""
 
     class Meta:
+        """Meta"""
+
         model = Page
         fields = (
             "title",
@@ -30,6 +32,8 @@ class PageEditForm(forms.ModelForm):
     """Form for editing a page"""
 
     class Meta:
+        """Meta"""
+
         model = Page
         fields = (
             "title",
@@ -54,5 +58,7 @@ class PageDeleteForm(forms.ModelForm):
     """Form for deleting a page"""
 
     class Meta:
+        """Meta"""
+
         model = Page
         fields = ()

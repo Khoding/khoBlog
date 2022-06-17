@@ -8,6 +8,8 @@ class CustomCommentXTDForm(XtdCommentForm):
     title = forms.CharField(max_length=200, required=False)
 
     class Meta:
+        """Meta"""
+
         field = "__all__"
 
     def check_for_duplicate_comment(self, new):

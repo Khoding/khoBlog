@@ -7,6 +7,8 @@ class ProjectAddForm(forms.ModelForm):
     """Form for adding a new project"""
 
     class Meta:
+        """Meta"""
+
         model = Project
         fields = (
             "title",
@@ -23,6 +25,8 @@ class ProjectUpdateForm(forms.ModelForm):
     """Form for editing a project"""
 
     class Meta:
+        """Meta"""
+
         model = Project
         fields = (
             "title",
@@ -57,6 +61,8 @@ class SubProjectAddForm(forms.ModelForm):
     """Form for adding a new subproject"""
 
     class Meta:
+        """Meta"""
+
         model = SubProject
         fields = (
             "title",
@@ -72,6 +78,8 @@ class SubProjectUpdateForm(forms.ModelForm):
     """Form for editing a subproject"""
 
     class Meta:
+        """Meta"""
+
         model = SubProject
         fields = (
             "title",

@@ -9,6 +9,8 @@ class TagForm(forms.ModelForm):
     """Form for CustomTag"""
 
     class Meta:
+        """Meta"""
+
         model = CustomTag
         fields = ("color",)
         widgets = {

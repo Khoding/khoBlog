@@ -30,6 +30,8 @@ class BaseFactAbstractModel(auto_prefetch.Model):
     site = auto_prefetch.ForeignKey(Site, default=1, on_delete=models.CASCADE)
 
     class Meta(auto_prefetch.Model.Meta):
+        """Meta"""
+
         abstract = True
 
     def __str__(self):
@@ -60,6 +62,8 @@ class Fact(BaseFactAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseFactAbstractModel.Meta):
+        """Meta"""
+
         verbose_name_plural = "Facts"
 
     def __str__(self):
@@ -98,6 +102,8 @@ class SpecificDateFact(BaseFactAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseFactAbstractModel.Meta):
+        """Meta"""
+
         verbose_name_plural = "Specific Date Facts"
 
     def __str__(self):
