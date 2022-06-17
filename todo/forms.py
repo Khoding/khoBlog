@@ -10,6 +10,8 @@ class TaskAddForm(forms.ModelForm):
     description = forms.TextInput(attrs={"class": "mb-2"})
 
     class Meta:
+        """Meta"""
+
         model = Task
         fields = ("title", "description")
 
@@ -21,6 +23,8 @@ class TaskEditForm(forms.ModelForm):
     description = forms.TextInput(attrs={"class": "mb-2"})
 
     class Meta:
+        """Meta"""
+
         model = Task
         fields = ("title", "description", "withdrawn", "status", "note", "completed_date")
 
@@ -29,6 +33,8 @@ class TaskChangeStatusForm(forms.ModelForm):
     """TaskChangeStatusForm"""
 
     class Meta:
+        """Meta"""
+
         model = Task
         fields = (
             "status",

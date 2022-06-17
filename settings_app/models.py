@@ -8,6 +8,8 @@ class MenuFooter(auto_prefetch.Model):
     title = models.CharField(max_length=200, blank=True)
 
     class Meta:
+        """Meta"""
+
         verbose_name_plural = "Menu Footers"
 
     def __str__(self):
@@ -39,6 +41,8 @@ class MenuFooterLink(auto_prefetch.Model):
     is_target_blank = models.BooleanField(default=False)
 
     class Meta:
+        """Meta"""
+
         verbose_name_plural = "Menu Footer Links"
 
     def __str__(self):

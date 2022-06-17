@@ -13,6 +13,8 @@ class BaseQuoteAbstractModel(auto_prefetch.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta(auto_prefetch.Model.Meta):
+        """Meta"""
+
         abstract = True
 
     # override the __str__ method to return the title of the quote
@@ -43,6 +45,8 @@ class Quote(BaseQuoteAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseQuoteAbstractModel.Meta):
+        """Meta"""
+
         pass
 
     def save(self, *args, **kwargs):
@@ -69,6 +73,8 @@ class Person(BaseQuoteAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseQuoteAbstractModel.Meta):
+        """Meta"""
+
         verbose_name_plural = "People"
 
     # override the __str__ method to return the name of the quoter
@@ -110,6 +116,8 @@ class Source(BaseQuoteAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseQuoteAbstractModel.Meta):
+        """Meta"""
+
         pass
 
     # override the __str__ method to return the title of the source
@@ -132,6 +140,8 @@ class Category(BaseQuoteAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseQuoteAbstractModel.Meta):
+        """Meta"""
+
         verbose_name_plural = "Categories"
 
     def __str__(self):
@@ -153,6 +163,8 @@ class MediaType(BaseQuoteAbstractModel):
     history = HistoricalRecords()
 
     class Meta(BaseQuoteAbstractModel.Meta):
+        """Meta"""
+
         verbose_name_plural = "Media"
 
     def __str__(self):

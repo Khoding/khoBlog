@@ -7,6 +7,8 @@ class PostSerializer(serializers.ModelSerializer):
     """Serializer for Post"""
 
     class Meta:
+        """Meta"""
+
         model = Post
         fields = (
             "pk",
@@ -26,6 +28,8 @@ class PostSerializerDetail(serializers.ModelSerializer):
     """Serializer for Post details"""
 
     class Meta:
+        """Meta"""
+
         model = Post
         fields = (
             "pk",

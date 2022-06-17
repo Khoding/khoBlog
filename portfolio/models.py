@@ -12,6 +12,8 @@ class BasePortfolioAbstractModel(auto_prefetch.Model):
     """Abstract Model for Portfolio"""
 
     class Meta(auto_prefetch.Model.Meta):
+        """Meta"""
+
         abstract = True
 
     title = models.CharField(max_length=100)

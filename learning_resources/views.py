@@ -73,6 +73,8 @@ class ResourceDetailView(generics.RetrieveAPIView):
 
 
 class ResourceUpdateView(generics.UpdateAPIView):
+    """Viewset for resource"""
+
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
@@ -84,6 +86,8 @@ class ResourceUpdateView(generics.UpdateAPIView):
 
 
 class ResourceDeleteView(generics.DestroyAPIView):
+    """Viewset for resource"""
+
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
