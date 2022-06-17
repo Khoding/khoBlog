@@ -35,14 +35,17 @@ class BaseFactAbstractModel(auto_prefetch.Model):
         abstract = True
 
     def __str__(self):
+        """String representation of the fact"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save the fact"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def save_without_historical_record(self, *args, **kwargs):
+        """Save without creating a historical record"""
         self.skip_history_when_saving = True
         try:
             ret = self.save(*args, **kwargs)
@@ -51,6 +54,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
         return ret
 
     def rnd_chosen(self):
+        """Randomly choose a fact"""
         self.rnd_choice += 1
         self.save_without_historical_record(update_fields=["rnd_choice"])
 
@@ -67,14 +71,17 @@ class Fact(BaseFactAbstractModel):
         verbose_name_plural = "Facts"
 
     def __str__(self):
+        """String representation of the Fact"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save method for Fact Model"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_admin_update_url(self):
+        """Get the absolute admin update url"""
         return reverse("admin:facts_fact_change", kwargs={"object_id": self.pk})
 
 
@@ -107,12 +114,15 @@ class SpecificDateFact(BaseFactAbstractModel):
         verbose_name_plural = "Specific Date Facts"
 
     def __str__(self):
+        """String representation of the model"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save the model"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_admin_update_url(self):
+        """Get the absolute admin update url"""
         return reverse("admin:facts_specificdatefact_change", kwargs={"object_id": self.pk})

@@ -19,6 +19,7 @@ class BaseQuoteAbstractModel(auto_prefetch.Model):
 
     # override the __str__ method to return the title of the quote
     def __str__(self):
+        """Return the title of the quote"""
         return self.title
 
 
@@ -50,17 +51,20 @@ class Quote(BaseQuoteAbstractModel):
         pass
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url"""
         return reverse("quotes:quote_detail", kwargs={"slug": self.slug})
 
     # create a title property that returns the title of the quote
     # the title is the name of the author and the body of the quote
     @property
     def title(self) -> str:
+        """Title"""
         return f"{self.author.name} - {self.body}"
 
 
@@ -79,9 +83,11 @@ class Person(BaseQuoteAbstractModel):
 
     # override the __str__ method to return the name of the quoter
     def __str__(self):
+        """__str__"""
         return self.name
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -122,9 +128,11 @@ class Source(BaseQuoteAbstractModel):
 
     # override the __str__ method to return the title of the source
     def __str__(self):
+        """__str__"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
@@ -145,9 +153,11 @@ class Category(BaseQuoteAbstractModel):
         verbose_name_plural = "Categories"
 
     def __str__(self):
+        """__str__"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
@@ -168,9 +178,11 @@ class MediaType(BaseQuoteAbstractModel):
         verbose_name_plural = "Media"
 
     def __str__(self):
+        """__str__"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)

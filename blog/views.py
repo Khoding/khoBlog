@@ -48,6 +48,7 @@ class PostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         query = PostFilter(
             self.request.GET,
             queryset=Post.objects.filter(Q(pub_date__lte=timezone.now(), withdrawn=False)),
@@ -57,6 +58,7 @@ class PostListView(ListView):
         return Post.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Latest Posts"
         context["filter_form"] = PostFilter()
@@ -82,6 +84,7 @@ class AllPostListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         if not self.request.user.is_superuser:
             raise PermissionDenied
         query = PostFilter(
@@ -93,6 +96,7 @@ class AllPostListView(ListView):
         return Post.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Latest Posts"
         context["filter_form"] = PostFilter()
@@ -114,6 +118,7 @@ class WeblogTemplateView(TemplateView):
     template_name = "blog/lists/weblog.html"
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Weblog"
         return context
@@ -141,6 +146,7 @@ class PostInCategoryListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
         if not self.category.withdrawn or self.request.user.is_superuser:
             self.title = self.category.title
@@ -150,6 +156,7 @@ class PostInCategoryListView(ListView):
         return self.model.objects.get_common_queryset(self.request.user).filter(categories=self.category)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["parent_object"] = self.category
         context["title"] = self.title
@@ -179,6 +186,7 @@ class PostInSeriesListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
         if not self.series.withdrawn or self.request.user.is_superuser:
             self.title = self.series.title
@@ -192,6 +200,7 @@ class PostInSeriesListView(ListView):
         )
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["parent_object"] = self.series
         context["title"] = self.series.title
@@ -219,11 +228,13 @@ class CategoryListView(ListView):
     ordering = "pk"
 
     def get_queryset(self):
+        """Get the queryset for this view."""
         if self.request.user.is_superuser:
             return self.model.objects.get_without_removed()
         return self.model.objects.filter(withdrawn=False).get_without_removed()
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "Category List"
         context["description"] = "List of categories"
@@ -249,11 +260,13 @@ class SeriesListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get the queryset for this view."""
         if self.request.user.is_superuser:
             return self.model.objects.get_without_removed()
         return self.model.objects.filter(withdrawn=False).get_without_removed()
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "Series List"
         context["description"] = "List of series"
@@ -280,6 +293,7 @@ class PostDetailView(DetailView):
     template_name = "blog/post_detail.html"
 
     def get_queryset(self):
+        """Get the queryset for this view."""
         self.post = get_object_or_404(Post, slug=self.kwargs["slug"])
         self.post.clicked()
         if self.post.deleted_at:
@@ -356,6 +370,7 @@ class PostDetailView(DetailView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["series"] = self.series
         context["title"] = self.title
@@ -411,9 +426,11 @@ class PostDraftListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """get_queryset"""
         return self.model.objects.filter(pub_date__isnull=True).order_by("-created_date").get_without_removed()
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "Drafts"
         context["description"] = "List of draft posts"
@@ -440,6 +457,7 @@ class PostScheduledListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """get_queryset"""
         return (
             self.model.objects.filter(pub_date__gte=timezone.now(), withdrawn=False)
             .get_without_removed()
@@ -447,6 +465,7 @@ class PostScheduledListView(ListView):
         )
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "Scheduled"
         context["description"] = "List of scheduled posts"
@@ -473,9 +492,11 @@ class PostWithdrawnListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """get_queryset"""
         return self.model.objects.filter(withdrawn=True).get_without_removed()
 
     def get_context_data(self, **kwargs):
+        """Gets the context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "Withdrawn"
         context["description"] = "List of withdrawn posts"
@@ -501,12 +522,14 @@ class PostWithTagListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """get_queryset"""
         self.tags = get_object_or_404(CustomTag, slug=self.kwargs["slug"])
         self.title = f"Tag: {self.tags.name}"
         self.description = f"Posts tagged with {self.tags.name}"
         return self.model.objects.get_common_queryset(self.request.user).filter(tags=self.tags)
 
     def get_context_data(self, **kwargs):
+        """Get context data for the view."""
         context = super().get_context_data(**kwargs)
         context["parent_object"] = self.tags
         context["title"] = self.title
@@ -532,10 +555,12 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     template_name = "blog/create_post.html"
 
     def form_valid(self, form):
+        """form_valid"""
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "New Post"
         return context
@@ -559,10 +584,12 @@ class CategoryCreateView(AutoPermissionRequiredMixin, CreateView):
     template_name = "blog/create_category.html"
 
     def form_valid(self, form):
+        """form_valid"""
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
+        """Get context data for the view."""
         context = super().get_context_data(**kwargs)
         context["title"] = "New Category"
         return context
@@ -586,6 +613,7 @@ class SeriesCreateView(AutoPermissionRequiredMixin, CreateView):
     template_name = "blog/create_series.html"
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "New Series"
         return context
@@ -609,6 +637,7 @@ class CategoryUpdateView(AutoPermissionRequiredMixin, UpdateView):
     template_name = "blog/edit_category.html"
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Category"
         return context
@@ -636,6 +665,7 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy("blog:category_list")
 
     def get_queryset(self):
+        """get_queryset"""
         if self.request.user.is_superuser:
             self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
@@ -645,6 +675,7 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Category"
         return context
@@ -668,6 +699,7 @@ class SeriesUpdateView(AutoPermissionRequiredMixin, UpdateView):
     template_name = "blog/edit_series.html"
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Series"
         return context
@@ -695,6 +727,7 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy("blog:series_list")
 
     def get_queryset(self):
+        """get_queryset"""
         if self.request.user.is_superuser:
             self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
@@ -704,6 +737,7 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Series"
         return context
@@ -727,6 +761,7 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
     template_name = "blog/edit_post.html"
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Edit Post"
         return context
@@ -750,10 +785,12 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
     form_class = PostCloneForm
 
     def form_valid(self, form):
+        """form_valid"""
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
+        """get_context_data"""
         post = self.get_object()
 
         context = super().get_context_data(**kwargs)
@@ -784,6 +821,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy("blog:post_list")
 
     def get_queryset(self):
+        """Get the queryset for this view."""
         if self.request.user.is_superuser:
             self.removing_post = get_object_or_404(Post, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
@@ -799,6 +837,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
 
 def post_next(request, slug):
+    """post_next"""
     post = get_object_or_404(Post, slug=slug)
     if request.user.is_superuser:
         if post.pub_date:
@@ -834,6 +873,7 @@ def post_next(request, slug):
 
 
 def post_previous(request, slug):
+    """post_previous"""
     post = get_object_or_404(Post, slug=slug)
     if request.user.is_superuser:
         if post.pub_date:
@@ -931,9 +971,11 @@ class PostDayArchiveView(DayArchiveView):
     allow_future = True
 
     def get_queryset(self):
+        """Get the queryset for this view."""
         return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
 
     def get_context_data(self, **kwargs):
+        """Get the context data for this view."""
         context = super().get_context_data(**kwargs)
         context["title"] = (
             "[Archive] Posted the " + str(self.get_day()) + " " + str(self.get_month()) + " " + str(self.get_year())

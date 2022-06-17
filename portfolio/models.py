@@ -60,35 +60,44 @@ class Project(BasePortfolioAbstractModel):
         ordering = ["pk"]
 
     def __str__(self):
+        """String representation of Project Model"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save method for Project Model"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url for Project Model"""
         return reverse("portfolio:project_detail", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get absolute url for Project Model"""
         return reverse("portfolio:project_edit", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
+        """Get absolute url for Project Model"""
         return reverse("portfolio:project_delete", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get absolute url for Project Model"""
         return reverse("admin:portfolio_project_change", kwargs={"object_id": self.pk})
 
     @property
     def get_sub_projects(self):
+        """Get sub projects"""
         sub_projects = self.sub_project.filter(deleted_at=None)
         return sub_projects
 
     def soft_delete(self):
+        """Soft delete method for Project Model"""
         self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
+        """Get index view url for Project Model"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
@@ -112,42 +121,51 @@ class SubProject(BasePortfolioAbstractModel):
         ordering = ["pk"]
 
     def __str__(self):
+        """String representation of SubProject Model"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save method for SubProject Model"""
         if not self.slug:
             self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url for SubProject Model"""
         return reverse(
             "portfolio:sub_project_detail", kwargs={"slug": self.parent_project.slug, "subproject_slug": self.slug}
         )
 
     def get_absolute_update_url(self):
+        """Get absolute url for SubProject Model"""
         return reverse(
             "portfolio:sub_project_edit", kwargs={"slug": self.parent_project.slug, "subproject_slug": self.slug}
         )
 
     def get_absolute_delete_url(self):
+        """Get absolute url for SubProject Model"""
         return reverse(
             "portfolio:sub_project_delete", kwargs={"slug": self.parent_project.slug, "subproject_slug": self.slug}
         )
 
     def get_absolute_admin_update_url(self):
+        """Get absolute url for SubProject Model"""
         return reverse("admin:portfolio_subproject_change", kwargs={"object_id": self.pk})
 
     @property
     def full_title(self) -> str:
+        """Get full title of SubProject"""
         fulltitle = ""
         fulltitle = self.parent_project.title + " " + self.title
         return fulltitle
 
     def soft_delete(self):
+        """Soft delete method for SubProject Model"""
         self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
+        """Get index view url for SubProject Model"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
@@ -159,6 +177,7 @@ class Website(auto_prefetch.Model):
     url = models.URLField()
 
     def __str__(self):
+        """String representation of Website Model"""
         return self.title
 
 
@@ -175,6 +194,7 @@ class Technology(auto_prefetch.Model):
         verbose_name_plural = "Technologies"
 
     def __str__(self):
+        """String representation of Technology Model"""
         return self.title
 
 
@@ -190,4 +210,5 @@ class Repository(auto_prefetch.Model):
         verbose_name_plural = "Repositories"
 
     def __str__(self):
+        """String representation of Repository Model"""
         return self.title

@@ -36,6 +36,7 @@ class Role(auto_prefetch.Model):
     id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
 
     def __str__(self):
+        """Return the name of the role"""
         return self.get_id_display()
 
 
@@ -68,22 +69,28 @@ class CustomUser(AbstractUser):
     show_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
 
     def __str__(self):
+        """String representation of CustomUser Model"""
         return self.username
 
     def save(self, *args, **kwargs):
+        """Save method for CustomUser Model"""
         if not self.slug:
             self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url for CustomUser Model"""
         return reverse("accounts:profile", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get absolute url for CustomUser Model"""
         return reverse("accounts:edit_profile", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get the absolute admin update url"""
         return reverse("admin:accounts_customuser_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
+        """Get the absolute index view url"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:profile" % (content_type.app_label), kwargs={"slug": self.slug})

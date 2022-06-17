@@ -13,6 +13,7 @@ class MenuFooter(auto_prefetch.Model):
         verbose_name_plural = "Menu Footers"
 
     def __str__(self):
+        """__str__"""
         return self.title
 
 
@@ -46,7 +47,9 @@ class MenuFooterLink(auto_prefetch.Model):
         verbose_name_plural = "Menu Footer Links"
 
     def __str__(self):
+        """String representation of MenuFooterLink Model"""
         return self.title
 
     def get_rel_url(self):
+        """Get the relative url of the link"""
         return "/" + self.rel_url

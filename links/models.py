@@ -57,14 +57,17 @@ class Links(BaseLinkAbstractModel):
         verbose_name_plural = "Links"
 
     def __str__(self):
+        """String representation of Link Model"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save method for Link Model"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url for Link Model"""
         return reverse("links:url_redirect", kwargs={"slug": self.slug})
 
     def get_content_object_url(self):
@@ -72,5 +75,6 @@ class Links(BaseLinkAbstractModel):
         return reverse("links:link-url-redirect", args=(self.content_type, self.object_pk))
 
     def get_absolute_permalink(self):
+        """Get absolute url for Link Model"""
         self.permalink = self.permalink + "/"
         return self.permalink

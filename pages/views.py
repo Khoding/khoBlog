@@ -79,11 +79,13 @@ class PageListView(ListView):
     paginate_orphans = 5
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             return self.model.objects.filter(deleted_at=None)
         return self.model.objects.filter(withdrawn=False, deleted_at=None)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Page List"
         context["description"] = "List of all Pages"
@@ -107,6 +109,7 @@ class PageCreateView(CreateView):
     form_class = PageAddForm
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Create Page"
         context["description"] = "Create a Page"
@@ -130,6 +133,7 @@ class PageUpdateView(UpdateView):
     form_class = PageEditForm
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Page"
         context["description"] = "Update a Page"
@@ -154,6 +158,7 @@ class PageDeleteView(UpdateView):
     success_url = reverse_lazy("pages:index")
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             self.removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
@@ -163,6 +168,7 @@ class PageDeleteView(UpdateView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Page"
         context["description"] = "Delete a Page"

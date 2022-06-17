@@ -28,15 +28,19 @@ class Task(auto_prefetch.Model):
     note = models.TextField(blank=True, default="", help_text="Note about the status, or something else")
 
     def __str__(self):
+        """Return the title"""
         return self.title
 
     def get_absolute_url(self):
+        """Get the url for the detail view"""
         return reverse("todo:task_change_status_confirmed", kwargs={"pk": self.pk})
 
     def status_changed(self):
+        """Check if the status has changed"""
         self.completed_date = timezone.now()
         self.save()
 
     def get_index_view_url(self):
+        """Get the url for the index view"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))

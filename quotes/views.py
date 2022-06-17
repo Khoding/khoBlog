@@ -10,6 +10,7 @@ class QuoteDetailView(DetailView):
     template_name = "quotes/quote_detail.html"
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["quote"] = self.object
         context["title"] = self.object.author
