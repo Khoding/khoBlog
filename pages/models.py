@@ -62,29 +62,37 @@ class Page(auto_prefetch.Model):
         ordering = ["pk"]
 
     def __str__(self):
+        """String representation of the model"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Override save method"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get the url for the detail view"""
         return reverse("pages:page_detail", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get the url for the update view"""
         return reverse("pages:page_edit", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
+        """Get the url for the delete view"""
         return reverse("pages:page_delete", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get the url for the admin update view"""
         return reverse("admin:pages_page_change", kwargs={"object_id": self.pk})
 
     def soft_delete(self):
+        """Soft delete the page"""
         self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
+        """Get the url for the index view"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:index" % (content_type.app_label))

@@ -16,16 +16,20 @@ class URL(auto_prefetch.Model):
     featured = models.BooleanField(default=False)
 
     def __str__(self):
+        """Return the title of the url"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get absolute url"""
         return reverse("shortener:url_redirect", kwargs={"slug": self.slug})
 
     def clicked(self):
+        """Clicked"""
         self.clicks += 1
         self.save()

@@ -29,15 +29,19 @@ class CustomTag(TagBase):
         verbose_name_plural = _("Tags")
 
     def get_absolute_url(self):
+        """Get absolute URL of Tag"""
         return reverse("custom_taggit:post_tagged_with", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get absolute URL of Tag"""
         return reverse("custom_taggit:tag_edit", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get absolute URL of Tag"""
         return reverse("admin:custom_taggit_customtag_change", kwargs={"object_id": self.pk})
 
     def get_index_view_url(self):
+        """Get index view URL of Tag"""
         return reverse("custom_taggit:tag_list")
 
 

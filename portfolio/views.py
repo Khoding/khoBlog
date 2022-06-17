@@ -24,9 +24,11 @@ class ProjectListView(ListView):
     context_object_name = "projects"
 
     def get_queryset(self):
+        """Get queryset"""
         return Project.objects.filter(deleted_at=None)
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Portfolio"
         context["description"] = "List of Projects"
@@ -40,12 +42,14 @@ class ProjectDetailView(DetailView):
     template_name = "portfolio/project_detail.html"
 
     def get_object(self, queryset=None):
+        """Get object"""
         obj = super(ProjectDetailView, self).get_object(queryset=queryset)
         if obj.deleted_at:
             raise Http404
         return super().get_object()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = f"Portfolio | {self.get_object().title}"
         context["description"] = self.get_object().description
@@ -61,6 +65,7 @@ class ProjectCreateView(CreateView):
     form_class = ProjectAddForm
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Create Project"
         context["description"] = "Create a Project"
@@ -76,6 +81,7 @@ class ProjectUpdateView(UpdateView):
     form_class = ProjectUpdateForm
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Project"
         context["description"] = "Update a Project"
@@ -100,6 +106,7 @@ class ProjectDeleteView(UpdateView):
     success_url = reverse_lazy("portfolio:project_list")
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             self.removing_project = get_object_or_404(Project, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
@@ -109,6 +116,7 @@ class ProjectDeleteView(UpdateView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Project"
         context["description"] = "Delete a Project"
@@ -123,10 +131,12 @@ class SubProjectDetailView(DetailView):
     template_name = "portfolio/project_detail.html"
 
     def get_object(self):
+        """Get object"""
         sub = get_object_or_404(SubProject, slug=self.kwargs["subproject_slug"])
         return sub
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = f"Portfolio | {self.get_object().title}"
         context["description"] = self.get_object().description
@@ -142,10 +152,12 @@ class SubProjectCreateView(CreateView):
     form_class = SubProjectAddForm
 
     def get_parent(self):
+        """Get parent"""
         parent = get_object_or_404(Project, slug=self.kwargs["slug"])
         return parent
 
     def form_valid(self, form):
+        """Form valid"""
         form.instance.parent_project = self.get_parent()
         return super().form_valid(form)
 
@@ -166,14 +178,17 @@ class SubProjectUpdateView(UpdateView):
     form_class = SubProjectUpdateForm
 
     def get_parent(self):
+        """Get parent"""
         parent = get_object_or_404(Project, slug=self.kwargs["slug"])
         return parent
 
     def get_object(self):
+        """Get object"""
         sub = get_object_or_404(SubProject, slug=self.kwargs["subproject_slug"])
         return sub
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Project"
         context["description"] = "Update a Project"
@@ -199,10 +214,12 @@ class SubProjectDeleteView(UpdateView):
     success_url = reverse_lazy("portfolio:project_list")
 
     def get_object(self):
+        """Get object"""
         sub = get_object_or_404(SubProject, slug=self.kwargs["subproject_slug"])
         return sub
 
     def get_queryset(self):
+        """Get queryset"""
         if self.request.user.is_superuser:
             self.removing_project = self.get_object()
             if self.get_form().is_valid():
@@ -212,6 +229,7 @@ class SubProjectDeleteView(UpdateView):
         return super().get_queryset()
 
     def get_context_data(self, **kwargs):
+        """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Delete Project"
         context["description"] = "Delete a Project"

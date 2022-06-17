@@ -12,4 +12,5 @@ class Resource(auto_prefetch.Model):
     done = models.BooleanField(default=False)
 
     def __str__(self):
+        """String representation of Resource Model"""
         return self.title

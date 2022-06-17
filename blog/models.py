@@ -66,38 +66,48 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         }
 
     def __str__(self):
+        """String representation of Category"""
         return self.full_title
 
     def save(self, *args, **kwargs):
+        """Save Category"""
         if not self.slug:
             self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get the absolute url for this category"""
         return reverse("blog:post_category_list", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get the update url for this category"""
         return reverse("blog:category_edit", kwargs={"slug": self.slug})
 
     def get_absolute_needs_review_url(self):
+        """Get the needs review url for this category"""
         return reverse("blog:category_needs_review", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
+        """Get the delete url for this category"""
         return reverse("blog:category_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get the admin update url for this category"""
         return reverse("admin:blog_category_change", kwargs={"object_id": self.pk})
 
     def needs_review(self):
+        """Set the needs_review flag for this category"""
         self.needs_reviewing = True
         self.save()
 
     def soft_delete(self):
+        """Soft delete Category"""
         self.deleted_at = timezone.now()
         self.save()
 
     @property
     def get_post_count_in_category(self):
+        """Get the number of posts in this category"""
         return self.postcatslink_set.filter(
             post__pub_date__lte=timezone.now(),
             post__withdrawn=False,
@@ -106,15 +116,18 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def get_superuser_post_count_in_category(self):
+        """Get the number of posts in this category"""
         return self.postcatslink_set.filter(post__deleted_at=None).count()
 
     @property
     def get_superuser_percent_of_posts(self) -> str:
+        """Get the percentage of posts in this category"""
         percentage = self.get_superuser_post_count_in_category / Post.objects.filter(deleted_at=None).count() * 100
         return f"{round(percentage, 2)}%"
 
     @property
     def get_percent_of_posts(self) -> str:
+        """Get the percentage of posts in this category"""
         percentage = (
             self.get_post_count_in_category
             / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).count()
@@ -124,6 +137,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def full_title(self) -> str:
+        """Get the full title of the category"""
         fulltitle = ""
         if self.suffix:
             fulltitle = self.title + " " + self.suffix
@@ -136,6 +150,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return fulltitle
 
     def get_index_view_url(self):
+        """Get the index view url for this category"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
@@ -177,37 +192,47 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         verbose_name_plural = "Series"
 
     def __str__(self):
+        """String representation of Series"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save Series"""
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Get the absolute url for this Series"""
         return reverse("blog:post_series_list", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get the absolute url for this Series"""
         return reverse("blog:series_edit", kwargs={"slug": self.slug})
 
     def get_absolute_needs_review_url(self):
+        """Get the absolute url for this Series"""
         return reverse("blog:series_needs_review", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
+        """Get the absolute url for this Series"""
         return reverse("blog:series_remove", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get the absolute url for this Series"""
         return reverse("admin:blog_series_change", kwargs={"object_id": self.pk})
 
     def needs_review(self):
+        """Set this Series to needs reviewing"""
         self.needs_reviewing = True
         self.save()
 
     def soft_delete(self):
+        """Soft delete Series"""
         self.deleted_at = timezone.now()
         self.save()
 
     def get_index_view_url(self):
+        """Get the index view url for this Series"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
 
@@ -234,6 +259,7 @@ class PostCatsLink(auto_prefetch.Model):
         verbose_name_plural = "Post to Category Link"
 
     def __str__(self):
+        """String representation of PostCatsLink"""
         return "%s - %s" % (self.post.title, self.category.title)
 
 
@@ -348,9 +374,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         }
 
     def __str__(self):
+        """String representation of Post"""
         return self.title
 
     def save(self, *args, **kwargs):
+        """Save Post"""
         if not self.slug:
             max_length = Post._meta.get_field("slug").max_length
             self.slug = orig = slugify(self.title)[:max_length]
@@ -372,6 +400,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return super().save(*args, **kwargs)
 
     def save_without_historical_record(self, *args, **kwargs):
+        """Save Post without Historical Record"""
         self.skip_history_when_saving = True
         try:
             ret = self.save(*args, **kwargs)
@@ -380,68 +409,85 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return ret
 
     def get_absolute_url(self):
+        """Get absolute url of Post"""
         return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
     def get_absolute_update_url(self):
+        """Get absolute url of Post update"""
         return reverse("blog:post_edit", kwargs={"slug": self.slug})
 
     def get_absolute_needs_review_url(self):
+        """Get absolute url of Post needs review"""
         return reverse("blog:post_needs_review", kwargs={"slug": self.slug})
 
     def get_absolute_delete_url(self):
+        """Get absolute url of Post delete"""
         return reverse("blog:post_remove", kwargs={"slug": self.slug})
 
     def get_absolute_publish_url(self):
+        """Get absolute url of Post publish"""
         return reverse("blog:post_publish", kwargs={"slug": self.slug})
 
     def get_absolute_publish_withdrawn_url(self):
+        """Get absolute url of Post publish"""
         return reverse("blog:post_publish_withdrawn", kwargs={"slug": self.slug})
 
     def get_absolute_clone_url(self):
+        """Get absolute url of Post clone"""
         return reverse("blog:clone_post", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
+        """Get absolute url of Post admin update"""
         return reverse("admin:blog_post_change", kwargs={"object_id": self.pk})
 
     def publish(self):
+        """Publish Post"""
         self.pub_date = timezone.now()
         self.publication_state = "P"
         self.withdrawn = False
         self.save()
 
     def publish_withdrawn(self):
+        """Publish Post Withdrawn"""
         self.pub_date = timezone.now()
         self.publication_state = "W"
         self.withdrawn = True
         self.save()
 
     def needs_review(self):
+        """Needs Review Post"""
         self.needs_reviewing = True
         self.save()
 
     def clicked(self):
+        """Clicked Post"""
         self.clicks += 1
         self.save_without_historical_record(update_fields=["clicks"])
 
     def rnd_chosen(self):
+        """Rnd Chosen Post"""
         self.rnd_choice += 1
         self.save_without_historical_record(update_fields=["rnd_choice"])
 
     def was_published_recently(self):
+        """Was published recently Post"""
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def soft_delete(self):
+        """Soft delete Post"""
         self.deleted_at = timezone.now()
         self.save()
 
     # Create a property that returns the markdown instead
     @property
     def formatted_markdown(self):
+        """Formatted Markdown Post"""
         return markdownify(self.body)
 
     @property
     def is_scheduled(self) -> bool:
+        """Is Scheduled Post"""
         now = timezone.now()
         if not self.pub_date:
             return False
@@ -450,18 +496,22 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def author_name(self):
+        """Author Name Post"""
         return self.author.username
 
     @property
     def get_tags(self):
+        """Get Tags Post"""
         return self.tags.filter(withdrawn=False)
 
     @property
     def get_admin_tags(self):
+        """Get Admin Tags Post"""
         return self.tags.all()
 
     @property
     def get_featured_cat(self):
+        """Get Featured Cat Post"""
         for post_cat in PostCatsLink.objects.filter(
             post_id=self.pk, category__deleted_at=None, featured_cat=True
         ).select_related("post", "category"):
@@ -469,11 +519,13 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     @property
     def featured_cat_title(self):
+        """Featured Cat Title Post"""
         for post_cat in PostCatsLink.objects.filter(
             post_id=self.pk, category__deleted_at=None, featured_cat=True
         ).select_related("post", "category"):
             return post_cat.category.full_title
 
     def get_index_view_url(self):
+        """Get Index View Url Post"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
