@@ -3,6 +3,8 @@ from django.db import models
 
 
 class MenuFooter(auto_prefetch.Model):
+    """Model for the menu footer"""
+
     title = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -13,6 +15,8 @@ class MenuFooter(auto_prefetch.Model):
 
 
 class MenuFooterLink(auto_prefetch.Model):
+    """Model for the menu footer links"""
+
     VISIBILITY_CHOICES = [
         ("D", "default"),
         ("NP", "needs_permission"),

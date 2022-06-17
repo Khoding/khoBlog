@@ -13,6 +13,7 @@ def get_proper_elided_page_range(p, number, on_each_side=3, on_ends=2):
 
 @register.simple_tag
 def relative_url(value, field_name, urlencode=None):
+    """relative_url tag"""
     url = "?{}={}".format(field_name, value)
 
     if urlencode:

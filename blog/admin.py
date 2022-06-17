@@ -19,12 +19,14 @@ class PostResource(resources.ModelResource):
 
 
 def export_as_json(queryset):
+    """Export a queryset as JSON"""
     response = HttpResponse(content_type="application/json")
     serializers.serialize("json", queryset, stream=response)
     return response
 
 
 def make_published(modeladmin, request, queryset):
+    """Make a queryset of posts published"""
     updated = queryset.update(publication_state="P")
     modeladmin.message_user(
         request,
@@ -39,6 +41,7 @@ def make_published(modeladmin, request, queryset):
 
 
 def make_withdrawn(modeladmin, request, queryset):
+    """Make a queryset of posts withdrawn"""
     updated = queryset.update(publication_state="W")
     modeladmin.message_user(
         request,
@@ -53,6 +56,7 @@ def make_withdrawn(modeladmin, request, queryset):
 
 
 def make_featured(modeladmin, request, queryset):
+    """Make a queryset of posts featured"""
     updated = queryset.update(featuring_state="F")
     modeladmin.message_user(
         request,
@@ -67,6 +71,7 @@ def make_featured(modeladmin, request, queryset):
 
 
 def make_super_featured(modeladmin, request, queryset):
+    """Make a queryset of posts super featured"""
     updated = queryset.update(featuring_state="SF")
     modeladmin.message_user(
         request,
@@ -80,35 +85,8 @@ def make_super_featured(modeladmin, request, queryset):
     )
 
 
-def make_approved(modeladmin, request, queryset):
-    updated = queryset.update(approbation_state="AP")
-    modeladmin.message_user(
-        request,
-        ngettext(
-            "%d post was successfully marked as approved.",
-            "%d posts were successfully marked as approved.",
-            updated,
-        )
-        % updated,
-        messages.SUCCESS,
-    )
-
-
-def make_removed(modeladmin, request, queryset):
-    updated = queryset.update(approbation_state="RE")
-    modeladmin.message_user(
-        request,
-        ngettext(
-            "%d post was successfully marked as removed.",
-            "%d posts were successfully marked as removed.",
-            updated,
-        )
-        % updated,
-        messages.SUCCESS,
-    )
-
-
 def make_baguette(modeladmin, request, queryset):
+    """Make a queryset of posts baguette"""
     updated = queryset.update(language="FR")
     modeladmin.message_user(
         request,
@@ -123,6 +101,7 @@ def make_baguette(modeladmin, request, queryset):
 
 
 def make_english(modeladmin, request, queryset):
+    """Make a queryset of posts English"""
     updated = queryset.update(language="EN")
     modeladmin.message_user(
         request,
@@ -137,6 +116,7 @@ def make_english(modeladmin, request, queryset):
 
 
 def make_other_language(modeladmin, request, queryset):
+    """Make a queryset of posts other language"""
     updated = queryset.update(language="OL")
     modeladmin.message_user(
         request,
@@ -151,6 +131,7 @@ def make_other_language(modeladmin, request, queryset):
 
 
 def make_multi_lingui(modeladmin, request, queryset):
+    """Make a queryset of posts multi lingual"""
     updated = queryset.update(language="ML")
     modeladmin.message_user(
         request,

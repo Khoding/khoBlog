@@ -5,6 +5,8 @@ from .models import Project, SubProject, Repository, Technology, Website
 
 
 class ProjectAdmin(admin.ModelAdmin):
+    """Admin class for Project"""
+
     form_class = ProjectAddForm
     list_display = (
         "title",
@@ -18,16 +20,22 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class WebsiteAdmin(admin.ModelAdmin):
+    """Admin class for Website"""
+
     list_display = ("title", "url")
     ordering = ("-pk",)
 
 
 class TechnologyAdmin(admin.ModelAdmin):
+    """Admin class for Technology"""
+
     list_display = ("title", "description", "website")
     ordering = ("-pk",)
 
 
 class RepositoryAdmin(admin.ModelAdmin):
+    """Admin class for Repository"""
+
     list_display = ("title", "url")
     ordering = ("-pk",)
 

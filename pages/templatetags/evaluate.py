@@ -14,6 +14,8 @@ def do_evaluate(parser, token):
 
 
 class EvaluateNode(template.Node):
+    """Evaluates a node"""
+
     def __init__(self, variable):
         self.variable = template.Variable(variable)
 

@@ -4,6 +4,8 @@ from .models import Project, SubProject
 
 
 class ProjectAddForm(forms.ModelForm):
+    """Form for adding a new project"""
+
     class Meta:
         model = Project
         fields = (
@@ -18,6 +20,8 @@ class ProjectAddForm(forms.ModelForm):
 
 
 class ProjectUpdateForm(forms.ModelForm):
+    """Form for editing a project"""
+
     class Meta:
         model = Project
         fields = (
@@ -50,6 +54,8 @@ class ProjectDeleteForm(forms.ModelForm):
 
 
 class SubProjectAddForm(forms.ModelForm):
+    """Form for adding a new subproject"""
+
     class Meta:
         model = SubProject
         fields = (
@@ -63,6 +69,8 @@ class SubProjectAddForm(forms.ModelForm):
 
 
 class SubProjectUpdateForm(forms.ModelForm):
+    """Form for editing a subproject"""
+
     class Meta:
         model = SubProject
         fields = (

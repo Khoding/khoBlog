@@ -4,6 +4,8 @@ from .models import Task
 
 
 class TaskAddForm(forms.ModelForm):
+    """Form for adding a new task"""
+
     title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Add new task...", "class": "mb-2"}))
     description = forms.TextInput(attrs={"class": "mb-2"})
 
@@ -13,6 +15,8 @@ class TaskAddForm(forms.ModelForm):
 
 
 class TaskEditForm(forms.ModelForm):
+    """Form for editing a task"""
+
     title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Add new task...", "class": "mb-2"}))
     description = forms.TextInput(attrs={"class": "mb-2"})
 

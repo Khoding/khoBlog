@@ -367,6 +367,7 @@ class PostDetailView(DetailView):
 
 
 def redirect_to_latest(request):
+    """redirects to the latest post"""
     if request.user.is_superuser:
         latest = Post.objects.latest()
     else:
@@ -375,6 +376,7 @@ def redirect_to_latest(request):
 
 
 def redirect_to_random(request):
+    """redirects to a random post"""
     if request.user.is_superuser:
         post = Post.objects.filter(deleted_at=None).order_by("?")[0]
     else:
@@ -384,6 +386,7 @@ def redirect_to_random(request):
 
 
 def post_detail_through_id(request, pk):
+    """redirects to a post by id"""
     post = get_object_or_404(Post, pk=pk)
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
@@ -868,6 +871,7 @@ def post_previous(request, slug):
 
 @user_passes_test(lambda u: u.is_superuser)
 def post_publish(request, slug):
+    """publishes a post"""
     post = get_object_or_404(Post, slug=slug)
     post.publish()
     return redirect("blog:post_detail", slug=slug)
@@ -875,6 +879,7 @@ def post_publish(request, slug):
 
 @user_passes_test(lambda u: u.is_superuser)
 def post_publish_withdrawn(request, slug):
+    """publishes a post as withdrawn"""
     post = get_object_or_404(Post, slug=slug)
     post.withdrawn = True
     post.publish_withdrawn()
@@ -883,6 +888,7 @@ def post_publish_withdrawn(request, slug):
 
 @user_passes_test(lambda u: u.is_superuser)
 def post_needs_review(request, slug):
+    """marks a post as needing review"""
     post = get_object_or_404(Post, slug=slug)
     post.needs_review()
     return redirect("blog:post_detail", slug=slug)
@@ -890,6 +896,7 @@ def post_needs_review(request, slug):
 
 @user_passes_test(lambda u: u.is_superuser)
 def category_needs_review(request, slug):
+    """marks a category as needing review"""
     category = get_object_or_404(Category, slug=slug)
     category.needs_review()
     return redirect("blog:post_category_list", slug=slug)
@@ -897,6 +904,7 @@ def category_needs_review(request, slug):
 
 @user_passes_test(lambda u: u.is_superuser)
 def series_needs_review(request, slug):
+    """marks a series as needing review"""
     series = get_object_or_404(Series, slug=slug)
     series.needs_review()
     return redirect("blog:post_series_list", slug=slug)

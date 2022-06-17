@@ -7,6 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag("tailwind/menu_footer_links.html", takes_context=True)
 def mfl_setting(context, menu_footer_links, device, link_type):
+    """Menu footer links tag"""
     has_perms = context.get("perms", ["settings_app.view_menu_footer_link"])
     dev_class = True
     if link_type == "D":

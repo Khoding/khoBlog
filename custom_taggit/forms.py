@@ -6,6 +6,8 @@ from custom_taggit.models import CustomTag
 
 
 class TagForm(forms.ModelForm):
+    """Form for CustomTag"""
+
     class Meta:
         model = CustomTag
         fields = ("color",)

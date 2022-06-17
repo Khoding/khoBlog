@@ -9,6 +9,8 @@ from .serializers import ResourceSerializer
 
 
 class TestView(APIView):
+    """Test api view"""
+
     permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
@@ -26,6 +28,8 @@ class TestView(APIView):
 
 
 class ResourceViewSet(viewsets.ModelViewSet):
+    """Viewset for resource"""
+
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):
@@ -40,6 +44,8 @@ class ResourceViewSet(viewsets.ModelViewSet):
 
 
 class ResourceCreateView(generics.CreateAPIView):
+    """Viewset for resource"""
+
     permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
@@ -51,6 +57,8 @@ class ResourceCreateView(generics.CreateAPIView):
 
 
 class ResourceDetailView(generics.RetrieveAPIView):
+    """Viewset for resource"""
+
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):

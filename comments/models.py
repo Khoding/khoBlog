@@ -4,6 +4,7 @@ from django_comments_xtd.models import XtdComment
 
 
 class CustomCommentXTD(XtdComment):
+    """Custom comment model"""
     title = models.CharField(max_length=200, blank=True, default="")
 
     def __str__(self):

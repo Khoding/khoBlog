@@ -12,6 +12,8 @@ from taggit_selectize.managers import TaggableManager
 
 
 class Page(auto_prefetch.Model):
+    """Page model"""
+
     FEATURING_CHOICES = [
         ("F", "Featured"),
         ("SF", "Super Featured"),

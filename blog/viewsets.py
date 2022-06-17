@@ -7,6 +7,8 @@ from .serializers import PostSerializer, PostSerializerDetail
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """Viewset for post"""
+
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_queryset(self):

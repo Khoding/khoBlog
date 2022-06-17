@@ -7,16 +7,19 @@ register = template.Library()
 
 @register.inclusion_tag("tailwind/super_buttons.html")
 def sb(o):
+    """Superbutton tag"""
     return {"object": o}
 
 
 @register.inclusion_tag("tailwind/user_super_buttons.html")
 def usb(o):
+    """User superbutton tag"""
     return {"object": o}
 
 
 @register.inclusion_tag("tailwind/content_super_buttons.html")
 def csb(o):
+    """Content superbutton tag"""
     content_type = ContentType.objects.get_for_model(o)
     create_url = reverse("%s:create_%s" % (content_type.app_label, content_type.model))
     obj = o.__class__.__name__

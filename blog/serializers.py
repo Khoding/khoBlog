@@ -4,6 +4,8 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """Serializer for Post"""
+
     class Meta:
         model = Post
         fields = (
@@ -21,6 +23,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class PostSerializerDetail(serializers.ModelSerializer):
+    """Serializer for Post details"""
+
     class Meta:
         model = Post
         fields = (

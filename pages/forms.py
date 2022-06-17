@@ -5,6 +5,8 @@ from .models import Page
 
 
 class PageAddForm(forms.ModelForm):
+    """Form for adding a new page"""
+
     class Meta:
         model = Page
         fields = (
@@ -25,6 +27,8 @@ class PageAddForm(forms.ModelForm):
 
 
 class PageEditForm(forms.ModelForm):
+    """Form for editing a page"""
+
     class Meta:
         model = Page
         fields = (
@@ -47,6 +51,8 @@ class PageEditForm(forms.ModelForm):
 
 
 class PageDeleteForm(forms.ModelForm):
+    """Form for deleting a page"""
+
     class Meta:
         model = Page
         fields = ()

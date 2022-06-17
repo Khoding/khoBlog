@@ -4,6 +4,8 @@ from quotes.models import Quote
 
 
 class QuoteDetailView(DetailView):
+    """QuoteDetailView Class"""
+
     model = Quote
     template_name = "quotes/quote_detail.html"
 

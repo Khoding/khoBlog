@@ -4,6 +4,8 @@ from .models import URL
 
 
 class URLAdmin(admin.ModelAdmin):
+    """Admin class for URL"""
+
     list_display = (
         "title",
         "full_url",

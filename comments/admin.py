@@ -7,6 +7,7 @@ from .models import CustomCommentXTD
 
 
 def make_site_khoblog(modeladmin, request, queryset):
+    """Changes the site of a queryset of comments to khoblog"""
     updated = queryset.update(site_id=1)
     modeladmin.message_user(
         request,
@@ -21,6 +22,7 @@ def make_site_khoblog(modeladmin, request, queryset):
 
 
 def make_site_localhost(modeladmin, request, queryset):
+    """Changes the site of a queryset of comments to localhost"""
     updated = queryset.update(site_id=2)
     modeladmin.message_user(
         request,
@@ -35,6 +37,8 @@ def make_site_localhost(modeladmin, request, queryset):
 
 
 class CommentsXTDAdmin(XtdCommentsAdmin):
+    """Admin class for CommentsXTD"""
+
     list_display = (
         "cid",
         "thread_level",

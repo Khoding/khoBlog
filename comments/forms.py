@@ -3,6 +3,8 @@ from django_comments_xtd.forms import XtdCommentForm
 
 
 class CustomCommentXTDForm(XtdCommentForm):
+    """Custom comment form"""
+
     title = forms.CharField(max_length=200, required=False)
 
     class Meta:

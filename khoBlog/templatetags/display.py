@@ -5,6 +5,7 @@ register = Library()
 
 
 def _get_content_types(tagname, tokens):
+    """Gets content types from tag tokens"""
     content_types = []
     for token in tokens:
         try:
@@ -32,6 +33,8 @@ class BaseLastElementsNode(Node):
 
 
 class GetLastElementsNode(BaseLastElementsNode):
+    """Gets the last element of the node"""
+
     def __init__(self, count, as_varname, content_types):
         super(GetLastElementsNode, self).__init__(count, content_types)
         self.as_varname = as_varname

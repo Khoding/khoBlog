@@ -7,6 +7,7 @@ from custom_taggit.models import CustomTag, CustomTaggedItem
 
 
 def make_default_color(modeladmin, request, queryset):
+    """Make a queryset of tags default color"""
     updated = queryset.update(color="#9B8383")
     modeladmin.message_user(
         request,
@@ -21,12 +22,16 @@ def make_default_color(modeladmin, request, queryset):
 
 
 class CustomTaggedItemAdmin(admin.StackedInline):
+    """Admin class for CustomTaggedItem"""
+
     model = CustomTaggedItem
     extra = 0
 
 
 @admin.register(CustomTag)
 class CustomTagAdmin(admin.ModelAdmin):
+    """Admin class for CustomTag"""
+
     list_display = (
         "name",
         "slug",

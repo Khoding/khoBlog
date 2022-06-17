@@ -7,6 +7,8 @@ from .models import Page
 
 @admin.register(Page)
 class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
+    """Admin class for Page"""
+
     list_display = ("title", "created_date", "slug", "deleted_at")
     ordering = ("title",)
     search_fields = ("title",)

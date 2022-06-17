@@ -17,6 +17,8 @@ from .models import Project, SubProject
 
 
 class ProjectListView(ListView):
+    """ProjectListView Class"""
+
     model = Project
     template_name = "portfolio/project_list.html"
     context_object_name = "projects"
@@ -32,6 +34,8 @@ class ProjectListView(ListView):
 
 
 class ProjectDetailView(DetailView):
+    """ProjectDetailView Class"""
+
     model = Project
     template_name = "portfolio/project_detail.html"
 
@@ -50,6 +54,8 @@ class ProjectDetailView(DetailView):
 
 @superuser_required()
 class ProjectCreateView(CreateView):
+    """ProjectCreateView Class"""
+
     model = Project
     template_name = "portfolio/create_project.html"
     form_class = ProjectAddForm
@@ -63,6 +69,8 @@ class ProjectCreateView(CreateView):
 
 @superuser_required()
 class ProjectUpdateView(UpdateView):
+    """ProjectUpdateView Class"""
+
     model = Project
     template_name = "portfolio/edit_project.html"
     form_class = ProjectUpdateForm
@@ -108,6 +116,8 @@ class ProjectDeleteView(UpdateView):
 
 
 class SubProjectDetailView(DetailView):
+    """SubProjectDetailView Class"""
+
     model = SubProject
     context_object_name = "project"
     template_name = "portfolio/project_detail.html"
@@ -125,6 +135,8 @@ class SubProjectDetailView(DetailView):
 
 @superuser_required()
 class SubProjectCreateView(CreateView):
+    """SubProjectCreateView Class"""
+
     model = SubProject
     template_name = "portfolio/create_sub_project.html"
     form_class = SubProjectAddForm
@@ -147,6 +159,8 @@ class SubProjectCreateView(CreateView):
 
 @superuser_required()
 class SubProjectUpdateView(UpdateView):
+    """SubProjectUpdateView Class"""
+
     model = SubProject
     template_name = "portfolio/edit_sub_project.html"
     form_class = SubProjectUpdateForm

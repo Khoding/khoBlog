@@ -7,6 +7,8 @@ from taggit.models import GenericTaggedItemBase, TagBase
 
 
 class CustomTag(TagBase):
+    """CustomTag model extending TagBase"""
+
     COLOR_PALETTE = [
         ("#444F99", "liberty"),
         ("#F1C40F", "yellow"),
@@ -38,6 +40,8 @@ class CustomTag(TagBase):
 
 
 class CustomTaggedItem(GenericTaggedItemBase):
+    """CustomTaggedItem model extending GenericTaggedItemBase"""
+
     # TaggedWhatever can also extend TaggedItemBase or a combination of
     # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
     # allows using the same tag for different kinds of objects, in this

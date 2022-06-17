@@ -11,6 +11,8 @@ from .models import Task
 
 
 class TaskListView(ListView):
+    """TaskListView Class"""
+
     model = Task
     template_name = "todo/list.html"
     context_object_name = "tasks"
@@ -29,6 +31,8 @@ class TaskListView(ListView):
 
 @superuser_required()
 class TaskCreateView(CreateView):
+    """TaskCreateView Class"""
+
     model = Task
     form_class = TaskAddForm
     template_name = "todo/create_task.html"
@@ -43,6 +47,7 @@ class TaskCreateView(CreateView):
 
 @user_passes_test(lambda u: u.is_superuser)
 def task_completed(request, pk):
+    """Task completed"""
     task = get_object_or_404(Task, pk=pk)
     task.status_changed()
     return redirect(reverse_lazy("todo:task_list"))
@@ -50,6 +55,8 @@ def task_completed(request, pk):
 
 @superuser_required()
 class TaskChangeStatusView(UpdateView):
+    """TaskChangeStatusView Class"""
+
     model = Task
     form_class = TaskChangeStatusForm
     template_name = "todo/task_change_status.html"
@@ -68,6 +75,8 @@ class TaskChangeStatusView(UpdateView):
 
 @superuser_required()
 class TaskUpdateView(UpdateView):
+    """TaskUpdateView Class"""
+
     model = Task
     form_class = TaskEditForm
     template_name = "todo/edit_task.html"
@@ -82,6 +91,8 @@ class TaskUpdateView(UpdateView):
 
 @superuser_required()
 class TaskDeleteView(DeleteView):
+    """TaskDeleteView Class"""
+
     model = Task
     template_name = "todo/delete.html"
     success_url = reverse_lazy("todo:task_list")

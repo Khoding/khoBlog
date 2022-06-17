@@ -65,6 +65,7 @@ class ResultsView(PermissionRequiredMixin, DetailView):
 
 @permission_required("polls.view_question")
 def vote(request, question_id):
+    """Vote Function"""
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.related_question.get(pk=request.POST["choice"])

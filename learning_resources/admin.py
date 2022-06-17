@@ -5,6 +5,8 @@ from .models import Resource
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
+    """Admin class for Resource"""
+
     list_display = (
         "title",
         "url",

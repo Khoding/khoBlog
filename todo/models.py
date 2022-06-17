@@ -7,6 +7,8 @@ import auto_prefetch
 
 
 class Task(auto_prefetch.Model):
+    """Task model"""
+
     STATUS = [
         ("complete", "Complete"),
         ("incomplete", "Incomplete"),

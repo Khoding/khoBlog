@@ -6,6 +6,8 @@ import auto_prefetch
 
 
 class URL(auto_prefetch.Model):
+    """URL model"""
+
     title = models.CharField(max_length=200, unique=True)
     full_url = models.URLField(unique=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
