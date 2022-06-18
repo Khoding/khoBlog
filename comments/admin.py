@@ -93,9 +93,6 @@ class CommentsXTDAdmin(XtdCommentsAdmin):
     )
 
     actions = [
-        "flag_comments",
-        "approve_comments",
-        "remove_comments",
         make_site_khoblog,
         make_site_localhost,
     ]
