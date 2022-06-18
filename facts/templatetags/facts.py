@@ -3,8 +3,9 @@ from datetime import datetime
 from django import template
 from django.db.models import Q
 
-register = template.Library()
 from facts.models import SpecificDateFact
+
+register = template.Library()
 
 
 @register.inclusion_tag("tailwind/display_fact.html")
