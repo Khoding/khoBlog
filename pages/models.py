@@ -72,7 +72,7 @@ class Page(auto_prefetch.Model):
         """Override save method"""
         try:
             ping_google()
-        except Exception:  # skipcq: PYL-W0703PYL-W0703
+        except Exception:  # skipcq: PYL-W0703
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             pass

@@ -74,7 +74,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Save Category"""
         try:
             ping_google()
-        except Exception:  # skipcq: PYL-W0703PYL-W0703
+        except Exception:  # skipcq: PYL-W0703
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             pass
@@ -206,7 +206,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Save Series"""
         try:
             ping_google()
-        except Exception:  # skipcq: PYL-W0703PYL-W0703
+        except Exception:  # skipcq: PYL-W0703
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             pass
@@ -394,7 +394,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Save Post"""
         try:
             ping_google()
-        except Exception:  # skipcq: PYL-W0703PYL-W0703
+        except Exception:  # skipcq: PYL-W0703
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             pass
