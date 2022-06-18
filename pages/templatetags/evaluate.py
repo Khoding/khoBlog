@@ -7,7 +7,7 @@ register = template.Library()
 def do_evaluate(parser, token):
     """tag usage {% evaluate object.textfield %}"""
     try:
-        tag_name, variable = token.split_contents()
+        _unused_tag_name, variable = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError(f"{token.contents.split()[0]} tag requires a single argument")
     return EvaluateNode(variable)
