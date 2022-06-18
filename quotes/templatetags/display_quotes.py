@@ -12,14 +12,14 @@ register = template.Library()
 def display_quotes(category_slug, show_category_title=False):
     """Display quotes"""
     category = Category.objects.get(slug=category_slug)
-    quotes = Quote.objects.filter(category=category)
+    QUOTES = Quote.objects.filter(category=category)
 
     content = [""]
 
     if show_category_title:
         content.append(f'<h2 id="{category.slug}">{category.title}</h2>')
 
-    for i, quote in enumerate(quotes):
+    for i, quote in enumerate(QUOTES):
         if i > 0:
             content.append("<hr>")
 

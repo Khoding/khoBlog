@@ -30,7 +30,7 @@ def facts():
     ).count()
     if specific_date_fact_count == 0:
         return None
-    facts = SpecificDateFact.objects.filter(shown=True).filter(
+    FACTS = SpecificDateFact.objects.filter(shown=True).filter(
         (
             Q(
                 showing_date__day=datetime.today().day,
@@ -47,9 +47,9 @@ def facts():
         )
         & (Q(is_recurrent=True) | Q(is_recurrent=False, showing_date__year=datetime.now().year))
     )
-    if facts.count() < 0:
+    if FACTS.count() < 0:
         return None
-    o = facts.order_by("?")[0]
+    o = FACTS.order_by("?")[0]
     o.rnd_chosen()
     is_old_enough = False
     timesince = datetime.now().year - o.showing_date.year
