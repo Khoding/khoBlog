@@ -78,14 +78,14 @@
     }
 
     .profile_tab {
-        @apply dark:text-jumbo-50 dark:hover:border-jumbo-500 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700;
+        @apply dark:text-jumbo-50 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700;
 
         &.profile_active_tab {
             @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
         }
 
-        & :not(.profile_active_tab) {
-            @apply border-transparent;
+        &:not(.profile_active_tab) {
+            @apply border-transparent dark:hover:border-jumbo-500 hover:border-gray-300;
         }
     }
 
@@ -145,10 +145,6 @@
             }
         }
 
-        & :is(.admonition, summary, details) {
-            @apply dark:text-jumbo-700 mb-2 p-4;
-        }
-
         .icon {
             @apply mr-1 inline-block align-middle;
 
@@ -157,62 +153,78 @@
             }
         }
 
-        summary > :last-child {
-            @apply mb-0;
-        }
-
-        /* default for custom types */
         & :is(.admonition, summary, details) {
-            @apply border-l-8 border-purple-600 bg-purple-100;
+            @apply dark:text-jumbo-700;
         }
 
-        /** native types */
-        & :is(.caution, .warning, .attention) {
-            @apply border-l-8 border-orange-600 bg-orange-100;
+        details[open] > summary {
+            @apply mb-2;
         }
 
-        & :is(.success, .check, .done) {
-            @apply border-l-8 border-green-600 bg-green-100;
-        }
+        & :is(details, .admonition) {
+            @apply mb-2 p-4;
 
-        & :is(.question, .help, .faq) {
-            @apply border-l-8 border-green-400 bg-green-100;
-        }
+            & :is(summary, .admonition-title) {
+                @apply font-bold;
+            }
 
-        & :is(.failure, .fail, .missing) {
-            @apply border-l-8 border-red-600 bg-red-100;
-        }
+            .admonition-title {
+                @apply m-0 mb-2 border-b border-inherit;
+            }
 
-        & :is(.danger, .error) {
-            @apply border-l-8 border-red-500 bg-red-100;
-        }
+            /* default for custom types */
+            &:is(summary, details) {
+                @apply border-l-8 border-purple-600 bg-purple-100;
+            }
 
-        .bug {
-            @apply border-l-8 border-pink-500 bg-pink-100;
-        }
+            /** native types */
+            &:is(.caution, .warning, .attention) {
+                @apply border-l-8 border-orange-600 bg-orange-100;
+            }
 
-        & :is(.tip, .hint, .important) {
-            @apply border-l-8 border-teal-500 bg-teal-100;
-        }
+            &:is(.success, .check, .done) {
+                @apply border-l-8 border-green-600 bg-green-100;
+            }
 
-        & :is(.info, .todo) {
-            @apply border-l-8 border-blue-500 bg-blue-100;
-        }
+            &:is(.question, .help, .faq) {
+                @apply border-l-8 border-green-400 bg-green-100;
+            }
 
-        & :is(.abstract, .summary, .tldr) {
-            @apply border-l-8 border-cyan-400 bg-cyan-100;
-        }
+            &:is(.failure, .fail, .missing) {
+                @apply border-l-8 border-red-600 bg-red-100;
+            }
 
-        .note {
-            @apply border-l-8 border-yellow-500 bg-yellow-100;
-        }
+            &:is(.danger, .error) {
+                @apply border-l-8 border-red-500 bg-red-100;
+            }
 
-        & :is(.quote, .cite) {
-            @apply border-l-8 border-gray-500 bg-gray-100;
-        }
+            &.bug {
+                @apply border-l-8 border-pink-500 bg-pink-100;
+            }
 
-        & :is(.admonition, summary, details) .icon svg {
-            @apply fill-current stroke-current;
+            &:is(.tip, .hint, .important) {
+                @apply border-l-8 border-teal-500 bg-teal-100;
+            }
+
+            &:is(.info, .todo) {
+                @apply border-l-8 border-blue-500 bg-blue-100;
+            }
+
+            &:is(.abstract, .summary, .tldr) {
+                @apply border-l-8 border-cyan-400 bg-cyan-100;
+            }
+
+            .note {
+                @apply border-l-8 border-yellow-500 bg-yellow-100;
+            }
+
+            &:is(.quote, .cite) {
+                @apply border-l-8 border-gray-500 bg-gray-100;
+            }
+
+            &:is(.admonition, summary, details) .icon svg {
+                @apply fill-current stroke-current;
+            }
         }
 
         & :is(a, p) {
