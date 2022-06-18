@@ -35,16 +35,14 @@ def display_quotes(category_slug, show_category_title=False):
                 content.append(" and ")
                 content.append(f"{escape(person.name)}")
         if quote.addressing:
-            QUOTE_ADDRESSING = quote.addressing.all()
-            for i, person in enumerate(QUOTE_ADDRESSING):
-                if i > 0:
+            for qai, person in enumerate(quote.addressing.all()):
+                if qai > 0:
                     content.append(" and ")
                 content.append(f" {escape(quote.get_to_or_about_display())} ")
                 content.append(f"{escape(person.name)}")
         if quote.source:
-            QUOTE_SOURCE = quote.source.all()
-            for i, source in enumerate(QUOTE_SOURCE):
-                if i > 0:
+            for qsi, source in enumerate(quote.source.all()):
+                if qsi > 0:
                     content.append(f" and {escape(source.linking_text)} ")
                 else:
                     content.append(f" {escape(source.linking_text)} ")
