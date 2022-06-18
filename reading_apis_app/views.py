@@ -6,12 +6,14 @@ from jsonview.decorators import json_view
 @json_view
 def return_the_api(request):
     """Return the API"""
-    if "e" not in request.GET:
-        return None
-    api = request.GET["e"]
-    response = requests.get(api)
-    thing = response.json()
     f = "api"
+    if "e" in request.GET:
+        api = request.GET["e"]
+        response = requests.get(api)
+        thing = response.json()
+    else:
+        f = "json"
+        thing = {"error": "No API provided"}
     if "format" in request.GET:
         f = request.GET["format"]
     if f == "json":
@@ -26,12 +28,14 @@ def return_the_api(request):
 @json_view
 def return_the_api_detail(request):
     """Return the API"""
-    if "e" not in request.GET:
-        return None
-    api = request.GET["e"]
-    response = requests.get(api)
-    thing = response.json()
     f = "api"
+    if "e" in request.GET:
+        api = request.GET["e"]
+        response = requests.get(api)
+        thing = response.json()
+    else:
+        f = "json"
+        thing = {"error": "No API provided"}
     if "format" in request.GET:
         f = request.GET["format"]
     if f == "json":
