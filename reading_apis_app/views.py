@@ -23,6 +23,8 @@ def return_the_api(request):
             template = "reading_apis_app/list.html"
             context = {"things": thing, "title": "API Reading App"}
             return render(request, template, context)
+    else:
+        return None
 
 
 @json_view
@@ -45,3 +47,5 @@ def return_the_api_detail(request):
             template = "reading_apis_app/detail.html"
             context = {"things": thing, "title": "API Reading App"}
             return render(request, template, context)
+    else:
+        return None

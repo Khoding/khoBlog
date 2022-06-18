@@ -57,3 +57,5 @@ def facts():
                 "is_old_enough": is_old_enough,
                 "timesince": timesince,
             }
+    else:
+        return None
