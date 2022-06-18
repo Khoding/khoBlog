@@ -19,10 +19,9 @@ def return_the_api(request):
     if f == "json":
         context = {"things": thing}
         return context
-    else:
-        template = "reading_apis_app/list.html"
-        context = {"things": thing, "title": "API Reading App"}
-        return render(request, template, context)
+    template = "reading_apis_app/list.html"
+    context = {"things": thing, "title": "API Reading App"}
+    return render(request, template, context)
 
 
 @json_view
@@ -41,7 +40,6 @@ def return_the_api_detail(request):
     if f == "json":
         context = {"things": thing}
         return context
-    else:
-        template = "reading_apis_app/detail.html"
-        context = {"things": thing, "title": "API Reading App"}
-        return render(request, template, context)
+    template = "reading_apis_app/detail.html"
+    context = {"things": thing, "title": "API Reading App"}
+    return render(request, template, context)
