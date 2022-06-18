@@ -25,7 +25,7 @@ class BaseLastElementsNode(Node):
         """Class method to parse get_xtdcomment_list and return a Node."""
         try:
             self.count = int(count)
-        except Exception:  # noqa, skipcq: PYL-W0703
+        except Exception:  # skipcq: PYL-W0703PYL-W0703
             self.count = Variable(count)
 
         self.content_types = content_types
