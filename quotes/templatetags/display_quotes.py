@@ -7,7 +7,7 @@ from quotes.models import Category, Quote
 
 register = template.Library()
 
-# display the quotes in a simple tag
+
 @register.simple_tag()
 def display_quotes(category_slug, show_category_title=False):
     """Display quotes"""
