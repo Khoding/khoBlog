@@ -168,6 +168,10 @@
                 @apply font-bold;
             }
 
+            summary {
+                @apply select-none;
+            }
+
             .admonition-title {
                 @apply m-0 mb-2 border-b border-inherit;
             }
