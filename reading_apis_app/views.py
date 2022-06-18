@@ -7,7 +7,7 @@ from jsonview.decorators import json_view
 def return_the_api(request):
     """Return the API"""
     if "e" not in request.GET:
-        return {"error": "Parameter missing"}
+        return None
     api = request.GET["e"]
     response = requests.get(api)
     thing = response.json()
@@ -27,7 +27,7 @@ def return_the_api(request):
 def return_the_api_detail(request):
     """Return the API"""
     if "e" not in request.GET:
-        return {"error": "Parameter missing"}
+        return None
     api = request.GET["e"]
     response = requests.get(api)
     thing = response.json()
