@@ -8,4 +8,4 @@ register = template.Library()
 @register.filter
 def formatted_markdown(text):
     """Formats markdown text"""
-    return mark_safe(markdownify(text))  # noqa
+    return mark_safe(markdownify(text))  # noqa, skipcq: BAN-B308
