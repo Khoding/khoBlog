@@ -33,7 +33,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
 from pages.sitemap import PageSitemap
-from portfolio.sitemap import ProjectSitemap
 
 from . import dev_urls
 
@@ -52,7 +51,6 @@ sitemaps = {
     "category": CategorySitemap,
     "series": SeriesSitemap,
     "pages": PageSitemap,
-    "projects": ProjectSitemap,
 }
 
 api_patterns = [
@@ -88,8 +86,6 @@ urlpatterns = (
         path("accounts/", include("accounts.urls")),
         path("accounts/", include("allauth.urls")),
         path("captcha/", include("captcha.urls")),
-        # Dev Urls
-        path("dev/", include(dev_urls, namespace="dev")),
         # Markdownx, taggit
         path("markdownx/", include("markdownx.urls")),
         re_path(r"^taggit/", include("taggit_selectize.urls")),
@@ -113,6 +109,12 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 )
+
+if settings.DEBUG:
+    urlpatterns += [
+        # Dev Urls
+        path("dev/", include(dev_urls, namespace="dev")),
+    ]
 
 if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
     urlpatterns += [

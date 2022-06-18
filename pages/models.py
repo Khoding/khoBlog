@@ -1,14 +1,17 @@
-import auto_prefetch
-from custom_taggit.models import CustomTaggedItem
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sitemaps import ping_google
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls.base import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+import auto_prefetch
 from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
+
+from custom_taggit.models import CustomTaggedItem
 
 
 class Page(auto_prefetch.Model):
@@ -67,6 +70,12 @@ class Page(auto_prefetch.Model):
 
     def save(self, *args, **kwargs):
         """Override save method"""
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)

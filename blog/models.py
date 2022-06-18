@@ -3,6 +3,7 @@ import itertools
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sitemaps import ping_google
 from django.db import models
 from django.db.models import Q
 from django.template.defaultfilters import slugify
@@ -71,6 +72,12 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Category"""
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
         if not self.slug:
             self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
@@ -197,6 +204,12 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Series"""
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
@@ -379,6 +392,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Post"""
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
         if not self.slug:
             max_length = Post._meta.get_field("slug").max_length
             self.slug = orig = slugify(self.title)[:max_length]
