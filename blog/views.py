@@ -208,6 +208,64 @@ class PostInSeriesListView(ListView):
         return context
 
 
+def redirect_to_first_in_category(request, slug):
+    """redirects to the first post in category"""
+    category = get_object_or_404(Category, slug=slug)
+    if request.user.is_superuser:
+        first = Post.objects.filter(categories=category).order_by("pk").first()
+    else:
+        first = (
+            Post.objects.filter(categories=category)
+            .filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None)
+            .order_by("pk")
+            .first()
+        )
+    return redirect(reverse("blog:post_detail", args=(first.slug,)))
+
+
+def redirect_to_latest_in_category(request, slug):
+    """redirects to the latest post in category"""
+    category = get_object_or_404(Category, slug=slug)
+    if request.user.is_superuser:
+        latest = Post.objects.filter(categories=category).latest()
+    else:
+        latest = (
+            Post.objects.filter(categories=category)
+            .filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None)
+            .latest()
+        )
+    return redirect(reverse("blog:post_detail", args=(latest.slug,)))
+
+
+def redirect_to_first_in_series(request, slug):
+    """redirects to the first post in series"""
+    series = get_object_or_404(Series, slug=slug)
+    if request.user.is_superuser:
+        first = Post.objects.filter(series=series).order_by("pk").first()
+    else:
+        first = (
+            Post.objects.filter(series=series)
+            .filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None)
+            .order_by("pk")
+            .first()
+        )
+    return redirect(reverse("blog:post_detail", args=(first.slug,)))
+
+
+def redirect_to_latest_in_series(request, slug):
+    """redirects to the latest post in series"""
+    series = get_object_or_404(Series, slug=slug)
+    if request.user.is_superuser:
+        latest = Post.objects.filter(series=series).latest()
+    else:
+        latest = (
+            Post.objects.filter(series=series)
+            .filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None)
+            .latest()
+        )
+    return redirect(reverse("blog:post_detail", args=(latest.slug,)))
+
+
 class CategoryListView(ListView):
     """CategoryListView ListView
 
