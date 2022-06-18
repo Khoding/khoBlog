@@ -6,14 +6,13 @@ with open(BASE_DIR + "/version.txt") as v_file:
     APP_VERSION_NUMBER = v_file.read()
 
 
-ver = re.split(
-    r"^(((v)([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$",
-    APP_VERSION_NUMBER,
+pattern = (
+    r"^(((v)([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)"
+    r"(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$"
 )
 
-
+ver = re.split(pattern, APP_VERSION_NUMBER, re.VERBOSE)
 version = ver[3:8]
-
 
 ver_code = (
     f"{int(version[1]) * 10000 + int(version[2]) * 1000 + int(version[3]) * 100}"
