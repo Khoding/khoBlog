@@ -54,8 +54,8 @@ def render_page(request, f):
     # To avoid having to always use the "|safe" filter in page templates,
     # mark the title and content as already safe (since they are raw HTML
     # content in the first place).
-    f.title = mark_safe(f.title)
-    f.content = mark_safe(f.content)
+    f.title = mark_safe(f.title)  # noqa
+    f.content = mark_safe(f.content)  # noqa
 
     return HttpResponse(template.render({"page": f, "title": f.title, "description": f.description}, request))
 
