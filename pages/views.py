@@ -160,9 +160,9 @@ class PageDeleteView(UpdateView):
     def get_queryset(self):
         """Get queryset"""
         if self.request.user.is_superuser:
-            self.removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
+            removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_page.soft_delete()
+                removing_page.soft_delete()
         else:
             raise PermissionDenied
         return super().get_queryset()

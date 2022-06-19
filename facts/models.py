@@ -46,7 +46,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
 
     def save_without_historical_record(self, *args, **kwargs):
         """Save without creating a historical record"""
-        self.skip_history_when_saving = True
+        self.skip_history_when_saving = True  # skipcq: PYL-W0201
         try:
             ret = self.save(*args, **kwargs)
         finally:

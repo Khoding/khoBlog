@@ -38,6 +38,7 @@ class GetLastElementsNode(BaseLastElementsNode):
     def __init__(self, count, as_varname, content_types):
         super(GetLastElementsNode, self).__init__(count, content_types)
         self.as_varname = as_varname
+        self.qs = None
 
     def render(self, context):
         """Render"""

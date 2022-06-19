@@ -108,9 +108,9 @@ class ProjectDeleteView(UpdateView):
     def get_queryset(self):
         """Get queryset"""
         if self.request.user.is_superuser:
-            self.removing_project = get_object_or_404(Project, slug=self.kwargs["slug"])
+            removing_project = get_object_or_404(Project, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_project.soft_delete()
+                removing_project.soft_delete()
         else:
             raise PermissionDenied
         return super().get_queryset()
@@ -222,9 +222,9 @@ class SubProjectDeleteView(UpdateView):
     def get_queryset(self):
         """Get queryset"""
         if self.request.user.is_superuser:
-            self.removing_project = self.get_object()
+            removing_project = self.get_object()
             if self.get_form().is_valid():
-                self.removing_project.soft_delete()
+                removing_project.soft_delete()
         else:
             raise PermissionDenied
         return super().get_queryset()

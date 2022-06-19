@@ -420,7 +420,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save_without_historical_record(self, *args, **kwargs):
         """Save Post without Historical Record"""
-        self.skip_history_when_saving = True
+        self.skip_history_when_saving = True  # skipcq: PYL-W0201
         try:
             ret = self.save(*args, **kwargs)
         finally:

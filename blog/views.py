@@ -881,9 +881,9 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
     def get_queryset(self):
         """Get the queryset for this view."""
         if self.request.user.is_superuser:
-            self.removing_post = get_object_or_404(Post, slug=self.kwargs["slug"])
+            removing_post = get_object_or_404(Post, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
-                self.removing_post.soft_delete()
+                removing_post.soft_delete()
         else:
             raise PermissionDenied()
         return super().get_queryset()
