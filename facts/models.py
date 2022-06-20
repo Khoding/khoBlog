@@ -1,5 +1,6 @@
 from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models import F
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -55,7 +56,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
 
     def rnd_chosen(self):
         """Randomly choose a fact"""
-        self.rnd_choice += 1
+        self.rnd_choice = F(rnd_choice) + 1
         self.save_without_historical_record(update_fields=["rnd_choice"])
 
 

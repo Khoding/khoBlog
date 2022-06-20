@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sitemaps import ping_google
 from django.db import models
-from django.db.models import Q
+from django.db.models import F, Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
@@ -480,12 +480,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def clicked(self):
         """Clicked Post"""
-        self.clicks += 1
+        self.clicks = F("clicks") + 1
         self.save_without_historical_record(update_fields=["clicks"])
 
     def rnd_chosen(self):
         """Rnd Chosen Post"""
-        self.rnd_choice += 1
+        self.rnd_choice = F("rnd_choice") + 1
         self.save_without_historical_record(update_fields=["rnd_choice"])
 
     def was_published_recently(self):

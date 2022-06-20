@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.db.models import F
 
 import auto_prefetch
 
@@ -31,5 +32,5 @@ class URL(auto_prefetch.Model):
 
     def clicked(self):
         """Clicked"""
-        self.clicks += 1
+        self.clicks = F("clicks") + 1
         self.save()
