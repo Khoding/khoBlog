@@ -56,7 +56,7 @@ class BaseFactAbstractModel(auto_prefetch.Model):
 
     def rnd_chosen(self):
         """Randomly choose a fact"""
-        self.rnd_choice = F(rnd_choice) + 1
+        self.rnd_choice = F("rnd_choice") + 1
         self.save_without_historical_record(update_fields=["rnd_choice"])
 
 
