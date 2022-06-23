@@ -6,5 +6,6 @@
 1598548222|Changed to Repo: khoBlog 1218 Commits
 1600069815|The 777th commit to this repository was the 1000th in total
 1634049471|Started the new design with Tailwind on October 12 2021
-1634900000|since it wasn't 100% done, so it was decided to finish it first
+1634900000|it got released a few days later, on April 12
+1634900000|since it wasn't 100% done, it was decided to finish it first
 1634900000|The new Tailwind design was supposed to be released on Khodok's Blog's second anniversary
