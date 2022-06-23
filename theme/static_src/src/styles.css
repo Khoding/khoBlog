@@ -117,6 +117,18 @@
         }
     }
 
+    .aside-section {
+        @apply mt-5 grid grid-cols-1 divide-y-2 divide-gray-300 dark:divide-jumbo shadow-lg rounded-2xl border-t dark:border-none border-gray-200;
+
+        div:first-of-type {
+            @apply rounded-t-2xl;
+        }
+
+        div:last-of-type {
+            @apply rounded-b-2xl;
+        }
+    }
+
     .prose {
         .tabbed-set {
             @apply relative flex flex-wrap;
