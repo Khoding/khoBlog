@@ -144,9 +144,9 @@
             input {
                 @apply absolute opacity-0;
 
-                & :nth-child(n + 1) {
+                &:nth-child(n + 1) {
                     @apply text-[#333333];
-                    & :checked + label {
+                    &:checked + label {
                         @apply text-[#ff5252];
 
                         & + .tabbed-content {
