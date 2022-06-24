@@ -1,0 +1,25 @@
+{% load content_type %}
+
+{% if not object.withdrawn %}
+  {% if object|to_class_name == "post" %}
+    {% if object.pub_date %}
+      {% if object.was_published_recently %}
+        <div class="inline-flex">
+          <span class="h-1.5 w-1.5 rounded-full bg-green-400" aria-hidden="true"></span>
+        </div>
+      {% elif object.is_scheduled %}
+        <div class="inline-flex">
+          <span class="h-1.5 w-1.5 rounded-full bg-orange-400" aria-hidden="true"></span>
+        </div>
+      {% endif %}
+    {% elif not object.pub_date %}
+      <div class="inline-flex">
+        <span class="h-1.5 w-1.5 rounded-full bg-slate-500 dark:bg-slate-300" aria-hidden="true"></span>
+      </div>
+    {% endif %}
+  {% endif %}
+{% else %}
+  <div class="inline-flex">
+    <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
+  </div>
+{% endif %}

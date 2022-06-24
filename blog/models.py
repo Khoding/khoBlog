@@ -574,6 +574,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         ).select_related("post", "category"):
             return post_cat.category.full_title
 
+    @property
+    def get_category_count(self) -> int:
+        """Get Category Count"""
+        return PostCatsLink.objects.filter(post_id=self.pk, category__deleted_at=None).count()
+
     def get_index_view_url(self):
         """Get Index View Url Post"""
         content_type = ContentType.objects.get_for_model(self.__class__)

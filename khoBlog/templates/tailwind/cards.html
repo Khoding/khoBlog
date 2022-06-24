@@ -1,4 +1,4 @@
-{% load featured_post comments content_type %}
+{% load featured_post comments content_type status_dot %}
 
 <article>
   {% if object.categories %}
@@ -16,33 +16,21 @@
           </span>
         </a>
       {% endif %}
-      {% if object|to_class_name == "post" %}
-        {% if object.pub_date and not object.withdrawn %}
-          {% if object.was_published_recently %}
-            <div class="inline-flex">
-              <span class="h-1.5 w-1.5 rounded-full bg-green-400" aria-hidden="true"></span>
-            </div>
-          {% elif object.is_scheduled %}
-            <div class="inline-flex">
-              <span class="h-1.5 w-1.5 rounded-full bg-orange-400" aria-hidden="true"></span>
-            </div>
-          {% endif %}
-        {% elif not object.pub_date %}
-          <div class="inline-flex">
-            <span class="h-1.5 w-1.5 rounded-full bg-slate-500 dark:bg-slate-300" aria-hidden="true"></span>
-          </div>
-        {% else %}
-          <div class="inline-flex">
-            <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
-          </div>
-        {% endif %}
+      {% if object.get_category_count > 1 %}
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700">
+          +{{ object.get_category_count|add:"-1" }}
+        </span>
       {% endif %}
+      {% status_dot object %}
     </section>
   {% endif %}
   <section>
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline">
       {{ object }}
     </a>
+    {% if object|to_class_name != "post" %}
+      {% status_dot object %}
+    {% endif %}
     {% if object.get_superuser_post_count or object.get_post_count or object.get_superuser_post_count or object.get_post_count %}
       <p class="text-sm dark:text-jumbo-100">Post count:
         {% if context.user.is_superuser %}
