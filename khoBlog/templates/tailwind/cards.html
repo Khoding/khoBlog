@@ -43,13 +43,13 @@
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline">
       {{ object }}
     </a>
-    {% if object.get_superuser_post_count_in_category or object.get_post_count_in_category %}
+    {% if object.get_superuser_post_count or object.get_post_count or object.get_superuser_post_count or object.get_post_count %}
       <p class="text-sm dark:text-jumbo-100">Post count:
         {% if context.user.is_superuser %}
-        <strong>{{ object.get_superuser_post_count_in_category }}</strong>
+        <strong>{{ object.get_superuser_post_count }}</strong>
         |
         {% endif %}
-        {{ object.get_post_count_in_category }}
+        {{ object.get_post_count }}
       </p>
       <p class="text-sm dark:text-jumbo-100">Percentage:
         {% if context.user.is_superuser %}

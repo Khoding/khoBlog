@@ -49,8 +49,8 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Category slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
-    withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
     deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
+    withdrawn = models.BooleanField(default=False, help_text="Is Category withdrawn")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
@@ -113,7 +113,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.save()
 
     @property
-    def get_post_count_in_category(self):
+    def get_post_count(self):
         """Get the number of posts in this category"""
         return self.postcatslink_set.filter(
             post__pub_date__lte=timezone.now(),
@@ -122,21 +122,21 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         ).count()
 
     @property
-    def get_superuser_post_count_in_category(self):
+    def get_superuser_post_count(self):
         """Get the number of posts in this category"""
         return self.postcatslink_set.filter(post__deleted_at=None).count()
 
     @property
     def get_superuser_percent_of_posts(self) -> str:
         """Get the percentage of posts in this category"""
-        percentage = self.get_superuser_post_count_in_category / Post.objects.filter(deleted_at=None).count() * 100
+        percentage = self.get_superuser_post_count / Post.objects.filter(deleted_at=None).count() * 100
         return f"{round(percentage, 2)}%"
 
     @property
     def get_percent_of_posts(self) -> str:
         """Get the percentage of posts in this category"""
         percentage = (
-            self.get_post_count_in_category
+            self.get_post_count
             / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).count()
             * 100
         )
@@ -181,8 +181,8 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     slug = models.SlugField(unique=True, default="", max_length=200, help_text="Series slug")
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
-    withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
     deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
+    withdrawn = models.BooleanField(default=False, help_text="Is Series withdrawn")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     history = HistoricalRecords()
 
@@ -243,6 +243,36 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Soft delete Series"""
         self.deleted_at = timezone.now()
         self.save()
+
+    @property
+    def get_post_count(self):
+        """Get the number of posts in this series"""
+        return self.post_series.filter(
+            pub_date__lte=timezone.now(),
+            withdrawn=False,
+            deleted_at=None,
+        ).count()
+
+    @property
+    def get_superuser_post_count(self):
+        """Get the number of posts in this series"""
+        return self.post_series.filter(deleted_at=None).count()
+
+    @property
+    def get_superuser_percent_of_posts(self) -> str:
+        """Get the percentage of posts in this series"""
+        percentage = self.get_superuser_post_count / Post.objects.filter(deleted_at=None).count() * 100
+        return f"{round(percentage, 2)}%"
+
+    @property
+    def get_percent_of_posts(self) -> str:
+        """Get the percentage of posts in this series"""
+        percentage = (
+            self.get_post_count
+            / Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).count()
+            * 100
+        )
+        return f"{round(percentage, 2)}%"
 
     def get_index_view_url(self):
         """Get the index view url for this Series"""
@@ -337,6 +367,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     created_date = models.DateTimeField(default=timezone.now, help_text="Creation date")
     mod_date = models.DateTimeField(auto_now=True, help_text="Last modification")
     pub_date = models.DateTimeField(blank=True, null=True, help_text="Publication date")
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     publication_state = models.CharField(
         max_length=25,
         verbose_name="Publication",
@@ -370,7 +401,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
-    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
