@@ -1,4 +1,4 @@
-{% load static analytical google_analytics_gtag tailwind_tags %}
+{% load static analytical google_analytics_gtag tailwind_tags pwa %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +78,9 @@
       <meta property="twitter:url" content="{{ CANONICAL_PATH }}">
       <meta property="twitter:description" content="{{ description }}">
     {% endblock page_head %}
+
+    {% progressive_web_app_meta %}
+    <link rel="manifest" href="manifest.json">
 
     <meta name="theme-color" content="#B362FF">
     <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">

@@ -93,6 +93,8 @@ urlpatterns = (
         re_path(r"^comments/", include("comments.urls")),
         re_path(r"^comments/", include("django_comments.urls")),
         re_path(r"^comments/", include("django_comments_xtd.urls")),
+        # PWA
+        path("", include("pwa.urls")),
         # Sitemaps
         path("sitemap.xml", index, {"sitemaps": sitemaps}),
         path(
