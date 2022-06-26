@@ -10,7 +10,7 @@
 
 @layer components {
     .kho-button-border {
-        @apply dark:border-jumbo-600  border-gray-300;
+        @apply dark:border-jumbo-600 border-gray-300;
     }
 
     .kho-button-border-focus {
@@ -18,7 +18,7 @@
     }
 
     .kho-button-bg {
-        @apply dark:bg-jumbo-700 bg-white;
+        @apply dark:bg-jumbo-700 bg-gray-50;
     }
 
     .kho-button-bg-darker {
@@ -26,15 +26,15 @@
     }
 
     .kho-button-bg-hover {
-        @apply dark:hover:bg-jumbo-800 hover:bg-gray-50;
+        @apply dark:hover:bg-jumbo-800 hover:bg-gray-200;
     }
 
     .kho-button-bg-disabled {
-        @apply disabled:dark:bg-jumbo-700 disabled:bg-slate-700;
+        @apply disabled:dark:bg-jumbo-700 disabled:bg-gray-700;
     }
 
     .kho-button-text {
-        @apply dark:text-jumbo-50 text-gray-700 disabled:text-slate-50;
+        @apply dark:text-jumbo-50 text-gray-700 disabled:text-gray-50;
     }
 
     .kho-button-active {
@@ -70,7 +70,7 @@
     }
 
     .flyout_bottom_items {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-xl p-3 text-base font-medium text-gray-900 hover:bg-gray-100;
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-xl p-3 text-base font-medium text-gray-900 hover:bg-gray-200;
     }
 
     .mobile_menu_grid_items {
@@ -102,7 +102,7 @@
     }
 
     .superbutton_dropdown_items {
-        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 rounded-xl bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
 
         .dropdown_item_container {
             @apply first:!pt-0 last:!pb-0;
@@ -118,7 +118,7 @@
     }
 
     .aside-section {
-        @apply mt-5 grid grid-cols-1 divide-y-2 divide-gray-300 dark:divide-jumbo shadow-lg rounded-2xl;
+        @apply mt-5 grid grid-cols-1 divide-y-2 divide-cornflower-200 dark:divide-jumbo shadow-lg rounded-2xl;
 
         div:first-of-type {
             @apply rounded-t-2xl;
@@ -235,7 +235,7 @@
             }
 
             &:is(.quote, .cite) {
-                @apply border-l-8 border-gray-500 bg-gray-100;
+                @apply border-l-8 border-gray-500 bg-gray-200;
             }
 
             &:is(.admonition, summary, details) .icon svg {
@@ -309,7 +309,7 @@
     }
 
     .dropdown_item_active {
-        @apply bg-gray-100 text-gray-900;
+        @apply bg-gray-200 text-gray-900;
     }
 
     .next_prev_buttons {
