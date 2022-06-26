@@ -118,7 +118,11 @@
     }
 
     .aside-section {
-        @apply mt-5 grid grid-cols-1 divide-y-2 divide-cornflower-200 dark:divide-jumbo shadow-lg rounded-2xl;
+        @apply mt-5 grid grid-cols-1 gap-1 rounded-2xl;
+
+        div {
+            @apply rounded-[4px];
+        }
 
         div:first-of-type {
             @apply rounded-t-2xl;
