@@ -14,7 +14,7 @@
       <div class="-mr-2 -my-2 md:hidden">
         {% include 'tailwind/theme_buttons.html' %}
 
-        <button type="button" class="rounded-xl p-2 inline-flex items-center justify-center text-gray-400 dark:text-jumbo-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-jumbo-800 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
+        <button type="button" class="rounded-xl p-2 inline-flex items-center justify-center text-gray-400 dark:text-jumbo-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-800 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
           <span class="sr-only">Open menu</span>
           <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -49,14 +49,14 @@
                 <div class="absolute inset-0 overflow-hidden">
                   <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                     <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
-                      <div class="flex h-full flex-col bg-white dark:bg-jumbo-800 py-6 shadow-xl">
+                      <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
                         <div class="px-4 sm:px-6">
                           <div class="flex items-start justify-between">
                             <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
                               Changelog
                             </div>
                             <div class="ml-3 flex h-7 items-center">
-                              <button type="button" class="bg-white dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
+                              <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
                                 <span class="sr-only">Close panel</span>
                                 <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -96,14 +96,14 @@
   </div>
 
   <div x-show="open" x-transition:enter="duration-200 ease-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-description="Mobile menu, show/hide based on mobile menu state." class="absolute z-30 top-0 inset-x-0 p-2 transition origin-top-right md:hidden" x-ref="panel" @click.away="open = false">
-    <div class="rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-jumbo-800 divide-y-2 divide-gray-50 dark:divide-jumbo-200">
+    <div class="rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 bg-gray-50 dark:bg-jumbo-800 divide-y-2 divide-gray-50 dark:divide-jumbo-200">
       <div class="pt-5 pb-6 px-5 sm:pb-8">
         <div class="flex items-center justify-between">
           <div>
             <img class="h-8 w-auto" width="2rem" height="2rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
           </div>
           <div class="-mr-2">
-            <button type="button" class="bg-white dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open=false">
+            <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open=false">
               <span class="sr-only">Close menu</span>
               <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
