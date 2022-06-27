@@ -1,0 +1,34 @@
+{
+  "short_name": "KhoBlog",
+  "name": "Khodok's Blog",
+  "icons": [
+    {
+      "src": "img/RuthinkkTooBig-small-square.png",
+      "sizes": "213x213"
+    },
+    {
+      "src": "img/RuthinkkTooBig-small.png",
+      "sizes": "221x213"
+    },
+    {
+      "src": "img/ic_launcher.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "img/maskable_icon_x96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#B362FF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#B362FF",
+  "description": "Khodok's Blog",
+  "related_applications": [{
+    "platform": "play",
+    "url": "https://play.google.com/store/apps/details?id=xyz.khodok.khoblog"
+  }]
+}
