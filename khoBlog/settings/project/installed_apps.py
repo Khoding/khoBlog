@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.github",
     "accounts",
     # Packages Apps
-    "pwa",
     "impostor",
     "markdownx",
     "captcha",

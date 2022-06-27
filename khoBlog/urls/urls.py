@@ -20,6 +20,8 @@ from django.contrib.sitemaps.views import index, sitemap
 from django.urls import include, path
 from django.urls.conf import re_path
 
+from khoBlog.views import ServiceWorkerView, offline
+
 try:
     if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
         import debug_toolbar  # noqa
@@ -94,7 +96,12 @@ urlpatterns = (
         re_path(r"^comments/", include("django_comments.urls")),
         re_path(r"^comments/", include("django_comments_xtd.urls")),
         # PWA
-        path("", include("pwa.urls")),
+        path(
+            "sw.js",
+            ServiceWorkerView.as_view(content_type="application/javascript"),
+            name="sw.js",
+        ),
+        path("offline/", offline, name="offline"),
         # Sitemaps
         path("sitemap.xml", index, {"sitemaps": sitemaps}),
         path(

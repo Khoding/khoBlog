@@ -1,4 +1,4 @@
-{% load static analytical google_analytics_gtag tailwind_tags pwa %}
+{% load static analytical google_analytics_gtag tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +62,7 @@
     <meta property="og:site_name" content="Hello There!"/>
     <meta property="og:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
     <meta property="twitter:image" content="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}">
+    <link rel="apple-touch-icon" href={% static 'khoBlog/img/RuthinkkTooBig-small-square.png' %}"/>
 
     {% block page_head %}
       <!-- Primary Meta Tags -->
@@ -79,8 +80,7 @@
       <meta property="twitter:description" content="{{ description }}">
     {% endblock page_head %}
 
-    {% progressive_web_app_meta %}
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="{% static 'khoBlog/manifest.json' %}">
 
     <meta name="theme-color" content="#B362FF">
     <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
@@ -176,6 +176,16 @@
         }
 
         colorScheme()
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('{% url "sw.js" %}', { scope: '/' }).then(function(reg) {
+            // registration worked
+            console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch(function(error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+        });
       }
     </script>
 
