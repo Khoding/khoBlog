@@ -245,6 +245,10 @@
             &.outdated {
                 @apply border-l-8 border-amber-800 bg-amber-200 text-amber-700;
             }
+
+            a {
+                @apply text-inherit;
+            }
         }
 
         & :is(a, p) {
