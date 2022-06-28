@@ -989,7 +989,7 @@ def post_publish_withdrawn(request, slug):
 class PostIsOutdatedUpdateView(AutoPermissionRequiredMixin, UpdateView):
     """PostIsOutdatedUpdateView
 
-    View to mark a Post as outdated
+    View to mark a post as outdated
     """
 
     model = Post
@@ -1009,7 +1009,7 @@ class PostIsOutdatedUpdateView(AutoPermissionRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = "Mark Post as outdated"
+        context["title"] = "Mark post as outdated"
         return context
 
 
