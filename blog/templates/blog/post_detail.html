@@ -76,7 +76,7 @@
         {% endif %}
 
         <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-          {{ post.body|formatted_markdown|safe }}
+          {{ post.body_content|formatted_markdown|safe }}
         </div>
       </div>
       <aside class="mt-8 xl:hidden">

@@ -20,9 +20,6 @@
     {% else %}
       <a class="text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
     {% endif %}
-    {% if object.is_outdated %}
-      <span class="text-amber-800 text-sm font-medium">Outdated</span>
-    {% endif %}
   </section>
   <section class="flex items-center space-x-2">
     <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">

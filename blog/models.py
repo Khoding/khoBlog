@@ -1,5 +1,6 @@
 import datetime
 import itertools
+import re
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -9,6 +10,7 @@ from django.db.models import F, Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import format_html
 
 import auto_prefetch
 import rules
@@ -537,12 +539,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.deleted_at = timezone.now()
         self.save()
 
-    # Create a property that returns the markdown instead
-    @property
-    def formatted_markdown(self):
-        """Formatted Markdown Post"""
-        return markdownify(self.body)
-
     @property
     def is_scheduled(self) -> bool:
         """Is Scheduled Post"""
@@ -587,6 +583,54 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_category_count(self) -> int:
         """Get Category Count"""
         return PostCatsLink.objects.filter(post_id=self.pk, category__deleted_at=None).count()
+
+    # Property that gets the first line of body field
+    @property
+    def first_line(self):
+        """First Line Post"""
+        return self.body.split("\n")[0]
+
+    # Property that removes anything between ![] in the first line
+    @property
+    def first_line_no_img(self):
+        """First Line No Img Post"""
+        return re.sub(r"!\[.*?\]", "", self.first_line)
+
+    # Property that gets everything after the first line
+    @property
+    def after_first_line(self):
+        """After First Line Post"""
+        return self.body.split("\n")[1:]
+
+    # Property that adds "This post is outdated" just after the first line
+    @property
+    def first_line_outdated(self):
+        """First Line Outdated Post"""
+        return (
+            self.first_line
+            + format_html(
+                '<div class="admonition outdated">'
+                '<p class="admonition-title">This post is outdated</p>'
+                "<p>The content of this post is outdated</p></div>"
+            )
+            + "\n"
+            + "\n".join(self.after_first_line)
+        )
+
+    # Property that defines the body_content depending on if it's outdated or not
+    @property
+    def body_content(self):
+        """Body Content Post"""
+        if self.is_outdated:
+            return self.first_line_outdated
+        else:
+            return self.body
+
+    # Create a property that returns the markdown instead
+    @property
+    def formatted_markdown(self):
+        """Formatted Markdown Post"""
+        return markdownify(self.body_content)
 
     def get_index_view_url(self):
         """Get Index View Url Post"""

@@ -170,7 +170,7 @@
         }
 
         & :is(.admonition, summary, details) {
-            @apply dark:text-jumbo-700;
+            @apply text-purple-600;
         }
 
         details[open] > summary {
@@ -199,51 +199,55 @@
 
             /** native types */
             &:is(.caution, .warning, .attention) {
-                @apply border-l-8 border-orange-600 bg-orange-100;
+                @apply border-l-8 border-orange-600 bg-orange-100 text-orange-700;
             }
 
             &:is(.success, .check, .done) {
-                @apply border-l-8 border-green-600 bg-green-100;
+                @apply border-l-8 border-green-600 bg-green-100 text-green-700;
             }
 
             &:is(.question, .help, .faq) {
-                @apply border-l-8 border-green-400 bg-green-100;
+                @apply border-l-8 border-green-400 bg-green-100 text-green-700;
             }
 
             &:is(.failure, .fail, .missing) {
-                @apply border-l-8 border-red-600 bg-red-100;
+                @apply border-l-8 border-red-600 bg-red-100 text-red-600;
             }
 
             &:is(.danger, .error) {
-                @apply border-l-8 border-red-500 bg-red-100;
+                @apply border-l-8 border-red-500 bg-red-100 text-red-600;
             }
 
             &.bug {
-                @apply border-l-8 border-pink-500 bg-pink-100;
+                @apply border-l-8 border-pink-500 bg-pink-100 text-pink-700;
             }
 
             &:is(.tip, .hint, .important) {
-                @apply border-l-8 border-teal-500 bg-teal-100;
+                @apply border-l-8 border-teal-500 bg-teal-100 text-teal-700;
             }
 
             &:is(.info, .todo) {
-                @apply border-l-8 border-blue-500 bg-blue-100;
+                @apply border-l-8 border-blue-500 bg-blue-100 text-blue-700;
             }
 
             &:is(.abstract, .summary, .tldr) {
-                @apply border-l-8 border-cyan-400 bg-cyan-100;
+                @apply border-l-8 border-cyan-400 bg-cyan-100 text-cyan-600;
             }
 
-            .note {
-                @apply border-l-8 border-yellow-500 bg-yellow-100;
+            &.note {
+                @apply border-l-8 border-yellow-500 bg-yellow-100 text-yellow-700;
             }
 
             &:is(.quote, .cite) {
-                @apply border-l-8 border-gray-500 bg-gray-200;
+                @apply border-l-8 border-gray-500 bg-gray-200 text-gray-700;
             }
 
             &:is(.admonition, summary, details) .icon svg {
                 @apply fill-current stroke-current;
+            }
+
+            &.outdated {
+                @apply border-l-8 border-amber-800 bg-amber-200 text-amber-700;
             }
         }
 
