@@ -48,7 +48,7 @@
           {% endif %}
           {% if object.get_absolute_outdated_url %}
             <div class="dropdown_item_container" role="none">
-              {% if not object.is_outdated %}
+              {% if not object.is_content_outdated_date %}
                 <a class="dropdown_item" href="{{ object.get_absolute_outdated_url }}">
                   Mark as outdated
                 </a>

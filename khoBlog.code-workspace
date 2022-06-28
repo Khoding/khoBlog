@@ -16,6 +16,7 @@
         "tailwindCSS.includeLanguages": {
             "plaintext": "html"
         },
-        "tailwindCSS.emmetCompletions": true
+        "tailwindCSS.emmetCompletions": true,
+        "explorer.excludeGitIgnore": false
     }
 }

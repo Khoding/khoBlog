@@ -14,9 +14,6 @@
               <a class="cat-link" href="{{ object.categories.first.get_absolute_url }}">{{ object.categories.first|capfirst }}</a>
             </strong>
           {% endif %}
-          {% if object.is_outdated %}
-            <span class="d-flex float-end">Outdated</span>
-          {% endif %}
           <p class="mb-0 text-sm">
             Post #{{ object.id }}
           </p>

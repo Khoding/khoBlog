@@ -22,6 +22,7 @@ from .forms import (
     PostCreateForm,
     PostDeleteForm,
     PostEditForm,
+    PostMarkOutdatedForm,
     SeriesCreateForm,
     SeriesDeleteForm,
     SeriesEditForm,
@@ -985,12 +986,31 @@ def post_publish_withdrawn(request, slug):
     return redirect("blog:post_detail", slug=slug)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def post_is_outdated(request, slug):
-    """marks a post as being outdated"""
-    post = get_object_or_404(Post, slug=slug)
-    post.outdated()
-    return redirect("blog:post_detail", slug=slug)
+class PostIsOutdatedUpdateView(AutoPermissionRequiredMixin, UpdateView):
+    """PostIsOutdatedUpdateView
+
+    View to mark a Post as outdated
+    """
+
+    model = Post
+    template_name = "blog/post_confirm_delete.html"
+    form_class = PostMarkOutdatedForm
+
+    def get_queryset(self):
+        """Get the queryset for this view."""
+        if self.request.user.is_superuser:
+            post = get_object_or_404(Post, slug=self.kwargs["slug"])
+            if self.get_form().is_valid():
+                post.outdated()
+        else:
+            raise PermissionDenied()
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        """get_context_data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Mark Post as outdated"
+        return context
 
 
 @user_passes_test(lambda u: u.is_superuser)

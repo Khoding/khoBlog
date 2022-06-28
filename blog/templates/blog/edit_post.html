@@ -147,13 +147,6 @@
           {% endif %}
         </div>
         <div class="form-floating">
-          {{ form.is_outdated.label_tag }}
-          {{ form.is_outdated|add_class:"form-check" }}
-          {% if form.is_outdated.help_text %}
-            <div class="text-sm">{{ form.is_outdated.help_text }}</div>
-          {% endif %}
-        </div>
-        <div class="form-floating">
           {{ form.needs_reviewing.label_tag }}
           {{ form.needs_reviewing|add_class:"form-check" }}
           {% if form.needs_reviewing.help_text %}
@@ -225,6 +218,16 @@
       {% for error in form.language.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
+    </section>
+
+    <section class="mb-2">
+      <div class="form-floating">
+        {{ form.is_content_outdated.label_tag }}
+        {{ form.is_content_outdated|add_class:"form-control" }}
+        {% if form.is_content_outdated.help_text %}
+          <div class="text-sm">{{ form.is_content_outdated.help_text }}</div>
+        {% endif %}
+      </div>
     </section>
 
     <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>

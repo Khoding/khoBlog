@@ -10,7 +10,7 @@ from django.db.models import F, Q
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.html import format_html
+from django.utils.html import format_html, mark_safe
 
 import auto_prefetch
 import rules
@@ -403,6 +403,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
     is_outdated = models.BooleanField(default=False, help_text="Is Post content's outdated")
+    is_content_outdated = models.TextField(default="", blank=True, help_text="Is Post content's outdated")
+    is_content_outdated_date = models.DateTimeField(blank=True, null=True, help_text="Outdated date")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
@@ -511,7 +513,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def outdated(self):
         """Post is outdated"""
-        self.is_outdated = True
+        self.is_content_outdated_date = timezone.now()
         self.save()
 
     def needs_review(self):
@@ -609,9 +611,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return (
             self.first_line
             + format_html(
-                '<div class="admonition outdated">'
-                '<p class="admonition-title">This post is outdated</p>'
-                "<p>The content of this post is outdated</p></div>"
+                f'<div class="admonition outdated">'
+                '<p class="admonition-title">This post is outdated as of {0}</p>'
+                "<p>{1}</p></div>",
+                self.is_content_outdated_date.strftime("%Y-%m-%d"),
+                mark_safe(self.is_content_outdated),  # skipcq: BAN-B308
             )
             + "\n"
             + "\n".join(self.after_first_line)
@@ -621,10 +625,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def body_content(self):
         """Body Content Post"""
-        if self.is_outdated:
-            return self.first_line_outdated
-        else:
-            return self.body
+        body = self.body
+        if self.is_content_outdated_date is not None:
+            body = self.first_line_outdated
+        return body
 
     # Create a property that returns the markdown instead
     @property

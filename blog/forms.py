@@ -91,6 +91,7 @@ class PostEditForm(forms.ModelForm):
             "url_to_article_title",
             "language",
             "is_outdated",
+            "is_content_outdated",
         )
 
         widgets = {
@@ -166,6 +167,22 @@ class PostCloneForm(forms.ModelForm):
             "series": forms.Select(),
             "language": forms.Select(),
         }
+
+
+class PostMarkOutdatedForm(forms.ModelForm):
+    """PostMarkOutdatedForm
+
+    A form to mark a Post as outdated
+
+    Args:
+        forms ([type]): [description]
+    """
+
+    class Meta:
+        """Meta class for PostMarkOutdatedForm ModelForm"""
+
+        model = Post
+        fields = ("is_content_outdated",)
 
 
 class PostDeleteForm(forms.ModelForm):
