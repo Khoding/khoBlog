@@ -465,6 +465,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Get absolute url of Post update"""
         return reverse("blog:post_edit", kwargs={"slug": self.slug})
 
+    def get_absolute_outdated_url(self):
+        """Get absolute url of Post is outdated"""
+        return reverse("blog:post_is_outdated", kwargs={"slug": self.slug})
+
     def get_absolute_needs_review_url(self):
         """Get absolute url of Post needs review"""
         return reverse("blog:post_needs_review", kwargs={"slug": self.slug})

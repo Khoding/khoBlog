@@ -21,7 +21,7 @@
       <a class="text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
     {% endif %}
     {% if object.is_outdated %}
-      <span class="text-red-400 text-sm font-medium">Outdated</span>
+      <span class="text-amber-800 text-sm font-medium">Outdated</span>
     {% endif %}
   </section>
   <section class="flex items-center space-x-2">
