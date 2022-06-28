@@ -67,6 +67,18 @@ class PostEditForm(forms.ModelForm):
         ),
     )
 
+    is_content_outdated_date = forms.SplitDateTimeField(
+        required=False,
+        input_date_formats=["%Y-%m-%d"],
+        input_time_formats=["%H:%M:%S", "%H:%M"],
+        widget=forms.SplitDateTimeWidget(
+            date_attrs={"type": "date"},
+            date_format="%Y-%m-%d",
+            time_attrs={"type": "time"},
+            time_format="%H:%M:%S",
+        ),
+    )
+
     class Meta:
         """Meta class for PostEditForm ModelForm"""
 
@@ -90,8 +102,8 @@ class PostEditForm(forms.ModelForm):
             "url_to_article",
             "url_to_article_title",
             "language",
-            "is_outdated",
             "is_content_outdated",
+            "is_content_outdated_date",
         )
 
         widgets = {
@@ -151,7 +163,6 @@ class PostCloneForm(forms.ModelForm):
             "url_to_article",
             "url_to_article_title",
             "language",
-            "is_outdated",
         )
 
         widgets = {

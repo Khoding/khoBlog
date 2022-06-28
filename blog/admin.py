@@ -204,7 +204,6 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "categories",
         "language",
         "tags",
-        "is_outdated",
     )
 
     fieldsets = (

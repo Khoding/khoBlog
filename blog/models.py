@@ -402,7 +402,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
-    is_outdated = models.BooleanField(default=False, help_text="Is Post content's outdated")
     is_content_outdated = models.TextField(default="", blank=True, help_text="Is Post content's outdated")
     is_content_outdated_date = models.DateTimeField(blank=True, null=True, help_text="Outdated date")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
