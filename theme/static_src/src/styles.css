@@ -169,10 +169,6 @@
             }
         }
 
-        & :is(.admonition, summary, details) {
-            @apply text-purple-600;
-        }
-
         details[open] > summary {
             @apply mb-2;
         }
@@ -194,7 +190,7 @@
 
             /* default for custom types */
             &:is(summary, details) {
-                @apply border-l-8 border-purple-600 bg-purple-100;
+                @apply border-l-8 border-purple-600 bg-purple-100 text-purple-600;
             }
 
             /** native types */
