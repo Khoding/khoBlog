@@ -80,8 +80,6 @@
       <meta property="twitter:description" content="{{ description }}">
     {% endblock page_head %}
 
-    <link rel="manifest" href="{% static 'khoBlog/manifest.json' %}">
-
     <meta name="theme-color" content="#B362FF">
     <link type="application/json+oembed" href="https://www.khodok.xyz/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
 
@@ -176,16 +174,6 @@
         }
 
         colorScheme()
-      }
-
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('{% url "sw.js" %}', { scope: '/' }).then(function(reg) {
-            // registration worked
-            console.log('Registration succeeded. Scope is ' + reg.scope);
-        }).catch(function(error) {
-            // registration failed
-            console.log('Registration failed with ' + error);
-        });
       }
     </script>
 
