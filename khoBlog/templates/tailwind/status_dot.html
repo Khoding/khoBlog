@@ -9,7 +9,7 @@
         </div>
       {% elif object.is_scheduled %}
         <div class="inline-flex">
-          <span class="h-1.5 w-1.5 rounded-full bg-orange-400" aria-hidden="true"></span>
+          <span class="h-1.5 w-1.5 rounded-full bg-fuchsia-700" aria-hidden="true"></span>
         </div>
       {% endif %}
     {% elif not object.pub_date %}
@@ -21,5 +21,10 @@
 {% else %}
   <div class="inline-flex">
     <span class="h-1.5 w-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
+  </div>
+{% endif %}
+{% if object.is_outdated %}
+  <div class="inline-flex">
+    <span class="h-1.5 w-1.5 rounded-full bg-amber-800" aria-hidden="true"></span>
   </div>
 {% endif %}

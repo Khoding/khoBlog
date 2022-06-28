@@ -390,7 +390,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         default="EN",
         help_text="What's the main language",
     )
-    is_outdated = models.BooleanField(default=False, help_text="Is Post content's outdated")
     url_to_article = models.URLField(default="", blank=True, help_text="Url to page that inspired the Post")
     url_to_article_title = models.CharField(
         max_length=200,
@@ -401,6 +400,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
+    is_outdated = models.BooleanField(default=False, help_text="Is Post content's outdated")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
 
@@ -501,6 +501,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.pub_date = timezone.now()
         self.publication_state = "W"
         self.withdrawn = True
+        self.save()
+
+    def outdated(self):
+        """Post is outdated"""
+        self.is_outdated = True
         self.save()
 
     def needs_review(self):

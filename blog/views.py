@@ -986,6 +986,14 @@ def post_publish_withdrawn(request, slug):
 
 
 @user_passes_test(lambda u: u.is_superuser)
+def post_is_outdated(request, slug):
+    """marks a post as being outdated"""
+    post = get_object_or_404(Post, slug=slug)
+    post.outdated()
+    return redirect("blog:post_detail", slug=slug)
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def post_needs_review(request, slug):
     """marks a post as needing review"""
     post = get_object_or_404(Post, slug=slug)
