@@ -986,25 +986,24 @@ def post_publish_withdrawn(request, slug):
     return redirect("blog:post_detail", slug=slug)
 
 
-class PostIsOutdatedUpdateView(AutoPermissionRequiredMixin, UpdateView):
+@superuser_required()
+class PostIsOutdatedUpdateView(UpdateView):
     """PostIsOutdatedUpdateView
 
     View to mark a post as outdated
     """
 
     model = Post
-    template_name = "blog/post_confirm_delete.html"
+    template_name = "blog/post_confirm_outdated.html"
     form_class = PostMarkOutdatedForm
 
-    def get_queryset(self):
-        """Get the queryset for this view."""
-        if self.request.user.is_superuser:
-            post = get_object_or_404(Post, slug=self.kwargs["slug"])
-            if self.get_form().is_valid():
-                post.outdated()
+    def form_valid(self, form):
+        if form.instance.is_content_outdated_date:
+            form.instance.is_content_outdated_date = form.instance.is_content_outdated_date
         else:
-            raise PermissionDenied()
-        return super().get_queryset()
+            form.instance.is_content_outdated_date = timezone.now()
+        form.instance.save()
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         """get_context_data"""

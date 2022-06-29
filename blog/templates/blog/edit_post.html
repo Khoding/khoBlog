@@ -220,28 +220,6 @@
       {% endfor %}
     </section>
 
-    <section class="mb-2">
-      <div class="form-floating">
-        {{ form.is_content_outdated.label_tag }}
-        {{ form.is_content_outdated|add_class:"form-control" }}
-        {% if form.is_content_outdated.help_text %}
-          <div class="text-sm">{{ form.is_content_outdated.help_text }}</div>
-        {% endif %}
-      </div>
-    </section>
-
-    <section class="mb-2">
-      {{ form.is_content_outdated_date.label_tag }}
-      <div class="flex gap-2 w-full md:w-1/4">
-        {{ form.is_content_outdated_date|add_class:"form-control picker" }}
-      </div>
-      {% if form.is_content_outdated_date.help_text %}
-        <span class="text-sm">{{ form.is_content_outdated_date.help_text }}</span>
-      {% endif %}
-      {% for error in form.is_content_outdated_date.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </section>
     <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
   </form>
   {{ form.media }}

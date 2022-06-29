@@ -510,11 +510,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         self.withdrawn = True
         self.save()
 
-    def outdated(self):
-        """Post is outdated"""
-        self.is_content_outdated_date = timezone.now()
-        self.save()
-
     def needs_review(self):
         """Needs Review Post"""
         self.needs_reviewing = True

@@ -50,11 +50,10 @@
                 {% if not object.is_content_outdated_date %}
                   <a class="dropdown_item" href="{{ object.get_absolute_outdated_url }}">
                     Mark as outdated
-                  </a>
                 {% else %}
-                  <button class="dropdown_item w-full text-left" disabled="disabled">
+                  <a class="dropdown_item active" href="{{ object.get_absolute_outdated_url }}">
                     Is outdated
-                  </button>
+                  </a>
                 {% endif %}
               {% endif %}
             </div>
