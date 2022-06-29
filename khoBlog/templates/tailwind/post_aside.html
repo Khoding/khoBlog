@@ -177,7 +177,11 @@
           <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
               {% if not e.is_scheduled or user.is_superuser %}
-                <a class="underline hover:no-underline text-base" href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
+                {% if not e == object %}
+                  <a class="underline hover:no-underline text-base" href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
+                {% else %}
+                  <span class="text-base">Part #{{ forloop.counter }}:
+                {% endif %}
                   {{ e }}
                   {% if e == object %}
                     <span class="italic text-sm">(You are here)</span>
@@ -188,7 +192,11 @@
                       {{ e.pub_date|date:'l, d F Y H:i:s' }})
                     </span>
                   {% endif %}
-                </a>
+                {% if not e == object %}
+                  </a>
+                {% else %}
+                  </span>
+                {% endif %}
               {% else %}
                 <span>Part #{{ forloop.counter }}:
                   {{ e }}
