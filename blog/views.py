@@ -998,6 +998,7 @@ class PostIsOutdatedUpdateView(UpdateView):
     form_class = PostMarkOutdatedForm
 
     def form_valid(self, form):
+        """what happens when the form is valid"""
         if form.instance.is_content_outdated_date:
             form.instance.is_content_outdated_date = form.instance.is_content_outdated_date
         else:
