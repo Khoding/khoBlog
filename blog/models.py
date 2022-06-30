@@ -342,6 +342,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         ("NS", "Not Specified"),
     ]
 
+    TYPES = [
+        ("needs_review", "Needing Review"),
+        ("outdated", "Outdated"),
+    ]
+
     author = auto_prefetch.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -402,6 +407,9 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
     history = HistoricalRecords()
+    marked_as = models.TextField(default="", blank=True, help_text="Post marked as")
+    marked_as_date = models.DateTimeField(blank=True, null=True, help_text="Post marked as date")
+    marked_as_type = models.CharField(default="", blank=True, choices=TYPES, max_length=25)
     is_content_outdated = models.TextField(default="", blank=True, help_text="Is Post content's outdated")
     is_content_outdated_date = models.DateTimeField(blank=True, null=True, help_text="Outdated date")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
@@ -471,6 +479,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_outdated_url(self):
         """Get absolute url of Post is outdated"""
         return reverse("blog:post_is_outdated", kwargs={"slug": self.slug})
+
+    def get_absolute_marked_as_url(self):
+        """Get absolute url of Post is marked_as"""
+        return reverse("blog:post_is_marked_as", kwargs={"slug": self.slug})
 
     def get_absolute_needs_review_url(self):
         """Get absolute url of Post needs review"""
@@ -615,13 +627,31 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
             + "\n".join(self.after_first_line)
         )
 
+    # Property that adds "This post is {marked_as_type} as of {marked_as_date}" just after the first line, then appends the rest of the body
+    @property
+    def first_line_marked_as(self):
+        """First Line Marked As Post"""
+        return (
+            self.first_line
+            + format_html(
+                f'<div class="admonition {self.marked_as_type.lower()}">'
+                '<p class="admonition-title">This post is marked as {0} as of {1}</p>'
+                "<p>{2}</p></div>",
+                self.get_marked_as_type_display(),
+                self.marked_as_date.strftime("%Y-%m-%d"),
+                mark_safe(self.marked_as),  # skipcq: BAN-B308
+            )
+            + "\n"
+            + "\n".join(self.after_first_line)
+        )
+
     # Property that defines the body_content depending on if it's outdated or not
     @property
     def body_content(self):
         """Body Content Post"""
         body = self.body
-        if self.is_content_outdated_date is not None:
-            body = self.first_line_outdated
+        if self.marked_as_date is not None:
+            body = self.first_line_marked_as
         return body
 
     # Create a property that returns the markdown instead

@@ -46,14 +46,14 @@
                   </button>
                 {% endif %}
               {% endif %}
-              {% if object.get_absolute_outdated_url %}
-                {% if not object.is_content_outdated_date %}
-                  <a class="dropdown_item" href="{{ object.get_absolute_outdated_url }}">
-                    Mark as outdated
+              {% if object.get_absolute_marked_as_url %}
+                {% if not object.get_absolute_marked_as_url %}
+                  <a class="dropdown_item" href="{{ object.get_absolute_marked_as_url }}">
+                    Mark as something
                   </a>
                 {% else %}
-                  <a class="dropdown_item active" href="{{ object.get_absolute_outdated_url }}">
-                    Is outdated
+                  <a class="dropdown_item active" href="{{ object.get_absolute_marked_as_url }}">
+                    Is something
                   </a>
                 {% endif %}
               {% endif %}

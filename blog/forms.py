@@ -193,6 +193,33 @@ class PostMarkOutdatedForm(forms.ModelForm):
         model = Post
         fields = ("is_content_outdated", "is_content_outdated_date")
 
+class PostMarkAsForm(forms.ModelForm):
+    """PostMarkAsForm
+
+    A form to mark a Post as outdated
+
+    Args:
+        forms ([type]): [description]
+    """
+
+    marked_as_date = forms.SplitDateTimeField(
+        required=False,
+        input_date_formats=["%Y-%m-%d"],
+        input_time_formats=["%H:%M", "%H:%M"],
+        widget=forms.SplitDateTimeWidget(
+            date_attrs={"type": "date"},
+            date_format="%Y-%m-%d",
+            time_attrs={"type": "time"},
+            time_format="%H:%M",
+        ),
+    )
+
+    class Meta:
+        """Meta class for PostMarkAsForm ModelForm"""
+
+        model = Post
+        fields = ("marked_as", "marked_as_date", "marked_as_type")
+
 
 class PostDeleteForm(forms.ModelForm):
     """PostDeleteForm

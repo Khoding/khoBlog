@@ -27,6 +27,7 @@ from .views import (
     SeriesUpdateView,
     WeblogTemplateView,
     PostIsOutdatedUpdateView,
+    PostIsMarkedAsUpdatedView,
 )
 
 post_action_extra_patterns = [
@@ -43,6 +44,7 @@ post_action_extra_patterns = [
     ),
     path("needs_review/", views.post_needs_review, name="post_needs_review"),
     path("outdated/", PostIsOutdatedUpdateView.as_view(), name="post_is_outdated"),
+    path("mark_as/", PostIsMarkedAsUpdatedView.as_view(), name="post_is_marked_as"),
     path("delete/", PostDeleteView.as_view(), name="post_remove"),
 ]
 

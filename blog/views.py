@@ -22,6 +22,7 @@ from .forms import (
     PostCreateForm,
     PostDeleteForm,
     PostEditForm,
+    PostMarkAsForm,
     PostMarkOutdatedForm,
     SeriesCreateForm,
     SeriesDeleteForm,
@@ -1010,6 +1011,33 @@ class PostIsOutdatedUpdateView(UpdateView):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Mark post as outdated"
+        return context
+
+
+@superuser_required()
+class PostIsMarkedAsUpdatedView(UpdateView):
+    """PostIsMarkedAsUpdatedView
+
+    View to mark a post as
+    """
+
+    model = Post
+    template_name = "blog/post_confirm_mark_as.html"
+    form_class = PostMarkAsForm
+
+    def form_valid(self, form):
+        """what happens when the form is valid"""
+        if form.instance.marked_as_date:
+            form.instance.marked_as_date = form.instance.marked_as_date
+        else:
+            form.instance.marked_as_date = timezone.now()
+        form.instance.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        """get_context_data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Mark post as something"
         return context
 
 
