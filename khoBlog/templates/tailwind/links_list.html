@@ -2,7 +2,7 @@
   {% if not dev_class %}
     <li class="flow-root">
   {% endif %}
-    <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="{% if not dev_class %}-m-3 p-3 flex items-center rounded-xl text-base font-medium text-gray-900 dark:text-jumbo-50 hover:bg-gray-200 dark:hover:bg-jumbo-700 transition ease-in-out duration-150{% else %}mobile_menu_grid_items{% endif %}">
+    <a href="{% if url.index %}{{ url.content_object.get_index_view_url }}{% else %}{% firstof url.permalink url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="{% if not dev_class %}-m-3 p-3 flex items-center rounded-xl text-base font-medium text-gray-900 dark:text-jumbo-50 hover:bg-gray-200 dark:hover:bg-jumbo-700 transition ease-in-out duration-150{% else %}mobile_menu_grid_items{% endif %}">
       <span>{% firstof url.featured_title url.title %}</span>
     </a>
   {% if not dev_class %}
