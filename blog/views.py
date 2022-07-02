@@ -999,8 +999,11 @@ class PostIsOutdatedUpdateView(UpdateView):
 
     def form_valid(self, form):
         """what happens when the form is valid"""
+        post = self.get_object()
         if form.instance.is_content_outdated_date:
             form.instance.is_content_outdated_date = form.instance.is_content_outdated_date
+        elif post.is_content_outdated_date is not None and form.instance.is_content_outdated_date is None:
+            form.instance.is_content_outdated_date = None
         else:
             form.instance.is_content_outdated_date = timezone.now()
         form.instance.save()
