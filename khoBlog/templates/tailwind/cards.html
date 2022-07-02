@@ -28,6 +28,11 @@
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline">
       {{ object }}
     </a>
+    {% if not object.featuring_state == "N" %}
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold tracking-tight bg-cornflower-200 text-cornflower-900">
+        {% if object.featuring_state == "SF" %}Super {% endif %}Featured
+      </span>
+    {% endif %}
     {% if object|to_class_name != "post" %}
       {% status_dot object %}
     {% endif %}

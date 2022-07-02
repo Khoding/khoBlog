@@ -9,9 +9,9 @@
     </svg>
     {% if object.pub_date and not object.withdrawn %}
       {% if object.was_published_recently %}
-        <span class="text-green-400 text-sm font-medium">New Post</span>
+        <span class="text-tradewind-400 text-sm font-medium">New Post</span>
       {% elif object.is_scheduled %}
-        <a class="text-orange-400 text-sm font-medium hover:underline" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+        <a class="text-fuchsia-400 text-sm font-medium hover:underline" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
       {% else %}
         <span class="text-gray-500 dark:text-jumbo-50 text-sm font-medium">Published</span>
       {% endif %}

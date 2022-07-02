@@ -199,19 +199,19 @@
             }
 
             &:is(.success, .check, .done) {
-                @apply border-l-8 border-green-600 bg-green-100 text-green-700;
+                @apply border-l-8 border-tradewind-600 bg-tradewind-100 text-tradewind-800;
             }
 
             &:is(.question, .help, .faq) {
-                @apply border-l-8 border-green-400 bg-green-100 text-green-700;
+                @apply border-l-8 border-tradewind-400 bg-tradewind-100 text-tradewind-800;
             }
 
             &:is(.failure, .fail, .missing) {
-                @apply border-l-8 border-red-600 bg-red-100 text-red-600;
+                @apply border-l-8 border-flamingo-600 bg-flamingo-100 text-flamingo-600;
             }
 
             &:is(.danger, .error) {
-                @apply border-l-8 border-red-500 bg-red-100 text-red-600;
+                @apply border-l-8 border-flamingo-500 bg-flamingo-100 text-flamingo-600;
             }
 
             &.bug {
