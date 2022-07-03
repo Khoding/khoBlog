@@ -23,7 +23,7 @@ def display_quotes(category_slug, show_category_title=False):
         if i > 0:
             content.append("<hr>")
 
-        content.append('<blockquote class="quotes">')
+        content.append('<blockquote class="quotes quote_list">')
         content.append("<dl>")
         body = formatter(quote.body, filter_name="markdown")
         content.append(f"<dt>{body}</dt>")
@@ -80,7 +80,7 @@ def display_single_quote(o):
     quote = Quote.objects.get(slug=o)
     print(quote)
 
-    content = ["<blockquote>", "<dl>"]
+    content = ["<blockquote class='quotes'>", "<dl>"]
     body = formatter(quote.body, filter_name="markdown")
     content.append(f"<dt>{body}</dt>")
     content.append("<dd>")
