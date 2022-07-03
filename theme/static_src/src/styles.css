@@ -246,7 +246,8 @@
                 @apply border-l-8 border-amber-800 bg-amber-200 text-amber-700;
             }
 
-            & a,
+            &
+                :is(a, strong, i, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
             li::marker {
                 @apply text-inherit;
             }
