@@ -1,6 +1,4 @@
-{% load i18n %}
-{% load comments %}
-{% load comments_xtd %}
+{% load i18n comments comments_xtd %}
 
 {% for item in comments %}
   <article id="comment-{{ item.comment.id }}" class="flex">
@@ -30,60 +28,63 @@
           <span class="text-sm font-normal text-flamingo-600">This comment has been removed.</span>
         {% endif %}
 
-        <span class="text-sm font-normal text-gray-900 dark:text-jumbo-50">{{ item.comment.submit_date|date:'l, d F Y' }}</span>
+        <span class="text-sm font-normal text-gray-900 dark:text-jumbo-50">
+          {{ item.comment.submit_date|date:'l, d F Y' }}
+          <a class="text-xs underline hover:no-underline" href="{% get_comment_permalink item.comment %}">permalink</a>
+        </span>
       </section>
-        {% if item.comment.is_removed %}
-          {% if not user.is_superuser %}
-            <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-              This comment has been removed.
-            </p>
-          {% else %}
-            <div class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
-              {% if item.comment.title %}
-                <div class="text-xl">{{ item.comment.title }}</div>
-              {% endif %}
-
-              {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
-            </div>
-          {% endif %}
+      {% if item.comment.is_removed %}
+        {% if not user.is_superuser %}
+          <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
+            This comment has been removed.
+          </p>
         {% else %}
-          <div class="prose dark:prose-invert">
+          <div class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
             {% if item.comment.title %}
-              <div class="text-xl">{{ item.comment.title }}</div>
+              <p class="text-xl">{{ item.comment.title }}</p>
             {% endif %}
 
             {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
           </div>
-          {% if allow_feedback %}
-            {% include "includes/django_comments_xtd/user_feedback.html" %}
-          {% endif %}
-          {% if item.comment.allow_thread and not item.comment.is_removed %}
-            {% if allow_feedback %}|{% endif %}
-
-            <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
-          {% endif %}
-          <span>
-            {% if perms.comments.can_moderate %}
-              |
-              {% if item.flagged_count %}
-                <span class="bg-flamingo-600" title="{% blocktrans count counter=item.flagged_count %}A user has flagged this comment as inappropriate.{% plural %}{{ counter }} users have flagged this comment as inappropriate.{% endblocktrans %}">{{ item.flagged_count }}</span>
-              {% endif %}
-            {% endif %}
-            {% if allow_flagging and item.flagged %}
-              <span class="text-flamingo-600" title="{% trans 'comment flagged' %}"></span>
-            {% elif allow_flagging %}
-              <a class="text-sm underline hover:no-underline" href="{% url 'comments-flag' item.comment.pk %}">
-                Flag
-              </a>
-            {% endif %}
-            {% if perms.comments.can_moderate %}
-              |
-              <a class="text-sm underline hover:no-underline" href="{% url 'comments-delete' item.comment.pk %}">
-                Delete
-              </a>
-            {% endif %}
-          </span>
         {% endif %}
+      {% else %}
+        <div class="prose dark:prose-invert">
+          {% if item.comment.title %}
+            <p class="text-xl">{{ item.comment.title }}</p>
+          {% endif %}
+
+          {% include "includes/django_comments_xtd/comment_content.html" with content=item.comment.comment %}
+        </div>
+        {% if allow_feedback %}
+          {% include "includes/django_comments_xtd/user_feedback.html" %}
+        {% endif %}
+        {% if item.comment.allow_thread and not item.comment.is_removed %}
+          {% if allow_feedback %}|{% endif %}
+
+          <a class="text-sm text-gray-500 dark:text-jumbo-100 underline hover:no-underline" href="{{ item.comment.get_reply_url }}">{% trans "Reply" %}</a>
+        {% endif %}
+        <span>
+          {% if perms.comments.can_moderate %}
+            |
+            {% if item.flagged_count %}
+              <span class="bg-flamingo-600" title="{% blocktrans count counter=item.flagged_count %}A user has flagged this comment as inappropriate.{% plural %}{{ counter }} users have flagged this comment as inappropriate.{% endblocktrans %}">{{ item.flagged_count }}</span>
+            {% endif %}
+          {% endif %}
+          {% if allow_flagging and item.flagged %}
+            <span class="text-flamingo-600" title="{% trans 'comment flagged' %}"></span>
+          {% elif allow_flagging %}
+            <a class="text-sm underline hover:no-underline" href="{% url 'comments-flag' item.comment.pk %}">
+              Flag
+            </a>
+          {% endif %}
+          {% if perms.comments.can_moderate %}
+            |
+            <a class="text-sm underline hover:no-underline" href="{% url 'comments-delete' item.comment.pk %}">
+              Delete
+            </a>
+          {% endif %}
+        </span>
+      {% endif %}
 
       {% if not item.comment.is_removed and item.children %}
         <h4 class="mt-5 mb-2 uppercase tracking-wide text-gray-400 dark:text-jumbo-200 font-bold text-xs">Replies</h4>

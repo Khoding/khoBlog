@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        @apply scroll-smooth;
+
+        scroll-padding-top: var(--scroll-padding, 75px);
+    }
+
     form :is(label, span) {
         @apply dark:text-jumbo-100;
     }

@@ -175,6 +175,10 @@
 
         colorScheme()
       }
+
+      const navigationHeight = document.querySelector('#navbar').offsetHeight;
+
+      document.documentElement.style.setProperty('--scroll-padding', navigationHeight - 1 + "px");
     </script>
 
     {% if not debug_flag %}
