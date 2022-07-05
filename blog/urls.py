@@ -31,6 +31,8 @@ from .views import (
 
 post_action_extra_patterns = [
     path("", PostDetailView.as_view(), name="post_detail"),
+    path("like/", views.post_like, name="post_like"),
+    path("dislike/", views.post_dislike, name="post_dislike"),
     path("edit/", PostUpdateView.as_view(), name="post_edit"),
     path("clone/", PostCloneView.as_view(), name="clone_post"),
     path("next/", views.post_next, name="post_next"),

@@ -401,11 +401,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     )
     clicks = models.IntegerField(default=0, help_text="How many times the Post has been seen")
     rnd_choice = models.IntegerField(default=0, help_text="How many times the Post has been randomly chosen")
-    history = HistoricalRecords()
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="post_likes", blank=True)
     is_content_outdated = models.TextField(default="", blank=True, help_text="Is Post content's outdated")
     is_content_outdated_date = models.DateTimeField(blank=True, null=True, help_text="Outdated date")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
+    history = HistoricalRecords()
 
     objects: PostManager = PostManager()
 
@@ -495,6 +496,14 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_absolute_admin_update_url(self):
         """Get absolute url of Post admin update"""
         return reverse("admin:blog_post_change", kwargs={"object_id": self.pk})
+
+    def get_absolute_like_url(self):
+        """Get absolute url to like a post"""
+        return reverse("blog:post_like", kwargs={"slug": self.slug})
+
+    def get_absolute_dislike_url(self):
+        """Get absolute url to dislike a post"""
+        return reverse("blog:post_dislike", kwargs={"slug": self.slug})
 
     def publish(self):
         """Publish Post"""
@@ -629,6 +638,12 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def formatted_markdown(self):
         """Formatted Markdown Post"""
         return markdownify(self.body_content)
+
+    # Property that returns the number of likes
+    @property
+    def total_likes(self):
+        """Likes Post"""
+        return self.likes.count()
 
     def get_index_view_url(self):
         """Get Index View Url Post"""

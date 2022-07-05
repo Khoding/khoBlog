@@ -100,7 +100,15 @@
     }
 
     .superbutton_main_action {
-        @apply superbutton_base rounded-l-lg px-4;
+        @apply superbutton_base px-4;
+
+        &:first-of-type {
+            @apply rounded-l-lg border-r-0;
+        }
+
+        &:only-child {
+            @apply rounded-r-lg border-r;
+        }
     }
 
     .superbutton_dropdown_button {

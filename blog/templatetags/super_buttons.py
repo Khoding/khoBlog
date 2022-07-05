@@ -6,9 +6,19 @@ register = template.Library()
 
 
 @register.inclusion_tag("tailwind/super_buttons.html")
-def sb(o):
+def sb(o, *args, **kwargs):
     """Superbutton tag"""
-    return {"object": o}
+    user = kwargs.get("user", None)
+    liked = False
+    authenticated = False
+    admin = False
+    if user and user.is_authenticated:
+        authenticated = True
+        liked = True if user in o.likes.all() else False
+    if user and user.is_superuser:
+        authenticated = True
+        admin = True
+    return {"object": o, "admin": admin, "authenticated": authenticated, "liked": liked}
 
 
 @register.inclusion_tag("tailwind/user_super_buttons.html")

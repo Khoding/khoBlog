@@ -440,6 +440,18 @@ class PostDetailView(DetailView):
         return context
 
 
+def post_like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
+
+
+def post_dislike(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.likes.remove(request.user)
+    return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
+
+
 def redirect_to_latest(request):
     """redirects to the latest post"""
     if request.user.is_superuser:
