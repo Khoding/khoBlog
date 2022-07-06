@@ -11,9 +11,7 @@
             {% if project.parent_project %}Sub {% endif %}Project <span class="font-bold">#{{ project.pk }}</span>
           </p>
         </div>
-        {% if user.is_superuser %}
-          {% sb project %}
-        {% endif %}
+        {% sb project user=request.user %}
       </section>
       <section class="py-3 xl:pt-6 xl:pb-0">
         <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">

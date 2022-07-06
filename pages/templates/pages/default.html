@@ -22,9 +22,7 @@
               Page <span class="font-bold">#{{ page.pk }}</span>
             </p>
           </div>
-          {% if user.is_superuser %}
-            {% sb page %}
-          {% endif %}
+          {% sb page user=request.user %}
         </div>
         <div class="py-3 xl:pt-6 xl:pb-0">
           <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">

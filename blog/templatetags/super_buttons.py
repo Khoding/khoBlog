@@ -14,7 +14,8 @@ def sb(o, *args, **kwargs):
     admin = False
     if user and user.is_authenticated:
         authenticated = True
-        liked = user in o.likes.all()
+        if hasattr(o, 'likes'):
+            liked = user in o.likes.all()
     if user and user.is_superuser:
         authenticated = True
         admin = True
