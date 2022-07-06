@@ -441,12 +441,14 @@ class PostDetailView(DetailView):
 
 
 def post_like(request, slug):
+    """View to like a post"""
     post = get_object_or_404(Post, slug=slug)
     post.likes.add(request.user)
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
 
 
 def post_dislike(request, slug):
+    """View to dislike a post"""
     post = get_object_or_404(Post, slug=slug)
     post.likes.remove(request.user)
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))

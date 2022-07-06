@@ -31,6 +31,6 @@ def usb(o):
 def csb(o):
     """Content superbutton tag"""
     content_type = ContentType.objects.get_for_model(o)
-    create_url = reverse("%s:create_%s" % (content_type.app_label, content_type.model))
+    create_url = reverse(f"{content_type.app_label}:create_{content_type.model}")
     obj = o.__class__.__name__
     return {"object": obj, "create_url": create_url}

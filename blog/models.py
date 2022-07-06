@@ -161,7 +161,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_index_view_url(self):
         """Get the index view url for this category"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+        return reverse(f"{content_type.app_label}:{content_type.model}_list")
 
 
 class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -279,7 +279,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_index_view_url(self):
         """Get the index view url for this Series"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+        return reverse(f"{content_type.app_label}:{content_type.model}_list")
 
 
 class PostCatsLink(auto_prefetch.Model):
@@ -305,7 +305,7 @@ class PostCatsLink(auto_prefetch.Model):
 
     def __str__(self):
         """String representation of PostCatsLink"""
-        return "%s - %s" % (self.post.title, self.category.title)
+        return f"{self.post.title} - {self.category.title}"
 
 
 class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
@@ -449,7 +449,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
                     break
 
                 # Truncate & Minus 1 for the hyphen.
-                self.slug = "%s-%d" % (orig[: max_length - len(str(x)) - 1], x)
+                self.slug = f"{orig[: max_length - len(str(x)) - 1]}-{x}"
         return super().save(*args, **kwargs)
 
     def save_without_historical_record(self, *args, **kwargs):
@@ -648,4 +648,4 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_index_view_url(self):
         """Get Index View Url Post"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+        return reverse(f"{content_type.app_label}:{content_type.model}_list")
