@@ -614,7 +614,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return (
             self.first_line
             + format_html(
-                f'<div class="admonition outdated">'
+                '<div class="admonition outdated">'
                 '<p class="admonition-title">This post is outdated as of {0}</p>'
                 "<p>{1}</p></div>",
                 self.is_content_outdated_date.strftime("%Y-%m-%d"),
