@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -443,14 +444,20 @@ class PostDetailView(DetailView):
 def post_like(request, slug):
     """View to like a post"""
     post = get_object_or_404(Post, slug=slug)
-    post.likes.add(request.user)
+    if request.user.is_authenticated:
+        post.likes.add(request.user)
+    else:
+        messages.add_message(request, messages.WARNING, "You must be logged in to like a post")
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
 
 
 def post_dislike(request, slug):
     """View to dislike a post"""
     post = get_object_or_404(Post, slug=slug)
-    post.likes.remove(request.user)
+    if request.user.is_authenticated:
+        post.likes.remove(request.user)
+    else:
+        messages.add_message(request, messages.WARNING, "You must be logged in to dislike a post")
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
 
 

@@ -30,13 +30,16 @@ from .views import (
 )
 
 post_action_extra_patterns = [
+    # Links for everyone
     path("", PostDetailView.as_view(), name="post_detail"),
-    path("like/", views.post_like, name="post_like"),
-    path("dislike/", views.post_dislike, name="post_dislike"),
-    path("edit/", PostUpdateView.as_view(), name="post_edit"),
-    path("clone/", PostCloneView.as_view(), name="clone_post"),
     path("next/", views.post_next, name="post_next"),
     path("previous/", views.post_previous, name="post_previous"),
+    # Links for logged in users
+    path("like/", views.post_like, name="post_like"),
+    path("dislike/", views.post_dislike, name="post_dislike"),
+    # Links for admin
+    path("edit/", PostUpdateView.as_view(), name="post_edit"),
+    path("clone/", PostCloneView.as_view(), name="clone_post"),
     path("publish/", views.post_publish, name="post_publish"),
     path(
         "publish_withdrawn/",

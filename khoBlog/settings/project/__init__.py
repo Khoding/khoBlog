@@ -5,6 +5,7 @@ from .email import *
 from .files_static_media import *
 from .installed_apps import *
 from .internationalization import *
+from .messages import *
 from .middleware import *
 from .others import *
 from .security import *

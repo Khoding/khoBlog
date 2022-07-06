@@ -404,6 +404,26 @@
     }
 }
 
+.message-warning {
+    @apply bg-orange-600 text-orange-50;
+}
+
+.message-info {
+    @apply bg-tradewind-600 text-tradewind-50;
+}
+
+.message-error {
+    @apply bg-flamingo-600 text-flamingo-50;
+}
+
+.message-critical {
+    @apply bg-flamingo-600 text-flamingo-50;
+}
+
+.message-success {
+    @apply bg-tradewind-900 text-tradewind-100;
+}
+
 @layer utilities {
     .leading-11 {
         line-height: 3.5rem;
