@@ -8,7 +8,7 @@ register = template.Library()
 @register.inclusion_tag("tailwind/super_buttons.html")
 def sb(o, *args, **kwargs):
     """Superbutton tag"""
-    user = kwargs.get("user", None)
+    user = kwargs.get("user")
     liked = False
     authenticated = False
     admin = False
