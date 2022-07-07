@@ -32,3 +32,4 @@ boto3
 pymdown-extensions
 pyembed-markdown
 importlib-metadata
+python-dotenv

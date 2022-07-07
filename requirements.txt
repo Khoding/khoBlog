@@ -202,6 +202,8 @@ pyquery==1.4.3
     # via readtime
 python-dateutil==2.8.2
     # via botocore
+python-dotenv==0.20.0
+    # via -r requirements.in
 python3-openid==3.2.0
     # via django-allauth
 pytz==2022.1
