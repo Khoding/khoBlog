@@ -31,3 +31,4 @@ bleach
 boto3
 pymdown-extensions
 pyembed-markdown
+importlib-metadata
