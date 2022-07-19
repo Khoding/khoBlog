@@ -14,9 +14,9 @@ black==22.6.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.26
+boto3==1.24.32
     # via -r requirements.in
-botocore==1.27.26
+botocore==1.27.32
     # via
     #   boto3
     #   s3transfer
@@ -84,7 +84,7 @@ django-browser-reload==1.6.0
     # via
     #   -r requirements.in
     #   django-tailwind
-django-colorfield==0.7.1
+django-colorfield==0.7.2
     # via django-admin-interface
 django-comments-xtd==2.9.7
     # via -r requirements.in
@@ -132,7 +132,7 @@ djangorestframework==3.13.1
     #   drf-yasg
 docutils==0.19
     # via django-comments-xtd
-drf-yasg==1.20.0
+drf-yasg==1.21.3
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
@@ -207,7 +207,9 @@ python-dotenv==0.20.0
 python3-openid==3.2.0
     # via django-allauth
 pytz==2022.1
-    # via djangorestframework
+    # via
+    #   djangorestframework
+    #   drf-yasg
 pyyaml==6.0
     # via tablib
 rcssmin==1.1.0
@@ -264,5 +266,5 @@ xlrd==2.0.1
     # via tablib
 xlwt==1.3.0
     # via tablib
-zipp==3.8.0
+zipp==3.8.1
     # via importlib-metadata
