@@ -6,7 +6,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.dates import DayArchiveView
 
 from rules.contrib.views import AutoPermissionRequiredMixin
