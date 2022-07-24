@@ -105,27 +105,6 @@ class AllPostListView(ListView):
         return context
 
 
-class WeblogTemplateView(TemplateView):
-    """WeblogTemplateView TemplateView
-
-    An alternative List View for Posts
-
-    Args:
-        TemplateView (TemplateView): A List View
-
-    Returns:
-        posts: A list of posts
-    """
-
-    template_name = "blog/lists/weblog.html"
-
-    def get_context_data(self, **kwargs):
-        """Get context data"""
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Weblog"
-        return context
-
-
 class PostInCategoryListView(ListView):
     """PostInCategoryListView List View
 

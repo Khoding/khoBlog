@@ -25,7 +25,6 @@ from .views import (
     SeriesCreateView,
     SeriesListView,
     SeriesUpdateView,
-    WeblogTemplateView,
     PostIsOutdatedUpdateView,
 )
 
@@ -108,7 +107,6 @@ urlpatterns = [
     path("all/", AllPostListView.as_view(), name="all_post_list"),
     path("latest/", views.redirect_to_latest, name="latest"),
     path("random/", views.redirect_to_random, name="random"),
-    path("weblog/", WeblogTemplateView.as_view(), name="weblog"),
     path("drafts/", PostDraftListView.as_view(), name="post_draft_list"),
     path("scheduled/", PostScheduledListView.as_view(), name="post_scheduled_list"),
     path("withdrawn/", PostWithdrawnListView.as_view(), name="post_withdrawn_list"),

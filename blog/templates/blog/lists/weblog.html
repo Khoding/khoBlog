@@ -1,6 +1,0 @@
-{% extends 'tailwind/base.html' %}
-{% load weblog %}
-
-{% block content %}
-  {% render_latest_blog_entries num=42 hide_readmore=False hide_header=False summary_first=False header_tag='h3' %}
-{% endblock content %}

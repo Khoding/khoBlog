@@ -1,4 +1,4 @@
-{% load links_menu featured_post featured_page weblog menu_footer_set %}
+{% load links_menu featured_post featured_page menu_footer_set %}
 
 <div x-data="{ open: false, focus: false }" @keydown.escape.stop="open = false" @close-popover-group.window="onClosePopoverGroup">
   <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
