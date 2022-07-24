@@ -192,6 +192,8 @@ pyembed==1.3.3
     # via pyembed-markdown
 pyembed-markdown==1.1.0
     # via -r requirements.in
+pygments==2.12.0
+    # via -r requirements.in
 pyjwt[crypto]==2.4.0
     # via django-allauth
 pymdown-extensions==9.5
