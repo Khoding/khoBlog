@@ -188,7 +188,7 @@
         }
 
         & :is(details, .admonition) {
-            @apply mb-2 p-4;
+            @apply mb-2 p-4 rounded-xl;
 
             & :is(summary, .admonition-title) {
                 @apply font-bold;

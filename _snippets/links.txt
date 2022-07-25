@@ -1,7 +1,7 @@
 [_this]: / "This Website"
 [latest]: /latest "Latest Post"
 [quotes]: /posts/quotes "Quotes Post"
-[khodok]: https://khodok.xyz "Khodok's Old Main Website"
+[khodok]: https://khodok.com "Khodok's Old Main Website"
 [repo]: https://github.com/Khoding/khoBlog "KhoBlog's Repo on Github"
 [google]: https://google.com "Google"
 [stackedit]: https://stackedit.io "StackEdit"
