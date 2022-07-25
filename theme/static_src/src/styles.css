@@ -284,11 +284,11 @@
         }
 
         .highlight {
-            @apply rounded-xl;
+            @apply rounded-xl rounded-br-none;
         }
 
         .highlighttable {
-            @apply block resize-x max-w-full rounded-xl bg-[#002b36] text-[#839496] overflow-x-auto;
+            @apply block resize-x max-w-full rounded-xl rounded-br-none bg-[#002b36] text-[#839496] overflow-x-auto;
 
             & .filename {
                 @apply ml-2;
