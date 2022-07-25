@@ -1,3 +1,4 @@
 *.css.map
 *.css
 !selectize.default.css
+!highlight.css
