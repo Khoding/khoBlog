@@ -51,7 +51,7 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = f"Portfolio | {self.get_object().title}"
+        context["title"] = f"Project | {self.get_object().title}"
         context["description"] = self.get_object().description
         return context
 
@@ -138,7 +138,7 @@ class SubProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
-        context["title"] = f"Portfolio | {self.get_object().title}"
+        context["title"] = f"Sub Project | {self.get_object().title}"
         context["description"] = self.get_object().description
         return context
 
