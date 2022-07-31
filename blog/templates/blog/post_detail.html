@@ -2,9 +2,11 @@
 {% load static comments comments_xtd super_buttons markdown_extra compress %}
 
 {% block additional_css %}
-  {% compress css %}
-  <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}" media="screen">
-  {% endcompress css %}
+  {% if object.has_code %}
+    {% compress css %}
+      <link rel="stylesheet" href="{% static 'khoBlog/css/highlight.css' %}">
+    {% endcompress css %}
+  {% endif %}
 {% endblock additional_css %}
 
 {% block content_main %}

@@ -351,7 +351,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     title = models.CharField(max_length=200, help_text="Post title")
     featured_title = models.CharField(max_length=27, default="", blank=True, help_text="Featured post title")
     body = MarkdownxField(help_text="Post main content", blank=True)
-
     image = models.ImageField(null=True, blank=True, upload_to="images/post/", help_text="Post image")
     description = models.TextField(help_text="Post description")
     slug = models.SlugField(unique=True, max_length=200, help_text="Post slug")
@@ -567,6 +566,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def get_admin_tags(self):
         """Get Admin Tags Post"""
         return self.tags.all()
+
+    @property
+    def has_code(self) -> bool:
+        """Post has code"""
+        return self.tags.filter(name="has_code").exists()
 
     @property
     def get_featured_cat(self):
