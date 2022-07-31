@@ -54,7 +54,7 @@
               </button>
 
               {% get_social_accounts object as accounts %}
-              {% if accounts.github and object.show_github %}
+              {% if accounts.github and object.display_github %}
                 <button :class="{ 'profile_active_tab': tab === 'github' }" x-on:click.prevent="tab = 'github'" class="profile_tab">
                   Github
                 </button>
@@ -121,7 +121,7 @@
         </dl>
       </section>
 
-      {% if accounts.github and object.show_github %}
+      {% if accounts.github and object.display_github %}
         <section x-show="tab === 'github'">
           <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
             <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</h2>

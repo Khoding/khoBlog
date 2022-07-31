@@ -22,7 +22,7 @@
       </div>
 
       <div id="profile-fields">
-        <h4 class="mb-0">Basic profile</h4>
+        <div class="mb-0 text-xl">Basic profile</div>
         <p class="text-sm">Some basic profile data</p>
 
         <div id="visible-profile-fields">
@@ -67,7 +67,7 @@
         </div>
 
         <div id="personal-profile-fields">
-          <h5>These fields are never shown</h5>
+          <div class="text-lg">These fields are never shown</div>
 
           <div class="field mb-2">
             <span>Name:</span>
@@ -135,7 +135,7 @@
       </div>
 
       <div id="customization-fields">
-        <h4 class="mb-0">Customization</h4>
+        <div class="mb-0 text-xl">Customization</div>
         <p class="text-sm">Some fields that change the design of the website, some of the texts on it, only affects you</p>
         <div class="field mb-2">
           <div class="form-floating">
@@ -150,21 +150,19 @@
           {% endfor %}
         </div>
 
-        <div class="field mb-2">
-          {{ form.show_github.label_tag }}
-          <div class="form-check">
-            {{ form.show_github|add_class:"form-check-input" }}
+        <section class="mb-2">
+          <div class="input-group gap-2">
+            <div class="form-floating">
+              {{ form.display_github.label_tag }}
+              {{ form.display_github|add_class:"form-check" }}
+              {% if form.display_github.help_text %}
+                <div class="text-sm">{{ form.display_github.help_text }}</div>
+              {% endif %}
+            </div>
           </div>
-          {% if form.show_github.help_text %}
-            <span class="text-sm">{{ form.show_github.help_text }}</span>
-          {% endif %}
-          {% for error in form.show_github.errors %}
-            <small class="text-flamingo-600">{{ error }}</small>
-          {% endfor %}
-        </div>
-      </div>
+        </section>
 
-      <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
+        <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
     </form>
   {% else %}
     <p>This isn't your profile. <a href="{{ user.get_absolute_update_url }}">Edit your profile</a></p>

@@ -66,7 +66,7 @@ class CustomUser(AbstractUser):
         help_text="The message before your name when you are logged, by default 'Hello'",
     )
     roles = models.ManyToManyField(Role, blank=True, default="User")
-    show_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
+    display_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
 
     def __str__(self):
         """String representation of CustomUser Model"""

@@ -13,12 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
         """Meta class for CustomUserCreationForm Form"""
 
         model = CustomUser
-        fields = (
-            "username",
-            "email",
-            "first_name",
-            "last_name",
-        )
+        fields = ("username", "email")
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -37,5 +32,5 @@ class CustomUserChangeForm(UserChangeForm):
             "welcome_message",
             "profile_pic",
             "slug",
-            "show_github",
+            "display_github",
         )
