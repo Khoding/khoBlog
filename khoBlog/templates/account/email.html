@@ -3,7 +3,7 @@
 
 {% block content %}
   {% if user.emailaddress_set.all %}
-    <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+    <div class="text-xl">You can sign in to your account using any of the following third party accounts:</div>
 
     <form action="{% url 'account_email' %}" class="email_list form" method="post">
       {% csrf_token %}
@@ -28,9 +28,9 @@
         {% endfor %}
 
         <div class="mt-2 buttonHolder">
-          <button class="kho-button-forms kho-button-submit secondaryAction" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
-          <button class="kho-button-forms kho-button-submit secondaryAction" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
-          <button class="kho-button-forms kho-button-submit primaryAction" type="submit" name="action_remove">{% trans 'Remove' %}</button>
+          <button class="kho-button-forms kho-button-submit mb-2" type="submit" name="action_primary">{% trans 'Make Primary' %}</button>
+          <button class="kho-button-forms kho-button-submit mb-2" type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+          <button class="kho-button-forms kho-button-submit-delete" type="submit" name="action_remove">{% trans 'Remove' %}</button>
         </div>
 
       </fieldset>
@@ -43,8 +43,7 @@
   {% endif %}
 
   {% if can_add_email %}
-    <hr/>
-    <h3>{% trans "Add E-mail Address" %}</h3>
+    <div class="text-xl mt-2">{% trans "Add E-mail Address" %}</div>
 
     <form method="post" action="{% url 'account_email' %}" class="form add_email">
       {% csrf_token %}

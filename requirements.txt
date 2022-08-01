@@ -122,7 +122,7 @@ django-storages==1.12.3
     # via -r requirements.in
 django-taggit==3.0.0
     # via -r requirements.in
-django-tailwind==3.3.0
+django-tailwind==3.4.0
     # via -r requirements.in
 django-widget-tweaks==1.4.12
     # via -r requirements.in
