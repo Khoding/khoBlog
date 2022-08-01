@@ -76,7 +76,23 @@
     }
 
     .flyout_bottom_items {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-700 rounded-xl p-3 text-base font-medium text-gray-900 hover:bg-gray-200;
+        @apply text-gray-900 dark:text-jumbo-50 rounded-xl p-3 text-base font-medium;
+
+        &.default {
+            @apply hover:bg-gray-200 dark:hover:bg-jumbo-700;
+        }
+
+        &.perm {
+            @apply hover:text-cornflower-900 hover:bg-cornflower-200 dark:hover:bg-cornflower-800 dark:hover:text-cornflower-100;
+        }
+
+        &.staff {
+            @apply hover:text-yellow-900 hover:bg-yellow-200 dark:hover:bg-yellow-800 dark:hover:text-yellow-200;
+        }
+
+        &.admin {
+            @apply flyout_bottom_items hover:text-flamingo-800 hover:bg-flamingo-200 dark:hover:bg-flamingo-800 dark:hover:text-flamingo-100;
+        }
     }
 
     .mobile_menu_grid_items {

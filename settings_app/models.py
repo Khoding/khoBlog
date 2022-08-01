@@ -53,3 +53,14 @@ class MenuFooterLink(auto_prefetch.Model):
     def get_rel_url(self):
         """Get the relative url of the link"""
         return "/" + self.rel_url
+
+    def get_link_color(
+        self,
+    ) -> str:  # update when Pythonanywhere gets Python 3.10 as default: https://stackoverflow.com/a/60211/16938491
+        """Get the color depending on the visibility of the link"""
+        return {
+            "D": "default",
+            "NP": "perm",
+            "NS": "staff",
+            "NA": "admin",
+        }[self.visibility]
