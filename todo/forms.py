@@ -13,7 +13,7 @@ class TaskAddForm(forms.ModelForm):
         """Meta"""
 
         model = Task
-        fields = ("title", "description")
+        fields = ("title", "description", "withdrawn")
 
 
 class TaskEditForm(forms.ModelForm):
