@@ -1,0 +1,21 @@
+{% load content_type %}
+
+<section class="flow-root">
+  {% for object in objects %}
+    <div class="relative pb-1">
+      <div class="relative flex items-start space-x-3">
+        <div class="min-w-0 flex-1 py-1.5">
+          <div class="text-sm">
+            <div class="truncate">
+              <a href="{{ object.get_absolute_url }}" class="font-medium hover:underline">{{ object.title }}</a>
+            </div>
+            <div class="text-xs">{{ object|to_class_name|capfirst }}</div>
+            <div>
+              {{ object.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
