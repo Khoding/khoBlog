@@ -1,4 +1,4 @@
-{% load static links_menu menu_footer_set changelog featured_post featured_page %}
+{% load static links_menu menu_footer_set changelog %}
 
 <div id="navbar" class="sticky top-0 z-[9999] bg-gray-50 dark:bg-jumbo-900">
   <div class="relative" x-data="{ open: false, focus: false }" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
@@ -12,43 +12,7 @@
           </a>
         </div>
 
-        <section class="ml-auto mr-8 -my-2 md:hidden" x-cloak x-data="{ open: false }">
-          <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Featured</button>
-
-          <div @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="slide-over-featured" x-ref="dialog" aria-modal="true">
-            <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
-
-            <div class="fixed inset-0 overflow-hidden">
-              <div class="absolute inset-0 overflow-hidden">
-                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                  <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
-                    <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
-                      <div class="px-4 sm:px-6">
-                        <div class="flex items-start justify-between">
-                          <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-featured">
-                            Featured
-                          </div>
-                          <div class="ml-3 flex h-7 items-center">
-                            <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
-                              <span class="sr-only">Close panel</span>
-                              <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                        {% all_featured_pages %}
-                        {% all_featured_posts %}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {% include 'tailwind/featured_flyout.html' %}
 
         <div class="-mr-2 -my-2 md:hidden">
           {% include 'tailwind/theme_buttons.html' %}

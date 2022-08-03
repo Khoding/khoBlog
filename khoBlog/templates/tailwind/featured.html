@@ -1,21 +1,8 @@
 {% load content_type %}
 
-<section class="flow-root">
-  {% for object in objects %}
-    <div class="relative pb-1">
-      <div class="relative flex items-start space-x-3">
-        <div class="min-w-0 flex-1 py-1.5">
-          <div class="text-sm">
-            <div class="truncate">
-              <a href="{{ object.get_absolute_url }}" class="font-medium hover:underline">{{ object.title }}</a>
-            </div>
-            <div class="text-xs">{{ object|to_class_name|capfirst }}</div>
-            <div>
-              {{ object.description }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-</section>
+{% for object in objects %}
+  <a href="{{ object.get_absolute_url }}" class="-m-3 p-3 block rounded-2xl hover:bg-gray-200 dark:hover:bg-jumbo-700 transition ease-in-out duration-150">
+    <p class="text-base font-medium text-gray-900 dark:text-jumbo-50">{% firstof object.featured_title object.title %}</p>
+    <p class="mt-1 text-sm text-gray-500 dark:text-jumbo-300">{{ object.description }}</p>
+  </a>
+{% endfor %}
