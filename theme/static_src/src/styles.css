@@ -6,7 +6,7 @@
     html {
         @apply scroll-smooth;
 
-        scroll-padding-top: var(--scroll-padding, 75px);
+        scroll-padding-top: var(--scroll-padding, 65px);
     }
 
     form :is(label, span) {
@@ -72,7 +72,7 @@
     }
 
     .flyout_button {
-        @apply dark:text-jumbo-100 dark:hover:text-jumbo-50 dark:focus:ring-cornflower-400 focus:ring-cornflower-500 inline-flex items-center rounded-xl text-base font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900;
+        @apply relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px border-transparent text-gray-700 hover:text-gray-800;
     }
 
     .flyout_bottom_items {

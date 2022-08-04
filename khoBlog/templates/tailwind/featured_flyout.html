@@ -1,13 +1,14 @@
 {% load featured_post featured_page %}
 
-<divclass="relative z-40 lg:hidden" role="dialog" aria-modal="true">
+<div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
 
   <div x-data="{ featured: false, focus: false }" class="fixed inset-0 flex z-40">
     <div class="flex-1 flex items-center lg:hidden">
       <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
-      <button type="button" class="absolute top-0 left-1/2 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 dark:text-jumbo-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-800 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="featured=!featured" @mousedown="if (featured) $event.preventDefault()" aria-expanded="true" :aria-expanded="featured.toString()"> open
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      <button type="button" class="rounded-xl p-2 inline-flex items-center justify-center text-gray-400 dark:text-jumbo-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-800 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
+        <span class="sr-only">Open menu</span>
+        <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
@@ -228,7 +229,7 @@
       </div>
     </div>
   </div>
-</divclass=>
+</div>
 
 {% comment %} <div x-cloak class="ml-auto mr-8 -my-2 md:hidden" x-data="{ open: false, focus: false }" @keydown.escape.stop="open = false" @close-popover-group.window="onClosePopoverGroup">
   <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button " @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()">
