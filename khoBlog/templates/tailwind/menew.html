@@ -9,7 +9,7 @@
     <div class="fixed inset-0 flex z-40">
       <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" x-description="Off-canvas menu, show/hide based on off-canvas menu state." class="relative max-w-xs w-full bg-gray-50 dark:bg-jumbo-900 shadow-xl pb-12 flex flex-col overflow-y-auto" @click.away="open = false" style="display: none;">
         <div class="px-4 pt-5 pb-2 flex">
-          <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400" @click="open = false">
+          <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-900" @click="open = false">
             <span class="sr-only">Close menu</span>
             <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -21,11 +21,11 @@
         <div x-data="{ tab: 'Main' }" class="mt-2">
           <div class="border-b border-gray-200">
             <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
-              <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 border-transparent" -->
-              <button x-on:click.prevent="tab = 'Main'" class="text-gray-900 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Main</button>
+              <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 dark:text-jumbo-100 border-transparent" -->
+              <button x-on:click.prevent="tab = 'Main'" class="text-gray-900 dark:text-jumbo-100 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Main</button>
 
-              <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 border-transparent" -->
-              <button x-on:click.prevent="tab = 'men'" class="text-gray-900 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Featured</button>
+              <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 dark:text-jumbo-100 border-transparent" -->
+              <button x-on:click.prevent="tab = 'men'" class="text-gray-900 dark:text-jumbo-100 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Featured</button>
             </div>
           </div>
 
@@ -33,24 +33,24 @@
             <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
-                  <p id="mobile-featured-heading-0" class="font-medium text-gray-900">
+                  <p id="mobile-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Featured
                   </p>
                   <ul role="list" aria-labelledby="mobile-featured-heading-0" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Sleep
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <p id="mobile-categories-heading" class="font-medium text-gray-900">
+                  <p id="mobile-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Categories
                   </p>
                   <ul role="list" aria-labelledby="mobile-categories-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Basic Tees
                       </a>
                     </li>
@@ -59,12 +59,12 @@
               </div>
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
-                  <p id="mobile-collection-heading" class="font-medium text-gray-900">
+                  <p id="mobile-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Collection
                   </p>
                   <ul role="list" aria-labelledby="mobile-collection-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Everything
                       </a>
                     </li>
@@ -72,12 +72,12 @@
                 </div>
 
                 <div>
-                  <p id="mobile-brand-heading" class="font-medium text-gray-900">
+                  <p id="mobile-brand-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Brands
                   </p>
                   <ul role="list" aria-labelledby="mobile-brand-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Full Nelson
                       </a>
                     </li>
@@ -91,24 +91,24 @@
             <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
-                  <p id="mobile-featured-heading-1" class="font-medium text-gray-900">
+                  <p id="mobile-featured-heading-1" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Featured
                   </p>
                   <ul role="list" aria-labelledby="mobile-featured-heading-1" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Casual
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <p id="mobile-categories-heading" class="font-medium text-gray-900">
+                  <p id="mobile-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Categories
                   </p>
                   <ul role="list" aria-labelledby="mobile-categories-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Artwork Tees
                       </a>
                     </li>
@@ -117,12 +117,12 @@
               </div>
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
-                  <p id="mobile-collection-heading" class="font-medium text-gray-900">
+                  <p id="mobile-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Collection
                   </p>
                   <ul role="list" aria-labelledby="mobile-collection-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Everything
                       </a>
                     </li>
@@ -130,12 +130,12 @@
                 </div>
 
                 <div>
-                  <p id="mobile-brand-heading" class="font-medium text-gray-900">
+                  <p id="mobile-brand-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                     Brands
                   </p>
                   <ul role="list" aria-labelledby="mobile-brand-heading" class="mt-6 space-y-6">
                     <li class="flex">
-                      <a href="#" class="text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100">
+                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
                         Significant Other
                       </a>
                     </li>
@@ -148,10 +148,10 @@
 
         <div class="border-t border-gray-200 py-6 px-4 space-y-6">
           <div class="flow-root">
-            <a href="#" class="-m-2 p-2 block font-medium text-gray-900">Create an account</a>
+            <a href="#" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Create an account</a>
           </div>
           <div class="flow-root">
-            <a href="#" class="-m-2 p-2 block font-medium text-gray-900">Sign in</a>
+            <a href="#" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Sign in</a>
           </div>
         </div>
       </div>
@@ -183,32 +183,32 @@
                           Main
                         </button>
                       </div>
-                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
+                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-900 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
                         <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-800 shadow" aria-hidden="true"></div>
-                        <div class="relative bg-white dark:bg-jumbo-800">
+                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
+                        <div class="relative bg-white dark:bg-jumbo-900">
                           <div class="max-w-7xl mx-auto px-8">
                             <div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
                               <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
-                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900">
+                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Featured
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-featured-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="text-gray-300 hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Sleep
                                       </a>
                                     </li>
                                   </ul>
                                 </div>
                                 <div>
-                                  <p id="desktop-categories-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Categories
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-categories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Basic Tees
                                       </a>
                                     </li>
@@ -217,24 +217,24 @@
                               </div>
                               <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
-                                  <p id="desktop-collection-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Collection
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-collection-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Everything
                                       </a>
                                     </li>
                                   </ul>
                                 </div>
                                 <div>
-                                  <p id="desktop-brand-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-brand-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Brands
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-brand-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Full Nelson
                                       </a>
                                     </li>
@@ -253,32 +253,32 @@
                           Featured
                         </button>
                       </div>
-                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-400 hover:text-gray-500 dark:text-jumbo-200 dark:hover:text-jumbo-100 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
+                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-900 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
                         <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-800 shadow" aria-hidden="true"></div>
-                        <div class="relative bg-white dark:bg-jumbo-800">
+                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
+                        <div class="relative bg-white dark:bg-jumbo-900">
                           <div class="max-w-7xl mx-auto px-8">
                             <div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
                               <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
-                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900">
+                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Featured
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-featured-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Sleep
                                       </a>
                                     </li>
                                   </ul>
                                 </div>
                                 <div>
-                                  <p id="desktop-categories-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Categories
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-categories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Basic Tees
                                       </a>
                                     </li>
@@ -287,24 +287,24 @@
                               </div>
                               <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
-                                  <p id="desktop-collection-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Collection
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-collection-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Everything
                                       </a>
                                     </li>
                                   </ul>
                                 </div>
                                 <div>
-                                  <p id="desktop-brand-heading" class="font-medium text-gray-900">
+                                  <p id="desktop-brand-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Brands
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-brand-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     <li class="flex">
-                                      <a href="#" class="hover:text-gray-800">
+                                      <a href="#" class="hover:underline">
                                         Full Nelson
                                       </a>
                                     </li>
@@ -322,7 +322,7 @@
 
               <!-- Mobile menu and search (lg-) -->
               <div class="flex-1 flex items-center lg:hidden">
-                <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 bg-white p-2 rounded-md text-gray-400" @click="open = true">
+                <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 bg-white p-2 rounded-md text-gray-900" @click="open = true">
                   <span class="sr-only">Open menu</span>
                   <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -343,7 +343,7 @@
                       {% include 'tailwind/theme_buttons.html' %}
                     </div>
                     <div class="flex">
-                      <a href="#" class="-m-2 p-2 text-gray-400 hover:text-gray-500 dark:text-jumbo-100 dark:hover:text-jumbo-300">
+                      <a href="#" class="-m-2 p-2 text-gray-900 dark:text-jumbo-100 dark:hover:text-jumbo-300">
                         <span class="sr-only">Account</span>
                         <svg class="w-6 h-6" x-description="Heroicon name: outline/user" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
