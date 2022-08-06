@@ -14,9 +14,9 @@ black==22.6.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.42
+boto3==1.24.46
     # via -r requirements.in
-botocore==1.27.42
+botocore==1.27.46
     # via
     #   boto3
     #   s3transfer
@@ -46,7 +46,7 @@ defusedxml==0.7.1
     #   python3-openid
 diff-match-patch==20200713
     # via django-import-export
-django==4.0.6
+django==4.1
     # via
     #   -r requirements.in
     #   django-admin-index
@@ -70,7 +70,7 @@ django==4.0.6
     #   impostor
 django-admin-index==2.0.2
     # via -r requirements.in
-django-admin-interface==0.19.1
+django-admin-interface==0.19.2
     # via -r requirements.in
 django-allauth==0.51.0
     # via -r requirements.in
@@ -88,7 +88,7 @@ django-colorfield==0.7.2
     # via django-admin-interface
 django-comments-xtd==2.9.7
     # via -r requirements.in
-django-compressor==4.0
+django-compressor==4.1
     # via -r requirements.in
 django-contrib-comments==2.2.0
     # via django-comments-xtd
@@ -118,7 +118,7 @@ django-simple-captcha==0.5.17
     # via -r requirements.in
 django-simple-history==3.1.1
     # via -r requirements.in
-django-storages==1.12.3
+django-storages==1.13.1
     # via -r requirements.in
 django-taggit==3.0.0
     # via -r requirements.in
@@ -258,7 +258,7 @@ uritemplate==4.1.1
     # via
     #   coreapi
     #   drf-yasg
-urllib3==1.26.10
+urllib3==1.26.11
     # via
     #   botocore
     #   requests

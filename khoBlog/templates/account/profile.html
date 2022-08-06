@@ -47,7 +47,7 @@
       <!-- Tabs -->
       <div class="mt-6 sm:mt-2 2xl:mt-5">
         <div class="border-b border-gray-200 dark:border-jumbo-600">
-          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-5xl mx-auto">
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
               <button :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
                 Profile
@@ -71,7 +71,7 @@
       </div>
 
       <!-- Description list -->
-      <section x-show="tab === 'description'" class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section x-show="tab === 'description'" class="mt-6 max-w-5xl mx-auto">
         <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
           <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">
@@ -108,7 +108,7 @@
       </section>
 
       {% if object == user or user.is_superuser %}
-        <section x-show="tab === 'personal'" class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section x-show="tab === 'personal'" class="mt-6 max-w-5xl mx-auto">
           <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
             <div class="sm:col-span-1">
               <dt class="text-sm font-medium text-gray-500 dark:text-jumbo-100">

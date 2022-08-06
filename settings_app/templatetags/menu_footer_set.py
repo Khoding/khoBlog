@@ -9,7 +9,8 @@ register = template.Library()
 def mfl_setting(context, link_type):
     """Menu footer links tag"""
     has_perms = context.get("perms", ["settings_app.view_menu_footer_link"])
-    if link_type == "D":
+    menu_footer_links = ""
+    if not context.request.user.is_authenticated and link_type == "D":
         menu_footer_links = MenuFooterLink.objects.filter(visibility="D")
     if context.request.user.is_authenticated:
         if link_type == "NP" and has_perms:
@@ -18,5 +19,4 @@ def mfl_setting(context, link_type):
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NS")
         elif link_type == "NA" and context.request.user.is_superuser:
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NA")
-
     return {"context": context, "menu_footer_links": menu_footer_links}
