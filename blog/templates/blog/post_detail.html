@@ -10,7 +10,7 @@
 {% endblock additional_css %}
 
 {% block content_main %}
-  <div class="xl:grid xl:grid-cols-3">
+  <article class="xl:grid xl:grid-cols-3 px-4 sm:px-6 lg:px-8">
     <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200 dark:xl:border-jumbo-200">
       <nav class="flex justify-between" role="group" aria-label="Previous / Next">
         {% if prev_post %}
@@ -86,7 +86,7 @@
     <aside class="hidden xl:block xl:pl-8">
       {% include 'tailwind/post_aside.html' %}
     </aside>
-  </div>
+  </article>
   {% if not comments_disabled_globally_flag and post.enable_comments %}
     <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
 

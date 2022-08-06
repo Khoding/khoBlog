@@ -25,7 +25,7 @@
               <button x-on:click.prevent="tab = 'Main'" class="text-gray-900 dark:text-jumbo-100 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Main</button>
 
               <!-- Selected: "text-indigo-600 border-indigo-600", Not Selected: "text-gray-900 dark:text-jumbo-100 border-transparent" -->
-              <button x-on:click.prevent="tab = 'men'" class="text-gray-900 dark:text-jumbo-100 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Featured</button>
+              <button x-on:click.prevent="tab = 'featured'" class="text-gray-900 dark:text-jumbo-100 border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium">Featured</button>
             </div>
           </div>
 
@@ -34,7 +34,7 @@
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
                   <p id="mobile-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
-                    Featured
+                    Posts
                   </p>
                   <ul role="list" aria-labelledby="mobile-featured-heading-0" class="mt-6 space-y-6">
                     <li class="flex">
@@ -87,19 +87,15 @@
             </div>
           </div>
 
-          <div x-show="tab === 'men'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
+          <div x-show="tab === 'featured'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
             <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
               <div class="grid grid-cols-1 gap-y-10 gap-x-6">
                 <div>
                   <p id="mobile-featured-heading-1" class="font-medium text-gray-900 dark:text-jumbo-100">
-                    Featured
+                    Posts
                   </p>
                   <ul role="list" aria-labelledby="mobile-featured-heading-1" class="mt-6 space-y-6">
-                    <li class="flex">
-                      <a href="#" class="text-gray-900 dark:text-jumbo-200">
-                        Casual
-                      </a>
-                    </li>
+                    {% featured_post_list %}
                   </ul>
                 </div>
                 <div>
@@ -191,15 +187,11 @@
                             <div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
                               <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
-                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Featured
+                                  <p id="desktop-gosomewhere-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                    Go somewhere
                                   </p>
-                                  <ul role="list" aria-labelledby="desktop-featured-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Sleep
-                                      </a>
-                                    </li>
+                                  <ul role="list" aria-labelledby="desktop-gosomewhere-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                    {% links_menu %}
                                   </ul>
                                 </div>
                                 <div>
@@ -207,15 +199,14 @@
                                     Categories
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-categories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Basic Tees
-                                      </a>
-                                    </li>
+                                    {% mfl_setting "D" %}
+                                    {% mfl_setting "NP" %}
+                                    {% mfl_setting "NS" %}
+                                    {% mfl_setting "NA" %}
                                   </ul>
                                 </div>
                               </div>
-                              <div class="grid grid-cols-2 gap-y-10 gap-x-8">
+                              {% comment %} <div class="grid grid-cols-2 gap-y-10 gap-x-8">
                                 <div>
                                   <p id="desktop-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
                                     Collection
@@ -240,7 +231,7 @@
                                     </li>
                                   </ul>
                                 </div>
-                              </div>
+                              </div> {% endcomment %}
                             </div>
                           </div>
                         </div>
@@ -258,58 +249,25 @@
                         <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
                         <div class="relative bg-white dark:bg-jumbo-900">
                           <div class="max-w-7xl mx-auto px-8">
-                            <div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
-                              <div class="grid grid-cols-2 gap-y-10 gap-x-8">
+                            <div class="flex col-2 gap-y-10 gap-x-8 pt-10 pb-12">
+                              <div class="flex-none gap-y-10 gap-x-8">
                                 <div>
                                   <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Featured
+                                    Posts
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-featured-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Sleep
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div>
-                                  <p id="desktop-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Categories
-                                  </p>
-                                  <ul role="list" aria-labelledby="desktop-categories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Basic Tees
-                                      </a>
-                                    </li>
+                                    {% featured_post_list %}
                                   </ul>
                                 </div>
                               </div>
-                              <div class="grid grid-cols-2 gap-y-10 gap-x-8">
-                                <div>
-                                  <p id="desktop-collection-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Collection
-                                  </p>
-                                  <ul role="list" aria-labelledby="desktop-collection-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Everything
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div>
-                                  <p id="desktop-brand-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Brands
-                                  </p>
-                                  <ul role="list" aria-labelledby="desktop-brand-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                    <li class="flex">
-                                      <a href="#" class="hover:underline">
-                                        Full Nelson
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
+                              <div>
+                                <p id="desktop-categories-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                  Categories
+                                </p>
+                                <ul role="list" aria-labelledby="desktop-categories-heading" class="grid grid-cols-3 gap-x-4 mt-6 sm:mt-4">
+                                  {% super_featured_post_list %}
+                                  {% super_featured_page_list %}
+                                </ul>
                               </div>
                             </div>
                           </div>
