@@ -1,6 +1,6 @@
 {% for url in urls %}
   <li class="flex">
-    <a href="{{ url.get_absolute_url }}" class="text-gray-900 dark:text-jumbo-200 hover:underline">
+    <a href="{% if url.index %}{% firstof url.permalink url.content_object.get_index_view_url %}{% else %}{% firstof url.permalink url.content_object.get_absolute_url url.get_content_object_url %}{% endif %}" class="text-gray-900 dark:text-jumbo-200 hover:underline">
       {% firstof url.featured_title url.title %}
     </a>
   </li>
