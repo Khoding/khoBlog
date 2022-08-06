@@ -1,5 +1,7 @@
 {% for link in menu_footer_links %}
-  <a href="{{ link.get_rel_url }}"{% if link.is_target_blank %} target="_blank"{% endif %} class="{% if dev_class %}mobile_menu_grid_items{% else %}flyout_bottom_items {{ link.get_link_color }}{% endif %}">
+  <li class="flex">
+    <a href="{{ link.get_rel_url }}" class="hover:underline flyout_items {{ link.get_link_color }}" {% if link.is_target_blank %} target="_blank"{% endif %}>
       {{ link }}
-  </a>
+    </a>
+  </li>
 {% endfor %}

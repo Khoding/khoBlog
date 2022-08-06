@@ -13,7 +13,7 @@
 
 {% block content %}
   {% if not page.withdrawn or user.is_superuser %}
-    <div class="xl:grid xl:grid-cols-3">
+    <article class="xl:grid xl:grid-cols-3">
       <div class="xl:col-span-2 xl:pr-8">
         <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-200 xl:pb-6">
           <div>
@@ -46,7 +46,7 @@
           </section>
         {% endif %}
       </div>
-    </div>
+    </article>
   {% else %}
     <h1>
       <a class="kho-button-forms kho-button-submit-delete" href="{% url 'pages:kheee' %}">{{ description }}</a>

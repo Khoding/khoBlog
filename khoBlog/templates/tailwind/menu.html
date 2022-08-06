@@ -1,193 +1,266 @@
 {% load static links_menu menu_footer_set changelog featured_post featured_page %}
 
-<div id="navbar" class="sticky top-0 z-[9999] bg-gray-50 dark:bg-jumbo-900">
-  <div class="relative" x-data="{ open: false, focus: false }" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
-    <div class="absolute inset-0 shadow z-30 pointer-events-none" aria-hidden="true"></div>
-    <div class="relative z-20">
-      <div class="max-w-7xl mx-auto flex justify-between items-center px-4 2xl:px-0 py-5 sm:py-4 md:justify-start md:space-x-10">
-        <div>
-          <a href="{% url 'blog:post_list' %}" class="flex">
-            <span class="sr-only">Home page</span>
-            <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
-          </a>
-        </div>
+<div id="navbar" x-data="{ open: false }" @keydown.window.escape="open = false" class="bg-gray-50 dark:bg-jumbo-900">
+  <!-- Mobile menu -->
+  <div x-show="open" class="relative z-50 lg:hidden" x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." x-ref="dialog" aria-modal="true" style="display: none;">
 
-        <section class="ml-auto mr-8 -my-2 md:hidden" x-cloak x-data="{ open: false }">
-          <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Featured</button>
+    <div x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Off-canvas menu backdrop, show/hide based on off-canvas menu state." class="fixed inset-0 bg-black bg-opacity-25" style="display: none;"></div>
 
-          <div @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="slide-over-featured" x-ref="dialog" aria-modal="true">
-            <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
-
-            <div class="fixed inset-0 overflow-hidden">
-              <div class="absolute inset-0 overflow-hidden">
-                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                  <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
-                    <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
-                      <div class="px-4 sm:px-6">
-                        <div class="flex items-start justify-between">
-                          <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-featured">
-                            Featured
-                          </div>
-                          <div class="ml-3 flex h-7 items-center">
-                            <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
-                              <span class="sr-only">Close panel</span>
-                              <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                        {% all_featured_pages %}
-                        {% all_featured_posts %}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="-mr-2 -my-2 md:hidden">
-          {% include 'tailwind/theme_buttons.html' %}
-
-          <button type="button" class="rounded-xl p-2 inline-flex items-center justify-center text-gray-400 dark:text-jumbo-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-800 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400/75" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="true" :aria-expanded="open.toString()">
-            <span class="sr-only">Open menu</span>
-            <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <div class="fixed inset-0 flex z-50">
+      <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" x-description="Off-canvas menu, show/hide based on off-canvas menu state." class="relative max-w-xs w-full bg-gray-50 dark:bg-jumbo-900 shadow-xl pb-12 flex flex-col overflow-y-auto" @click.away="open = false" style="display: none;">
+        <div class="px-4 pt-5 pb-2 flex">
+          <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = false">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
         </div>
-        <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-          <nav class="flex space-x-4 lg:space-x-10">
-            {% include 'tailwind/menu_flyout.html' %}
-            {% include 'tailwind/facts_flyout.html' %}
 
-            {% if user.is_superuser %}
-              <a href="{% url 'admin:index' %}" class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
-                Admin
-              </a>
+        <div x-data="{ tab: 'main' }" class="mt-2">
+          <div class="border-b border-gray-200 dark:border-jumbo-700">
+            <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
+              <button x-on:click.prevent="tab = 'main'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'main', 'border-transparent': !(tab === 'main') }">Main</button>
 
-              <a href="https://eu.pythonanywhere.com" class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
-                Host
-              </a>
-            {% endif %}
-          </nav>
-          <article class="flex items-center md:ml-12">
-            {% include 'tailwind/theme_buttons.html' %}
+              <button x-on:click.prevent="tab = 'featured'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'featured', 'border-transparent': !(tab === 'featured') }">Featured</button>
+            </div>
+          </div>
 
-            <section x-cloak x-data="{ open: false }">
-              <button class="text-xs lg:text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
-
-              <div @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
-                <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
-
-                <div class="fixed inset-0 overflow-hidden">
-                  <div class="absolute inset-0 overflow-hidden">
-                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                      <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
-                        <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
-                          <div class="px-4 sm:px-6">
-                            <div class="flex items-start justify-between">
-                              <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
-                                Changelog
-                              </div>
-                              <div class="ml-3 flex h-7 items-center">
-                                <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
-                                  <span class="sr-only">Close panel</span>
-                                  <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                  </svg>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                            {% changelog %}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div x-show="tab === 'main'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
+            <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
+              <div class="grid grid-cols-1 gap-y-10 gap-x-6">
+                <div>
+                  <p id="mobile-gosomewhere-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
+                    Go somewhere
+                  </p>
+                  <ul role="list" aria-labelledby="mobile-gosomewhere-heading-0" class="mt-6 space-y-6">
+                    {% links_menu %}
+                  </ul>
+                </div>
+                <div>
+                  <p id="mobile-directlinks-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                    Direct Links
+                  </p>
+                  <ul role="list" aria-labelledby="mobile-directlinks-heading" class="mt-6 space-y-6">
+                    {% mfl_setting "D" %}
+                    {% mfl_setting "NP" %}
+                    {% mfl_setting "NS" %}
+                    {% mfl_setting "NA" %}
+                  </ul>
                 </div>
               </div>
-            </section>
-            {% if not user.is_authenticated %}
-              <a href="{% url 'account_login' %}" class="ml-8 text-xs lg:text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
-                Log in
-              </a>
-              <a href="{% url 'accounts:signup' %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 lg:px-4 lg:py-2 border border-transparent rounded-xl shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
-                Sign up
-              </a>
-            {% else %}
-              <a href="{% url 'account_logout' %}" class="ml-8 text-xs lg:text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline">
-                Log out
-              </a>
-              <a href="{% url 'accounts:profile' slug=user.slug %}" class="ml-8 inline-flex items-center justify-center px-3 py-2 border border-transparent rounded-xl shadow-sm text-xs lg:text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
-                Your profile
-              </a>
-            {% endif %}
-          </article>
-        </div>
-      </div>
-    </div>
+            </div>
+          </div>
 
-    <div x-show="open" x-transition:enter="duration-200 ease-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-description="Mobile menu, show/hide based on mobile menu state." class="absolute z-30 top-0 inset-x-0 p-2 transition origin-top-right md:hidden" x-ref="panel" @click.away="open = false">
-      <div class="rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 bg-gray-50 dark:bg-jumbo-800 divide-y-2 divide-gray-50 dark:divide-jumbo-200">
-        <div class="pt-5 pb-6 px-5 sm:pb-8">
-          <div class="flex items-center justify-between">
-            <div>
-              <img class="h-8 w-auto" width="2rem" height="2rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" alt="Khodok's Logo">
-            </div>
-            <div class="-mr-2">
-              <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open=false">
-                <span class="sr-only">Close menu</span>
-                <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="mt-6 sm:mt-8">
-            <nav>
-              <div class="grid gap-4 grid-cols-2">
-                {% links_menu urls "mobile" %}
+          <div x-show="tab === 'featured'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
+            <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
+              <div class="grid grid-cols-1 gap-y-10 gap-x-6">
+                <div>
+                  <p id="mobile-featured-heading-1" class="font-medium text-gray-900 dark:text-jumbo-100">
+                    Featured
+                  </p>
+                  <ul role="list" aria-labelledby="mobile-featured-heading-1" class="mt-6 space-y-6">
+                    {% featured_post_list %}
+                  </ul>
+                </div>
+                <div>
+                  <p id="mobile-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                    Super Featured
+                  </p>
+                  <ul role="list" aria-labelledby="mobile-superfeatured-heading" class="mt-6 space-y-6">
+                    {% super_featured_post_list %}
+                    {% super_featured_page_list %}
+                  </ul>
+                </div>
               </div>
-            </nav>
+            </div>
           </div>
         </div>
-        <div class="py-6 px-5">
-          <div class="grid grid-cols-2 gap-4">
-            {% mfl_setting default "mobile" "D" %}
-            {% mfl_setting default "mobile" "NP" %}
-            {% mfl_setting default "mobile" "NS" %}
-            {% mfl_setting default "mobile" "NA" %}
-          </div>
-          <div class="mt-6">
-            {% if not user.is_authenticated %}
-              <a href="{% url 'accounts:signup' %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
-                Sign up
-              </a>
-              <p class="mt-6 text-center text-base font-medium text-gray-500">
-                <a href="{% url 'account_login' %}" class="text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
-                  Log in
-                </a>
-              </p>
-            {% else %}
-              <a href="{% url 'accounts:profile' slug=user.slug %}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-cornflower-600 hover:bg-cornflower-700">
-                Your profile
-              </a>
-              <p class="mt-6 text-center text-base font-medium text-gray-500">
-                <a href="{% url 'account_logout' %}" class="text-cornflower-600 hover:text-cornflower-500 dark:text-jumbo-200 dark:hover:text-jumbo-300">
-                  Log out
-                </a>
-              </p>
-            {% endif %}
-          </div>
+
+        <div class="border-t border-gray-200 dark:border-jumbo-700 py-6 px-4 space-y-6">
+          {% if not user.is_authenticated %}
+            <div class="flow-root">
+              <a href="{% url 'account_signup' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Create an account</a>
+            </div>
+            <div class="flow-root">
+              <a href="{% url 'account_login' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Sign in</a>
+            </div>
+          {% else %}
+            <div class="flow-root">
+              <a href="{{ user.get_absolute_url}}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Profile</a>
+            </div>
+            <div class="flow-root">
+              <a href="{% url 'account_logout' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Logout</a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
+
+  <header class="relative">
+    <nav aria-label="Top">
+      <!-- navigation -->
+      <div class="bg-gray-50 dark:bg-jumbo-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="border-b border-gray-200 dark:border-jumbo-700">
+            <div class="h-16 flex items-center justify-between">
+              <!-- Logo (lg+) -->
+              <div class="hidden lg:flex lg:items-center">
+                <a href="{% url 'blog:post_list' %}">
+                  <span class="sr-only">Home page</span>
+                  <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" loading="lazy" alt="Khodok's Logo">
+                </a>
+              </div>
+
+              <div class="hidden h-full lg:flex">
+                <!-- Mega menus -->
+                <div class="ml-8 z-50">
+                  <div class="h-full flex justify-center space-x-8">
+                    <div class="flex" x-data="{ open: false, focus: false }" @keydown.window.escape="open = false" @close-popover-group.window="onClosePopoverGroup">
+                      <div class="relative flex">
+                        <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': open, 'border-transparent': !(open) }">
+                          Main
+                        </button>
+                      </div>
+                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-900 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
+                        <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
+                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
+                        <div class="relative bg-white dark:bg-jumbo-900">
+                          <div class="max-w-7xl mx-auto px-8">
+                            <div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
+                              <div class="grid grid-cols-2 gap-y-10 gap-x-8">
+                                <div>
+                                  <p id="desktop-gosomewhere-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                    Go somewhere
+                                  </p>
+                                  <ul role="list" aria-labelledby="desktop-gosomewhere-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                    {% links_menu %}
+                                  </ul>
+                                </div>
+                                <div>
+                                  <p id="desktop-directlinks-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                    Direct Links
+                                  </p>
+                                  <ul role="list" aria-labelledby="desktop-directlinks-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                    {% mfl_setting "D" %}
+                                    {% mfl_setting "NP" %}
+                                    {% mfl_setting "NS" %}
+                                    {% mfl_setting "NA" %}
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex" x-data="{ open: false, focus: false }" @keydown.window.escape="open = false" @close-popover-group.window="onClosePopoverGroup">
+                      <div class="relative flex">
+                        <button type="button" x-state:on="Item active" x-state:off="Item inactive" class="group flyout_button" @click="open=!open" @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': open, 'border-transparent': !(open) }">
+                          Featured
+                        </button>
+                      </div>
+                      <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Featured' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-900 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
+                        <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
+                        <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
+                        <div class="relative bg-white dark:bg-jumbo-900">
+                          <div class="max-w-7xl mx-auto px-8">
+                            <div class="flex col-2 gap-y-10 gap-x-8 pt-10 pb-12">
+                              <div class="flex-none gap-y-10 gap-x-8">
+                                <div>
+                                  <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                    Featured
+                                  </p>
+                                  <ul role="list" aria-labelledby="desktop-featured-heading-0" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                    {% featured_post_list %}
+                                  </ul>
+                                </div>
+                              </div>
+                              <div>
+                                <p id="desktop-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                  Super Featured
+                                </p>
+                                <ul role="list" aria-labelledby="desktop-superfeatured-heading" class="grid grid-cols-3 gap-x-4 mt-6 sm:mt-4">
+                                  {% super_featured_post_list %}
+                                  {% super_featured_page_list %}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile menu and search (lg-) -->
+              <div class="flex-1 flex items-center lg:hidden">
+                <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 p-2 rounded-md hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = true">
+                  <span class="sr-only">Open menu</span>
+                  <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Logo (lg-) -->
+              <a href="{% url 'blog:post_list' %}" class="lg:hidden">
+                <span class="sr-only">Home page</span>
+                <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/RuthinkkTooBig.webp' %}" loading="lazy" alt="Khodok's Logo">
+              </a>
+
+              <div class="flex-1 flex items-center justify-end">
+                <div class="flex items-center lg:ml-8">
+                  <div class="flex space-x-8">
+                    <section class="hidden md:flex" x-cloak x-data="{ open: false }">
+                      <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
+
+                      <div @keydown.window.escape="open = false" x-show="open" class="relative z-50" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
+                        <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
+
+                        <div class="fixed inset-0 overflow-hidden">
+                          <div class="absolute inset-0 overflow-hidden">
+                            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                              <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
+                                <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
+                                  <div class="px-4 sm:px-6">
+                                    <div class="flex items-start justify-between">
+                                      <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
+                                        Changelog
+                                      </div>
+                                      <div class="ml-3 flex h-7 items-center">
+                                        <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
+                                          <span class="sr-only">Close panel</span>
+                                          <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                          </svg>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                                    {% changelog %}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    <div class="flex">
+                      {% include 'tailwind/theme_buttons.html' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
 </div>
