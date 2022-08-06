@@ -5637,6 +5637,11 @@ html {
   background-color: rgb(213 213 216 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-700:hover {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
@@ -5935,6 +5940,11 @@ html {
 .dark .dark\:hover\:bg-jumbo-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(30 29 32 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:hover\:bg-jumbo-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(97 95 103 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:hover\:text-jumbo-200:hover {
@@ -6308,6 +6318,10 @@ html {
     margin-top: 0px;
   }
 
+  .md\:mr-0 {
+    margin-right: 0px;
+  }
+
   .md\:block {
     display: block;
   }
@@ -6616,6 +6630,10 @@ html {
 
   .lg\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .lg\:mr-0 {
+    margin-right: 0px;
   }
 
   .lg\:flex {
