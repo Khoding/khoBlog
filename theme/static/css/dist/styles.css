@@ -1557,8 +1557,13 @@ html {
 }
 
 .flyout_button:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
+.dark .flyout_button {
   --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
+  color: rgb(203 202 206 / var(--tw-text-opacity));
 }
 
 .flyout_bottom_items {
@@ -4163,6 +4168,10 @@ html {
   z-index: 20;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .col-auto {
   grid-column: auto;
 }
@@ -5415,6 +5424,11 @@ html {
   color: rgb(242 106 106 / var(--tw-text-opacity));
 }
 
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -5667,6 +5681,11 @@ html {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
+.hover\:text-gray-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .hover\:text-cornflower-500:hover {
   --tw-text-opacity: 1;
   color: rgb(101 39 243 / var(--tw-text-opacity));
@@ -5690,11 +5709,6 @@ html {
 .hover\:text-cornflower-700:hover {
   --tw-text-opacity: 1;
   color: rgb(55 9 161 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -5745,14 +5759,14 @@ html {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.group:hover .group-hover\:text-gray-800 {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
-}
-
 .group:hover .group-hover\:text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .dark .dark\:prose-invert {
