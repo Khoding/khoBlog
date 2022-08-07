@@ -19,4 +19,6 @@ def mfl_setting(context, link_type):
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NS")
         elif link_type == "NA" and context.request.user.is_superuser:
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NA")
+        elif link_type == "NAL" and context.request.user.is_superuser:
+            menu_footer_links = MenuFooterLink.objects.filter(visibility="NAL")
     return {"context": context, "menu_footer_links": menu_footer_links}

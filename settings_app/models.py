@@ -25,6 +25,7 @@ class MenuFooterLink(auto_prefetch.Model):
         ("NP", "needs_permission"),
         ("NS", "needs_staff"),
         ("NA", "needs_admin"),
+        ("NAL", "needs_admin_lists"),
     ]
 
     title = models.CharField(max_length=200, blank=True)
@@ -63,4 +64,5 @@ class MenuFooterLink(auto_prefetch.Model):
             "NP": "perm",
             "NS": "staff",
             "NA": "admin",
+            "NAL": "admin",
         }[self.visibility]

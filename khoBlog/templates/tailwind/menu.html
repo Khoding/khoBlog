@@ -39,16 +39,53 @@
                 </div>
                 <div>
                   <p id="mobile-directlinks-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-                    Direct Links
+                    Direct links
                   </p>
                   <ul role="list" aria-labelledby="mobile-directlinks-heading" class="mt-6 space-y-6">
                     {% mfl_setting "D" %}
-                    {% mfl_setting "NP" %}
-                    {% mfl_setting "NS" %}
-                    {% mfl_setting "NA" %}
                   </ul>
                 </div>
               </div>
+              {% if user.is_authenticated %}
+                <div class="grid grid-cols-1 gap-y-10 gap-x-4">
+                  <div>
+                    <p id="desktop-dlperm-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                      DL Permission
+                    </p>
+                    <ul role="list" aria-labelledby="desktop-dlperm-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                      {% mfl_setting "NP" %}
+                    </ul>
+                  </div>
+                  {% if user.is_staff %}
+                    <div>
+                      <p id="desktop-dlstaff-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                        DL Staff
+                      </p>
+                      <ul role="list" aria-labelledby="desktop-dlstaff-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                        {% mfl_setting "NS" %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                  {% if user.is_superuser %}
+                    <div>
+                      <p id="desktop-dladminlists-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                        DL Admin Lists
+                      </p>
+                      <ul role="list" aria-labelledby="desktop-dladminlists-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                        {% mfl_setting "NAL" %}
+                      </ul>
+                    </div>
+                    <div>
+                      <p id="desktop-dladmin-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                        DL Admin
+                      </p>
+                      <ul role="list" aria-labelledby="desktop-dladmin-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                        {% mfl_setting "NA" %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
             </div>
           </div>
 
@@ -140,16 +177,53 @@
                                 </div>
                                 <div>
                                   <p id="desktop-directlinks-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-                                    Direct Links
+                                    Direct links
                                   </p>
                                   <ul role="list" aria-labelledby="desktop-directlinks-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                     {% mfl_setting "D" %}
-                                    {% mfl_setting "NP" %}
-                                    {% mfl_setting "NS" %}
-                                    {% mfl_setting "NA" %}
                                   </ul>
                                 </div>
                               </div>
+                              {% if user.is_authenticated %}
+                                <div class="grid grid-cols-4 gap-y-10 gap-x-8">
+                                  <div>
+                                    <p id="desktop-dlperm-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                      DL Permission
+                                    </p>
+                                    <ul role="list" aria-labelledby="desktop-dlperm-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                      {% mfl_setting "NP" %}
+                                    </ul>
+                                  </div>
+                                  {% if user.is_staff %}
+                                    <div>
+                                      <p id="desktop-dlstaff-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                        DL Staff
+                                      </p>
+                                      <ul role="list" aria-labelledby="desktop-dlstaff-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                        {% mfl_setting "NS" %}
+                                      </ul>
+                                    </div>
+                                  {% endif %}
+                                  {% if user.is_superuser %}
+                                    <div>
+                                      <p id="desktop-dladminlists-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                        DL Admin Lists
+                                      </p>
+                                      <ul role="list" aria-labelledby="desktop-dladminlists-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                        {% mfl_setting "NAL" %}
+                                      </ul>
+                                    </div>
+                                    <div>
+                                      <p id="desktop-dladmin-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                                        DL Admin
+                                      </p>
+                                      <ul role="list" aria-labelledby="desktop-dladmin-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                        {% mfl_setting "NA" %}
+                                      </ul>
+                                    </div>
+                                  {% endif %}
+                                </div>
+                              {% endif %}
                             </div>
                           </div>
                         </div>
