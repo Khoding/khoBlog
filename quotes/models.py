@@ -137,6 +137,10 @@ class Source(BaseQuoteAbstractModel):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        """Get absolute url"""
+        return reverse("quotes:source_detail", kwargs={"slug": self.slug})
+
 
 # auto_prefetch model for categories
 class Category(BaseQuoteAbstractModel):

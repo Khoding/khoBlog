@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 
-from quotes.models import Person, Quote
+from quotes.models import Person, Quote, Source
 
 
 class QuoteDetailView(DetailView):
@@ -29,4 +29,18 @@ class PersonDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = self.object
         context["description"] = f"Quotes involving {self.object}"
+        return context
+
+
+class SourceDetailView(DetailView):
+    """SourceDetailView Class"""
+
+    model = Source
+    template_name = "quotes/source_detail.html"
+
+    def get_context_data(self, **kwargs):
+        """Get context data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.object
+        context["description"] = f"Quotes in {self.object}"
         return context

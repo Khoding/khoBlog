@@ -4,7 +4,7 @@ from django.utils.html import escape, mark_safe
 
 from django_markup.markup import formatter
 
-from quotes.models import Category, Person, Quote
+from quotes.models import Category, Person, Quote, Source
 
 register = template.Library()
 
@@ -139,6 +139,69 @@ def display_quotes_by_person(person_slug):
 
 
 @register.simple_tag()
+def display_quotes_by_source(source_slug):
+    """Display quotes by person"""
+    source = Source.objects.get(slug=source_slug)
+    QUOTES = Quote.objects.filter(source=source)
+
+    content = [""]
+
+    for i, quote in enumerate(QUOTES):
+        if i > 0:
+            content.append("<hr>")
+
+        content.append('<blockquote class="quotes quote_list">')
+        content.append("<dl>")
+        body = formatter(quote.body, filter_name="markdown")
+        content.append(f"<dt>{body}</dt>")
+        content.append("<dd>")
+        if quote.author:
+            content.append(f"{escape(quote.author.name)}")
+        if quote.person:
+            for person in quote.person.all():
+                content.append(" and ")
+                content.append(f"{escape(person.name)}")
+        if quote.addressing:
+            for qai, person in enumerate(quote.addressing.all()):
+                if qai > 0:
+                    content.append(" and")
+                content.append(f" {escape(quote.get_to_or_about_display())} ")
+                content.append(f"{escape(person.name)}")
+        if quote.source:
+            for qsi, source in enumerate(quote.source.all()):
+                if qsi > 0:
+                    content.append(f" and {escape(source.linking_text)} ")
+                else:
+                    content.append(f" {escape(source.linking_text)} ")
+
+                if source.url:
+                    content.append(f'<a href="{source.url}" target="_blank" rel="noopener noreferrer">')
+                content.append(f"{escape(source.title)}")
+                if source.url:
+                    content.append("</a>")
+
+                if source.date:
+                    content.append(f" ({escape(format(source.date, source.date_type))}")
+                    if not source.media:
+                        content.append(")")
+
+                if source.media:
+                    if source.date:
+                        content.append(", ")
+                    else:
+                        content.append(" (")
+                    content.append(f"{escape(source.media.title)}")
+                    content.append(")")
+        content.append("</dd>")
+        content.append(f'<dd><a href="{quote.get_absolute_url()}">Details for this quote</a></dd>')
+        content.append("</dl>")
+        content.append("</blockquote>")
+
+    content = "".join(content)
+    return mark_safe(content)
+
+
+@register.simple_tag()
 def display_single_quote(o):
     """Display a single quote"""
     quote = Quote.objects.get(slug=o)
@@ -166,11 +229,10 @@ def display_single_quote(o):
             else:
                 content.append(f" {escape(source.linking_text)} ")
 
+            content.append(f'<a href="{source.get_absolute_url()}">{escape(source.title)}</a>')
+
             if source.url:
-                content.append(f'<a href="{source.url}" target="_blank" rel="noopener noreferrer">')
-            content.append(f"{escape(source.title)}")
-            if source.url:
-                content.append("</a>")
+                content.append(f' <a href="{source.url}" target="_blank" rel="noopener noreferrer">Go to source</a>')
 
             if source.date:
                 content.append(f" ({escape(format(source.date, source.date_type))}")
