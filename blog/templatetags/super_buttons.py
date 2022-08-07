@@ -14,7 +14,7 @@ def sb(o, *args, **kwargs):
     admin = False
     if user and user.is_authenticated:
         authenticated = True
-        if hasattr(o, 'likes'):
+        if hasattr(o, "likes"):
             liked = user in o.likes.all()
     if user and user.is_superuser:
         authenticated = True
@@ -35,3 +35,11 @@ def csb(o):
     create_url = reverse(f"{content_type.app_label}:create_{content_type.model}")
     obj = o.__class__.__name__
     return {"object": obj, "create_url": create_url}
+
+
+@register.inclusion_tag("tailwind/user_auth_button.html")
+def user_auth_sb(o):
+    """User auth button tag"""
+    return {
+        "object": o,
+    }

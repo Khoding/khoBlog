@@ -1,4 +1,4 @@
-{% load static links_menu menu_footer_set changelog featured_post featured_page %}
+{% load static links_menu menu_footer_set changelog featured_post featured_page super_buttons %}
 
 <div id="navbar" x-data="{ open: false }" @keydown.window.escape="open = false" class="bg-gray-50 dark:bg-jumbo-900">
   <!-- Mobile menu -->
@@ -251,8 +251,12 @@
                         </div>
                       </div>
                     </section>
-                    <div class="flex">
-                      {% include 'tailwind/theme_buttons.html' %}
+                    <section class="flex">
+                      {% include 'tailwind/theme_button.html' %}
+                    </section>
+                    <section class="hidden lg:flex">
+                      {% user_auth_sb user %}
+                    </section>
                     </div>
                   </div>
                 </div>
