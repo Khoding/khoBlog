@@ -10,7 +10,7 @@ def mfl_setting(context, link_type):
     """Menu footer links tag"""
     has_perms = context.get("perms", ["settings_app.view_menu_footer_link"])
     menu_footer_links = ""
-    if not context.request.user.is_authenticated and link_type == "D":
+    if link_type == "D":
         menu_footer_links = MenuFooterLink.objects.filter(visibility="D")
     if context.request.user.is_authenticated:
         if link_type == "NP" and has_perms:
