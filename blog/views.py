@@ -7,7 +7,13 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.views.generic.dates import DayArchiveView
+from django.views.generic.dates import (
+    ArchiveIndexView,
+    DayArchiveView,
+    MonthArchiveView,
+    WeekArchiveView,
+    YearArchiveView,
+)
 
 from rules.contrib.views import AutoPermissionRequiredMixin
 
@@ -1038,6 +1044,125 @@ def series_needs_review(request, slug):
     series = get_object_or_404(Series, slug=slug)
     series.needs_review()
     return redirect("blog:post_series_list", slug=slug)
+
+
+class PostArchiveIndexView(ArchiveIndexView):
+    """PostArchiveIndexView
+
+    Archive view
+
+    Args:
+        ArchiveIndexView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+    model = Post
+    template_name = "blog/lists/post_list.html"
+    context_object_name = "posts"
+    paginate_by = 20
+    paginate_orphans = 5
+    make_object_list = True
+    date_field = "pub_date"
+    allow_future = True
+
+    def get_queryset(self):
+        return self.model.objects.get_common_queryset(self.request.user).get_without_removed()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "[Archive] Post archive"
+        return context
+
+
+class PostYearArchiveView(YearArchiveView):
+    """PostYearArchiveView
+
+    Archive by year
+
+    Args:
+        YearArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+    model = Post
+    template_name = "blog/lists/post_list.html"
+    context_object_name = "posts"
+    paginate_by = 20
+    paginate_orphans = 5
+    make_object_list = True
+    date_field = "pub_date"
+    allow_future = True
+
+    def get_queryset(self):
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "[Archive] Posted in " + str(self.get_year())
+        return context
+
+
+class PostMonthArchiveView(MonthArchiveView):
+    """PostMonthArchiveView
+
+    Archive by month
+
+    Args:
+        MonthArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+    model = Post
+    template_name = "blog/lists/post_list.html"
+    context_object_name = "posts"
+    paginate_by = 20
+    paginate_orphans = 5
+    date_field = "pub_date"
+    allow_future = True
+
+    def get_queryset(self):
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "[Archive] Posted in " + str(self.get_month()) + " of " + str(self.get_year())
+        return context
+
+
+class PostWeekArchiveView(WeekArchiveView):
+    """PostWeekArchiveView
+
+    Archive by week
+
+    Args:
+        WeekArchiveView ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+    model = Post
+    template_name = "blog/lists/post_list.html"
+    context_object_name = "posts"
+    paginate_by = 20
+    paginate_orphans = 5
+    date_field = "pub_date"
+    week_format = "%W"
+    allow_future = True
+
+    def get_queryset(self):
+        return self.model.objects.get_common_queryset(user=self.request.user).get_without_removed()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "[Archive] Posted during Week " + str(self.get_week()) + " of " + str(self.get_year())
+        return context
 
 
 class PostDayArchiveView(DayArchiveView):

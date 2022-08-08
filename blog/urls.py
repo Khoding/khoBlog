@@ -10,6 +10,7 @@ from .views import (
     CategoryCreateView,
     CategoryListView,
     CategoryUpdateView,
+    PostArchiveIndexView,
     PostCloneView,
     PostCreateView,
     PostDayArchiveView,
@@ -19,9 +20,12 @@ from .views import (
     PostInCategoryListView,
     PostInSeriesListView,
     PostListView,
+    PostMonthArchiveView,
     PostScheduledListView,
     PostUpdateView,
+    PostWeekArchiveView,
     PostWithdrawnListView,
+    PostYearArchiveView,
     SeriesCreateView,
     SeriesListView,
     SeriesUpdateView,
@@ -92,6 +96,22 @@ post_extra_patterns = [
 
 
 archive_extra_patterns = [
+    path("", PostArchiveIndexView.as_view(), name="post_archive"),
+    path("<int:year>/", PostYearArchiveView.as_view(), name="archive_year"),
+    # Example: /2012/08/
+    path(
+        "<int:year>/<int:month>/",
+        PostMonthArchiveView.as_view(month_format="%m"),
+        name="archive_month_numeric",
+    ),
+    # Example: /2012/aug/
+    path("<int:year>/<str:month>/", PostMonthArchiveView.as_view(), name="archive_month"),
+    # Example: /2012/week/23/
+    path(
+        "<int:year>/week/<int:week>/",
+        PostWeekArchiveView.as_view(),
+        name="archive_week",
+    ),
     # Example: /2012/Nov/10/
     path(
         "<int:year>/<str:month>/<int:day>/",
