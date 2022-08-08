@@ -22,7 +22,7 @@ class PersonDetailView(DetailView):
     """PersonDetailView Class"""
 
     model = Person
-    template_name = "quotes/person_detail.html"
+    template_name = "quotes/specific_detail.html"
 
     def get_context_data(self, **kwargs):
         """Get context data"""
@@ -36,7 +36,7 @@ class SourceDetailView(DetailView):
     """SourceDetailView Class"""
 
     model = Source
-    template_name = "quotes/source_detail.html"
+    template_name = "quotes/specific_detail.html"
 
     def get_context_data(self, **kwargs):
         """Get context data"""

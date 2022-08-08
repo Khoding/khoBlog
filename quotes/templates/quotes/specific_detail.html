@@ -1,11 +1,11 @@
 {% extends 'sub_base_main_block.html' %}
-{% load display_quotes %}
+{% load display_quotes content_type %}
 
 {% block content_main %}
   <a class="hover:underline" href="{% url 'pages:quotes' %}">Go back to quotes list</a>
   <div class="text-3xl">{{ description }}</div>
 
   <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-    {% display_quotes_by_person object.slug %}
+    {% display_quotes object|to_class_name object.slug %}
   </div>
 {% endblock content_main %}
