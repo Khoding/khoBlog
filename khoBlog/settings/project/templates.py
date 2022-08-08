@@ -20,6 +20,7 @@ TEMPLATES = [
                 "content_type": "khoBlog.templatetags.content_type",
                 "display": "khoBlog.templatetags.display",
                 "status_dot": "khoBlog.templatetags.status_dot",
+                "menu": "khoBlog.templatetags.menu",
             },
             "loaders": [
                 (

@@ -1,0 +1,90 @@
+{% load links_menu menu_footer_set featured_post featured_page %}
+
+{% if menu == "Main" %}
+  <div x-show="tab === 'main'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
+    <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
+      <div class="grid grid-cols-1 gap-y-10 gap-x-6">
+        <div>
+          <p id="mobile-gosomewhere-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
+            Go somewhere
+          </p>
+          <ul role="list" aria-labelledby="mobile-gosomewhere-heading-0" class="mt-6 space-y-6">
+            {% links_menu %}
+          </ul>
+        </div>
+        <div>
+          <p id="mobile-directlinks-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+            Direct links
+          </p>
+          <ul role="list" aria-labelledby="mobile-directlinks-heading" class="mt-6 space-y-6">
+            {% mfl_setting "D" %}
+          </ul>
+        </div>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="grid grid-cols-1 gap-y-10 gap-x-4">
+          <div>
+            <p id="desktop-dlperm-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+              DL Permission
+            </p>
+            <ul role="list" aria-labelledby="desktop-dlperm-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+              {% mfl_setting "NP" %}
+            </ul>
+          </div>
+          {% if user.is_staff %}
+            <div>
+              <p id="desktop-dlstaff-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                DL Staff
+              </p>
+              <ul role="list" aria-labelledby="desktop-dlstaff-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                {% mfl_setting "NS" %}
+              </ul>
+            </div>
+          {% endif %}
+          {% if user.is_superuser %}
+            <div>
+              <p id="desktop-dladminlists-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                DL Admin Lists
+              </p>
+              <ul role="list" aria-labelledby="desktop-dladminlists-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                {% mfl_setting "NAL" %}
+              </ul>
+            </div>
+            <div>
+              <p id="desktop-dladmin-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+                DL Admin
+              </p>
+              <ul role="list" aria-labelledby="desktop-dladmin-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                {% mfl_setting "NA" %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+    {% endif %}
+    </div>
+  </div>
+{% else %}
+  <div x-show="tab === 'featured'" class="px-4 pt-10 pb-6 space-y-12" role="tabpanel" tabindex="0">
+    <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
+      <div class="grid grid-cols-1 gap-y-10 gap-x-6">
+        <div>
+          <p id="mobile-featured-heading-1" class="font-medium text-gray-900 dark:text-jumbo-100">
+            Featured
+          </p>
+          <ul role="list" aria-labelledby="mobile-featured-heading-1" class="mt-6 space-y-6">
+            {% featured_post_list %}
+          </ul>
+        </div>
+        <div>
+          <p id="mobile-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+            Super Featured
+          </p>
+          <ul role="list" aria-labelledby="mobile-superfeatured-heading" class="mt-6 space-y-6">
+            {% super_featured_post_list %}
+            {% super_featured_page_list %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
