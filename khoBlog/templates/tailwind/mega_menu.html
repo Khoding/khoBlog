@@ -65,6 +65,15 @@
     </div>
   {% else %}
     <div class="flex col-2 gap-y-10 gap-x-8 pt-10 pb-12">
+      <div>
+        <p id="desktop-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+          Super Featured
+        </p>
+        <ul role="list" aria-labelledby="desktop-superfeatured-heading" class="grid grid-cols-3 gap-y-8 gap-x-4 mt-6 sm:mt-4">
+          {% super_featured_page_list %}
+          {% super_featured_post_list %}
+        </ul>
+      </div>
       <div class="flex-none gap-y-10 gap-x-8">
         <div>
           <p id="desktop-featured-heading-0" class="font-medium text-gray-900 dark:text-jumbo-100">
@@ -74,15 +83,6 @@
             {% featured_post_list %}
           </ul>
         </div>
-      </div>
-      <div>
-        <p id="desktop-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-          Super Featured
-        </p>
-        <ul role="list" aria-labelledby="desktop-superfeatured-heading" class="grid grid-cols-3 gap-x-4 mt-6 sm:mt-4">
-          {% super_featured_post_list %}
-          {% super_featured_page_list %}
-        </ul>
       </div>
     </div>
   {% endif %}

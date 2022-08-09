@@ -68,20 +68,20 @@
     <div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
       <div class="grid grid-cols-1 gap-y-10 gap-x-6">
         <div>
+          <p id="mobile-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
+            Super Featured
+          </p>
+          <ul role="list" aria-labelledby="mobile-superfeatured-heading" class="mt-6 space-y-6">
+            {% super_featured_page_list %}
+            {% super_featured_post_list %}
+          </ul>
+        </div>
+        <div>
           <p id="mobile-featured-heading-1" class="font-medium text-gray-900 dark:text-jumbo-100">
             Featured
           </p>
           <ul role="list" aria-labelledby="mobile-featured-heading-1" class="mt-6 space-y-6">
             {% featured_post_list %}
-          </ul>
-        </div>
-        <div>
-          <p id="mobile-superfeatured-heading" class="font-medium text-gray-900 dark:text-jumbo-100">
-            Super Featured
-          </p>
-          <ul role="list" aria-labelledby="mobile-superfeatured-heading" class="mt-6 space-y-6">
-            {% super_featured_post_list %}
-            {% super_featured_page_list %}
           </ul>
         </div>
       </div>
