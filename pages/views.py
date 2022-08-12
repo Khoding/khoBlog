@@ -80,7 +80,7 @@ class PageListView(ListView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser and not self.request.user.secure_mode is True:
             return self.model.objects.filter(deleted_at=None)
         return self.model.objects.filter(withdrawn=False, deleted_at=None)
 
@@ -159,7 +159,7 @@ class PageDeleteView(UpdateView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser and not self.request.user.secure_mode is True:
             removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 removing_page.soft_delete()

@@ -12,7 +12,7 @@
 {% endblock page_head %}
 
 {% block content %}
-  {% if not page.withdrawn or user.is_superuser %}
+  {% if not page.withdrawn or user.is_superuser and not user.secure_mode %}
     <article class="xl:grid xl:grid-cols-3">
       <div class="xl:col-span-2 xl:pr-8">
         <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-200 xl:pb-6">

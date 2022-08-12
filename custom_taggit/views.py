@@ -27,7 +27,7 @@ class TagListView(ListView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser and not self.request.user.secure_mode is True:
             return self.model.objects.all()
         return self.model.objects.filter(withdrawn=False)
 

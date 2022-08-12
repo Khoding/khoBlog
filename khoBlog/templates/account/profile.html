@@ -25,7 +25,7 @@
           <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
             {% usb object %}
           </div>
-        {% elif user.is_superuser %}
+        {% elif user.is_superuser and not user.secure_mode %}
           <div class="mx-auto text-right">
             <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-xl px-4">
               Edit in admin
@@ -53,7 +53,7 @@
                 Profile
               </button>
 
-              {% if object == user or user.is_superuser %}
+              {% if object == user or user.is_superuser and not user.secure_mode %}
                 <button :class="{ 'profile_active_tab': tab === 'personal' }" x-on:click.prevent="tab = 'personal'" class="profile_tab">
                   Personal info
                 </button>
@@ -107,7 +107,7 @@
         </dl>
       </section>
 
-      {% if object == user or user.is_superuser %}
+      {% if object == user or user.is_superuser and not user.secure_mode %}
         <section x-show="tab === 'personal'" class="mt-6 max-w-5xl mx-auto">
           <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
             <div class="sm:col-span-1">
@@ -125,7 +125,7 @@
               </dt>
               <dd class="mt-1 text-sm text-gray-900 dark:text-jumbo-300">
                 {% for emailaddress in object.emailaddress_set.all %}
-                  {% if user.is_superuser %}
+                  {% if user.is_superuser and not user.secure_mode %}
                     <a class="underline hover:no-underline" href="{% url 'admin:account_emailaddress_change' object_id=emailaddress.id %}">
                   {% else %}
                     <a class="underline hover:no-underline" href="{% url 'accounts:email' %}">

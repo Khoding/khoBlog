@@ -33,4 +33,5 @@ class CustomUserChangeForm(UserChangeForm):
             "profile_pic",
             "slug",
             "display_github",
+            "secure_mode",
         )

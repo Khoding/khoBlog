@@ -97,7 +97,7 @@
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Categories</h2>
     <ul role="list" class="mt-2 leading-8">
       {% for category in object.categories.all %}
-        {% if not category.withdrawn or user.is_superuser %}
+        {% if not category.withdrawn or user.is_superuser and not user.secure_mode %}
           {% spaceless %}
             <li class="inline">
               <a href="{% url 'blog:post_category_list' slug=category.slug %}" class="relative inline-flex items-center rounded-full border border-jumbo-300 px-3 py-0.5">
@@ -114,7 +114,7 @@
   <section>
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Tags</h2>
     <ul role="list" class="mt-2 leading-8">
-      {% if not user.is_superuser %}
+      {% if not user.is_superuser and not user.secure_mode %}
         {% for tag in object.get_tags %}
           {% spaceless %}
             <li class="inline">
@@ -150,7 +150,7 @@
     <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Related content</h2>
     <ul role="list" class="mt-2 leading-8">
       {% for e in similar_posts %}
-        {% if not e.withdrawn and not e.is_scheduled or user.is_superuser %}
+        {% if not e.withdrawn and not e.is_scheduled or user.is_superuser and not user.secure_mode %}
           {% spaceless %}
             <li class="inline">
               <a href="{{ e.get_absolute_url }}" class="relative inline-flex items-center rounded-full border border-jumbo-300 dark:border-jumbo-200 px-3 py-0.5">
@@ -184,7 +184,7 @@
         {% for e in series.all %}
           <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
-              {% if not e.is_scheduled or user.is_superuser %}
+              {% if not e.is_scheduled or user.is_superuser and not user.secure_mode %}
                 {% if not e == object %}
                   <a class="underline hover:no-underline text-base" href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
                 {% else %}
