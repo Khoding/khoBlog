@@ -1,5 +1,7 @@
-from captcha.fields import CaptchaField
+from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+
+from captcha.fields import CaptchaField
 
 from .models import CustomUser
 
@@ -33,5 +35,14 @@ class CustomUserChangeForm(UserChangeForm):
             "profile_pic",
             "slug",
             "display_github",
-            "secure_mode",
         )
+
+
+class ChangeSecureModeStatusForm(forms.ModelForm):
+    """ChangeSecureModeStatusForm Form Class"""
+
+    class Meta:
+        """Meta class for ChangeSecureModeStatusForm Form"""
+
+        model = CustomUser
+        fields = ("secure_mode",)

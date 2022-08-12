@@ -161,17 +161,6 @@
             </div>
           </div>
         </section>
-        <section class="mb-2">
-          <div class="input-group gap-2">
-            <div class="form-floating">
-              {{ form.secure_mode.label_tag }}
-              {{ form.secure_mode|add_class:"form-check" }}
-              {% if form.secure_mode.help_text %}
-                <div class="text-sm">{{ form.secure_mode.help_text }}</div>
-              {% endif %}
-            </div>
-          </div>
-        </section>
 
         <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
     </form>

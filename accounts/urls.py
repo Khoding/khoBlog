@@ -15,6 +15,7 @@ from .views import (
     SignUpView,
     UserEditView,
     UserListView,
+    ChangeSecureModeStatusUpdateView,
 )
 
 app_name = "accounts"
@@ -46,6 +47,7 @@ password_extra_patterns = [
 extra_patterns = [
     path("", ProfileView.as_view(), name="profile"),
     path("edit/", UserEditView.as_view(), name="edit_profile"),
+    path("edit_secure_mode_status/", ChangeSecureModeStatusUpdateView.as_view(), name="edit_secure_mode_status"),
 ]
 
 urlpatterns = [

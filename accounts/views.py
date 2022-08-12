@@ -14,9 +14,9 @@ from allauth.account.views import (
 )
 from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 
-from khoBlog.utils.superuser_required import superuser_required
+from khoBlog.utils.superuser_required import superuser_required, superuser_required_ignore_secure_mode
 
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import ChangeSecureModeStatusForm, CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
 
@@ -186,4 +186,19 @@ class UserListView(ListView):
         """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "User list"
+        return context
+
+
+@superuser_required_ignore_secure_mode()
+class ChangeSecureModeStatusUpdateView(UpdateView):
+    """ChangeSecureModeStatusUpdateView UpdateView"""
+
+    form_class = ChangeSecureModeStatusForm
+    model = CustomUser
+    template_name = "account/update_secure_mode_status.html"
+
+    def get_context_data(self, **kwargs):
+        """Get context data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Change Secure Mode Status"
         return context
