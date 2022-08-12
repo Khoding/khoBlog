@@ -67,6 +67,7 @@ class CustomUser(AbstractUser):
     )
     roles = models.ManyToManyField(Role, blank=True, default="User")
     display_github = models.BooleanField(default=True, help_text="Show Github link on your profile page")
+    secure_mode = models.BooleanField(default=False, help_text="Activate secure mode")
 
     def __str__(self):
         """String representation of CustomUser Model"""
