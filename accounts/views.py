@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, UpdateView
 
@@ -16,7 +17,7 @@ from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 
 from khoBlog.utils.superuser_required import superuser_required, superuser_required_ignore_secure_mode
 
-from .forms import ChangeSecureModeStatusForm, CustomUserChangeForm, CustomUserCreationForm
+from .forms import ToggleSecureModeStatusForm, CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser
 
 
@@ -190,12 +191,22 @@ class UserListView(ListView):
 
 
 @superuser_required_ignore_secure_mode()
-class ChangeSecureModeStatusUpdateView(UpdateView):
-    """ChangeSecureModeStatusUpdateView UpdateView"""
+class ToggleSecureModeStatusUpdateView(UpdateView):
+    """ToggleSecureModeStatusUpdateView UpdateView"""
 
-    form_class = ChangeSecureModeStatusForm
     model = CustomUser
-    template_name = "account/update_secure_mode_status.html"
+    form_class = ToggleSecureModeStatusForm
+    template_name = "account/toggle_secure_mode_status.html"
+
+    def form_valid(self, form):
+        """Form valid"""
+        user = get_object_or_404(self.model, pk=form.instance.pk)
+        if user.secure_mode:
+            form.instance.secure_mode = False
+        else:
+            form.instance.secure_mode = True
+        form.instance.save()
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         """Get context data"""

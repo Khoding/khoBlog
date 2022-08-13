@@ -38,11 +38,11 @@ class CustomUserChangeForm(UserChangeForm):
         )
 
 
-class ChangeSecureModeStatusForm(forms.ModelForm):
-    """ChangeSecureModeStatusForm Form Class"""
+class ToggleSecureModeStatusForm(forms.ModelForm):
+    """ToggleSecureModeStatusForm Form Class"""
 
     class Meta:
-        """Meta class for ChangeSecureModeStatusForm Form"""
+        """Meta class for ToggleSecureModeStatusForm Form"""
 
         model = CustomUser
         fields = ("secure_mode",)

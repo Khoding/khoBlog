@@ -1,0 +1,15 @@
+{% extends 'tailwind/base.html' %}
+{% load widget_tweaks socialaccount project_tags %}
+
+{% block content %}
+  {% if user.id == object.id %}
+    <div class="text-xl">Toggle Secure Mode Status?</div>
+    <form enctype="multipart/form-data" method="post" novalidate="novalidate">
+      {% csrf_token %}
+
+      <button type="submit" class="kho-button-forms kho-button-submit mt-2">{{ title }}</button>
+    </form>
+  {% else %}
+    <p>This isn't your profile. <a href="{{ user.get_absolute_toggle_secure_mode_status_url }}">Edit your secure status</a></p>
+  {% endif %}
+{% endblock content %}

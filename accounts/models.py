@@ -91,9 +91,9 @@ class CustomUser(AbstractUser):
         """Get the absolute admin update url"""
         return reverse("admin:accounts_customuser_change", kwargs={"object_id": self.pk})
 
-    def get_absolute_update_secure_mode_status_url(self):
+    def get_absolute_toggle_secure_mode_status_url(self):
         """Get the absolute secure mode status update url"""
-        return reverse("accounts:edit_secure_mode_status", kwargs={"slug": self.slug})
+        return reverse("accounts:toggle_secure_mode_status", kwargs={"slug": self.slug})
 
     def get_index_view_url(self):
         """Get the absolute index view url"""
