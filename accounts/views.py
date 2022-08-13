@@ -197,6 +197,7 @@ class ToggleSecureModeStatusUpdateView(UpdateView):
     model = CustomUser
     form_class = ToggleSecureModeStatusForm
     template_name = "account/toggle_secure_mode_status.html"
+    success_url = reverse_lazy("blog:post_list")
 
     def form_valid(self, form):
         """Form valid"""
