@@ -16,7 +16,7 @@ def sb(o, *args, **kwargs):
         authenticated = True
         if hasattr(o, "likes"):
             liked = user in o.likes.all()
-    if user and user.is_superuser and not user.secure_mode is True:
+    if user and user.is_superuser and user.secure_mode is not True:
         authenticated = True
         admin = True
     return {"object": o, "admin": admin, "authenticated": authenticated, "liked": liked}

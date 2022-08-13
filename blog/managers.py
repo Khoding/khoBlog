@@ -21,7 +21,7 @@ class PostQuerySet(auto_prefetch.QuerySet):
 
     def get_common_queryset(self, user):
         """Get common queryset"""
-        if user.is_superuser and not user.secure_mode is True:
+        if user.is_superuser and user.secure_mode is not True:
             queryset = self.defer("body", "image").filter(deleted_at=None)
         else:
             queryset = self.defer("body", "image").filter(
@@ -99,7 +99,7 @@ class CategoryQuerySet(auto_prefetch.QuerySet):
 
     def get_common_queryset(self, user):
         """Get common queryset"""
-        if user.is_superuser and not user.secure_mode is True:
+        if user.is_superuser and user.secure_mode is not True:
             queryset = self.filter(deleted_at=None)
         else:
             queryset = self.filter(withdrawn=False, deleted_at=None)

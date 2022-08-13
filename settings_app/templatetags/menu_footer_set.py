@@ -17,8 +17,8 @@ def mfl_setting(context, link_type):
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NP")
         elif link_type == "NS" and context.request.user.is_staff:
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NS")
-        elif link_type == "NA" and context.request.user.is_superuser and not context.request.user.secure_mode is True:
+        elif link_type == "NA" and context.request.user.is_superuser and context.request.user.secure_mode is not True:
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NA")
-        elif link_type == "NAL" and context.request.user.is_superuser and not context.request.user.secure_mode is True:
+        elif link_type == "NAL" and context.request.user.is_superuser and context.request.user.secure_mode is not True:
             menu_footer_links = MenuFooterLink.objects.filter(visibility="NAL")
     return {"menu_footer_links": menu_footer_links}

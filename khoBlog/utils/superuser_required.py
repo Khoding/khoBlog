@@ -20,7 +20,7 @@ def superuser_required():
 
             def test_func(self):
                 """test_func"""
-                return self.request.user.is_superuser and not self.request.user.secure_mode is True
+                return self.request.user.is_superuser and self.request.user.secure_mode is not True
 
         return WrappedClass
 
