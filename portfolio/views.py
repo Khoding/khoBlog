@@ -107,7 +107,7 @@ class ProjectDeleteView(UpdateView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             removing_project = get_object_or_404(Project, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 removing_project.soft_delete()
@@ -221,7 +221,7 @@ class SubProjectDeleteView(UpdateView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             removing_project = self.get_object()
             if self.get_form().is_valid():
                 removing_project.soft_delete()

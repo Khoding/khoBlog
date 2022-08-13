@@ -5,7 +5,7 @@
     <section class="font-bold">
       {% if comment.user %}
         {% if user.is_authenticated %}
-          {% if user == comment.user or user.is_superuser and not user.secure_mode %}
+          {% if user == comment.user or user.is_superuser %}
             <a class="dark:text-jumbo-100" href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
           {% elif comment.user.owner %}
             <a class="dark:text-jumbo-100" href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
@@ -28,7 +28,7 @@
       {% endif %}
     </section>
       {% if comment.is_removed %}
-        {% if not user.is_superuser and not user.secure_mode %}
+        {% if not user.is_superuser %}
           <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not comment.allow_thread %} pb-2{% endif %}">
             This comment has been removed.
           </p>

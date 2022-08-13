@@ -6,7 +6,7 @@
       <section class="font-bold">
         {% if item.comment.user %}
           {% if user.is_authenticated %}
-            {% if user == item.comment.user or user.is_superuser and not user.secure_mode %}
+            {% if user == item.comment.user or user.is_superuser %}
               <a class="dark:text-jumbo-100 hover:underline" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
             {% elif item.comment.user.owner %}
               <a class="dark:text-jumbo-100 hover:underline" href="{{ item.comment.user.get_absolute_url }}">{{ item.comment.user }}</a>
@@ -34,7 +34,7 @@
         </span>
       </section>
       {% if item.comment.is_removed %}
-        {% if not user.is_superuser and not user.secure_mode %}
+        {% if not user.is_superuser %}
           <p class="text-gray-600 dark:text-jumbo-600{% if not allow_feedback and not item.comment.allow_thread %} pb-2{% endif %}">
             This comment has been removed.
           </p>

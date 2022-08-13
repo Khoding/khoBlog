@@ -23,8 +23,6 @@
             <div class="dropdown_item_container" role="none">
               {% if object.is_superuser %}
                 <a class="dropdown_item" href="{{ object.get_absolute_toggle_secure_mode_status_url }}">Secure Mode Status</a>
-              {% endif %}
-              {% if not object.secure_mode %}
                 <a class="dropdown_item" href="{{ object.get_absolute_admin_update_url }}">
                   Edit in Admin
                 </a>

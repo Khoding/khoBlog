@@ -731,7 +731,7 @@ class CategoryDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_queryset(self):
         """get_queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 self.category.soft_delete()
@@ -793,7 +793,7 @@ class SeriesDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_queryset(self):
         """get_queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 self.series.soft_delete()
@@ -887,7 +887,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
 
     def get_queryset(self):
         """Get the queryset for this view."""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             removing_post = get_object_or_404(Post, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 removing_post.soft_delete()

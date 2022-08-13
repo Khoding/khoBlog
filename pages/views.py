@@ -159,7 +159,7 @@ class PageDeleteView(UpdateView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser:
             removing_page = get_object_or_404(Page, slug=self.kwargs["slug"])
             if self.get_form().is_valid():
                 removing_page.soft_delete()

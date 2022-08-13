@@ -25,7 +25,7 @@
           <div class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
             {% usb object %}
           </div>
-        {% elif user.is_superuser and not user.secure_mode %}
+        {% elif user.is_superuser %}
           <div class="mx-auto text-right">
             <a href="{{ object.get_absolute_admin_update_url }}" type="button" class="mt-6 superbutton_base rounded-xl px-4">
               Edit in admin

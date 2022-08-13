@@ -6,7 +6,7 @@
       <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
         {{ title }}
       </h2>
-      {% if user.is_superuser and not user.secure_mode and parent_object %}
+      {% if user.is_superuser and parent_object %}
         {% sb parent_object user=request.user %}
       {% endif %}
     </div>
@@ -26,7 +26,7 @@
           <h2 id="filter-heading" class="sr-only">Filters</h2>
         </section>
       {% endif %}
-      {% if user.is_superuser and not user.secure_mode and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
+      {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
         {% csb object_list.model %}
       {% endif %}
     </div>
