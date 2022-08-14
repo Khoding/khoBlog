@@ -1,7 +1,16 @@
-{% for link in menu_footer_links %}
-  <li class="flex">
-    <a href="{% firstof link.url link.get_rel_url %}" class="hover:underline flyout_items {{ link.get_link_color }}"{% if link.is_target_blank %} target="_blank"{% endif %}>
-      {{ link }}
-    </a>
-  </li>
-{% endfor %}
+{% if menu_footer_links %}
+  <div>
+    <p class="font-medium text-gray-900 dark:text-jumbo-100">
+      {{ block_title }}
+    </p>
+    <ul role="list" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+      {% for link in menu_footer_links %}
+      <li class="flex">
+        <a href="{% firstof link.url link.get_rel_url %}" class="hover:underline flyout_items {{ link.get_link_color }}"{% if link.is_target_blank %} target="_blank"{% endif %}>
+          {{ link }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
