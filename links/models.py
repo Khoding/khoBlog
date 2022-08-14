@@ -76,5 +76,6 @@ class Links(BaseLinkAbstractModel):
 
     def get_absolute_permalink(self):
         """Get absolute url for Link Model"""
-        self.permalink = self.permalink + "/"
+        if self.permalink:
+            self.permalink = self.permalink + "/"
         return self.permalink
