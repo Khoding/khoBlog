@@ -135,7 +135,7 @@ class PostInCategoryListView(ListView):
     def get_queryset(self):
         """Get queryset"""
         self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
-        if self.category.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if not self.category.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
             self.title = self.category.title
             self.description = self.category.description
         else:
@@ -175,7 +175,7 @@ class PostInSeriesListView(ListView):
     def get_queryset(self):
         """Get queryset"""
         self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
-        if self.series.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if not self.series.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
             self.title = self.series.title
             self.description = self.series.description
         else:
