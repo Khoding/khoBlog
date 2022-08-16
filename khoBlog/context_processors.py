@@ -10,7 +10,7 @@ def context(request):
         "CANONICAL_PATH": request.build_absolute_uri(request.path_info),
         "debug_flag": debug_flag,
         "now": timezone.now(),
-        "description": "Welcome to my website! It's my blog and portfolio.",
+        "description": "Welcome! My name is Khodok. This is my personal blog.",
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
     }
     return CONTEXT
