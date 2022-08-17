@@ -28,6 +28,12 @@
             {{ project.learned|apply_markup:"markdown" }}
           </div>
         {% endif %}
+        {% if project.done_in_project %}
+          <div>
+            <span class="d-block">What was done:</span>
+            {{ project.done_in_project|apply_markup:"markdown" }}
+          </div>
+        {% endif %}
         {% if project.website or project.technology %}
           {% if project.website %}
             <p>Website:
