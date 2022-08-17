@@ -13,24 +13,16 @@
         </div>
         {% sb project user=request.user %}
       </section>
-      <section class="py-3 xl:pt-6 xl:pb-0">
-        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-          {% autoescape off %}
-            {{ project.content }}
-          {% endautoescape %}
-        </div>
-      </section>
       <section class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-        <h1>{{ project.title }}</h1>
         {% if project.learned %}
           <div>
-            <span class="d-block">Had to learn:</span>
+            <span class="text-xl font-medium">Had to learn:</span>
             {{ project.learned|apply_markup:"markdown" }}
           </div>
         {% endif %}
         {% if project.done_in_project %}
           <div>
-            <span class="d-block">What was done:</span>
+            <span class="text-xl font-medium">What was done:</span>
             {{ project.done_in_project|apply_markup:"markdown" }}
           </div>
         {% endif %}
