@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView
 
-from khoBlog.utils.superuser_required import superuser_required
+from khoBlog.utils.superuser_required import superuser_required_ignore_secure_mode
 
 from .forms import TagForm
 from .models import CustomTag
@@ -39,7 +39,7 @@ class TagListView(ListView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class TagUpdateView(UpdateView):
     """TagUpdateView UpdateView
 

@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls.base import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from khoBlog.utils.superuser_required import superuser_required
+from khoBlog.utils.superuser_required import superuser_required_ignore_secure_mode
 from portfolio.forms import (
     ProjectAddForm,
     ProjectDeleteForm,
@@ -56,7 +56,7 @@ class ProjectDetailView(DetailView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class ProjectCreateView(CreateView):
     """ProjectCreateView Class"""
 
@@ -72,7 +72,7 @@ class ProjectCreateView(CreateView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class ProjectUpdateView(UpdateView):
     """ProjectUpdateView Class"""
 
@@ -143,7 +143,7 @@ class SubProjectDetailView(DetailView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class SubProjectCreateView(CreateView):
     """SubProjectCreateView Class"""
 
@@ -170,7 +170,7 @@ class SubProjectCreateView(CreateView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class SubProjectUpdateView(UpdateView):
     """SubProjectUpdateView Class"""
 
