@@ -348,8 +348,8 @@
                     @apply lg:font-normal;
                 }
 
-                & dt {
-                    @apply line-clamp-1;
+                & dt p:not(:first-of-type) {
+                    @apply hidden;
                 }
             }
         }
