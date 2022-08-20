@@ -640,10 +640,12 @@ class PostDefineFeaturedCategoryUpdateView(UpdateView):
 
     model = Post
     form_class = PostDefineFeaturedCategoryForm
-    template_name = "blog/lists/post_category_list.html"
+    template_name = "blog/post_define_featured_category.html"
 
     def get_form_kwargs(self):
-        """Passes the request object to the form class."""
+        """Passes the request object to the form class.
+        This allows to get the queryset for the featured_cat field.
+        """
 
         kwargs = super(PostDefineFeaturedCategoryUpdateView, self).get_form_kwargs()
         kwargs["post"] = self.get_object()
@@ -651,13 +653,17 @@ class PostDefineFeaturedCategoryUpdateView(UpdateView):
 
     def form_valid(self, form):
         """form_valid"""
-        postcat = form.instance.postcatslink_set.all()
-        for category in postcat:
-            category.featured_cat = False
-            category.save()
-        postcatslink = PostCatsLink.objects.get(post=self.get_object(), category=form.cleaned_data["featured_cat"])
-        postcatslink.featured_cat = True
-        postcatslink.save()
+        # There's probably a better way to do this, but it seems that Django doesn't handle through fields really well
+        # And since this is a once a week action, I'd rather have this than having to go to the Admin to set it
+        postcat = form.instance.postcatslink_set.all()  # get all the postcatslinks for the post
+        for link in postcat:  # for each postcatslink
+            link.featured_cat = False  # set the featured_cat to False
+            link.save()  # save the changes
+        postcatslink = PostCatsLink.objects.get(
+            post=self.get_object(), category=form.cleaned_data["featured_cat"]
+        )  # get the postcatslink with the chosen featured_cat
+        postcatslink.featured_cat = True  # set the featured_cat to True
+        postcatslink.save()  # save the changes
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
