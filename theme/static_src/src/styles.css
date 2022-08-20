@@ -77,15 +77,15 @@
 
     .flyout_items {
         &.perm {
-            @apply hover:text-cornflower-900 dark:hover:text-cornflower-100;
+            @apply hover:text-cornflower-500 dark:hover:text-cornflower-400;
         }
 
         &.staff {
-            @apply hover:text-yellow-900 dark:hover:text-yellow-200;
+            @apply hover:text-orange-500;
         }
 
         &.admin {
-            @apply hover:text-flamingo-800 dark:hover:text-flamingo-100;
+            @apply hover:text-flamingo-400;
         }
     }
 
