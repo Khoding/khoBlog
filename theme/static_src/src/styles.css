@@ -338,8 +338,19 @@
                 @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
             }
 
-            &.quote_list dd {
-                @apply lg:font-normal line-clamp-1;
+            &.quote_list {
+                & dt > p:first-of-type {
+                    @apply mt-0;
+                }
+
+                & dt,
+                & dd {
+                    @apply lg:font-normal;
+                }
+
+                & dt {
+                    @apply line-clamp-1;
+                }
             }
         }
     }
@@ -403,10 +414,6 @@
 
     .markdownx-preview {
         @apply prose dark:prose-invert lg:prose-lg xl:prose-xl;
-    }
-
-    .quotes p:not(:first-of-type) {
-        @apply hidden;
     }
 
     .todo_header_element {
