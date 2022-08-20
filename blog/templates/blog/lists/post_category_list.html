@@ -1,0 +1,38 @@
+{% extends 'tailwind/base.html' %}
+{% load static widget_tweaks project_tags %}
+
+{% block content %}
+  <form enctype="multipart/form-data" method="post" novalidate="novalidate">
+    {% csrf_token %}
+    <section class="non-field-errors">
+      {{ form.non_field_errors }}
+    </section>
+
+    <section class="hidden-fields-errors">
+      {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field }}
+      {% endfor %}
+    </section>
+
+    <section class="text-flamingo-600">
+      {{ form.non_field_errors }}
+    </section>
+
+    <section class="mb-2 sm:w-fit">
+      <div class="form-floating">
+        {{ form.featured_cat.label_tag }}
+        {{ form.featured_cat|add_class:"form-control" }}
+      </div>
+
+      {% if form.featured_cat.help_text %}
+        <span class="text-sm">{{ form.featured_cat.help_text }}</span>
+      {% endif %}
+      {% for error in form.featured_cat.errors %}
+        <small class="text-flamingo-600">{{ error }}</small>
+      {% endfor %}
+    </section>
+
+    <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
+  </form>
+{% endblock content %}

@@ -496,6 +496,10 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         """Get absolute url of Post admin update"""
         return reverse("admin:blog_post_change", kwargs={"object_id": self.pk})
 
+    def get_absolute_define_featured_category_url(self):
+        """Get absolute url to define a featured category to a post"""
+        return reverse("blog:post_define_featured_category", kwargs={"slug": self.slug})
+
     def get_absolute_like_url(self):
         """Get absolute url to like a post"""
         return reverse("blog:post_like", kwargs={"slug": self.slug})

@@ -27,6 +27,7 @@ from .forms import (
     CategoryEditForm,
     PostCloneForm,
     PostCreateForm,
+    PostDefineFeaturedCategoryForm,
     PostDeleteForm,
     PostEditForm,
     PostMarkOutdatedForm,
@@ -34,7 +35,7 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
-from .models import Category, Post, Series
+from .models import Category, Post, PostCatsLink, Series
 
 
 class PostListView(ListView):
@@ -628,6 +629,41 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
         """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "New Post"
+        return context
+
+
+class PostDefineFeaturedCategoryUpdateView(UpdateView):
+    """PostDefineFeaturedCategoryUpdateView UpdateView
+
+    A view to set the featured category of a post
+    """
+
+    model = Post
+    form_class = PostDefineFeaturedCategoryForm
+    template_name = "blog/lists/post_category_list.html"
+
+    def get_form_kwargs(self):
+        """Passes the request object to the form class."""
+
+        kwargs = super(PostDefineFeaturedCategoryUpdateView, self).get_form_kwargs()
+        kwargs["post"] = self.get_object()
+        return kwargs
+
+    def form_valid(self, form):
+        """form_valid"""
+        postcat = form.instance.postcatslink_set.all()
+        for category in postcat:
+            category.featured_cat = False
+            category.save()
+        postcatslink = PostCatsLink.objects.get(post=self.get_object(), category=form.cleaned_data["featured_cat"])
+        postcatslink.featured_cat = True
+        postcatslink.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        """Get context data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Define the post's featured category"
         return context
 
 

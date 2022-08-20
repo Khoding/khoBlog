@@ -1,7 +1,7 @@
 from django import forms
 from taggit_selectize.widgets import TagSelectize
 
-from .models import Category, Post, Series
+from .models import Category, Post, PostCatsLink, Series
 
 
 class PostCreateForm(forms.ModelForm):
@@ -105,6 +105,26 @@ class PostEditForm(forms.ModelForm):
             "series": forms.Select(),
             "language": forms.Select(),
         }
+
+
+class PostDefineFeaturedCategoryForm(forms.ModelForm):
+    """PostDefineFeaturedCategoryForm
+
+    A form to define the featured category of a post
+    """
+
+    featured_cat = forms.ModelChoiceField(queryset=Category.objects.all())
+
+    def __init__(self, **kwargs):
+        self.post = kwargs.pop("post")
+        super(PostDefineFeaturedCategoryForm, self).__init__(**kwargs)
+        self.fields["featured_cat"].queryset = Category.objects.filter(postcatslink__post=self.post)
+
+    class Meta:
+        """Meta class for UpdateView ModelForm"""
+
+        model = PostCatsLink
+        fields = ("featured_cat",)
 
 
 class PostCloneForm(forms.ModelForm):

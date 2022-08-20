@@ -70,6 +70,7 @@
               {% endif %}
               {% if object.get_absolute_clone_url %}
                 <div class="dropdown_item_container" role="none">
+                  <a href="{{ object.get_absolute_define_featured_category_url }}" class="dropdown_item">Define featured category</a>
                   <a href="{{ object.get_absolute_clone_url }}" class="dropdown_item">Duplicate</a>
                 </div>
               {% endif %}
