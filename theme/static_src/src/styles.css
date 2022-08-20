@@ -339,7 +339,7 @@
             }
 
             &.quote_list dd {
-                @apply lg:font-normal;
+                @apply lg:font-normal line-clamp-1;
             }
         }
     }
