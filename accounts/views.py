@@ -205,10 +205,10 @@ class ToggleSecureModeStatusUpdateView(UpdateView):
         user = get_object_or_404(self.model, pk=form.instance.pk)
         if user.secure_mode:
             form.instance.secure_mode = False
-            messages.add_message(self.request, messages.WARNING, f"Secure mode status was turned off")
+            messages.add_message(self.request, messages.WARNING, "Secure mode status was turned off")
         else:
             form.instance.secure_mode = True
-            messages.add_message(self.request, messages.WARNING, f"Secure mode status was turned on")
+            messages.add_message(self.request, messages.WARNING, "Secure mode status was turned on")
         form.instance.save()
         return super().form_valid(form)
 
