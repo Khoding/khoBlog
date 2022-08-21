@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -17,7 +18,7 @@ from allauth.socialaccount.views import ConnectionsView, DisconnectForm
 
 from khoBlog.utils.superuser_required import superuser_required, superuser_required_ignore_secure_mode
 
-from .forms import ToggleSecureModeStatusForm, CustomUserChangeForm, CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, ToggleSecureModeStatusForm
 from .models import CustomUser
 
 
@@ -204,8 +205,10 @@ class ToggleSecureModeStatusUpdateView(UpdateView):
         user = get_object_or_404(self.model, pk=form.instance.pk)
         if user.secure_mode:
             form.instance.secure_mode = False
+            messages.add_message(self.request, messages.WARNING, f"Secure mode status was turned off")
         else:
             form.instance.secure_mode = True
+            messages.add_message(self.request, messages.WARNING, f"Secure mode status was turned on")
         form.instance.save()
         return super().form_valid(form)
 

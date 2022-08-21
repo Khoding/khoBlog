@@ -432,6 +432,7 @@ def post_like(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.user.is_authenticated:
         post.likes.add(request.user)
+        messages.add_message(request, messages.SUCCESS, f"You liked {post.title}")
     else:
         messages.add_message(request, messages.WARNING, "You must be logged in to like a post")
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
@@ -442,6 +443,7 @@ def post_dislike(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.user.is_authenticated:
         post.likes.remove(request.user)
+        messages.add_message(request, messages.SUCCESS, f"Your like was removed from {post.title}")
     else:
         messages.add_message(request, messages.WARNING, "You must be logged in to dislike a post")
     return HttpResponseRedirect(reverse("blog:post_detail", kwargs={"slug": slug}))
@@ -463,6 +465,11 @@ def redirect_to_random(request):
     else:
         post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).order_by("?")[0]
     post.rnd_chosen()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        f"You were redirected to {post.title}",
+    )
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
 
@@ -623,6 +630,7 @@ class PostCreateView(AutoPermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         """form_valid"""
         form.instance.author = self.request.user
+        messages.add_message(self.request, messages.SUCCESS, f"{form.instance.title} was created successfully")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -664,6 +672,11 @@ class PostDefineFeaturedCategoryUpdateView(UpdateView):
         )  # get the postcatslink with the chosen featured_cat
         postcatslink.featured_cat = True  # set the featured_cat to True
         postcatslink.save()  # save the changes
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f"{form.instance.title}'s featured category was set to {postcatslink.category}",
+        )
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -867,6 +880,11 @@ class PostUpdateView(AutoPermissionRequiredMixin, UpdateView):
     form_class = PostEditForm
     template_name = "blog/edit_post.html"
 
+    def form_valid(self, form):
+        """form_valid"""
+        messages.add_message(self.request, messages.SUCCESS, f"{form.instance.title} was edited successfully")
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
@@ -894,6 +912,7 @@ class PostCloneView(AutoPermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         """form_valid"""
         form.instance.author = self.request.user
+        messages.add_message(self.request, messages.SUCCESS, f"{form.instance.title} was cloned successfully")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
