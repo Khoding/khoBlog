@@ -4,7 +4,7 @@ from django.urls.base import reverse_lazy
 from django.views.generic import DeleteView, ListView, UpdateView
 from django.views.generic.edit import CreateView
 
-from khoBlog.utils.superuser_required import superuser_required
+from khoBlog.utils.superuser_required import superuser_required_ignore_secure_mode
 
 from .forms import TaskChangeStatusForm, TaskAddForm, TaskEditForm
 from .models import Task
@@ -31,7 +31,7 @@ class TaskListView(ListView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class TaskCreateView(CreateView):
     """TaskCreateView Class"""
 
@@ -56,7 +56,7 @@ def task_completed(request, pk):
     return redirect(reverse_lazy("todo:task_list"))
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class TaskChangeStatusView(UpdateView):
     """TaskChangeStatusView Class"""
 
@@ -78,7 +78,7 @@ class TaskChangeStatusView(UpdateView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class TaskUpdateView(UpdateView):
     """TaskUpdateView Class"""
 
@@ -95,7 +95,7 @@ class TaskUpdateView(UpdateView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class TaskDeleteView(DeleteView):
     """TaskDeleteView Class"""
 
