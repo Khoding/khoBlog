@@ -12,18 +12,20 @@
         </div>
         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <label for="id_title" class="block text-sm font-medium text-gray-700 dark:text-jumbo-400 sm:mt-px sm:pt-2">{{ form.title.label }}</label>
-            <div class="mt-1 sm:mt-0 sm:col-span-2">
-              <div class="max-w-lg flex rounded-xl shadow-sm">
-                <input type="text" name="title" id="title" autocomplete="title" class="flex-1 block w-full focus:ring-cornflower-500 focus:border-cornflower-400 min-w-0 rounded-xl sm:text-sm border-gray-300">
-              </div>
+            {{ form.title.label_tag }}
+            <div class="flex gap-2">
+              {{ form.title|add_class:"form-control col"|attr:"placeholder:Post title" }}
             </div>
+            {% for error in form.title.errors %}
+              <small class="text-flamingo-600">{{ error }}</small>
+            {% endfor %}
+            {% for error in form.featured_title.errors %}
+              <small class="text-flamingo-600">{{ error }}</small>
+            {% endfor %}
           </div>
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <label for="description" class="block text-sm font-medium text-gray-700 dark:text-jumbo-400 sm:mt-px sm:pt-2">{{ form.description.label }}</label>
-            <div class="mt-1 sm:mt-0 sm:col-span-2">
-              <textarea id="description" name="description" rows="3" class="max-w-lg shadow-sm block w-full focus:ring-cornflower-500 focus:border-cornflower-400 sm:text-sm border border-gray-300 rounded-xl"></textarea>
-            </div>
+            {{ form.description.label_tag }}
+            {{ form.description|add_class:"form-control"|attr:"placeholder:Task description" }}
           </div>
           <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
             <div>
@@ -33,7 +35,7 @@
               <div class="max-w-lg space-y-4">
                 <div class="relative flex items-start">
                   <div class="flex items-center h-5">
-                    {{ form.withdrawn|add_class:"h-4 w-4 text-cornflower-600 focus:ring-cornflower-500 border border-gray-300 dark:border-jumbo-300 rounded" }}
+                    {{ form.withdrawn|add_class:"form-check" }}
                   </div>
                   <div class="ml-3 text-sm">
                     <label for="id_withdrawn" class="font-medium text-gray-700 dark:text-jumbo-400">{{ form.withdrawn.label }}</label>
