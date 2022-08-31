@@ -19,7 +19,7 @@ from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
 from custom_taggit.models import CustomTag
-from khoBlog.utils.superuser_required import superuser_required
+from khoBlog.utils.superuser_required import superuser_required, superuser_required_ignore_secure_mode
 
 from .forms import (
     CategoryCreateForm,
@@ -479,7 +479,7 @@ def post_detail_through_id(request, pk):
     return redirect(reverse("blog:post_detail", args=(post.slug,)))
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class PostDraftListView(ListView):
     """PostDraftListView ListView
 
@@ -510,7 +510,7 @@ class PostDraftListView(ListView):
         return context
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class PostScheduledListView(ListView):
     """PostScheduledListView ListView
 
@@ -545,6 +545,7 @@ class PostScheduledListView(ListView):
         return context
 
 
+# superuser is required to access this view because it can contain secured content
 @superuser_required()
 class PostWithdrawnListView(ListView):
     """PostWithdrawnListView ListView
