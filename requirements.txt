@@ -10,13 +10,13 @@ beautifulsoup4==4.11.1
     # via
     #   pyembed
     #   readtime
-black==22.6.0
+black==22.8.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.61
+boto3==1.24.68
     # via -r requirements.in
-botocore==1.27.61
+botocore==1.27.68
     # via
     #   boto3
     #   s3transfer
@@ -36,7 +36,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==37.0.4
+cryptography==38.0.1
     # via pyjwt
 cssselect==1.1.0
     # via pyquery
@@ -46,7 +46,7 @@ defusedxml==0.7.1
     #   python3-openid
 diff-match-patch==20200713
     # via django-import-export
-django==4.1
+django==4.1.1
     # via
     #   -r requirements.in
     #   django-admin-index
@@ -177,7 +177,7 @@ openpyxl==3.0.10
     # via tablib
 packaging==21.3
     # via drf-yasg
-pathspec==0.9.0
+pathspec==0.10.1
     # via black
 pillow==9.2.0
     # via
@@ -204,11 +204,11 @@ pyquery==1.4.3
     # via readtime
 python-dateutil==2.8.2
     # via botocore
-python-dotenv==0.20.0
+python-dotenv==0.21.0
     # via -r requirements.in
 python3-openid==3.2.0
     # via django-allauth
-pytz==2022.1
+pytz==2022.2.1
     # via
     #   djangorestframework
     #   drf-yasg
