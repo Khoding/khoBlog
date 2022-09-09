@@ -35,14 +35,8 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
+from .mixins import ListMixin
 from .models import Category, Post, PostCatsLink, Series
-
-
-class ListMixin:
-    """Mixin for list views"""
-
-    paginate_by = 50
-    paginate_orphans = 5
 
 
 class PostListView(ListMixin, ListView):
