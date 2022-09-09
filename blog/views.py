@@ -38,7 +38,14 @@ from .forms import (
 from .models import Category, Post, PostCatsLink, Series
 
 
-class PostListView(ListView):
+class ListMixin:
+    """Mixin for list views"""
+
+    paginate_by = 50
+    paginate_orphans = 5
+
+
+class PostListView(ListMixin, ListView):
     """PostListView List View
 
     The default List View for Posts
@@ -53,8 +60,6 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""
@@ -74,7 +79,7 @@ class PostListView(ListView):
         return context
 
 
-class AllPostListView(ListView):
+class AllPostListView(ListMixin, ListView):
     """AllPostListView List View
 
     The List View for Posts that shows all posts
@@ -89,8 +94,6 @@ class AllPostListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""
@@ -112,7 +115,7 @@ class AllPostListView(ListView):
         return context
 
 
-class PostInCategoryListView(ListView):
+class PostInCategoryListView(ListMixin, ListView):
     """PostInCategoryListView List View
 
     Lists all Posts in a particular Category
@@ -130,8 +133,6 @@ class PostInCategoryListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""
@@ -152,7 +153,7 @@ class PostInCategoryListView(ListView):
         return context
 
 
-class PostInSeriesListView(ListView):
+class PostInSeriesListView(ListMixin, ListView):
     """PostInSeriesListView List View
 
     Lists all Posts in a particular Series
@@ -170,8 +171,6 @@ class PostInSeriesListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """Get queryset"""
@@ -254,7 +253,7 @@ def redirect_to_latest_in_series(request, slug):
     return redirect(reverse("blog:post_detail", args=(latest.slug,)))
 
 
-class CategoryListView(ListView):
+class CategoryListView(ListMixin, ListView):
     """CategoryListView ListView
 
     A list of Categories
@@ -269,8 +268,6 @@ class CategoryListView(ListView):
     model = Category
     template_name = "blog/lists/category_list.html"
     context_object_name = "category_list"
-    paginate_by = 20
-    paginate_orphans = 5
     ordering = "pk"
 
     def get_queryset(self):
@@ -287,7 +284,7 @@ class CategoryListView(ListView):
         return context
 
 
-class SeriesListView(ListView):
+class SeriesListView(ListMixin, ListView):
     """SeriesListView ListView
 
     A list of Series
@@ -302,8 +299,6 @@ class SeriesListView(ListView):
     model = Series
     template_name = "blog/lists/series_list.html"
     context_object_name = "series_list"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """Get the queryset for this view."""
@@ -480,7 +475,7 @@ def post_detail_through_id(request, pk):
 
 
 @superuser_required_ignore_secure_mode()
-class PostDraftListView(ListView):
+class PostDraftListView(ListMixin, ListView):
     """PostDraftListView ListView
 
     Lists Draft Posts
@@ -495,8 +490,6 @@ class PostDraftListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """get_queryset"""
@@ -511,7 +504,7 @@ class PostDraftListView(ListView):
 
 
 @superuser_required_ignore_secure_mode()
-class PostScheduledListView(ListView):
+class PostScheduledListView(ListMixin, ListView):
     """PostScheduledListView ListView
 
     Lists Scheduled Posts
@@ -526,8 +519,6 @@ class PostScheduledListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """get_queryset"""
@@ -547,7 +538,7 @@ class PostScheduledListView(ListView):
 
 # superuser is required to access this view because it can contain secured content
 @superuser_required()
-class PostWithdrawnListView(ListView):
+class PostWithdrawnListView(ListMixin, ListView):
     """PostWithdrawnListView ListView
 
     Lists Withdrawn Posts
@@ -562,8 +553,6 @@ class PostWithdrawnListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """get_queryset"""
@@ -577,7 +566,7 @@ class PostWithdrawnListView(ListView):
         return context
 
 
-class PostWithTagListView(ListView):
+class PostWithTagListView(ListMixin, ListView):
     """PostWithTagListView ListView
 
     Lists all Posts tagged with a given Tag
@@ -592,8 +581,6 @@ class PostWithTagListView(ListView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
 
     def get_queryset(self):
         """get_queryset"""
@@ -1108,7 +1095,7 @@ def series_needs_review(request, slug):
     return redirect("blog:post_series_list", slug=slug)
 
 
-class PostArchiveIndexView(ArchiveIndexView):
+class PostArchiveIndexView(ListMixin, ArchiveIndexView):
     """PostArchiveIndexView
 
     Archive view
@@ -1123,8 +1110,6 @@ class PostArchiveIndexView(ArchiveIndexView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
     allow_future = True
@@ -1140,7 +1125,7 @@ class PostArchiveIndexView(ArchiveIndexView):
         return context
 
 
-class PostYearArchiveView(YearArchiveView):
+class PostYearArchiveView(ListMixin, YearArchiveView):
     """PostYearArchiveView
 
     Archive by year
@@ -1155,8 +1140,6 @@ class PostYearArchiveView(YearArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
     make_object_list = True
     date_field = "pub_date"
     allow_future = True
@@ -1172,7 +1155,7 @@ class PostYearArchiveView(YearArchiveView):
         return context
 
 
-class PostMonthArchiveView(MonthArchiveView):
+class PostMonthArchiveView(ListMixin, MonthArchiveView):
     """PostMonthArchiveView
 
     Archive by month
@@ -1187,8 +1170,6 @@ class PostMonthArchiveView(MonthArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
 
@@ -1203,7 +1184,7 @@ class PostMonthArchiveView(MonthArchiveView):
         return context
 
 
-class PostWeekArchiveView(WeekArchiveView):
+class PostWeekArchiveView(ListMixin, WeekArchiveView):
     """PostWeekArchiveView
 
     Archive by week
@@ -1218,8 +1199,6 @@ class PostWeekArchiveView(WeekArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
     date_field = "pub_date"
     week_format = "%W"
     allow_future = True
@@ -1235,7 +1214,7 @@ class PostWeekArchiveView(WeekArchiveView):
         return context
 
 
-class PostDayArchiveView(DayArchiveView):
+class PostDayArchiveView(ListMixin, DayArchiveView):
     """PostDayArchiveView
 
     Archive by day
@@ -1250,8 +1229,6 @@ class PostDayArchiveView(DayArchiveView):
     model = Post
     template_name = "blog/lists/post_list.html"
     context_object_name = "posts"
-    paginate_by = 20
-    paginate_orphans = 5
     date_field = "pub_date"
     allow_future = True
 
