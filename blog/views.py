@@ -35,11 +35,11 @@ from .forms import (
     SeriesDeleteForm,
     SeriesEditForm,
 )
-from .mixins import ListMixin
+from .mixins import CategoryListMixin, PostListMixin, SeriesListMixin
 from .models import Category, Post, PostCatsLink, Series
 
 
-class PostListView(ListMixin, ListView):
+class PostListView(PostListMixin, ListView):
     """PostListView List View
 
     The default List View for Posts
@@ -50,10 +50,6 @@ class PostListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """Get queryset"""
@@ -73,7 +69,7 @@ class PostListView(ListMixin, ListView):
         return context
 
 
-class AllPostListView(ListMixin, ListView):
+class AllPostListView(PostListMixin, ListView):
     """AllPostListView List View
 
     The List View for Posts that shows all posts
@@ -84,10 +80,6 @@ class AllPostListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """Get queryset"""
@@ -109,7 +101,7 @@ class AllPostListView(ListMixin, ListView):
         return context
 
 
-class PostInCategoryListView(ListMixin, ListView):
+class PostInCategoryListView(PostListMixin, ListView):
     """PostInCategoryListView List View
 
     Lists all Posts in a particular Category
@@ -123,10 +115,6 @@ class PostInCategoryListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """Get queryset"""
@@ -147,7 +135,7 @@ class PostInCategoryListView(ListMixin, ListView):
         return context
 
 
-class PostInSeriesListView(ListMixin, ListView):
+class PostInSeriesListView(PostListMixin, ListView):
     """PostInSeriesListView List View
 
     Lists all Posts in a particular Series
@@ -161,10 +149,6 @@ class PostInSeriesListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """Get queryset"""
@@ -247,7 +231,7 @@ def redirect_to_latest_in_series(request, slug):
     return redirect(reverse("blog:post_detail", args=(latest.slug,)))
 
 
-class CategoryListView(ListMixin, ListView):
+class CategoryListView(CategoryListMixin, ListView):
     """CategoryListView ListView
 
     A list of Categories
@@ -259,9 +243,6 @@ class CategoryListView(ListMixin, ListView):
         category_list: A list of Categories
     """
 
-    model = Category
-    template_name = "blog/lists/category_list.html"
-    context_object_name = "category_list"
     ordering = "pk"
 
     def get_queryset(self):
@@ -278,7 +259,7 @@ class CategoryListView(ListMixin, ListView):
         return context
 
 
-class SeriesListView(ListMixin, ListView):
+class SeriesListView(SeriesListMixin, ListView):
     """SeriesListView ListView
 
     A list of Series
@@ -289,10 +270,6 @@ class SeriesListView(ListMixin, ListView):
     Returns:
         series_list: A list of Series
     """
-
-    model = Series
-    template_name = "blog/lists/series_list.html"
-    context_object_name = "series_list"
 
     def get_queryset(self):
         """Get the queryset for this view."""
@@ -469,7 +446,7 @@ def post_detail_through_id(request, pk):
 
 
 @superuser_required_ignore_secure_mode()
-class PostDraftListView(ListMixin, ListView):
+class PostDraftListView(PostListMixin, ListView):
     """PostDraftListView ListView
 
     Lists Draft Posts
@@ -480,10 +457,6 @@ class PostDraftListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """get_queryset"""
@@ -498,7 +471,7 @@ class PostDraftListView(ListMixin, ListView):
 
 
 @superuser_required_ignore_secure_mode()
-class PostScheduledListView(ListMixin, ListView):
+class PostScheduledListView(PostListMixin, ListView):
     """PostScheduledListView ListView
 
     Lists Scheduled Posts
@@ -509,10 +482,6 @@ class PostScheduledListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """get_queryset"""
@@ -532,7 +501,7 @@ class PostScheduledListView(ListMixin, ListView):
 
 # superuser is required to access this view because it can contain secured content
 @superuser_required()
-class PostWithdrawnListView(ListMixin, ListView):
+class PostWithdrawnListView(PostListMixin, ListView):
     """PostWithdrawnListView ListView
 
     Lists Withdrawn Posts
@@ -543,10 +512,6 @@ class PostWithdrawnListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """get_queryset"""
@@ -560,7 +525,7 @@ class PostWithdrawnListView(ListMixin, ListView):
         return context
 
 
-class PostWithTagListView(ListMixin, ListView):
+class PostWithTagListView(PostListMixin, ListView):
     """PostWithTagListView ListView
 
     Lists all Posts tagged with a given Tag
@@ -571,10 +536,6 @@ class PostWithTagListView(ListMixin, ListView):
     Returns:
         posts: A list of posts
     """
-
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
 
     def get_queryset(self):
         """get_queryset"""
@@ -1089,7 +1050,7 @@ def series_needs_review(request, slug):
     return redirect("blog:post_series_list", slug=slug)
 
 
-class PostArchiveIndexView(ListMixin, ArchiveIndexView):
+class PostArchiveIndexView(PostListMixin, ArchiveIndexView):
     """PostArchiveIndexView
 
     Archive view
@@ -1101,9 +1062,6 @@ class PostArchiveIndexView(ListMixin, ArchiveIndexView):
         [type]: [description]
     """
 
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
     make_object_list = True
     date_field = "pub_date"
     allow_future = True
@@ -1119,7 +1077,7 @@ class PostArchiveIndexView(ListMixin, ArchiveIndexView):
         return context
 
 
-class PostYearArchiveView(ListMixin, YearArchiveView):
+class PostYearArchiveView(PostListMixin, YearArchiveView):
     """PostYearArchiveView
 
     Archive by year
@@ -1131,9 +1089,6 @@ class PostYearArchiveView(ListMixin, YearArchiveView):
         [type]: [description]
     """
 
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
     make_object_list = True
     date_field = "pub_date"
     allow_future = True
@@ -1149,7 +1104,7 @@ class PostYearArchiveView(ListMixin, YearArchiveView):
         return context
 
 
-class PostMonthArchiveView(ListMixin, MonthArchiveView):
+class PostMonthArchiveView(PostListMixin, MonthArchiveView):
     """PostMonthArchiveView
 
     Archive by month
@@ -1161,9 +1116,6 @@ class PostMonthArchiveView(ListMixin, MonthArchiveView):
         [type]: [description]
     """
 
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
     date_field = "pub_date"
     allow_future = True
 
@@ -1178,7 +1130,7 @@ class PostMonthArchiveView(ListMixin, MonthArchiveView):
         return context
 
 
-class PostWeekArchiveView(ListMixin, WeekArchiveView):
+class PostWeekArchiveView(PostListMixin, WeekArchiveView):
     """PostWeekArchiveView
 
     Archive by week
@@ -1190,9 +1142,6 @@ class PostWeekArchiveView(ListMixin, WeekArchiveView):
         [type]: [description]
     """
 
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
     date_field = "pub_date"
     week_format = "%W"
     allow_future = True
@@ -1208,7 +1157,7 @@ class PostWeekArchiveView(ListMixin, WeekArchiveView):
         return context
 
 
-class PostDayArchiveView(ListMixin, DayArchiveView):
+class PostDayArchiveView(PostListMixin, DayArchiveView):
     """PostDayArchiveView
 
     Archive by day
@@ -1220,9 +1169,6 @@ class PostDayArchiveView(ListMixin, DayArchiveView):
         [type]: [description]
     """
 
-    model = Post
-    template_name = "blog/lists/post_list.html"
-    context_object_name = "posts"
     date_field = "pub_date"
     allow_future = True
 
