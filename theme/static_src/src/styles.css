@@ -291,6 +291,10 @@
 
         & img {
             @apply my-0 inline-block;
+
+            &:is(:first-of-type) {
+                @apply mb-2;
+            }
         }
 
         .highlight {

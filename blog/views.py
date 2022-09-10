@@ -996,7 +996,7 @@ def post_publish_withdrawn(request, slug):
     return redirect("blog:post_detail", slug=slug)
 
 
-@superuser_required()
+@superuser_required_ignore_secure_mode()
 class PostIsOutdatedUpdateView(UpdateView):
     """PostIsOutdatedUpdateView
 

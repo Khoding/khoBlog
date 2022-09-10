@@ -71,10 +71,6 @@
       </div>
       <div class="py-3 xl:pt-6 xl:pb-0">
         <h2 class="sr-only">Content</h2>
-        {% if post.image %}
-          <img src="{{ post.image.url }}" class="w-full" alt="Post image" loading="lazy"/>
-        {% endif %}
-
         <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
           {{ post.body_content|formatted_markdown|safe }}
         </div>

@@ -619,17 +619,22 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def first_line_outdated(self):
         """First Line Outdated Post"""
-        return (
-            self.first_line
-            + format_html(
-                '<div class="admonition outdated">'
-                '<p class="admonition-title">This post is outdated as of {0}</p>'
-                "<p>{1}</p></div>",
-                self.is_content_outdated_date.strftime("%Y-%m-%d"),
-                mark_safe(self.is_content_outdated),  # skipcq: BAN-B308
-            )
-            + "\n"
-            + "\n".join(self.after_first_line)
+        return format_html(
+            '<div class="admonition outdated">'
+            '<p class="admonition-title">This post is outdated as of {0}</p>'
+            "<p>{1}</p></div>",
+            self.is_content_outdated_date.strftime("%Y-%m-%d"),
+            mark_safe(self.is_content_outdated),  # skipcq: BAN-B308
+        )
+
+    # Property that adds the post image just after the title
+    @property
+    def first_line_image(self):
+        """First Line Image Post"""
+        return format_html(
+            '<img src="{0}" alt="{1}">',
+            self.image.url,
+            self.title,
         )
 
     # Property that defines the body_content depending on if it's outdated or not
@@ -637,8 +642,13 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     def body_content(self):
         """Body Content Post"""
         body = self.body
+        if self.is_content_outdated_date is not None or self.image is not None:
+            body = self.first_line
         if self.is_content_outdated_date is not None:
-            body = self.first_line_outdated
+            body += self.first_line_outdated
+        if self.image:
+            body += self.first_line_image
+        body += "\n".join(self.after_first_line)
         return body
 
     # Create a property that returns the markdown instead
