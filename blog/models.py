@@ -644,6 +644,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         body = self.body
         if self.is_content_outdated_date is not None or self.image is not None:
             body = self.first_line
+            body += "\n"
         if self.is_content_outdated_date is not None:
             body += self.first_line_outdated
         if self.image:
