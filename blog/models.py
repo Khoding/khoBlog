@@ -574,7 +574,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def has_code(self) -> bool:
         """Post has code"""
-        return self.tags.filter(name="has code").exists()
+        return self.tags.filter(slug="has-code").exists()
 
     @property
     def get_featured_cat(self):

@@ -188,12 +188,12 @@
                 {% if not e == object %}
                   <a class="underline hover:no-underline text-base" href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
                 {% else %}
+                  {% if e == object %}
+                    <div class="italic text-sm">(You are here)</div>
+                  {% endif %}
                   <span class="text-base">Part #{{ forloop.counter }}:
                 {% endif %}
                   {{ e }}
-                  {% if e == object %}
-                    <span class="italic text-sm">(You are here)</span>
-                  {% endif %}
                   {% if e.is_scheduled %}
                     <span class="italic">
                       (Coming:
