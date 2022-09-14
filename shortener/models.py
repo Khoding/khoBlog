@@ -10,7 +10,7 @@ class URL(auto_prefetch.Model):
     """URL model"""
 
     title = models.CharField(max_length=200, unique=True)
-    full_url = models.URLField(unique=True)
+    full_url = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(unique=True, default="", max_length=200)
     clicks = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
