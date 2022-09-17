@@ -57,12 +57,14 @@ class MenuFooterLink(auto_prefetch.Model):
 
     def get_link_color(
         self,
-    ) -> str:  # update when Pythonanywhere gets Python 3.10 as default: https://stackoverflow.com/a/60211/16938491
+    ) -> str:
         """Get the color depending on the visibility of the link"""
-        return {
-            "D": "default",
-            "NP": "perm",
-            "NS": "staff",
-            "NA": "admin",
-            "NAL": "admin",
-        }[self.visibility]
+        match self.visibility:
+            case "D":
+                return "default"
+            case "NP":
+                return "perm"
+            case "NS":
+                return "staff"
+            case "NA" | "NAL":
+                return "admin"
