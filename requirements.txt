@@ -14,13 +14,13 @@ black==22.8.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.68
+boto3==1.24.75
     # via -r requirements.in
-botocore==1.27.68
+botocore==1.27.75
     # via
     #   boto3
     #   s3transfer
-certifi==2022.6.15
+certifi==2022.9.14
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -100,7 +100,7 @@ django-flat-responsive==2.0
     # via django-admin-interface
 django-flat-theme==1.1.4
     # via django-admin-interface
-django-import-export==2.8.0
+django-import-export==2.9.0
     # via -r requirements.in
 django-jsonview==2.0.0
     # via -r requirements.in
@@ -136,7 +136,7 @@ drf-yasg==1.21.3
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
-idna==3.3
+idna==3.4
     # via requests
 importlib-metadata==4.12.0
     # via -r requirements.in
@@ -169,7 +169,7 @@ mypy-extensions==0.4.3
     # via black
 mysqlclient==2.1.1
     # via -r requirements.in
-oauthlib==3.2.0
+oauthlib==3.2.1
     # via requests-oauthlib
 odfpy==1.4.1
     # via tablib
@@ -194,7 +194,7 @@ pyembed-markdown==1.1.0
     # via -r requirements.in
 pygments==2.13.0
     # via -r requirements.in
-pyjwt[crypto]==2.4.0
+pyjwt[crypto]==2.5.0
     # via django-allauth
 pymdown-extensions==9.5
     # via -r requirements.in
@@ -252,6 +252,8 @@ taggit-selectize==2.11.0
     # via -r requirements.in
 tomli==2.0.1
     # via black
+types-cryptography==3.3.23
+    # via pyjwt
 tzdata==2022.2
     # via django
 uritemplate==4.1.1
