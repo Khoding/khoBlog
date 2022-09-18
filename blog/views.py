@@ -83,7 +83,7 @@ class AllPostListView(PostListMixin, ListView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser and self.request.user.secure_mode is True:
             raise PermissionDenied
         query = PostFilter(
             self.request.GET,
@@ -119,7 +119,7 @@ class PostInCategoryListView(PostListMixin, ListView):
     def get_queryset(self):
         """Get queryset"""
         self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
-        if not self.category.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if not self.category.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is False:
             self.title = self.category.title
             self.description = self.category.description
         else:
@@ -153,7 +153,7 @@ class PostInSeriesListView(PostListMixin, ListView):
     def get_queryset(self):
         """Get queryset"""
         self.series = get_object_or_404(Series, slug=self.kwargs["slug"])
-        if not self.series.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if not self.series.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is False:
             self.title = self.series.title
             self.description = self.series.description
         else:
@@ -176,7 +176,7 @@ class PostInSeriesListView(PostListMixin, ListView):
 def redirect_to_first_in_category(request, slug):
     """redirects to the first post in category"""
     category = get_object_or_404(Category, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         first = Post.objects.filter(categories=category).order_by("pk").first()
     else:
         first = (
@@ -191,7 +191,7 @@ def redirect_to_first_in_category(request, slug):
 def redirect_to_latest_in_category(request, slug):
     """redirects to the latest post in category"""
     category = get_object_or_404(Category, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         latest = Post.objects.filter(categories=category).latest()
     else:
         latest = (
@@ -205,7 +205,7 @@ def redirect_to_latest_in_category(request, slug):
 def redirect_to_first_in_series(request, slug):
     """redirects to the first post in series"""
     series = get_object_or_404(Series, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         first = Post.objects.filter(series=series).order_by("pk").first()
     else:
         first = (
@@ -220,7 +220,7 @@ def redirect_to_first_in_series(request, slug):
 def redirect_to_latest_in_series(request, slug):
     """redirects to the latest post in series"""
     series = get_object_or_404(Series, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         latest = Post.objects.filter(series=series).latest()
     else:
         latest = (
@@ -247,7 +247,7 @@ class CategoryListView(CategoryListMixin, ListView):
 
     def get_queryset(self):
         """Get the queryset for this view."""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
             return self.model.objects.get_without_removed()
         return self.model.objects.filter(withdrawn=False).get_without_removed()
 
@@ -273,7 +273,7 @@ class SeriesListView(SeriesListMixin, ListView):
 
     def get_queryset(self):
         """Get the queryset for this view."""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
             return self.model.objects.get_without_removed()
         return self.model.objects.filter(withdrawn=False).get_without_removed()
 
@@ -310,7 +310,7 @@ class PostDetailView(DetailView):
         self.post.clicked()
         if self.post.deleted_at:
             raise Http404
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
             self.series = (
                 self.model.objects.get_queryset()
                 .filter(series__isnull=False, series=self.post.series)
@@ -417,7 +417,7 @@ def post_dislike(request, slug):
 
 def redirect_to_latest(request):
     """redirects to the latest post"""
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         latest = Post.objects.latest()
     else:
         latest = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).latest()
@@ -426,7 +426,7 @@ def redirect_to_latest(request):
 
 def redirect_to_random(request):
     """redirects to a random post"""
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         post = Post.objects.filter(deleted_at=None).order_by("?")[0]
     else:
         post = Post.objects.filter(pub_date__lte=timezone.now(), withdrawn=False, deleted_at=None).order_by("?")[0]
@@ -909,7 +909,7 @@ class PostDeleteView(AutoPermissionRequiredMixin, UpdateView):
 def post_next(request, slug):
     """post_next"""
     post = get_object_or_404(Post, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         if post.pub_date:
             next_post = (
                 Post.objects.filter(pub_date__gt=post.pub_date, deleted_at=None)
@@ -945,7 +945,7 @@ def post_next(request, slug):
 def post_previous(request, slug):
     """post_previous"""
     post = get_object_or_404(Post, slug=slug)
-    if request.user.is_superuser and request.user.secure_mode is not True:
+    if request.user.is_superuser and request.user.secure_mode is False:
         if post.pub_date:
             prev_post = (
                 Post.objects.filter(pub_date__lt=post.pub_date, deleted_at=None)

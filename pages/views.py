@@ -80,7 +80,7 @@ class PageListView(ListView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
             return self.model.objects.filter(deleted_at=None)
         return self.model.objects.filter(withdrawn=False, deleted_at=None)
 

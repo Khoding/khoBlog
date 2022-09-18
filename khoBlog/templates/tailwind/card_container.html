@@ -3,9 +3,9 @@
 <section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>
     <div class="md:flex md:items-center md:justify-between md:space-x-4">
-      <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
+      <div class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
         {{ title }}
-      </h2>
+      </div>
       {% if user.is_superuser and parent_object %}
         {% sb parent_object user=request.user %}
       {% endif %}
@@ -23,7 +23,7 @@
             </svg>
             Filters
           </button>
-          <h2 id="filter-heading" class="sr-only">Filters</h2>
+          <div id="filter-heading" class="sr-only">Filters</div>
         </section>
       {% endif %}
       {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
@@ -36,46 +36,59 @@
     {% load project_tags widget_tweaks %}
 
     <section id="filters" x-show="open" style="display: none;" class="mt-6 pt-10" x-transition:enter="transition ease-out duration-250" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1">
-      <form method="get" class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 md:grid-flow-col gap-2 h-fit">
-        <div class="h-fit">
-          {{ filter_form.form.title.label_tag }}
-          {{ filter_form.form.title|add_class:"form-control"|attr:"placeholder:Post title" }}
-        </div>
+      {% if not object_list.model|to_class_name == "customtag" %}
+        <form method="get" class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-3 xl:grid-rows-3 md:grid-flow-col gap-2 h-fit">
+          <div class="h-fit">
+            {{ filter_form.form.title.label_tag }}
+            {{ filter_form.form.title|add_class:"form-control"|attr:"placeholder:Post title" }}
+          </div>
 
-        <div class="h-fit">
-          {{ filter_form.form.description.label_tag }}
-          {{ filter_form.form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
-        </div>
+          <div class="h-fit">
+            {{ filter_form.form.description.label_tag }}
+            {{ filter_form.form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
+          </div>
 
-        <div class="h-fit">
-          {{ filter_form.form.categories.label_tag }}
-          {{ filter_form.form.categories|add_class:"form-control" }}
-        </div>
+          <div class="h-fit">
+            {{ filter_form.form.categories.label_tag }}
+            {{ filter_form.form.categories|add_class:"form-control" }}
+          </div>
 
-        <div class="h-fit md:row-start-1">
-          {{ filter_form.form.featuring_state.label_tag }}
-          {{ filter_form.form.featuring_state|add_class:"form-control" }}
-        </div>
+          <div class="h-fit md:row-start-1">
+            {{ filter_form.form.featuring_state.label_tag }}
+            {{ filter_form.form.featuring_state|add_class:"form-control" }}
+          </div>
 
-        <div class="h-fit">
-          {{ filter_form.form.language.label_tag }}
-          {{ filter_form.form.language|add_class:"form-control" }}
-        </div>
+          <div class="h-fit">
+            {{ filter_form.form.language.label_tag }}
+            {{ filter_form.form.language|add_class:"form-control" }}
+          </div>
 
-        <div class="h-fit">
-          {{ filter_form.form.order_by.label_tag }}
-          {{ filter_form.form.order_by|add_class:"form-control" }}
-        </div>
+          <div class="h-fit">
+            {{ filter_form.form.order_by.label_tag }}
+            {{ filter_form.form.order_by|add_class:"form-control" }}
+          </div>
 
-        <div class="row-start-3 md:row-start-4 md:col-start-1 md:col-span-2 xl:col-start-3 xl:row-span-full h-fit">
-          {{ filter_form.form.body.label_tag }}
-          {{ filter_form.form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
-        </div>
+          <div class="row-start-3 md:row-start-4 md:col-start-1 md:col-span-2 xl:col-start-3 xl:row-span-full h-fit">
+            {{ filter_form.form.body.label_tag }}
+            {{ filter_form.form.body|add_class:"form-control"|attr:"placeholder:Post body" }}
+          </div>
 
-        <div class="col-start-1 md:row-start-5 xl:row-start-4 w-fit">
-          <button type="submit" class="kho-button-forms kho-button-submit">Filter results</button>
-        </div>
-      </form>
+          <div class="col-start-1 md:row-start-5 xl:row-start-4 w-fit">
+            <button type="submit" class="kho-button-forms kho-button-submit">Filter results</button>
+          </div>
+        </form>
+      {% else %}
+        <form method="get" class="h-fit">
+          <div class="h-fit">
+            {{ filter_form.form.name.label_tag }}
+            {{ filter_form.form.name|add_class:"form-control"|attr:"placeholder:Tag name" }}
+          </div>
+
+          <div class="w-fit mt-2">
+            <button type="submit" class="kho-button-forms kho-button-submit">Filter results</button>
+          </div>
+        </form>
+      {% endif %}
     </section>
   {% endif %}
 

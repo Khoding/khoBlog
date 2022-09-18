@@ -20,6 +20,7 @@ class CustomTag(TagBase):
 
     color = ColorField(samples=COLOR_PALETTE, default="#9B8383")
     withdrawn = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
 
     class Meta:
         """Meta"""

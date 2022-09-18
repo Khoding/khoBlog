@@ -3,6 +3,7 @@ from django.views.generic import ListView, UpdateView
 
 from khoBlog.utils.superuser_required import superuser_required_ignore_secure_mode
 
+from .filters import TagFilter
 from .forms import TagForm
 from .models import CustomTag
 
@@ -27,15 +28,27 @@ class TagListView(ListView):
 
     def get_queryset(self):
         """Get queryset"""
-        if self.request.user.is_superuser and self.request.user.secure_mode is not True:
-            return self.model.objects.all()
-        return self.model.objects.filter(withdrawn=False)
+        query = TagFilter(
+            self.request.GET,
+            queryset=CustomTag.objects.filter(withdrawn=False),
+        )
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
+            query = TagFilter(
+                self.request.GET,
+                queryset=CustomTag.objects.all(),
+            )
+        if query is not None and query != "":
+            return query.qs
+        if self.request.user.is_superuser and self.request.user.secure_mode is False:
+            return self.model.objects.filter(deleted_at=None)
+        return self.model.objects.filter(withdrawn=False, deleted_at=None)
 
     def get_context_data(self, **kwargs):
         """Get context data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "Tag List"
         context["description"] = "List of all tags"
+        context["filter_form"] = TagFilter()
         return context
 
 
