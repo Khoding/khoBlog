@@ -86,7 +86,7 @@ django-browser-reload==1.6.0
     #   django-tailwind
 django-colorfield==0.7.2
     # via django-admin-interface
-django-comments-xtd==2.9.7
+django-comments-xtd==2.9.8
     # via -r requirements.in
 django-compressor==4.1
     # via -r requirements.in
