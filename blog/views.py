@@ -1195,4 +1195,4 @@ def redirect_post(request, short_code):
     Redirects from vanity urls to the actual post
     """
     post = get_object_or_404(Post, short_code=short_code)
-    return redirect(post.get_absolute_url(), permanent=True)
+    return redirect(post.get_absolute_url())
