@@ -1187,3 +1187,12 @@ class PostDayArchiveView(PostListMixin, DayArchiveView):
         context["g_month"] = f"{self.get_month()}"
         context["g_year"] = f"{self.get_year()}"
         return context
+
+
+def redirect_post(request, short_code):
+    """redirect_post
+
+    Redirects from vanity urls to the actual post
+    """
+    post = get_object_or_404(Post, short_code=short_code)
+    return redirect(post.get_absolute_url(), permanent=True)

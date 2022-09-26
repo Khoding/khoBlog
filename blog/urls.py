@@ -138,6 +138,7 @@ urlpatterns = [
     path("withdrawn/", PostWithdrawnListView.as_view(), name="post_withdrawn_list"),
     # Post Related Patterns
     path("post/", include(post_extra_patterns)),
+    path("p/<str:short_code>", views.redirect_post),
     # Category Related Patterns
     path("category/", include(category_extra_patterns)),
     # Series Related Patterns

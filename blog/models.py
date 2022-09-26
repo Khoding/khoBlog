@@ -23,6 +23,8 @@ from taggit_selectize.managers import TaggableManager
 from blog.managers import CategoryManager, PostManager, SeriesManager
 from custom_taggit.models import CustomTaggedItem
 
+from .utils import generate_unique_vanity
+
 
 class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     """Category model
@@ -405,6 +407,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     is_content_outdated_date = models.DateTimeField(blank=True, null=True, help_text="Outdated date")
     needs_reviewing = models.BooleanField(default=False, help_text=("Needs reviewing"))
     enable_comments = models.BooleanField(default=True)
+    short_code = models.CharField(max_length=200, default="", blank=True, help_text="Short code for the Post")
     history = HistoricalRecords()
 
     objects: PostManager = PostManager()
@@ -431,6 +434,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
             # Bare 'except' because we could get a variety
             # of HTTP-related exceptions.
             pass
+        if not self.short_code:
+            self.short_code = generate_unique_vanity(5, 10, Post)
         if not self.slug:
             max_length = Post._meta.get_field("slug").max_length
             self.slug = orig = slugify(self.title)[:max_length]
