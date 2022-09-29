@@ -85,6 +85,21 @@ def make_super_featured(modeladmin, request, queryset):
     )
 
 
+def make_not_featuredd(modeladmin, request, queryset):
+    """Make a queryset of posts not featured"""
+    updated = queryset.update(featuring_state="N")
+    modeladmin.message_user(
+        request,
+        ngettext(
+            "%d post was successfully marked as not featured.",
+            "%d posts were successfully marked as not featured.",
+            updated,
+        )
+        % updated,
+        messages.SUCCESS,
+    )
+
+
 def make_baguette(modeladmin, request, queryset):
     """Make a queryset of posts baguette"""
     updated = queryset.update(language="FR")
