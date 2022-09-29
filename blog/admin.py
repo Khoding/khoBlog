@@ -278,6 +278,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         make_withdrawn,
         make_featured,
         make_super_featured,
+        make_not_featuredd,
         export_as_json,
         make_baguette,
         make_english,
