@@ -137,6 +137,19 @@
       {% endfor %}
     </section>
 
+    <section class="row mb-2">
+      <div class="input-group col-auto">
+        <span class="input-group-text">https://{{ request.get_host }}/p/</span>
+        {{ form.vanity_url|add_class:"form-control"|attr:"placeholder:Vanity url" }}
+      </div>
+      {% if form.vanity_url.help_text %}
+        <span class="text-sm">{{ form.vanity_url.help_text }}</span>
+      {% endif %}
+      {% for error in form.vanity_url.errors %}
+        <small class="text-flamingo-600">{{ error }}</small>
+      {% endfor %}
+    </section>
+
     <section class="mb-2">
       <div class="input-group gap-2">
         <div class="form-floating">

@@ -90,6 +90,7 @@ class PostEditForm(forms.ModelForm):
             "url_to_article",
             "url_to_article_title",
             "language",
+            "vanity_url",
         )
 
         widgets = {

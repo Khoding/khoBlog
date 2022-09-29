@@ -1189,10 +1189,10 @@ class PostDayArchiveView(PostListMixin, DayArchiveView):
         return context
 
 
-def redirect_post(request, short_code):
+def redirect_post(request, vanity_url):
     """redirect_post
 
     Redirects from vanity urls to the actual post
     """
-    post = get_object_or_404(Post, short_code=short_code)
+    post = get_object_or_404(Post, vanity_url=vanity_url)
     return redirect(post.get_absolute_url())
