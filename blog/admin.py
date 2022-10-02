@@ -177,6 +177,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         "created_date",
         "pub_date",
         "slug",
+        "vanity_url",
         "publication_state",
         "featuring_state",
         "featured_cat_title",
@@ -231,6 +232,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
                     "description",
                     "author",
                     "slug",
+                    "vanity_url",
                     "body",
                     "tags",
                 )

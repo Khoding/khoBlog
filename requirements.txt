@@ -14,13 +14,13 @@ black==22.8.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.75
+boto3==1.24.84
     # via -r requirements.in
-botocore==1.27.75
+botocore==1.27.84
     # via
     #   boto3
     #   s3transfer
-certifi==2022.9.14
+certifi==2022.9.24
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -132,13 +132,13 @@ djangorestframework==3.13.1
     #   drf-yasg
 docutils==0.19
     # via django-comments-xtd
-drf-yasg==1.21.3
+drf-yasg==1.21.4
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
 idna==3.4
     # via requests
-importlib-metadata==4.12.0
+importlib-metadata==5.0.0
     # via -r requirements.in
 impostor==3.0.0
     # via -r requirements.in
@@ -159,7 +159,7 @@ markdown==3.3.7
     #   django-markdownx
     #   pyembed-markdown
     #   pymdown-extensions
-markdown2==2.4.3
+markdown2==2.4.5
     # via readtime
 markuppy==1.14
     # via tablib
@@ -196,7 +196,7 @@ pygments==2.13.0
     # via -r requirements.in
 pyjwt[crypto]==2.5.0
     # via django-allauth
-pymdown-extensions==9.5
+pymdown-extensions==9.6
     # via -r requirements.in
 pyparsing==3.0.9
     # via packaging
@@ -208,7 +208,7 @@ python-dotenv==0.21.0
     # via -r requirements.in
 python3-openid==3.2.0
     # via django-allauth
-pytz==2022.2.1
+pytz==2022.4
     # via
     #   djangorestframework
     #   drf-yasg
@@ -244,7 +244,7 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.3.2.post1
     # via beautifulsoup4
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via django
 tablib[html,ods,xls,xlsx,yaml]==3.2.1
     # via django-import-export
@@ -254,7 +254,7 @@ tomli==2.0.1
     # via black
 types-cryptography==3.3.23
     # via pyjwt
-tzdata==2022.2
+tzdata==2022.4
     # via django
 uritemplate==4.1.1
     # via
