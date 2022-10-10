@@ -7,7 +7,7 @@ def generate_vanity(min_length, max_length):
     choices = "abcdefghijklmnopqrstuvwxyz1234567890"
     vanity = ""
 
-    for i in range(0, length):
+    for _ in range(0, length):
         vanity += choices[secrets.choice(range(0, len(choices)))]
     return vanity
 
