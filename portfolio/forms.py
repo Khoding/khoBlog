@@ -12,7 +12,6 @@ class ProjectAddForm(forms.ModelForm):
         model = Project
         fields = (
             "title",
-            "snippet",
             "description",
             "done_in_project",
             "learned",
@@ -31,7 +30,6 @@ class ProjectUpdateForm(forms.ModelForm):
         model = Project
         fields = (
             "title",
-            "snippet",
             "description",
             "done_in_project",
             "learned",
@@ -68,7 +66,6 @@ class SubProjectAddForm(forms.ModelForm):
         model = SubProject
         fields = (
             "title",
-            "snippet",
             "description",
             "done_in_project",
             "learned",
@@ -86,7 +83,6 @@ class SubProjectUpdateForm(forms.ModelForm):
         model = SubProject
         fields = (
             "title",
-            "snippet",
             "description",
             "done_in_project",
             "learned",

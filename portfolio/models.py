@@ -17,9 +17,8 @@ class BasePortfolioAbstractModel(auto_prefetch.Model):
         abstract = True
 
     title = models.CharField(max_length=100)
-    snippet = models.TextField(default="")
     description = models.TextField(default="")
-    done_in_project = models.TextField(default="")
+    done_in_project = models.TextField(default="", blank=True)
     learned = models.TextField(default="")
     slug = models.SlugField(unique=True, default="", max_length=200)
     start_date = models.DateTimeField("Project's start date", null=True, blank=True)

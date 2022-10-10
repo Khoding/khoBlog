@@ -10,7 +10,6 @@ class ProjectAdmin(admin.ModelAdmin):
     form_class = ProjectAddForm
     list_display = (
         "title",
-        "snippet",
         "description",
         "technology",
         "repository",

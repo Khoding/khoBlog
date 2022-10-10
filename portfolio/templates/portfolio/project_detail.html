@@ -75,6 +75,10 @@
           {% for object in project.sub_project.all %}
             {% cards object %}
           {% endfor %}
+
+          {% if request.user.is_superuser %}
+            <a class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline" href="{% url 'portfolio:create_sub_project' slug=object.slug %}">Add Sub project</a>
+          {% endif %}
         </section>
       {% endif %}
     </div>

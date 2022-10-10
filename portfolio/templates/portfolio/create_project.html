@@ -35,21 +35,8 @@
 
     <div class="field mb-2">
       <div class="form-floating">
-        {{ form.snippet|add_class:"form-control"|attr:"placeholder:snippet" }}
-        {{ form.snippet.label_tag }}
-      </div>
-      {% if form.snippet.help_text %}
-        <span class="text-sm">{{ form.snippet.help_text }}</span>
-      {% endif %}
-      {% for error in form.snippet.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </div>
-
-    <div class="field mb-2">
-      <div class="form-floating">
-        {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
         {{ form.description.label_tag }}
+        {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
       </div>
       {% if form.description.help_text %}
         <span class="text-sm">{{ form.description.help_text }}</span>
@@ -61,8 +48,21 @@
 
     <div class="field mb-2">
       <div class="form-floating">
-        {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
+        {{ form.done_in_project.label_tag }}
+        {{ form.done_in_project|add_class:"form-control"|attr:"placeholder:done_in_project" }}
+      </div>
+      {% if form.done_in_project.help_text %}
+        <span class="text-sm">{{ form.done_in_project.help_text }}</span>
+      {% endif %}
+      {% for error in form.done_in_project.errors %}
+        <small class="text-flamingo-600">{{ error }}</small>
+      {% endfor %}
+    </div>
+
+    <div class="field mb-2">
+      <div class="form-floating">
         {{ form.learned.label_tag }}
+        {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
       </div>
       {% if form.learned.help_text %}
         <span class="text-sm">{{ form.learned.help_text }}</span>
@@ -75,8 +75,8 @@
     <div class="field mb-2">
       <div class="input-group">
         <div class="form-floating col-10">
-          {{ form.technology|add_class:"form-select"|attr:"placeholder:Post technology" }}
           {{ form.technology.label_tag }}
+          {{ form.technology|add_class:"form-select"|attr:"placeholder:Post technology" }}
         </div>
       </div>
       {% if form.technology.help_text %}
@@ -90,8 +90,8 @@
     <div class="field mb-2">
       <div class="input-group">
         <div class="form-floating col-10">
-          {{ form.website|add_class:"form-select"|attr:"placeholder:Post website" }}
           {{ form.website.label_tag }}
+          {{ form.website|add_class:"form-select"|attr:"placeholder:Post website" }}
         </div>
       </div>
       {% if form.website.help_text %}
@@ -105,26 +105,14 @@
     <div class="field mb-2">
       <div class="input-group">
         <div class="form-floating col-10">
-          {{ form.repository|add_class:"form-select"|attr:"placeholder:Post repository" }}
           {{ form.repository.label_tag }}
+          {{ form.repository|add_class:"form-select"|attr:"placeholder:Post repository" }}
         </div>
       </div>
       {% if form.repository.help_text %}
         <span class="text-sm">{{ form.repository.help_text }}</span>
       {% endif %}
       {% for error in form.repository.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </div>
-
-    <div class="field row mb-2">
-      <div class="input-group col-auto">
-        {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
-      </div>
-      {% if form.slug.help_text %}
-        <span class="text-sm">{{ form.slug.help_text }}</span>
-      {% endif %}
-      {% for error in form.slug.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
     </div>

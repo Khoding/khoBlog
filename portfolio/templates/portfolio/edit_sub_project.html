@@ -34,21 +34,8 @@
 
     <div class="field mb-2">
       <div class="form-floating">
-        {{ form.snippet|add_class:"form-control"|attr:"placeholder:snippet" }}
-        {{ form.snippet.label_tag }}
-      </div>
-      {% if form.snippet.help_text %}
-        <span class="text-sm">{{ form.snippet.help_text }}</span>
-      {% endif %}
-      {% for error in form.snippet.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </div>
-
-    <div class="field mb-2">
-      <div class="form-floating">
-        {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
         {{ form.description.label_tag }}
+        {{ form.description|add_class:"form-control"|attr:"placeholder:Post description" }}
       </div>
       {% if form.description.help_text %}
         <span class="text-sm">{{ form.description.help_text }}</span>
@@ -60,8 +47,21 @@
 
     <div class="field mb-2">
       <div class="form-floating">
-        {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
+        {{ form.done_in_project.label_tag }}
+        {{ form.done_in_project|add_class:"form-control"|attr:"placeholder:done_in_project" }}
+      </div>
+      {% if form.done_in_project.help_text %}
+        <span class="text-sm">{{ form.done_in_project.help_text }}</span>
+      {% endif %}
+      {% for error in form.done_in_project.errors %}
+        <small class="text-flamingo-600">{{ error }}</small>
+      {% endfor %}
+    </div>
+
+    <div class="field mb-2">
+      <div class="form-floating">
         {{ form.learned.label_tag }}
+        {{ form.learned|add_class:"form-control"|attr:"placeholder:Learned" }}
       </div>
       {% if form.learned.help_text %}
         <span class="text-sm">{{ form.learned.help_text }}</span>
@@ -86,21 +86,21 @@
       {% endfor %}
     </div>
 
-    <div class="field mb-2">
-      {{ form.featured.label_tag }}
-      <div class="form-check">
-        {{ form.featured|add_class:"form-check-input" }}
+    <section class="mb-2">
+      <div class="input-group gap-2">
+        <div class="form-floating">
+          {{ form.featured.label_tag }}
+          {{ form.featured|add_class:"form-check" }}
+          {% if form.featured.help_text %}
+            <div class="text-sm">{{ form.featured.help_text }}</div>
+          {% endif %}
+        </div>
       </div>
-      {% if form.featured.help_text %}
-        <span class="text-sm">{{ form.featured.help_text }}</span>
-      {% endif %}
-      {% for error in form.featured.errors %}
-        <small class="text-flamingo-600">{{ error }}</small>
-      {% endfor %}
-    </div>
+    </section>
 
-    <div class="field row mb-2">
+    <section class="row mb-2">
       <div class="input-group col-auto">
+        <span class="input-group-text">https://{{ request.get_host }}/projects/{{ object.parent_project.slug }}/</span>
         {{ form.slug|add_class:"form-control"|attr:"placeholder:Slug" }}
       </div>
       {% if form.slug.help_text %}
@@ -109,7 +109,7 @@
       {% for error in form.slug.errors %}
         <small class="text-flamingo-600">{{ error }}</small>
       {% endfor %}
-    </div>
+    </section>
 
     <button type="submit" class="kho-button-forms kho-button-submit">{{ title }}</button>
   </form>
