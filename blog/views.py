@@ -599,7 +599,6 @@ class PostDefineFeaturedCategoryUpdateView(UpdateView):
         """Passes the request object to the form class.
         This allows to get the queryset for the featured_cat field.
         """
-
         kwargs = super(PostDefineFeaturedCategoryUpdateView, self).get_form_kwargs()
         kwargs["post"] = self.get_object()
         return kwargs
