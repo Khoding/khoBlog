@@ -114,7 +114,8 @@ class PostDefineFeaturedCategoryForm(forms.ModelForm):
     A form to define the featured category of a post
     """
 
-    # This just sets the widget type, the queryset is required, so we give everything (a bit slow, but again, once a week action)
+    # This just sets the widget type, the queryset is required,
+    # so we give everything (a bit slow, but again, once a week action)
     # Find a way to set the queryset to nothing or whatever
     featured_cat = forms.ModelChoiceField(queryset=Category.objects.all())
 
