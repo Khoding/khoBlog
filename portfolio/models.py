@@ -100,7 +100,7 @@ class Project(BasePortfolioAbstractModel):
     def get_index_view_url(self):
         """Get index view url for Project Model"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+        return reverse(f"{content_type.app_label}:{content_type.model}_list")
 
 
 class SubProject(BasePortfolioAbstractModel):
@@ -168,7 +168,7 @@ class SubProject(BasePortfolioAbstractModel):
     def get_index_view_url(self):
         """Get index view url for SubProject Model"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:%s_list" % (content_type.app_label, content_type.model))
+        return reverse(f"{content_type.app_label}:{content_type.model}_list")
 
 
 class Website(auto_prefetch.Model):

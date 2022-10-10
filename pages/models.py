@@ -103,4 +103,4 @@ class Page(auto_prefetch.Model):
     def get_index_view_url(self):
         """Get the url for the index view"""
         content_type = ContentType.objects.get_for_model(self.__class__)
-        return reverse("%s:index" % (content_type.app_label))
+        return reverse(f"{content_type.app_label}:index")
