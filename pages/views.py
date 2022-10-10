@@ -38,9 +38,9 @@ def page(request, slug):
 @csrf_protect
 def render_page(request, f):
     """Internal interface to the flat page view."""
-    # If registration is required for accessing this page, and the user isn't
+    # If registration is required (page is withdrawn) for accessing this page, and the user isn't
     # logged in, redirect to the login page.
-    if f.registration_required and not request.user.is_authenticated:
+    if f.withdrawn and not request.user.is_authenticated:
         from django.contrib.auth.views import redirect_to_login
 
         return redirect_to_login(request.path)

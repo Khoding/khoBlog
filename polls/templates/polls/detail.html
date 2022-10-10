@@ -1,7 +1,7 @@
 {% extends 'tailwind/base.html' %}
 
 {% block content %}
-  <h4>{{ question.title }}</h4>
+  <div class="text-xl">{{ question.title }}</div>
   <a href="{% url 'polls:results' question.id %}">See the results without voting</a>
 
   {% if error_message %}

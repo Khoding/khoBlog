@@ -2,11 +2,11 @@
 {% load widget_tweaks project_tags %}
 
 {% block content %}
-  <h3>Delete:
-    {{ subproject.title }}</h3>
+  <div class="text-xl">Delete:
+    {{ subproject.title }}</div>
   <form method="POST">
     {% csrf_token %}
-    <h4>Are you sure?</h4>
+    <div class="text-xl">Are you sure?</div>
     {{ form.as_p }}
 
     <button type="submit" class="kho-button-forms kho-button-submit-delete mt-2">{{ title }}</button>

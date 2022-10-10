@@ -12,44 +12,38 @@
 {% endblock page_head %}
 
 {% block content %}
-  {% if not page.withdrawn or user.is_superuser and not user.secure_mode %}
-    <article class="xl:grid xl:grid-cols-3">
-      <div class="xl:col-span-2 xl:pr-8">
-        <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-200 xl:pb-6">
-          <div>
-            <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ page.title }}</span>
-            <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-500">
-              <a href="{% url 'pages:index' %}" class="hover:underline">Page</a> <span class="font-bold">#{{ page.pk }}</span>
-            </p>
-          </div>
-          {% sb page user=request.user %}
+  <article class="xl:grid xl:grid-cols-3">
+    <div class="xl:col-span-2 xl:pr-8">
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-200 xl:pb-6">
+        <div>
+          <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ page.title }}</span>
+          <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-500">
+            <a href="{% url 'pages:index' %}" class="hover:underline">Page</a> <span class="font-bold">#{{ page.pk }}</span>
+          </p>
         </div>
-        <div class="py-3 xl:pt-6 xl:pb-0">
-          <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
-            {% autoescape off %}
-              {% evaluate page.content %}
-            {% endautoescape %}
-          </div>
-        </div>
-        {% if not comments_disabled_globally_flag and page.enable_comments %}
-          <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
-          {% render_comment_form for page %}
-
-          <div class="relative">
-            <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
-              <div class="w-full border-t border-gray-200 dark:border-jumbo-200"></div>
-            </div>
-          </div>
-
-          <section class="mt-4 space-y-4">
-            {% render_xtdcomment_tree for page allow_thread allow_flagging allow_feedback show_feedback %}
-          </section>
-        {% endif %}
+        {% sb page user=request.user %}
       </div>
-    </article>
-  {% else %}
-    <h1>
-      <a class="kho-button-forms kho-button-submit-delete" href="{% url 'pages:kheee' %}">{{ description }}</a>
-    </h1>
-  {% endif %}
+      <div class="py-3 xl:pt-6 xl:pb-0">
+        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+          {% autoescape off %}
+            {% evaluate page.content %}
+          {% endautoescape %}
+        </div>
+      </div>
+      {% if not comments_disabled_globally_flag and page.enable_comments %}
+        <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
+        {% render_comment_form for page %}
+
+        <div class="relative">
+          <div class="absolute inset-0 mt-2 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-gray-200 dark:border-jumbo-200"></div>
+          </div>
+        </div>
+
+        <section class="mt-4 space-y-4">
+          {% render_xtdcomment_tree for page allow_thread allow_flagging allow_feedback show_feedback %}
+        </section>
+      {% endif %}
+    </div>
+  </article>
 {% endblock content %}

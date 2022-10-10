@@ -1,7 +1,7 @@
 {% extends 'tailwind/base.html' %}
 
 {% block content %}
-  <h4>{{ question.title }}</h4>
+  <div class="text-xl">{{ question.title }}</div>
 
   <ul class="mb-2">
     {% for choice in question.related_question.all %}

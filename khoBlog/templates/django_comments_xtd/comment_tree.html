@@ -87,7 +87,7 @@
       {% endif %}
 
       {% if not item.comment.is_removed and item.children %}
-        <h4 class="mt-5 mb-2 uppercase tracking-wide text-gray-400 dark:text-jumbo-200 font-bold text-xs">Replies</h4>
+        <h4 class="mt-5 mb-2 uppercase tracking-wide text-gray-400 dark:text-jumbo-200 font-bold text-xs">Replies</div>
 
         {% render_xtdcomment_tree with comments=item.children %}
       {% endif %}

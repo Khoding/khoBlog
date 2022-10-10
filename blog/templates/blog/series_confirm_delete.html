@@ -2,10 +2,10 @@
 {% load widget_tweaks project_tags %}
 
 {% block content %}
-  <h3>Delete:
+  <div class="text-xl">Delete:
     {{ series.id }}
     -
-    {{ series.title }}</h3>
+    {{ series.title }}</div>
   <form method="POST">
     {% csrf_token %}
     {% form form %}

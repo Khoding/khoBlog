@@ -2,10 +2,10 @@
 {% load widget_tweaks project_tags %}
 
 {% block content %}
-  <h3>Delete:
+  <div class="text-xl">Delete:
     {{ post.id }}
     -
-    {{ post.title }}</h3>
+    {{ post.title }}</div>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% form form %}

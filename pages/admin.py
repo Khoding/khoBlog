@@ -15,7 +15,7 @@ class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     prepopulated_fields = {"slug": ("title",)}
     list_filter = (
         "sites",
-        "registration_required",
+        "withdrawn",
         "deleted_at",
     )
 
@@ -38,7 +38,7 @@ class PageAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
             ("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": ("registration_required", "template_name"),
+                "fields": ("withdrawn", "template_name"),
             },
         ),
     )

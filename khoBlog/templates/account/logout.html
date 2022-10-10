@@ -8,7 +8,7 @@
 {% block content %}
   <form method="POST">
     {% csrf_token %}
-    <h3>You're About to Log out</h3>
+    <div class="text-xl">You're about to Log out</div>
     {{ form.as_p }}
 
     <button type="submit" class="kho-button-forms kho-button-submit-delete mt-2">Log out</button>

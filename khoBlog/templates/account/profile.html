@@ -16,7 +16,7 @@
         <div class="sm:hidden md:block mt-6 min-w-0 flex-1">
           <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
             {{ object }}
-          </h1>
+          </div>
           {% if not object.is_active %}
             <span class="text-flamingo-600">(Banned)</span>
           {% endif %}
@@ -37,7 +37,7 @@
     <div class="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
       <h1 class="text-2xl font-bold text-gray-900 dark:text-jumbo-500 truncate">
         {{ object }}
-      </h1>
+      </div>
       {% if not object.is_active %}
         <span class="text-flamingo-600">(Banned)</span>
       {% endif %}
@@ -148,7 +148,7 @@
       {% if accounts.github and object.display_github %}
         <section x-show="tab === 'github'">
           <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
-            <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</h2>
+            <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-300">Github account</div>
             {% for github in accounts.github %}
               <div class="relative rounded-2xl md:w-1/2 border border-gray-300 dark:border-jumbo-500 bg-gray-50 dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 dark:focus-within:ring-offset-jumbo-900 focus-within:ring-cornflower-500 dark:focus-within:ring-cornflower-500">
                 <div class="flex-shrink-0">

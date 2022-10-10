@@ -2,7 +2,7 @@
 {% load widget_tweaks project_tags %}
 
 {% block content %}
-  <h3>Change status of: {{ task.id }} - {{ task.title }}</h3>
+  <div class="text-xl">Change status of: {{ task.id }} - {{ task.title }}</div>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% form form %}

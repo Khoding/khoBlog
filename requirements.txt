@@ -10,13 +10,13 @@ beautifulsoup4==4.11.1
     # via
     #   pyembed
     #   readtime
-black==22.8.0
+black==22.10.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.24.84
+boto3==1.24.89
     # via -r requirements.in
-botocore==1.27.84
+botocore==1.27.89
     # via
     #   boto3
     #   s3transfer
@@ -70,7 +70,7 @@ django==4.1.2
     #   impostor
 django-admin-index==2.0.2
     # via -r requirements.in
-django-admin-interface==0.20.0
+django-admin-interface==0.21.0
     # via -r requirements.in
 django-allauth==0.51.0
     # via -r requirements.in
