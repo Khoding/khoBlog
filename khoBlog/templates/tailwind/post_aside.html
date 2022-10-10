@@ -92,7 +92,7 @@
 <article class="mt-6 border-t border-gray-200 dark:border-jumbo-200 py-6 space-y-8">
   {% if object.url_to_article %}
     <section>
-      <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Linked article</div>
+      <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Linked article</div>
       <a href="{{ object.url_to_article }}" class="text-sm font-medium text-gray-900 dark:text-jumbo-50 hover:underline">
         {% firstof object.url_to_article_title object.url_to_article %}
       </a>
@@ -100,7 +100,7 @@
   {% endif %}
 
   <section>
-    <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Categories</div>
+    <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Categories</div>
     <ul role="list" class="mt-2 leading-8">
       {% for category in object.categories.all %}
         {% if not category.withdrawn or user.is_superuser and not user.secure_mode %}
@@ -118,7 +118,7 @@
   </section>
 
   <section>
-    <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Tags</div>
+    <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Tags</div>
     <ul role="list" class="mt-2 leading-8">
       {% if not user.is_superuser and not user.secure_mode %}
         {% for tag in object.get_tags %}
@@ -153,7 +153,7 @@
   </section>
 
   <section>
-    <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Related content</div>
+    <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Related content</div>
     <ul role="list" class="mt-2 leading-8">
       {% for e in similar_posts %}
         {% if not e.withdrawn and not e.is_scheduled or user.is_superuser and not user.secure_mode %}
@@ -172,7 +172,7 @@
 
   {% if series %}
     <section>
-      <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Series</div>
+      <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Series</div>
       <dl class="aside-section">
         <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 overflow-hidden sm:p-6">
           <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
@@ -236,7 +236,7 @@
   {% endif %}
 
   <section>
-    <h2 class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Stats</div>
+    <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Stats</div>
     <dl class="aside-section">
       <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 shadow rounded-t-2xl overflow-hidden sm:p-6">
         <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">

@@ -25,7 +25,7 @@ def display_quotes(model_class, model_slug, show_title=False):
     content = [""]
 
     if show_title:
-        content.append(f'<h2 id="{lookup_container.slug}">{lookup_container.title}</div>')
+        content.append(f'<div id="{lookup_container.slug}">{lookup_container.title}</div>')
 
     for i, quote in enumerate(QUOTES):
         if i > 0:
