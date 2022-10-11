@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Tailwind
     "django_browser_reload",
     "tailwind",
+    "heroicons",
     "theme",
     # Django Packages Apps
     "django_comments_xtd",

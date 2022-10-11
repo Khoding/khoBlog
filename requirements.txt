@@ -67,6 +67,7 @@ django==4.1.2
     #   django-tailwind
     #   djangorestframework
     #   drf-yasg
+    #   heroicons
     #   impostor
 django-admin-index==2.0.2
     # via -r requirements.in
@@ -136,6 +137,8 @@ drf-yasg==1.21.4
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
+heroicons[django]==2.1.0
+    # via -r requirements.in
 idna==3.4
     # via requests
 importlib-metadata==5.0.0

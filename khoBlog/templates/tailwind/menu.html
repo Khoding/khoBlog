@@ -1,4 +1,4 @@
-{% load static changelog super_buttons menu links_menu menu_footer_set featured_post featured_page %}
+{% load static changelog super_buttons menu links_menu menu_footer_set featured_post featured_page heroicons %}
 
 <div id="navbar" x-data="{ open: false }" @keydown.window.escape="open = false" class="bg-gray-50 dark:bg-jumbo-900">
   <!-- Mobile menu -->
@@ -11,9 +11,7 @@
         <div class="px-4 pt-5 pb-2 flex">
           <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = false">
             <span class="sr-only">Close menu</span>
-            <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
+            {% heroicon_outline 'x-mark' class="w-6 h-6" %}
           </button>
         </div>
 
@@ -86,9 +84,7 @@
               <div class="flex-1 flex items-center lg:hidden">
                 <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 p-2 rounded-md hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = true">
                   <span class="sr-only">Open menu</span>
-                  <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                  </svg>
+                  {% heroicon_outline 'bars-3' class="w-6 h-6" stroke_width=2 %}
                 </button>
               </div>
 
@@ -120,9 +116,7 @@
                                       <div class="ml-3 flex h-7 items-center">
                                         <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
                                           <span class="sr-only">Close panel</span>
-                                          <svg class="h-6 w-6" x-description="Heroicon name: outline/x" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                          </svg>
+                                          {% heroicon_outline 'x-mark' class="w-6 h-6" %}
                                         </button>
                                       </div>
                                     </div>

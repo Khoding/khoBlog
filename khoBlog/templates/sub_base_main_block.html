@@ -1,5 +1,5 @@
 {% extends 'tailwind/base.html' %}
-{% load paginator_tags %}
+{% load paginator_tags heroicons %}
 
 {% block content %}
   {% block content_main %}{% endblock content_main %}
@@ -46,16 +46,12 @@
               {% if page_obj.has_previous %}
                 <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button">
                   <span class="sr-only">Previous</span>
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
                 </a>
               {% else %}
                 <button disabled class="previous_pagination_button disabled:opacity-50">
                   <span class="sr-only">Previous</span>
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
                 </button>
               {% endif %}
 
@@ -81,16 +77,12 @@
               {% if page_obj.has_next %}
                 <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button">
                   <span class="sr-only">Next</span>
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
                 </a>
               {% else %}
                 <button disabled class="next_pagination_button disabled:opacity-50">
                   <span class="sr-only">Next</span>
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
                 </button>
               {% endif %}
             </nav>

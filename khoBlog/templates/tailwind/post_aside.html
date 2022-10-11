@@ -1,12 +1,9 @@
-{% load read_time comments %}
+{% load read_time comments heroicons %}
 
 <div class="sr-only">Details</div>
 <article class="space-y-5">
   <section class="flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-jumbo-100" viewbox="0 0 20 20" fill="currentColor">
-      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-      <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-    </svg>
+    {% heroicon_mini 'eye' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     {% if object.pub_date and not object.withdrawn %}
       {% if object.was_published_recently %}
         <span class="text-tradewind-800 text-sm font-medium">New Post</span>
@@ -22,9 +19,7 @@
     {% endif %}
   </section>
   <section class="flex items-center space-x-2">
-    <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-    </svg>
+    {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
       Created:
       <time datetime="{{ object.created_date|date:"c" }}">
@@ -34,9 +29,7 @@
   </section>
   {% if object.pub_date %}
     <section class="flex items-center space-x-2">
-      <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-      </svg>
+      {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
       <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
         Published:
         <time datetime="{{ object.pub_date|date:"c" }}">
@@ -46,9 +39,7 @@
     </section>
   {% endif %}
   <section class="flex items-center space-x-2">
-    <svg class="h-5 w-5 text-gray-400 dark:text-jumbo-100" x-description="Heroicon name: solid/calendar" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-    </svg>
+    {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
       Updated:
       <time datetime="{{ object.mod_date|date:"c" }}">
@@ -57,23 +48,17 @@
     </a>
   </section>
   <section class="flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-gray-400 dark:text-jumbo-100">
-      <path d="M13 4.5a2.5 2.5 0 11.702 1.737L6.97 9.604a2.518 2.518 0 010 .792l6.733 3.367a2.5 2.5 0 11-.671 1.341l-6.733-3.367a2.5 2.5 0 110-3.475l6.733-3.366A2.52 2.52 0 0113 4.5z" />
-    </svg>
+    {% heroicon_mini 'share' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <span class="text-sm font-medium">{{ object.vanity_url }}</span>
   </section>
   <section class="flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-jumbo-100" viewbox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-    </svg>
+    {% heroicon_mini 'clock' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <span class="text-gray-900 dark:text-jumbo-50 text-sm font-medium">
       {{ object.body|readtime }}
     </span>
   </section>
   <section class="flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-jumbo-100" viewBox="0 0 20 20" fill="currentColor">
-      <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-    </svg>
+    {% heroicon_mini 'hand-thumb-up' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <span class="text-gray-900 dark:text-jumbo-50 text-sm font-medium">{{ object.total_likes }}
       like{{ object.total_likes|pluralize:'s' }}</span>
   </section>
@@ -81,9 +66,7 @@
   {% get_comment_count for post as comment_count %}
 
   <section class="flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-jumbo-100" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-    </svg>
+    {% heroicon_mini 'chat-bubble-bottom-center-text' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="#comments" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">{{ comment_count }}
       comment{{ comment_count|pluralize:'s' }}</a>
   </section>

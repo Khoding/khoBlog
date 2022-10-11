@@ -34,3 +34,4 @@ pygments
 pyembed-markdown
 importlib-metadata
 python-dotenv
+heroicons[django]

@@ -1,5 +1,5 @@
 {% extends 'sub_base_main_block.html' %}
-{% load static comments comments_xtd super_buttons markdown_extra compress %}
+{% load static comments comments_xtd super_buttons markdown_extra compress heroicons %}
 
 {% block additional_css %}
   {% if object.has_code %}
@@ -15,17 +15,13 @@
       <nav class="flex justify-between" role="group" aria-label="Previous / Next">
         {% if prev_post %}
           <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
+            {% heroicon_outline "chevron-left" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
             <!-- space -->
             Previous Post
           </a>
         {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
+            {% heroicon_outline "chevron-left" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
             <!-- space -->
             Previous Post
           </button>
@@ -34,17 +30,13 @@
           <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
             Next Post
             <!-- space -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            {% heroicon_outline "chevron-right" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
           </a>
         {% else %}
           <button disabled class="next_prev_buttons disabled:opacity-50">
             Next Post
             <!-- space -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            {% heroicon_outline "chevron-right" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
           </button>
         {% endif %}
       </nav>
