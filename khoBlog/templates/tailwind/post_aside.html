@@ -240,5 +240,16 @@
         </dd>
       </div>
     </dl>
+    <dl class="aside-section">
+      <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 shadow rounded-t-2xl overflow-hidden sm:p-6">
+        <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
+          Post was modified
+        </dt>
+        <dd class="mt-1 text-3xl font-semibold text-cornflower-800 dark:text-jumbo-50">
+          {{ object.history.count }}
+          time{{ object.history.count|pluralize:'s' }}
+        </dd>
+      </div>
+    </dl>
   </section>
 </article>
