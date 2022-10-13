@@ -34,8 +34,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 from blog.sitemap import CategorySitemap, PostSitemap, SeriesSitemap
 from pages.sitemap import PageSitemap
 
-from . import dev_urls
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Blog API",
@@ -109,12 +107,6 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 )
-
-if settings.DEBUG:
-    urlpatterns += [
-        # Dev Urls
-        path("dev/", include(dev_urls, namespace="dev")),
-    ]
 
 if settings.DEBUG and settings.ENABLE_DEBUG_TOOLBAR:
     urlpatterns += [
