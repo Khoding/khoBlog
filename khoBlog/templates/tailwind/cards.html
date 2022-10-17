@@ -16,11 +16,6 @@
           </span>
         </a>
       {% endif %}
-      {% if object.get_category_count > 1 %}
-        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700">
-          +{{ object.get_category_count|add:"-1" }}
-        </span>
-      {% endif %}
       {% status_dot object %}
     </section>
   {% endif %}
