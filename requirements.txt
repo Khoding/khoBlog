@@ -157,7 +157,7 @@ jmespath==1.0.1
     #   botocore
 lxml==4.9.1
     # via pyquery
-markdown==3.4.1
+markdown==3.3.7
     # via
     #   django-markdownx
     #   pyembed-markdown
