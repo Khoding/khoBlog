@@ -1,0 +1,46 @@
+{% extends 'tailwind/base.html' %}
+{% load super_buttons cards %}
+
+{% block content %}
+  <article class="xl:grid xl:grid-cols-3">
+    <div class="xl:col-span-2 xl:pr-8">
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-700 xl:pb-6">
+        <div>
+          <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ artist }}</span>
+        </div>
+        {% sb artist user=request.user %}
+      </div>
+      <div class="py-3 xl:pt-6 xl:pb-0">
+        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+          {% load markup_tags %}
+
+          {{ artist.about|apply_markup:"markdown"|apply_markup:"widont" }}
+
+          {% for genre in artist.genre.all %}
+            {{ genre }}
+          {% endfor %}
+
+          {% if songs %}
+            <article class="pb-8 pt-16">
+              <section class="relative">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div class="w-full border-t border-gray-300 dark:border-jumbo-600"></div>
+                </div>
+                <div class="relative flex justify-center">
+                  <span class="px-3 bg-gray-50 dark:bg-jumbo-900 text-lg font-medium text-gray-900 dark:text-jumbo-300">
+                    {{ songs.count }}
+                    Song{{ songs.count|pluralize:'s' }}
+                  </span>
+                </div>
+              </section>
+            </article>
+            <section class="grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
+              {% for object in songs %}
+                {% cards object %}
+              {% endfor %}
+            </section>
+          {% endif %}
+        </div>
+      </div>
+  </article>
+{% endblock content %}

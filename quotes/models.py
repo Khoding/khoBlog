@@ -17,11 +17,6 @@ class BaseQuoteAbstractModel(auto_prefetch.Model):
 
         abstract = True
 
-    # override the __str__ method to return the title of the quote
-    def __str__(self):
-        """Return the title of the quote"""
-        return self.title
-
 
 # abstact auto_prefetch model for quotes
 class Quote(BaseQuoteAbstractModel):
@@ -47,6 +42,11 @@ class Quote(BaseQuoteAbstractModel):
 
     class Meta(BaseQuoteAbstractModel.Meta):
         """Meta"""
+
+    # override the __str__ method to return the title of the quote
+    def __str__(self):
+        """Return the title of the quote"""
+        return self.title
 
     def save(self, *args, **kwargs):
         """Save"""

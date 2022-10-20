@@ -29,7 +29,7 @@ def display_quotes(model_class, model_slug, show_title=False):
 
     for i, quote in enumerate(QUOTES):
         if i > 0:
-            content.append("<hr>")
+            content.append("<hr />")
 
         content.append('<blockquote class="quotes quote_list">')
         content.append("<dl>")
