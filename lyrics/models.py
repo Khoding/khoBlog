@@ -1,4 +1,3 @@
-from platform import release
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -36,7 +35,7 @@ class Song(BaseSongAbstractModel):
     lyrics = models.TextField(help_text="Song lyrics")
     url_to_media = models.URLField()
     host = models.CharField(choices=HOST_CHOICES, max_length=200, default="spotify", help_text="Song host")
-    release_date = models.DateTimeField(blank=True, null=True)
+    release_date = models.TimeField(blank=True, null=True)
     artist = models.ManyToManyField("lyrics.Artist", blank=True)
     featuring_artist = models.ManyToManyField("lyrics.Artist", blank=True, related_name="feat")
     genre = models.ManyToManyField("lyrics.Genre", blank=True)
