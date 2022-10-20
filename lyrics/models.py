@@ -46,8 +46,6 @@ class Song(BaseSongAbstractModel):
     class Meta(BaseSongAbstractModel.Meta):
         """Meta"""
 
-        pass
-
     # override the __str__ method to return the title of the quote
     def __str__(self):
         """Return the title of the quote"""
