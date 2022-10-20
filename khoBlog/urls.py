@@ -73,6 +73,7 @@ urlpatterns = (
         path("todo/", include("todo.urls")),
         path("tags/", include("custom_taggit.urls")),
         path("quote/", include("quotes.urls")),
+        path("song/", include("lyrics.urls")),
         path("s/", include("shortener.urls")),
         path("l/", include("links.urls")),
         # Rest API

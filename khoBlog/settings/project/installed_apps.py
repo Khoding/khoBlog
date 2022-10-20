@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "reading_apis_app",
     "facts",
     "quotes",
+    "lyrics",
 ]
 
 if DEBUG and ENABLE_DEBUG_TOOLBAR:
