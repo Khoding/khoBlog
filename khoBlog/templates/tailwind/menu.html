@@ -1,142 +1,144 @@
 {% load static changelog super_buttons menu links_menu menu_footer_set featured_post featured_page heroicons %}
 
-<div id="navbar" x-data="{ open: false }" @keydown.window.escape="open = false" class="bg-gray-50 dark:bg-jumbo-900">
-  <!-- Mobile menu -->
-  <div x-show="open" class="relative z-50 lg:hidden" x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." x-ref="dialog" aria-modal="true" style="display: none;">
+<div id="navbar" class="sticky top-0 z-[9999] bg-gray-50 dark:bg-jumbo-900">
+  <div x-data="{ open: false }" @keydown.window.escape="open = false" class="bg-gray-50 dark:bg-jumbo-900">
+    <!-- Mobile menu -->
+    <div x-show="open" class="relative z-50 lg:hidden" x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." x-ref="dialog" aria-modal="true" style="display: none;">
 
-    <div x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Off-canvas menu backdrop, show/hide based on off-canvas menu state." class="fixed inset-0 bg-black bg-opacity-25" style="display: none;"></div>
+      <div x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Off-canvas menu backdrop, show/hide based on off-canvas menu state." class="fixed inset-0 bg-black bg-opacity-25" style="display: none;"></div>
 
-    <div class="fixed inset-0 flex z-50">
-      <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" x-description="Off-canvas menu, show/hide based on off-canvas menu state." class="relative max-w-xs w-full bg-gray-50 dark:bg-jumbo-900 shadow-xl pb-12 flex flex-col overflow-y-auto" @click.away="open = false" style="display: none;">
-        <div class="px-4 pt-5 pb-2 flex">
-          <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = false">
-            <span class="sr-only">Close menu</span>
-            {% heroicon_outline 'x-mark' class="w-6 h-6" %}
-          </button>
-        </div>
-
-        <div x-data="{ tab: 'main' }" class="mt-2">
-          <div class="border-b border-gray-200 dark:border-jumbo-700">
-            <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
-              <button x-on:click.prevent="tab = 'main'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'main', 'border-transparent': !(tab === 'main') }">Main</button>
-
-              <button x-on:click.prevent="tab = 'featured'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'featured', 'border-transparent': !(tab === 'featured') }">Featured</button>
-            </div>
+      <div class="fixed inset-0 flex z-50">
+        <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" x-description="Off-canvas menu, show/hide based on off-canvas menu state." class="relative max-w-xs w-full bg-gray-50 dark:bg-jumbo-900 shadow-xl pb-12 flex flex-col overflow-y-auto" @click.away="open = false" style="display: none;">
+          <div class="px-4 pt-5 pb-2 flex">
+            <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = false">
+              <span class="sr-only">Close menu</span>
+              {% heroicon_outline 'x-mark' class="w-6 h-6" %}
+            </button>
           </div>
 
-          {% tab_menu "Main" %}
-          {% tab_menu "Featured" %}
-        </div>
+          <div x-data="{ tab: 'main' }" class="mt-2">
+            <div class="border-b border-gray-200 dark:border-jumbo-700">
+              <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
+                <button x-on:click.prevent="tab = 'main'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'main', 'border-transparent': !(tab === 'main') }">Main</button>
 
-        <div class="border-t border-gray-200 dark:border-jumbo-700 py-6 px-4 space-y-6">
-          {% if user.is_authenticated %}
-            <div class="flow-root">
-              <a href="{{ user.get_absolute_url}}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Profile</a>
-            </div>
-            <div class="flow-root">
-              <a href="{% url 'account_logout' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Logout</a>
+                <button x-on:click.prevent="tab = 'featured'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'featured', 'border-transparent': !(tab === 'featured') }">Featured</button>
+              </div>
             </div>
 
-            {% if user.is_superuser %}
+            {% tab_menu "Main" %}
+            {% tab_menu "Featured" %}
+          </div>
+
+          <div class="border-t border-gray-200 dark:border-jumbo-700 py-6 px-4 space-y-6">
+            {% if user.is_authenticated %}
               <div class="flow-root">
-                <a href="{{ user.get_absolute_toggle_secure_mode_status_url }}" class="-m-2 p-2 block font-medium {% if user.is_superuser and not user.secure_mode %}text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200{% else %}text-flamingo-500 hover:text-flamingo-600{% endif %}" >Secure Mode Status</a>
+                <a href="{{ user.get_absolute_url}}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Profile</a>
+              </div>
+              <div class="flow-root">
+                <a href="{% url 'account_logout' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Logout</a>
+              </div>
+
+              {% if user.is_superuser %}
+                <div class="flow-root">
+                  <a href="{{ user.get_absolute_toggle_secure_mode_status_url }}" class="-m-2 p-2 block font-medium {% if user.is_superuser and not user.secure_mode %}text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200{% else %}text-flamingo-500 hover:text-flamingo-600{% endif %}" >Secure Mode Status</a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="flow-root">
+                <a href="{% url 'account_login' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Log in</a>
+              </div>
+              <div class="flow-root">
+                <a href="{% url 'account_signup' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Sign up</a>
               </div>
             {% endif %}
-          {% else %}
-            <div class="flow-root">
-              <a href="{% url 'account_login' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Log in</a>
-            </div>
-            <div class="flow-root">
-              <a href="{% url 'account_signup' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Sign up</a>
-            </div>
-          {% endif %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <header class="relative">
-    <nav aria-label="Top">
-      <!-- navigation -->
-      <div class="bg-gray-50 dark:bg-jumbo-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="border-b border-gray-200 dark:border-jumbo-700">
-            <div class="h-16 flex items-center justify-between">
-              <!-- Logo (lg+) -->
-              <div class="hidden lg:flex lg:items-center">
-                <a href="{% url 'blog:post_list' %}">
+    <header class="relative">
+      <nav aria-label="Top">
+        <!-- navigation -->
+        <div class="bg-gray-50 dark:bg-jumbo-900">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-b border-gray-200 dark:border-jumbo-700">
+              <div class="h-16 flex items-center justify-between">
+                <!-- Logo (lg+) -->
+                <div class="hidden lg:flex lg:items-center">
+                  <a href="{% url 'blog:post_list' %}">
+                    <span class="sr-only">Home page</span>
+                    <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/Ruthinkk.webp' %}" loading="lazy" alt="Khodok's Logo">
+                  </a>
+                </div>
+
+                <div class="hidden h-full lg:flex">
+                  <!-- Mega menus -->
+                  <div class="ml-8 z-50">
+                    <div class="h-full flex justify-center space-x-8">
+                      {% mega_menu "Main" %}
+                      {% mega_menu "Featured" %}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile menu and search (lg-) -->
+                <div class="flex-1 flex items-center lg:hidden">
+                  <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 p-2 rounded-md hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = true">
+                    <span class="sr-only">Open menu</span>
+                    {% heroicon_outline 'bars-3' class="w-6 h-6" stroke_width=2 %}
+                  </button>
+                </div>
+
+                <!-- Logo (lg-) -->
+                <a href="{% url 'blog:post_list' %}" class="lg:hidden">
                   <span class="sr-only">Home page</span>
                   <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/Ruthinkk.webp' %}" loading="lazy" alt="Khodok's Logo">
                 </a>
-              </div>
 
-              <div class="hidden h-full lg:flex">
-                <!-- Mega menus -->
-                <div class="ml-8 z-50">
-                  <div class="h-full flex justify-center space-x-8">
-                    {% mega_menu "Main" %}
-                    {% mega_menu "Featured" %}
-                  </div>
-                </div>
-              </div>
+                <div class="flex-1 flex items-center justify-end">
+                  <div class="flex items-center lg:ml-8">
+                    <div class="flex space-x-8">
+                      <section class="hidden md:flex" x-cloak x-data="{ open: false }">
+                        <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
 
-              <!-- Mobile menu and search (lg-) -->
-              <div class="flex-1 flex items-center lg:hidden">
-                <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 p-2 rounded-md hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = true">
-                  <span class="sr-only">Open menu</span>
-                  {% heroicon_outline 'bars-3' class="w-6 h-6" stroke_width=2 %}
-                </button>
-              </div>
+                        <div @keydown.window.escape="open = false" x-show="open" class="relative z-50" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
+                          <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
 
-              <!-- Logo (lg-) -->
-              <a href="{% url 'blog:post_list' %}" class="lg:hidden">
-                <span class="sr-only">Home page</span>
-                <img class="h-8 w-auto sm:h-10" width="2.5rem" height="2.5rem" src="{% static 'khoBlog/img/Ruthinkk.webp' %}" loading="lazy" alt="Khodok's Logo">
-              </a>
-
-              <div class="flex-1 flex items-center justify-end">
-                <div class="flex items-center lg:ml-8">
-                  <div class="flex space-x-8">
-                    <section class="hidden md:flex" x-cloak x-data="{ open: false }">
-                      <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
-
-                      <div @keydown.window.escape="open = false" x-show="open" class="relative z-50" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
-                        <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>
-
-                        <div class="fixed inset-0 overflow-hidden">
-                          <div class="absolute inset-0 overflow-hidden">
-                            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                              <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
-                                <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
-                                  <div class="px-4 sm:px-6">
-                                    <div class="flex items-start justify-between">
-                                      <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
-                                        Changelog
-                                      </div>
-                                      <div class="ml-3 flex h-7 items-center">
-                                        <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
-                                          <span class="sr-only">Close panel</span>
-                                          {% heroicon_outline 'x-mark' class="w-6 h-6" %}
-                                        </button>
+                          <div class="fixed inset-0 overflow-hidden">
+                            <div class="absolute inset-0 overflow-hidden">
+                              <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                                <div x-show="open" x-transition:enter="transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
+                                  <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
+                                    <div class="px-4 sm:px-6">
+                                      <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
+                                          Changelog
+                                        </div>
+                                        <div class="ml-3 flex h-7 items-center">
+                                          <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
+                                            <span class="sr-only">Close panel</span>
+                                            {% heroicon_outline 'x-mark' class="w-6 h-6" %}
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="relative mt-6 flex-1 px-4 sm:px-6 overflow-y-auto scrollbar-thin scrollbar-thumb-jumbo-200 scrollbar-track-jumbo-1000 dark:scrollbar-thumb-jumbo-700 dark:scrollbar-track-jumbo-600">
-                                    {% changelog %}
+                                    <div class="relative mt-6 flex-1 px-4 sm:px-6 overflow-y-auto scrollbar-thin scrollbar-thumb-jumbo-200 scrollbar-track-jumbo-1000 dark:scrollbar-thumb-jumbo-700 dark:scrollbar-track-jumbo-600">
+                                      {% changelog %}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                      </section>
+                      <section class="flex">
+                        {% include 'tailwind/theme_button.html' %}
+                      </section>
+                      <section class="hidden lg:flex">
+                        {% user_auth_sb user %}
+                      </section>
                       </div>
-                    </section>
-                    <section class="flex">
-                      {% include 'tailwind/theme_button.html' %}
-                    </section>
-                    <section class="hidden lg:flex">
-                      {% user_auth_sb user %}
-                    </section>
                     </div>
                   </div>
                 </div>
@@ -144,7 +146,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
+  </div>
 </div>
