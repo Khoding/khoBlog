@@ -76,11 +76,6 @@ class Song(BaseSongAbstractModel):
         self.deleted_at = timezone.now()
         self.save()
 
-    # override the __str__ method to return the title of the song
-    def __str__(self):
-        """Return the title of the song"""
-        return self.title
-
 
 class Artist(BaseSongAbstractModel):
     """Artist Model Class"""
