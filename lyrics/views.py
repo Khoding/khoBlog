@@ -16,8 +16,8 @@ class SongDetailView(DetailView):
 
     def get_queryset(self):
         """Get the queryset for this view."""
-        self.song = get_object_or_404(Song, slug=self.kwargs["slug"])
-        if self.song.deleted_at:
+        song = get_object_or_404(Song, slug=self.kwargs["slug"])
+        if song.deleted_at:
             raise Http404
         return super().get_queryset()
 
