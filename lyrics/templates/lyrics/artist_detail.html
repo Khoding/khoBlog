@@ -17,7 +17,7 @@
           {{ artist.about|apply_markup:"markdown"|apply_markup:"widont" }}
 
           {% for genre in artist.genre.all %}
-            {{ genre }}
+            {{ genre }}{% if not forloop.last %}, {% endif %}
           {% endfor %}
 
           {% if songs %}
