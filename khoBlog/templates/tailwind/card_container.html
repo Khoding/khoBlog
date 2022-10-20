@@ -24,7 +24,7 @@
           <div id="filter-heading" class="sr-only">Filters</div>
         </section>
       {% endif %}
-      {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" %}
+      {% if user.is_superuser and not object_list.model|to_class_name == "post" and not object_list.model|to_class_name == "customtag" and not object_list.model|to_class_name == "song" %}
         {% csb object_list.model %}
       {% endif %}
     </div>

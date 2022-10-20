@@ -1,11 +1,29 @@
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView
 
 from lyrics.forms import SongDeleteForm
 
 from .models import Song
+
+
+class SongListView(ListView):
+    """SongListView Class"""
+
+    model = Song
+    template_name = "lyrics/song_list.html"
+    context_object_name = "songs"
+
+    def get_queryset(self):
+        """Get queryset"""
+        return Song.objects.filter(deleted_at=None)
+
+    def get_context_data(self, **kwargs):
+        """Get context data"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Song List"
+        return context
 
 
 class SongDetailView(DetailView):
