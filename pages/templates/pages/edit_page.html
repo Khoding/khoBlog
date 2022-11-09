@@ -5,12 +5,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {% endblock additional_js %}
 
-{% block additional_css %}
-  {% compress css %}
-  <link rel="stylesheet" href="{% static 'khoBlog/css/selectize.default.css' %}">
-  {% endcompress css %}
-{% endblock additional_css %}
-
 {% block content %}
   <form enctype="multipart/form-data" method="post" novalidate="novalidate">
     <div class="text-flamingo-600">

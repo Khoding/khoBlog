@@ -19,3 +19,7 @@ default_settings = {
     "DRAG_DROP": False,
     "DELIMITER": ",",
 }
+
+TAGGIT_SELECTIZE = {
+    "CSS_FILENAMES": ("khoBlog/css/selectize.css",),
+}
