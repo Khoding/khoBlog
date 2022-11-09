@@ -14,9 +14,9 @@ black==22.10.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.25.4
+boto3==1.26.5
     # via -r requirements.in
-botocore==1.28.4
+botocore==1.29.5
     # via
     #   boto3
     #   s3transfer
@@ -36,7 +36,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==38.0.1
+cryptography==38.0.3
     # via pyjwt
 cssselect==1.2.0
     # via pyquery
@@ -117,7 +117,7 @@ django-robots==5.0
     # via -r requirements.in
 django-simple-captcha==0.5.17
     # via -r requirements.in
-django-simple-history==3.1.1
+django-simple-history==3.2.0
     # via -r requirements.in
 django-storages==1.13.1
     # via -r requirements.in
@@ -187,7 +187,7 @@ pillow==9.3.0
     #   django-colorfield
     #   django-markdownx
     #   django-simple-captcha
-platformdirs==2.5.2
+platformdirs==2.5.3
     # via black
 pycparser==2.21
     # via cffi
@@ -199,7 +199,7 @@ pygments==2.13.0
     # via -r requirements.in
 pyjwt[crypto]==2.6.0
     # via django-allauth
-pymdown-extensions==9.7
+pymdown-extensions==9.8
     # via -r requirements.in
 pyparsing==3.0.9
     # via packaging
@@ -211,7 +211,7 @@ python-dotenv==0.21.0
     # via -r requirements.in
 python3-openid==3.2.0
     # via django-allauth
-pytz==2022.5
+pytz==2022.6
     # via
     #   djangorestframework
     #   drf-yasg
