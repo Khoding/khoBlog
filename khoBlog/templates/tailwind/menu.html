@@ -40,7 +40,7 @@
 
               {% if user.is_superuser %}
                 <div class="flow-root">
-                  <a href="{{ user.get_absolute_toggle_secure_mode_status_url }}" class="-m-2 p-2 block font-medium {% if user.is_superuser and not user.secure_mode %}text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200{% else %}text-flamingo-500 hover:text-flamingo-600{% endif %}" >Secure Mode Status</a>
+                  <a href="{{ user.get_absolute_toggle_secure_mode_status_url }}" class="-m-2 p-2 block font-medium {% if user.is_superuser and not user.secure_mode %}text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200{% else %}text-flamingo-500 hover:text-flamingo-600{% endif %}">Secure Mode Status</a>
                 </div>
               {% endif %}
             {% else %}
