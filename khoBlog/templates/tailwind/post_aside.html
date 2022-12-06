@@ -76,7 +76,7 @@
   {% if object.url_to_article %}
     <section>
       <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Linked article</div>
-      <a href="{{ object.url_to_article }}" class="text-sm font-medium text-gray-900 dark:text-jumbo-50 hover:underline">
+      <a href="{{ object.url_to_article }}" class="text-sm font-medium text-gray-900 dark:text-jumbo-50 hover:underline break-words">
         {% firstof object.url_to_article_title object.url_to_article %}
       </a>
     </section>
