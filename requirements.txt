@@ -10,17 +10,17 @@ beautifulsoup4==4.11.1
     # via
     #   pyembed
     #   readtime
-black==22.10.0
+black==22.12.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.26.24
+boto3==1.26.30
     # via -r requirements.in
-botocore==1.29.24
+botocore==1.29.30
     # via
     #   boto3
     #   s3transfer
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -71,7 +71,7 @@ django==4.1.4
     #   impostor
 django-admin-index==2.0.2
     # via -r requirements.in
-django-admin-interface==0.23.0
+django-admin-interface==0.24.1
     # via -r requirements.in
 django-allauth==0.51.0
     # via -r requirements.in
@@ -97,11 +97,7 @@ django-environ==0.9.0
     # via -r requirements.in
 django-filter==22.1
     # via -r requirements.in
-django-flat-responsive==2.0
-    # via django-admin-interface
-django-flat-theme==1.1.4
-    # via django-admin-interface
-django-import-export==3.0.1
+django-import-export==3.0.2
     # via -r requirements.in
 django-jsonview==2.0.0
     # via -r requirements.in
@@ -155,7 +151,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-lxml==4.9.1
+lxml==4.9.2
     # via pyquery
 markdown==3.3.7
     # via
@@ -178,16 +174,16 @@ odfpy==1.4.1
     # via tablib
 openpyxl==3.0.10
     # via tablib
-packaging==21.3
+packaging==22.0
     # via drf-yasg
-pathspec==0.10.2
+pathspec==0.10.3
     # via black
 pillow==9.3.0
     # via
     #   django-colorfield
     #   django-markdownx
     #   django-simple-captcha
-platformdirs==2.5.4
+platformdirs==2.6.0
     # via black
 pycparser==2.21
     # via cffi
@@ -201,8 +197,6 @@ pyjwt[crypto]==2.6.0
     # via django-allauth
 pymdown-extensions==9.9
     # via -r requirements.in
-pyparsing==3.0.9
-    # via packaging
 pyquery==1.4.3
     # via readtime
 python-dateutil==2.8.2
@@ -242,14 +236,13 @@ s3transfer==0.6.0
 six==1.16.0
     # via
     #   bleach
-    #   django-admin-interface
     #   django-comments-xtd
     #   python-dateutil
 soupsieve==2.3.2.post1
     # via beautifulsoup4
 sqlparse==0.4.3
     # via django
-tablib[html,ods,xls,xlsx,yaml]==3.2.1
+tablib[html,ods,xls,xlsx,yaml]==3.3.0
     # via django-import-export
 taggit-selectize==2.11.0
     # via -r requirements.in
