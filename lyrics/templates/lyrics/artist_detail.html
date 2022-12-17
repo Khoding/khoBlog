@@ -19,28 +19,28 @@
           {% for genre in artist.genre.all %}
             {{ genre }}{% if not forloop.last %}, {% endif %}
           {% endfor %}
-
-          {% if songs %}
-            <article class="pb-8 pt-16">
-              <section class="relative">
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                  <div class="w-full border-t border-gray-300 dark:border-jumbo-600"></div>
-                </div>
-                <div class="relative flex justify-center">
-                  <span class="px-3 bg-gray-50 dark:bg-jumbo-900 text-lg font-medium text-gray-900 dark:text-jumbo-300">
-                    {{ songs.count }}
-                    Song{{ songs.count|pluralize:'s' }}
-                  </span>
-                </div>
-              </section>
-            </article>
-            <section class="grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
-              {% for object in songs %}
-                {% cards object %}
-              {% endfor %}
-            </section>
-          {% endif %}
         </div>
+
+        {% if songs %}
+          <article class="pb-8 pt-16">
+            <section class="relative">
+              <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-gray-300 dark:border-jumbo-600"></div>
+              </div>
+              <div class="relative flex justify-center">
+                <span class="px-3 bg-gray-50 dark:bg-jumbo-900 text-lg font-medium text-gray-900 dark:text-jumbo-300">
+                  {{ songs.count }}
+                  Song{{ songs.count|pluralize:'s' }}
+                </span>
+              </div>
+            </section>
+          </article>
+          <section class="grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
+            {% for object in songs %}
+              {% cards object %}
+            {% endfor %}
+          </section>
+        {% endif %}
       </div>
   </article>
 {% endblock content %}
