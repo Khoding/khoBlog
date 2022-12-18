@@ -5,11 +5,11 @@ from blog.models import Post
 register = template.Library()
 
 
-@register.inclusion_tag("tailwind/featured_posts.html")
+@register.inclusion_tag("tailwind/featured_objects.html")
 def featured_post_list():
     """featured_post_list Every Featured Posts for links lists"""
-    urls = Post.objects.defer("body", "image").filter(featuring_state="F")
-    return {"urls": urls}
+    objects = Post.objects.defer("body", "image").filter(featuring_state="F")
+    return {"objects": objects}
 
 
 @register.inclusion_tag("tailwind/super_featured_objects.html")

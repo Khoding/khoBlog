@@ -77,15 +77,15 @@
 
     .flyout_items {
         &.perm {
-            @apply hover:text-cornflower-500 dark:hover:text-cornflower-400;
+            @apply text-cornflower-500 dark:text-cornflower-400 lg:text-inherit lg:dark:text-inherit lg:hover:text-cornflower-500 lg:dark:hover:text-cornflower-400;
         }
 
         &.staff {
-            @apply hover:text-orange-500;
+            @apply text-orange-500 lg:hover:text-orange-500 lg:text-inherit;
         }
 
         &.admin {
-            @apply hover:text-flamingo-400;
+            @apply text-flamingo-400 lg:hover:text-flamingo-400 lg:text-inherit;
         }
     }
 
