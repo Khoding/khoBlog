@@ -338,8 +338,8 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     LANGUAGE_CHOICES = [
         ("EN", "English"),
-        ("FR", "French"),
-        ("DE", "Deutsch"),
+        ("FR", "Français"),
+        ("DE", "German"),
         ("ML", "Multi Linguistic"),
         ("OL", "Other Language"),
         ("NS", "Not Specified"),
