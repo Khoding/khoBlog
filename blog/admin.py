@@ -100,6 +100,21 @@ def make_not_featuredd(modeladmin, request, queryset):
     )
 
 
+def make_wurst(modeladmin, request, queryset):
+    """Make a queryset of posts wurst"""
+    updated = queryset.update(language="DE")
+    modeladmin.message_user(
+        request,
+        ngettext(
+            "%d post was successfully marked as Language Wurst.",
+            "%d posts were successfully marked as Language Wurst.",
+            updated,
+        )
+        % updated,
+        messages.SUCCESS,
+    )
+
+
 def make_baguette(modeladmin, request, queryset):
     """Make a queryset of posts baguette"""
     updated = queryset.update(language="FR")
@@ -282,6 +297,7 @@ class PostAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
         make_super_featured,
         make_not_featuredd,
         export_as_json,
+        make_wurst,
         make_baguette,
         make_english,
         make_other_language,
