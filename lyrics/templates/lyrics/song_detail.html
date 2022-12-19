@@ -9,15 +9,36 @@
           <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ song.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
             By <a href="{{ song.artist.first.get_absolute_url }}" class="hover:underline font-bold">{{ song.artist.first }}</a>
-            {% for artist in song.featuring_artist.all %}
-              {% if forloop.first %}
-                featuring
-              {% endif %}
-              <a href="{{ artist.get_absolute_url }}" class="hover:underline font-bold">{{ artist }}</a>
-              {% if not forloop.last %}
-                and
-              {% endif %}
-            {% endfor %}
+            {% if song.featuring_artist.count >= 3 %}
+              {% for artist in song.featuring_artist.all|slice:2 %}
+                {% if forloop.first %}
+                  featuring
+                {% endif %}
+
+                <a href="{{ artist.get_absolute_url }}" class="hover:underline font-bold">{{ artist }}</a>
+
+                {% if not forloop.last %}
+                  and
+                {% else %}
+                  and more
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% for artist in song.featuring_artist.all %}
+                {% if forloop.first %}
+                  featuring
+                {% endif %}
+
+                <a href="{{ artist.get_absolute_url }}" class="hover:underline font-bold">{{ artist }}</a>
+
+                {% if forloop.counter >= 3 %}
+                  and many others
+                {% endif %}
+                {% if not forloop.last %}
+                  and
+                {% endif %}
+              {% endfor %}
+            {% endif %}
           </p>
         </div>
         {% sb song user=request.user %}
