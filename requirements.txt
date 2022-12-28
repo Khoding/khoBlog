@@ -14,9 +14,9 @@ black==22.12.0
     # via -r requirements.in
 bleach==5.0.1
     # via -r requirements.in
-boto3==1.26.30
+boto3==1.26.38
     # via -r requirements.in
-botocore==1.29.30
+botocore==1.29.38
     # via
     #   boto3
     #   s3transfer
@@ -71,7 +71,7 @@ django==4.1.4
     #   impostor
 django-admin-index==2.0.2
     # via -r requirements.in
-django-admin-interface==0.24.1
+django-admin-interface==0.24.2
     # via -r requirements.in
 django-allauth==0.51.0
     # via -r requirements.in
@@ -115,7 +115,7 @@ django-simple-captcha==0.5.17
     # via -r requirements.in
 django-simple-history==3.2.0
     # via -r requirements.in
-django-storages==1.13.1
+django-storages==1.13.2
     # via -r requirements.in
 django-taggit==3.1.0
     # via -r requirements.in
@@ -137,7 +137,7 @@ heroicons[django]==2.1.1
     # via -r requirements.in
 idna==3.4
     # via requests
-importlib-metadata==5.1.0
+importlib-metadata==5.2.0
     # via -r requirements.in
 impostor==3.0.0
     # via -r requirements.in

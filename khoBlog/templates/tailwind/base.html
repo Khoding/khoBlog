@@ -209,6 +209,23 @@
       document.documentElement.style.setProperty('--scroll-padding', navigationHeight - 1 + "px");
     </script>
 
+    <script>
+      function copyToClipboard() {
+        const vanity_url = document.querySelector("#vanity");
+        const value = vanity_url.textContent;
+
+        const textarea = document.createElement("textarea");
+        textarea.value = "{{ request.get_host }}/p/" + value;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+
+      const button = document.querySelector("#vanity_button");
+      button.addEventListener("click", copyToClipboard);
+    </script>
+
     {% if not debug_flag %}
       {% analytical_body_bottom %}
     {% endif %}

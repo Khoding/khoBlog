@@ -49,7 +49,7 @@
   </section>
   <section class="flex items-center space-x-2">
     {% heroicon_mini 'share' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
-    <span class="text-sm font-medium">{{ object.vanity_url }}</span>
+    <button id="vanity_button" class="text-sm font-medium hover:underline" onClick="copyToClipboard()">Copy permalink <span class="text-xs">(<span id="vanity">{{ object.vanity_url }}</span>)</span></button>
   </section>
   <section class="flex items-center space-x-2">
     {% heroicon_mini 'clock' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
