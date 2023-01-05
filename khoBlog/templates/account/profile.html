@@ -7,9 +7,9 @@
     <div class="sm:flex sm:items-end sm:space-x-5">
       <div class="flex">
         {% if object.profile_pic %}
-          <img class="object-contain h-24 w-auto sm:h-32 sm:w-auto" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ object }}">
+          <img class="object-contain h-24 w-auto sm:h-32 sm:w-auto" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ object }}" loading="lazy">
         {% else %}
-          <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture">
+          <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture" loading="lazy">
         {% endif %}
       </div>
       <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
