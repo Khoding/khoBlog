@@ -88,8 +88,6 @@ class Artist(BaseSongAbstractModel):
     class Meta(BaseSongAbstractModel.Meta):
         """Meta"""
 
-        pass
-
     # override the __str__ method to return the name of the artist
     def __str__(self):
         """__str__"""
@@ -125,8 +123,6 @@ class Genre(BaseSongAbstractModel):
 
     class Meta(BaseSongAbstractModel.Meta):
         """Meta"""
-
-        pass
 
     # override the __str__ method to return the title of the genre
     def __str__(self):
