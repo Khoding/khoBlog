@@ -137,81 +137,91 @@
 
   <section>
     <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Related content</div>
-    <ul role="list" class="mt-2 leading-8">
+    <dl class="aside-section">
       {% for e in similar_posts %}
         {% if not e.withdrawn and not e.is_scheduled or user.is_superuser and not user.secure_mode %}
-          {% spaceless %}
-            <li class="inline">
-              <a href="{{ e.get_absolute_url }}" class="relative inline-flex items-center rounded-full border border-jumbo-300 dark:border-jumbo-200 px-3 py-0.5">
-                <div class="text-sm font-medium text-gray-900 dark:text-jumbo-50">{{ e }}</div>
-              </a>
-              <!-- space -->
-            </li>
-          {% endspaceless %}
+          <div class="aside-content-child">
+            <a class="group" href="{{ e.get_absolute_url }}">
+              <dt class="text-base font-medium text-cornflower-500 dark:text-jumbo-100 truncate group-hover:underline">
+                {{ e }}
+              </dt>
+              <dd class="mt-1 text-sm text-cornflower-800 dark:text-jumbo-50">
+                {{ e.description }}
+              </dd>
+            </a>
+          </div>
         {% endif %}
       {% endfor %}
-    </ul>
+    </dl>
   </section>
 
   {% if series %}
     <section>
       <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Series</div>
       <dl class="aside-section">
-        <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 overflow-hidden sm:p-6">
-          <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
-            <a class="underline hover:no-underline text-base" href="{% url 'blog:post_series_list' slug=object.series.slug %}">{{ object.series.title }}</a>
-          </dt>
-          <dd class="mt-1 text-3xl font-semibold text-cornflower-800 dark:text-jumbo-50">
-            {% if series.description %}
-              {{ series.description }}
-              -
-            {% endif %}
-            ({{ series.all.count }}
-            Part series)
-          </dd>
+        <div class="aside-content-child">
+          <a class="group" href="{% url 'blog:post_series_list' slug=object.series.slug %}">
+            <dt class="text-base underline group-hover:no-underline font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
+              {{ object.series.title }}
+            </dt>
+            <dd class="mt-1 text-3xl font-semibold text-cornflower-800 dark:text-jumbo-50">
+              {% if series.description %}
+                {{ series.description }}
+                -
+              {% endif %}
+              ({{ series.all.count }}
+              Part series)
+            </dd>
+          </a>
         </div>
         {% for e in series.all %}
-          <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 overflow-hidden sm:p-6">
-            <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
-              {% if not e.is_scheduled or user.is_superuser and not user.secure_mode %}
-                {% if not e == object %}
-                  <a class="underline hover:no-underline text-base" href="{% url 'blog:post_detail' slug=e.slug %}">Part #{{ forloop.counter }}:
-                {% else %}
-                  {% if e == object %}
-                    <div class="italic text-sm">(You are here)</div>
+          <div class="aside-content-child">
+            {% if not e == object %}
+              <a class="group" href="{% url 'blog:post_detail' slug=e.slug %}">
+            {% endif %}
+              <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
+                {% if not e.is_scheduled or user.is_superuser and not user.secure_mode %}
+                  {% if not e == object %}
+                    <span class="underline group-hover:no-underline text-base">Part #{{ forloop.counter }}:
+                  {% else %}
+                    {% if e == object %}
+                      <div class="italic text-sm">(You are here)</div>
+                    {% endif %}
+                    <span class="text-base">Part #{{ forloop.counter }}:
                   {% endif %}
-                  <span class="text-base">Part #{{ forloop.counter }}:
-                {% endif %}
-                  {{ e }}
-                  {% if e.is_scheduled %}
-                    <span class="italic">
-                      (Coming:
-                      {{ e.pub_date|date:'l, d F Y H:i:s' }})
+                    {{ e }}
+                    {% if e.is_scheduled %}
+                      <span class="italic">
+                        (Coming:
+                        {{ e.pub_date|date:'l, d F Y H:i:s' }})
+                      </span>
+                    {% endif %}
+                  {% if not e == object %}
+                    </span>
+                  {% else %}
                     </span>
                   {% endif %}
-                {% if not e == object %}
-                  </a>
                 {% else %}
+                  <span>Part #{{ forloop.counter }}:
+                    {{ e }}
+                    {% if e == object %}
+                      <span>(You are here)</span>
+                    {% endif %}
+                    {% if e.is_scheduled %}
+                      <span class="italic">
+                        (Coming:
+                        {{ e.pub_date|date:'l, d F Y H:i:s' }})
+                      </span>
+                    {% endif %}
                   </span>
                 {% endif %}
-              {% else %}
-                <span>Part #{{ forloop.counter }}:
-                  {{ e }}
-                  {% if e == object %}
-                    <span>(You are here)</span>
-                  {% endif %}
-                  {% if e.is_scheduled %}
-                    <span class="italic">
-                      (Coming:
-                      {{ e.pub_date|date:'l, d F Y H:i:s' }})
-                    </span>
-                  {% endif %}
-                </span>
-              {% endif %}
-            </dt>
-            <dd class="mt-1 font-semibold text-cornflower-800 dark:text-jumbo-50">
-              {{ e.description }}
-            </dd>
+              </dt>
+              <dd class="mt-1 font-semibold text-cornflower-800 dark:text-jumbo-50">
+                {{ e.description }}
+              </dd>
+            {% if not e == object %}
+              </a>
+            {% endif %}
           </div>
         {% endfor %}
       </dl>
@@ -221,7 +231,7 @@
   <section>
     <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Stats</div>
     <dl class="aside-section">
-      <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 shadow rounded-t-2xl overflow-hidden sm:p-6">
+      <div class="aside-content-child">
         <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
           Seen
         </dt>
@@ -230,7 +240,7 @@
           time{{ object.clicks|pluralize:'s' }}
         </dd>
       </div>
-      <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 shadow rounded-b-2xl overflow-hidden sm:p-6">
+      <div class="aside-content-child">
         <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
           Randomly chosen
         </dt>
@@ -241,7 +251,7 @@
       </div>
     </dl>
     <dl class="aside-section">
-      <div class="px-4 py-5 bg-cornflower-100 dark:bg-jumbo-700 shadow rounded-t-2xl overflow-hidden sm:p-6">
+      <div class="aside-content-child">
         <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate">
           Post was modified
         </dt>

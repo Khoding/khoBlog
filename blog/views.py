@@ -389,7 +389,7 @@ class PostDetailView(DetailView):
         context["series"] = self.series
         context["title"] = self.title
         context["description"] = self.description
-        context["similar_posts"] = self.tags = self.post.tags.similar_objects()[:5]
+        context["similar_posts"] = self.post.tags.similar_objects()[:3]
         context["next_post"] = self.next_post
         context["prev_post"] = self.prev_post
         return context
