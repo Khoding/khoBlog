@@ -4,7 +4,6 @@
   <li class="flex">
     <a href="{{ object.get_absolute_url }}" class="text-gray-900 dark:text-jumbo-200 hover:underline">
       {% firstof object.featured_title object.title  %}
-      <span class="text-xs">{{ object|to_class_name|capfirst }}</span>
     </a>
   </li>
 {% endfor %}

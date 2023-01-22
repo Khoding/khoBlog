@@ -11,7 +11,7 @@
         {% sb artist user=request.user %}
       </div>
       <div class="py-3 xl:pt-6 xl:pb-0">
-        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+        <div class="prose prose_base">
           {% load markup_tags %}
 
           {{ artist.about|apply_markup:"markdown"|apply_markup:"widont" }}

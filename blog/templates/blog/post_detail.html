@@ -10,8 +10,8 @@
 {% endblock additional_css %}
 
 {% block content_main %}
-  <article class="xl:grid xl:grid-cols-3">
-    <div class="xl:col-span-2 xl:pr-8 xl:border-r xl:border-gray-200 dark:xl:border-jumbo-700">
+  <article class="lg:grid lg:grid-cols-3">
+    <div class="lg:col-span-2 lg:pr-8 lg:border-r lg:border-gray-200 dark:lg:border-jumbo-700">
       <nav class="flex justify-between" role="group" aria-label="Previous / Next">
         {% if prev_post %}
           <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
@@ -40,10 +40,10 @@
           </button>
         {% endif %}
       </nav>
-      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-700 xl:pb-6">
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
-          <div class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ object.title }}</div>
-          <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
+          <div class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ object.title }}</div>
+          <p class="mt-2 text-xs sm:text-sm text-gray-500 dark:text-jumbo-200">
             Post <span class="font-bold">#{{ object.pk }}</span> written by
             <!-- space -->
             <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50 hover:underline">{{ object.author }}</a>
@@ -61,17 +61,17 @@
         </div>
         {% sb object user=request.user %}
       </div>
-      <div class="py-3 xl:pt-6 xl:pb-0">
+      <div class="py-3 lg:pt-6 lg:pb-0">
         <div class="sr-only">Content</div>
-        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+        <div class="prose prose_base">
           {{ post.body_content|formatted_markdown|safe }}
         </div>
       </div>
-      <aside class="mt-8 xl:hidden">
+      <aside class="mt-8 lg:hidden">
         {% include 'tailwind/post_aside.html' %}
       </aside>
     </div>
-    <aside class="hidden xl:block xl:pl-8">
+    <aside class="hidden lg:block lg:pl-8">
       {% include 'tailwind/post_aside.html' %}
     </aside>
   </article>

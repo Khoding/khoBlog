@@ -12,9 +12,9 @@
 {% endblock page_head %}
 
 {% block content %}
-  <article class="xl:grid xl:grid-cols-3">
-    <div class="xl:col-span-2 xl:pr-8">
-      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-700 xl:pb-6">
+  <article class="lg:grid lg:grid-cols-3">
+    <div class="lg:col-span-2 lg:pr-8">
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
           <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ page.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
@@ -24,7 +24,7 @@
         {% sb page user=request.user %}
       </div>
       <div class="py-3 xl:pt-6 xl:pb-0">
-        <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl">
+        <div class="prose prose_base">
           {% autoescape off %}
             {% evaluate page.content %}
           {% endautoescape %}
