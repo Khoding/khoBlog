@@ -8,19 +8,19 @@
       {% if object.was_published_recently %}
         <span class="text-tradewind-800 text-sm font-medium">New Post</span>
       {% elif object.is_scheduled %}
-        <a class="text-fuchsia-400 text-sm font-medium hover:underline" href="{% url 'blog:post_scheduled_list' %}">Scheduled</a>
+        <a class="text-fuchsia-400 text-sm font-medium hover:underline" href="{% url 'blog:post_scheduled_list' %}"rel="noopener noreferrer">Scheduled</a>
       {% else %}
         <span class="text-gray-500 dark:text-jumbo-50 text-sm font-medium">Published</span>
       {% endif %}
     {% elif not object.pub_date %}
-      <a class="text-slate-500 dark:text-slate-300 text-sm font-medium hover:underline" href="{% url 'blog:post_draft_list' %}">Draft</a>
+      <a class="text-slate-500 dark:text-slate-300 text-sm font-medium hover:underline" href="{% url 'blog:post_draft_list' %}" rel="noopener noreferrer">Draft</a>
     {% else %}
-      <a class="text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}">Withdrawn</a>
+      <a class="text-flamingo-600 text-sm font-medium hover:underline" href="{% url 'blog:post_withdrawn_list' %}"rel="noopener noreferrer">Withdrawn</a>
     {% endif %}
   </section>
   <section class="flex items-center space-x-2">
     {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
-    <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+    <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
       Created:
       <time datetime="{{ object.created_date|date:"c" }}">
         {{ object.created_date|date:"Y\-m\-d \a\t H:i:s" }}
@@ -30,7 +30,7 @@
   {% if object.pub_date %}
     <section class="flex items-center space-x-2">
       {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
-      <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+      <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
         Published:
         <time datetime="{{ object.pub_date|date:"c" }}">
           {{ object.pub_date|date:"Y\-m\-d \a\t H:i:s" }}
@@ -40,7 +40,7 @@
   {% endif %}
   <section class="flex items-center space-x-2">
     {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
-    <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">
+    <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
       Updated:
       <time datetime="{{ object.mod_date|date:"c" }}">
         {{ object.mod_date|date:"Y\-m\-d \a\t H:i:s" }}
@@ -67,7 +67,7 @@
 
   <section class="flex items-center space-x-2">
     {% heroicon_mini 'chat-bubble-bottom-center-text' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
-    <a href="#comments" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline">{{ comment_count }}
+    <a href="#comments" class="text-gray-900 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">{{ comment_count }}
       comment{{ comment_count|pluralize:'s' }}</a>
   </section>
 </article>
@@ -76,7 +76,7 @@
   {% if object.url_to_article %}
     <section>
       <div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Linked article</div>
-      <a href="{{ object.url_to_article }}" class="text-sm font-medium text-gray-900 dark:text-jumbo-50 hover:underline break-words">
+      <a href="{{ object.url_to_article }}" class="text-sm font-medium text-gray-900 dark:text-jumbo-50 hover:underline break-words" rel="noopener noreferrer">
         {% firstof object.url_to_article_title object.url_to_article %}
       </a>
     </section>

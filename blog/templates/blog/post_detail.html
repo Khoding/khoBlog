@@ -14,7 +14,7 @@
     <div class="lg:col-span-2 lg:pr-8 lg:border-r lg:border-gray-200 dark:lg:border-jumbo-700">
       <nav class="flex justify-between" role="group" aria-label="Previous / Next">
         {% if prev_post %}
-          <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}">
+          <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}" rel="noopener noreferrer">
             {% heroicon_outline "chevron-left" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
             <!-- space -->
             Previous Post
@@ -27,7 +27,7 @@
           </button>
         {% endif %}
         {% if next_post %}
-          <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}">
+          <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}" rel="noopener noreferrer">
             Next Post
             <!-- space -->
             {% heroicon_outline "chevron-right" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
