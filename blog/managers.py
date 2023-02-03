@@ -29,6 +29,10 @@ class PostQuerySet(auto_prefetch.QuerySet):
             )
         return queryset
 
+    def get_without_wednesday(self):
+        """Get without wednesday"""
+        return self.exclude(categories__slug__iexact="wednesday")
+
     def get_by_author(self, author_username):
         """Get by author"""
         return self.filter(author__username=author_username)
@@ -58,6 +62,10 @@ class PostManager(auto_prefetch.Manager):
     def get_without_removed(self):
         """Get without removed"""
         return self.get_queryset().get_without_removed()
+
+    def get_without_wednesday(self):
+        """Get without wednesday"""
+        return self.get_queryset().get_without_wednesday()
 
     def get_base_common_queryset(self):
         """Get base common queryset"""

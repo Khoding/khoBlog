@@ -7,7 +7,7 @@ from .installed_apps import *
 from .internationalization import *
 from .messages import *
 from .middleware import *
-from .others import *
+from .miscellaneous import *
 from .security import *
 from .templates import *
 from .version import *

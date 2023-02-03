@@ -19,6 +19,7 @@ from rules.contrib.views import AutoPermissionRequiredMixin
 
 from blog.filters import PostFilter
 from custom_taggit.models import CustomTag
+from khoBlog import settings
 from khoBlog.utils.superuser_required import superuser_required, superuser_required_ignore_secure_mode
 
 from .forms import (
@@ -57,8 +58,10 @@ class PostListView(PostListMixin, ListView):
             self.request.GET,
             queryset=Post.objects.filter(Q(pub_date__lte=timezone.now(), withdrawn=False)),
         )
-        if query is not None and query != "":
+        if query.data != {} and query.data != "":
             return query.qs
+        if settings.HIDE_WEDNESDAY:
+            return Post.objects.get_base_common_queryset().get_without_wednesday()
         return Post.objects.get_base_common_queryset()
 
     def get_context_data(self, **kwargs):

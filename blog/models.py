@@ -583,6 +583,11 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         return self.tags.filter(slug="has-code").exists()
 
     @property
+    def is_wednesday(self, slug: str) -> bool:
+        """Post has category"""
+        return self.categories.filter(slug="wednesday").exists()
+
+    @property
     def get_featured_cat(self):
         """Get Featured Cat Post"""
         for post_cat in PostCatsLink.objects.filter(

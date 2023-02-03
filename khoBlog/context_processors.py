@@ -12,6 +12,7 @@ def context(request):
         "now": timezone.now(),
         "description": "Welcome! My name is Khodok. This is my personal blog.",
         "comments_disabled_globally_flag": comments_disabled_globally_flag,
+        "hide_wednesday": settings.HIDE_WEDNESDAY,
     }
     return CONTEXT
 
