@@ -35,7 +35,6 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     "pymdownx.tabbed",
     "pymdownx.tasklist",
     "pymdownx.tilde",
-    "pyembed.markdown",
 ]
 
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {

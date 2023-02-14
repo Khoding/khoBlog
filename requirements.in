@@ -31,7 +31,6 @@ bleach
 boto3
 pymdown-extensions
 pygments
-pyembed-markdown
 importlib-metadata
 python-dotenv
 heroicons[django]
