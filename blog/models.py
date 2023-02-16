@@ -149,16 +149,16 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
     @property
     def full_title(self) -> str:
         """Get the full title of the category"""
-        fulltitle = ""
+        full_title = ""
         if self.suffix:
-            fulltitle = self.title + " " + self.suffix
+            full_title = self.title + " " + self.suffix
         elif not self.suffix and not self.parent:
-            fulltitle = self.title
+            full_title = self.title
         elif not self.suffix and self.parent and self.parent.suffix:
-            fulltitle = self.title + " " + self.parent.suffix
+            full_title = self.title + " " + self.parent.suffix
         else:
-            fulltitle = self.title
-        return fulltitle
+            full_title = self.title
+        return full_title
 
     def get_index_view_url(self):
         """Get the index view url for this category"""

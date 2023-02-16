@@ -124,7 +124,7 @@ class PostInCategoryListView(PostListMixin, ListView):
         """Get queryset"""
         self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
         if not self.category.withdrawn or self.request.user.is_superuser and self.request.user.secure_mode is False:
-            self.title = self.category.title
+            self.title = self.category.full_title
             self.description = self.category.description
         else:
             raise PermissionDenied
