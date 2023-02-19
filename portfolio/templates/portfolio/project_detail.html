@@ -17,46 +17,50 @@
         <h1>{{ project.title }}</h1>
         {% if project.learned %}
           <div>
-            <span class="text-xl font-medium">Had to learn:</span>
+            <h2>Had to learn:</h2>
             {{ project.learned|apply_markup:"markdown" }}
           </div>
         {% endif %}
         {% if project.done_in_project %}
           <div>
-            <span class="text-xl font-medium">What was done:</span>
+            <h2>The project itself:</h2>
             {{ project.done_in_project|apply_markup:"markdown" }}
           </div>
         {% endif %}
-        {% if project.website or project.technology %}
+        <section>
+          <h3>More about this project</h3>
           {% if project.website %}
             <p>Website:
               <a target="_blank" href="{{ project.website.url }}" rel="noopener noreferrer">{{ project.website }}</a>
             </p>
           {% endif %}
           {% if project.technology %}
-            <div>
-              Made with:
-              <a target="_blank" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
-              <br/>
-              <span>{{ project.technology.description }}</span>
-            </div>
+            <dl>
+              <dt>
+                Made using:
+                <a target="_blank" href="{{ project.technology.website }}" rel="noopener noreferrer">{{ project.technology }}</a>
+              </dt>
+              <dd>
+                {{ project.technology.description }}
+              </dd>
+            </dl>
           {% endif %}
           {% if project.repository %}
             <p>Repository:
               <a target="_blank" href="{{ project.repository.url }}" rel="noopener noreferrer">{{ project.repository }}</a>
             </p>
           {% endif %}
-        {% endif %}
-        {% if project.parent_project %}
-          <p>Parent Project
-            <a href="{{ project.parent_project.get_absolute_url }}">{{ project.parent_project }}</a>
-          </p>
-          {% if project.link_in_repo %}
-            <p>Folder in Repository:
-              <a target="_blank" href="{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}" rel="noopener noreferrer">{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}</a>
+          {% if project.parent_project %}
+            <p>Parent project:
+              <a href="{{ project.parent_project.get_absolute_url }}">{{ project.parent_project }}</a>
             </p>
+            {% if project.link_in_repo %}
+              <p>Folder in repository:
+                <a target="_blank" href="{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}" rel="noopener noreferrer">{{ project.parent_project.repository.url }}/{{ project.link_in_repo }}</a>
+              </p>
+            {% endif %}
           {% endif %}
-        {% endif %}
+        </section>
       </section>
       {% if project.sub_project %}
         <article class="pb-8 pt-16">

@@ -359,6 +359,17 @@
             content: "";
         }
 
+        dl {
+            & dd {
+                @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
+            }
+
+            & dt,
+            & dd {
+                @apply lg:font-normal;
+            }
+        }
+
         & .quotes {
             & dd {
                 @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
