@@ -5,13 +5,13 @@
     <section>
       {% if object.get_featured_cat %}
         <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
             {{ object.featured_cat_title }}
           </span>
         </a>
       {% else %}
         <a href="{{ object.categories.first.get_absolute_url }}" class="inline-block">
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200">
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
             {{ object.categories.first }}
           </span>
         </a>
