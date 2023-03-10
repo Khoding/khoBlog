@@ -21,7 +21,7 @@
       colorScheme()
     </script>
     <meta charset="UTF-8"/>
-    {% if not debug_flag %}
+    {% if not debug_flag or not user.is_superuser %}
       {% analytical_head_top %}
 
       <!-- Google Tag Manager -->
@@ -101,7 +101,7 @@
       {% tailwind_css %}
     {% endblock rel %}
 
-    {% if not debug_flag %}
+    {% if not debug_flag or not user.is_superuser %}
       <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
 
       {% analytical_head_bottom %}
@@ -109,7 +109,7 @@
   </head>
 
   <body class="antialiased min-h-screen overflow-y-scroll bg-gray-50 dark:bg-jumbo-900 dark:text-jumbo-100">
-    {% if not debug_flag %}
+    {% if not debug_flag or not user.is_superuser %}
       {% analytical_body_top %}
 
       <!-- Google Tag Manager (noscript) -->
@@ -209,7 +209,7 @@
       document.documentElement.style.setProperty('--scroll-padding', navigationHeight - 1 + "px");
     </script>
 
-    {% if not debug_flag %}
+    {% if not debug_flag or not user.is_superuser %}
       {% analytical_body_bottom %}
     {% endif %}
   </body>
