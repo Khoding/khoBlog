@@ -188,7 +188,7 @@ class Technology(auto_prefetch.Model):
     description = models.TextField(default="", blank=True)
     website = models.URLField(default="", blank=True)
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for Technology Model Class"""
 
         verbose_name_plural = "Technologies"
@@ -204,7 +204,7 @@ class Repository(auto_prefetch.Model):
     title = models.CharField(max_length=100)
     url = models.URLField()
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for Repository Model Class"""
 
         verbose_name_plural = "Repositories"

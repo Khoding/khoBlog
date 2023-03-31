@@ -60,7 +60,7 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     objects: CategoryManager = CategoryManager()
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for Category Model"""
 
         ordering = ["pk"]
@@ -192,7 +192,7 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     objects: SeriesManager = SeriesManager()
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for Series Model"""
 
         rules_permissions = {
@@ -300,7 +300,7 @@ class PostCatsLink(auto_prefetch.Model):
     category = auto_prefetch.ForeignKey("blog.Category", on_delete=models.CASCADE)
     featured_cat = models.BooleanField(default=False)
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for PostCatsLink Through Table"""
 
         verbose_name_plural = "Post to Category Link"
@@ -413,7 +413,7 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     objects: PostManager = PostManager()
 
-    class Meta:
+    class Meta(auto_prefetch.Model.Meta):
         """Meta class for Post Model"""
 
         ordering = ["-pub_date"]
