@@ -4,7 +4,7 @@ django-admin-index
 django-admin-interface
 django-allauth
 Impostor
-django-markdownx==4.0.0b1
+django-markdownx
 django-simple-captcha
 django-storages
 django-robots
