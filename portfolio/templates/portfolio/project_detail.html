@@ -6,7 +6,7 @@
     <div class="col-span-full">
       <section class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-700 xl:pb-6">
         <div>
-          <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ project.title }}</span>
+          <span class="text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ project.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
             {% if project.parent_project %}<a href="{{ project.parent_project.get_absolute_url }}" class="hover:underline">Sub Project</a>{% else %}<a href="{% url 'portfolio:project_list' %}" class="hover:underline">Project</a>{% endif %} <span class="font-bold">#{{ project.pk }}</span>
           </p>
@@ -69,7 +69,7 @@
               <div class="w-full border-t border-gray-300 dark:border-jumbo-600"></div>
             </div>
             <div class="relative flex justify-center">
-              <span class="px-3 bg-gray-50 dark:bg-jumbo-900 text-lg font-medium text-gray-900 dark:text-jumbo-300">
+              <span class="px-3 bg-gray-50 dark:bg-jumbo-900 text-lg font-medium text-gray-950 dark:text-jumbo-300">
                 {{ project.get_sub_projects.count }}
                 Sub Project{{ project.get_sub_projects.count|pluralize:'s' }}
               </span>
@@ -82,7 +82,7 @@
           {% endfor %}
 
           {% if request.user.is_superuser %}
-            <a class="mt-2 inline-block text-lg font-bold text-gray-900 dark:text-jumbo-100 hover:underline" href="{% url 'portfolio:create_sub_project' slug=object.slug %}">Add Sub project</a>
+            <a class="mt-2 inline-block text-lg font-bold text-gray-950 dark:text-jumbo-100 hover:underline" href="{% url 'portfolio:create_sub_project' slug=object.slug %}">Add Sub project</a>
           {% endif %}
         </section>
       {% endif %}

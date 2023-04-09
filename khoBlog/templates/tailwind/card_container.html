@@ -3,7 +3,7 @@
 <section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>
     <div class="md:flex md:items-center md:justify-between md:space-x-4">
-      <div class="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-jumbo-100 sm:text-4xl">
+      <div class="text-3xl tracking-tight font-extrabold text-gray-950 dark:text-jumbo-100 sm:text-4xl">
         {{ title }}
       </div>
       {% if user.is_superuser and parent_object %}
@@ -17,7 +17,7 @@
       {% if filter_form %}
         <!-- Filters -->
         <section class="w-auto">
-          <button type="button" class="group text-gray-900 dark:text-jumbo-100 font-medium flex items-center" aria-controls="filters" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
+          <button type="button" class="group text-gray-950 dark:text-jumbo-100 font-medium flex items-center" aria-controls="filters" @click="open = !open" aria-expanded="false" x-bind:aria-expanded="open.toString()">
             {% heroicon_solid 'funnel' class="flex-none w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500" %}
             Filters
           </button>

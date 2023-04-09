@@ -16,7 +16,7 @@
     <div class="col-span-full">
       <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
-          <span class="text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ page.title }}</span>
+          <span class="text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ page.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
             <a href="{% url 'pages:index' %}" class="hover:underline">Page</a> <span class="font-bold">#{{ page.pk }}</span>
           </p>
@@ -31,7 +31,7 @@
         </div>
       </div>
       {% if not comments_disabled_globally_flag and page.enable_comments %}
-        <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
+        <div id="comments" class="mb-4 text-lg font-semibold text-gray-950 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
         {% render_comment_form for page %}
 
         <div class="relative">

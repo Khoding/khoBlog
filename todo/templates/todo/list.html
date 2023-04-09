@@ -4,12 +4,12 @@
   <div class="mx-auto max-w-7xl">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <div class="text-xl font-semibold text-gray-900 dark:text-jumbo-100">Tasks</div>
+        <div class="text-xl font-semibold text-gray-950 dark:text-jumbo-100">Tasks</div>
         <p class="mt-2 text-sm text-gray-700 dark:text-jumbo-50">A list of all the things to do.</p>
       </div>
       {% if user.is_superuser %}
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <a href="{% url 'todo:create_task' %}" type="button" role="button" class="inline-flex items-center justify-center rounded-xl border border-transparent bg-cornflower-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-cornflower-500 dark:focus:ring-cornflower-500 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900 sm:w-auto">Add new task</a>
+          <a href="{% url 'todo:create_task' %}" type="button" role="button" class="inline-flex items-center justify-center rounded-xl border border-transparent bg-cornflower-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-cornflower-700 focus:outline-none focus:ring-2 focus:ring-cornflower-500 dark:focus:ring-cornflower-500 focus:ring-offset-2 dark:focus:ring-offset-jumbo-950 sm:w-auto">Add new task</a>
         </div>
       {% endif %}
     </div>
@@ -20,7 +20,7 @@
             <table class="min-w-full divide-y divide-gray-300 dark:divide-jumbo-300">
               <thead class="bg-gray-50 dark:bg-jumbo-800">
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300 sm:pl-6">ID</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-950 dark:text-jumbo-300 sm:pl-6">ID</th>
                   <th scope="col" class="todo_header_element">Title</th>
                   <th scope="col" class="todo_header_element">Description</th>
                   <th scope="col" class="todo_header_element">Status</th>
@@ -36,7 +36,7 @@
               <tbody class="bg-gray-50 divide-y divide-gray-200 dark:bg-jumbo-700 dark:divide-jumbo-300">
                 {% for task in tasks %}
                   <tr>
-                    <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-jumbo-300 sm:pl-6">{{ task.pk }}</td>
+                    <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-950 dark:text-jumbo-300 sm:pl-6">{{ task.pk }}</td>
                     <td class="todo_element text-gray-500 dark:text-jumbo-50">{{ task.title }}</td>
                     <td class="todo_element text-gray-500 dark:text-jumbo-50">{{ task.description }}</td>
                     <td class="todo_element {% if task.status == "complete" %}text-tradewind-700 dark:text-tradewind-500{% elif task.status == "wontfix" or task.status == "impossible" %}text-flamingo-600{% else %}text-gray-500 dark:text-jumbo-50{% endif %}">{{ task.get_status_display }}</td>
@@ -47,7 +47,7 @@
                         {% if task.status == "incomplete" %}
                         <a class="text-cyan-500 hover:text-cyan-600 dark:text-cyan-400 dark:hover:text-cyan-600" href="{% url 'todo:task_change_status' task.id %}">Update status</a>
                         {% endif %}
-                        <a class="text-cornflower-600 hover:text-cornflower-900 dark:text-cornflower-200 dark:hover:text-cornflower-500" href="{% url 'todo:edit_task' task.id %}">Edit</a>
+                        <a class="text-cornflower-600 hover:text-cornflower-950 dark:text-cornflower-200 dark:hover:text-cornflower-500" href="{% url 'todo:edit_task' task.id %}">Edit</a>
                         <a class="text-cornflower hover:text-cornflower-700 dark:text-cornflower-200 dark:hover:text-cornflower-500" href="{% url 'todo:delete' task.id %}">Delete</a>
                       </td>
                     {% endif %}

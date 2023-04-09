@@ -42,19 +42,19 @@
       </nav>
       <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
-          <div class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-jumbo-50">{{ object.title }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ object.title }}</div>
           <p class="mt-2 text-xs sm:text-sm text-gray-500 dark:text-jumbo-200">
             Post <span class="font-bold">#{{ object.pk }}</span> written by
             <!-- space -->
-            <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50 hover:underline">{{ object.author }}</a>
+            <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-950 dark:text-jumbo-50 hover:underline">{{ object.author }}</a>
             <!-- space -->
             in
             <!-- space -->
             {% if object.categories %}
               {% if object.get_featured_cat %}
-                <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50 hover:underline">{{ object.featured_cat_title }}</a>
+                <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="font-medium text-gray-950 dark:text-jumbo-50 hover:underline">{{ object.featured_cat_title }}</a>
               {% else %}
-                <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-gray-900 dark:text-jumbo-50 hover:underline">{{ object.categories.first }}</a>
+                <a href="{{ object.categories.first.get_absolute_url }}" class="font-medium text-gray-950 dark:text-jumbo-50 hover:underline">{{ object.categories.first }}</a>
               {% endif %}
             {% endif %}
           </p>
@@ -76,7 +76,7 @@
     </aside>
   </article>
   {% if not comments_disabled_globally_flag and post.enable_comments %}
-    <div id="comments" class="mb-4 text-lg font-semibold text-gray-900 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
+    <div id="comments" class="mb-4 text-lg font-semibold text-gray-950 dark:text-jumbo-100 mt-12 border-t-2 border-gray-200 dark:border-jumbo-200">Comments</div>
 
     {% render_comment_form for post %}
 

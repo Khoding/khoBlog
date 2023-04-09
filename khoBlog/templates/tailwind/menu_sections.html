@@ -4,7 +4,7 @@
       {{ menu }}
     </button>
   </section>
-  <section x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-900 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
+  <section x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="'Main' mega menu, show/hide based on flyout menu state." class="absolute top-full inset-x-0 text-gray-950 dark:text-jumbo-200 sm:text-sm" x-ref="panel" @click.away="open = false" style="display: none;">
     <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
     <div class="absolute inset-0 top-1/2 bg-white dark:bg-jumbo-900 shadow" aria-hidden="true"></div>
 

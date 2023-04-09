@@ -1,7 +1,7 @@
 {
-  "name": "theme",
-  "version": "2.2.1",
-  "description": "",
+  "name": "khoblogtheme",
+  "version": "4.0.0",
+  "description": "Theme for Khodok's Blog",
   "scripts": {
     "start": "npm run dev",
     "build": "npm run build:clean && npm run build:tailwind",

@@ -32,10 +32,10 @@
           <div class="border-t border-gray-200 dark:border-jumbo-700 py-6 px-4 space-y-6">
             {% if user.is_authenticated %}
               <div class="flow-root">
-                <a href="{{ user.get_absolute_url}}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Profile</a>
+                <a href="{{ user.get_absolute_url}}" class="-m-2 p-2 block font-medium text-gray-950 dark:text-jumbo-100">Profile</a>
               </div>
               <div class="flow-root">
-                <a href="{% url 'account_logout' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Logout</a>
+                <a href="{% url 'account_logout' %}" class="-m-2 p-2 block font-medium text-gray-950 dark:text-jumbo-100">Logout</a>
               </div>
 
               {% if user.is_superuser %}
@@ -45,10 +45,10 @@
               {% endif %}
             {% else %}
               <div class="flow-root">
-                <a href="{% url 'account_login' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Log in</a>
+                <a href="{% url 'account_login' %}" class="-m-2 p-2 block font-medium text-gray-950 dark:text-jumbo-100">Log in</a>
               </div>
               <div class="flow-root">
-                <a href="{% url 'account_signup' %}" class="-m-2 p-2 block font-medium text-gray-900 dark:text-jumbo-100">Sign up</a>
+                <a href="{% url 'account_signup' %}" class="-m-2 p-2 block font-medium text-gray-950 dark:text-jumbo-100">Sign up</a>
               </div>
             {% endif %}
           </div>
@@ -111,7 +111,7 @@
                                   <div class="flex h-full flex-col bg-gray-50 dark:bg-jumbo-800 py-6 shadow-xl">
                                     <div class="px-4 sm:px-6">
                                       <div class="flex items-start justify-between">
-                                        <div class="text-lg font-medium text-gray-900 dark:text-jumbo-100" id="slide-over-title">
+                                        <div class="text-lg font-medium text-gray-950 dark:text-jumbo-100" id="slide-over-title">
                                           Changelog
                                         </div>
                                         <div class="ml-3 flex h-7 items-center">

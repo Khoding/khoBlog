@@ -48,7 +48,7 @@
     }
 
     .kho-button-forms {
-        @apply flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-900;
+        @apply flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-950;
     }
 
     .kho-button-submit {
@@ -90,14 +90,14 @@
     }
 
     .mobile_menu_grid_items {
-        @apply dark:text-jumbo-50 dark:hover:text-jumbo-100 rounded-xl text-base font-medium text-gray-900 hover:text-gray-700;
+        @apply dark:text-jumbo-50 dark:hover:text-jumbo-100 rounded-xl text-base font-medium text-gray-950 hover:text-gray-700;
     }
 
     .profile_tab {
         @apply dark:text-jumbo-50 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700;
 
         &.profile_active_tab {
-            @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-900;
+            @apply dark:border-cornflower-400 dark:text-jumbo-300 border-cornflower-500 text-gray-950;
         }
 
         &:not(.profile_active_tab) {
@@ -393,7 +393,7 @@
     }
 
     .dropdown_item {
-        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-900 disabled:dark:hover:text-jumbo-50 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
+        @apply dark:text-jumbo-50 dark:hover:bg-jumbo-800 hover:dropdown_item_active dark:disabled:bg-jumbo-950 disabled:dark:hover:text-jumbo-50 block px-4 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:text-gray-700;
 
         &.active {
             @apply bg-cornflower-500 text-cornflower-100 hover:bg-cornflower-600 hover:text-cornflower-50;
@@ -413,7 +413,7 @@
     }
 
     .dropdown_item_active {
-        @apply bg-gray-200 text-gray-900;
+        @apply bg-gray-200 text-gray-950;
     }
 
     .next_prev_buttons {
@@ -462,7 +462,7 @@
     }
 
     .todo_header_element {
-        @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-jumbo-300;
+        @apply px-3 py-3.5 text-left text-sm font-semibold text-gray-950 dark:text-jumbo-300;
     }
 
     .todo_element {
@@ -487,7 +487,7 @@
 }
 
 .message-success {
-    @apply bg-tradewind-900 text-tradewind-100;
+    @apply bg-tradewind-950 text-tradewind-100;
 }
 
 @layer utilities {
