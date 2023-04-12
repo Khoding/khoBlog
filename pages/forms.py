@@ -21,6 +21,7 @@ class PageAddForm(forms.ModelForm):
             "enable_comments",
             "main_page",
             "sites",
+            "template_name",
         )
 
         widgets = {
@@ -47,6 +48,7 @@ class PageEditForm(forms.ModelForm):
             "enable_comments",
             "main_page",
             "sites",
+            "template_name",
         )
 
         widgets = {
