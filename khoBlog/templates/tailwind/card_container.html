@@ -1,4 +1,7 @@
 {% load cards content_type super_buttons heroicons %}
+{% if archive %}
+  {% include 'tailwind/archive_buttons.html' %}
+{% endif %}
 
 <section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>

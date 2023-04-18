@@ -1078,6 +1078,7 @@ class PostArchiveIndexView(PostListMixin, ArchiveIndexView):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "[Archive] Post archive"
+        context["archive"] = True
         return context
 
 
@@ -1105,6 +1106,7 @@ class PostYearArchiveView(PostListMixin, YearArchiveView):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "[Archive] Posted in " + str(self.get_year())
+        context["archive"] = True
         return context
 
 
@@ -1131,6 +1133,7 @@ class PostMonthArchiveView(PostListMixin, MonthArchiveView):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "[Archive] Posted in " + str(self.get_month()) + " of " + str(self.get_year())
+        context["archive"] = True
         return context
 
 
@@ -1158,6 +1161,7 @@ class PostWeekArchiveView(PostListMixin, WeekArchiveView):
         """get_context_data"""
         context = super().get_context_data(**kwargs)
         context["title"] = "[Archive] Posted during Week " + str(self.get_week()) + " of " + str(self.get_year())
+        context["archive"] = True
         return context
 
 
