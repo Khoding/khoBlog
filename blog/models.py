@@ -20,9 +20,9 @@ from rules.contrib.models import RulesModelBase, RulesModelMixin
 from simple_history.models import HistoricalRecords
 from taggit_selectize.managers import TaggableManager
 
-from blog.managers import CategoryManager, PostManager, SeriesManager
 from custom_taggit.models import CustomTaggedItem
 
+from .managers import CategoryManager, PostManager, SeriesManager
 from .utils import generate_unique_vanity
 
 
