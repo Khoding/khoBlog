@@ -8,7 +8,6 @@
         "editor.autoIndent": "full",
         "editor.codeActionsOnSave": { "source.fixAll": false },
         "git.ignoreLimitWarning": true,
-        "python.formatting.provider": "black",
         "css.validate": false,
         "editor.quickSuggestions": {
             "strings": true
@@ -17,6 +16,9 @@
             "plaintext": "html"
         },
         "tailwindCSS.emmetCompletions": true,
-        "explorer.excludeGitIgnore": false
+        "explorer.excludeGitIgnore": false,
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter"
+        }
     }
 }
