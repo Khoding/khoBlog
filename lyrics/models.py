@@ -32,7 +32,7 @@ class Song(BaseSongAbstractModel):
     )
 
     title = models.CharField(max_length=200, help_text="Song title")
-    description = models.TextField(blank=True, null=True, help_text="Song description")
+    description = models.TextField(blank=True, default="", help_text="Song description")
     lyrics = models.TextField(help_text="Song lyrics")
     url_to_media = models.URLField()
     host = models.CharField(choices=HOST_CHOICES, max_length=200, default="spotify", help_text="Song host")
