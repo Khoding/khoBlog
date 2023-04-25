@@ -1,6 +1,6 @@
 {% load heroicons %}
 
-<div x-cloak x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left z-40 -m-2 p-2">
+<div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left z-40 -m-2 p-2">
   <div>
     <button type="button" class="rounded-full flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-950 focus:ring-cornflower-500 {% if not object.is_authenticated %}text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200{% elif object.is_authenticated and not object.secure_mode %}text-tradewind-950 dark:text-tradewind-700 hover:text-tradewind-700 dark:hover:text-tradewind-600{% elif object.is_superuser and object.secure_mode %}text-flamingo-500 hover:text-flamingo-600{% endif %}" id="user-auth-button" x-ref="button" @click="open=!open" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="true" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
       <span class="sr-only">Open accounts menu</span>
@@ -8,7 +8,7 @@
     </button>
   </div>
 
-  <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-7 w-56 superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="user-auth-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false" @keyup.space.prevent="open = false">
+  <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-7 w-56 superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="user-auth-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false" @keyup.space.prevent="open = false">
     {% if object.is_authenticated %}
       <div class="dropdown_item_container" role="none">
         <a href="{{ object.get_absolute_url }}" class="theme_option w-full flex dropdown_item" role="button" @click="open = false">Profile</a>

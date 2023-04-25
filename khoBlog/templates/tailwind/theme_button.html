@@ -1,4 +1,4 @@
-<div id="color_scheme" x-cloak x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left z-40 -m-2 p-2">
+<div id="color_scheme" x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left z-40 -m-2 p-2">
   <div>
     <button type="button" class="rounded-full flex items-center text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-950 focus:ring-cornflower-500" id="color-scheme-button" x-ref="button" @click="open=!open" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="true" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
       <span class="sr-only">Open themes menu</span>
@@ -7,7 +7,7 @@
     </button>
   </div>
 
-  <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-7 w-56 superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="color-scheme-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false" @keyup.space.prevent="open = false">
+  <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-7 w-56 superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="color-scheme-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false" @keyup.space.prevent="open = false">
     <div class="dropdown_item_container" role="none">
       <button id="light" class="theme_option w-full flex dropdown_item" role="menuitem" @click="themeOption; open = false">Light</button>
       <button id="dark" class="theme_option w-full flex dropdown_item" role="menuitem" @click="themeOption; open = false">Dark</button>
