@@ -361,7 +361,7 @@
 
         dl {
             & dd {
-                @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400;
+                @apply font-normal lg:font-light text-gray-600 dark:text-jumbo-400 ml-4 mb-2;
             }
 
             & dt,
