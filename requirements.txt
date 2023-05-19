@@ -125,7 +125,7 @@ djangorestframework==3.14.0
     # via
     #   django-comments-xtd
     #   drf-yasg
-docutils==0.20
+docutils==0.20.1
     # via django-comments-xtd
 drf-yasg==1.21.5
     # via -r requirements.in
@@ -190,7 +190,7 @@ pygments==2.15.1
     # via -r requirements.in
 pyjwt[crypto]==2.7.0
     # via django-allauth
-pymdown-extensions==9.11
+pymdown-extensions==10.0.1
     # via -r requirements.in
 pyquery==2.0.0
     # via readtime
