@@ -48,7 +48,7 @@
       <div class="mt-6 sm:mt-2 2xl:mt-5">
         <div class="border-b border-gray-200 dark:border-jumbo-600">
           <div class="max-w-5xl mx-auto">
-            <div class="-mb-px flex space-x-8" aria-label="Tabs">
+            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
               <button :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
                 Profile
               </button>
@@ -65,7 +65,7 @@
                   Github
                 </button>
               {% endif %}
-            </div>
+            </nav>
           </div>
         </div>
       </div>
