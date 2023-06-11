@@ -14,13 +14,13 @@ def get_proper_elided_page_range(p, number, on_each_side=3, on_ends=2):
 @register.simple_tag
 def relative_url(value, field_name, urlencode=None):
     """relative_url tag"""
-    url = "?{}={}".format(field_name, value)
+    url = f"?{field_name}={value}"
 
     if urlencode:
         querystring = urlencode.split("&")
         filtered_querystring = filter(lambda p: p.split("=")[0] != field_name, querystring)
         encoded_querystring = "&".join(filtered_querystring)
-        url = "{}".format(url)
+        url = f"{url}"
         if encoded_querystring:
-            url = "{}&{}".format(url, encoded_querystring)
+            url = f"{url}&{encoded_querystring}"
     return url
