@@ -20,7 +20,7 @@
 
       colorScheme()
     </script>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
     {% if not debug_flag or not user.is_superuser %}
       {% analytical_head_top %}
 
@@ -53,16 +53,16 @@
       {% endif %}
     </title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="canonical" href="{{ CANONICAL_PATH }}">
     <link rel="shortlink" href="{{ CANONICAL_PATH }}">
 
-    <meta property="og:site_name" content="Hello There!"/>
+    <meta property="og:site_name" content="Hello There!">
     <meta property="og:image" content="{% static 'khoBlog/img/Ruthinkk.webp' %}">
     <meta property="twitter:image" content="{% static 'khoBlog/img/Ruthinkk.webp' %}">
-    <link rel="apple-touch-icon" href="{% static 'khoBlog/img/RuthinkkTooBig-small-square.png' %}"/>
+    <link rel="apple-touch-icon" href="{% static 'khoBlog/img/RuthinkkTooBig-small-square.png' %}">
 
     {% block page_head %}
       <!-- Primary Meta Tags -->
@@ -71,7 +71,7 @@
 
       <!-- Open Graph / Facebook -->
       <meta property="og:title" content="{{ title }}">
-      <meta property="og:url" content="{{ CANONICAL_PATH }}"/>
+      <meta property="og:url" content="{{ CANONICAL_PATH }}">
       <meta property="og:description" content="{{ description }}">
 
       <!-- Twitter -->
@@ -81,7 +81,7 @@
     {% endblock page_head %}
 
     <meta name="theme-color" content="#B362FF">
-    <link type="application/json+oembed" href="https://www.khodok.com/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
+    <link type="application/json+oembed" rel="alternate" href="https://www.khodok.com/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
     {% if has_rss %}
       <link rel="alternate" hreflang="en" type="application/rss+xml" title="{{ title }}" href="/latest/rss">
     {% endif %}
@@ -96,13 +96,13 @@
 
     {% block rel %}
       <!-- base! favicon -->
-      <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}"/>
+      <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}">
 
       {% tailwind_css %}
     {% endblock rel %}
 
     {% if not debug_flag or not user.is_superuser %}
-      <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI"/>
+      <meta name="google-site-verification" content="KZMs6ddQ5vepSstnuHhhjh_4IhiS0hPZfSvqPH98wrI">
 
       {% analytical_head_bottom %}
     {% endif %}
