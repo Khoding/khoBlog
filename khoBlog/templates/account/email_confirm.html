@@ -14,7 +14,7 @@
 
     <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
       {% csrf_token %}
-      <button class="kho-button-forms kho-button-submit mt-2" type="submit">{% trans 'Confirm' %}</button>
+      <button type="submit" class="kho-button-forms kho-button-submit mt-2">{% trans 'Confirm' %}</button>
     </form>
 
   {% else %}

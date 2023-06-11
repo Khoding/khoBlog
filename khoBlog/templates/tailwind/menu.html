@@ -19,9 +19,9 @@
           <div x-data="{ tab: 'main' }" class="mt-2">
             <div class="border-b border-gray-200 dark:border-jumbo-700">
               <div class="-mb-px flex px-4 space-x-8" aria-orientation="horizontal" role="tablist">
-                <button x-on:click.prevent="tab = 'main'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'main', 'border-transparent': !(tab === 'main') }">Main</button>
+                <button type="button" x-on:click.prevent="tab = 'main'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'main', 'border-transparent': !(tab === 'main') }">Main</button>
 
-                <button x-on:click.prevent="tab = 'featured'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'featured', 'border-transparent': !(tab === 'featured') }">Featured</button>
+                <button type="button" x-on:click.prevent="tab = 'featured'" class="border-transparent flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium" :class="{ 'border-cornflower-600 text-cornflower-600 dark:border-cornflower-300 dark:text-cornflower-300': tab === 'featured', 'border-transparent': !(tab === 'featured') }">Featured</button>
               </div>
             </div>
 

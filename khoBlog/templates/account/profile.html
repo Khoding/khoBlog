@@ -49,19 +49,19 @@
         <div class="border-b border-gray-200 dark:border-jumbo-600">
           <div class="max-w-5xl mx-auto">
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-              <button :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
+              <button type="button" :class="{ 'profile_active_tab': tab === 'description' }" x-on:click.prevent="tab = 'description'" class="profile_tab">
                 Profile
               </button>
 
               {% if object == user or user.is_superuser and not user.secure_mode %}
-                <button :class="{ 'profile_active_tab': tab === 'personal' }" x-on:click.prevent="tab = 'personal'" class="profile_tab">
+                <button type="button" :class="{ 'profile_active_tab': tab === 'personal' }" x-on:click.prevent="tab = 'personal'" class="profile_tab">
                   Personal info
                 </button>
               {% endif %}
 
               {% get_social_accounts object as accounts %}
               {% if accounts.github and object.display_github %}
-                <button :class="{ 'profile_active_tab': tab === 'github' }" x-on:click.prevent="tab = 'github'" class="profile_tab">
+                <button type="button" :class="{ 'profile_active_tab': tab === 'github' }" x-on:click.prevent="tab = 'github'" class="profile_tab">
                   Github
                 </button>
               {% endif %}

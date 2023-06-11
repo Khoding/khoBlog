@@ -13,7 +13,7 @@
               Previous
             </a>
           {% else %}
-            <button class="pagination_next_prev_buttons disabled:opacity-50" disabled>
+            <button type="button" disabled class="pagination_next_prev_buttons disabled:opacity-50">
               Previous
             </button>
           {% endif %}
@@ -22,7 +22,7 @@
               Next
             </a>
           {% else %}
-            <button class="pagination_next_prev_buttons ml-3 disabled:opacity-50" disabled>
+            <button type="button" disabled class="pagination_next_prev_buttons ml-3 disabled:opacity-50">
               Next
             </button>
           {% endif %}
@@ -42,14 +42,14 @@
           </section>
 
           <section>
-            <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="Pagination">
+            <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="pagination">
               {% if page_obj.has_previous %}
                 <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button" rel="noopener noreferrer">
                   <span class="sr-only">Previous</span>
                   {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
                 </a>
               {% else %}
-                <button disabled class="previous_pagination_button disabled:opacity-50">
+                <button type="button" disabled class="previous_pagination_button disabled:opacity-50">
                   <span class="sr-only">Previous</span>
                   {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
                 </button>
@@ -80,7 +80,7 @@
                   {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
                 </a>
               {% else %}
-                <button disabled class="next_pagination_button disabled:opacity-50">
+                <button type="button" disabled class="next_pagination_button disabled:opacity-50">
                   <span class="sr-only">Next</span>
                   {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
                 </button>
