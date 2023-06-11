@@ -99,7 +99,7 @@
                   <div class="flex items-center lg:ml-8">
                     <div class="flex space-x-8">
                       <section class="hidden md:flex" x-data="{ open: false }">
-                        <button class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
+                        <button type="button" class="text-base font-medium text-gray-500 dark:text-jumbo-50 hover:underline" @click="open=!open">Latest changes</button>
 
                         <div @keydown.window.escape="open = false" x-cloak x-show="open" class="relative z-50" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
                           <div x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0"></div>

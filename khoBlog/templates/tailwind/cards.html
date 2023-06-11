@@ -2,7 +2,7 @@
 
 <article>
   {% if object.categories %}
-    <section>
+    <div>
       {% if object.get_featured_cat %}
         <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block">
           <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
@@ -17,7 +17,7 @@
         </a>
       {% endif %}
       {% status_dot object %}
-    </section>
+    </div>
   {% endif %}
   <section>
     <a href="{{ object.get_absolute_url }}" class="mt-2 inline-block text-lg font-bold text-gray-950 dark:text-jumbo-100 hover:underline">

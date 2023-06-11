@@ -3,7 +3,7 @@
   {% include 'tailwind/archive_buttons.html' %}
 {% endif %}
 
-<section{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
+<div{% if filter_form %} x-data="{ open: false }" aria-labelledby="filter-heading"{% endif %} class="relative divide-y-2 divide-gray-300 dark:divide-jumbo-600">
   <section>
     <div class="md:flex md:items-center md:justify-between md:space-x-4">
       <div class="text-3xl tracking-tight font-extrabold text-gray-950 dark:text-jumbo-100 sm:text-4xl">
@@ -100,4 +100,4 @@
       Nothing found here.
     {% endfor %}
   </section>
-</section>
+</div>
