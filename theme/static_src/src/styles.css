@@ -500,6 +500,6 @@
 
 @layer utilities {
     .leading-11 {
-        line-height: 3.5rem;
+        @apply leading-[3.5rem];
     }
 }
