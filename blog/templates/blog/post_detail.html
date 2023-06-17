@@ -73,20 +73,21 @@
         </div>
         {% sb object user=request.user %}
       </div>
-      <div class="py-3 lg:pt-6 lg:pb-0">
+      <div class="lg:pt-6">
         <div class="sr-only">Content</div>
         <div class="prose prose_base">
           {{ post.body_content|formatted_markdown|safe }}
         </div>
-      </div>
-      <div class="toc-links">
-        <ol>
-          {% for link in post.toc %}
-            <li>
-              <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
-            </li>
-          {% endfor %}
-        </ol>
+
+        <div class="toc-links">
+          <ol>
+            {% for link in post.toc %}
+              <li>
+                <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
       </div>
       <aside class="mt-8 lg:hidden">
         {% include 'tailwind/post_aside.html' %}

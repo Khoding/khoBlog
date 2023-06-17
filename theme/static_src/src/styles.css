@@ -718,7 +718,7 @@
     }
 
     .toc-links .toc-link {
-        @apply inline-block lg:hidden;
+        @apply inline-block;
     }
 
     .toc-links ol {
