@@ -105,7 +105,7 @@ module.exports = {
     plugins: [
         require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
-        require("@tailwindcss/line-clamp"),
+        require("@tailwindcss/container-queries"),
         require("@tailwindcss/aspect-ratio"),
         require("tailwind-scrollbar"),
     ],

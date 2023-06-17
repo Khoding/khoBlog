@@ -9,6 +9,18 @@
   {% endif %}
 {% endblock additional_css %}
 
+{% comment %} {% block toc %}
+  <div class="sub-nav sub-nav--anchored">
+    <div class="sub-nav__wrapper">
+      {% for link in post.toc %}
+        <div class="sub-nav__link-wrapper no-children">
+          <a class="glue-cta sub-nav__link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock toc %} {% endcomment %}
+
 {% block content_main %}
   <article class="lg:grid lg:grid-cols-3">
     <div class="lg:col-span-2 lg:pr-8 lg:border-r lg:border-gray-200 dark:lg:border-jumbo-700">
@@ -40,11 +52,11 @@
           </button>
         {% endif %}
       </nav>
-      <div class="jump-links mt-2 bg-jumbo-800">
+      <div class="toc-links">
         <ol>
           {% for link in post.toc %}
             <li>
-              <a class="jump-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+              <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
             </li>
           {% endfor %}
         </ol>

@@ -481,289 +481,261 @@
         @apply hidden;
     }
 
-    .jump-links {
-        border-radius: 1000px;
-        -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-        color: #fff;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 24px;
-        margin: 0 auto;
-        max-height: 48px;
-        max-width: 90vw;
+    /* .sub-nav__link {
+        @apply text-jumbo-100 hidden text-sm mr-5 no-underline whitespace-nowrap 2xl:flex 2xl:text-center 2xl:rounded-r-3xl 2xl:text-base 2xl:h-11 2xl:mr-0 2xl:pl-4 2xl:whitespace-normal 2xl:w-full active:text-jumbo-100 active:hidden visited:text-jumbo-100 visited:hidden;
+    }
+
+    .sub-nav__link:hover {
+        background-color: #e8f0fe;
+        color: #174ea6;
+    }
+
+    .sub-nav__link.active {
+        color: #202124;
+    }
+
+    @media (min-width: 1024px) {
+        .sub-nav__link--mobile {
+            display: none;
+        }
+    }
+
+    .sub-nav {
+        -webkit-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+        display: none;
+        height: 50px;
+        margin: 0 8px;
         overflow: hidden;
-        position: -webkit-sticky;
-        position: sticky;
-        text-align: center;
-        top: 85px;
-        -webkit-transition: top 0.3s ease;
-        -o-transition: top 0.3s ease;
-        transition: top 0.3s ease;
-        white-space: nowrap;
+        padding: 0 30px;
+        position: relative;
         width: -webkit-fit-content;
         width: -moz-fit-content;
         width: fit-content;
-        z-index: 799;
-    }
-
-    @media (min-width: 1024px) {
-        .jump-links {
-            display: none;
-            max-width: 640px;
-            overflow-x: hidden;
-        }
-    }
-
-    .jump-links::after,
-    .jump-links::before {
-        bottom: 0;
-        content: "";
-        position: absolute;
-        top: 0;
-        width: 20px;
+        width: inherit;
         z-index: 1;
     }
 
-    .jump-links .jump-link {
-        display: inline-block;
-    }
-
-    @media (min-width: 1024px) {
-        .jump-links .jump-link {
-            display: inline-block;
+    @media (min-width: 1760px) {
+        .sub-nav {
+            display: block;
+            margin: 0 auto;
         }
     }
 
-    .jump-links .jump-link--mobile {
-        display: inline-block;
+    .sub-nav::after {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(rgba(255, 255, 255, 0)),
+            to(white)
+        );
+        background: -o-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0) 0,
+            #fff 100%
+        );
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0) 0,
+            #fff 100%
+        );
+        content: "";
+        height: 50px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 35px;
     }
 
     @media (min-width: 1024px) {
-        .jump-links .jump-link--mobile {
+        .sub-nav::after {
             display: none;
         }
     }
 
-    .jump-links.top {
-        top: 144px;
+    .sub-nav .sub-nav__wrapper {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 100%;
+        overflow-x: auto;
     }
 
-    .jump-links ol {
-        margin: 0;
-        -ms-overflow-style: none;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        padding: 0 10px;
-        margin-top: 0;
+    @media (min-width: 1024px) {
+        .sub-nav .sub-nav__wrapper {
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+        }
     }
 
-    .jump-links ol::-webkit-scrollbar {
-        height: 0;
-    }
-
-    .jump-links li {
-        display: inline-block;
-        list-style: none;
-        margin: 0;
-    }
-
-    .jump-links li:first-child {
-        margin-left: 21px;
-    }
-
-    .jump-links li:last-child {
-        margin-right: 21px;
-    }
-
-    .jump-links a {
-        border-radius: 4px;
-        color: inherit;
-        display: inline-block;
-        line-height: 24px;
+    .sub-nav--anchored {
+        left: 16px;
         overflow: visible;
-        padding: 6px 12px;
+        position: fixed;
+        top: 150px;
+        width: calc(100% - 32px);
+    }
+
+    @media (min-width: 1024px) {
+        .sub-nav--anchored {
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            height: auto;
+            left: 0;
+            padding: 0;
+            top: 208px;
+            -webkit-transform: none;
+            -ms-transform: none;
+            transform: none;
+            width: 248px;
+        }
+    }
+
+    .sub-nav--anchored .sub-nav__link {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .sub-nav--anchored .sub-nav__link[aria-current="true"] {
+        background-color: #e8f0fe;
+        color: #174ea6;
+    }
+
+    @media (min-width: 1024px) {
+        .sub-nav--anchored .sub-nav__sub-nav-link--mobile {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .sub-nav--anchored .sub-nav__wrapper {
+            display: block;
+            overflow: visible;
+        }
+    }
+
+    .sub-nav__link-wrapper {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: block;
+        max-height: 44px;
+        overflow: hidden;
+        padding: 2px 2px 2px 0;
+        -webkit-transition: max-height 0.5s linear;
+        -o-transition: max-height 0.5s linear;
+        transition: max-height 0.5s linear;
+    }
+
+    .sub-nav__link-wrapper.no-children {
+        overflow: visible;
+    }
+
+    .sub-nav__link-wrapper.active {
+        max-height: 240px;
+    }
+
+    .sub-nav__link-wrapper:last-child .sub-nav__link {
+        margin-right: 0;
+    }
+
+    .sub-nav__sub-nav {
+        border-left: solid 2px #e8eaed;
+        display: none;
+        height: 100%;
+        margin: 20px 0 20px 16px;
+    }
+
+    @media (min-width: 1024px) {
+        .sub-nav__sub-nav {
+            display: block;
+        }
+    }
+
+    .sub-nav__sub-nav-link-wrapper {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 16px;
+        margin-bottom: 20px;
+    }
+
+    .sub-nav__sub-nav-link-wrapper:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .sub-nav__sub-nav-link {
+        border-radius: 0;
+        @apply text-jumbo-100 hidden font-s;
+        display: block;
+        font-size: 14px;
+        margin-left: -2px;
+        padding-left: 15px;
         position: relative;
         text-decoration: none;
     }
 
-    .jump-links a::after {
-        bottom: -6px;
-        content: "";
+    .sub-nav__sub-nav-link:active,
+    .sub-nav__sub-nav-link:visited {
+        @apply text-jumbo-100 hidden font-s;
+    }
+
+    .sub-nav__sub-nav-link[aria-current="true"] {
+        color: #174ea6;
+    }
+
+    .sub-nav__sub-nav-link.active {
+        color: #202124;
+    }
+
+    .sub-nav__sub-nav-link.active::before {
+        background: #4285f4;
+        content: " ";
         display: block;
+        height: 24px;
         left: 0;
         position: absolute;
-        right: 0;
-        top: -6px;
+        top: 0;
+        width: 2px;
+        z-index: 5;
+    } */
+
+    .toc-links {
+        @apply rounded-full dark:text-white dark:bg-jumbo-800 bg-white text-jumbo-800 flex mx-auto mb-0 mt-2 sticky text-center top-[85px] whitespace-nowrap w-fit z-[799] max-w-[90vw] overflow-hidden max-h-12 font-medium lg:hidden lg:max-w-2xl lg:overflow-x-hidden after:bottom-0 before:bottom-0 after:content-['_'] before:content-['_'] after:top-0 before:top-0 after:w-5 before:w-5 after:z-[1] before:z-[1] shadow-lg;
     }
 
-    .jump-links a[aria-current="true"] {
-        @apply text-jumbo-100;
+    .toc-links .toc-link {
+        @apply inline-block lg:hidden;
     }
 
-    .jump-links a:hover {
-        @apply text-jumbo-100;
+    .toc-links.top {
+        @apply top-36;
     }
 
-    .jump-links a:focus {
-        @apply text-jumbo-100;
+    .toc-links ol {
+        @apply m-0 overflow-x-scroll overflow-y-hidden py-0 px-3 scrollbar-none;
     }
 
-    .jump-links a:active {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        color: rgb(203 202 206);
-        outline: 0;
+    .toc-links li {
+        @apply inline-block list-none m-0 first:ml-[21px] last:mr-[21px];
     }
 
-    /* .toc {
-    @apply bg-white rounded-full shadow-sm sticky flex text-[#5f6368] top-[85px] z-[999] w-fit max-h-12 max-w-[90vw] overflow-hidden text-center whitespace-nowrap before:left-0 after:right-0;
-
-    a {
-        @apply inline-block px-3 py-1.5 text-sm font-medium leading-4 hover:text-[#1a0dab] hover:underline;
+    .toc-links a {
+        @apply inline-block overflow-visible py-2 px-4 relative after:-bottom-2 after:content-['_'] after:block after:left-0 after:right-0 after:absolute after:-top-2 dark:hover:text-jumbo-100 hover:text-jumbo-900 dark:focus:text-jumbo-100 focus:text-jumbo-900 active:shadow-none dark:active:text-jumbo-100 active:text-jumbo-900 active:outline-0;
     }
-    /* background-color: #fff;
-    border-radius: 1000px;
-    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    color: #5f6368;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    font-family: "Google Sans", Roboto;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    margin: 0 auto;
-    max-height: 48px;
-    max-width: 90vw;
-    overflow: hidden;
-    position: -webkit-sticky;
-    position: sticky;
-    text-align: center;
-    top: 85px;
-    -webkit-transition: top 0.3s ease;
-    -o-transition: top 0.3s ease;
-    transition: top 0.3s ease;
-    white-space: nowrap;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    z-index: 799; */
-    /* } */
-
-    /* .toc::before {
-    background: -webkit-gradient(
-        linear,
-        right top,
-        left top,
-        from(rgba(255, 255, 255, 0)),
-        to(white)
-    );
-    background: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: linear-gradient(to left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    left: 0;
-}
-
-.toc::after {
-    background: -webkit-gradient(
-        linear,
-        left top,
-        right top,
-        from(rgba(255, 255, 255, 0)),
-        to(white)
-    );
-    background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0, #fff 100%);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, #fff 100%);
-    right: 0;
-} */
-
-    /* .toc::after,
-.toc::before {
-    bottom: 0;
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 20px;
-    z-index: 1;
-}
-
-.toc a {
-    display: inline-block;
-}
-
-.toc ul {
-    margin: 0;
-    -ms-overflow-style: none;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    padding: 0 10px;
-}
-
-.toc ul::-webkit-scrollbar {
-    height: 0;
-}
-
-.toc li {
-    display: inline-block;
-    list-style: none;
-}
-
-.toc li:first-child {
-    margin-left: 42px;
-}
-
-.toc li:last-child {
-    margin-right: 42px;
-}
-
-.toc a {
-    border-radius: 4px;
-    color: inherit;
-    display: inline-block;
-    line-height: 24px;
-    margin: 6px 0;
-    overflow: visible;
-    padding: 6px 12px;
-    position: relative;
-    text-decoration: none;
-}
-
-.toc a::after {
-    bottom: -6px;
-    content: "";
-    display: block;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: -6px;
-}
-
-.toc a[aria-current="true"] {
-    @apply text-jumbo-100
-}
-
-.toc a:hover {
-    @apply text-jumbo-100
-}
-
-.toc a:focus {
-    @apply text-jumbo-100
-}
-
-.toc a:active {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    @apply text-jumbo-100
-    outline: 0;
-}
- .jump-link-target-our-commitments {
-    position: relative;
-    top: -50px;
-} */
 }
 
 .message-warning {
