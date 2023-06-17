@@ -40,6 +40,15 @@
           </button>
         {% endif %}
       </nav>
+      <div class="jump-links mt-2 bg-jumbo-800">
+        <ol>
+          {% for link in post.toc %}
+            <li>
+              <a class="jump-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
       <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
           <div class="text-xl sm:text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ object.title }}</div>
@@ -64,15 +73,6 @@
       <div class="py-3 lg:pt-6 lg:pb-0">
         <div class="sr-only">Content</div>
         <div class="prose prose_base">
-          <div class="jump-links">
-            <ol>
-              {% for link in post.toc %}
-                <li>
-                  <a class="jump-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
-                </li>
-              {% endfor %}
-            </ol>
-          </div>
           {{ post.body_content|formatted_markdown|safe }}
         </div>
       </div>
