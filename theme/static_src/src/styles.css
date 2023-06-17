@@ -714,15 +714,11 @@
     } */
 
     .toc-links {
-        @apply rounded-full dark:text-white dark:bg-jumbo-800 bg-white text-jumbo-800 flex mx-auto mb-0 mt-2 sticky text-center top-[85px] whitespace-nowrap w-fit z-[799] max-w-[90vw] overflow-hidden max-h-12 font-medium lg:hidden lg:max-w-2xl lg:overflow-x-hidden after:bottom-0 before:bottom-0 after:content-['_'] before:content-['_'] after:top-0 before:top-0 after:w-5 before:w-5 after:z-[1] before:z-[1] shadow-lg;
+        @apply rounded-full dark:text-white dark:bg-jumbo-800 bg-white text-jumbo-800 flex mx-auto my-0 sticky bottom-2 text-center top-[85px] whitespace-nowrap w-fit z-[799] max-w-[90vw] overflow-hidden max-h-12 font-medium lg:hidden lg:max-w-2xl lg:overflow-x-hidden after:bottom-0 before:bottom-0 after:content-['_'] before:content-['_'] after:top-0 before:top-0 after:w-5 before:w-5 after:z-[1] before:z-[1] shadow-lg;
     }
 
     .toc-links .toc-link {
         @apply inline-block lg:hidden;
-    }
-
-    .toc-links.top {
-        @apply top-36;
     }
 
     .toc-links ol {

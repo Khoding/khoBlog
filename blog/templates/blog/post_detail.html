@@ -52,15 +52,6 @@
           </button>
         {% endif %}
       </nav>
-      <div class="toc-links">
-        <ol>
-          {% for link in post.toc %}
-            <li>
-              <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
-            </li>
-          {% endfor %}
-        </ol>
-      </div>
       <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
           <div class="text-xl sm:text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ object.title }}</div>
@@ -87,6 +78,15 @@
         <div class="prose prose_base">
           {{ post.body_content|formatted_markdown|safe }}
         </div>
+      </div>
+      <div class="toc-links">
+        <ol>
+          {% for link in post.toc %}
+            <li>
+              <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+            </li>
+          {% endfor %}
+        </ol>
       </div>
       <aside class="mt-8 lg:hidden">
         {% include 'tailwind/post_aside.html' %}
