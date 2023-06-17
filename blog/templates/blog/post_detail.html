@@ -78,16 +78,6 @@
         <div class="prose prose_base">
           {{ post.body_content|formatted_markdown|safe }}
         </div>
-
-        <div class="toc-links">
-          <ol>
-            {% for link in post.toc %}
-              <li>
-                <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
-              </li>
-            {% endfor %}
-          </ol>
-        </div>
       </div>
       <aside class="mt-8 lg:hidden">
         {% include 'tailwind/post_aside.html' %}
@@ -132,3 +122,15 @@
 {% endblock content_main %}
 
 {% block pagination %}{% endblock pagination %}
+
+{% block very_bottom %}
+  <nav class="toc-links">
+    <ol>
+      {% for link in post.toc %}
+        <li>
+          <a class="toc-link" href="{{ link.href }}" aria-label="{{ link.text }}: Jump to page section">{{ link.text }}</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endblock very_bottom %}

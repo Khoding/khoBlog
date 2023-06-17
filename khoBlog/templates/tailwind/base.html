@@ -162,6 +162,9 @@
       </div>
     </footer>
 
+    {% block very_bottom %}
+    {% endblock very_bottom %}
+
     {% if messages %}
       {% for message in messages %}
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" aria-live="assertive" class="messages fixed inset-0 top-auto flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
