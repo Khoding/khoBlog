@@ -658,23 +658,11 @@
     z-index: 799;
 }
 
-/* @media (min-width: 1024px) {
+@media (min-width: 1024px) {
     .jump-links {
         display: none;
         max-width: 640px;
         overflow-x: hidden;
-    }
-} */
-
-[data-route="/guidance/"] .jump-links {
-    margin: 48px auto;
-}
-
-@media (min-width: 1024px) {
-    [data-route="/guidance/"] .jump-links {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
     }
 }
 
