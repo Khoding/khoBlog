@@ -79,7 +79,7 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
             "outdated",
         ]
     },
-    "pymdownx.snippets": {"base_path": BASE_DIR + "/_snippets/"},
+    "pymdownx.snippets": {"base_path": BASE_DIR + "/_snippets/", "auto_append": ["toc.md"]},
     "pymdownx.tasklist": {"custom_checkbox": True},
     "pymdownx.critic": {"mode": "view"},
     "pymdownx.magiclink": {

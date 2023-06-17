@@ -1,6 +1,7 @@
 import datetime
 import itertools
 import re
+from bs4 import BeautifulSoup
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -559,7 +560,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
         now = timezone.now()
         if not self.pub_date:
             return False
-
         return self.pub_date >= now
 
     @property
@@ -657,6 +657,16 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
             body += self.first_line_image
         body += "\n".join(self.after_first_line)
         return body
+
+    # property that returns everything in the .toc div as individual links
+    @property
+    def toc(self):
+        """Toc elements"""
+        tocie = BeautifulSoup(self.formatted_markdown, "html.parser").find("div", {"class": "toc"})
+        text = [tocie.find_all("a")[i].text for i in range(len(tocie.find_all("a")))]
+        href = [tocie.find_all("a")[i]["href"] for i in range(len(tocie.find_all("a")))]
+        # return a list of dictionaries
+        return [{"text": text[i], "href": href[i]} for i in range(len(text))]
 
     # Create a property that returns the markdown instead
     @property
