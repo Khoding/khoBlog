@@ -9,7 +9,7 @@
       {% if is_paginated %}
         <section class="flex-1 flex justify-between md:hidden">
           {% if page_obj.has_previous %}
-            <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons dark:hover:bg-jumbo-800" rel="noopener noreferrer">
+            <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons dark:hover:bg-jumbo-800" rel="noopener noreferrer" tabindex="0">
               Previous
             </a>
           {% else %}
@@ -18,7 +18,7 @@
             </button>
           {% endif %}
           {% if page_obj.has_next %}
-            <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons ml-3 dark:hover:bg-jumbo-800" rel="noopener noreferrer">
+            <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="pagination_next_prev_buttons ml-3 dark:hover:bg-jumbo-800" rel="noopener noreferrer" tabindex="0">
               Next
             </a>
           {% else %}
@@ -44,7 +44,7 @@
           <section>
             <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="pagination">
               {% if page_obj.has_previous %}
-                <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button" rel="noopener noreferrer">
+                <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button" rel="noopener noreferrer" tabindex="0">
                   <span class="sr-only">Previous</span>
                   {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
                 </a>
@@ -67,7 +67,7 @@
                       {{ i }}
                     </span>
                   {% else %}
-                    <a href="{% relative_url i 'page' request.GET.urlencode %}" class="kho-button-bg kho-button-bg-hover kho-button-text kho-button-border relative inline-flex items-center px-4 py-2 border text-sm font-medium" rel="noopener noreferrer">
+                    <a href="{% relative_url i 'page' request.GET.urlencode %}" class="kho-button-bg kho-button-bg-hover kho-button-text kho-button-border relative inline-flex items-center px-4 py-2 border text-sm font-medium" rel="noopener noreferrer" tabindex="0">
                       {{ i }}
                     </a>
                   {% endif %}
@@ -75,7 +75,7 @@
               {% endfor %}
 
               {% if page_obj.has_next %}
-                <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button" rel="noopener noreferrer">
+                <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button" rel="noopener noreferrer" tabindex="0">
                   <span class="sr-only">Next</span>
                   {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
                 </a>
