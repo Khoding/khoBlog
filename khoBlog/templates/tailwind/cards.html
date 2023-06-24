@@ -5,13 +5,13 @@
     {% if object.get_featured_cat %}
       <a href="{{ object.get_featured_cat.category.get_absolute_url }}" class="inline-block" title="Go to: '{{ object.get_featured_cat.category }}' category" tabindex="0">
         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
-          {{ object.featured_cat_title }}
+          {{ object.featured_cat_title }} <span class="sr-only">Category</span>
         </span>
       </a>
     {% else %}
       <a href="{{ object.categories.first.get_absolute_url }}" class="inline-block" title="Go to: '{{ object.categories.first }}' category" tabindex="0">
         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-cornflower-100 text-cornflower-800 dark:bg-cornflower-100 dark:text-cornflower-700 hover:bg-cornflower-200 dark:hover:bg-cornflower-200 dark:hover:text-cornflower-800">
-          {{ object.categories.first }}
+          {{ object.categories.first }} <span class="sr-only">Category</span>
         </span>
       </a>
     {% endif %}

@@ -82,8 +82,8 @@
 
     <meta name="theme-color" content="#B362FF">
     <link type="application/json+oembed" rel="alternate" href="https://www.khodok.com/static/khoBlog/js/oembed/oembed.json" title="oEmbed Profile: JSON">
-    {% if has_rss %}
-      <link rel="alternate" hreflang="en" type="application/rss+xml" title="{{ title }}" href="/latest/rss">
+    {% if rss_feed %}
+      <link rel="alternate" hreflang="en" type="application/rss+xml" title="{{ title }}" href="{{ rss_feed }}">
     {% endif %}
 
     {% block additional_js %}{% endblock additional_js %}

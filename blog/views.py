@@ -69,7 +69,7 @@ class PostListView(PostListMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Latest Posts"
         context["filter_form"] = PostFilter()
-        context["has_rss"] = True
+        context["rss_feed"] = "/latest/rss/"
         return context
 
 
@@ -136,7 +136,7 @@ class PostInCategoryListView(PostListMixin, ListView):
         context["parent_object"] = self.category
         context["title"] = self.title
         context["description"] = self.description
-        context["has_rss"] = True
+        context["rss_feed"] = "./rss/"
         return context
 
 
