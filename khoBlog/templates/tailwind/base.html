@@ -98,6 +98,9 @@
       <!-- base! favicon -->
       <link rel="shortcut icon" type="image/png" href="{% static 'khoBlog/img/favicon.ico' %}">
 
+      {% if not debug_flag %}
+        {% tailwind_preload_css %}
+      {% endif %}
       {% tailwind_css %}
     {% endblock rel %}
 
