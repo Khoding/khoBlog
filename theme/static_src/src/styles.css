@@ -68,11 +68,11 @@
     }
 
     .next_pagination_button {
-        @apply pagination_buttons rounded-r-lg;
+        @apply pagination_buttons rounded-r-xl;
     }
 
     .previous_pagination_button {
-        @apply pagination_buttons rounded-l-lg;
+        @apply pagination_buttons rounded-l-xl;
     }
 
     .flyout_button {
@@ -117,16 +117,16 @@
         @apply superbutton_base px-4;
 
         &:first-of-type {
-            @apply rounded-l-lg border-r-0;
+            @apply rounded-l-xl border-r-0;
         }
 
         &:only-child {
-            @apply rounded-r-lg border-r;
+            @apply rounded-r-xl border-r;
         }
     }
 
     .superbutton_dropdown_button {
-        @apply superbutton_base rounded-r-lg px-2;
+        @apply superbutton_base rounded-r-xl px-2;
     }
 
     .superbutton_dropdown_items {
