@@ -60,7 +60,7 @@ class Song(BaseSongAbstractModel):
 
     def get_absolute_url(self):
         """Get absolute url"""
-        return reverse("music:song_detail", kwargs={"slug": self.slug})
+        return reverse("music:song_detail", kwargs={"artist_slug": self.artist.first().slug, "slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         """Get the admin update url for this song"""
