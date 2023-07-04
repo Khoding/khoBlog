@@ -107,6 +107,6 @@ module.exports = {
         require("@tailwindcss/typography"),
         require("@tailwindcss/container-queries"),
         require("@tailwindcss/aspect-ratio"),
-        require("tailwind-scrollbar"),
+        require("tailwind-scrollbar"), // Require this one for the scrollbar in "Latest Changes" aside
     ],
 };
