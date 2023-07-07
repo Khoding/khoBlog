@@ -236,7 +236,7 @@ tzdata==2023.3
     # via django
 uritemplate==4.1.1
     # via drf-yasg
-urllib3==2.0.3
+urllib3==1.26.16
     # via
     #   botocore
     #   requests
