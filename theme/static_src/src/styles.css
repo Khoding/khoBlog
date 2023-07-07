@@ -604,6 +604,10 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        align-items: center;
     }
 
     .sub-nav--anchored .sub-nav__link[aria-current="true"] {
