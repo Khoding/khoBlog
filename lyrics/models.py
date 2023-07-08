@@ -60,7 +60,7 @@ class Song(BaseSongAbstractModel):
 
     def get_absolute_url(self):
         """Get absolute url"""
-        return reverse("music:song_detail", kwargs={"artist_slug": self.artist.first().slug, "slug": self.slug})
+        return reverse("lyrics:song_detail", kwargs={"artist_slug": self.artist.first().slug, "slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         """Get the admin update url for this song"""
@@ -68,7 +68,7 @@ class Song(BaseSongAbstractModel):
 
     def get_absolute_delete_url(self):
         """Get the delete url for this song"""
-        return reverse("music:song_remove", kwargs={"slug": self.slug})
+        return reverse("lyrics:song_remove", kwargs={"slug": self.slug})
 
     def soft_delete(self):
         """Soft delete Category"""
@@ -102,7 +102,7 @@ class Artist(BaseSongAbstractModel):
 
     def get_absolute_url(self):
         """Get absolute url"""
-        return reverse("music:artist_detail", kwargs={"slug": self.slug})
+        return reverse("lyrics:artist_detail", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         """Get the admin update url for this artist"""
@@ -110,7 +110,7 @@ class Artist(BaseSongAbstractModel):
 
     def get_absolute_delete_url(self):
         """Get the delete url for this artist"""
-        return reverse("music:artist_remove", kwargs={"slug": self.slug})
+        return reverse("lyrics:artist_remove", kwargs={"slug": self.slug})
 
 
 class Genre(BaseSongAbstractModel):
@@ -138,7 +138,7 @@ class Genre(BaseSongAbstractModel):
 
     def get_absolute_url(self):
         """Get absolute url"""
-        return reverse("music:genre_detail", kwargs={"slug": self.slug})
+        return reverse("lyrics:genre_detail", kwargs={"slug": self.slug})
 
     def get_absolute_admin_update_url(self):
         """Get the admin update url for this genre"""
@@ -146,4 +146,4 @@ class Genre(BaseSongAbstractModel):
 
     def get_absolute_delete_url(self):
         """Get the delete url for this genre"""
-        return reverse("music:genre_remove", kwargs={"slug": self.slug})
+        return reverse("lyrics:genre_remove", kwargs={"slug": self.slug})

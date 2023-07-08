@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import SongListView, SongDetailView, SongDeleteView, ArtistListView, ArtistDetailView, ArtistDeleteView
 
-app_name = "music"
+app_name = "lyrics"
 urlpatterns = [
     path("song/", SongListView.as_view(), name="song_list"),
     path("song/<slug:artist_slug>/<slug:slug>/", SongDetailView.as_view(), name="song_detail"),
