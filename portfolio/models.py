@@ -91,6 +91,11 @@ class Project(BasePortfolioAbstractModel):
         sub_projects = self.sub_project.filter(deleted_at=None)
         return sub_projects
 
+    @property
+    def number(self):
+        """Project's number"""
+        return f"#{self.pk}"
+
     def soft_delete(self):
         """Soft delete method for Project Model"""
         self.deleted_at = timezone.now()
@@ -158,6 +163,11 @@ class SubProject(BasePortfolioAbstractModel):
         fulltitle = ""
         fulltitle = self.parent_project.title + " " + self.title
         return fulltitle
+
+    @property
+    def number(self):
+        """Project's number"""
+        return f"#{self.pk}"
 
     def soft_delete(self):
         """Soft delete method for SubProject Model"""

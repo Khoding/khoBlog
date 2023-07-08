@@ -56,7 +56,7 @@
         <div>
           <div class="text-xl sm:text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ object.title }}</div>
           <p class="mt-2 text-xs sm:text-sm text-gray-500 dark:text-jumbo-200">
-            Post <span class="font-bold">#{{ object.pk }}</span> written by
+            Post <span class="font-bold">{{ object.number }}</span> written by
             <!-- space -->
             <a href="{{ object.author.get_absolute_url }}" class="font-medium text-gray-950 dark:text-jumbo-50 hover:underline">{{ object.author }}</a>
             <!-- space -->

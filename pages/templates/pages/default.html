@@ -18,7 +18,7 @@
         <div>
           <span class="text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ page.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
-            <a href="{% url 'pages:index' %}" class="hover:underline">Page</a> <span class="font-bold">#{{ page.pk }}</span>
+            <a href="{% url 'pages:index' %}" class="hover:underline">Page</a> <span class="font-bold">{{ page.number }}</span>
           </p>
         </div>
         {% sb page user=request.user %}

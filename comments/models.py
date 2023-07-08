@@ -12,6 +12,10 @@ class CustomCommentXTD(XtdComment):
         """__str__"""
         return self.full_title
 
+    def get_absolute_url(self, anchor_pattern="#comment-%(id)s"):
+        """Get absolute url for Comment Model"""
+        return self.get_content_object_url() + (anchor_pattern % self.__dict__)
+
     @property
     def full_title(self):
         """Get full title of Comment"""
@@ -23,6 +27,7 @@ class CustomCommentXTD(XtdComment):
         full_t = full_t + self.comment[:25]
         return full_t
 
-    def get_absolute_url(self, anchor_pattern="#comment-%(id)s"):
-        """Get absolute url for Comment Model"""
-        return self.get_content_object_url() + (anchor_pattern % self.__dict__)
+    @property
+    def number(self):
+        """Comment's number"""
+        return f"#{self.pk}"

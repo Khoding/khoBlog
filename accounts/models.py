@@ -99,3 +99,8 @@ class CustomUser(AbstractUser):
         """Get the absolute index view url"""
         content_type = ContentType.objects.get_for_model(self.__class__)
         return reverse(f"{content_type.app_label}:profile", kwargs={"slug": self.slug})
+
+    @property
+    def number(self):
+        """User's number"""
+        return f"#{self.pk}"
