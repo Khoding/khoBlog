@@ -38,17 +38,18 @@ def display_quotes(model_class, model_slug, show_title=False):
         content.append("<dd>")
         if quote.author:
             content.append(f"{escape(quote.author.name)}")
-        if quote.person:
+        if quote.person.all():
             for person in quote.person.all():
                 content.append(" and ")
                 content.append(f"{escape(person.name)}")
-        if quote.addressing:
+        if quote.addressing.all():
+            content.append("yooooooo")
             content.append(f" {escape(quote.get_to_or_about_display())} ")
             for qai, person in enumerate(quote.addressing.all()):
                 if qai > 0:
                     content.append(" and")
                 content.append(f"{escape(person.name)}")
-        if quote.source:
+        if quote.source.all():
             for qsi, source in enumerate(quote.source.all()):
                 if qsi > 0:
                     content.append(f" and {escape(source.linking_text)} ")
@@ -93,17 +94,17 @@ def display_single_quote(o):
     content.append("<dd>")
     if quote.author:
         content.append(f"<a href='{quote.author.get_absolute_url()}'>{escape(quote.author.name)}</a>")
-    if quote.person:
+    if quote.person.all():
         for person in quote.person.all():
             content.append(" and ")
             content.append(f"<a href='{person.get_absolute_url()}'>{escape(person.name)}</a>")
-    if quote.addressing:
+    if quote.addressing.all():
         content.append(f" {escape(quote.get_to_or_about_display())} ")
         for i, person in enumerate(quote.addressing.all()):
             if i > 0:
                 content.append(" and ")
             content.append(f"<a href='{person.get_absolute_url()}'>{escape(person.name)}</a>")
-    if quote.source:
+    if quote.source.all():
         for i, source in enumerate(quote.source.all()):
             if i > 0:
                 content.append(f" and {escape(source.linking_text)} ")
