@@ -1,8 +1,14 @@
 import requests
 from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test
 from jsonview.decorators import json_view
 
 
+def check_admin(user):
+    return user.is_superuser
+
+
+@user_passes_test(check_admin)
 @json_view
 def return_the_api(request):
     """Return the API"""
@@ -24,6 +30,7 @@ def return_the_api(request):
     return render(request, template, context)
 
 
+@user_passes_test(check_admin)
 @json_view
 def return_the_api_detail(request):
     """Return the API"""
