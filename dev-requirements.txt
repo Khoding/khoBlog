@@ -8,7 +8,7 @@ asgiref==3.5.2
     # via
     #   -r dev-requirements.txt
     #   django
-django==4.1
+django==4.2.3
     # via django-debug-toolbar
 django-debug-toolbar==3.5.0
     # via
