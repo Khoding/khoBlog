@@ -5,6 +5,7 @@ from jsonview.decorators import json_view
 
 
 def check_admin(user):
+    """check_admin checks if the user is an admin"""
     return user.is_superuser
 
 
