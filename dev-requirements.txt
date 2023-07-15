@@ -16,7 +16,7 @@ django-debug-toolbar==3.5.0
     #   django-debug-toolbar-template-profiler
 django-debug-toolbar-template-profiler==2.1.0
     # via -r dev-requirements.txt
-sqlparse==0.4.2
+sqlparse==0.4.4
     # via
     #   -r dev-requirements.txt
     #   django
