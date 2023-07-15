@@ -43,7 +43,6 @@ def display_quotes(model_class, model_slug, show_title=False):
                 content.append(" and ")
                 content.append(f"{escape(person.name)}")
         if quote.addressing.all():
-            content.append("yooooooo")
             content.append(f" {escape(quote.get_to_or_about_display())} ")
             for qai, person in enumerate(quote.addressing.all()):
                 if qai > 0:
