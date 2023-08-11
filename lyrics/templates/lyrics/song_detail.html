@@ -20,7 +20,7 @@
                 {% if not forloop.last %}
                   and
                 {% else %}
-                  and more
+                  and {{ song.number_of_artists|add:-2 }} more
                 {% endif %}
               {% endfor %}
             {% else %}
@@ -31,9 +31,6 @@
 
                 <a href="{{ artist.get_absolute_url }}" class="hover:underline font-bold">{{ artist }}</a>
 
-                {% if forloop.counter >= 3 %}
-                  and many others
-                {% endif %}
                 {% if not forloop.last %}
                   and
                 {% endif %}

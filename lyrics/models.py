@@ -75,6 +75,11 @@ class Song(BaseSongAbstractModel):
         self.deleted_at = timezone.now()
         self.save()
 
+    @property
+    def number_of_artists(self):
+        """Number of artists"""
+        return self.artist.count() + self.featuring_artist.count()
+
 
 class Artist(BaseSongAbstractModel):
     """Artist Model Class"""
