@@ -20,7 +20,7 @@
                 {% if not forloop.last %}
                   and
                 {% else %}
-                  and {{ song.number_of_artists|add:-2 }} more
+                  and {{ song.number_of_artists|add:-3 }} more
                 {% endif %}
               {% endfor %}
             {% else %}
