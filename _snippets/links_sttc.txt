@@ -1,4 +1,7 @@
 [ruthinkk]: /s/ruthinkk
+[ruthinkk256x]: /s/ruthinkk-256x256
+[ruthinkk128x]: /s/ruthinkk-128x128
+[ruthinkk64x]: /s/ruthinkk-64x64
 [mydudes]: /s/my-dudes
 [whathype]: /s/whathype
 [babysip]: /s/babysip
