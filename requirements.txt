@@ -12,23 +12,23 @@ black==23.7.0
     # via -r requirements.in
 bleach==6.0.0
     # via -r requirements.in
-boto3==1.28.3
+boto3==1.28.32
     # via -r requirements.in
-botocore==1.31.3
+botocore==1.31.32
     # via
     #   boto3
     #   s3transfer
-certifi==2023.5.7
+certifi==2023.7.22
     # via requests
 cffi==1.15.1
     # via cryptography
 charset-normalizer==3.2.0
     # via requests
-click==8.1.5
+click==8.1.7
     # via black
 colorama==0.4.6
     # via click
-cryptography==41.0.2
+cryptography==41.0.3
     # via pyjwt
 cssselect==1.2.0
     # via pyquery
@@ -38,7 +38,7 @@ defusedxml==0.7.1
     #   python3-openid
 diff-match-patch==20230430
     # via django-import-export
-django==4.2.3
+django==4.2.4
     # via
     #   -r requirements.in
     #   django-admin-index
@@ -65,7 +65,7 @@ django-admin-index==3.1.0
     # via -r requirements.in
 django-admin-interface==0.26.0
     # via -r requirements.in
-django-allauth==0.54.0
+django-allauth==0.55.0
     # via -r requirements.in
 django-analytical==3.1.0
     # via -r requirements.in
@@ -119,7 +119,7 @@ djangorestframework==3.14.0
     #   drf-yasg
 docutils==0.20.1
     # via django-comments-xtd
-drf-yasg==1.21.6
+drf-yasg==1.21.7
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
@@ -139,11 +139,11 @@ jmespath==1.0.1
     #   botocore
 lxml==4.9.3
     # via pyquery
-markdown==3.4.3
+markdown==3.4.4
     # via
     #   django-markdownx
     #   pymdown-extensions
-markdown2==2.4.9
+markdown2==2.4.10
     # via readtime
 markuppy==1.14
     # via tablib
@@ -161,20 +161,20 @@ packaging==23.1
     # via
     #   black
     #   drf-yasg
-pathspec==0.11.1
+pathspec==0.11.2
     # via black
 pillow==10.0.0
     # via
     #   django-colorfield
     #   django-markdownx
     #   django-simple-captcha
-platformdirs==3.8.1
+platformdirs==3.10.0
     # via black
 pycparser==2.21
     # via cffi
-pygments==2.15.1
+pygments==2.16.1
     # via -r requirements.in
-pyjwt[crypto]==2.7.0
+pyjwt[crypto]==2.8.0
     # via django-allauth
 pymdown-extensions==10.1
     # via -r requirements.in
@@ -193,14 +193,14 @@ pytz==2023.3
     #   django-comments-xtd
     #   djangorestframework
     #   drf-yasg
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   drf-yasg
     #   pymdown-extensions
     #   tablib
 rcssmin==1.1.1
     # via django-compressor
-readtime==2.0.0
+readtime==3.0.0
     # via -r requirements.in
 requests==2.31.0
     # via
@@ -212,7 +212,7 @@ rjsmin==1.2.1
     # via django-compressor
 rules==3.3
     # via -r requirements.in
-s3transfer==0.6.1
+s3transfer==0.6.2
     # via boto3
 six==1.16.0
     # via
