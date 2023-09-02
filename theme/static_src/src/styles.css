@@ -15,6 +15,10 @@
 
     a[target="_blank"] {
         @apply after:content-['_↗'] after:text-sm after:font-bold;
+
+        &.no-blank {
+            @apply after:content-none;
+        }
     }
 }
 
@@ -471,10 +475,6 @@
 
     .todo_element {
         @apply whitespace-nowrap lg:whitespace-normal px-3 py-4 text-sm;
-    }
-
-    a[target="_blank"].no-blank {
-        @apply after:content-none;
     }
 
     .toc {

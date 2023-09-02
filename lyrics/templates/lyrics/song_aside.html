@@ -1,7 +1,7 @@
-<div class="font-medium">Facts about this song</div>
+<div class="text-sm font-medium text-gray-500 dark:text-jumbo-100">Fact{{ song.facts.all|pluralize }} about this song</div>
 
-<article class="space-y-5">
+<dl class="aside-section">
   {% for fact in song.facts.all %}
     {% include 'tailwind/display_single_fact.html' with object=fact %}
   {% endfor %}
-</article>
+</dl>

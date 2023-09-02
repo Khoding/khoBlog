@@ -1,25 +1,19 @@
-{% if object %}
-  {% load markup_tags %}
+{% load markup_tags %}
 
-  <article id="{{ object.slug }}">
-    <section class="flex md:h-full lg:flex-col">
-      <div class="md:flex-1 md:flex md:flex-col md:justify-between">
-        <div>
-          <div class="prose prose-gray dark:prose-jumbo dark:prose-invert">
-            {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
-          </div>
-        </div>
-        {% if object.link %}
-          {% if object.link.permalink %}
-            <a href="{{ object.link.permalink }}" class="mt-2 text-sm font-medium text-cornflower-600 dark:text-cornflower-300 hover:underline whitespace-nowrap text-ellipsis overflow-hidden">
-          {% else %}
-            <a href="{{ object.link.content_object.get_absolute_url }}"{% if object.link.content_type.model == 'url' %} target="_blank" rel="noopener noreferrer"{% endif %} class="mt-2 text-sm font-medium text-cornflower-600 dark:text-cornflower-300 hover:underline whitespace-nowrap text-ellipsis overflow-hidden">
-          {% endif %}
-            Learn more about {{ object }}
-            <span aria-hidden="true">→</span>
-          </a>
-        {% endif %}
-      </div>
-    </section>
-  </article>
-{% endif %}
+<div class="aside-content-child {% if object.link %}group relative{% endif %}">
+  <dt class="text-sm font-medium text-cornflower-500 dark:text-jumbo-100 truncate group-hover:underline">
+    {{ object }}
+  </dt>
+  <dd class="mt-1 font-semibold text-cornflower-800 dark:text-jumbo-50">
+    {{ object.fact|apply_markup:"markdown"|apply_markup:"widont" }}
+    {% if object.link.permalink %}
+      <a href="{{ object.link.permalink }}">
+        <span class="absolute inset-0"></span>
+      </a>
+    {% elif object.link.content_object.get_absolute_url %}
+      <a href="{{ object.link.content_object.get_absolute_url }}"{% if object.link.content_type.model == 'url' %} target="_blank" rel="noopener noreferrer"{% endif %} class="inset-0 no-blank">
+        <span class="absolute inset-0"></span>
+      </a>
+    {% endif %}
+  </dd>
+</div>
