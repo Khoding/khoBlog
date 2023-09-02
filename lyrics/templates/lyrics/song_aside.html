@@ -1,0 +1,7 @@
+<div class="font-medium">Facts about this song</div>
+
+<article class="space-y-5">
+  {% for fact in song.facts.all %}
+    {% include 'tailwind/display_single_fact.html' with object=fact %}
+  {% endfor %}
+</article>

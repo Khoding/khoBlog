@@ -40,6 +40,7 @@ class Song(BaseSongAbstractModel):
     artist = models.ManyToManyField("lyrics.Artist", blank=True)
     featuring_artist = models.ManyToManyField("lyrics.Artist", blank=True, related_name="feat")
     genre = models.ManyToManyField("lyrics.Genre", blank=True)
+    facts = models.ManyToManyField("facts.Fact", blank=True)
     deleted_at = models.DateTimeField(blank=True, null=True, help_text="Deletion date for soft delete")
 
     history = HistoricalRecords()

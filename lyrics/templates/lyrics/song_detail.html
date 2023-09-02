@@ -2,9 +2,9 @@
 {% load super_buttons %}
 
 {% block content %}
-  <article class="xl:grid xl:grid-cols-3">
-    <div class="xl:col-span-2 xl:pr-8">
-      <div class="md:flex md:items-center md:justify-between md:space-x-4 xl:border-b xl:border-gray-200 dark:xl:border-jumbo-700 xl:pb-6">
+  <article class="lg:grid lg:grid-cols-3">
+    <div class="{% if song.facts.all %}lg:col-span-2 lg:pr-8 lg:border-r lg:border-gray-200 dark:lg:border-jumbo-700{% else %}col-span-full{% endif %}">
+      <div class="md:flex md:items-center md:justify-between md:space-x-4 lg:border-b lg:border-gray-200 dark:lg:border-jumbo-700 lg:pb-6">
         <div>
           <span class="text-2xl font-bold text-gray-950 dark:text-jumbo-50">{{ song.title }}</span>
           <p class="mt-2 text-sm text-gray-500 dark:text-jumbo-200">
@@ -40,14 +40,29 @@
         </div>
         {% sb song user=request.user %}
       </div>
+
       <div class="py-3 xl:pt-6 xl:pb-0">
         <div class="prose prose_base">
           {% load markup_tags %}
           {{ song.lyrics|apply_markup:"markdown"|apply_markup:"widont" }}
         </div>
+
         <div class="border-t border-jumbo-100 dark:border-jumbo-700 pt-5">
           <a class="hover:underline" href="{{ song.url_to_media }}" target="_blank" rel="noopener noreferrer">Find <span class="font-extrabold">{{ song.artist.first }} - {{ song }}</span>{% if not song.host == other %} on {{ song.get_host_display }}{% endif %}</a>
         </div>
       </div>
+
+      {% if song.facts.all %}
+        <aside class="mt-8 lg:hidden">
+          {% include 'lyrics/song_aside.html' %}
+        </aside>
+      {% endif %}
+    </div>
+
+    {% if song.facts.all %}
+      <aside class="hidden lg:block lg:pl-8">
+        {% include 'lyrics/song_aside.html' %}
+      </aside>
+    {% endif %}
   </article>
 {% endblock content %}

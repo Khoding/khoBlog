@@ -1,4 +1,6 @@
 <div id="color_scheme" x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false" class="relative inline-block text-left z-40 -m-2 p-2">
+  <span class="cursor-pointer sr-only">Color Scheme Switch</span>
+
   <button type="button" class="rounded-full flex items-center text-gray-500 dark:text-jumbo-100 hover:text-gray-600 dark:hover:text-jumbo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-jumbo-950 focus:ring-cornflower-500" id="color-scheme-button" x-ref="button" @click="open=!open" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="true" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
     <span class="sr-only">Open themes menu</span>
     <!-- Theme icon -->
@@ -13,4 +15,3 @@
     </div>
   </div>
 </div>
-<label for="color_scheme" class="cursor-pointer sr-only">Color Scheme Switch</label>
