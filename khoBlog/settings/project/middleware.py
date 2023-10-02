@@ -21,6 +21,7 @@ MIDDLEWARE += [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
