@@ -134,7 +134,7 @@
     }
 
     .superbutton_dropdown_items {
-        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 rounded-xl bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+        @apply dark:bg-jumbo-700 dark:border-jumbo-600 dark:text-jumbo-50 dark:divide-jumbo-600 absolute right-0 mt-7 w-56 origin-top-right divide-y divide-gray-200 rounded-xl bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
 
         & .dropdown_item_container {
             @apply first:!pt-0 last:!pb-0;
