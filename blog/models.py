@@ -1,11 +1,9 @@
 import datetime
 import itertools
 import re
-from bs4 import BeautifulSoup
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sitemaps import ping_google
 from django.db import models
 from django.db.models import F, Q
 from django.template.defaultfilters import slugify
@@ -15,6 +13,7 @@ from django.utils.html import format_html, mark_safe
 
 import auto_prefetch
 import rules
+from bs4 import BeautifulSoup
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from rules.contrib.models import RulesModelBase, RulesModelMixin
@@ -77,12 +76,6 @@ class Category(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Category"""
-        try:
-            ping_google()
-        except Exception:  # skipcq: PYL-W0703
-            # Bare 'except' because we could get a variety
-            # of HTTP-related exceptions.
-            pass
         if not self.slug:
             self.slug = slugify(self.full_title)
         return super().save(*args, **kwargs)
@@ -209,12 +202,6 @@ class Series(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Series"""
-        try:
-            ping_google()
-        except Exception:  # skipcq: PYL-W0703
-            # Bare 'except' because we could get a variety
-            # of HTTP-related exceptions.
-            pass
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
@@ -430,12 +417,6 @@ class Post(RulesModelMixin, auto_prefetch.Model, metaclass=RulesModelBase):
 
     def save(self, *args, **kwargs):
         """Save Post"""
-        try:
-            ping_google()
-        except Exception:  # skipcq: PYL-W0703
-            # Bare 'except' because we could get a variety
-            # of HTTP-related exceptions.
-            pass
         if not self.vanity_url:
             self.vanity_url = generate_unique_vanity(5, 10, Post)
         if not self.slug:

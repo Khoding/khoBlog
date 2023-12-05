@@ -1,5 +1,4 @@
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.sitemaps import ping_google
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -69,12 +68,6 @@ class Page(auto_prefetch.Model):
 
     def save(self, *args, **kwargs):
         """Override save method"""
-        try:
-            ping_google()
-        except Exception:  # skipcq: PYL-W0703
-            # Bare 'except' because we could get a variety
-            # of HTTP-related exceptions.
-            pass
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
