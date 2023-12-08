@@ -6,7 +6,9 @@
     ],
     "settings": {
         "editor.autoIndent": "full",
-        "editor.codeActionsOnSave": { "source.fixAll": false },
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "never"
+        },
         "git.ignoreLimitWarning": true,
         "css.validate": false,
         "editor.quickSuggestions": {
