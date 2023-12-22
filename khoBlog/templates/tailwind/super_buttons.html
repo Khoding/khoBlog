@@ -18,7 +18,7 @@
           <span x-data="{ open: false }" @click="open=!open" @keydown.escape.stop="open = false" @click.away="open=false" class="-ml-px relative block">
             <button type="button" class="superbutton_dropdown_button" id="option-menu-button" x-ref="button" @keyup.space.prevent="onButtonEnter()" @keydown.enter.prevent="onButtonEnter()" aria-expanded="false" aria-haspopup="true" x-bind:aria-expanded="open.toString()" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()">
               <span class="sr-only">Open options</span>
-              {% heroicon_mini 'chevron-down' class="w-5 h-5" stroke_width=2 %}
+              {% heroicon_mini 'chevron-down' class="size-5" stroke_width=2 %}
             </button>
 
             <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="superbutton_dropdown_items" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false" @keyup.space.prevent="open = false">

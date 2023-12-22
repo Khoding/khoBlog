@@ -27,13 +27,13 @@
       <nav class="flex justify-between" role="group" aria-label="Previous / Next">
         {% if prev_post %}
           <a type="button" class="next_prev_buttons" href="{{ prev_post.get_absolute_url }}" rel="noopener noreferrer">
-            {% heroicon_outline "chevron-left" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
+            {% heroicon_outline "chevron-left" class="size-4 sm:size-5" stroke_width=2 %}
             <!-- space -->
             Previous Post
           </a>
         {% else %}
           <button type="button" disabled class="next_prev_buttons disabled:opacity-50">
-            {% heroicon_outline "chevron-left" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
+            {% heroicon_outline "chevron-left" class="size-4 sm:size-5" stroke_width=2 %}
             <!-- space -->
             Previous Post
           </button>
@@ -42,13 +42,13 @@
           <a type="button" class="next_prev_buttons" href="{{ next_post.get_absolute_url }}" rel="noopener noreferrer">
             Next Post
             <!-- space -->
-            {% heroicon_outline "chevron-right" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
+            {% heroicon_outline "chevron-right" class="size-4 sm:size-5" stroke_width=2 %}
           </a>
         {% else %}
           <button type="button" disabled class="next_prev_buttons disabled:opacity-50">
             Next Post
             <!-- space -->
-            {% heroicon_outline "chevron-right" class="h-4 sm:h-5 w-4 sm:w-5" stroke_width=2 %}
+            {% heroicon_outline "chevron-right" class="size-4 sm:size-5" stroke_width=2 %}
           </button>
         {% endif %}
       </nav>

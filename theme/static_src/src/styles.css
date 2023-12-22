@@ -206,7 +206,7 @@
             @apply mr-1 inline-block align-middle;
 
             & svg {
-                @apply mb-1 inline-block h-5 w-5 stroke-0;
+                @apply mb-1 inline-block size-5 stroke-0;
             }
         }
 

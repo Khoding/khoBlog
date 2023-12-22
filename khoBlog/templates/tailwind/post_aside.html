@@ -3,7 +3,7 @@
 <div class="sr-only">Details</div>
 <article class="space-y-5">
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'eye' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'eye' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     {% if object.pub_date and not object.withdrawn %}
       {% if object.was_published_recently %}
         <span class="text-tradewind-800 text-sm font-medium">New Post</span>
@@ -19,7 +19,7 @@
     {% endif %}
   </section>
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'calendar' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="{% url 'blog:archive_day' year=object.created_date|date:'Y' month=object.created_date|date:'M' day=object.created_date|date:'d' %}" class="text-gray-950 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
       Created:
       <time datetime="{{ object.created_date|date:"c" }}">
@@ -29,7 +29,7 @@
   </section>
   {% if object.pub_date %}
     <section class="flex items-center space-x-2">
-      {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+      {% heroicon_mini 'calendar' class="size-5 text-gray-400 dark:text-jumbo-100" %}
       <a href="{% url 'blog:archive_day' year=object.pub_date|date:'Y' month=object.pub_date|date:'M' day=object.pub_date|date:'d' %}" class="text-gray-950 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
         Published:
         <time datetime="{{ object.pub_date|date:"c" }}">
@@ -39,7 +39,7 @@
     </section>
   {% endif %}
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'calendar' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'calendar' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="{% url 'blog:archive_day' year=object.mod_date|date:'Y' month=object.mod_date|date:'M' day=object.mod_date|date:'d' %}" class="text-gray-950 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">
       Updated:
       <time datetime="{{ object.mod_date|date:"c" }}">
@@ -48,17 +48,17 @@
     </a>
   </section>
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'share' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'share' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <button type="button" id="vanity_button" class="text-sm font-medium hover:underline" onClick="copyToClipboard()">Copy permalink <span class="text-xs">(<span id="vanity">{{ object.vanity_url }}</span>)</span></button>
   </section>
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'clock' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'clock' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <span class="text-gray-950 dark:text-jumbo-50 text-sm font-medium">
       {{ object.body|readtime }}
     </span>
   </section>
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'hand-thumb-up' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'hand-thumb-up' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <span class="text-gray-950 dark:text-jumbo-50 text-sm font-medium">{{ object.total_likes }}
       like{{ object.total_likes|pluralize:'s' }}</span>
   </section>
@@ -66,7 +66,7 @@
   {% get_comment_count for post as comment_count %}
 
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'chat-bubble-bottom-center-text' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'chat-bubble-bottom-center-text' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="#comments" class="text-gray-950 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">{{ comment_count }}
       comment{{ comment_count|pluralize:'s' }}</a>
   </section>

@@ -9,7 +9,7 @@
         {% if object.profile_pic %}
           <img class="object-contain h-24 w-auto sm:h-32 sm:w-auto" src="{{ object.profile_pic.url }}" alt="Profile picture of {{ object }}" loading="lazy">
         {% else %}
-          <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture" loading="lazy">
+          <img class="size-24 rounded-full ring-4 ring-white sm:size-32" src="{% static 'khoBlog/img/default_profile_picture.png' %}" alt="Default profile picture" loading="lazy">
         {% endif %}
       </div>
       <div class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
@@ -152,7 +152,7 @@
             {% for github in accounts.github %}
               <div class="relative rounded-2xl md:w-1/2 border border-gray-300 dark:border-jumbo-500 bg-gray-50 dark:bg-jumbo-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-jumbo-600 focus-within:ring-2 focus-within:ring-offset-2 dark:focus-within:ring-offset-jumbo-950 focus-within:ring-cornflower-500 dark:focus-within:ring-cornflower-500">
                 <div class="flex-shrink-0">
-                  <img class="h-10 w-10 rounded-full" src="{{ github.extra_data.avatar_url }}" loading="lazy" alt="User's Github account's profile picture">
+                  <img class="size-10 rounded-full" src="{{ github.extra_data.avatar_url }}" loading="lazy" alt="User's Github account's profile picture">
                 </div>
                 <div class="flex-1 min-w-0">
                   <a href="{{ github.extra_data.html_url }}" class="focus:outline-none" target="_blank" rel="noopener noreferrer">

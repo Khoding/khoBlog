@@ -46,12 +46,12 @@
               {% if page_obj.has_previous %}
                 <a href="{% relative_url page_obj.previous_page_number 'page' request.GET.urlencode %}" class="previous_pagination_button" rel="noopener noreferrer" tabindex="0">
                   <span class="sr-only">Previous</span>
-                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
+                  {% heroicon_mini "chevron-left" class="size-5" stroke_width=2 %}
                 </a>
               {% else %}
                 <button type="button" disabled class="previous_pagination_button disabled:opacity-50">
                   <span class="sr-only">Previous</span>
-                  {% heroicon_mini "chevron-left" class="h-5 w-5" stroke_width=2 %}
+                  {% heroicon_mini "chevron-left" class="size-5" stroke_width=2 %}
                 </button>
               {% endif %}
 
@@ -77,12 +77,12 @@
               {% if page_obj.has_next %}
                 <a href="{% relative_url page_obj.next_page_number 'page' request.GET.urlencode %}" class="next_pagination_button" rel="noopener noreferrer" tabindex="0">
                   <span class="sr-only">Next</span>
-                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
+                  {% heroicon_mini "chevron-right" class="size-5" stroke_width=2 %}
                 </a>
               {% else %}
                 <button type="button" disabled class="next_pagination_button disabled:opacity-50">
                   <span class="sr-only">Next</span>
-                  {% heroicon_mini "chevron-right" class="h-5 w-5" stroke_width=2 %}
+                  {% heroicon_mini "chevron-right" class="size-5" stroke_width=2 %}
                 </button>
               {% endif %}
             </nav>

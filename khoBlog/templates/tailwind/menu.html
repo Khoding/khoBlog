@@ -12,7 +12,7 @@
           <div class="px-4 pt-5 pb-2 flex">
             <button type="button" class="-m-2 p-2 rounded-md inline-flex items-center justify-center hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = false">
               <span class="sr-only">Close menu</span>
-              {% heroicon_outline 'x-mark' class="w-6 h-6" %}
+              {% heroicon_outline 'x-mark' class="size-6" %}
             </button>
           </div>
 
@@ -85,18 +85,12 @@
                 <div class="flex-1 flex items-center lg:hidden">
                   <button type="button" x-description="Mobile menu toggle, controls the 'mobileFeatureduOpen' state." class="-ml-2 p-2 rounded-md hover:bg-gray-300 dark:hover:bg-jumbo-700" @click="open = true">
                     <span class="sr-only">Open menu</span>
-                    {% heroicon_outline 'bars-3' class="w-6 h-6" stroke_width=2 %}
+                    {% heroicon_outline 'bars-3' class="size-6" stroke_width=2 %}
                   </button>
                 </div>
 
-                <!-- Logo (sm-) -->
-                <a href="{% url 'blog:post_list' %}" class="sm:hidden">
-                  <span class="sr-only">Home page</span>
-                  <img class="h-8 w-auto" width="32" height="32" src="{% static 'khoBlog/img/Ruthinkk/Ruthinkk32x.webp' %}" loading="lazy" alt="Khodok's Logo">
-                </a>
-
                 <!-- Logo (lg-) -->
-                <a href="{% url 'blog:post_list' %}" class="hidden sm:block lg:hidden">
+                <a href="{% url 'blog:post_list' %}" class="block lg:hidden">
                   <span class="sr-only">Home page</span>
                   <img class="w-auto h-10" width="40" height="40" src="{% static 'khoBlog/img/Ruthinkk/Ruthinkk64x.webp' %}" loading="lazy" alt="Khodok's Logo">
                 </a>
@@ -123,7 +117,7 @@
                                         <div class="ml-3 flex h-7 items-center">
                                           <button type="button" class="bg-gray-50 dark:bg-jumbo-800 rounded-xl p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-200 dark:hover:bg-jumbo-700 dark:text-jumbo-200 dark:hover:text-jumbo-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cornflower-500 dark:focus:ring-cornflower-400" @click="open = false">
                                             <span class="sr-only">Close panel</span>
-                                            {% heroicon_outline 'x-mark' class="w-6 h-6" %}
+                                            {% heroicon_outline 'x-mark' class="size-6" %}
                                           </button>
                                         </div>
                                       </div>

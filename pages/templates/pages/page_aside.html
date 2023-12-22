@@ -5,7 +5,7 @@
   {% get_comment_count for page as comment_count %}
 
   <section class="flex items-center space-x-2">
-    {% heroicon_mini 'chat-bubble-bottom-center-text' class="h-5 w-5 text-gray-400 dark:text-jumbo-100" %}
+    {% heroicon_mini 'chat-bubble-bottom-center-text' class="size-5 text-gray-400 dark:text-jumbo-100" %}
     <a href="#comments" class="text-gray-950 dark:text-jumbo-50 text-sm font-medium hover:underline" rel="noopener noreferrer">{{ comment_count }}
       comment{{ comment_count|pluralize:'s' }}</a>
   </section>
