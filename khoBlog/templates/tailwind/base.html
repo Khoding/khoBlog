@@ -5,8 +5,8 @@
   <head>
     <script>
       function colorScheme() {
-        const isDarkThemeSet = localStorage.theme === 'dark';
-        const isThemeStored = 'theme' in localStorage;
+        const isDarkThemeSet = localStorage.khoBlogThemeVariant === 'dark';
+        const isThemeStored = 'khoBlogThemeVariant' in localStorage;
         const isDarkPrefered = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         try {
@@ -197,16 +197,16 @@
     <script>
       function themeOption(e) {
         let optionValue = e.target.id
-        let localStorageValue = localStorage.getItem('theme')
+        let localStorageValue = localStorage.getItem('khoBlogThemeVariant')
 
         if (optionValue === 'system') {
           if (localStorageValue) {
-            localStorage.removeItem('theme')
+            localStorage.removeItem('khoBlogThemeVariant')
           }
         } else if (optionValue === 'dark') {
-          localStorage.setItem('theme', 'dark')
+          localStorage.setItem('khoBlogThemeVariant', 'dark')
         } else if (optionValue === 'light') {
-          localStorage.setItem('theme', 'light')
+          localStorage.setItem('khoBlogThemeVariant', 'light')
         }
 
         colorScheme()
