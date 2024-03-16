@@ -30,6 +30,6 @@
     "tailwindcss": "^3.3.2"
   },
   "dependencies": {
-    "follow-redirects": "^1.14.7"
+    "follow-redirects": "^1.15.6"
   }
 }
